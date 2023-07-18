@@ -1,5 +1,9 @@
 # Compiled class file
 *.class
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # Log file
 *.log
@@ -21,6 +25,7 @@
 
 ### Eclipse ###
 .apt_generated
+.classpath
 .factorypath
 .project
 .settings
