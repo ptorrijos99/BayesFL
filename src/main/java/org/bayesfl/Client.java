@@ -96,32 +96,10 @@ public class Client {
     }
 
     /**
-     * Run the client.
-     */
-    public void run() {
-        // 1. Build the local model of the client using the data.
-        localModel = buildLocalModel();
-
-        // 2. Send the local model to the server and get the global model.
-        globalModel = sendLocalModel();
-
-        // 3. Perform the fusion of the global model that the server sends with the local model of the client.
-        localModel = fusion(globalModel);
-    }
-
-    /**
-     * Send the local model to the server and get the global model.
-     */
-    private Model sendLocalModel() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
      * Build the local model of the client.
      */
-    private Model buildLocalModel() {
-        return localAlgorithm.buildLocalModel(localModel, data);
+    protected void buildLocalModel() {
+        localModel = localAlgorithm.buildLocalModel(localModel, data);
     }
 
     /**
@@ -129,8 +107,8 @@ public class Client {
      * sends with the local model of the client.
      * @param globalModel The global model that the server sends.
      */
-    private Model fusion(Model globalModel) {
-        return localFusion.fusion(localModel, globalModel);
+    protected void fusion(Model globalModel) {
+        localModel = localFusion.fusion(localModel, globalModel);
     }
 
     /**
@@ -147,5 +125,21 @@ public class Client {
      */
     public void setID(int id) {
         this.id = id;
+    }
+
+    /**
+     * Get the ID of the client.
+     * @return The ID of the client.
+     */
+    public int getID() {
+        return this.id;
+    }
+
+    /**
+     * Get the local model of the client.
+     * @return The local Model of the client.
+     */
+    protected Model getLocalModel() {
+        return localModel;
     }
 }

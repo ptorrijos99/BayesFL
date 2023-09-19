@@ -51,7 +51,7 @@ public class Server {
      */
     private final Collection<Client> clients;
 
-
+    private Model[] localModels;
 
     /**
      * Constructor of the class Server.
@@ -68,6 +68,7 @@ public class Server {
             client.setID(id);
             id++;
         }
+        localModels = new Model[clients.size()];
     }
 
     /**
@@ -85,6 +86,29 @@ public class Server {
      * Run the server.
      */
     public void run() {
-        // 1. Run the clients
+        // 1. Create the local model of each client
+        for (Client client : clients) {
+            client.buildLocalModel();
+        }
+
+        // 2. Get the local models
+        for (Client client : clients) {
+            localModels[client.getID()] = client.getLocalModel();
+        }
+
+        // 3. Fuse the local models into a global model
+        this.fusion();
+
+        // 4. Fuse the global model with each local model on the clients
+        for (Client client : clients) {
+            client.fusion(globalModel);
+        }
+    }
+
+    /**
+     * Perform the fusion of the local models that the clients send
+     */
+    protected void fusion() {
+        globalModel = globalFusion.fusion(localModels);
     }
 }

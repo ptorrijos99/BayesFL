@@ -28,8 +28,25 @@
  * @author Pablo Torrijos Arenas
  *
  */
+
 package org.bayesfl;
 
-public class Fusion {
-    
+public interface Fusion {
+
+    /**
+     * Perform the fusion of two models.
+     * @param model1 The first model to fuse.
+     * @param model2 The second model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model model1, Model model2);
+
+    /**
+     * Perform the fusion of many models.
+     * @param models The array of Model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model[] models);
+
 }
+

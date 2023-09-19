@@ -31,5 +31,15 @@
 
 package org.bayesfl;
 
-public class LocalAlgorithm {
+public interface LocalAlgorithm {
+
+    /**
+     * Build the local model using the algorithm.
+     * @param localModel The previous local Model that the algorithm
+     *                   uses as base.
+     * @param data The Data used to build the Model.
+     * @return The model build by the algorithm.
+     */
+    Model buildLocalModel(Model localModel, Data data);
+
 }
