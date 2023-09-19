@@ -31,5 +31,5 @@
 
 package org.bayesfl;
 
-public class Data {
+public interface Data {
 }
