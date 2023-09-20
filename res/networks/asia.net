@@ -1,0 +1,111 @@
+net
+{
+	node_size = (130 55);
+}
+
+node dysp
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node tub
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node asia
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node lung
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node either
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node smoke
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node xray
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+node bronc
+{
+	states = ("yes" "no" );
+	position = (0 0);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	diagnosistype = "AUXILIARY";
+}
+potential ( dysp | bronc either )
+{
+	data = (((	0.9	0.1	)
+		(	0.8	0.2	))
+		((	0.7	0.3	)
+		(	0.1	0.9	)));
+}
+potential ( tub | asia )
+{
+	data = ((	0.05	0.95	)
+		(	0.01	0.99	));
+}
+potential ( asia | )
+{
+	data = (	0.01	0.99	);
+}
+potential ( lung | smoke )
+{
+	data = ((	0.1	0.9	)
+		(	0.01	0.99	));
+}
+potential ( either | lung tub )
+{
+	data = (((	1.0	0.0	)
+		(	1.0	0.0	))
+		((	1.0	0.0	)
+		(	0.0	1.0	)));
+}
+potential ( smoke | )
+{
+	data = (	0.5	0.5	);
+}
+potential ( xray | either )
+{
+	data = ((	0.98	0.02	)
+		(	0.05	0.95	));
+}
+potential ( bronc | smoke )
+{
+	data = ((	0.6	0.4	)
+		(	0.3	0.7	));
+}

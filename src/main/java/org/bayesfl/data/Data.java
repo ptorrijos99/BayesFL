@@ -32,4 +32,9 @@
 package org.bayesfl.data;
 
 public interface Data {
+
+    Object getData();
+
+    void setData(Object data);
+
 }

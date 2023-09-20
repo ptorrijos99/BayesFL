@@ -9,6 +9,7 @@ import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.data.DiscreteVariable;
 import edu.cmu.tetrad.graph.*;
+import edu.cmu.tetrad.search.SearchGraphUtils;
 import weka.classifiers.bayes.BayesNet;
 
 import java.io.File;
@@ -28,7 +29,7 @@ public class Utils {
      * Research. </p> R. Silva, June 2004
      */
     public static void pdagToDag(Graph g) {
-        Graph p = new EdgeListGraph(g);
+        Graph p = new EdgeListGraph_n(g);
         List<Edge> undirectedEdges = new ArrayList<>();
 
         for (Edge edge : g.getEdges()) {
@@ -47,7 +48,7 @@ public class Utils {
             for (Node pNode : pNodes) {
                 x = pNode;
 
-                if (!p.getChildren(x).isEmpty()) {
+                if (p.getChildren(x).size() > 0) {
                     continue;
                 }
 
@@ -65,7 +66,7 @@ public class Utils {
                         }
                     }
                 }
-                if (!neighbors.isEmpty()) {
+                if (neighbors.size() > 0) {
                     Collection<Node> parents = p.getParents(x);
                     Set<Node> all = new HashSet<>(neighbors);
                     all.addAll(parents);
@@ -84,7 +85,7 @@ public class Utils {
                 break;
             }
             pNodes.remove(x);
-        } while (!pNodes.isEmpty());
+        } while (pNodes.size() > 0);
     }
 
     /**
@@ -225,14 +226,14 @@ public class Utils {
         return -1;
     }
 
-    private static void ensureVariables(ArrayList<Dag> setofbns){
+    private static void ensureVariables(ArrayList<Dag_n> setofbns){
 
         List<Node> nodes = setofbns.get(0).getNodes();
         //System.out.println("Nodes: " + nodes);
         for(int i = 1 ; i< setofbns.size(); i++) {
-            Dag oldDag = setofbns.get(i);
+            Dag_n oldDag = setofbns.get(i);
             Set<Edge> oldEdges = oldDag.getEdges();
-            Dag newdag = new Dag(nodes);
+            Dag_n newdag = new Dag_n(nodes);
             for(Edge e: oldEdges){
                 /*
                 System.out.println("Node1");
@@ -256,8 +257,8 @@ public class Utils {
         }
     }
 
-    public static int compare(Dag bn1, Dag bn2){
-        ArrayList<Dag> dags = new ArrayList<>();
+    public static int compare(Dag_n bn1, Dag_n bn2){
+        ArrayList<Dag_n> dags = new ArrayList<>();
         dags.add(bn1);
         dags.add(bn2);
         ensureVariables(dags);
@@ -267,15 +268,15 @@ public class Utils {
         return hmd;
     }
 
-    public static int SHD (Dag bn1, Dag bn2) {
+    public static int SHD (Dag_n bn1, Dag_n bn2) {
 
-        ArrayList<Dag> dags = new ArrayList<>();
+        ArrayList<Dag_n> dags = new ArrayList<>();
         dags.add(bn1);
         dags.add(bn2);
         ensureVariables(dags);
 
-        Graph g1 = new EdgeListGraph(dags.get(0));
-        Graph g2 = new EdgeListGraph(dags.get(1));
+        Graph g1 = new EdgeListGraph_n(dags.get(0));
+        Graph g2 = new EdgeListGraph_n(dags.get(1));
 
         for(Node n: dags.get(0).getNodes()) {
             List<Node> p = dags.get(0).getParents(n);
@@ -320,7 +321,7 @@ public class Utils {
 
 
 
-    public static List<Node> getMarkovBlanket(Dag bn, Node n){
+    public static List<Node> getMarkovBlanket(Dag_n bn, Node n){
         List<Node> mb = new ArrayList<>();
 
         // Adding children and parents to the Markov's Blanket of this node
@@ -349,7 +350,7 @@ public class Utils {
      * @param created
      * @return
      */
-    public static double [] avgMarkovBlanquetdif(Dag original, Dag created) {
+    public static double [] avgMarkovBlanquetdif(Dag_n original, Dag_n created) {
 
         if (original.getNodes().size() != created.getNodes().size())
             return null;
@@ -417,7 +418,7 @@ public class Utils {
      * @param g Graph to be transformed.
      * @return Resulting DAG of the inserted graph.
      */
-    public static Dag removeInconsistencies(Graph g){
+    public static Dag_n removeInconsistencies(Graph g){
         // Transforming the current graph into a DAG
         pdagToDag(g);
 
@@ -436,13 +437,13 @@ public class Utils {
             }
 
 
-            if(g.paths().existsDirectedPathFromTo(nodeT, nodeH)){
+            if(g.existsDirectedPathFromTo(nodeT, nodeH)){
                 System.out.println("Directed path from " + nodeT + " to " + nodeH +"\t Deleting Edge...");
                 g.removeEdge(e);
             }
         }
         // Adding graph from each thread to the graphs array
-        return new Dag(g);
+        return new Dag_n(g);
 
     }
 
@@ -575,7 +576,7 @@ public class Utils {
         return sum / data.getNumRows() / data.getNumColumns();
     }
 
-    public static double LL(Dag g, DataSet data) {
+    public static double LL(Dag_n g, DataSet data) {
         BayesPm bnaux = new BayesPm(g);
         MlBayesIm bnOut = new MlBayesIm(bnaux, MlBayesIm.MANUAL);
         return LL(bnOut, data);
@@ -588,7 +589,7 @@ public class Utils {
      * @return The BayesPm of the BayesNet
      */
     public static BayesPm transformBayesNetToBayesPm(BayesNet wekabn) {
-        Dag graph = new Dag();
+        Dag_n graph = new Dag_n();
 
         // Getting nodes from weka network and adding them to a GraphNode
         for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {

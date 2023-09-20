@@ -6,6 +6,9 @@ import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.GraphUtils;
+import edu.cmu.tetrad.search.SearchGraphUtils;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
 import org.albacete.simd.clustering.Clustering;
@@ -48,7 +51,6 @@ public class ExperimentBNBuilder {
     protected int numberOfThreads;
     protected int numberOfPGESThreads;
     protected int interleaving;
-    protected double alpha = -1.0;
     protected int maxIterations;
     //protected static HashMap<String, HashMap<String,String>> map;
 
@@ -71,7 +73,7 @@ public class ExperimentBNBuilder {
     protected String algName;
     protected long seed = -1;
     private MlBayesIm controlBayesianNetwork;
-    public Dag resultingBayesianNetwork;
+    public Dag_n resultingBayesianNetwork;
 
 
     public ExperimentBNBuilder(String[] parameters, int threads) throws Exception {
@@ -97,10 +99,7 @@ public class ExperimentBNBuilder {
         testDataset = Utils.readData(testDatabasePath);
 
         numberOfPGESThreads = Integer.parseInt(parameters[5]);
-        
-        //interleaving = Integer.parseInt(parameters[6]);
-        alpha = Double.parseDouble(parameters[6]);
-        
+        interleaving = Integer.parseInt(parameters[6]);
         seed = Integer.parseInt(parameters[7]);
     }
     
@@ -149,11 +148,19 @@ public class ExperimentBNBuilder {
                 break;
             case "circular_ges_c1":
                 clustering = new HierarchicalClustering();
-                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, alpha, "c1");
+                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, interleaving, "c1");
                 break;
             case "circular_ges_c2":
                 clustering = new HierarchicalClustering();
-                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, alpha, "c2");
+                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, interleaving, "c2");
+                break;
+            case "circular_ges_c3":
+                clustering = new HierarchicalClustering();
+                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, interleaving, "c3");
+                break;
+            case "circular_ges_c4":
+                clustering = new HierarchicalClustering();
+                algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, interleaving, "c4");
                 break;
             case "fges":
                 algorithm = new Fges_BNBuilder(databasePath, true, false);
@@ -234,7 +241,7 @@ public class ExperimentBNBuilder {
         //System.out.println("\tFusion Consensus: " + fusion_consensus);
         System.out.println("\tnThreads: " + numberOfThreads);
         System.out.println("\tnPGESThreads: " + numberOfPGESThreads);
-        System.out.println("\tnItInterleaving: " + alpha);
+        System.out.println("\tnItInterleaving: " + interleaving);
         System.out.println("-----------------------------------------");
 
         System.out.println("Net_path: " + netPath);
@@ -340,7 +347,7 @@ public class ExperimentBNBuilder {
                 + this.databaseName + ","
                 + this.numberOfThreads + ","
                 + this.numberOfPGESThreads + ","
-                + this.alpha + ","
+                + this.interleaving + ","
                 + this.seed + ","
                 + this.structuralHamiltonDistanceValue + ","
                 + this.LogLikelihoodScore + ","

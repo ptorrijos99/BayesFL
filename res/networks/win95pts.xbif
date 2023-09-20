@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!--
+  Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
+  Produced by SamIam http://reasoning.cs.ucla.edu/samiam
+  Output created 22-may-2013 18:43:54
+-->
+
+<BIF VERSION="0.3">
+<NETWORK>
+  <NAME>bayesiannetwork</NAME>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtPort</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NetPrint</NAME>
+    <OUTCOME>No__Local_printer_</OUTCOME>
+    <OUTCOME>Yes__Network_printer_</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtData</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DS_LCLOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtDriver</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NtSpd</NAME>
+    <OUTCOME>OK</OUTCOME>
+    <OUTCOME>Slow</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtFile</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NnTTOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem4</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PTROFFLINE</NAME>
+    <OUTCOME>Online</OUTCOME>
+    <OUTCOME>Offline</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtCbl</NAME>
+    <OUTCOME>Connected</OUTCOME>
+    <OUTCOME>Loose</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DeskPrntSpd</NAME>
+    <OUTCOME>OK</OUTCOME>
+    <OUTCOME>Too_Slow</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtStatOff</NAME>
+    <OUTCOME>No_Error</OUTCOME>
+    <OUTCOME>OFFLINE__OFF</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtPScript</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>EPSGrphc</NAME>
+    <OUTCOME>No____TIF___WMF___BMP_</OUTCOME>
+    <OUTCOME>Yes____EPS_</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtThread</NAME>
+    <OUTCOME>OK</OUTCOME>
+    <OUTCOME>Corrupt_Buggy</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>AppOK</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect_Corrupt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtDataOut</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtIcon</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Grayed_Out</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TrTypFnts</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtStatToner</NAME>
+    <OUTCOME>No_Error</OUTCOME>
+    <OUTCOME>Low__None</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NtGrbld</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GrbldPS</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DS_NTOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PgOrnttnOK</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtPaper</NAME>
+    <OUTCOME>Has_Paper</OUTCOME>
+    <OUTCOME>No_Paper</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtSel</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>AvlblVrtlMmry</NAME>
+    <OUTCOME>Adequate____1Mb_</OUTCOME>
+    <OUTCOME>Inadequate____1_Mb_</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtOn</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PC2PRT</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GrbldOtpt</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LclOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem6</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>EMFOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TstpsTxt</NAME>
+    <OUTCOME>x_1_Mb_Available_VM</OUTCOME>
+    <OUTCOME>x_1_Mb_Available_VM2</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NnPSGrphc</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem1</NAME>
+    <OUTCOME>Normal_Output</OUTCOME>
+    <OUTCOME>No_Output</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DSApplctn</NAME>
+    <OUTCOME>DOS</OUTCOME>
+    <OUTCOME>Windows</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtMpTPth</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem3</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CblPrtHrdwrOK</NAME>
+    <OUTCOME>Operational</OUTCOME>
+    <OUTCOME>Not_Operational</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>ScrnFntNtPrntrFnt</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GrphcsRltdDrvrSttngs</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NtwrkCnfg</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtQueue</NAME>
+    <OUTCOME>Short</OUTCOME>
+    <OUTCOME>Long</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IncmpltPS</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtStatPaper</NAME>
+    <OUTCOME>No_Error</OUTCOME>
+    <OUTCOME>Jam__Out__Bin_Full</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TTOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrntrAccptsTrtyp</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtTimeOut</NAME>
+    <OUTCOME>Long_Enough</OUTCOME>
+    <OUTCOME>Too_Short</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>FntInstlltn</NAME>
+    <OUTCOME>Verified</OUTCOME>
+    <OUTCOME>Faulty</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>REPEAT</NAME>
+    <OUTCOME>Yes__Always_the_Same_</OUTCOME>
+    <OUTCOME>No__Different_Each_Time_</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>HrglssDrtnAftrPrnt</NAME>
+    <OUTCOME>Fast_Enough</OUTCOME>
+    <OUTCOME>Too_Long</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GDIOUT</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtMem</NAME>
+    <OUTCOME>Greater_than_2_Mb</OUTCOME>
+    <OUTCOME>Less_than_2Mb</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GDIIN</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LclGrbld</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrntngArOK</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>AppData</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect_or_corrupt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtPath</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PSERRMEM</NAME>
+    <OUTCOME>No_Error</OUTCOME>
+    <OUTCOME>Low_Memory</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem5</NAME>
+    <OUTCOME>No</OUTCOME>
+    <OUTCOME>Yes</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TnrSpply</NAME>
+    <OUTCOME>Adequate</OUTCOME>
+    <OUTCOME>Low</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>AppDtGnTm</NAME>
+    <OUTCOME>Fast_Enough</OUTCOME>
+    <OUTCOME>Too_Long</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtStatMem</NAME>
+    <OUTCOME>No_Error</OUTCOME>
+    <OUTCOME>Out_of_Memory</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DataFile</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect_Corrupt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DskLocal</NAME>
+    <OUTCOME>Greater_than_2_Mb</OUTCOME>
+    <OUTCOME>Less_than_2_Mb</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>FllCrrptdBffr</NAME>
+    <OUTCOME>Intact__not_Corrupt_</OUTCOME>
+    <OUTCOME>Full_or_Corrupt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrtSpool</NAME>
+    <OUTCOME>Enabled</OUTCOME>
+    <OUTCOME>Disabled</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PrntPrcssTm</NAME>
+    <OUTCOME>Fast_Enough</OUTCOME>
+    <OUTCOME>Too_Long</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Problem2</NAME>
+    <OUTCOME>OK</OUTCOME>
+    <OUTCOME>Too_Long</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DrvSet</NAME>
+    <OUTCOME>Correct</OUTCOME>
+    <OUTCOME>Incorrect</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DrvOK</NAME>
+    <OUTCOME>Reinstalled</OUTCOME>
+    <OUTCOME>Corrupt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NetOK</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CmpltPgPrntd</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>PSGRAPHIC</NAME>
+    <OUTCOME>Yes</OUTCOME>
+    <OUTCOME>No</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <DEFINITION>
+    <FOR>PrtPort</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NetPrint</FOR>
+    <TABLE>0.8 0.2 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtData</FOR>
+    <GIVEN>PrtOn</GIVEN>
+    <GIVEN>PrtPaper</GIVEN>
+    <GIVEN>PC2PRT</GIVEN>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>PrtTimeOut</GIVEN>
+    <GIVEN>FllCrrptdBffr</GIVEN>
+    <GIVEN>TnrSpply</GIVEN>
+    <TABLE>0.99 0.01 0.01 0.99 0.02 0.98 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DS_LCLOK</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>PrtCbl</GIVEN>
+    <GIVEN>PrtPort</GIVEN>
+    <GIVEN>CblPrtHrdwrOK</GIVEN>
+    <TABLE>1.0 0.0 0.1 0.9 0.0 1.0 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtDriver</FOR>
+    <TABLE>0.9 0.1 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NtSpd</FOR>
+    <GIVEN>DeskPrntSpd</GIVEN>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <GIVEN>PrtQueue</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 0.25 0.75 0.25 0.75 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtFile</FOR>
+    <GIVEN>PrtDataOut</GIVEN>
+    <TABLE>0.8 0.2 0.2 0.8 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NnTTOK</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>ScrnFntNtPrntrFnt</GIVEN>
+    <GIVEN>FntInstlltn</GIVEN>
+    <TABLE>0.99000001 0.00999999 0.1 0.9 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem4</FOR>
+    <GIVEN>NnPSGrphc</GIVEN>
+    <GIVEN>PrtPScript</GIVEN>
+    <GIVEN>PSGRAPHIC</GIVEN>
+    <TABLE>0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PTROFFLINE</FOR>
+    <TABLE>0.7 0.3 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtCbl</FOR>
+    <TABLE>0.98 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DeskPrntSpd</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>AppDtGnTm</GIVEN>
+    <GIVEN>PrntPrcssTm</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 9.9999E-4 0.99900001 9.9999E-4 0.99900001 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtStatOff</FOR>
+    <GIVEN>PrtOn</GIVEN>
+    <TABLE>0.99000001 0.00999999 0.00999999 0.99000001 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtPScript</FOR>
+    <TABLE>0.4 0.6 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>EPSGrphc</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtThread</FOR>
+    <TABLE>0.9999 1.0E-4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>AppOK</FOR>
+    <TABLE>0.995 0.0050 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtDataOut</FOR>
+    <GIVEN>GDIOUT</GIVEN>
+    <GIVEN>PrtSel</GIVEN>
+    <TABLE>0.99 0.01 0.0 1.0 0.0 1.0 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtIcon</FOR>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <GIVEN>PTROFFLINE</GIVEN>
+    <TABLE>0.9999 1.0E-4 0.7 0.3 0.25 0.75 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TrTypFnts</FOR>
+    <TABLE>0.9 0.1 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtStatToner</FOR>
+    <GIVEN>TnrSpply</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 9.9999E-4 0.99900001 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NtGrbld</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>PrtDriver</GIVEN>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <TABLE>1.0 0.0 0.4 0.6 0.2 0.8 0.5 0.5 0.4 0.6 0.5 0.5 0.5 0.5 0.5 0.5 0.3 0.7 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GrbldPS</FOR>
+    <GIVEN>GrbldOtpt</GIVEN>
+    <GIVEN>AvlblVrtlMmry</GIVEN>
+    <TABLE>1.0 0.0 0.1 0.9 0.0 1.0 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DS_NTOK</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>PrtPath</GIVEN>
+    <GIVEN>PrtMpTPth</GIVEN>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <GIVEN>PTROFFLINE</GIVEN>
+    <TABLE>0.99 0.01 0.0 1.0 0.1 0.9 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.2 0.8 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PgOrnttnOK</FOR>
+    <TABLE>0.95 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtPaper</FOR>
+    <TABLE>0.98 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtSel</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>AvlblVrtlMmry</FOR>
+    <GIVEN>PrtPScript</GIVEN>
+    <TABLE>0.98 0.02 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtOn</FOR>
+    <TABLE>0.9 0.1 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PC2PRT</FOR>
+    <GIVEN>NetPrint</GIVEN>
+    <GIVEN>PrtDataOut</GIVEN>
+    <GIVEN>NetOK</GIVEN>
+    <GIVEN>LclOK</GIVEN>
+    <GIVEN>DSApplctn</GIVEN>
+    <GIVEN>DS_NTOK</GIVEN>
+    <GIVEN>DS_LCLOK</GIVEN>
+    <TABLE>1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GrbldOtpt</FOR>
+    <GIVEN>NetPrint</GIVEN>
+    <GIVEN>LclGrbld</GIVEN>
+    <GIVEN>NtGrbld</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LclOK</FOR>
+    <GIVEN>PrtCbl</GIVEN>
+    <GIVEN>PrtPort</GIVEN>
+    <GIVEN>CblPrtHrdwrOK</GIVEN>
+    <TABLE>0.999 0.0010 0.01 0.99 0.0 1.0 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem6</FOR>
+    <GIVEN>GrbldOtpt</GIVEN>
+    <GIVEN>PrtPScript</GIVEN>
+    <GIVEN>GrbldPS</GIVEN>
+    <TABLE>1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>EMFOK</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>DskLocal</GIVEN>
+    <GIVEN>PrtThread</GIVEN>
+    <TABLE>0.99 0.01 0.05 0.95 0.0 1.0 0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TstpsTxt</FOR>
+    <GIVEN>PrtPScript</GIVEN>
+    <GIVEN>AvlblVrtlMmry</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 9.9999E-4 0.99900001 1.0 0.0 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NnPSGrphc</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>GrphcsRltdDrvrSttngs</GIVEN>
+    <GIVEN>EPSGrphc</GIVEN>
+    <TABLE>0.999 0.0010 0.0 1.0 0.1 0.9 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem1</FOR>
+    <GIVEN>PrtData</GIVEN>
+    <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DSApplctn</FOR>
+    <TABLE>0.15 0.85 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtMpTPth</FOR>
+    <TABLE>0.8 0.2 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem3</FOR>
+    <GIVEN>CmpltPgPrntd</GIVEN>
+    <GIVEN>PrtPScript</GIVEN>
+    <GIVEN>IncmpltPS</GIVEN>
+    <TABLE>0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CblPrtHrdwrOK</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>ScrnFntNtPrntrFnt</FOR>
+    <TABLE>0.95 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GrphcsRltdDrvrSttngs</FOR>
+    <TABLE>0.95 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NtwrkCnfg</FOR>
+    <TABLE>0.98 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtQueue</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IncmpltPS</FOR>
+    <GIVEN>CmpltPgPrntd</GIVEN>
+    <GIVEN>AvlblVrtlMmry</GIVEN>
+    <TABLE>1.0 0.0 0.3 0.7 0.0 1.0 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtStatPaper</FOR>
+    <GIVEN>PrtPaper</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 9.9999E-4 0.99900001 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TTOK</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>FntInstlltn</GIVEN>
+    <GIVEN>PrntrAccptsTrtyp</GIVEN>
+    <TABLE>0.99000001 0.00999999 0.0 1.0 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrntrAccptsTrtyp</FOR>
+    <TABLE>0.9 0.1 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtTimeOut</FOR>
+    <TABLE>0.94 0.06 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>FntInstlltn</FOR>
+    <TABLE>0.98 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>REPEAT</FOR>
+    <GIVEN>CblPrtHrdwrOK</GIVEN>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <TABLE>1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>HrglssDrtnAftrPrnt</FOR>
+    <GIVEN>AppDtGnTm</GIVEN>
+    <TABLE>0.99 0.01 0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GDIOUT</FOR>
+    <GIVEN>PrtDriver</GIVEN>
+    <GIVEN>GDIIN</GIVEN>
+    <GIVEN>DrvSet</GIVEN>
+    <GIVEN>DrvOK</GIVEN>
+    <TABLE>0.99 0.01 0.2 0.8 0.9 0.1 0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.1 0.9 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtMem</FOR>
+    <TABLE>0.95 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GDIIN</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>PrtSpool</GIVEN>
+    <GIVEN>EMFOK</GIVEN>
+    <TABLE>1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LclGrbld</FOR>
+    <GIVEN>AppData</GIVEN>
+    <GIVEN>PrtDriver</GIVEN>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>CblPrtHrdwrOK</GIVEN>
+    <TABLE>1.0 0.0 0.1 0.9 0.2 0.8 0.5 0.5 0.4 0.6 0.5 0.5 0.5 0.5 0.5 0.5 0.2 0.8 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrntngArOK</FOR>
+    <TABLE>0.98 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>AppData</FOR>
+    <GIVEN>AppOK</GIVEN>
+    <GIVEN>DataFile</GIVEN>
+    <TABLE>0.9999 1.0E-4 0.0 1.0 0.0 1.0 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtPath</FOR>
+    <TABLE>0.97 0.03 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PSERRMEM</FOR>
+    <GIVEN>PrtPScript</GIVEN>
+    <GIVEN>AvlblVrtlMmry</GIVEN>
+    <TABLE>1.0 0.0 0.05 0.95 1.0 0.0 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem5</FOR>
+    <GIVEN>TrTypFnts</GIVEN>
+    <GIVEN>TTOK</GIVEN>
+    <GIVEN>NnTTOK</GIVEN>
+    <TABLE>0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TnrSpply</FOR>
+    <TABLE>0.995 0.0050 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>AppDtGnTm</FOR>
+    <GIVEN>PrtSpool</GIVEN>
+    <TABLE>1.0 0.0 0.99000001 0.00999999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtStatMem</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <TABLE>0.99900001 9.9999E-4 0.2 0.8 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DataFile</FOR>
+    <TABLE>0.995 0.0050 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DskLocal</FOR>
+    <TABLE>0.97 0.03 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>FllCrrptdBffr</FOR>
+    <TABLE>0.85 0.15 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrtSpool</FOR>
+    <TABLE>0.95 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PrntPrcssTm</FOR>
+    <GIVEN>PrtSpool</GIVEN>
+    <TABLE>0.99000001 0.00999999 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Problem2</FOR>
+    <GIVEN>NetPrint</GIVEN>
+    <GIVEN>DeskPrntSpd</GIVEN>
+    <GIVEN>NtSpd</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DrvSet</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DrvOK</FOR>
+    <TABLE>0.99 0.01 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NetOK</FOR>
+    <GIVEN>PrtPath</GIVEN>
+    <GIVEN>NtwrkCnfg</GIVEN>
+    <GIVEN>PTROFFLINE</GIVEN>
+    <TABLE>0.99 0.01 0.0 1.0 0.1 0.9 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CmpltPgPrntd</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>PgOrnttnOK</GIVEN>
+    <GIVEN>PrntngArOK</GIVEN>
+    <TABLE>0.99 0.01 0.1 0.9 0.00999999 0.99000001 0.5 0.5 0.3 0.7 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>PSGRAPHIC</FOR>
+    <GIVEN>PrtMem</GIVEN>
+    <GIVEN>GrphcsRltdDrvrSttngs</GIVEN>
+    <GIVEN>EPSGrphc</GIVEN>
+    <TABLE>0.999 0.0010 1.0 0.0 0.1 0.9 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+</NETWORK>
+</BIF>

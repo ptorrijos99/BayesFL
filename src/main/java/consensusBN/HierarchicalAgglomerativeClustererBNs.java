@@ -12,7 +12,7 @@ package consensusBN;
 
 import java.util.ArrayList;
 
-import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
 
 
 /**
@@ -25,8 +25,8 @@ import edu.cmu.tetrad.graph.Dag;
 
 public final class HierarchicalAgglomerativeClustererBNs {
 
-    ArrayList<Dag> setOfBNs = null;
-    Dag[][] clustersBN = null;
+    ArrayList<Dag_n> setOfBNs = null;
+    Dag_n[][] clustersBN = null;
     boolean [][][] clustersIndexes = null;
     double averageNEdges = 0.00;
     double maxComplexityCluster = Double.MAX_VALUE;
@@ -44,9 +44,9 @@ public final class HierarchicalAgglomerativeClustererBNs {
 	private int[][] clustersInsertedEdges;
    
     
-    public HierarchicalAgglomerativeClustererBNs(ArrayList<Dag> setOfBNs, int maxSize) {
+    public HierarchicalAgglomerativeClustererBNs(ArrayList<Dag_n> setOfBNs, int maxSize) {
         this.setOfBNs = setOfBNs;
-        this.clustersBN = new Dag[setOfBNs.size()][setOfBNs.size()];
+        this.clustersBN = new Dag_n[setOfBNs.size()][setOfBNs.size()];
         this.clustersIndexes = new boolean[setOfBNs.size()][setOfBNs.size()][setOfBNs.size()];
         for(int i=  0 ; i< setOfBNs.size(); i++){
         	this.averageNEdges+=(double) setOfBNs.get(i).getNumEdges();
@@ -60,9 +60,9 @@ public final class HierarchicalAgglomerativeClustererBNs {
         this.clustersInsertedEdges = new int[setOfBNs.size()][setOfBNs.size()];
     }
     
-    public HierarchicalAgglomerativeClustererBNs(ArrayList<Dag> setOfBNs, double maxComplexity) {
+    public HierarchicalAgglomerativeClustererBNs(ArrayList<Dag_n> setOfBNs, double maxComplexity) {
         this.setOfBNs = setOfBNs;
-        this.clustersBN = new Dag[setOfBNs.size()][setOfBNs.size()];
+        this.clustersBN = new Dag_n[setOfBNs.size()][setOfBNs.size()];
         this.clustersIndexes = new boolean[setOfBNs.size()][setOfBNs.size()][setOfBNs.size()];
         for(int i=  0 ; i< setOfBNs.size(); i++){
         	this.averageNEdges+=(double) setOfBNs.get(i).getNumEdges();
@@ -85,12 +85,12 @@ public final class HierarchicalAgglomerativeClustererBNs {
 //        this.method = 1;
 //    }
     
-    public void setDags(ArrayList<Dag> setOfBNs) {
+    public void setDags(ArrayList<Dag_n> setOfBNs) {
   
     	this.setOfBNs = setOfBNs;
     }
     
-    public ArrayList<Dag> getSetOfBNs() {
+    public ArrayList<Dag_n> getSetOfBNs() {
         return this.setOfBNs;
     }
     
@@ -164,7 +164,7 @@ public final class HierarchicalAgglomerativeClustererBNs {
         return nDags;
     }
     
-    public Dag computeConsensusDag(int level){
+    public Dag_n computeConsensusDag(int level){
 
     	if (level <= this.maxLevel && level > 0 && this.initialpairwisedistance!=null){
     		int[] distance = new int[this.setOfBNs.size()];
@@ -188,7 +188,7 @@ public final class HierarchicalAgglomerativeClustererBNs {
     				}
     			}
     		}
-    		ArrayList<Dag> setOfDags = new ArrayList<Dag>();
+    		ArrayList<Dag_n> setOfDags = new ArrayList<Dag_n>();
     		for (int cluster = 0; cluster < this.setOfBNs.size(); cluster++){
     			if(index[cluster]!=-1) setOfDags.add(this.setOfBNs.get(index[cluster]));
     		}
@@ -223,9 +223,9 @@ public final class HierarchicalAgglomerativeClustererBNs {
     }
     
     
-    public ArrayList<Dag> getClustersOutput(int level){
+    public ArrayList<Dag_n> getClustersOutput(int level){
     	
-    	ArrayList<Dag> clusters = new ArrayList<Dag>();
+    	ArrayList<Dag_n> clusters = new ArrayList<Dag_n>();
     	for(int cluster = 0; cluster< this.setOfBNs.size(); cluster++){
     		if(this.clustersBN[cluster][level]!= null)
     			clusters.add(this.clustersBN[cluster][level]);

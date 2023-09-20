@@ -1,0 +1,11 @@
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50001_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50002_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50003_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50004_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50005_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50006_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50007_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50008_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50009_.csv /res/networks/BBDD/tests/mildew_test.csv
+ges mildew /res/networks/mildew.xbif /res/networks/BBDD/mildew.xbif50001246_.csv /res/networks/BBDD/tests/mildew_test.csv

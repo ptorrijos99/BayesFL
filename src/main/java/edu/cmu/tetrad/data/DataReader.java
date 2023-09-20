@@ -555,7 +555,7 @@ public final class DataReader implements IDataReader {
             dataSet.removeColumn(idVar);
         }
 
-        Knowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
+        IKnowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
 
         if (knowledge != null) {
             dataSet.setKnowledge(knowledge);
@@ -727,7 +727,7 @@ public final class DataReader implements IDataReader {
             }
         }
 
-        Knowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
+        IKnowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
 
         ICovarianceMatrix covarianceMatrix
                 = new CovarianceMatrix(DataUtils.createContinuousVariables(varNames), c, n);
@@ -745,10 +745,10 @@ public final class DataReader implements IDataReader {
      * Loads knowledge from a file. Assumes knowledge is the only thing in the
      * file. No jokes please. :)
      */
-    public Knowledge parseKnowledge(File file) throws IOException {
+    public IKnowledge parseKnowledge(File file) throws IOException {
         FileReader reader = new FileReader(file);
         Lineizer lineizer = new Lineizer(reader, commentMarker);
-        Knowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
+        IKnowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
         this.logger.reset();
         return knowledge;
     }
@@ -757,10 +757,10 @@ public final class DataReader implements IDataReader {
      * Parses knowledge from the char array, assuming that's all there is in the
      * char array.
      */
-    public Knowledge parseKnowledge(char[] chars) {
+    public IKnowledge parseKnowledge(char[] chars) {
         CharArrayReader reader = new CharArrayReader(chars);
         Lineizer lineizer = new Lineizer(reader, commentMarker);
-        Knowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
+        IKnowledge knowledge = parseKnowledge(lineizer, delimiterType.getPattern());
         this.logger.reset();
         return knowledge;
     }
@@ -827,14 +827,14 @@ public final class DataReader implements IDataReader {
      * 4 x5
      * </pre>
      */
-    private Knowledge parseKnowledge(Lineizer lineizer, Pattern delimiter) {
-        Knowledge knowledge = new Knowledge();
+    private IKnowledge parseKnowledge(Lineizer lineizer, Pattern delimiter) {
+        IKnowledge knowledge = new Knowledge2();
 
         String line = lineizer.nextLine();
         String firstLine = line;
 
         if (line == null) {
-            return new Knowledge();
+            return new Knowledge2();
         }
 
         if (line.startsWith("/knowledge")) {

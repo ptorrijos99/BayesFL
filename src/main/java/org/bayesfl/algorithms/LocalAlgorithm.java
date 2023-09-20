@@ -38,11 +38,17 @@ public interface LocalAlgorithm {
 
     /**
      * Build the local model using the algorithm.
-     * @param localModel The previous local Model that the algorithm
-     *                   uses as base.
+     * @param localModel The previous local Model that the algorithm uses as base.
      * @param data The Data used to build the Model.
      * @return The model build by the algorithm.
      */
     Model buildLocalModel(Model localModel, Data data);
+
+    /**
+     * Build the local model using the algorithm, without previous local model.
+     * @param data The Data used to build the Model.
+     * @return The model build by the algorithm.
+     */
+    Model buildLocalModel(Data data);
 
 }

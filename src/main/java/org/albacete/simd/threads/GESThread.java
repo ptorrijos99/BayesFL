@@ -2,8 +2,8 @@ package org.albacete.simd.threads;
 
 import consensusBN.SubSet;
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.utils.GraphSearchUtils;
-import edu.cmu.tetrad.search.utils.MeekRules;
+import edu.cmu.tetrad.search.MeekRules;
+import edu.cmu.tetrad.search.SearchGraphUtils;
 import edu.cmu.tetrad.util.NumberFormatUtil;
 import org.albacete.simd.framework.BackwardStage;
 import org.albacete.simd.framework.ForwardStage;
@@ -135,7 +135,7 @@ public abstract class GESThread implements Runnable{
     /**
      * Id of the thread
      */
-    public int id = -1;
+    protected int id = -1;
 
     /**
      * Boolean value that says if the thread is from a forward stage (true) or from a backwards stage (false)
@@ -345,7 +345,7 @@ public abstract class GESThread implements Runnable{
      * @param graph Graph being rebuilt.
      */
     protected void rebuildPattern(Graph graph) {
-        GraphSearchUtils.basicCpdag(graph);
+        SearchGraphUtils.basicCPDAG(graph);
         pdag(graph);
     }
 
@@ -363,7 +363,7 @@ public abstract class GESThread implements Runnable{
      */
     protected void pdag(Graph graph) {
         MeekRules rules = new MeekRules();
-        rules.setMeekPreventCycles(true);
+        rules.setAggressivelyPreventCycles(this.aggressivelyPreventCycles);
         rules.orientImplied(graph);
     }
 
@@ -384,7 +384,7 @@ public abstract class GESThread implements Runnable{
         }
 
 //        Graph dag = SearchGraphUtils.dagFromPattern(graph);
-        Graph dag = new EdgeListGraph(graph);
+        Graph dag = new EdgeListGraph_n(graph);
         pdagToDag(dag);
         double score = 0.;
 
@@ -422,7 +422,7 @@ public abstract class GESThread implements Runnable{
             return Double.NEGATIVE_INFINITY;
         }
         
-        Graph dag = new EdgeListGraph(graph);
+        Graph dag = new EdgeListGraph_n(graph);
         pdagToDag(dag);
         HashMap<Node,Integer> hashIndices = problem.getHashIndices();
 

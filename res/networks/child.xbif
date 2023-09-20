@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!--
+  Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
+  Produced by SamIam http://reasoning.cs.ucla.edu/samiam
+  Output created 22-may-2013 18:39:05
+-->
+
+<BIF VERSION="0.3">
+<NETWORK>
+  <NAME>bayesiannetwork</NAME>
+
+  <VARIABLE TYPE="nature">
+    <NAME>HypDistrib</NAME>
+    <OUTCOME>Equal</OUTCOME>
+    <OUTCOME>Unequal</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DuctFlow</NAME>
+    <OUTCOME>Lt_to_Rt</OUTCOME>
+    <OUTCOME>None</OUTCOME>
+    <OUTCOME>Rt_to_Lt</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CardiacMixing</NAME>
+    <OUTCOME>None</OUTCOME>
+    <OUTCOME>Mild</OUTCOME>
+    <OUTCOME>Complete</OUTCOME>
+    <OUTCOME>Transp.</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Disease</NAME>
+    <OUTCOME>PFC</OUTCOME>
+    <OUTCOME>TGA</OUTCOME>
+    <OUTCOME>Fallot</OUTCOME>
+    <OUTCOME>PAIVS</OUTCOME>
+    <OUTCOME>TAPVD</OUTCOME>
+    <OUTCOME>Lung</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LungFlow</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Low</OUTCOME>
+    <OUTCOME>High</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CO2Report</NAME>
+    <OUTCOME><![CDATA[<7.5]]></OUTCOME>
+    <OUTCOME>>=7.5</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>HypoxiaInO2</NAME>
+    <OUTCOME>Mild</OUTCOME>
+    <OUTCOME>Moderate</OUTCOME>
+    <OUTCOME>Severe</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>XrayReport</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Oligaemic</OUTCOME>
+    <OUTCOME>Plethoric</OUTCOME>
+    <OUTCOME>Grd_Glass</OUTCOME>
+    <OUTCOME>Asy/Patchy</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Age</NAME>
+    <OUTCOME>0-3_days</OUTCOME>
+    <OUTCOME>4-10_days</OUTCOME>
+    <OUTCOME>11-30_days</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LVH</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LowerBodyO2</NAME>
+    <OUTCOME><![CDATA[<5]]></OUTCOME>
+    <OUTCOME>5-12</OUTCOME>
+    <OUTCOME>12+</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CO2</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Low</OUTCOME>
+    <OUTCOME>High</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>ChestXray</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Oligaemic</OUTCOME>
+    <OUTCOME>Plethoric</OUTCOME>
+    <OUTCOME>Grd_Glass</OUTCOME>
+    <OUTCOME>Asy/Patch</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LVHreport</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>BirthAsphyxia</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GruntingReport</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Grunting</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>Sick</NAME>
+    <OUTCOME>yes</OUTCOME>
+    <OUTCOME>no</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>LungParench</NAME>
+    <OUTCOME>Normal</OUTCOME>
+    <OUTCOME>Congested</OUTCOME>
+    <OUTCOME>Abnormal</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RUQO2</NAME>
+    <OUTCOME><![CDATA[<5]]></OUTCOME>
+    <OUTCOME>5-12</OUTCOME>
+    <OUTCOME>12+</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <DEFINITION>
+    <FOR>HypDistrib</FOR>
+    <GIVEN>DuctFlow</GIVEN>
+    <GIVEN>CardiacMixing</GIVEN>
+    <TABLE>0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.05 0.95 0.5 0.5 0.95 0.05 0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DuctFlow</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.15 0.05 0.8 0.1 0.8 0.1 0.8 0.2 0.0 1.0 0.0 0.0 0.33 0.33 0.34 0.2 0.4 0.4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CardiacMixing</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.4 0.43 0.15 0.02 0.02 0.09 0.09 0.8 0.02 0.16 0.8 0.02 0.01 0.02 0.95 0.02 0.01 0.03 0.95 0.01 0.4 0.53 0.05 0.02 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Disease</FOR>
+    <GIVEN>BirthAsphyxia</GIVEN>
+    <TABLE>0.2 0.3 0.25 0.15 0.05 0.05 0.03061224 0.33673469 0.29591837 0.23469388 0.05102041 0.05102041 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LungFlow</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.3 0.65 0.05 0.2 0.05 0.75 0.15 0.8 0.05 0.1 0.85 0.05 0.3 0.1 0.6 0.7 0.1 0.2 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CO2Report</FOR>
+    <GIVEN>CO2</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>HypoxiaInO2</FOR>
+    <GIVEN>CardiacMixing</GIVEN>
+    <GIVEN>LungParench</GIVEN>
+    <TABLE>0.93 0.05 0.02 0.15 0.8 0.05 0.7000000000000001 0.20000000000000004 0.10000000000000002 0.1 0.8 0.1 0.1 0.75 0.15 0.1 0.65 0.25 0.1 0.7 0.2 0.05 0.65 0.3 0.1 0.5 0.4 0.02 0.18 0.8 0.1 0.3 0.6 0.02 0.18 0.8 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>XrayReport</FOR>
+    <GIVEN>ChestXray</GIVEN>
+    <TABLE>0.7999999999999998 0.059999999999999984 0.059999999999999984 0.019999999999999997 0.059999999999999984 0.1 0.8 0.02 0.02 0.06 0.1 0.02 0.8 0.02 0.06 0.08 0.02 0.1 0.6 0.2 0.08 0.02 0.1 0.1 0.7 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Age</FOR>
+    <GIVEN>Disease</GIVEN>
+    <GIVEN>Sick</GIVEN>
+    <TABLE>0.95 0.03 0.02 0.85 0.1 0.05 0.8 0.15 0.05 0.7000000000000001 0.20000000000000004 0.10000000000000002 0.7 0.15 0.15 0.25 0.25 0.5 0.8 0.15 0.05 0.8 0.15 0.05 0.8 0.15 0.05 0.7000000000000001 0.20000000000000004 0.10000000000000002 0.9 0.08 0.02 0.8 0.15 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LVH</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.1 0.9 0.1 0.9 0.1 0.9 0.9 0.1 0.05 0.95 0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LowerBodyO2</FOR>
+    <GIVEN>HypDistrib</GIVEN>
+    <GIVEN>HypoxiaInO2</GIVEN>
+    <TABLE>0.1 0.3 0.6 0.30000000000000004 0.6000000000000001 0.10000000000000002 0.5 0.4 0.1 0.4 0.5 0.1 0.5 0.45 0.05 0.6 0.35 0.05 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CO2</FOR>
+    <GIVEN>LungParench</GIVEN>
+    <TABLE>0.8 0.1 0.1 0.65 0.05 0.3 0.45 0.05 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>ChestXray</FOR>
+    <GIVEN>LungParench</GIVEN>
+    <GIVEN>LungFlow</GIVEN>
+    <TABLE>0.9 0.03 0.03 0.01 0.03 0.14 0.8 0.02 0.02 0.02 0.15 0.01 0.79 0.04 0.01 0.05000000000000001 0.020000000000000004 0.15000000000000002 0.7000000000000001 0.08000000000000002 0.05 0.22 0.08 0.5 0.15 0.05 0.02 0.4 0.4 0.13 0.05 0.05 0.05 0.05 0.8 0.05 0.15 0.05 0.05 0.7 0.23999999999999994 0.32999999999999996 0.029999999999999992 0.33999999999999997 0.059999999999999984 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LVHreport</FOR>
+    <GIVEN>LVH</GIVEN>
+    <TABLE>0.9 0.1 0.05 0.95 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>BirthAsphyxia</FOR>
+    <TABLE>0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GruntingReport</FOR>
+    <GIVEN>Grunting</GIVEN>
+    <TABLE>0.8 0.2 0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Grunting</FOR>
+    <GIVEN>LungParench</GIVEN>
+    <GIVEN>Sick</GIVEN>
+    <TABLE>0.2 0.8 0.05 0.95 0.4 0.6 0.2 0.8 0.8 0.2 0.6 0.4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>Sick</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.4 0.6 0.3 0.7 0.2 0.8 0.3 0.7 0.7 0.3 0.7 0.3 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>LungParench</FOR>
+    <GIVEN>Disease</GIVEN>
+    <TABLE>0.6 0.1 0.3 0.8 0.05 0.15 0.8 0.05 0.15 0.8 0.05 0.15 0.1 0.6 0.3 0.03 0.25 0.72 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RUQO2</FOR>
+    <GIVEN>HypoxiaInO2</GIVEN>
+    <TABLE>0.1 0.3 0.6 0.30000000000000004 0.6000000000000001 0.10000000000000002 0.5 0.4 0.1 </TABLE>
+  </DEFINITION>
+
+</NETWORK>
+</BIF>

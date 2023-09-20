@@ -7,21 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import edu.cmu.tetrad.graph.Node;
-import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Endpoint;
 
 
 public class BetaToAlpha {
 
-	Dag G = null;
+	Dag_n G = null;
 	ArrayList<Node> beta = new ArrayList<Node>();
 	ArrayList<Node> alfa = new ArrayList<Node>();
 	HashMap<Node,Integer> alfaHash= new HashMap<Node,Integer>();
-	Dag G_aux = null;
+	Dag_n G_aux = null;
 	int numberOfInsertedEdges = 0;
 	
-	public BetaToAlpha(Dag G, ArrayList<Node> alfa){
+	public BetaToAlpha(Dag_n G, ArrayList<Node> alfa){
 
 		this.alfa = alfa;
 		this.G = G;
@@ -33,7 +33,7 @@ public class BetaToAlpha {
 		
 	}
 	
-	public BetaToAlpha(Dag G){
+	public BetaToAlpha(Dag_n G){
 
 		this.alfa = null;
 		this.G = G;
@@ -87,7 +87,7 @@ public class BetaToAlpha {
 	
 	public void transform(){
 		
-		this.G_aux = new Dag(this.G);
+		this.G_aux = new Dag_n(this.G);
 		this.beta = new ArrayList<Node>();
 		ArrayList<Node> sinkNodes = getSinkNodes(this.G_aux);
 		this.beta.add(sinkNodes.get(0)); 
@@ -192,7 +192,7 @@ public class BetaToAlpha {
 		return this.numberOfInsertedEdges;
 	}
 	
-	ArrayList<Node> getSinkNodes(Dag g){
+	ArrayList<Node> getSinkNodes(Dag_n g){
 		
 		ArrayList<Node> sourcesNodes = new ArrayList<Node>();
 		List<Node> nodes = g.getNodes();
@@ -210,9 +210,9 @@ public class BetaToAlpha {
 //
 //		 //Graph graph = GraphConverter.convert("X1-->X2,X1-->X3,X2-->X4,X3-->X4");
 //		 Graph graph = GraphConverter.convert("X2-->X1,X3-->X1,X1-->X4,X5-->X4,X4-->X6");
-//		 Dag dag = new Dag(graph);
+//		 Dag_n dag = new Dag_n(graph);
 //		
-//	     Dag dag2 = GraphUtils.randomDag(dag.getNodes(), 7, true);
+//	     Dag_n dag2 = GraphUtils.randomDag(dag.getNodes(), 7, true);
 ////	     BayesPm bayesPm = new BayesPm(dag, 3, 3);
 ////	     MlBayesIm bayesIm = new MlBayesIm(bayesPm);
 ////	     
@@ -234,7 +234,7 @@ public class BetaToAlpha {
 //	     System.out.println(GraphUtils.graphToDot(dag));
 //	     
 //	     
-////	     System.out.println("Dag Inicial: "+ dag.toString());
+////	     System.out.println("Dag_n Inicial: "+ dag.toString());
 //	     
 //	     Random aleatorio = new Random(150);
 //	     BetaToAlpha mt = new BetaToAlpha(dag);  
@@ -246,7 +246,7 @@ public class BetaToAlpha {
 //	     
 //	     
 //	     
-////	     System.out.println("Dag Inicial: "+ dag2.toString());
+////	     System.out.println("Dag_n Inicial: "+ dag2.toString());
 //	     
 //	     System.out.println(GraphUtils.graphToDot(dag2));
 //	     
