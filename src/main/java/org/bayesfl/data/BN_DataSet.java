@@ -14,7 +14,7 @@ public class BN_DataSet implements Data {
     @Override
     public void setData(Object data) {
         if (!(data instanceof DataSet)) {
-            throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
+            throw new IllegalArgumentException("The data must be object of the DataSet class");
         }
 
         this.data = (DataSet) data;

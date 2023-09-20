@@ -299,6 +299,8 @@ public abstract class BNBuilder {
         return nItInterleaving;
     }
 
-
+    public void setInitialGraph(Graph initialGraph) {
+        this.initialGraph = initialGraph;
+    }
 
 }
