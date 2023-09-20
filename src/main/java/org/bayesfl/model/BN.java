@@ -53,7 +53,7 @@ public class BN implements Model {
     @Override
     public void setModel(Object model) {
         if (!(model instanceof Dag_n)) {
-            throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
+            throw new IllegalArgumentException("The model must be object of the BN class");
         }
 
         this.dag = (Dag_n) model;
