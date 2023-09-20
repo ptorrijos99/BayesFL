@@ -31,6 +31,11 @@
 
 package org.bayesfl;
 
+import org.bayesfl.algorithms.LocalAlgorithm;
+import org.bayesfl.data.Data;
+import org.bayesfl.fusion.Fusion;
+import org.bayesfl.model.Model;
+
 public class Client {
 
     /**
@@ -53,16 +58,6 @@ public class Client {
      * The local model of the client.
      */
     private Model localModel;
-
-    /**
-     * The global model of the server.
-     */
-    private Model globalModel;
-
-    /**
-     * The server.
-     */
-    private Server server;
 
     /**
      * The ID of the client.
@@ -109,14 +104,6 @@ public class Client {
      */
     protected void fusion(Model globalModel) {
         localModel = localFusion.fusion(localModel, globalModel);
-    }
-
-    /**
-     * Set the server.
-     * @param server The server.
-     */
-    public void setServer(Server server) {
-        this.server = server;
     }
 
     /**

@@ -29,7 +29,9 @@
  *
  */
 
-package org.bayesfl;
+package org.bayesfl.fusion;
+
+import org.bayesfl.model.Model;
 
 public interface Fusion {
 

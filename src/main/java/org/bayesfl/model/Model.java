@@ -22,14 +22,14 @@
  *  SOFTWARE.
  */
 /**
- *    Data.java
+ *    Model.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.bayesfl;
+package org.bayesfl.model;
 
-public interface Data {
+public interface Model {
 }

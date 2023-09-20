@@ -31,6 +31,9 @@
 
 package org.bayesfl;
 
+import org.bayesfl.fusion.Fusion;
+import org.bayesfl.model.Model;
+
 import java.util.Collection;
 
 public class Server {
@@ -51,7 +54,7 @@ public class Server {
      */
     private final Collection<Client> clients;
 
-    private Model[] localModels;
+    private final Model[] localModels;
 
     /**
      * Constructor of the class Server.
@@ -64,7 +67,6 @@ public class Server {
 
         int id = 0;
         for (Client client : clients) {
-            client.setServer(this);
             client.setID(id);
             id++;
         }

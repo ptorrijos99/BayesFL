@@ -22,24 +22,16 @@
  *  SOFTWARE.
  */
 /**
- *    LocalAlgorithm.java
+ *    BN.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.bayesfl;
+package org.bayesfl.model;
 
-public interface LocalAlgorithm {
-
-    /**
-     * Build the local model using the algorithm.
-     * @param localModel The previous local Model that the algorithm
-     *                   uses as base.
-     * @param data The Data used to build the Model.
-     * @return The model build by the algorithm.
-     */
-    Model buildLocalModel(Model localModel, Data data);
+public class BN {
+    
 
 }
