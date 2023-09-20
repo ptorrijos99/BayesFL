@@ -5,6 +5,7 @@ import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.clustering.Clustering;
 import org.albacete.simd.framework.*;
 import org.albacete.simd.threads.GESThread;
+import org.albacete.simd.utils.Problem;
 
 public class PGESwithStages extends BNBuilder {
 
@@ -55,6 +56,15 @@ public class PGESwithStages extends BNBuilder {
         this.speedUp = speedUp;
         this.update = update;
         this.parallel = parallel;
+    }
+
+    public PGESwithStages(Problem problem, Clustering clustering, int nThreads, int maxIterations, int nItInterleaving, boolean speedUp) {
+        super(problem.getData(), nThreads, maxIterations, nItInterleaving);
+        this.clustering = clustering;
+        this.clustering.setProblem(super.getProblem());
+        this.speedUp = speedUp;
+        this.update = true;
+        this.parallel = true;
     }
 
     @Override

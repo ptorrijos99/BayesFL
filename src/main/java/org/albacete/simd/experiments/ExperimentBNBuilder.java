@@ -163,13 +163,10 @@ public class ExperimentBNBuilder {
                 algorithm = new Circular_GES(databasePath, clustering, numberOfPGESThreads, interleaving, "c4");
                 break;
             case "fges":
-                algorithm = new Fges_BNBuilder(databasePath, true, false);
+                algorithm = new Fges_BNBuilder(databasePath, true);
                 break;
             case "fges-faithfulness":
-                algorithm = new Fges_BNBuilder(databasePath, false, false);
-                break;
-            case "ges-tetrad":
-                algorithm = new Fges_BNBuilder(databasePath, true, true);
+                algorithm = new Fges_BNBuilder(databasePath, false);
                 break;
             case "pges-jc":
                 clustering = new HierarchicalClustering(true, true);
