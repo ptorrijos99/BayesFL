@@ -32,4 +32,8 @@
 package org.bayesfl.model;
 
 public interface Model {
+
+    Object getModel();
+
+    void setModel(Object model);
 }

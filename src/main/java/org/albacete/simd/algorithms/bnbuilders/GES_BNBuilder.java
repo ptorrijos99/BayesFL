@@ -75,7 +75,7 @@ public class GES_BNBuilder extends BNBuilder {
     @Override
     protected void forwardStage() throws InterruptedException {
         ForwardStage.meanTimeTotal = 0;
-        FESThread fes = new FESThread(problem, initialDag, setOfArcs, Integer.MAX_VALUE, false, true, parallel);
+        FESThread fes = new FESThread(problem, initialDag, setOfArcs, Integer.MAX_VALUE, false, false, parallel);
         fes.run();
         currentGraph = fes.getCurrentGraph();
         fesFlag = fes.getFlag();

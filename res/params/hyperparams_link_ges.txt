@@ -1,0 +1,11 @@
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50001_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50002_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50003_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50004_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50005_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50006_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50007_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50008_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50009_.csv /res/networks/BBDD/tests/link_test.csv
+ges link /res/networks/link.xbif /res/networks/BBDD/link.xbif50001246_.csv /res/networks/BBDD/tests/link_test.csv

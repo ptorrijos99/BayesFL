@@ -1,0 +1,11 @@
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50001_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50002_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50003_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50004_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50005_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50006_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50007_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50008_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50009_.csv /res/networks/BBDD/tests/water_test.csv
+ges water /res/networks/water.xbif /res/networks/BBDD/water.xbif50001246_.csv /res/networks/BBDD/tests/water_test.csv

@@ -1,5 +1,14 @@
 package org.albacete.simd.experiments;
 
+import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
+import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
+import org.albacete.simd.clustering.Clustering;
+import org.albacete.simd.clustering.HierarchicalClustering;
+import org.albacete.simd.clustering.RandomClustering;
+import org.albacete.simd.framework.BNBuilder;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,10 +22,11 @@ public class ExperimentBNLauncher {
     public static final int MAXITERATIONS = 100;
 
     private final String EXPERIMENTS_FOLDER;
-    private final int index;
-    private final String paramsFileName;
-    private final int threads;
+    private int index;
+    private String paramsFileName;
+    private int threads;
     private ExperimentBNBuilder experiment;
+    private String savepath;
 
     public ExperimentBNLauncher(int index, String paramsFileName, int threads, String saveFolder){
         this.index = index;
@@ -97,7 +107,7 @@ public class ExperimentBNLauncher {
     private boolean checkExistentFile() throws IOException{
         String savePath = EXPERIMENTS_FOLDER  + "experiment_results_" + experiment.netName + "_" + experiment.algName + "_" + 
                 experiment.databaseName + "_t" + experiment.numberOfThreads + "_PGESt" + experiment.numberOfPGESThreads +
-                "_i" + experiment.alpha + "_s" + experiment.seed + ".csv";
+                "_i" + experiment.interleaving + "_s" + experiment.seed + ".csv";
         
         return experiment.checkExistentFile(savePath);
     }
@@ -107,7 +117,7 @@ public class ExperimentBNLauncher {
 
         String savePath = EXPERIMENTS_FOLDER  + "experiment_results_" + experiment.netName + "_" + experiment.algName + "_" + 
                 experiment.databaseName + "_t" + experiment.numberOfThreads + "_PGESt" + experiment.numberOfPGESThreads +
-                "_i" + experiment.alpha + "_s" + experiment.seed + ".csv";
+                "_i" + experiment.interleaving + "_s" + experiment.seed + ".csv";
         try {
             saveExperiment(savePath, results);
         } catch (IOException e) {

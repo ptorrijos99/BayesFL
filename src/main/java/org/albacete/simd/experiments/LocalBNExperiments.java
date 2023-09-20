@@ -17,18 +17,18 @@ import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 public class LocalBNExperiments {
     
     protected static BNBuilder algorithm;
-    protected static String EXPERIMENTS_FOLDER = "resultados-MSI/";
+    protected static String EXPERIMENTS_FOLDER = "resultados/";
     
     public static void main(String[] args) throws Exception {
         // 1. Configuration
         String networkFolder = "./res/networks/";
-        
-        // 2. Algorithm
-        //String[] algorithmsPGES = new String[]{"pges update", "pges-jc update"};  // "pges update noParallel", 
-        String[] algorithmsPGES = new String[]{"circular_ges_c1", "circular_ges_c2", "circular_ges_c3", "circular_ges_c4"};
-        String[] bbdds = new String[]{"alarm", "barley", "child", "hepar2", "insurance", "water", "win95pts", "andes", "pathfinder", "hailfinder", "mildew", "pigs", "link", "diabetes", "munin"};
 
-        Integer[] nThreads = new Integer[]{8};
+        // 2. Algorithm
+        //String[] algorithmsPGES = new String[]{"pges", "pges update", "pges update speed", "pges-jc", "pges-jc update", "pges-jc update speed"};  // "pges update noParallel", 
+        String[] algorithmsPGES = new String[]{"circular_ges_c1", "circular_ges_c2", "circular_ges_c3", "circular_ges_c4"};
+        String[] bbdds = new String[]{"alarm", "barley", "child", "hepar2", "insurance", "mildew", "water", "win95pts", "andes", "pigs", "link", "diabetes", "pathfinder", "hailfinder", "munin"};
+
+        Integer[] nThreads = new Integer[]{8,4};
         String[] bbdd_patchs = new String[]{"50003_", "50002_", "50001_", "50004_","50005_", "50006_", "50007_",
                                             "50008_", "50009_", "50001246_", "_"};
 
@@ -42,9 +42,9 @@ public class LocalBNExperiments {
                     //launchExperiment("empty", net_name, net_path, bbdd_path, test_path, 1, -1, bb);
 
                     /*launchExperiment("ges", net_name, net_path, bbdd_path, test_path, 1, -1, bb);
-                    System.gc();*/
-                    //launchExperiment("ges parallel", net_name, net_path, bbdd_path, test_path, 1, -1, bb);
                     System.gc();
+                    launchExperiment("ges parallel", net_name, net_path, bbdd_path, test_path, 1, -1, bb);
+                    System.gc();*/
                     for (String alg : algorithmsPGES) {
                         try {
                             launchExperiment(alg, net_name, net_path, bbdd_path, test_path, threads, Integer.MAX_VALUE, bb);

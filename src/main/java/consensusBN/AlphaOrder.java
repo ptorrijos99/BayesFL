@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Endpoint;
@@ -13,27 +13,27 @@ import edu.cmu.tetrad.graph.Node;
 import java.util.HashMap;
 
 public class AlphaOrder {
-	ArrayList<Dag> setOfDags = null;
+	ArrayList<Dag_n> setOfDags = null;
 	ArrayList<Node> alpha = null;
-	ArrayList<Dag> setOfauxG = null;
+	ArrayList<Dag_n> setOfauxG = null;
 //	ArrayList<int[][]> dpaths = null;
 	
-	public AlphaOrder(ArrayList<Dag> dags){
+	public AlphaOrder(ArrayList<Dag_n> dags){
 		
 		this.setOfDags = dags;
 		this.alpha = new ArrayList<Node>();
-		this.setOfauxG = new ArrayList<Dag>();
+		this.setOfauxG = new ArrayList<Dag_n>();
 //		this.dpaths = new ArrayList<int[][]>();
 		
-		for (Dag i : setOfDags)	{
-			Dag aux_G = new Dag(i);
+		for (Dag_n i : setOfDags)	{
+			Dag_n aux_G = new Dag_n(i);
 			setOfauxG.add(aux_G);
 //			dpaths.add(computeDirectedPathFromTo(aux_G));
 		}
 		
 	}
 	
-	public int[][] computeDirectedPathFromTo(Dag graph) {
+	public int[][] computeDirectedPathFromTo(Dag_n graph) {
 		
 		LinkedList<Edge> dpathNewEdges = new LinkedList<Edge>();
 		dpathNewEdges.clear();
@@ -95,7 +95,7 @@ public class AlphaOrder {
 			int index_alpha = computeNextH1(nodes);
 			Node node_alpha = nodes.get(index_alpha);
 			alpha.addFirst(node_alpha);
-			for(Dag g: this.setOfauxG){
+			for(Dag_n g: this.setOfauxG){
 				removeNode(g,node_alpha);
 				int[][] newDpaths = computeDirectedPathFromTo(g);
 //				this.dpaths.set(this.setOfauxG.indexOf(g), newDpaths);
@@ -116,7 +116,7 @@ public void computeAlphaH2(){
 			int index_alpha = computeNextH2(nodes);
 			Node node_alpha = nodes.get(index_alpha);
 			alpha.addFirst(node_alpha);
-			for(Dag g: this.setOfauxG){
+			for(Dag_n g: this.setOfauxG){
 				removeNode(g,node_alpha);
 			}
 			nodes.remove(node_alpha);
@@ -136,7 +136,7 @@ public void computeAlphaH2(){
 		
 		for(int i=0; i<nodes.size(); i++){
 			Node nodei = nodes.get(i);
-			for(Dag g: this.setOfauxG){
+			for(Dag_n g: this.setOfauxG){
 				ArrayList<Edge> inserted = new ArrayList<Edge>();
 				List<Node> children = g.getChildren(nodei);
 				inversion += (children.size()-1);
@@ -181,7 +181,7 @@ public void computeAlphaH2(){
 		return indexNode;
 	}
 	
-	void removeNode(Dag g, Node node_alpha){
+	void removeNode(Dag_n g, Node node_alpha){
 		
 		List<Node> children = g.getChildren(node_alpha);
 		
@@ -193,7 +193,7 @@ public void computeAlphaH2(){
 				child = children.get(i++);
 				g.removeEdge(node_alpha, child);
 				seguir=false;
-				if(g.paths().existsDirectedPathFromTo(node_alpha,child)){
+				if(g.existsDirectedPathFromTo(node_alpha,child)){
 					seguir=true;
 					g.addEdge(new Edge(node_alpha,child,Endpoint.TAIL, Endpoint.ARROW));
 				}
@@ -228,7 +228,7 @@ public void computeAlphaH2(){
 		
 		for(int i=0 ; i< nodes.size(); i++){
 			int weightNodei = 0;
-			for(Dag dag : this.setOfauxG){
+			for(Dag_n dag : this.setOfauxG){
 	//			int[][] dpath = this.dpaths.get(this.setOfauxG.indexOf(dag));
 	//			for(int j=0 ; j<nodes.size(); j++) weightNodei+= dpath[i][j];
 			}
@@ -251,22 +251,22 @@ public void computeAlphaH2(){
 	
 	public static void main(String args[]) {
 		
-//		ArrayList<Dag> dags = new ArrayList<Dag>();
+//		ArrayList<Dag_n> dags = new ArrayList<Dag_n>();
 //		ArrayList<Node> alfa = new ArrayList<Node>();
 //
 //
 //		System.out.println("Grafos de Partida:   ");
 //		System.out.println("---------------------");
 ////		Graph graph = GraphConverter.convert("X1-->X5,X2-->X3,X3-->X4,X4-->X1,X4-->X5");
-////		Dag dag = new Dag(graph);
+////		Dag_n dag = new Dag_n(graph);
 //
-//		Dag dag = new Dag();
+//		Dag_n dag = new Dag_n();
 //	//	dag = GraphUtils.randomDag(Integer.parseInt(args[0]), Integer.parseInt(args[1]), true);
 //		dags.add(dag);
 //		System.out.println("DAG: ---------------");
 //		System.out.println(dag.toString());
 //		for (int i=0 ; i < Integer.parseInt(args[2])-1 ; i++){
-//		//	Dag newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
+//		//	Dag_n newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
 //			dags.add(newDag);
 //			System.out.println("DAG: ---------------");
 //			System.out.println(newDag.toString());

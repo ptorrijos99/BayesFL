@@ -1,7 +1,7 @@
 package org.albacete.simd.framework;
 
 
-import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.utils.Problem;
 
@@ -18,7 +18,7 @@ public abstract class Stage {
      * {@link ArrayList ArrayList} of graphs. This contains the list of {@link Graph graphs} created for each stage,
      * just before the fusion is done.
      */
-    protected ArrayList<Dag> graphs = null;
+    protected ArrayList<Dag_n> graphs = null;
 
     public Stage(Problem problem){
         this.problem = problem;
@@ -34,7 +34,7 @@ public abstract class Stage {
     public abstract boolean run() throws InterruptedException;
 
 
-    public ArrayList<Dag> getGraphs() {
+    public ArrayList<Dag_n> getGraphs() {
         return graphs;
     }
 

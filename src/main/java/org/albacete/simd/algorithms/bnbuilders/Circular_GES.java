@@ -50,21 +50,6 @@ public class Circular_GES extends BNBuilder {
         this.typeConvergence = typeConvergence;
     }
     
-    public Circular_GES(String path, Clustering clustering, int nThreads, double alpha, String typeConvergence) {
-        this(path, clustering, nThreads, 0, typeConvergence);
-
-        // Interleaving = round(alpha * nThreads * sqrt(N))
-        this.nItInterleaving = (int) Math.round((alpha / nThreads) * Math.sqrt(this.problem.getVariables().size()));
-        System.out.println(this.nItInterleaving);
-    }
-    
-    public Circular_GES(DataSet data, Clustering clustering, int nThreads, double alpha, String typeConvergence) {
-        this(data, clustering, nThreads, 0, typeConvergence);
-
-        // Interleaving = round(alpha * nThreads * sqrt(N))
-        this.nItInterleaving = (int) Math.round((alpha / nThreads) * Math.sqrt(data.getVariables().size()));
-    }
-    
     
     @Override
     public Graph search(){
@@ -72,8 +57,6 @@ public class Circular_GES extends BNBuilder {
         initialConfig();
         //2. Do circular fusion while convergence is false
         do {
-            System.out.println("\n\n\n-----------------------------------------------------------------------"
-                    + "\n                                 ITERATION \n");
             iteration();
         } while (!convergence());
 

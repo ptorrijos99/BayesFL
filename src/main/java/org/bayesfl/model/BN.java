@@ -31,7 +31,32 @@
 
 package org.bayesfl.model;
 
-public class BN {
-    
+import edu.cmu.tetrad.graph.Dag_n;
+
+public class BN implements Model {
+
+    private Dag_n dag;
+
+    public BN() {
+        this.dag = new Dag_n();
+    }
+
+    public BN(Dag_n dag) {
+        this.dag = dag;
+    }
+
+    @Override
+    public Dag_n getModel() {
+        return dag;
+    }
+
+    @Override
+    public void setModel(Object model) {
+        if (!(model instanceof Dag_n)) {
+            throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
+        }
+
+        this.dag = (Dag_n) model;
+    }
 
 }

@@ -1,0 +1,11 @@
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50001_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50002_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50003_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50004_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50005_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50006_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50007_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50008_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50009_.csv /res/networks/BBDD/tests/win95pts_test.csv
+ges win95pts /res/networks/win95pts.xbif /res/networks/BBDD/win95pts.xbif50001246_.csv /res/networks/BBDD/tests/win95pts_test.csv

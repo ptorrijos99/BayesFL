@@ -4,8 +4,8 @@ import consensusBN.PowerSet;
 import consensusBN.PowerSetFabric;
 import consensusBN.SubSet;
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.utils.GraphSearchUtils;
-import edu.cmu.tetrad.search.utils.MeekRules;
+import edu.cmu.tetrad.search.MeekRules;
+import edu.cmu.tetrad.search.SearchGraphUtils;
 import org.albacete.simd.utils.Problem;
 
 import java.util.*;
@@ -54,7 +54,7 @@ public class FESThread extends GESThread {
      */
     public FESThread(Problem problem, Set<Edge> subset, int maxIt, boolean speedUp, boolean update, boolean parallel) {
         this.problem = problem;
-        this.initialDag = new EdgeListGraph(new LinkedList<>(getVariables()));
+        this.initialDag = new EdgeListGraph_n(new LinkedList<>(getVariables()));
         setSubSetSearch(subset);
         setMaxIt(maxIt);
         this.id = threadCounter;
@@ -91,7 +91,7 @@ public class FESThread extends GESThread {
             numNonCachedCalls = 0;
             //localScoreCache.clear();
 
-            Graph graph = new EdgeListGraph(this.initialDag);
+            Graph graph = new EdgeListGraph_n(this.initialDag);
             //buildIndexing(graph);
 
             // Method 1-- original.
@@ -287,9 +287,9 @@ public class FESThread extends GESThread {
     }
 
     private Set<Node> revertToCPDAG(Graph graph) {
-        GraphSearchUtils.basicCpdag(graph);
+        SearchGraphUtils.basicCPDAG(graph);
         MeekRules rules = new MeekRules();
-        rules.setMeekPreventCycles(true);
+        rules.setAggressivelyPreventCycles(true);
         return rules.orientImplied(graph);
     }
 

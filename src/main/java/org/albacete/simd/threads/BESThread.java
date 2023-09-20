@@ -9,6 +9,7 @@ import org.albacete.simd.utils.Problem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import static org.albacete.simd.utils.Utils.pdagToDag;
@@ -61,7 +62,7 @@ public class BESThread extends GESThread {
             numNonCachedCalls=0;
             //localScoreCache.clear();
 
-            Graph graph = new EdgeListGraph(this.initialDag);
+            Graph graph = new EdgeListGraph_n(this.initialDag);
             //buildIndexing(graph);
 
             // Method 1-- original.

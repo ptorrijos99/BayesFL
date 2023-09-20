@@ -3,7 +3,7 @@ package consensusBN;
 import java.util.ArrayList;
 
 
-import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Node;
 
@@ -11,21 +11,21 @@ import edu.cmu.tetrad.graph.Node;
 
 public class PairWiseConsensusBES implements Runnable{
 	
-	private Dag b1 = null;
-	private Dag b2 = null;
-	private Dag conDAG = null;
+	private Dag_n b1 = null;
+	private Dag_n b2 = null;
+	private Dag_n conDAG = null;
 	private ConsensusBES conBES= null;
 	private int numberOfInsertedEdges = 0;
 	private int numberOfUnionEdges = 0;
 	
-	public PairWiseConsensusBES(Dag b1, Dag b2) {
+	public PairWiseConsensusBES(Dag_n b1, Dag_n b2) {
 		super();
 		this.b1 = b1;
 		this.b2 = b2;
 	}
 	
 	public void getFusion(){
-		ArrayList<Dag> setOfDags = new ArrayList<Dag>();
+		ArrayList<Dag_n> setOfDags = new ArrayList<Dag_n>();
 		setOfDags.add(this.b1);
 		setOfDags.add(this.b2);
 		conBES = new ConsensusBES(setOfDags);
@@ -49,7 +49,7 @@ public class PairWiseConsensusBES implements Runnable{
 		for(Edge ed: this.conDAG.getEdges()){
 			Node tail = ed.getNode1();
 			Node head = ed.getNode2();
-			for(Dag g: conBES.setOfOutDags){	
+			for(Dag_n g: conBES.setOfOutDags){	
 				Edge edge1 = g.getEdge(tail, head);
 				Edge edge2 = g.getEdge(head, tail);
 				if(edge1 == null && edge2==null) distance++;
@@ -58,7 +58,7 @@ public class PairWiseConsensusBES implements Runnable{
 		return distance+this.getNumberOfInsertedEdges();
 	}
 	
-	public Dag getDagFusion(){
+	public Dag_n getDagFusion(){
 		return this.conDAG;
 		
 	}

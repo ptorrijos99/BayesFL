@@ -1,0 +1,3028 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!--
+  Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
+  Produced by SamIam http://reasoning.cs.ucla.edu/samiam
+  Output created 22-may-2013 18:38:19
+-->
+
+<BIF VERSION="0.3">
+<NETWORK>
+  <NAME>bayesiannetwork</NAME>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_156</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GIVEN_1</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_17</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RESOLVE37</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CHOOSE62</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY22</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_26</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_99</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_110</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY76</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>BUGGY54</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_146</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_53</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_11</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp3</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WEIGHT57</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_93</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_136</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>APPLY61</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RESOLVE40</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_19</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CHOOSE19</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_120</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp2</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_125</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_34</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_116</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SLIDING4</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_103</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NEWTONS74</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_5</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_41</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp12</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_131</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RESOLVE42</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>FORCE60</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_152</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>FIND58</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_147</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_109</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL65</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_54</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_129</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>MAXIMIZE34</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY55</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VECTOR73</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_102</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_20</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_132</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_55</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>EQUAL71</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_46</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DEFINE23</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>AXIS33</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_115</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_114</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NORMAL52</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_28</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_65</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CHOOSE35</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_104</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VECTOR70</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_51</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_98</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_88</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SUM75</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GRAV2</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_12</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_2</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_81</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NEED36</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL68</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_151</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_83</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_63</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>DISPLACEM0</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_50</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>KINEMATI17</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WRITE64</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_57</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY12</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_143</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY59</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_15</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_27</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp6</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GRAV78</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY24</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_74</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_62</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_154</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NEWTONS45</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GIVEN21</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>FIND49</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp5</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>INCLINE51</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_118</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>COMPO16</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_111</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VECTOR69</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_130</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY43</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WRITE31</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_80</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_124</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_52</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY9</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_94</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SYSTEM46</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY10</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_69</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WRITE30</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_25</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_107</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY15</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_72</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_13</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>KINE29</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_150</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp4</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_133</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_75</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_37</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp8</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_59</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>KNOWN6</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NULL48</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp10</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY39</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_113</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_29</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY13</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_43</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NEED67</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VAR20</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>HORIZ53</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY25</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_66</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_68</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_3</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>KNOWN8</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>APPLY77</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_31</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp13</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RESOLVE38</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_21</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_135</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_117</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_137</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NEED1</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_7</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WRITE63</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY26</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_60</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_61</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_10</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_119</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_106</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_153</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_128</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_127</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SYSTEM18</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_123</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY11</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_38</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VELOCITY7</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_16</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_67</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>STRAT_90</NAME>
+    <OUTCOME>SNode_92_1</OUTCOME>
+    <OUTCOME>SNode_91_2</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL66</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_142</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_42</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_49</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_14</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_4</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_47</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_134</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_126</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_8</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>IDENTIFY41</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_87</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_71</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_6</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_97</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_33</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_9</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_48</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CHOOSE47</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_44</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_64</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL72</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp1</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_24</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_92</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_84</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_40</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_121</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_108</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>EQUATION28</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>CONSTANT5</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_100</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_73</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VALUE3</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>APPLY32</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VECTOR44</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_86</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_149</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>WEIGHT56</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>NORMAL50</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_155</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_70</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>TRY14</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp9</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_18</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_95</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_79</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp11</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_112</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>RApp7</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>GOAL_56</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>VECTOR27</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_122</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <VARIABLE TYPE="nature">
+    <NAME>SNode_91</NAME>
+    <OUTCOME>false</OUTCOME>
+    <OUTCOME>true</OUTCOME>
+    <PROPERTY>position = (0, 0)</PROPERTY>
+  </VARIABLE>
+
+  <DEFINITION>
+    <FOR>SNode_156</FOR>
+    <GIVEN>SNode_86</GIVEN>
+    <GIVEN>NEWTONS45</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GIVEN_1</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_17</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RESOLVE37</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CHOOSE62</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY22</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_26</FOR>
+    <GIVEN>SNode_11</GIVEN>
+    <GIVEN>CONSTANT5</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_99</FOR>
+    <GIVEN>GOAL_98</GIVEN>
+    <GIVEN>FIND58</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_110</FOR>
+    <GIVEN>GOAL_109</GIVEN>
+    <GIVEN>GOAL65</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY76</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>BUGGY54</FOR>
+    <GIVEN>NORMAL52</GIVEN>
+    <TABLE>0.2 0.8 1.0 0.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_146</FOR>
+    <GIVEN>SNode_132</GIVEN>
+    <GIVEN>SNode_137</GIVEN>
+    <GIVEN>EQUATION28</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_53</FOR>
+    <GIVEN>GOAL_49</GIVEN>
+    <GIVEN>SNode_52</GIVEN>
+    <GIVEN>IDENTIFY10</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_11</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp3</FOR>
+    <GIVEN>KNOWN6</GIVEN>
+    <GIVEN>SNode_26</GIVEN>
+    <GIVEN>SNode_47</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WEIGHT57</FOR>
+    <TABLE>0.3 0.7 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_93</FOR>
+    <GIVEN>GOAL_87</GIVEN>
+    <GIVEN>SNode_88</GIVEN>
+    <GIVEN>IDENTIFY55</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_136</FOR>
+    <GIVEN>SNode_37</GIVEN>
+    <GIVEN>GOAL_108</GIVEN>
+    <GIVEN>SNode_128</GIVEN>
+    <GIVEN>SNode_154</GIVEN>
+    <GIVEN>NEWTONS74</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>APPLY61</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RESOLVE40</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_19</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CHOOSE19</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_120</FOR>
+    <GIVEN>SNode_92</GIVEN>
+    <GIVEN>SNode_93</GIVEN>
+    <GIVEN>GOAL_113</GIVEN>
+    <GIVEN>SNode_117</GIVEN>
+    <GIVEN>VECTOR69</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp2</FOR>
+    <GIVEN>GIVEN_1</GIVEN>
+    <TABLE>1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_125</FOR>
+    <GIVEN>GOAL_109</GIVEN>
+    <GIVEN>SNode_112</GIVEN>
+    <GIVEN>SUM75</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_34</FOR>
+    <GIVEN>SNode_10</GIVEN>
+    <GIVEN>CONSTANT5</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_116</FOR>
+    <GIVEN>SNode_95</GIVEN>
+    <GIVEN>SNode_97</GIVEN>
+    <GIVEN>GOAL_114</GIVEN>
+    <GIVEN>SNode_115</GIVEN>
+    <GIVEN>VECTOR69</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SLIDING4</FOR>
+    <TABLE>0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_103</FOR>
+    <GIVEN>GOAL_83</GIVEN>
+    <GIVEN>SNode_102</GIVEN>
+    <GIVEN>APPLY61</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NEWTONS74</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_5</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_41</FOR>
+    <GIVEN>SNode_9</GIVEN>
+    <GIVEN>CONSTANT5</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp12</FOR>
+    <GIVEN>COMPO16</GIVEN>
+    <GIVEN>GOAL_143</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_131</FOR>
+    <GIVEN>GOAL_130</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RESOLVE42</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>FORCE60</FOR>
+    <TABLE>0.2 0.8 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_152</FOR>
+    <GIVEN>SNode_106</GIVEN>
+    <GIVEN>AXIS33</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>FIND58</FOR>
+    <TABLE>0.7 0.3 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_147</FOR>
+    <GIVEN>RApp11</GIVEN>
+    <GIVEN>RApp12</GIVEN>
+    <GIVEN>RApp13</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_109</FOR>
+    <GIVEN>GOAL_107</GIVEN>
+    <GIVEN>WRITE64</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL65</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_54</FOR>
+    <GIVEN>GOAL_53</GIVEN>
+    <GIVEN>IDENTIFY41</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_129</FOR>
+    <GIVEN>GOAL_126</GIVEN>
+    <GIVEN>GOAL68</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>MAXIMIZE34</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY55</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VECTOR73</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_102</FOR>
+    <GIVEN>GOAL_87</GIVEN>
+    <GIVEN>SNode_88</GIVEN>
+    <GIVEN>SNode_94</GIVEN>
+    <GIVEN>FORCE60</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_20</FOR>
+    <GIVEN>SNode_16</GIVEN>
+    <GIVEN>NEED1</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_132</FOR>
+    <GIVEN>SNode_95</GIVEN>
+    <GIVEN>SNode_97</GIVEN>
+    <GIVEN>GOAL_130</GIVEN>
+    <GIVEN>SNode_131</GIVEN>
+    <GIVEN>VECTOR69</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_55</FOR>
+    <GIVEN>SNode_34</GIVEN>
+    <GIVEN>GOAL_53</GIVEN>
+    <GIVEN>IDENTIFY43</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>EQUAL71</FOR>
+    <TABLE>0.4 0.6 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_46</FOR>
+    <GIVEN>SNode_44</GIVEN>
+    <GIVEN>VALUE3</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DEFINE23</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>AXIS33</FOR>
+    <TABLE>0.2 0.8 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_115</FOR>
+    <GIVEN>GOAL_114</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_114</FOR>
+    <GIVEN>GOAL_110</GIVEN>
+    <GIVEN>GOAL68</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NORMAL52</FOR>
+    <TABLE>0.646 0.354 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_28</FOR>
+    <GIVEN>SNode_27</GIVEN>
+    <GIVEN>GOAL_53</GIVEN>
+    <GIVEN>IDENTIFY9</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_65</FOR>
+    <GIVEN>SNode_29</GIVEN>
+    <GIVEN>GOAL_63</GIVEN>
+    <GIVEN>SNode_64</GIVEN>
+    <GIVEN>NULL48</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CHOOSE35</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_104</FOR>
+    <GIVEN>GOAL_103</GIVEN>
+    <GIVEN>CHOOSE62</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VECTOR70</FOR>
+    <TABLE>0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_51</FOR>
+    <GIVEN>SNode_17</GIVEN>
+    <GIVEN>GOAL_50</GIVEN>
+    <GIVEN>SYSTEM18</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_98</FOR>
+    <GIVEN>GOAL_83</GIVEN>
+    <GIVEN>SNode_156</GIVEN>
+    <GIVEN>DEFINE23</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_88</FOR>
+    <GIVEN>SNode_25</GIVEN>
+    <GIVEN>GOAL_87</GIVEN>
+    <GIVEN>NORMAL50</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SUM75</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GRAV2</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_12</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_2</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_81</FOR>
+    <GIVEN>RApp5</GIVEN>
+    <GIVEN>RApp6</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NEED36</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL68</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_151</FOR>
+    <GIVEN>GOAL_150</GIVEN>
+    <GIVEN>GRAV78</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_83</FOR>
+    <GIVEN>GOAL_81</GIVEN>
+    <GIVEN>TRY24</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_63</FOR>
+    <GIVEN>SNode_28</GIVEN>
+    <GIVEN>GOAL_62</GIVEN>
+    <GIVEN>RESOLVE37</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>DISPLACEM0</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_50</FOR>
+    <GIVEN>GOAL_49</GIVEN>
+    <GIVEN>CHOOSE19</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>KINEMATI17</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WRITE64</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_57</FOR>
+    <GIVEN>GOAL_56</GIVEN>
+    <GIVEN>CHOOSE35</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY12</FOR>
+    <TABLE>0.7 0.3 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_143</FOR>
+    <GIVEN>SNode_116</GIVEN>
+    <GIVEN>SNode_132</GIVEN>
+    <GIVEN>EQUATION28</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY59</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_15</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_27</FOR>
+    <GIVEN>RApp3</GIVEN>
+    <GIVEN>RApp4</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp6</FOR>
+    <GIVEN>COMPO16</GIVEN>
+    <GIVEN>GOAL_80</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GRAV78</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY24</FOR>
+    <GIVEN>TRY25</GIVEN>
+    <TABLE>0.95 0.05 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_74</FOR>
+    <GIVEN>GOAL_62</GIVEN>
+    <GIVEN>SNode_64</GIVEN>
+    <GIVEN>SNode_67</GIVEN>
+    <GIVEN>SNode_70</GIVEN>
+    <GIVEN>SNode_73</GIVEN>
+    <GIVEN>KINE29</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_62</FOR>
+    <GIVEN>GOAL_61</GIVEN>
+    <GIVEN>WRITE30</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_154</FOR>
+    <GIVEN>GOAL_121</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NEWTONS45</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GIVEN21</FOR>
+    <TABLE>0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>FIND49</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp5</FOR>
+    <GIVEN>VECTOR27</GIVEN>
+    <GIVEN>GOAL_79</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>INCLINE51</FOR>
+    <GIVEN>NORMAL52</GIVEN>
+    <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_118</FOR>
+    <GIVEN>SNode_91</GIVEN>
+    <GIVEN>GOAL_113</GIVEN>
+    <GIVEN>VECTOR70</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>COMPO16</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_111</FOR>
+    <GIVEN>GOAL_109</GIVEN>
+    <GIVEN>GOAL66</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VECTOR69</FOR>
+    <TABLE>0.7 0.3 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_130</FOR>
+    <GIVEN>GOAL_126</GIVEN>
+    <GIVEN>GOAL68</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY43</FOR>
+    <TABLE>0.6 0.4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WRITE31</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_80</FOR>
+    <GIVEN>SNode_75</GIVEN>
+    <GIVEN>EQUATION28</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_124</FOR>
+    <GIVEN>SNode_37</GIVEN>
+    <GIVEN>GOAL_109</GIVEN>
+    <GIVEN>SNode_112</GIVEN>
+    <GIVEN>SNode_122</GIVEN>
+    <GIVEN>NEWTONS74</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_52</FOR>
+    <GIVEN>SNode_51</GIVEN>
+    <GIVEN>KINEMATI17</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY9</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_94</FOR>
+    <GIVEN>SNode_16</GIVEN>
+    <GIVEN>SNode_33</GIVEN>
+    <GIVEN>GOAL_87</GIVEN>
+    <GIVEN>WEIGHT56</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SYSTEM46</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY10</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_69</FOR>
+    <GIVEN>SNode_54</GIVEN>
+    <GIVEN>GOAL_62</GIVEN>
+    <GIVEN>RESOLVE40</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WRITE30</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_25</FOR>
+    <GIVEN>SNode_15</GIVEN>
+    <GIVEN>SLIDING4</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_107</FOR>
+    <GIVEN>GOAL_103</GIVEN>
+    <GIVEN>SNode_152</GIVEN>
+    <GIVEN>WRITE63</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY15</FOR>
+    <GIVEN>TRY12</GIVEN>
+    <TABLE>0.9 0.1 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_72</FOR>
+    <GIVEN>SNode_55</GIVEN>
+    <GIVEN>GOAL_62</GIVEN>
+    <GIVEN>RESOLVE42</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_13</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>KINE29</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_150</FOR>
+    <GIVEN>SNode_20</GIVEN>
+    <GIVEN>SNode_37</GIVEN>
+    <GIVEN>GOAL_149</GIVEN>
+    <GIVEN>APPLY77</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp4</FOR>
+    <GIVEN>KNOWN8</GIVEN>
+    <GIVEN>SNode_11</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_133</FOR>
+    <GIVEN>GOAL_129</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_75</FOR>
+    <GIVEN>SNode_4</GIVEN>
+    <GIVEN>GOAL_72</GIVEN>
+    <GIVEN>SNode_73</GIVEN>
+    <GIVEN>VECTOR44</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_37</FOR>
+    <GIVEN>GOAL_98</GIVEN>
+    <GIVEN>IDENTIFY22</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp8</FOR>
+    <GIVEN>NEED36</GIVEN>
+    <GIVEN>GOAL_111</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_59</FOR>
+    <GIVEN>SNode_7</GIVEN>
+    <GIVEN>GOAL_57</GIVEN>
+    <GIVEN>MAXIMIZE34</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>KNOWN6</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NULL48</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp10</FOR>
+    <GIVEN>NEED36</GIVEN>
+    <GIVEN>GOAL_127</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY39</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_113</FOR>
+    <GIVEN>GOAL_110</GIVEN>
+    <GIVEN>GOAL68</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_29</FOR>
+    <GIVEN>SNode_28</GIVEN>
+    <GIVEN>VAR20</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY13</FOR>
+    <GIVEN>TRY12</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_43</FOR>
+    <GIVEN>SNode_42</GIVEN>
+    <GIVEN>GOAL_53</GIVEN>
+    <GIVEN>IDENTIFY39</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NEED67</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VAR20</FOR>
+    <TABLE>0.3 0.7 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>HORIZ53</FOR>
+    <GIVEN>NORMAL52</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY25</FOR>
+    <TABLE>0.1 0.9 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_66</FOR>
+    <GIVEN>SNode_43</GIVEN>
+    <GIVEN>GOAL_62</GIVEN>
+    <GIVEN>RESOLVE38</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_68</FOR>
+    <GIVEN>GOAL_66</GIVEN>
+    <GIVEN>SNode_67</GIVEN>
+    <GIVEN>VECTOR44</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_3</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>KNOWN8</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>APPLY77</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_31</FOR>
+    <GIVEN>SNode_29</GIVEN>
+    <GIVEN>VALUE3</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp13</FOR>
+    <GIVEN>VECTOR27</GIVEN>
+    <GIVEN>GOAL_146</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RESOLVE38</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_21</FOR>
+    <GIVEN>SNode_20</GIVEN>
+    <GIVEN>GRAV2</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_135</FOR>
+    <GIVEN>SNode_92</GIVEN>
+    <GIVEN>SNode_93</GIVEN>
+    <GIVEN>GOAL_129</GIVEN>
+    <GIVEN>SNode_133</GIVEN>
+    <GIVEN>VECTOR69</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_117</FOR>
+    <GIVEN>GOAL_113</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_137</FOR>
+    <GIVEN>GOAL_108</GIVEN>
+    <GIVEN>SNode_128</GIVEN>
+    <GIVEN>SUM75</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NEED1</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_7</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WRITE63</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY26</FOR>
+    <GIVEN>TRY25</GIVEN>
+    <TABLE>0.9 0.1 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_60</FOR>
+    <GIVEN>SNode_59</GIVEN>
+    <GIVEN>AXIS33</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_61</FOR>
+    <GIVEN>GOAL_56</GIVEN>
+    <GIVEN>SNode_60</GIVEN>
+    <GIVEN>WRITE31</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_10</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_119</FOR>
+    <GIVEN>SNode_93</GIVEN>
+    <GIVEN>SNode_117</GIVEN>
+    <GIVEN>SNode_118</GIVEN>
+    <GIVEN>EQUAL71</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_106</FOR>
+    <GIVEN>GOAL_104</GIVEN>
+    <GIVEN>MAXIMIZE34</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_153</FOR>
+    <GIVEN>GOAL_108</GIVEN>
+    <GIVEN>GOAL72</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_128</FOR>
+    <GIVEN>RApp9</GIVEN>
+    <GIVEN>RApp10</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_127</FOR>
+    <GIVEN>GOAL_108</GIVEN>
+    <GIVEN>GOAL66</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SYSTEM18</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_123</FOR>
+    <GIVEN>SNode_4</GIVEN>
+    <GIVEN>SNode_100</GIVEN>
+    <GIVEN>GOAL_121</GIVEN>
+    <GIVEN>SNode_122</GIVEN>
+    <GIVEN>VECTOR73</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY11</FOR>
+    <GIVEN>TRY12</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_38</FOR>
+    <GIVEN>SNode_37</GIVEN>
+    <GIVEN>VAR20</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VELOCITY7</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_16</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_67</FOR>
+    <GIVEN>GOAL_66</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>STRAT_90</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL66</FOR>
+    <TABLE>0.6 0.4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_142</FOR>
+    <GIVEN>SNode_116</GIVEN>
+    <GIVEN>SNode_125</GIVEN>
+    <GIVEN>EQUATION28</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_42</FOR>
+    <GIVEN>SNode_8</GIVEN>
+    <GIVEN>SNode_41</GIVEN>
+    <GIVEN>KNOWN6</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_49</FOR>
+    <GIVEN>SNode_5</GIVEN>
+    <GIVEN>SNode_6</GIVEN>
+    <GIVEN>GOAL_48</GIVEN>
+    <GIVEN>TRY11</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_14</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_4</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_47</FOR>
+    <GIVEN>SNode_3</GIVEN>
+    <GIVEN>VELOCITY7</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_134</FOR>
+    <GIVEN>SNode_91</GIVEN>
+    <GIVEN>SNode_93</GIVEN>
+    <GIVEN>GOAL_129</GIVEN>
+    <GIVEN>SNode_133</GIVEN>
+    <GIVEN>VECTOR73</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_126</FOR>
+    <GIVEN>GOAL_108</GIVEN>
+    <GIVEN>GOAL65</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_8</FOR>
+    <GIVEN>RApp1</GIVEN>
+    <GIVEN>RApp2</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>IDENTIFY41</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_87</FOR>
+    <GIVEN>GOAL_83</GIVEN>
+    <GIVEN>SNode_156</GIVEN>
+    <GIVEN>FIND49</GIVEN>
+    <TABLE>0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 0.7 0.3 7.0E-5 0.99993 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_71</FOR>
+    <GIVEN>GOAL_69</GIVEN>
+    <GIVEN>SNode_70</GIVEN>
+    <GIVEN>VECTOR44</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_6</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_97</FOR>
+    <GIVEN>GOAL_87</GIVEN>
+    <GIVEN>SNode_94</GIVEN>
+    <GIVEN>IDENTIFY55</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_33</FOR>
+    <GIVEN>SNode_10</GIVEN>
+    <GIVEN>GIVEN21</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_9</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_48</FOR>
+    <GIVEN>GOAL_2</GIVEN>
+    <GIVEN>COMPO16</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CHOOSE47</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_44</FOR>
+    <GIVEN>SNode_43</GIVEN>
+    <GIVEN>VAR20</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_64</FOR>
+    <GIVEN>GOAL_63</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL72</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp1</FOR>
+    <GIVEN>DISPLACEM0</GIVEN>
+    <GIVEN>SNode_3</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_24</FOR>
+    <GIVEN>SNode_21</GIVEN>
+    <GIVEN>VALUE3</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_92</FOR>
+    <GIVEN>SNode_12</GIVEN>
+    <GIVEN>STRAT_90</GIVEN>
+    <GIVEN>BUGGY54</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 0.8 0.2 0.8 0.2 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_84</FOR>
+    <GIVEN>GOAL_83</GIVEN>
+    <GIVEN>CHOOSE47</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_40</FOR>
+    <GIVEN>SNode_38</GIVEN>
+    <GIVEN>VALUE3</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_121</FOR>
+    <GIVEN>GOAL_109</GIVEN>
+    <GIVEN>GOAL72</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_108</FOR>
+    <GIVEN>GOAL_107</GIVEN>
+    <GIVEN>WRITE64</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>EQUATION28</FOR>
+    <TABLE>0.6 0.4 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>CONSTANT5</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_100</FOR>
+    <GIVEN>GOAL_98</GIVEN>
+    <GIVEN>IDENTIFY59</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_73</FOR>
+    <GIVEN>GOAL_72</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VALUE3</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>APPLY32</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VECTOR44</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_86</FOR>
+    <GIVEN>GOAL_84</GIVEN>
+    <GIVEN>SYSTEM46</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_149</FOR>
+    <GIVEN>GOAL_147</GIVEN>
+    <GIVEN>TRY76</GIVEN>
+    <TABLE>0.7 0.3 0.7 0.3 0.7 0.3 7.0E-5 0.99993 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>WEIGHT56</FOR>
+    <TABLE>0.3 0.7 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>NORMAL50</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_155</FOR>
+    <GIVEN>SNode_4</GIVEN>
+    <GIVEN>SNode_100</GIVEN>
+    <GIVEN>GOAL_153</GIVEN>
+    <GIVEN>SNode_154</GIVEN>
+    <GIVEN>VECTOR44</GIVEN>
+    <TABLE>0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 0.9 0.1 9.0E-5 0.99991 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_70</FOR>
+    <GIVEN>GOAL_69</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>TRY14</FOR>
+    <GIVEN>TRY12</GIVEN>
+    <TABLE>0.9 0.1 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp9</FOR>
+    <GIVEN>NEED67</GIVEN>
+    <GIVEN>GOAL_108</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_18</FOR>
+    <TABLE>0.02 0.98 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_95</FOR>
+    <GIVEN>SNode_94</GIVEN>
+    <GIVEN>WEIGHT57</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_79</FOR>
+    <GIVEN>SNode_74</GIVEN>
+    <GIVEN>SNode_75</GIVEN>
+    <GIVEN>EQUATION28</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp11</FOR>
+    <GIVEN>VECTOR27</GIVEN>
+    <GIVEN>GOAL_142</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_112</FOR>
+    <GIVEN>RApp7</GIVEN>
+    <GIVEN>RApp8</GIVEN>
+    <TABLE>0.8 0.2 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>RApp7</FOR>
+    <GIVEN>NEED67</GIVEN>
+    <GIVEN>GOAL_109</GIVEN>
+    <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0E-4 0.9999 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>GOAL_56</FOR>
+    <GIVEN>GOAL_49</GIVEN>
+    <GIVEN>SNode_52</GIVEN>
+    <GIVEN>APPLY32</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>VECTOR27</FOR>
+    <TABLE>0.5 0.5 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_122</FOR>
+    <GIVEN>GOAL_121</GIVEN>
+    <GIVEN>NEED36</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+  <DEFINITION>
+    <FOR>SNode_91</FOR>
+    <GIVEN>SNode_88</GIVEN>
+    <GIVEN>SNode_12</GIVEN>
+    <GIVEN>SNode_13</GIVEN>
+    <GIVEN>STRAT_90</GIVEN>
+    <GIVEN>INCLINE51</GIVEN>
+    <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8 0.2 8.0E-5 0.99992 </TABLE>
+  </DEFINITION>
+
+</NETWORK>
+</BIF>
