@@ -122,7 +122,7 @@ public class BN_GES implements LocalAlgorithm {
     }
 
     public void fGES (DataSet data) {
-        algorithm = new Fges_BNBuilder(data, false, false);
+        algorithm = new Fges_BNBuilder(data, false);
     }
 
     public void GES (DataSet data) {
