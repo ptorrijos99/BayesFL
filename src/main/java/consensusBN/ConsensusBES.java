@@ -22,7 +22,7 @@ import static org.albacete.simd.utils.Utils.pdagToDag;
 
 
 
-public class ConsensusBES implements Runnable {
+public class ConsensusBES {
 	
 	ArrayList<Node> alpha = null;
 	Dag_n outputDag = null;
@@ -414,55 +414,5 @@ public class ConsensusBES implements Runnable {
     public List<Node> getOrderFusion(){
     	return  this.getFusion().getCausalOrdering();
     }
-    
-	
-    public static void main(String args[]) {
 
-
-		System.out.println("Grafos de Partida:   ");
-
-		// (seed, n. variables, n egdes max, n.dags, mutation(n. de operaciones))
-		RandomBN setOfBNs = new RandomBN(0, Integer.parseInt(args[0]), Integer.parseInt(args[1]),
-				Integer.parseInt(args[2]), Integer.parseInt(args[3]));
-		setOfBNs.setMaxInDegree(4);
-		setOfBNs.setMaxOutDegree(4);
-		setOfBNs.generate();
-
-		for (int i = 0; i < setOfBNs.setOfRandomBNs.size(); i++) {
-			System.out.println("red de partida: " + i);
-			System.out.println("---------------------");
-			System.out.println("Grafo: ");
-			System.out.println(setOfBNs.setOfRandomDags.get(i).toString());
-//    		System.out.println("Probabilidades: ");
-//    		System.out.println(setOfBNs.setOfRandomBNs.get(i).toString());
-//    		System.out.println("_____________________");
-//    		System.out.println("Datos Simulados");
-//    		System.out.println(setOfBNs.setOfSampledBNs.get(i).toString());
-
-//
-//    	}
-//    	//
-    	ConsensusBES conDag= null;
-//
-    	conDag = new ConsensusBES(setOfBNs.setOfRandomDags);
-    	conDag.fusion();
-    	Dag_n g = conDag.getFusion();
-    	System.out.println("grafo consenso: "+ g +"  Complejidad de la Fusion: "+ conDag.getNumberOfInsertedEdges()
-    	+ "  "+ conDag.union.getNumEdges());
-    	System.out.println("Orden Inicial Heu: "+conDag.alpha.toString());
-    	System.out.println("Orden de consenso: "+conDag.getOrderFusion().toString());
-//
-////		HierarchicalAgglomerativeClustererBNs Cfusion = new HierarchicalAgglomerativeClustererBNs(setOfBNs.setOfRandomDags,0.50);
-////		int l = Cfusion.cluster();
-////		System.out.println("Nivel de Fusion: "+l);
-////		System.out.println(Cfusion.computeConsensusDag(l).toString());
-//    }
-//
-		}
-	}
-
-	@Override
-	public void run() {
-
-	}
 }

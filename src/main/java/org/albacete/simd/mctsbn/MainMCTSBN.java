@@ -9,6 +9,7 @@ import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
+import org.albacete.simd.utils.ProblemMCTS;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.BIFReader;
@@ -25,7 +26,7 @@ public class MainMCTSBN {
         String netPath = networkFolder + net_name + ".xbif";
 
 
-        Problem problem = new Problem(bbdd_path);
+        ProblemMCTS problem = new ProblemMCTS(bbdd_path);
 
         MCTSBN mctsbn = new MCTSBN(problem, 3000);
 
@@ -50,7 +51,7 @@ public class MainMCTSBN {
     }
 
 
-    public static void addEndHook(MCTSBN mctsbn, long startTime, String netPath, Problem problem){
+    public static void addEndHook(MCTSBN mctsbn, long startTime, String netPath, ProblemMCTS problem){
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run(){
                 try {

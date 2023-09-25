@@ -32,6 +32,8 @@
 package org.bayesfl.model;
 
 import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Graph;
+import org.albacete.simd.utils.Utils;
 
 public class BN implements Model {
 
@@ -43,6 +45,10 @@ public class BN implements Model {
 
     public BN(Dag_n dag) {
         this.dag = dag;
+    }
+
+    public BN(Graph graph) {
+        this.dag = new Dag_n(Utils.removeInconsistencies(graph));
     }
 
     @Override
@@ -57,6 +63,11 @@ public class BN implements Model {
         }
 
         this.dag = (Dag_n) model;
+    }
+
+    @Override
+    public String toString() {
+        return dag.toString();
     }
 
 }

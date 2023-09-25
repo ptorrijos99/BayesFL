@@ -183,4 +183,8 @@ public class Problem {
         return bdeu;
     }
 
+    public void setData(DataSet data) {
+        this.data = data;
+    }
+
 }

@@ -65,6 +65,11 @@ public class Client {
     private int id;
 
     /**
+     * The stats flag.
+     */
+    private boolean stats = false;
+
+    /**
      * Constructor of the class Client.
      * @param localFusion The Fusion operator that will be used to perform the fusion of the global model that the server
      * sends with the local model of the client
@@ -94,16 +99,23 @@ public class Client {
      * Build the local model of the client.
      */
     protected void buildLocalModel() {
+        System.out.println("Client " + id + ": BUILDING local model");
         localModel = localAlgorithm.buildLocalModel(localModel, data);
+        System.out.println("  Client " + id + ": local model BUILD");
     }
 
     /**
      * Perform the fusion of the global model that the server
      * sends with the local model of the client.
+     * Then, if defined, a refinement of the local model is performed.
      * @param globalModel The global model that the server sends.
      */
     protected void fusion(Model globalModel) {
+        System.out.println("Client " + id + ": doing FUSION");
+        Model oldModel = localModel;
         localModel = localFusion.fusion(localModel, globalModel);
+        localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
+        System.out.println("  Client " + id + ": FUSION done\n");
     }
 
     /**
@@ -129,4 +141,13 @@ public class Client {
     protected Model getLocalModel() {
         return localModel;
     }
+
+    /**
+     * Set the stats flag.
+     * @param stats The stats flag.
+     */
+    public void setStats(boolean stats) {
+        this.stats = stats;
+    }
+
 }

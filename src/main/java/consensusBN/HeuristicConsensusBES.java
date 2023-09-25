@@ -17,6 +17,8 @@ import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.Node;
 import edu.cmu.tetrad.search.MeekRules;
 import edu.cmu.tetrad.search.SearchGraphUtils;
+
+import static java.lang.Double.valueOf;
 import static org.albacete.simd.utils.Utils.pdagToDag;
 
 
@@ -270,7 +272,7 @@ public class HeuristicConsensusBES {
 				if(dSeparated(g, y, x, conditioning)) ++eval;
 			}
 			eval = eval / (double) this.setOfdags.size();
-			val = new Double(eval);
+			val = eval;
 			this.localScore.put(key, val);
 			return eval;
 		}else{
@@ -395,41 +397,5 @@ public class HeuristicConsensusBES {
     public Dag_n getFusion(){
     	
     	return this.outputDag;
-    }
-    
-	
-    public static void main(String args[]) {
-	
-			
-    	System.out.println("Grafos de Partida:   ");
-
-    	// (seed, n. variables, n egdes aprox, n.dags, mutation)
-    	RandomBN setOfBNs = new RandomBN(0, Integer.parseInt(args[0]), Integer.parseInt(args[1]), 
-    			Integer.parseInt(args[2]),Integer.parseInt(args[3]));
-    	setOfBNs.setMaxInDegree(3);
-    	setOfBNs.setMaxOutDegree(3);
-    	setOfBNs.generate();
-
-    	for(int i = 0; i< setOfBNs.setOfRandomBNs.size(); i++){
-    		System.out.println("red de partida: "+i);
-    		System.out.println("---------------------");
-    		System.out.println("Grafo: ");
-    		System.out.println(setOfBNs.setOfRandomDags.get(i).getConnectivity()+" "+ setOfBNs.setOfRandomDags.get(i).getNumEdges());
-//    		System.out.println("Probabilidades: ");
-//    		System.out.println(setOfBNs.setOfRandomBNs.get(i).toString());
-//    		System.out.println("_____________________");
-//    		System.out.println("Datos Simulados");
-//    		System.out.println(setOfBNs.setOfSampledBNs.get(i).toString());
-
-
-    	}
-    	//
-    	HeuristicConsensusBES conDag= null;
-
-    	conDag = new HeuristicConsensusBES(setOfBNs.setOfRandomDags,1.0);
-    	conDag.fusion();
-    	Dag_n g = conDag.getFusion();
-    	System.out.println("grafo de partida Union: "+conDag.union.getConnectivity()+" "+ conDag.union.getNumEdges());
-    	System.out.println("grafo consenso: "+ g.getConnectivity() +"  Complejidad de la Fusion: "+ conDag.getNumberOfInsertedEdges()+ "  "+ conDag.outputDag.getNumEdges());
     }
 }

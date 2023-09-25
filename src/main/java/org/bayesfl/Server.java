@@ -57,6 +57,11 @@ public class Server {
     private final Model[] localModels;
 
     /**
+     * The stats flag.
+     */
+    private boolean stats = false;
+
+    /**
      * Constructor of the class Server.
      * @param globalFusion The Fusion operator that will be used to perform the fusion of the local models that the clients
      * send with the global model of the server.
@@ -88,10 +93,8 @@ public class Server {
      * Run the server.
      */
     public void run() {
-        // 1. Create the local model of each client
-        for (Client client : clients) {
-            client.buildLocalModel();
-        }
+        // 1. Create the local model of each client with a ParallelStream
+        clients.parallelStream().forEach(Client::buildLocalModel);
 
         // 2. Get the local models
         for (Client client : clients) {
@@ -100,11 +103,10 @@ public class Server {
 
         // 3. Fuse the local models into a global model
         this.fusion();
+        System.out.println("\nSERVER: FUSION done\n");
 
         // 4. Fuse the global model with each local model on the clients
-        for (Client client : clients) {
-            client.fusion(globalModel);
-        }
+        clients.parallelStream().forEach(client -> client.fusion(globalModel));
     }
 
     /**
@@ -112,5 +114,13 @@ public class Server {
      */
     protected void fusion() {
         globalModel = globalFusion.fusion(localModels);
+    }
+
+    /**
+     * Set the stats flag.
+     * @param stats The stats flag.
+     */
+    public void setStats(boolean stats) {
+        this.stats = stats;
     }
 }

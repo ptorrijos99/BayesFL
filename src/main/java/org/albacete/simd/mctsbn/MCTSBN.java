@@ -581,7 +581,7 @@ public class MCTSBN {
         if(o.getParent() == null){
             return Double.MAX_VALUE;
         }
-        return  ((o.getTotalReward() / o.getNumVisits()) - Problem.emptyGraphScore ) / Problem.nInstances +
+        return  ((o.getTotalReward() / o.getNumVisits()) - ProblemMCTS.emptyGraphScore ) / ProblemMCTS.nInstances +
                     this.EXPLORATION_CONSTANT * Math.sqrt(Math.log(o.getParent().getNumVisits()) / o.getNumVisits());
     }
     
@@ -675,7 +675,7 @@ public class MCTSBN {
         String res = "";
         res += ("\n\nEN COLA: \n");
         for (TreeNode tn : selectionSet) {
-            double explotationScore = ((tn.getTotalReward() / tn.getNumVisits()) - Problem.emptyGraphScore) / Problem.nInstances;
+            double explotationScore = ((tn.getTotalReward() / tn.getNumVisits()) - ProblemMCTS.emptyGraphScore) / ProblemMCTS.nInstances;
             double explorationScore = 0;
             if (tn.getParent() != null)
                 explorationScore = this.EXPLORATION_CONSTANT * Math.sqrt(Math.log(tn.getParent().getNumVisits()) / tn.getNumVisits());
