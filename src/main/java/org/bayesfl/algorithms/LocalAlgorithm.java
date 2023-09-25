@@ -37,6 +37,13 @@ import org.bayesfl.model.Model;
 public interface LocalAlgorithm {
 
     /**
+     * Build the local model using the algorithm, without previous local model.
+     * @param data The Data used to build the Model.
+     * @return The model build by the algorithm.
+     */
+    Model buildLocalModel(Data data);
+
+    /**
      * Build the local model using the algorithm.
      * @param localModel The previous local Model that the algorithm uses as base.
      * @param data The Data used to build the Model.
@@ -45,10 +52,12 @@ public interface LocalAlgorithm {
     Model buildLocalModel(Model localModel, Data data);
 
     /**
-     * Build the local model using the algorithm, without previous local model.
+     * Refinate the local model using the algorithm.
+     * @param oldModel The previous local Model that the algorithm refines.
+     * @param localModel The local Model from witch the algorithm get the changes to do the refinement.
      * @param data The Data used to build the Model.
-     * @return The model build by the algorithm.
+     * @return The refined model build by the algorithm.
      */
-    Model buildLocalModel(Data data);
+    Model refinateLocalModel(Model oldModel, Model localModel, Data data);
 
 }

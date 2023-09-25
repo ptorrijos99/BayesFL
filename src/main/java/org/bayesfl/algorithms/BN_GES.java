@@ -33,6 +33,8 @@ package org.bayesfl.algorithms;
 
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Edge;
+import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.algorithms.bnbuilders.Circular_GES;
 import org.albacete.simd.algorithms.bnbuilders.Fges_BNBuilder;
@@ -40,20 +42,43 @@ import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
 import org.albacete.simd.clustering.HierarchicalClustering;
 import org.albacete.simd.framework.BNBuilder;
+import org.albacete.simd.threads.BESThread;
+import org.albacete.simd.threads.FESThread;
 import org.bayesfl.data.BN_DataSet;
 import org.bayesfl.data.Data;
 import org.bayesfl.model.BN;
 import org.bayesfl.model.Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class BN_GES implements LocalAlgorithm {
 
     private BNBuilder algorithm;
     private final String algorithmName;
+    private String refinement = "None";
     private int nThreads = 4;
     private int nInterleaving = Integer.MAX_VALUE;
 
     public BN_GES(String algorithmName) {
         this.algorithmName = algorithmName;
+    }
+
+    public BN_GES(String algorithmName, String refinement) {
+        this(algorithmName);
+        this.refinement = refinement;
+    }
+
+    /**
+     * Build the local model using the algorithm, without previous local model.
+     * @param data The Data used to build the Model (BN).
+     * @return The model build by the algorithm.
+     */
+    @Override
+    public Model buildLocalModel(Data data) {
+        build(data);
+
+        return new BN(algorithm.search());
     }
 
     /**
@@ -66,26 +91,50 @@ public class BN_GES implements LocalAlgorithm {
     public Model buildLocalModel(Model localModel, Data data) {
         build(data);
 
-        Graph graph = ((BN)localModel).getModel();
-        algorithm.setInitialGraph(graph);
+        if (localModel instanceof BN) {
+            Graph graph = ((BN)localModel).getModel();
+            algorithm.setInitialGraph(graph);
+        }
 
-        Dag_n result = new Dag_n(algorithm.search());
-        return new BN(result);
+        return new BN(algorithm.search());
     }
 
     /**
-     * Build the local model using the algorithm, without previous local model.
-     * @param data The Data used to build the Model (BN).
-     * @return The model build by the algorithm.
+     * Refinate the local model using the algorithm.
+     * @param oldModel The previous local Model that the algorithm refines.
+     * @param localModel The local Model from witch the algorithm get the changes to do the refinement.
+     * @param data The Data used to build the Model.
+     * @return The refined model build by the algorithm.
      */
     @Override
-    public Model buildLocalModel(Data data) {
-        build(data);
+    public Model refinateLocalModel(Model oldModel, Model localModel, Data data) {
+        if (!(data instanceof BN_DataSet)) {
+            throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+        }
 
-        Dag_n result = new Dag_n(algorithm.search());
-        return new BN(result);
+        Graph oldM = ((BN)oldModel).getModel();
+        Graph localM = ((BN)localModel).getModel();
+        DataSet dataSet = ((BN_DataSet) data).getData();
+
+        switch (refinement) {
+            case "FES" -> localModel = new BN(refinementFES(oldM, localM, dataSet));
+            case "BES" -> localModel = new BN(refinementBES(oldM, localM, dataSet));
+            case "GES" -> {
+                Graph refinedFES = refinementFES(oldM, localM, dataSet);
+                Graph refinedBES = refinementBES(refinedFES, localM, dataSet);
+                localModel = new BN(refinedBES);
+            }
+            default -> {
+            }
+        }
+
+        return localModel;
     }
 
+    /**
+     * Build the local model using the algorithm.
+     * @param data The Data used to build the Model.
+     */
     private void build(Data data) {
         if (!(data instanceof BN_DataSet)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
@@ -111,22 +160,82 @@ public class BN_GES implements LocalAlgorithm {
         }
     }
 
-    public void pGES (DataSet data) {
+    private void pGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
         algorithm = new PGESwithStages(data, clustering, this.nThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
     }
 
-    public void cGES (DataSet data) {
+    private void cGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
         algorithm = new Circular_GES(data, clustering, this.nThreads, this.nInterleaving, "c4");
     }
 
-    public void fGES (DataSet data) {
+    private void fGES (DataSet data) {
         algorithm = new Fges_BNBuilder(data, false);
     }
 
-    public void GES (DataSet data) {
+    private void GES (DataSet data) {
         algorithm = new GES_BNBuilder(data, true);
+    }
+
+    /**
+     * Refinate the local model using the FES algorithm.
+     * @param oldModel The previous local Model that the algorithm refines.
+     * @param localModel The local Model from witch the algorithm get the changes to do the refinement (add edges).
+     * @param data The Data used to build the Model.
+     * @return The refined model build by the algorithm.
+     */
+    private Graph refinementFES (Graph oldModel, Graph localModel, DataSet data) {
+        Set<Edge> candidates = getEdgesDifferences(oldModel, localModel);
+
+        FESThread fes = new FESThread(algorithm.getProblem(), oldModel, candidates, candidates.size(), false, true,true);
+        algorithm.getProblem().setData(data);
+        fes.run();
+        try {
+            localModel = fes.getCurrentGraph();
+        } catch (InterruptedException ignored) {}
+
+        return localModel;
+    }
+
+    /**
+     * Refinate the local model using the FES algorithm.
+     * @param oldModel The previous local Model that the algorithm refines.
+     * @param localModel The local Model from witch the algorithm get the changes to do the refinement (remove edges).
+     * @param data The Data used to build the Model.
+     * @return The refined model build by the algorithm.
+     */
+    private Graph refinementBES (Graph oldModel, Graph localModel, DataSet data) {
+        Set<Edge> candidates = getEdgesDifferences(localModel, oldModel);
+
+        BESThread bes = new BESThread(algorithm.getProblem(), oldModel, candidates);
+        algorithm.getProblem().setData(data);
+        bes.run();
+        try {
+            localModel = bes.getCurrentGraph();
+        } catch (InterruptedException ignored) {}
+
+        return localModel;
+    }
+
+    /**
+     * Get the edges that are in the model2 but not in the model1.
+     * @param model1 The first model.
+     * @param model2 The second model.
+     * @return The edges that are in the model2 but not in the model1.
+     */
+    private Set<Edge> getEdgesDifferences(Graph model1, Graph model2) {
+        Set<Edge> candidates = new HashSet<>();
+
+        for (Edge e : model2.getEdges()) {
+            if (model1.getEdge(e.getNode1(), e.getNode2()) != null ||
+                    model1.getEdge(e.getNode2(), e.getNode1()) != null)
+                continue;
+            candidates.add(Edges.directedEdge(e.getNode1(), e.getNode2()));
+            candidates.add(Edges.directedEdge(e.getNode2(), e.getNode1()));
+        }
+
+        return candidates;
     }
 
     public void setNThreads(int nThreads) {
@@ -136,4 +245,6 @@ public class BN_GES implements LocalAlgorithm {
     public void setNInterleaving(int nInterleaving) {
         this.nInterleaving = nInterleaving;
     }
+
+
 }
