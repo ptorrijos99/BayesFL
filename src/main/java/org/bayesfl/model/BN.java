@@ -100,11 +100,15 @@ public class BN implements Model {
         System.out.println("| BDeu score: " + fges.scoreDag(this.dag));
 
         if (((BN_DataSet) data).getOriginalBNPath() != null) {
-            try {
-                MlBayesIm originalBN = readOriginalBayesianNetwork(((BN_DataSet) data).getOriginalBNPath());
-                System.out.println("| SMHD score: " + Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), this.dag));
-            } catch (Exception e) { e.printStackTrace(); }
+            printOriginalBNStats(((BN_DataSet) data).getOriginalBNPath());
         }
+    }
+    
+    public void printOriginalBNStats(String patch) {
+        try {
+            MlBayesIm originalBN = readOriginalBayesianNetwork(patch);
+            System.out.println("| SMHD score: " + Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), this.dag));
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     /**

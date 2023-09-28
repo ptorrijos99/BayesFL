@@ -35,7 +35,7 @@ import org.bayesfl.fusion.Fusion;
 import org.bayesfl.model.Model;
 
 import java.util.Collection;
-import org.bayesfl.data.BN_DataSet;
+import org.bayesfl.model.BN;
 
 public class Server {
 
@@ -108,17 +108,19 @@ public class Server {
         }
 
         // 3. Fuse the local models into a global model
+        double start = System.currentTimeMillis();
         this.fusion();
+        double fusionTime = (System.currentTimeMillis() - start) / 1000;
+        
         System.out.println("\nSERVER: FUSION done\n");
         if (stats) {
             System.out.println(DASH + "\n| SERVER FUSION stats:");
             System.out.println("| Fusion operator: " + globalModel.getClass().getSimpleName() + "\n|");
+            System.out.println("| Build time: " + fusionTime + " s");
+            globalModel.printStats();
             if (originalBNPath != null) {
-                BN_DataSet bn = new BN_DataSet();
-                bn.setOriginalBNPath(originalBNPath);
-                globalModel.printStats(bn);
-            } else globalModel.printStats();
-            
+                ((BN)globalModel).printOriginalBNStats(originalBNPath);
+            }
             System.out.println(DASH + "\n");
         }
 
