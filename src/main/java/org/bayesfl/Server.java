@@ -94,7 +94,7 @@ public class Server {
      */
     public void run() {
         // 1. Create the local model of each client with a ParallelStream
-        clients.parallelStream().forEach(Client::buildLocalModel);
+        clients.stream().forEach(Client::buildLocalModel);
 
         // 2. Get the local models
         for (Client client : clients) {
@@ -106,7 +106,7 @@ public class Server {
         System.out.println("\nSERVER: FUSION done\n");
 
         // 4. Fuse the global model with each local model on the clients
-        clients.parallelStream().forEach(client -> client.fusion(globalModel));
+        clients.stream().forEach(client -> client.fusion(globalModel));
     }
 
     /**

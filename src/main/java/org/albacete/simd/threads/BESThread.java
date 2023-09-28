@@ -75,7 +75,6 @@ public class BESThread extends GESThread {
             this.elapsedTime = endTime - startTime;
 
             double newScore = scoreDag(graph);
-            System.out.println(" ["+getId()+"] BES New Score: " + newScore + ", Initial Score: " + scoreInitial);
             // If we improve the score, return the new graph
             if (newScore > scoreInitial) {
                 this.modelBDeu = newScore;

@@ -14,12 +14,15 @@ public class Main {
     public static void main(String[] args) {
         Fusion fusionClient = new BN_FusionUnion();
         Fusion fusionServer = new BN_FusionUnion();
-        Data data = new BN_DataSet("./res/networks/BBDD/andes.xbif50003_.csv");
+        BN_DataSet data = new BN_DataSet("./res/networks/BBDD/andes.xbif50003_.csv", "andes_50003");
+        data.setOriginalBNPath("./res/networks/andes.xbif");
         LocalAlgorithm algorithm = new BN_GES("pGES", "FES");
 
         Set<Client> clients = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
-            clients.add(new Client(fusionClient, algorithm, data));
+        for (int i = 0; i < 2; i++) {
+            Client client = new Client(fusionClient, algorithm, data);
+            client.setStats(true);
+            clients.add(client);
         }
 
         Server server = new Server(fusionServer, clients);

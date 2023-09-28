@@ -66,7 +66,7 @@ public class Circular_GES extends BNBuilder {
         currentGraph = bestDag.dag;
         
         //4. Do a final GES with all the data
-        System.out.println("\n\n\n FINAL GES");
+        //System.out.println("\n\n\n FINAL GES");
         finalGES();
         
         return currentGraph;

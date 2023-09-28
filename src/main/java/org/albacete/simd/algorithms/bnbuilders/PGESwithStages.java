@@ -74,7 +74,7 @@ public class PGESwithStages extends BNBuilder {
             return true;
 
         it++;
-        System.out.println("\n\nIterations: " + it);
+        //System.out.println("\n\nIterations: " + it);
 
         // Checking working status
         /*if(!fesFlag && !besFlag){
@@ -82,7 +82,7 @@ public class PGESwithStages extends BNBuilder {
         }*/
         double currentScore = GESThread.scoreGraph(this.currentGraph, this.problem);
 
-        System.out.println("Current: " + currentScore + ", prev: "+ prevScore);
+        //System.out.println("Current: " + currentScore + ", prev: "+ prevScore);
         if(currentScore > prevScore){
 
             prevScore = currentScore;
