@@ -125,7 +125,7 @@ public class BN_GES implements LocalAlgorithm {
 
         // Search with the algorithm created
         BN result = new BN(algorithm.search());
-        buildTime = System.currentTimeMillis() - startTime;
+        buildTime = (System.currentTimeMillis() - startTime) / 1000;
 
         return result;
     }
@@ -179,7 +179,7 @@ public class BN_GES implements LocalAlgorithm {
             }
         }
 
-        refinementTime = System.currentTimeMillis() - startTime;
+        refinementTime = (System.currentTimeMillis() - startTime) / 1000;
 
         return localModel;
     }
@@ -250,7 +250,7 @@ public class BN_GES implements LocalAlgorithm {
     @Override
     public void printStats() {
         System.out.println(this);
-        System.out.println("| Build time: " + buildTime + " ms");
+        System.out.println("| Build time: " + buildTime + " s");
     }
 
     /**
@@ -259,7 +259,7 @@ public class BN_GES implements LocalAlgorithm {
     @Override
     public void printRefinementStats() {
         System.out.println("| " + refinement + " Refinement\n|");
-        System.out.println("| Refinement time: " + refinementTime + " ms");
+        System.out.println("| Refinement time: " + refinementTime + " s");
     }
 
 

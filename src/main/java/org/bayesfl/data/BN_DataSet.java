@@ -14,6 +14,10 @@ public class BN_DataSet implements Data {
     private String originalBNPath;
 
     private final String name;
+    
+    public BN_DataSet() {
+        this.name = "";
+    }
 
     public BN_DataSet(String path, String name) {
         this.data = readData(path);
