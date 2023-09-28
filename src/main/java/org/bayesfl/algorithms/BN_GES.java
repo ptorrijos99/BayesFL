@@ -80,9 +80,7 @@ public class BN_GES implements LocalAlgorithm {
      */
     @Override
     public Model buildLocalModel(Data data) {
-        build(data);
-
-        return new BN(algorithm.search());
+        return buildLocalModel(null, data);
     }
 
     /**
@@ -93,14 +91,61 @@ public class BN_GES implements LocalAlgorithm {
      */
     @Override
     public Model buildLocalModel(Model localModel, Data data) {
-        build(data);
+        if (!(data instanceof BN_DataSet)) {
+            throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+        }
+        double startTime = System.currentTimeMillis();
+        DataSet dataSet = ((BN_DataSet) data).getData();
+        dataName = data.getName();
 
-        if (localModel instanceof BN) {
-            Graph graph = ((BN)localModel).getModel();
+        // Initialize the algorithm
+        switch (algorithmName) {
+            case "pGES":
+                pGES(dataSet);
+                break;
+            case "cGES":
+                cGES(dataSet);
+                break;
+            case "fGES":
+                fGES(dataSet);
+                break;
+            default:
+                System.out.println("Algorithm " + algorithmName + " not found, using GES");
+            case "GES":
+                GES(dataSet);
+                break;
+        }
+
+        /* If there is a previous local model, use it as base. If is null (for example, with a call of
+           "public Model buildLocalModel(Data data)"), the model isn't an instance of BN. */
+        if (localModel instanceof BN bn) {
+            Graph graph = bn.getModel();
             algorithm.setInitialGraph(graph);
         }
 
-        return new BN(algorithm.search());
+        // Search with the algorithm created
+        BN result = new BN(algorithm.search());
+        buildTime = System.currentTimeMillis() - startTime;
+
+        return result;
+    }
+
+    private void pGES (DataSet data) {
+        HierarchicalClustering clustering = new HierarchicalClustering();
+        algorithm = new PGESwithStages(data, clustering, this.nGESThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
+    }
+
+    private void cGES (DataSet data) {
+        HierarchicalClustering clustering = new HierarchicalClustering();
+        algorithm = new Circular_GES(data, clustering, this.nGESThreads, this.nInterleaving, "c4");
+    }
+
+    private void fGES (DataSet data) {
+        algorithm = new Fges_BNBuilder(data, false);
+    }
+
+    private void GES (DataSet data) {
+        algorithm = new GES_BNBuilder(data, true);
     }
 
     /**
@@ -137,60 +182,6 @@ public class BN_GES implements LocalAlgorithm {
         refinementTime = System.currentTimeMillis() - startTime;
 
         return localModel;
-    }
-
-    /**
-     * Build the local model using the algorithm.
-     * @param data The Data used to build the Model.
-     */
-    private void build(Data data) {
-        if (!(data instanceof BN_DataSet)) {
-            throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
-        }
-
-        double startTime = System.currentTimeMillis();
-
-        DataSet dataSet = ((BN_DataSet) data).getData();
-        dataName = data.getName();
-        switch (algorithmName) {
-            case "pGES":
-                pGES(dataSet);
-                break;
-            case "cGES":
-                cGES(dataSet);
-                break;
-            case "fGES":
-                fGES(dataSet);
-                break;
-            default:
-                System.out.println("Algorithm " + algorithmName + " not found, using GES");
-            case "GES":
-                GES(dataSet);
-                break;
-        }
-
-        //TODO ver por qué van sin esto
-        //algorithm.search();
-
-        buildTime = System.currentTimeMillis() - startTime;
-    }
-
-    private void pGES (DataSet data) {
-        HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new PGESwithStages(data, clustering, this.nGESThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
-    }
-
-    private void cGES (DataSet data) {
-        HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new Circular_GES(data, clustering, this.nGESThreads, this.nInterleaving, "c4");
-    }
-
-    private void fGES (DataSet data) {
-        algorithm = new Fges_BNBuilder(data, false);
-    }
-
-    private void GES (DataSet data) {
-        algorithm = new GES_BNBuilder(data, true);
     }
 
     /**
