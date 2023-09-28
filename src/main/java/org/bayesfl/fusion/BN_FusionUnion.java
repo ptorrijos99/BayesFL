@@ -35,7 +35,6 @@ import consensusBN.ConsensusUnion;
 import edu.cmu.tetrad.graph.*;
 import org.bayesfl.model.BN;
 import org.bayesfl.model.Model;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
