@@ -31,9 +31,15 @@
 
 package org.bayesfl.model;
 
+import org.bayesfl.data.Data;
+
 public interface Model {
 
     Object getModel();
 
     void setModel(Object model);
+
+    public void printStats();
+
+    public void printStats(Data data);
 }

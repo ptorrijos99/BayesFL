@@ -35,8 +35,6 @@ public abstract class BackwardStage extends ThreadStage{
             sumDeviationThreads += Math.pow((g.getElapsedTime() - meanTimeTotal),2);
         }
         varianceTimeTotal = (double) sumDeviationThreads / n;
-        System.out.println("Backwards Time Stats: n=" + n + " sumTimeThreads=" + sumTimeThreads + " meanTimeTotal: " +
-                meanTimeTotal + " sumDeviationThreads=" + sumDeviationThreads + " varianceTimeTotal: " + varianceTimeTotal);
     }
 
 }

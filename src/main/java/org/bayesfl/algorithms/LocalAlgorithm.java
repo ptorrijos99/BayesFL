@@ -60,4 +60,20 @@ public interface LocalAlgorithm {
      */
     Model refinateLocalModel(Model oldModel, Model localModel, Data data);
 
+    /**
+     * Print the stats of the algorithm.
+     */
+    void printStats();
+
+    /**
+     * Print the stats of the refinement with the algorithm.
+     */
+    void printRefinementStats();
+
+    /**
+     * Save the results of the algorithm.
+     * @param path The path where the results are saved.
+     */
+    void saveResults(String path);
+
 }

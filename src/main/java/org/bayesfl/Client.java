@@ -69,6 +69,8 @@ public class Client {
      */
     private boolean stats = false;
 
+    private final String DASH = "------------------------------------------------------------------------";
+
     /**
      * Constructor of the class Client.
      * @param localFusion The Fusion operator that will be used to perform the fusion of the global model that the server
@@ -99,9 +101,15 @@ public class Client {
      * Build the local model of the client.
      */
     protected void buildLocalModel() {
-        System.out.println("Client " + id + ": BUILDING local model");
+        System.out.println("Client " + id + ": BUILDING local model\n");
         localModel = localAlgorithm.buildLocalModel(localModel, data);
-        System.out.println("  Client " + id + ": local model BUILD");
+
+        if (stats)  {
+            System.out.println(DASH + "\n| CLIENT " + id + " BUILD stats:");
+            localAlgorithm.printStats();
+            localModel.printStats(data);
+            System.out.println(DASH + "\n");
+        }
     }
 
     /**
@@ -111,11 +119,26 @@ public class Client {
      * @param globalModel The global model that the server sends.
      */
     protected void fusion(Model globalModel) {
-        System.out.println("Client " + id + ": doing FUSION");
+        System.out.println("Client " + id + ": doing FUSION\n");
         Model oldModel = localModel;
         localModel = localFusion.fusion(localModel, globalModel);
+
+        if (stats) {
+            System.out.println(DASH + "\n| CLIENT " + id + " FUSION stats:");
+            System.out.println("| Fusion operator: " + localFusion.getClass().getSimpleName() + "\n|");
+            localModel.printStats(data);
+            System.out.println(DASH + "\n");
+        }
+
+        System.out.println("\nClient " + id + ": doing REFINEMENT\n");
         localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
-        System.out.println("  Client " + id + ": FUSION done\n");
+
+        if (stats)  {
+            System.out.println(DASH + "\n| CLIENT " + id + " REFINEMENT stats:");
+            localAlgorithm.printRefinementStats();
+            localModel.printStats(data);
+            System.out.println(DASH + "\n");
+        }
     }
 
     /**

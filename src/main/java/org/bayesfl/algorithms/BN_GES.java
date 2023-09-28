@@ -32,7 +32,6 @@
 package org.bayesfl.algorithms;
 
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Graph;
@@ -56,9 +55,14 @@ public class BN_GES implements LocalAlgorithm {
 
     private BNBuilder algorithm;
     private final String algorithmName;
+    private String dataName;
     private String refinement = "None";
-    private int nThreads = 4;
+    private int nGESThreads = 4;
     private int nInterleaving = Integer.MAX_VALUE;
+    private double buildTime;
+    private double refinementTime;
+
+
 
     public BN_GES(String algorithmName) {
         this.algorithmName = algorithmName;
@@ -112,6 +116,8 @@ public class BN_GES implements LocalAlgorithm {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
 
+        double startTime = System.currentTimeMillis();
+
         Graph oldM = ((BN)oldModel).getModel();
         Graph localM = ((BN)localModel).getModel();
         DataSet dataSet = ((BN_DataSet) data).getData();
@@ -128,6 +134,8 @@ public class BN_GES implements LocalAlgorithm {
             }
         }
 
+        refinementTime = System.currentTimeMillis() - startTime;
+
         return localModel;
     }
 
@@ -140,8 +148,10 @@ public class BN_GES implements LocalAlgorithm {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
 
-        DataSet dataSet = ((BN_DataSet) data).getData();
+        double startTime = System.currentTimeMillis();
 
+        DataSet dataSet = ((BN_DataSet) data).getData();
+        dataName = data.getName();
         switch (algorithmName) {
             case "pGES":
                 pGES(dataSet);
@@ -158,16 +168,21 @@ public class BN_GES implements LocalAlgorithm {
                 GES(dataSet);
                 break;
         }
+
+        //TODO ver por qué van sin esto
+        //algorithm.search();
+
+        buildTime = System.currentTimeMillis() - startTime;
     }
 
     private void pGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new PGESwithStages(data, clustering, this.nThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
+        algorithm = new PGESwithStages(data, clustering, this.nGESThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
     }
 
     private void cGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new Circular_GES(data, clustering, this.nThreads, this.nInterleaving, "c4");
+        algorithm = new Circular_GES(data, clustering, this.nGESThreads, this.nInterleaving, "c4");
     }
 
     private void fGES (DataSet data) {
@@ -238,8 +253,46 @@ public class BN_GES implements LocalAlgorithm {
         return candidates;
     }
 
-    public void setNThreads(int nThreads) {
-        this.nThreads = nThreads;
+    /**
+     * Print the stats of the algorithm.
+     */
+    @Override
+    public void printStats() {
+        System.out.println(this);
+        System.out.println("| Build time: " + buildTime + " ms");
+    }
+
+    /**
+     * Print the stats of the refinement with the algorithm.
+     */
+    @Override
+    public void printRefinementStats() {
+        System.out.println("| " + refinement + " Refinement\n|");
+        System.out.println("| Refinement time: " + refinementTime + " ms");
+    }
+
+
+    /**
+     * Save the results of the algorithm.
+     * @param path The path where the results are saved.
+     */
+    @Override
+    public void saveResults(String path) {
+
+    }
+
+    @Override
+    public String toString() {
+        String string = "| " + algorithmName + " Algorithm.  " +
+                "Database: " + dataName + ", Threads: " + Runtime.getRuntime().availableProcessors();
+        if (algorithmName.equals("pGES") || algorithmName.equals("cGES")) {
+            string = string + ", GESThreads: " + nGESThreads + ", Interleaving: " + nInterleaving;
+        }
+        return string + "\n|";
+    }
+
+    public void setNGESThreads(int nGESThreads) {
+        this.nGESThreads = nGESThreads;
     }
 
     public void setNInterleaving(int nInterleaving) {

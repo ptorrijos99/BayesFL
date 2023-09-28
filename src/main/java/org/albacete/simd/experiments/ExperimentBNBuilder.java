@@ -285,7 +285,7 @@ public class ExperimentBNBuilder {
         System.out.println("Total Nodes of Resulting DAG");
         System.out.println(algorithm.getCurrentGraph().getNodes().size());
         System.out.println("-------------------------\nMetrics: ");
-        System.out.println("SHD: "+ structuralHamiltonDistanceValue);
+        System.out.println("SMHD: "+ structuralHamiltonDistanceValue);
         System.out.println("LLScore: " + this.LogLikelihoodScore);
         System.out.println("Final BDeu: " +this.bdeuScore);
         System.out.println("Total execution time (s): " + (double) elapsedTime/1000);

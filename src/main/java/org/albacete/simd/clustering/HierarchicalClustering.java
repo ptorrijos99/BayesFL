@@ -42,15 +42,15 @@ public class HierarchicalClustering extends Clustering{
 
     public List<Set<Node>> generateNodeClusters(int numClusters) {
         //Initial setup
-        System.out.println("Generating node clusters");
+        //System.out.println("Generating node clusters");
         if(edgeScores.isEmpty()) {
-            System.out.println("Generating edge scores");
+            //System.out.println("Generating edge scores");
             calculateEdgesScore();
         }
         List<Node> nodes = problem.getVariables();
 
         //Initializing clusters
-        System.out.println("Initializing clusters");
+        //System.out.println("Initializing clusters");
         clusters = new ArrayList<>(nodes.size());
         for (Node n : nodes) {
             Set<Node> s = new HashSet<>();
@@ -59,11 +59,11 @@ public class HierarchicalClustering extends Clustering{
         }
 
         // Initializing Similarity Matrix
-        System.out.println("Initializing similarity matrix");
+        //System.out.println("Initializing similarity matrix");
         initializeSimMatrix();
 
         // Calculating clusters
-        System.out.println("Calculating clusters");
+        //System.out.println("Calculating clusters");
         while (clusters.size() > numClusters) {
 
             // Initializing scores and initial positions of indexes
@@ -104,12 +104,12 @@ public class HierarchicalClustering extends Clustering{
 
         // Creating joint clusters if necessary
         if(this.isJoint){
-            System.out.println("Creating joint clusters");
+            //System.out.println("Creating joint clusters");
             createJointClusters();
         }
 
         //Indexing the cluster nodes
-        System.out.println("Indexing the cluster nodes");
+        //System.out.println("Indexing the cluster nodes");
         indexClusters();
 
         return clusters;
@@ -272,7 +272,7 @@ public class HierarchicalClustering extends Clustering{
         });
 
         double end = System.currentTimeMillis();
-        System.out.println("Time to create joint clusters: " + (end - start)/1000 + " seconds");
+        //System.out.println("Time to create joint clusters: " + (end - start)/1000 + " seconds");
     }
 
     private void indexClusters() {
@@ -299,7 +299,7 @@ public class HierarchicalClustering extends Clustering{
             generateNodeClusters(numClusters);
         }
         // Generating edge distribution
-        System.out.println("Generating edge distribution");
+        //System.out.println("Generating edge distribution");
         List<Set<Edge>> edgeDistribution = new ArrayList<>(clusters.size());
         for (int i = 0; i < clusters.size(); i++) {
             Set<Edge> edges = new HashSet<>();
@@ -307,7 +307,7 @@ public class HierarchicalClustering extends Clustering{
         }
 
         // Generating the Inner and Outer edges
-        System.out.println("Generating inner and outer edges");
+        //System.out.println("Generating inner and outer edges");
         allEdges.forEach(edge -> {
             Node node1 = edge.getNode1();
             Node node2 = edge.getNode2();
@@ -344,7 +344,7 @@ public class HierarchicalClustering extends Clustering{
             }
 
         });
-        System.out.println("Finished generating edge distribution");
+        //System.out.println("Finished generating edge distribution");
 
         return edgeDistribution;
     }
