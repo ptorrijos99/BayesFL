@@ -22,43 +22,33 @@
  *  SOFTWARE.
  */
 /**
- *    Main.java
+ *    LocalFusion.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.bayesfl;
+package org.albacete.simd.bayesfl.fusion;
 
-import org.bayesfl.algorithms.BN_GES;
-import org.bayesfl.algorithms.LocalAlgorithm;
-import org.bayesfl.data.BN_DataSet;
-import org.bayesfl.fusion.BN_FusionUnion;
-import org.bayesfl.fusion.Fusion;
+import org.albacete.simd.bayesfl.model.Model;
 
-import java.util.ArrayList;
+public interface Fusion {
 
-public class Main {
-    public static void main(String[] args) {
-        String net = "andes";
+    /**
+     * Perform the fusion of two models.
+     * @param model1 The first model to fuse.
+     * @param model2 The second model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model model1, Model model2);
 
-        ArrayList<Client> clients = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            Fusion fusionClient = new BN_FusionUnion();
-            BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + ".xbif5000" + i + "_.csv", net + "_5000" + i);
-            data.setOriginalBNPath("./res/networks/" + net + ".xbif");
-            LocalAlgorithm algorithm = new BN_GES("pGES", "FES");
-            
-            Client client = new Client(fusionClient, algorithm, data);
-            client.setStats(true);
-            clients.add(client);
-        }
+    /**
+     * Perform the fusion of many models.
+     * @param models The array of Model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model[] models);
 
-        Fusion fusionServer = new BN_FusionUnion();
-        Server server = new Server(fusionServer, clients);
-        server.setStats(true);
-        server.setOriginalBNPath("./res/networks/" + net + ".xbif");
-        server.run();
-    }
 }
+

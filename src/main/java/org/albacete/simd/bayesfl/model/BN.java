@@ -29,7 +29,7 @@
  *
  */
 
-package org.bayesfl.model;
+package org.albacete.simd.bayesfl.model;
 
 import edu.cmu.tetrad.bayes.BayesIm;
 import edu.cmu.tetrad.bayes.BayesPm;
@@ -40,8 +40,8 @@ import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.search.BDeuScore;
 import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.utils.Utils;
-import org.bayesfl.data.Data;
-import org.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.data.Data;
+import org.albacete.simd.bayesfl.data.BN_DataSet;
 import org.w3c.dom.Document;
 import weka.classifiers.bayes.net.BIFReader;
 

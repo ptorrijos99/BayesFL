@@ -29,13 +29,13 @@
  *
  */
 
-package org.bayesfl;
+package org.albacete.simd.bayesfl;
 
-import org.bayesfl.fusion.Fusion;
-import org.bayesfl.model.Model;
+import org.albacete.simd.bayesfl.fusion.Fusion;
+import org.albacete.simd.bayesfl.model.Model;
 
 import java.util.Collection;
-import org.bayesfl.model.BN;
+import org.albacete.simd.bayesfl.model.BN;
 
 public class Server {
 
@@ -55,7 +55,15 @@ public class Server {
      */
     private final Collection<Client> clients;
 
+    /**
+     * The local models of the clients.
+     */
     private final Model[] localModels;
+
+    /**
+     * The number of iterations of the algorithm.
+     */
+    private int nIterations = 5;
 
     /**
      * The stats flag.
@@ -99,33 +107,38 @@ public class Server {
      * Run the server.
      */
     public void run() {
-        // 1. Create the local model of each client with a ParallelStream
-        clients.stream().forEach(Client::buildLocalModel);
+        // For each iteration of the algorithm
+        for (int i = 1; i < nIterations+1; i++) {
+            System.out.println("\n\n\n" + DASH + "\nITERATION " + i + "\n");
+            
+            // 1. Create the local model of each client with a ParallelStream
+            clients.stream().forEach(Client::buildLocalModel);
 
-        // 2. Get the local models
-        for (Client client : clients) {
-            localModels[client.getID()] = client.getLocalModel();
-        }
-
-        // 3. Fuse the local models into a global model
-        double start = System.currentTimeMillis();
-        this.fusion();
-        double fusionTime = (System.currentTimeMillis() - start) / 1000;
-        
-        System.out.println("\nSERVER: FUSION done\n");
-        if (stats) {
-            System.out.println(DASH + "\n| SERVER FUSION stats:");
-            System.out.println("| Fusion operator: " + globalModel.getClass().getSimpleName() + "\n|");
-            System.out.println("| Build time: " + fusionTime + " s");
-            globalModel.printStats();
-            if (originalBNPath != null) {
-                ((BN)globalModel).printOriginalBNStats(originalBNPath);
+            // 2. Get the local models
+            for (Client client : clients) {
+                localModels[client.getID()] = client.getLocalModel();
             }
-            System.out.println(DASH + "\n");
-        }
 
-        // 4. Fuse the global model with each local model on the clients
-        clients.stream().forEach(client -> client.fusion(globalModel));
+            // 3. Fuse the local models into a global model
+            double start = System.currentTimeMillis();
+            this.fusion();
+            double fusionTime = (System.currentTimeMillis() - start) / 1000;
+
+            System.out.println("\nSERVER: FUSION done\n");
+            if (stats) {
+                System.out.println(DASH + "\n| SERVER FUSION stats:");
+                System.out.println("| Fusion operator: " + globalModel.getClass().getSimpleName() + "\n|");
+                System.out.println("| Build time: " + fusionTime + " s");
+                globalModel.printStats();
+                if (originalBNPath != null) {
+                    ((BN)globalModel).printOriginalBNStats(originalBNPath);
+                }
+                System.out.println(DASH + "\n");
+            }
+
+            // 4. Fuse the global model with each local model on the clients
+            clients.stream().forEach(client -> client.fusion(globalModel));
+        }
     }
 
     /**
@@ -149,5 +162,13 @@ public class Server {
      */
     public void setOriginalBNPath(String path) {
         this.originalBNPath = path;
+    }
+
+    /**
+     * Sets the number of iterations of the algorithm.
+     * @param nIterations The number of iterations of the algorithm.
+     */
+    public void setnIterations(int nIterations) {
+        this.nIterations = nIterations;
     }
 }

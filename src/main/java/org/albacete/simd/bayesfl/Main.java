@@ -1,18 +1,18 @@
 /*
  *  The MIT License (MIT)
- *
+ *  
  *  Copyright (c) 2022 Universidad de Castilla-La Mancha, España
- *
+ *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
  *  in the Software without restriction, including without limitation the rights
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ *  
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ *  
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,57 +22,44 @@
  *  SOFTWARE.
  */
 /**
- *    BN_FusionUnion.java
+ *    Main.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.bayesfl.fusion;
+package org.albacete.simd.bayesfl;
 
-import consensusBN.ConsensusUnion;
-import edu.cmu.tetrad.graph.*;
-import org.bayesfl.model.BN;
-import org.bayesfl.model.Model;
-import org.jetbrains.annotations.NotNull;
+import org.albacete.simd.bayesfl.algorithms.BN_GES;
+import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
+import org.albacete.simd.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
+import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
+import org.albacete.simd.bayesfl.fusion.Fusion;
 
 import java.util.ArrayList;
 
-public class BN_FusionUnion implements Fusion {
+public class Main {
+    public static void main(String[] args) {
+        String net = "andes";
 
-    @Override
-    public Model fusion(Model model1, Model model2) {
-        if (!(model1 instanceof BN) || !(model2 instanceof BN)) {
-            throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
+        ArrayList<Client> clients = new ArrayList<>();
+        for (int i = 1; i < 6; i++) {
+            Fusion fusionClient = new BN_FusionUnion();
+            BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + ".xbif5000" + i + "_.csv", net + "_5000" + i);
+            data.setOriginalBNPath("./res/networks/" + net + ".xbif");
+            LocalAlgorithm algorithm = new BN_GES("pGES");
+            
+            Client client = new Client(fusionClient, algorithm, data);
+            client.setStats(true);
+            clients.add(client);
         }
 
-        ArrayList<Dag_n> dags = new ArrayList<>();
-        dags.add(((BN) model1).getModel());
-        dags.add(((BN) model2).getModel());
-
-        ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
+        Fusion fusionServer = new BN_FusionIntersection();
+        Server server = new Server(fusionServer, clients);
+        server.setStats(true);
+        server.setOriginalBNPath("./res/networks/" + net + ".xbif");
+        server.run();
     }
-
-    @Override
-    public Model fusion(Model @NotNull [] models) {
-        for (Model model : models) {
-            if (!(model instanceof BN)) {
-                throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
-            }
-        }
-
-        ArrayList<Dag_n> dags = new ArrayList<>();
-        for (Model model : models) {
-            dags.add(((BN) model).getModel());
-        }
-
-        ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
-    }
-
-
 }

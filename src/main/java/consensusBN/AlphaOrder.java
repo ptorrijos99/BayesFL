@@ -140,34 +140,34 @@ public void computeAlphaH2(){
 				ArrayList<Edge> inserted = new ArrayList<Edge>();
 				List<Node> children = g.getChildren(nodei);
 				inversion += (children.size()-1);
-				List<Node> paX = g.getParents(nodei);
-				for(Node child: children){
-					List<Node> paY = g.getParents(child);
-					for(Node nodep: paX){
-							if(g.getEdge(nodep, child)==null){
-								addition++;
-							}
-					}
-					for(Node nodec: paY){
-						if(!nodec.equals(nodei)){
-							if((g.getEdge(nodec,nodei)==null) && (g.getEdge(nodei,nodec)==null)){
-								Edge toBeInserted = new Edge(nodec,nodei,Endpoint.CIRCLE,Endpoint.CIRCLE);
-								boolean contains = false;
-								for(Edge e: inserted){
-									if((e.getNode1().equals(nodec) && (e.getNode2().equals(nodei))) || 
-									  ((e.getNode1().equals(nodei) && (e.getNode2().equals(nodec))))){
-										contains = true;
-										break;
-									}
-								}
-								if(!contains){
-									addition++;
-									inserted.add(toBeInserted);
-								}
-							}
-						}
-					}
-				}
+                                    List<Node> paX = g.getParents(nodei);
+                                    for(Node child: children){
+                                            List<Node> paY = g.getParents(child);
+                                            for(Node nodep: paX){
+                                                            if(g.getEdge(nodep, child)==null){
+                                                                    addition++;
+                                                            }
+                                            }
+                                            for(Node nodec: paY){
+                                                    if(!nodec.equals(nodei)){
+                                                            if((g.getEdge(nodec,nodei)==null) && (g.getEdge(nodei,nodec)==null)){
+                                                                    Edge toBeInserted = new Edge(nodec,nodei,Endpoint.CIRCLE,Endpoint.CIRCLE);
+                                                                    boolean contains = false;
+                                                                    for(Edge e: inserted){
+                                                                            if((e.getNode1().equals(nodec) && (e.getNode2().equals(nodei))) || 
+                                                                              ((e.getNode1().equals(nodei) && (e.getNode2().equals(nodec))))){
+                                                                                    contains = true;
+                                                                                    break;
+                                                                            }
+                                                                    }
+                                                                    if(!contains){
+                                                                            addition++;
+                                                                            inserted.add(toBeInserted);
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
 			}
 			changes = inversion + addition;
 			if(changes < min){
@@ -182,8 +182,10 @@ public void computeAlphaH2(){
 	}
 	
 	void removeNode(Dag_n g, Node node_alpha){
+            
+                Node node_alpha_g = g.getNode(node_alpha.getName());
 		
-		List<Node> children = g.getChildren(node_alpha);
+		List<Node> children = g.getChildren(node_alpha_g);
 		
 		while(!children.isEmpty()){
 			int i=0;
@@ -191,18 +193,18 @@ public void computeAlphaH2(){
 			boolean seguir = false;
 			do{
 				child = children.get(i++);
-				g.removeEdge(node_alpha, child);
+				g.removeEdge(node_alpha_g, child);
 				seguir=false;
-				if(g.existsDirectedPathFromTo(node_alpha,child)){
+				if(g.existsDirectedPathFromTo(node_alpha_g,child)){
 					seguir=true;
-					g.addEdge(new Edge(node_alpha,child,Endpoint.TAIL, Endpoint.ARROW));
+					g.addEdge(new Edge(node_alpha_g,child,Endpoint.TAIL, Endpoint.ARROW));
 				}
 			}while(seguir);
 
-			List<Node> paX = g.getParents(node_alpha);
+			List<Node> paX = g.getParents(node_alpha_g);
 			List<Node> paY = g.getParents(child);
-			paY.remove(node_alpha);
-			g.addEdge(new Edge(child,node_alpha,Endpoint.TAIL, Endpoint.ARROW));
+			paY.remove(node_alpha_g);
+			g.addEdge(new Edge(child,node_alpha_g,Endpoint.TAIL, Endpoint.ARROW));
 			for(Node nodep: paX){
 				Edge pay = g.getEdge(nodep, child);
 				if(pay == null)
@@ -210,15 +212,15 @@ public void computeAlphaH2(){
 
 			}
 			for(Node nodep : paY){
-				Edge paz = g.getEdge(nodep,node_alpha);
+				Edge paz = g.getEdge(nodep,node_alpha_g);
 				if(paz == null) 
-					g.addEdge(new Edge(nodep,node_alpha,Endpoint.TAIL,Endpoint.ARROW));
+					g.addEdge(new Edge(nodep,node_alpha_g,Endpoint.TAIL,Endpoint.ARROW));
 			}
 
 			children.remove(child);
 		}
-		g.removeNode(node_alpha);
-	}
+                g.removeNode(node_alpha_g);
+                }
 
 
 	int computeNextH1(List<Node> nodes){

@@ -29,10 +29,10 @@
  *
  */
 
-package org.bayesfl.algorithms;
+package org.albacete.simd.bayesfl.algorithms;
 
-import org.bayesfl.data.Data;
-import org.bayesfl.model.Model;
+import org.albacete.simd.bayesfl.data.Data;
+import org.albacete.simd.bayesfl.model.Model;
 
 public interface LocalAlgorithm {
 

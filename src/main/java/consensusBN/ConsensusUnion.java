@@ -41,7 +41,7 @@ public class ConsensusUnion {
 	}
 	
 	public Dag_n union(){
-		
+            
 		if(this.alpha == null){
 			
 			this.heuristic.computeAlphaH2();
@@ -62,6 +62,7 @@ public class ConsensusUnion {
 			}
 			
 		}
+                System.out.println(this.union.getEdges().equals(this.imaps2alpha.setOfOutputDags.get(0).getEdges()));
 		return this.union;
 		
 	}

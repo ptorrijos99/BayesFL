@@ -22,20 +22,24 @@
  *  SOFTWARE.
  */
 /**
- *    Data.java
+ *    Model.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.bayesfl.data;
+package org.albacete.simd.bayesfl.model;
 
-public interface Data {
+import org.albacete.simd.bayesfl.data.Data;
 
-    Object getData();
+public interface Model {
 
-    void setData(Object data);
+    Object getModel();
 
-    String getName();
+    void setModel(Object model);
+
+    public void printStats();
+
+    public void printStats(Data data);
 }
