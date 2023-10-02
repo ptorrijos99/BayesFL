@@ -306,7 +306,7 @@ public final class DiscreteVariable extends AbstractVariable
     // of nodes and edges in graphs won't work.
     public final int hashCode() {
         if (hash == 0) {
-            hash = super.hashCode();
+            hash = getName().hashCode();
         }
 //        if (NodeEqualityMode.getEqualityType() == NodeEqualityMode.Type.OBJECT) {
         return hash;

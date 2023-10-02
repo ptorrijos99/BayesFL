@@ -29,12 +29,12 @@
  *
  */
 
-package org.bayesfl;
+package org.albacete.simd.bayesfl;
 
-import org.bayesfl.algorithms.LocalAlgorithm;
-import org.bayesfl.data.Data;
-import org.bayesfl.fusion.Fusion;
-import org.bayesfl.model.Model;
+import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
+import org.albacete.simd.bayesfl.data.Data;
+import org.albacete.simd.bayesfl.fusion.Fusion;
+import org.albacete.simd.bayesfl.model.Model;
 
 public class Client {
 
@@ -129,7 +129,7 @@ public class Client {
             localModel.printStats(data);
             System.out.println(DASH + "\n");
         }
-
+/*
         System.out.println("\nClient " + id + ": doing REFINEMENT\n");
         localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
 
@@ -138,7 +138,7 @@ public class Client {
             localAlgorithm.printRefinementStats();
             localModel.printStats(data);
             System.out.println(DASH + "\n");
-        }
+        }*/
     }
 
     /**

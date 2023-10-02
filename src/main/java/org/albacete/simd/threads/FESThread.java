@@ -150,7 +150,7 @@ public class FESThread extends GESThread {
 
             // Inserting edge
             insert(x_i, y_i, t_0, graph);
-
+            
             // Checking cycles?
             //boolean cycles = graph.existsDirectedCycle();
 
@@ -246,6 +246,7 @@ public class FESThread extends GESThread {
             // Deleting the selected edge from enlaces
             enlaces.remove(max.edge);
             this.scores.remove(max);
+            S.remove(max.edge);
         }
 
         return max.score;
