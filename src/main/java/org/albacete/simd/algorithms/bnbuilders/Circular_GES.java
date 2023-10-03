@@ -76,7 +76,8 @@ public class Circular_GES extends BNBuilder {
     protected void initialConfig() {
         it = 0;
         repartition();
-        initializeValuesInResultsMap();
+        Graph initialGraph = super.getInitialGraph();
+        initializeValuesInResultsMap(initialGraph);
     }
 
     @Override
@@ -91,9 +92,9 @@ public class Circular_GES extends BNBuilder {
         }
     }
 
-    private void initializeValuesInResultsMap(){
+    private void initializeValuesInResultsMap(Graph initialGraph){
         for (int i = 0; i < nThreads; i++) {
-            circularFusionThreadsResults.put(i, new CircularDag(problem,subsetEdges.get(i),nItInterleaving,i));
+            circularFusionThreadsResults.put(i, new CircularDag(initialGraph, problem,subsetEdges.get(i),nItInterleaving,i));
         }
     }
     
