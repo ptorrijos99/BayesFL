@@ -26,6 +26,12 @@ public class Fges_BNBuilder extends BNBuilder {
 
         Fges fges = new Fges(bdeu);
         fges.setFaithfulnessAssumed(setFaithfulnessAssumed);
+        Graph initialGraph = super.getInitialGraph();
+        if (initialGraph != null) {
+            fges.setExternalGraph(initialGraph);
+        }
+        
+        
         this.currentGraph = fges.search();
         this.score = fges.scoreDag(currentGraph);
 

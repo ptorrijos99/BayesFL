@@ -32,11 +32,18 @@ public class CircularDag {
     public static final String EXPERIMENTS_FOLDER = "./experiments/";
 
     public CircularDag(Problem problem, Set<Edge> subsetEdges, int nItInterleaving, int id) {
+        this(null, problem, subsetEdges, nItInterleaving, id);
+    }
+    
+    public CircularDag(Graph initialGraph, Problem problem, Set<Edge> subsetEdges, int nItInterleaving, int id) {
         this.id = id;
         this.problem = problem;
         this.subsetEdges = subsetEdges;
         this.nItInterleaving = nItInterleaving;
-        this.dag = new Dag_n(problem.getVariables());
+        if (initialGraph == null)
+            this.dag = new Dag_n(problem.getVariables());
+        else
+            this.dag = new Dag_n(initialGraph);
     }
 
     public void fusionGES() throws InterruptedException {

@@ -45,18 +45,18 @@ public class Main {
         String net = "andes";
 
         ArrayList<Client> clients = new ArrayList<>();
-        for (int i = 1; i < 6; i++) {
+        for (int i = 5; i < 9; i++) {
             Fusion fusionClient = new BN_FusionUnion();
             BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + ".xbif5000" + i + "_.csv", net + "_5000" + i);
             data.setOriginalBNPath("./res/networks/" + net + ".xbif");
-            LocalAlgorithm algorithm = new BN_GES("pGES");
+            LocalAlgorithm algorithm = new BN_GES("GES");
             
             Client client = new Client(fusionClient, algorithm, data);
             client.setStats(true);
             clients.add(client);
         }
 
-        Fusion fusionServer = new BN_FusionIntersection();
+        Fusion fusionServer = new BN_FusionUnion();
         Server server = new Server(fusionServer, clients);
         server.setStats(true);
         server.setOriginalBNPath("./res/networks/" + net + ".xbif");

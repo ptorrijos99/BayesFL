@@ -302,5 +302,9 @@ public abstract class BNBuilder {
     public void setInitialGraph(Graph initialGraph) {
         this.initialGraph = initialGraph;
     }
+    
+    public Graph getInitialGraph() {
+        return this.initialGraph;
+    }
 
 }

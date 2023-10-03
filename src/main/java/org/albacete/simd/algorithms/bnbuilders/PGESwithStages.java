@@ -95,7 +95,7 @@ public class PGESwithStages extends BNBuilder {
 
     @Override
     protected void initialConfig() {
-
+        this.currentGraph = super.getInitialGraph();
     }
 
     @Override
