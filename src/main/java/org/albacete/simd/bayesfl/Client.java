@@ -128,7 +128,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
 
         if (stats) {
-            localModel.saveStats(localFusion.getClass().getSimpleName(), id, data, iteration, time);
+            localModel.saveStats(localAlgorithm.getAlgorithmName() + "_" + localFusion.getClass().getSimpleName(), id, data, iteration, time);
         }
         
         // If defined, perform a refinement to the local model
@@ -138,7 +138,7 @@ public class Client {
             time = (System.currentTimeMillis() - start) / 1000;
 
             if (stats)  {
-                localModel.saveStats(localAlgorithm.getRefinementName(), id, data, iteration, time);
+                localModel.saveStats(localAlgorithm.getAlgorithmName() + "_" + localAlgorithm.getRefinementName(), id, data, iteration, time);
             }
         }
     }

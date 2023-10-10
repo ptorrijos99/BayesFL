@@ -75,6 +75,8 @@ public class Server {
     private String originalBNPath;
     
     private String bbddName;
+            
+    private String experimentName;
 
     /**
      * Constructor of the class Server.
@@ -133,7 +135,7 @@ public class Server {
                     data = new BN_DataSet(this.bbddName);
                     ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
                 }
-                globalModel.saveStats(globalFusion.getClass().getSimpleName(), -1, data, iteration, time);
+                globalModel.saveStats(experimentName + "_" + globalFusion.getClass().getSimpleName(), -1, data, iteration, time);
             }
             
             // 4. Fuse the global model with each local model on the clients
@@ -159,6 +161,10 @@ public class Server {
     
     public void setBBDDName(String bbddName) {
         this.bbddName = bbddName;
+    }
+    
+    public void setExperimentName(String experimentName) {
+        this.experimentName = experimentName;
     }
 
     /**
