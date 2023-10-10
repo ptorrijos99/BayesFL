@@ -79,8 +79,12 @@ public class BN implements Model {
         double bdeu = calculateBDeu(data, this.dag);
         int threads = Runtime.getRuntime().availableProcessors();
         
-        String path = "";
-        String header = "algorithm,iteration,id,bbdd,instances,threads,bdeu,SMHD,time(s)\n";
+        String client;
+        if (id == -1) client = "Server";
+        else client = "Client";
+        
+        String path = client + "/" + data.getName() + "_" + operation + "_" + id + ".csv";
+        String header = "bbdd,algorithm,id,iteration,instances,threads,bdeu,SMHD,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         id + "," +
@@ -93,7 +97,7 @@ public class BN implements Model {
         
         System.out.println(results);
 
-        //saveExperiment(path, header, results);
+        saveExperiment(path, header, results);
     }
     
     

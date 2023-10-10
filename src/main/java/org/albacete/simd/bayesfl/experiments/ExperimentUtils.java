@@ -57,6 +57,12 @@ public class ExperimentUtils {
     public static void saveExperiment(String restPath, String header, String data) {
         String path = SAVEPATH + restPath;
         
+        // Create the directory if it does not exist
+        File directory = new File(path.substring(0, path.lastIndexOf("/")));
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
+
         File file = new File(path);
         BufferedWriter csvWriter;
         try {
@@ -73,7 +79,6 @@ public class ExperimentUtils {
         } catch (IOException ex) {
             Logger.getLogger(ExperimentUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Results saved at: " + path);
     }
     
     public static double calculateBDeu(Data data, Dag_n dag) {
