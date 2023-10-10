@@ -35,6 +35,8 @@ import org.albacete.simd.bayesfl.fusion.Fusion;
 import org.albacete.simd.bayesfl.model.Model;
 
 import java.util.Collection;
+import org.albacete.simd.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.bayesfl.model.BN;
 
 public class Server {
@@ -69,9 +71,10 @@ public class Server {
      * The stats flag.
      */
     private boolean stats = false;
-    private final String DASH = "------------------------------------------------------------------------";
-    
+
     private String originalBNPath;
+    
+    private String bbddName;
 
     /**
      * Constructor of the class Server.
@@ -108,8 +111,8 @@ public class Server {
      */
     public void run() {
         // For each iteration of the algorithm
-        for (int i = 1; i < nIterations+1; i++) {
-            System.out.println("\n\n\n" + DASH + "\nITERATION " + i + "\n");
+        for (int iteration = 1; iteration < nIterations+1; iteration++) {
+            System.out.println("\n\n\nITERATION " + iteration + "\n");
             
             // 1. Create the local model of each client with a ParallelStream
             clients.stream().forEach(Client::buildLocalModel);
@@ -121,31 +124,21 @@ public class Server {
 
             // 3. Fuse the local models into a global model
             double start = System.currentTimeMillis();
-            this.fusion();
-            double fusionTime = (System.currentTimeMillis() - start) / 1000;
-
-            System.out.println("\nSERVER: FUSION done\n");
+            globalModel = globalFusion.fusion(localModels);
+            double time = (System.currentTimeMillis() - start) / 1000;
+            
             if (stats) {
-                System.out.println(DASH + "\n| SERVER FUSION stats:");
-                System.out.println("| Fusion operator: " + globalModel.getClass().getSimpleName() + "\n|");
-                System.out.println("| Build time: " + fusionTime + " s");
-                globalModel.printStats();
-                if (originalBNPath != null) {
-                    ((BN)globalModel).printOriginalBNStats(originalBNPath);
+                Data data = null;
+                if (this.originalBNPath != null) {
+                    data = new BN_DataSet(this.bbddName);
+                    ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
                 }
-                System.out.println(DASH + "\n");
+                globalModel.saveStats(globalFusion.getClass().getSimpleName(), -1, data, iteration, time);
             }
-
+            
             // 4. Fuse the global model with each local model on the clients
             clients.stream().forEach(client -> client.fusion(globalModel));
         }
-    }
-
-    /**
-     * Perform the fusion of the local models that the clients send
-     */
-    protected void fusion() {
-        globalModel = globalFusion.fusion(localModels);
     }
 
     /**
@@ -155,13 +148,17 @@ public class Server {
     public void setStats(boolean stats) {
         this.stats = stats;
     }
-    
+
     /**
      * Sets the path of the original BN. Used only in experiments for the stats.
      * @param path Path of the original BN.
      */
     public void setOriginalBNPath(String path) {
         this.originalBNPath = path;
+    }
+    
+    public void setBBDDName(String bbddName) {
+        this.bbddName = bbddName;
     }
 
     /**

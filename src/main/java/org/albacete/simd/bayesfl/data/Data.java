@@ -38,4 +38,6 @@ public interface Data {
     void setData(Object data);
 
     String getName();
+    
+    int getNInstances();
 }

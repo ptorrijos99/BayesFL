@@ -43,3 +43,6 @@ nbactions.xml
 .DS_Store
 .idea/vcs.xml
 desktop.ini
+
+### Results folder ###
+results/

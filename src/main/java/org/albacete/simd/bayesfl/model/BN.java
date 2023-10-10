@@ -31,27 +31,16 @@
 
 package org.albacete.simd.bayesfl.model;
 
-import edu.cmu.tetrad.bayes.BayesIm;
-import edu.cmu.tetrad.bayes.BayesPm;
-import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Graph;
-import edu.cmu.tetrad.search.BDeuScore;
-import edu.cmu.tetrad.search.Fges;
+
 import org.albacete.simd.utils.Utils;
 import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.w3c.dom.Document;
-import weka.classifiers.bayes.net.BIFReader;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
 
 public class BN implements Model {
-
+    
     private Dag_n dag;
 
     public BN() {
@@ -81,56 +70,33 @@ public class BN implements Model {
     }
 
     @Override
-    public void printStats() {
-        System.out.println("| Total Nodes of DAG: " + this.dag.getNodes().size());
-        System.out.println("| Total Edges of DAG: " + this.dag.getEdges().size());
-    }
-
-    @Override
-    public void printStats(Data data) {
-        printStats();
-
+    public void saveStats(String operation, int id, Data data, int iteration, double time) {
         if (!(data instanceof BN_DataSet)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
+        
+        int smhd = calculateSMHD(data, this.dag);
+        double bdeu = calculateBDeu(data, this.dag);
+        int threads = Runtime.getRuntime().availableProcessors();
+        
+        String path = "";
+        String header = "algorithm,iteration,id,bbdd,instances,threads,bdeu,SMHD,time(s)\n";
+        String results = data.getName() + "," +
+                        operation + "," +
+                        id + "," +
+                        iteration + "," +
+                        data.getNInstances() + "," +
+                        threads + "," + 
+                        bdeu + "," +
+                        smhd + "," +
+                        time + "\n";
+        
+        System.out.println(results);
 
-        // Calculate bdeu score
-        BDeuScore bdeu = new BDeuScore((DataSet) data.getData());
-        Fges fges = new Fges(bdeu);
-        System.out.println("| BDeu score: " + fges.scoreDag(this.dag));
-
-        if (((BN_DataSet) data).getOriginalBNPath() != null) {
-            printOriginalBNStats(((BN_DataSet) data).getOriginalBNPath());
-        }
+        //saveExperiment(path, header, results);
     }
     
-    public void printOriginalBNStats(String patch) {
-        try {
-            MlBayesIm originalBN = readOriginalBayesianNetwork(patch);
-            System.out.println("| SMHD score: " + Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), this.dag));
-        } catch (Exception e) { e.printStackTrace(); }
-    }
-
-    /**
-     * Read the original Bayesian Network from the BIF file in the netPath.
-     * @return The original Bayesian Network.
-     * @throws Exception If the file is not found.
-     */
-    private MlBayesIm readOriginalBayesianNetwork(String netPath) throws Exception {
-        final PrintStream err = new PrintStream(System.err);
-        System.setErr(new PrintStream(OutputStream.nullOutputStream()));
-
-        BIFReader bayesianReader = new BIFReader();
-        bayesianReader.processFile(netPath);
-
-        System.setErr(err);
-
-        // Transforming the BayesNet into a BayesPm
-        BayesPm bayesPm = Utils.transformBayesNetToBayesPm(bayesianReader);
-
-        return new MlBayesIm(bayesPm);
-    }
-
+    
     @Override
     public String toString() {
         return dag.toString();

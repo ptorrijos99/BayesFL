@@ -18,6 +18,10 @@ public class BN_DataSet implements Data {
     public BN_DataSet() {
         this.name = "";
     }
+    
+    public BN_DataSet(String name) {
+        this.name = name;
+    }
 
     public BN_DataSet(String path, String name) {
         this.data = readData(path);
@@ -59,6 +63,13 @@ public class BN_DataSet implements Data {
     public String getName() {
         return name;
     }
+    
+    @Override
+    public int getNInstances() {
+        if (data != null) 
+            return data.getNumRows();
+        return -1;
+    }
 
     /**
      * Returns the path of the original BN. Used only in experiments for the stats.
@@ -75,4 +86,6 @@ public class BN_DataSet implements Data {
     public void setOriginalBNPath(String path) {
         this.originalBNPath = path;
     }
+
+    
 }
