@@ -68,8 +68,8 @@ public class Client {
      * The stats flag.
      */
     private boolean stats = false;
-
-    private final String DASH = "------------------------------------------------------------------------";
+    
+    private int iteration;
 
     /**
      * Constructor of the class Client.
@@ -82,6 +82,7 @@ public class Client {
         this.localFusion = localFusion;
         this.localAlgorithm = localAlgorithm;
         this.data = data;
+        this.iteration = 0;
     }
 
     /**
@@ -101,14 +102,14 @@ public class Client {
      * Build the local model of the client.
      */
     protected void buildLocalModel() {
-        System.out.println("Client " + id + ": BUILDING local model\n");
+        iteration = iteration+1;
+        
+        double start = System.currentTimeMillis();
         localModel = localAlgorithm.buildLocalModel(localModel, data);
-
+        double time = (System.currentTimeMillis() - start) / 1000;
+        
         if (stats)  {
-            System.out.println(DASH + "\n| CLIENT " + id + " BUILD stats:");
-            localAlgorithm.printStats();
-            localModel.printStats(data);
-            System.out.println(DASH + "\n");
+            localModel.saveStats(localAlgorithm.getAlgorithmName(), id, data, iteration, time);
         }
     }
 
@@ -119,26 +120,27 @@ public class Client {
      * @param globalModel The global model that the server sends.
      */
     protected void fusion(Model globalModel) {
-        System.out.println("Client " + id + ": doing FUSION\n");
         Model oldModel = localModel;
+        
+        // Perform the fusion between the local and the global model
+        double start = System.currentTimeMillis();
         localModel = localFusion.fusion(localModel, globalModel);
+        double time = (System.currentTimeMillis() - start) / 1000;
 
         if (stats) {
-            System.out.println(DASH + "\n| CLIENT " + id + " FUSION stats:");
-            System.out.println("| Fusion operator: " + localFusion.getClass().getSimpleName() + "\n|");
-            localModel.printStats(data);
-            System.out.println(DASH + "\n");
+            localModel.saveStats(localFusion.getClass().getSimpleName(), id, data, iteration, time);
         }
-/*
-        System.out.println("\nClient " + id + ": doing REFINEMENT\n");
-        localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
+        
+        // If defined, perform a refinement to the local model
+        if (!localAlgorithm.getRefinementName().equals("None")) {
+            start = System.currentTimeMillis();
+            localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
+            time = (System.currentTimeMillis() - start) / 1000;
 
-        if (stats)  {
-            System.out.println(DASH + "\n| CLIENT " + id + " REFINEMENT stats:");
-            localAlgorithm.printRefinementStats();
-            localModel.printStats(data);
-            System.out.println(DASH + "\n");
-        }*/
+            if (stats)  {
+                localModel.saveStats(localAlgorithm.getRefinementName(), id, data, iteration, time);
+            }
+        }
     }
 
     /**

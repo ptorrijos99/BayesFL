@@ -59,11 +59,8 @@ public class BN_GES implements LocalAlgorithm {
     private String refinement = "None";
     private int nGESThreads = 4;
     private int nInterleaving = Integer.MAX_VALUE;
-    private double buildTime;
-    private double refinementTime;
 
-
-
+    
     public BN_GES(String algorithmName) {
         this.algorithmName = algorithmName;
     }
@@ -94,7 +91,7 @@ public class BN_GES implements LocalAlgorithm {
         if (!(data instanceof BN_DataSet)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
-        double startTime = System.currentTimeMillis();
+
         DataSet dataSet = ((BN_DataSet) data).getData();
         dataName = data.getName();
 
@@ -125,7 +122,6 @@ public class BN_GES implements LocalAlgorithm {
 
         // Search with the algorithm created
         BN result = new BN(algorithm.search());
-        buildTime = (System.currentTimeMillis() - startTime) / 1000;
 
         return result;
     }
@@ -161,8 +157,6 @@ public class BN_GES implements LocalAlgorithm {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
 
-        double startTime = System.currentTimeMillis();
-
         Graph oldM = ((BN)oldModel).getModel();
         Graph localM = ((BN)localModel).getModel();
         DataSet dataSet = ((BN_DataSet) data).getData();
@@ -178,8 +172,6 @@ public class BN_GES implements LocalAlgorithm {
             default -> {
             }
         }
-
-        refinementTime = (System.currentTimeMillis() - startTime) / 1000;
 
         return localModel;
     }
@@ -244,34 +236,6 @@ public class BN_GES implements LocalAlgorithm {
         return candidates;
     }
 
-    /**
-     * Print the stats of the algorithm.
-     */
-    @Override
-    public void printStats() {
-        System.out.println(this);
-        System.out.println("| Build time: " + buildTime + " s");
-    }
-
-    /**
-     * Print the stats of the refinement with the algorithm.
-     */
-    @Override
-    public void printRefinementStats() {
-        System.out.println("| " + refinement + " Refinement\n|");
-        System.out.println("| Refinement time: " + refinementTime + " s");
-    }
-
-
-    /**
-     * Save the results of the algorithm.
-     * @param path The path where the results are saved.
-     */
-    @Override
-    public void saveResults(String path) {
-
-    }
-
     @Override
     public String toString() {
         String string = "| " + algorithmName + " Algorithm.  " +
@@ -290,5 +254,14 @@ public class BN_GES implements LocalAlgorithm {
         this.nInterleaving = nInterleaving;
     }
 
+    @Override
+    public String getAlgorithmName() {
+        return algorithmName;
+    }
+    
+    @Override
+    public String getRefinementName() {
+        return refinement;
+    }
 
 }

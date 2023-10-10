@@ -39,7 +39,5 @@ public interface Model {
 
     void setModel(Object model);
 
-    public void printStats();
-
-    public void printStats(Data data);
+    public void saveStats(String operation, int id, Data data, int iteration, double time);
 }

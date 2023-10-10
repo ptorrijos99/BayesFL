@@ -45,7 +45,7 @@ public class Main {
         String net = "andes";
 
         ArrayList<Client> clients = new ArrayList<>();
-        for (int i = 5; i < 9; i++) {
+        for (int i = 1; i < 5; i++) {
             Fusion fusionClient = new BN_FusionUnion();
             BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + ".xbif5000" + i + "_.csv", net + "_5000" + i);
             data.setOriginalBNPath("./res/networks/" + net + ".xbif");
@@ -58,8 +58,11 @@ public class Main {
 
         Fusion fusionServer = new BN_FusionUnion();
         Server server = new Server(fusionServer, clients);
+        
         server.setStats(true);
         server.setOriginalBNPath("./res/networks/" + net + ".xbif");
+        server.setBBDDName(net);
+        
         server.run();
     }
 }
