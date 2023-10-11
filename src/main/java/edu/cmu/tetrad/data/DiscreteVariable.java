@@ -302,44 +302,27 @@ public final class DiscreteVariable extends AbstractVariable
         this.categoryNamesDisplayed = categoryNamesDisplayed;
     }
 
+    @Override
+    public int hashCode() {
+        return this.getName().hashCode();
+    }
+
+    /* VERSIONES VIEJAS
     // The identity of a node can't be changed by changing its name, etc. Otherwise the deleting
     // of nodes and edges in graphs won't work.
     public final int hashCode() {
         if (hash == 0) {
+            //hash = super.hashCode();
             hash = getName().hashCode();
         }
-//        if (NodeEqualityMode.getEqualityType() == NodeEqualityMode.Type.OBJECT) {
         return hash;
-//        } else if (NodeEqualityMode.getEqualityType() == NodeEqualityMode.Type.NAME) {
-//            int hashCode = 39;
-//            hashCode = 17 * hashCode + getName().hashCode();
-//
-//            for (int i = 0; i < getNumCategories(); i++) {
-//                hashCode = 17 * hashCode + getCategory(i).hashCode();
-//            }
-//
-//            hashCode = 17 * hashCode + getNodeType().hashCode();
-//            return hashCode;
-//        }
-//
-//        throw new IllegalArgumentException();
-
-//        return getNode().hashCode();
-//        int hashCode = 39;
-//        hashCode = 17 * hashCode + getNode().hashCode();
-//
-//        for (int i = 0; i < getNumCategories(); i++) {
-//            hashCode = 17 * hashCode + getCategory(i).hashCode();
-//        }
-//
-//        hashCode = 17 * hashCode + getNodeType().hashCode();
-//        return hashCode;
-    }
+    }*/
 
     /**
      * @return true iff the given object is a discrete variable with the same
      * number of categories and the same categories.
      */
+    @Override
     public final boolean equals(Object o) {
 
         //AJ
@@ -347,64 +330,13 @@ public final class DiscreteVariable extends AbstractVariable
             return false;
         }
 
-        // Updating needs the slow node equality. jdramsey 6/7/2015
-//        if (equalityType == NodeEqualityMode.Type.OBJECT) {
-//            return o == this;
-//        } else if (equalityType == NodeEqualityMode.Type.NAME) {
         DiscreteVariable variable = (DiscreteVariable) o;
 
         if (!(getName().equals(variable.getName()))) {
             return false;
         }
-/*
-        if (!(getNumCategories() == variable.getNumCategories())) {
-            return false;
-        }
-
-        for (int i = 0; i < getNumCategories(); i++) {
-            if (!(getCategory(i).equals(variable.getCategory(i)))) {
-                return false;
-            }
-        }*/
 
         return getNodeType() == variable.getNodeType();
-//        }
-//        else {
-//            throw new IllegalStateException();
-//        }
-//        }
-//
-//        throw new IllegalStateException();
-
-        //        return o == this;
-//
-//        if (o == this) return true;
-//
-//        if (o == null) {
-//            return false;
-//        }
-//
-//        if (!(o instanceof DiscreteVariable)) {
-//            return false;
-//        }
-//
-//        DiscreteVariable variable = (DiscreteVariable) o;
-//
-//        if (!(getNode().equals(variable.getNode()))) {
-//            return false;
-//        }
-//
-//        if (!(getNumCategories() == variable.getNumCategories())) {
-//            return false;
-//        }
-//
-//        for (int i = 0; i < getNumCategories(); i++) {
-//            if (!(getCategory(i).equals(variable.getCategory(i)))) {
-//                return false;
-//            }
-//        }
-//
-//        return getNodeType() == variable.getNodeType();
     }
 
     public final NodeType getNodeType() {
