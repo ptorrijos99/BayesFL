@@ -22,7 +22,7 @@ public class SimpleBNExperiment {
     public static void main(String[] args){
         // 1. Configuration
         String networkFolder = "./res/networks/";
-        String net_name = "andes";
+        String net_name = "pathfinder";
         String net_path = networkFolder + net_name + ".xbif";
         String bbdd_path = networkFolder + "BBDD/" + net_name + ".xbif50001_.csv";
         DataSet ds = Utils.readData(bbdd_path);

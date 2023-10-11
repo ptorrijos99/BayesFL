@@ -75,15 +75,15 @@ public final class Dag_n implements Graph {
      */
     public Dag_n() {
 
-        // Must use EdgeListGraph because property change events are correctly implemeted. Don't change it!
+        // Must use EdgeListGraph_n because property change events are correctly implemeted. Don't change it!
         // unless you fix that or the interface will break the interface! jdramsey 2015-6-5
-        this.graph = new EdgeListGraph();
+        this.graph = new EdgeListGraph_n();
 
         reconstituteDpath();
     }
 
     public Dag_n(List<Node> nodes) {
-        this.graph = new EdgeListGraph(nodes);
+        this.graph = new EdgeListGraph_n(nodes);
         reconstituteDpath();
     }
 
@@ -99,7 +99,7 @@ public final class Dag_n implements Graph {
             throw new IllegalArgumentException("That graph was not acyclic.");
         }
 
-        this.graph = new EdgeListGraph();
+        this.graph = new EdgeListGraph_n();
 
         transferNodesAndEdges(graph);
 
@@ -534,7 +534,8 @@ public final class Dag_n implements Graph {
     }
 
     public boolean removeNode(Node node) {
-        boolean removed = getGraph().removeNode(node);
+        Node nodeToRemove = getGraph().getNode(node.getName());
+        boolean removed=getGraph().removeNode(nodeToRemove);
 
         if (removed) {
             resetDPath();

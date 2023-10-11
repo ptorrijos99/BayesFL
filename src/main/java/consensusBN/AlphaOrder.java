@@ -8,9 +8,7 @@ import edu.cmu.tetrad.graph.Dag_n;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Endpoint;
-import edu.cmu.tetrad.graph.GraphUtils;
 import edu.cmu.tetrad.graph.Node;
-import java.util.HashMap;
 
 public class AlphaOrder {
 	ArrayList<Dag_n> setOfDags = null;
@@ -21,8 +19,8 @@ public class AlphaOrder {
 	public AlphaOrder(ArrayList<Dag_n> dags){
 		
 		this.setOfDags = dags;
-		this.alpha = new ArrayList<Node>();
-		this.setOfauxG = new ArrayList<Dag_n>();
+		this.alpha = new ArrayList<>();
+		this.setOfauxG = new ArrayList<>();
 //		this.dpaths = new ArrayList<int[][]>();
 		
 		for (Dag_n i : setOfDags)	{
@@ -35,10 +33,10 @@ public class AlphaOrder {
 	
 	public int[][] computeDirectedPathFromTo(Dag_n graph) {
 		
-		LinkedList<Edge> dpathNewEdges = new LinkedList<Edge>();
+		LinkedList<Edge> dpathNewEdges = new LinkedList<>();
 		dpathNewEdges.clear();
 		dpathNewEdges.addAll(graph.getEdges());
-		List<Node> dpathNodes = null;
+		List<Node> dpathNodes;
 		dpathNodes = graph.getNodes();
 		
 		int numNodes = dpathNodes.size();
@@ -51,9 +49,9 @@ public class AlphaOrder {
 			int _indexT = dpathNodes.indexOf(_nodeT);
 			int _indexH = dpathNodes.indexOf(_nodeH);
 			dpath[_indexT][_indexH] = 1;
-			int dPathT = 0;
-			int dPathH = 0;
-			int mindPath = 0;
+			int dPathT;
+			int dPathH;
+			int mindPath;
 			for (int i = 0; i < dpathNodes.size(); i++) {
 				dPathT = dpath[i][_indexT];
 				if (dpath[i][_indexT] >= 1) {
@@ -89,9 +87,9 @@ public class AlphaOrder {
 	public void computeAlphaH1(){
 		
 		List<Node> nodes = setOfDags.get(0).getNodes();
-		LinkedList<Node> alpha = new LinkedList<Node>();
+		LinkedList<Node> alpha = new LinkedList<>();
 		
-		while(nodes.size()>0){
+		while(!nodes.isEmpty()){
 			int index_alpha = computeNextH1(nodes);
 			Node node_alpha = nodes.get(index_alpha);
 			alpha.addFirst(node_alpha);
@@ -102,42 +100,40 @@ public class AlphaOrder {
 			}
 			nodes.remove(node_alpha);
 		}
-		this.alpha = new ArrayList<Node>(alpha);
+		this.alpha = new ArrayList<>(alpha);
 	}
 	
 	// heuistica para encontrar un orden de conceso. Se basa en los enlaces que generaria seguir una secuencia creada desde los nodos sumideros hacia arriba.
 	
-public void computeAlphaH2(){
+        public void computeAlphaH2(){
 		
 		List<Node> nodes = setOfDags.get(0).getNodes();
-		LinkedList<Node> alpha = new LinkedList<Node>();
+		LinkedList<Node> alpha = new LinkedList<>();
 		
-		while(nodes.size()>0){
-			int index_alpha = computeNextH2(nodes);
-			Node node_alpha = nodes.get(index_alpha);
+		while(!nodes.isEmpty()){
+			Node node_alpha = computeNextH2(nodes);
 			alpha.addFirst(node_alpha);
 			for(Dag_n g: this.setOfauxG){
 				removeNode(g,node_alpha);
 			}
 			nodes.remove(node_alpha);
 		}
-		this.alpha = new ArrayList<Node>(alpha);
+		this.alpha = new ArrayList<>(alpha);
 	}
 	
 	
 	
-	int computeNextH2(List<Node> nodes){
-		
-		int changes = 0;
+	Node computeNextH2(List<Node> nodes){
+	
+		int changes;
 		int inversion = 0;
 		int addition = 0;
-		int indexNode = 0;
+		Node bestNode = null;
 		int min = Integer.MAX_VALUE;
 		
-		for(int i=0; i<nodes.size(); i++){
-			Node nodei = nodes.get(i);
+		for(Node nodei : nodes){
 			for(Dag_n g: this.setOfauxG){
-				ArrayList<Edge> inserted = new ArrayList<Edge>();
+				ArrayList<Edge> inserted = new ArrayList<>();
 				List<Node> children = g.getChildren(nodei);
 				inversion += (children.size()-1);
                                     List<Node> paX = g.getParents(nodei);
@@ -172,13 +168,13 @@ public void computeAlphaH2(){
 			changes = inversion + addition;
 			if(changes < min){
 				min = changes;
-				indexNode = i;
+				bestNode = nodei;
 			}
 			changes = 0;
 			inversion = 0;
 			addition = 0;
 		}
-		return indexNode;
+		return bestNode;
 	}
 	
 	void removeNode(Dag_n g, Node node_alpha){
@@ -190,7 +186,7 @@ public void computeAlphaH2(){
 		while(!children.isEmpty()){
 			int i=0;
 			Node child;
-			boolean seguir = false;
+			boolean seguir;
 			do{
 				child = children.get(i++);
 				g.removeEdge(node_alpha_g, child);
