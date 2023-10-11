@@ -46,7 +46,7 @@ public class Main {
         String algName = "pGES";
 
         ArrayList<Client> clients = new ArrayList<>();
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 5; i++) {
             Fusion fusionClient = new BN_FusionUnion();
             BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + ".xbif5000" + i + "_.csv", net + "_5000" + i);
             data.setOriginalBNPath("./res/networks/" + net + ".xbif");

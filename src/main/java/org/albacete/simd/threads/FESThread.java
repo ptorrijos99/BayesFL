@@ -104,6 +104,7 @@ public class FESThread extends GESThread {
             this.elapsedTime = endTime - startTime;
 
             double newScore = scoreDag(graph);
+            System.out.println(" [" + getId() + "] FES New Score: " + newScore + ", Initial Score: " + scoreInitial);
             // If we improve the score, return the new graph
             if (newScore > scoreInitial) {
                 this.modelBDeu = newScore;
@@ -149,8 +150,9 @@ public class FESThread extends GESThread {
             bestScore = bestInsert;
 
             // Inserting edge
+            System.out.println("Thread " + getId() + " inserting: (" + x_i + ", " + y_i + ", " + t_0 + "), score: " + bestScore);
             insert(x_i, y_i, t_0, graph);
-            
+
             // Checking cycles?
             //boolean cycles = graph.existsDirectedCycle();
 
@@ -246,7 +248,6 @@ public class FESThread extends GESThread {
             // Deleting the selected edge from enlaces
             enlaces.remove(max.edge);
             this.scores.remove(max);
-            S.remove(max.edge);
         }
 
         return max.score;
