@@ -2,7 +2,6 @@ package org.albacete.simd.threads;
 
 import consensusBN.SubSet;
 import edu.cmu.tetrad.graph.Edge;
-import java.util.Objects;
 
 public class EdgeSearch implements Comparable<EdgeSearch> {
 
@@ -23,8 +22,7 @@ public class EdgeSearch implements Comparable<EdgeSearch> {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof EdgeSearch) {
-            EdgeSearch obj = (EdgeSearch) other;
+        if (other instanceof EdgeSearch obj) {
             if (obj.edge.equals(this.edge)) {
                 return true;
             }
@@ -34,7 +32,7 @@ public class EdgeSearch implements Comparable<EdgeSearch> {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.edge);
+        return this.edge.hashCode();
     }
 
     public double getScore() {
@@ -47,5 +45,10 @@ public class EdgeSearch implements Comparable<EdgeSearch> {
 
     public Edge getEdge() {
         return this.edge;
+    }
+    
+    @Override
+    public String toString() {
+        return score + " =>   " + edge + "  " + hSubset;
     }
 }

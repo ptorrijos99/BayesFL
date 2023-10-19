@@ -4,33 +4,33 @@ import java.util.ArrayList;
 
 
 import edu.cmu.tetrad.graph.Node;
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 
 public class TransformDags {
 
-	ArrayList<Dag_n> setOfDags = null;
-	ArrayList<Dag_n> setOfOutputDags = null;
+	ArrayList<Dag> setOfDags = null;
+	ArrayList<Dag> setOfOutputDags = null;
 	ArrayList<Node> alfa = null;
 	ArrayList<BetaToAlpha> metAs= null;
 	int numberOfInsertedEdges = 0;
 //	int weight[][][] = null;
 	
-	public TransformDags(ArrayList<Dag_n> dags, ArrayList<Node> alfa){
+	public TransformDags(ArrayList<Dag> dags, ArrayList<Node> alfa){
 		
 		this.setOfDags = dags;
-		this.setOfOutputDags = new ArrayList<Dag_n>();
+		this.setOfOutputDags = new ArrayList<Dag>();
 		this.metAs = new ArrayList<BetaToAlpha>();
 		this.alfa = alfa;
 		
-		for (Dag_n i : setOfDags)	{
-			Dag_n out = new Dag_n(i);
+		for (Dag i : setOfDags)	{
+			Dag out = new Dag(i);
 			this.metAs.add(new BetaToAlpha(out,alfa));
 		}
 		
 	}
 	
 	
-	ArrayList<Dag_n> transform (){
+	ArrayList<Dag> transform (){
 		
 		this.numberOfInsertedEdges = 0;
 		
@@ -56,18 +56,18 @@ public class TransformDags {
 //		
 //		this.weight = new int[this.setOfDags.size()][this.alfa.size()][this.alfa.size()];
 //		
-//		for(Dag_n g: this.setOfOutputDags){
+//		for(Dag g: this.setOfOutputDags){
 //			for(Node nodei : g.getNodes()){
 //				List<Node> pa = g.getParents(nodei);
 //				if(pa.isEmpty()) continue;
 //				List<Node> anc = new ArrayList<Node>();
 //				anc.add(nodei);
 //				anc = g.getAncestors(anc);
-//				Dag_n gAnc =  new Dag_n(g.subgraph(anc));
+//				Dag gAnc =  new Dag(g.subgraph(anc));
 //				// me quedo con el grafo ancestral del node_i
 //				for(Node pai: pa){ // Calculo el numero de  caminos desde los ancestros que se "activan" borrando cada padre.
 //					int npaths = 0;
-//					Dag_n gAncNopai = new Dag_n(gAnc);
+//					Dag gAncNopai = new Dag(gAnc);
 //					for(Node rm : pa) if(!rm.equals(pai)) gAncNopai.removeNode(rm); // borro todos los padres menos el pa_i en el grafo ancestral.
 //					for(Node nodeAc: anc){ // para cada ancestro voy mirando si hay un camino dirigido.
 //						if((gAncNopai.getNodes().contains(nodeAc))&&(!nodeAc.equals(nodei)))
@@ -83,14 +83,14 @@ public class TransformDags {
 //
 //	}
 	
-//	public Dag_n computeWeightDag(boolean w){
+//	public Dag computeWeightDag(boolean w){
 //	
-//		Dag_n wDag = new Dag_n(this.alfa);
+//		Dag wDag = new Dag(this.alfa);
 //		for(Node nodei : this.alfa){
 //			for(Node nodej : this.alfa){
 //				if(nodei.equals(nodej)) continue;
 //				int wij = 0;
-//				for(Dag_n g: this.setOfOutputDags){
+//				for(Dag g: this.setOfOutputDags){
 //					int wg = this.weight[this.setOfOutputDags.indexOf(g)][g.getNodes().indexOf(nodei)][g.getNodes().indexOf(nodej)];
 //					if(wg > 0 && !w) wg = 1;
 //					else if (wg == 0) wg =-1;
@@ -112,9 +112,9 @@ public class TransformDags {
 //		System.out.println("Grafos de Partida:   ");
 //		System.out.println("---------------------");
 ////		Graph graph = GraphConverter.convert("X1-->X5,X2-->X3,X3-->X4,X4-->X1,X4-->X5");
-////		Dag_n dag = new Dag_n(graph);
+////		Dag dag = new Dag(graph);
 //		
-//		Dag_n dag = new Dag_n();
+//		Dag dag = new Dag();
 //		
 //		dag = GraphUtils.randomDag(Integer.parseInt(args[0]), Integer.parseInt(args[1]), true);
 //		BetaToAlpha mt = new BetaToAlpha(dag);
@@ -123,7 +123,7 @@ public class TransformDags {
 //		System.out.println("DAG: ---------------");
 //		System.out.println(dag.toString());
 //		for (int i=0 ; i < Integer.parseInt(args[2])-1 ; i++){
-//			Dag_n newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
+//			Dag newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
 //			dags.add(newDag);
 //			System.out.println("DAG: ---------------");
 //			System.out.println(newDag.toString());
@@ -139,17 +139,17 @@ public class TransformDags {
 //		
 //		
 //		
-//		for(Dag_n d : setOfDags.setOfOutputDags){
+//		for(Dag d : setOfDags.setOfOutputDags){
 //			System.out.println("DAG trasformado: ---------------");
 //			System.out.println(d.toString());
 //		}
 //		
 //		
 //		
-//		Dag_n union = new Dag_n(alfa);
+//		Dag union = new Dag(alfa);
 //		
 //		for(Node nodei: alfa){
-//			for(Dag_n d : setOfDags.setOfOutputDags){
+//			for(Dag d : setOfDags.setOfOutputDags){
 //				List<Node>parent = d.getParents(nodei);
 //				for(Node pa: parent){
 //					if(!union.isParentOf(pa, nodei)) union.addEdge(new Edge(pa,nodei,Endpoint.TAIL,Endpoint.ARROW));
@@ -161,9 +161,9 @@ public class TransformDags {
 //		
 //		System.out.println("Grafo UNION: "+union.toString());
 //		setOfDags.computeWeight();
-//		Dag_n wDag = setOfDags.computeWeightDag(true);
+//		Dag wDag = setOfDags.computeWeightDag(true);
 //		System.out.println("Grafo Consenso: "+ wDag.toString());
-//		Dag_n wDag2 = setOfDags.computeWeightDag(false);
+//		Dag wDag2 = setOfDags.computeWeightDag(false);
 //		System.out.println("Grafo Consenso sin pesos: "+ wDag2.toString());
 //		
 //		

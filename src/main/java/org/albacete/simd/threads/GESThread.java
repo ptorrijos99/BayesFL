@@ -384,7 +384,7 @@ public abstract class GESThread implements Runnable{
         }
 
 //        Graph dag = SearchGraphUtils.dagFromPattern(graph);
-        Graph dag = new EdgeListGraph_n(graph);
+        Graph dag = new EdgeListGraph(graph);
         pdagToDag(dag);
         double score = 0.;
 
@@ -422,7 +422,7 @@ public abstract class GESThread implements Runnable{
             return Double.NEGATIVE_INFINITY;
         }
         
-        Graph dag = new EdgeListGraph_n(graph);
+        Graph dag = new EdgeListGraph(graph);
         pdagToDag(dag);
         HashMap<Node,Integer> hashIndices = problem.getHashIndices();
 

@@ -1,6 +1,6 @@
 package org.albacete.simd.mctsbn;
 
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.search.*;
 import org.albacete.simd.utils.Problem;
@@ -79,7 +79,7 @@ public class MCTSBN {
     private double mean;
     private double standardDeviation;
 
-    private Dag_n PGESdag;
+    private Dag PGESdag;
     
     private final ArrayList<ArrayList> orderSet = new ArrayList<>();
 
@@ -126,7 +126,7 @@ public class MCTSBN {
         this.firstPart = "mcts-" + initializeAlgorithm + "," + netName + "," + databaseName + "," + threads + "," + iterationLimit + "," + exploitConstant + "," + numberSwaps + "," + probabilitySwap + ",";
     }
 
-    public Dag_n search(State initialState){
+    public Dag search(State initialState){
         //1. Set Root
         this.root = new TreeNode(initialState, null, this);
 
@@ -232,11 +232,11 @@ public class MCTSBN {
         //System.out.println("Tree Structure: ");
         //System.out.println(this);
         // return Best Dag
-        return new Dag_n(bestDag);
+        return new Dag(bestDag);
     }
 
 
-    public Dag_n search(){
+    public Dag search(){
         State initialState = new State(-1, new ArrayList<>(), allVars, problem, 0, hc);
         return this.search(initialState);
     }
@@ -505,7 +505,7 @@ public class MCTSBN {
         algorithm.search();
 
         // Create the set with some orders to use in rollout
-        Dag_n currentDag = algorithm.getCurrentDag();
+        Dag currentDag = algorithm.getCurrentDag();
 
         initialize(currentDag, init);
     }
@@ -513,7 +513,7 @@ public class MCTSBN {
     private void initializeWithfGES() {
         double init = System.currentTimeMillis();
         Fges alg = new Fges(problem.getBDeu());
-        Dag_n dag = new Dag_n(Utils.removeInconsistencies(alg.search()));
+        Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
@@ -521,7 +521,7 @@ public class MCTSBN {
         double init = System.currentTimeMillis();
         IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
         Pc alg = new Pc(bdeu_test);
-        Dag_n dag = new Dag_n(Utils.removeInconsistencies(alg.search()));
+        Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
@@ -529,7 +529,7 @@ public class MCTSBN {
         double init = System.currentTimeMillis();
         IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
         Cpc alg = new Cpc(bdeu_test);
-        Dag_n dag = new Dag_n(Utils.removeInconsistencies(alg.search()));
+        Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
@@ -537,11 +537,11 @@ public class MCTSBN {
         double init = System.currentTimeMillis();
         IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
         PcStableMax alg = new PcStableMax(bdeu_test);
-        Dag_n dag = new Dag_n(Utils.removeInconsistencies(alg.search()));
+        Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
-    private void initialize(Dag_n currentDag, double init) {
+    private void initialize(Dag currentDag, double init) {
         for (int i = 0; i < 10000; i++) {
             orderSet.add(hc.nodeToIntegerList(currentDag.getTopologicalOrder()));
         }
@@ -654,7 +654,7 @@ public class MCTSBN {
         return bestDag;
     }
 
-    public Dag_n getPGESDag() {
+    public Dag getPGESDag() {
         return PGESdag;
     }
 

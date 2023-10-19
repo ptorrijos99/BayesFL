@@ -1,9 +1,9 @@
 package org.albacete.simd.framework;
 
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.EdgeListGraph_n;
+import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.GraphUtils;
 import org.albacete.simd.threads.BESThread;
@@ -64,7 +64,7 @@ public abstract class BNBuilder {
      * {@link ArrayList ArrayList} of graphs. This contains the list of {@link Graph graphs} created for each stage,
      * just before the fusion is done.
      */
-    protected ArrayList<Dag_n> graphs = null;
+    protected ArrayList<Dag> graphs = null;
 
     /**
      * {@link Graph Graph} containing the current bayesian network that has been constructed so far.
@@ -111,7 +111,7 @@ public abstract class BNBuilder {
 
     public BNBuilder(Graph initialGraph, DataSet data, int nThreads, int maxIterations, int nItInterleaving) {
         this(data, nThreads, maxIterations, nItInterleaving);
-        this.initialGraph = new EdgeListGraph_n(initialGraph);
+        this.initialGraph = new EdgeListGraph(initialGraph);
         checkForConsistenciesInInitialGraphWithProblem(initialGraph);
     }
 
@@ -259,21 +259,21 @@ public abstract class BNBuilder {
      * Gets the current list of graphs.
      * @return ArrayList of the current Dags created in a previous stage.
      */
-    public ArrayList<Dag_n> getGraphs() {
+    public ArrayList<Dag> getGraphs() {
         return this.graphs;
     }
 
     /**
      * Gets the {@link #currentGraph currentGraph} constructed so far.
      *
-     * @return Dag_n of the currentGraph.
+     * @return Dag of the currentGraph.
      */
     public Graph getCurrentGraph() {
         return this.currentGraph;
     }
 
-    public Dag_n getCurrentDag() {
-        //TODO: Transform the graph (EdgeListGraph) into a Dag_n
+    public Dag getCurrentDag() {
+        //TODO: Transform the graph (EdgeListGraph) into a Dag
         return Utils.removeInconsistencies(this.currentGraph);
     }
 

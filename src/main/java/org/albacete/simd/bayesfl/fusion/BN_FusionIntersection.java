@@ -45,7 +45,7 @@ public class BN_FusionIntersection implements Fusion {
             throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionIntersection");
         }
 
-        Dag_n[] graphs = new Dag_n[2];
+        Dag[] graphs = new Dag[2];
         graphs[0] = ((BN) model1).getModel();
         graphs[1] = ((BN) model2).getModel();
 
@@ -60,7 +60,7 @@ public class BN_FusionIntersection implements Fusion {
             }
         }
 
-        Dag_n[] graphs = new Dag_n[models.length];
+        Dag[] graphs = new Dag[models.length];
         for (int i = 0; i < models.length; i++) {
             graphs[i] = ((BN) models[i]).getModel();
         }
@@ -68,10 +68,10 @@ public class BN_FusionIntersection implements Fusion {
         return new BN(fusionIntersection(graphs));
     }
 
-    private Dag_n fusionIntersection(Dag_n[] graphs) {
+    private Dag fusionIntersection(Dag[] graphs) {
         ArrayList<Node> order = new ArrayList<>(graphs[0].getCausalOrdering()); // Randomly first graph
 
-        for(Dag_n graph : graphs) {
+        for(Dag graph : graphs) {
             for(Edge e : graph.getEdges()) {
                 if((order.indexOf(e.getNode1()) < order.indexOf(e.getNode2())) &&
                         (e.getEndpoint1() == Endpoint.TAIL && e.getEndpoint2() == Endpoint.ARROW))
@@ -94,16 +94,16 @@ public class BN_FusionIntersection implements Fusion {
             }
 
         }
-        Graph graph = new EdgeListGraph_n(graphs[0]);
+        Graph graph = new EdgeListGraph(graphs[0]);
         // Looping over each edge of the first graph and checking if it has been deleted in any of the resulting graphs of the BES stage.
         // If it has been deleted, then it is removed from the currentGraph.
         for(Edge e: graph.getEdges()) {
-            for(Dag_n g: graphs)
+            for(Dag g: graphs)
                 if(!g.containsEdge(e)) {
                     graph.removeEdge(e);
                     break;
                 }
         }
-        return new Dag_n(graph);
+        return new Dag(graph);
     }
 }

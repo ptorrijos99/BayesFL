@@ -4,34 +4,34 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Endpoint;
 import edu.cmu.tetrad.graph.Node;
 
 public class AlphaOrder {
-	ArrayList<Dag_n> setOfDags = null;
+	ArrayList<Dag> setOfDags = null;
 	ArrayList<Node> alpha = null;
-	ArrayList<Dag_n> setOfauxG = null;
+	ArrayList<Dag> setOfauxG = null;
 //	ArrayList<int[][]> dpaths = null;
 	
-	public AlphaOrder(ArrayList<Dag_n> dags){
+	public AlphaOrder(ArrayList<Dag> dags){
 		
 		this.setOfDags = dags;
 		this.alpha = new ArrayList<>();
 		this.setOfauxG = new ArrayList<>();
 //		this.dpaths = new ArrayList<int[][]>();
 		
-		for (Dag_n i : setOfDags)	{
-			Dag_n aux_G = new Dag_n(i);
+		for (Dag i : setOfDags)	{
+			Dag aux_G = new Dag(i);
 			setOfauxG.add(aux_G);
 //			dpaths.add(computeDirectedPathFromTo(aux_G));
 		}
 		
 	}
 	
-	public int[][] computeDirectedPathFromTo(Dag_n graph) {
+	public int[][] computeDirectedPathFromTo(Dag graph) {
 		
 		LinkedList<Edge> dpathNewEdges = new LinkedList<>();
 		dpathNewEdges.clear();
@@ -93,7 +93,7 @@ public class AlphaOrder {
 			int index_alpha = computeNextH1(nodes);
 			Node node_alpha = nodes.get(index_alpha);
 			alpha.addFirst(node_alpha);
-			for(Dag_n g: this.setOfauxG){
+			for(Dag g: this.setOfauxG){
 				removeNode(g,node_alpha);
 				int[][] newDpaths = computeDirectedPathFromTo(g);
 //				this.dpaths.set(this.setOfauxG.indexOf(g), newDpaths);
@@ -113,7 +113,7 @@ public class AlphaOrder {
 		while(!nodes.isEmpty()){
 			Node node_alpha = computeNextH2(nodes);
 			alpha.addFirst(node_alpha);
-			for(Dag_n g: this.setOfauxG){
+			for(Dag g: this.setOfauxG){
 				removeNode(g,node_alpha);
 			}
 			nodes.remove(node_alpha);
@@ -132,7 +132,7 @@ public class AlphaOrder {
 		int min = Integer.MAX_VALUE;
 		
 		for(Node nodei : nodes){
-			for(Dag_n g: this.setOfauxG){
+			for(Dag g: this.setOfauxG){
 				ArrayList<Edge> inserted = new ArrayList<>();
 				List<Node> children = g.getChildren(nodei);
 				inversion += (children.size()-1);
@@ -177,7 +177,7 @@ public class AlphaOrder {
 		return bestNode;
 	}
 	
-	void removeNode(Dag_n g, Node node_alpha){
+	void removeNode(Dag g, Node node_alpha){
             
                 Node node_alpha_g = g.getNode(node_alpha.getName());
 		
@@ -226,7 +226,7 @@ public class AlphaOrder {
 		
 		for(int i=0 ; i< nodes.size(); i++){
 			int weightNodei = 0;
-			for(Dag_n dag : this.setOfauxG){
+			for(Dag dag : this.setOfauxG){
 	//			int[][] dpath = this.dpaths.get(this.setOfauxG.indexOf(dag));
 	//			for(int j=0 ; j<nodes.size(); j++) weightNodei+= dpath[i][j];
 			}
@@ -256,15 +256,15 @@ public class AlphaOrder {
 //		System.out.println("Grafos de Partida:   ");
 //		System.out.println("---------------------");
 ////		Graph graph = GraphConverter.convert("X1-->X5,X2-->X3,X3-->X4,X4-->X1,X4-->X5");
-////		Dag_n dag = new Dag_n(graph);
+////		Dag dag = new Dag(graph);
 //
-//		Dag_n dag = new Dag_n();
+//		Dag dag = new Dag();
 //	//	dag = GraphUtils.randomDag(Integer.parseInt(args[0]), Integer.parseInt(args[1]), true);
 //		dags.add(dag);
 //		System.out.println("DAG: ---------------");
 //		System.out.println(dag.toString());
 //		for (int i=0 ; i < Integer.parseInt(args[2])-1 ; i++){
-//		//	Dag_n newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
+//		//	Dag newDag = GraphUtils.randomDag(dag.getNodes(),Integer.parseInt(args[1]) ,true);
 //			dags.add(newDag);
 //			System.out.println("DAG: ---------------");
 //			System.out.println(newDag.toString());
