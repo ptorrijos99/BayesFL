@@ -38,6 +38,7 @@ import org.albacete.simd.bayesfl.model.Model;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import org.albacete.simd.utils.Utils;
 
 public class BN_FusionUnion implements Fusion {
 
@@ -47,13 +48,15 @@ public class BN_FusionUnion implements Fusion {
             throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
         }
 
-        ArrayList<Dag_n> dags = new ArrayList<>();
+        ArrayList<Dag> dags = new ArrayList<>();
         dags.add(((BN) model1).getModel());
         dags.add(((BN) model2).getModel());
 
         ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
+        Dag union = fusion.union();
+        Utils.removeInconsistencies(union);
+        
+        return new BN(union);
     }
 
     @Override
@@ -64,15 +67,15 @@ public class BN_FusionUnion implements Fusion {
             }
         }
 
-        ArrayList<Dag_n> dags = new ArrayList<>();
+        ArrayList<Dag> dags = new ArrayList<>();
         for (Model model : models) {
             dags.add(((BN) model).getModel());
         }
 
         ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
+        Dag union = fusion.union();
+        Utils.removeInconsistencies(union);
+        
+        return new BN(union);
     }
-
-
 }

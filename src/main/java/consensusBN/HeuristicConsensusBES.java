@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.EdgeListGraph_n;
+import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Endpoint;
 import edu.cmu.tetrad.graph.Graph;
@@ -27,19 +27,19 @@ import static org.albacete.simd.utils.Utils.pdagToDag;
 public class HeuristicConsensusBES {
 	
 	ArrayList<Node> alpha = null;
-	Dag_n outputDag = null;
+	Dag outputDag = null;
 	AlphaOrder heuristic = null;
 	TransformDags imaps2alpha = null;
-	ArrayList<Dag_n> setOfdags = null;
-	ArrayList<Dag_n> setOfOutDags = null;
-	Dag_n union = null;
+	ArrayList<Dag> setOfdags = null;
+	ArrayList<Dag> setOfOutDags = null;
+	Dag union = null;
 	int numberOfInsertedEdges = 0;
 	double percentage = 1.0;
 	int maxSize = 10;
 	
 	Map<String, Double> localScore = new HashMap<String,Double>();
 	
-	public HeuristicConsensusBES(ArrayList<Dag_n> dags, double percentage){
+	public HeuristicConsensusBES(ArrayList<Dag> dags, double percentage){
 		this.setOfdags = dags;
 		this.heuristic = new AlphaOrder(this.setOfdags);
 		this.heuristic.computeAlphaH2();
@@ -58,9 +58,9 @@ public class HeuristicConsensusBES {
 	
 	private void consensusUnion(){
 		
-		this.union = new Dag_n(this.alpha);
+		this.union = new Dag(this.alpha);
 		for(Node nodei: this.alpha){
-			for(Dag_n d : this.imaps2alpha.setOfOutputDags){
+			for(Dag d : this.imaps2alpha.setOfOutputDags){
 				List<Node>parent = d.getParents(nodei);
 				for(Node pa: parent){
 					if(!this.union.isParentOf(pa, nodei)) this.union.addEdge(new Edge(pa,nodei,Endpoint.TAIL,Endpoint.ARROW));
@@ -84,7 +84,7 @@ public class HeuristicConsensusBES {
 		Graph graph = null;
 
 		consensusUnion();
-		graph = new EdgeListGraph_n(new LinkedList<Node>(this.union.getNodes()));
+		graph = new EdgeListGraph(new LinkedList<Node>(this.union.getNodes()));
 		for(Edge e: this.union.getEdges()){
 			graph.addEdge(e);
 		}
@@ -166,7 +166,7 @@ public class HeuristicConsensusBES {
 //		System.out.println("Pdag: "+ graph.toString());
 		pdagToDag(graph);
 //		System.out.println("PdagToDag"+graph.toString());
-		this.outputDag = new Dag_n();
+		this.outputDag = new Dag();
 		for (Node node : graph.getNodes()) this.outputDag.addNode(node);
 		Node nodeT, nodeH;
 		for (Edge e : graph.getEdges()){
@@ -268,7 +268,7 @@ public class HeuristicConsensusBES {
 			double eval = 0.0;
 			LinkedList<Node> conditioning = new LinkedList<Node>();
 			conditioning.addAll(set);
-			for(Dag_n g: this.setOfdags){
+			for(Dag g: this.setOfdags){
 				if(dSeparated(g, y, x, conditioning)) ++eval;
 			}
 			eval = eval / (double) this.setOfdags.size();
@@ -282,7 +282,7 @@ public class HeuristicConsensusBES {
 	
 
 	
-	boolean dSeparated(Dag_n g, Node x, Node y, LinkedList<Node> cond){
+	boolean dSeparated(Dag g, Node x, Node y, LinkedList<Node> cond){
 		
 		LinkedList<Node> open = new LinkedList<Node>();
 		HashMap<String,Node> close = new HashMap<String,Node>();
@@ -301,7 +301,7 @@ public class HeuristicConsensusBES {
 			}
 		}
 		
-		Graph aux = new EdgeListGraph_n();
+		Graph aux = new EdgeListGraph();
 		
 		for (Node node : g.getNodes()) aux.addNode(node);
 		Node nodeT, nodeH;
@@ -394,7 +394,7 @@ public class HeuristicConsensusBES {
         return naYX;
     }
     
-    public Dag_n getFusion(){
+    public Dag getFusion(){
     	
     	return this.outputDag;
     }

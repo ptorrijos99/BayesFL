@@ -2,7 +2,7 @@ package org.albacete.simd.utils;
 
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DiscreteVariable;
-import edu.cmu.tetrad.graph.EdgeListGraph_n;
+import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.Node;
 import edu.cmu.tetrad.search.BDeuScore;
@@ -28,7 +28,7 @@ public class ProblemMCTS extends Problem {
     public ProblemMCTS (DataSet dataSet){
         super(dataSet);
 
-        Graph graph = new EdgeListGraph_n(new LinkedList<Node>(getVariables()));
+        Graph graph = new EdgeListGraph(new LinkedList<Node>(getVariables()));
         emptyGraphScore = GESThread.scoreGraph(graph, this);
         nInstances = dataSet.getNumRows();
     }

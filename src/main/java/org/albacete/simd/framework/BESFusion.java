@@ -1,6 +1,6 @@
 package org.albacete.simd.framework;
 
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Graph;
@@ -17,7 +17,7 @@ public class BESFusion extends FusionStage{
     
     ThreadStage besStage;
     
-    public BESFusion(Problem problem, Graph currentGraph, ArrayList<Dag_n> graphs, BESStage besStage) {
+    public BESFusion(Problem problem, Graph currentGraph, ArrayList<Dag> graphs, BESStage besStage) {
         super(problem, currentGraph, graphs);
         this.besStage = besStage;
     }
@@ -25,8 +25,8 @@ public class BESFusion extends FusionStage{
     public boolean flag = false;
 
     @Override
-    protected Dag_n fusion() {
-        Dag_n fusionGraph = this.fusionIntersection();
+    protected Dag fusion() {
+        Dag fusionGraph = this.fusionIntersection();
 
 
         Set<Edge> candidates = new HashSet<>();
@@ -55,7 +55,7 @@ public class BESFusion extends FusionStage{
             if (fusionScore > currentScore) {
                 flag = true;
                 this.currentGraph = fusionGraph;
-                return (Dag_n) this.currentGraph;
+                return (Dag) this.currentGraph;
             } 
             
             // If the fusion doesn´t improves the result, we check if any previous BESThread has improved the results.
@@ -69,7 +69,8 @@ public class BESFusion extends FusionStage{
                         flag = true;
                     } catch (InterruptedException ex) {
                         System.out.println("\n\n\n EXCEPCIÓN º\n\n\n");}
-                    return (Dag_n) this.currentGraph;
+                    pdagToDag(this.currentGraph);
+                    return new Dag(this.currentGraph);
                 }
             }
         }
@@ -84,7 +85,7 @@ public class BESFusion extends FusionStage{
         }
 
         pdagToDag(this.currentGraph);
-        return new Dag_n(this.currentGraph);
+        return new Dag(this.currentGraph);
         //return Utils.removeInconsistencies(this.currentGraph);
     }
 }

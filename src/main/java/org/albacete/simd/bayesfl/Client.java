@@ -70,6 +70,8 @@ public class Client {
     private boolean stats = false;
     
     private int iteration;
+    
+    private String experimentName;
 
     /**
      * Constructor of the class Client.
@@ -109,7 +111,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
         
         if (stats)  {
-            localModel.saveStats(localAlgorithm.getAlgorithmName(), id, data, iteration, time);
+            localModel.saveStats(this.experimentName + "_build", id, data, iteration, time);
         }
     }
 
@@ -128,7 +130,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
 
         if (stats) {
-            localModel.saveStats(localAlgorithm.getAlgorithmName() + "_" + localFusion.getClass().getSimpleName(), id, data, iteration, time);
+            localModel.saveStats(this.experimentName + "_fusion", id, data, iteration, time);
         }
         
         // If defined, perform a refinement to the local model
@@ -138,7 +140,7 @@ public class Client {
             time = (System.currentTimeMillis() - start) / 1000;
 
             if (stats)  {
-                localModel.saveStats(localAlgorithm.getAlgorithmName() + "_" + localAlgorithm.getRefinementName(), id, data, iteration, time);
+                localModel.saveStats(this.experimentName + "_refin", id, data, iteration, time);
             }
         }
     }
@@ -175,4 +177,7 @@ public class Client {
         this.stats = stats;
     }
 
+    public void setExperimentName(String experimentName) {
+        this.experimentName = experimentName;
+    }
 }

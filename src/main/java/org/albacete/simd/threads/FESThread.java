@@ -54,7 +54,7 @@ public class FESThread extends GESThread {
      */
     public FESThread(Problem problem, Set<Edge> subset, int maxIt, boolean speedUp, boolean update, boolean parallel) {
         this.problem = problem;
-        this.initialDag = new EdgeListGraph_n(new LinkedList<>(getVariables()));
+        this.initialDag = new EdgeListGraph(new LinkedList<>(getVariables()));
         setSubSetSearch(subset);
         setMaxIt(maxIt);
         this.id = threadCounter;
@@ -91,7 +91,7 @@ public class FESThread extends GESThread {
             numNonCachedCalls = 0;
             //localScoreCache.clear();
 
-            Graph graph = new EdgeListGraph_n(this.initialDag);
+            Graph graph = new EdgeListGraph(this.initialDag);
             //buildIndexing(graph);
 
             // Method 1-- original.

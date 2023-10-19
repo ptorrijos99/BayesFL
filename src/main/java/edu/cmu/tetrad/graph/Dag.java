@@ -33,7 +33,7 @@ import java.util.*;
  *
  * @author Joseph Ramsey
  */
-public final class Dag_n implements Graph {
+public final class Dag implements Graph {
     static final long serialVersionUID = 23L;
 
     /**
@@ -73,17 +73,17 @@ public final class Dag_n implements Graph {
     /**
      * Constructs a new directed acyclic graph (DAG).
      */
-    public Dag_n() {
+    public Dag() {
 
-        // Must use EdgeListGraph_n because property change events are correctly implemeted. Don't change it!
+        // Must use EdgeListGraph because property change events are correctly implemeted. Don't change it!
         // unless you fix that or the interface will break the interface! jdramsey 2015-6-5
-        this.graph = new EdgeListGraph_n();
+        this.graph = new EdgeListGraph();
 
         reconstituteDpath();
     }
 
-    public Dag_n(List<Node> nodes) {
-        this.graph = new EdgeListGraph_n(nodes);
+    public Dag(List<Node> nodes) {
+        this.graph = new EdgeListGraph(nodes);
         reconstituteDpath();
     }
 
@@ -94,12 +94,12 @@ public final class Dag_n implements Graph {
      * @throws IllegalArgumentException if the given graph cannot for some
      *                                  reason be converted into a DAG.
      */
-    public Dag_n(Graph graph) throws IllegalArgumentException {
+    public Dag(Graph graph) throws IllegalArgumentException {
         if (graph.existsDirectedCycle()) {
             throw new IllegalArgumentException("That graph was not acyclic.");
         }
 
-        this.graph = new EdgeListGraph_n();
+        this.graph = new EdgeListGraph();
 
         transferNodesAndEdges(graph);
 
@@ -120,8 +120,8 @@ public final class Dag_n implements Graph {
     /**
      * Generates a simple exemplar of this class to test serialization.
      */
-    public static Dag_n serializableInstance() {
-        Dag_n dag = new Dag_n();
+    public static Dag serializableInstance() {
+        Dag dag = new Dag();
         GraphNode node1 = new GraphNode("X");
         dag.addNode(node1);
         return dag;
@@ -135,7 +135,7 @@ public final class Dag_n implements Graph {
         ArrayList<Node> L = new ArrayList(nodesHash.size());
         ArrayList<Node> S = new ArrayList();
 
-        Dag_n graphCopy = new Dag_n(this);
+        Dag graphCopy = new Dag(this);
 
         // S -> Nodos raíz, sin padres
         for (Node node : graphCopy.getNodes()) {
@@ -254,7 +254,7 @@ public final class Dag_n implements Graph {
     }
 
     public boolean equals(Object o) {
-        return o instanceof Dag_n && getGraph().equals(o);
+        return o instanceof Dag && getGraph().equals(o);
     }
 
     public boolean existsDirectedPathFromTo(Node node1, Node node2) {

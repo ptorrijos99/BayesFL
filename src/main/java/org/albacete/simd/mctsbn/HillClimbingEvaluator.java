@@ -38,7 +38,7 @@ public class HillClimbingEvaluator {
     public HillClimbingEvaluator(ProblemMCTS problem, ConcurrentHashMap<String,Double> localScoreCache){
         this.problem = problem;
         this.localScoreCache = localScoreCache;
-        this.graph = new EdgeListGraph_n();
+        this.graph = new EdgeListGraph();
         this.bestBDeuForNode = new double [problem.getVariables().size()];
         metric = new BDeuScore(problem.getData());
     }
@@ -176,7 +176,7 @@ public class HillClimbingEvaluator {
     }
 
     public double search(){
-        graph = new EdgeListGraph_n(problem.getVariables());
+        graph = new EdgeListGraph(problem.getVariables());
         finalScore = 0;
         
         Set<Integer> candidates = new HashSet<>();

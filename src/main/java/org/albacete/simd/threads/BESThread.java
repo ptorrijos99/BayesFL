@@ -62,7 +62,7 @@ public class BESThread extends GESThread {
             numNonCachedCalls=0;
             //localScoreCache.clear();
 
-            Graph graph = new EdgeListGraph_n(this.initialDag);
+            Graph graph = new EdgeListGraph(this.initialDag);
             //buildIndexing(graph);
 
             // Method 1-- original.

@@ -335,7 +335,7 @@ public final class DiscreteVariable extends AbstractVariable
         if (!(getName().equals(variable.getName()))) {
             return false;
         }
-
+        
         return getNodeType() == variable.getNodeType();
     }
 

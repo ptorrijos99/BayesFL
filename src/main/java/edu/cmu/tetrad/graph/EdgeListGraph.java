@@ -42,7 +42,7 @@ import static edu.cmu.tetrad.graph.Edges.directedEdge;
  * @author Erin Korber additions summer 2004
  * @see edu.cmu.tetrad.graph.Endpoint
  */
-public class EdgeListGraph_n implements Graph {
+public class EdgeListGraph implements Graph {
 
     static final long serialVersionUID = 23L;
 
@@ -114,7 +114,7 @@ public class EdgeListGraph_n implements Graph {
     /**
      * Constructs a new (empty) EdgeListGraph_n.
      */
-    public EdgeListGraph_n() {
+    public EdgeListGraph() {
         this.edgeLists = new HashMap<>();
         this.neighboursMap = new HashMap();
         this.nodes = new HashSet<>();
@@ -131,7 +131,7 @@ public class EdgeListGraph_n implements Graph {
      * @param graph the graph from which nodes and edges are is to be extracted.
      * @throws IllegalArgumentException if a duplicate edge is added.
      */
-    public EdgeListGraph_n(Graph graph) throws IllegalArgumentException {
+    public EdgeListGraph(Graph graph) throws IllegalArgumentException {
         this();
 
         if (graph == null) {
@@ -169,7 +169,7 @@ public class EdgeListGraph_n implements Graph {
      * Constructs a new graph, with no edges, using the the given variable
      * names.
      */
-    public EdgeListGraph_n(List<Node> nodes) {
+    public EdgeListGraph(List<Node> nodes) {
         this();
 
         if (nodes == null) {
@@ -193,8 +193,8 @@ public class EdgeListGraph_n implements Graph {
     /**
      * Generates a simple exemplar of this class to test serialization.
      */
-    public static EdgeListGraph_n serializableInstance() {
-        return new EdgeListGraph_n();
+    public static EdgeListGraph serializableInstance() {
+        return new EdgeListGraph();
     }
 
     private static boolean visibleEdgeHelper(Node A, Node B, Graph graph) {
@@ -213,7 +213,7 @@ public class EdgeListGraph_n implements Graph {
                 return true;
             }
 
-            if (EdgeListGraph_n.visibleEdgeHelperVisit(graph, C, A, B, path)) {
+            if (EdgeListGraph.visibleEdgeHelperVisit(graph, C, A, B, path)) {
                 return true;
             }
         }
@@ -250,7 +250,7 @@ public class EdgeListGraph_n implements Graph {
                 }
             }
 
-            if (EdgeListGraph_n.visibleEdgeHelperVisit(graph, D, c, b, path)) {
+            if (EdgeListGraph.visibleEdgeHelperVisit(graph, D, c, b, path)) {
                 return true;
             }
         }
@@ -362,7 +362,7 @@ public class EdgeListGraph_n implements Graph {
                 }
             }
 
-            return EdgeListGraph_n.visibleEdgeHelper(A, B, this);
+            return EdgeListGraph.visibleEdgeHelper(A, B, this);
         } else {
             throw new IllegalArgumentException(
                     "Given edge is not in the graph.");
@@ -1299,8 +1299,8 @@ public class EdgeListGraph_n implements Graph {
             return false;
         }
 
-        if (o instanceof EdgeListGraph_n) {
-            EdgeListGraph_n _o = (EdgeListGraph_n) o;
+        if (o instanceof EdgeListGraph) {
+            EdgeListGraph _o = (EdgeListGraph) o;
             boolean nodesEqual = new HashSet<>(_o.nodes).equals(new HashSet<>(this.nodes));
             boolean edgesEqual = new HashSet<>(_o.edgesSet).equals(new HashSet<>(this.edgesSet));
             return (nodesEqual && edgesEqual);
@@ -1626,7 +1626,7 @@ public class EdgeListGraph_n implements Graph {
 
     @Override
     public Graph subgraph(List<Node> nodes) {
-        Graph graph = new EdgeListGraph_n(nodes);
+        Graph graph = new EdgeListGraph(nodes);
         Set<Edge> edges = getEdges();
 
         for (Edge edge : edges) {

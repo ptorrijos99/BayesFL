@@ -6,7 +6,7 @@ import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.GraphUtils;
 import edu.cmu.tetrad.search.SearchGraphUtils;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
@@ -73,7 +73,7 @@ public class ExperimentBNBuilder {
     protected String algName;
     protected long seed = -1;
     private MlBayesIm controlBayesianNetwork;
-    public Dag_n resultingBayesianNetwork;
+    public Dag resultingBayesianNetwork;
 
 
     public ExperimentBNBuilder(String[] parameters, int threads) throws Exception {

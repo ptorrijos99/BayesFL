@@ -34,7 +34,7 @@ package org.albacete.simd.bayesfl.experiments;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.search.BDeuScore;
 import edu.cmu.tetrad.search.Fges;
 import java.io.BufferedWriter;
@@ -53,7 +53,7 @@ import weka.classifiers.bayes.net.BIFReader;
 public class ExperimentUtils {
     
     final static String SAVEPATH = "results/";
-    
+
     public static void saveExperiment(String restPath, String header, String data) {
         String path = SAVEPATH + restPath;
         
@@ -81,7 +81,7 @@ public class ExperimentUtils {
         }
     }
     
-    public static double calculateBDeu(Data data, Dag_n dag) {
+    public static double calculateBDeu(Data data, Dag dag) {
         if (data.getData() != null) {
             BDeuScore bdeu = new BDeuScore((DataSet) data.getData());
             Fges fges = new Fges(bdeu);
@@ -90,7 +90,7 @@ public class ExperimentUtils {
         return -1;
     }
     
-    public static int calculateSMHD(Data data, Dag_n dag) {
+    public static int calculateSMHD(Data data, Dag dag) {
         if (((BN_DataSet) data).getOriginalBNPath() != null) {
             try {
                 MlBayesIm originalBN = readOriginalBayesianNetwork(((BN_DataSet) data).getOriginalBNPath());

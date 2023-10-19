@@ -135,7 +135,7 @@ public class Server {
                     data = new BN_DataSet(this.bbddName);
                     ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
                 }
-                globalModel.saveStats(experimentName + "_" + globalFusion.getClass().getSimpleName(), -1, data, iteration, time);
+                globalModel.saveStats(experimentName, -1, data, iteration, time);
             }
             
             // 4. Fuse the global model with each local model on the clients

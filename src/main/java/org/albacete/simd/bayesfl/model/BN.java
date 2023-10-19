@@ -31,7 +31,7 @@
 
 package org.albacete.simd.bayesfl.model;
 
-import edu.cmu.tetrad.graph.Dag_n;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 
 import org.albacete.simd.utils.Utils;
@@ -41,32 +41,32 @@ import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
 
 public class BN implements Model {
     
-    private Dag_n dag;
+    private Dag dag;
 
     public BN() {
-        this.dag = new Dag_n();
+        this.dag = new Dag();
     }
 
-    public BN(Dag_n dag) {
+    public BN(Dag dag) {
         this.dag = dag;
     }
 
     public BN(Graph graph) {
-        this.dag = new Dag_n(Utils.removeInconsistencies(graph));
+        this.dag = new Dag(Utils.removeInconsistencies(graph));
     }
 
     @Override
-    public Dag_n getModel() {
+    public Dag getModel() {
         return dag;
     }
 
     @Override
     public void setModel(Object model) {
-        if (!(model instanceof Dag_n)) {
+        if (!(model instanceof Dag)) {
             throw new IllegalArgumentException("The model must be object of the BN class");
         }
 
-        this.dag = (Dag_n) model;
+        this.dag = (Dag) model;
     }
 
     @Override
