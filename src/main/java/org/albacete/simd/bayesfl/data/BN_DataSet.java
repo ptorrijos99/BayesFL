@@ -1,11 +1,15 @@
 package org.albacete.simd.bayesfl.data;
 
+import edu.cmu.tetrad.data.BoxDataSet;
 import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
+import edu.cmu.tetrad.data.VerticalDoubleDataBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import org.albacete.simd.utils.Problem;
 
 public class BN_DataSet implements Data {
 
@@ -15,6 +19,8 @@ public class BN_DataSet implements Data {
 
     private final String name;
     
+    private Problem problem;
+    
     public BN_DataSet() {
         this.name = "";
     }
@@ -22,13 +28,20 @@ public class BN_DataSet implements Data {
     public BN_DataSet(String name) {
         this.name = name;
     }
-
+    
     public BN_DataSet(String path, String name) {
         this.data = readData(path);
+        this.problem = new Problem(data);
+        this.name = name;
+    }
+    
+    public BN_DataSet(DataSet data, String name) {
+        this.data = data;
+        this.problem = new Problem(data);
         this.name = name;
     }
 
-    private static DataSet readData (String path) {
+    public static DataSet readData (String path) {
         // Initial Configuration
         DataReader reader = new DataReader();
         reader.setDelimiter(DelimiterType.COMMA);
@@ -44,6 +57,33 @@ public class BN_DataSet implements Data {
 
         return dataSet;
     }
+    
+    public static ArrayList<DataSet> divideDataSet(DataSet data, int N) {
+        int actualSampleSize = data.getNumRows();
+        float bucketSize = actualSampleSize / (float) N;
+
+        int[] cols = new int[data.getNumColumns()];
+        for (int i = 0; i < cols.length; i++) {
+            cols[i] = i;
+        }
+        
+        ArrayList<DataSet> dataSets = new ArrayList<>();
+        
+        for (int currentBucket = 0; currentBucket < N; currentBucket++) {
+            int first = (int) Math.ceil(currentBucket * bucketSize);
+            int last = (int) Math.ceil(currentBucket * bucketSize + bucketSize);
+
+            int[] rows = new int[last-first];
+            int index = 0;
+            for (int i = first; i < last; i++) {
+                rows[index] = i;
+                index++;
+            }
+            
+            dataSets.add(new BoxDataSet(new VerticalDoubleDataBox(data.getDoubleData().getSelection(rows, cols).transpose().toArray()), data.getVariables()));
+        }
+        return dataSets;
+    }
 
     @Override
     public DataSet getData() {
@@ -57,6 +97,7 @@ public class BN_DataSet implements Data {
         }
 
         this.data = (DataSet) data;
+        this.problem = new Problem((DataSet) data);
     }
 
     @Override
@@ -87,5 +128,7 @@ public class BN_DataSet implements Data {
         this.originalBNPath = path;
     }
 
-    
+    public Problem getProblem() {
+        return this.problem;
+    }
 }

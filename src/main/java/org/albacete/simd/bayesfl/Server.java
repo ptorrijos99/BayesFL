@@ -37,7 +37,6 @@ import org.albacete.simd.bayesfl.model.Model;
 import java.util.Collection;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
 import org.albacete.simd.bayesfl.data.Data;
-import org.albacete.simd.bayesfl.model.BN;
 
 public class Server {
 
@@ -61,6 +60,11 @@ public class Server {
      * The local models of the clients.
      */
     private final Model[] localModels;
+    
+    /**
+     * The local models of the clients on the previous iteration.
+     */
+    private Model[] lastLocalModels;
 
     /**
      * The number of iterations of the algorithm.
@@ -91,9 +95,11 @@ public class Server {
         int id = 0;
         for (Client client : clients) {
             client.setID(id);
+            client.setNClients(clients.size());
             id++;
         }
         localModels = new Model[clients.size()];
+        lastLocalModels = new Model[clients.size()];
     }
 
     /**
@@ -121,6 +127,7 @@ public class Server {
 
             // 2. Get the local models
             for (Client client : clients) {
+                lastLocalModels[client.getID()] = localModels[client.getID()];
                 localModels[client.getID()] = client.getLocalModel();
             }
 
@@ -135,12 +142,23 @@ public class Server {
                     data = new BN_DataSet(this.bbddName);
                     ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
                 }
-                globalModel.saveStats(experimentName, -1, data, iteration, time);
+                globalModel.saveStats(experimentName + ",server", clients.size(), -1, data, iteration, time);
             }
             
             // 4. Fuse the global model with each local model on the clients
             clients.stream().forEach(client -> client.fusion(globalModel));
-        }
+            
+            // 5. Check if any of the clients has changued their model
+            if (checkConvergence()) break;
+            System.out.println("Fuera del IF");
+        }System.out.println("  Fuera del FOR");
+    }
+    
+    private boolean checkConvergence() {
+        for (int i = 0; i < localModels.length; i++) {
+            if (!localModels[i].equals(lastLocalModels[i])) return false;}
+        
+        return true;
     }
 
     /**

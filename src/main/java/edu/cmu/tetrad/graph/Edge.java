@@ -68,6 +68,8 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
 
     private final List<EdgeTypeProbability> edgeTypeProbabilities = new ArrayList<>();
 
+    private final int hash;
+
     // =========================CONSTRUCTORS============================//
 
     /**
@@ -100,6 +102,8 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
             this.endpoint1 = endpoint1;
             this.endpoint2 = endpoint2;
         }
+
+        hash = (node1.getName() + node2.getName()).hashCode();
     }
 
     public Edge(Edge edge) {
@@ -327,7 +331,7 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
     }
 
     public final int hashCode() {
-        return (node1.getName() + node2.getName()).hashCode();
+        return hash;
     }
 
     /**

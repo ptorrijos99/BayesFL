@@ -70,7 +70,7 @@ public class BN implements Model {
     }
 
     @Override
-    public void saveStats(String operation, int id, Data data, int iteration, double time) {
+    public void saveStats(String operation, int nClients, int id, Data data, int iteration, double time) {
         if (!(data instanceof BN_DataSet)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
@@ -83,16 +83,18 @@ public class BN implements Model {
         if (id == -1) client = "Server";
         else client = "Client";
         
-        String path = client + "/" + data.getName() + "_" + operation + "_" + id + ".csv";
-        String header = "bbdd,algorithm,id,iteration,instances,threads,bdeu,SMHD,time(s)\n";
+        String path = client + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
+        String header = "bbdd,algorithm,fusionC,refinement,fusionS,epoch,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
+                        nClients + "," +
                         id + "," +
                         iteration + "," +
                         data.getNInstances() + "," +
                         threads + "," + 
                         bdeu + "," +
                         smhd + "," +
+                        this.dag.getEdges().size() + "," +
                         time + "\n";
         
         System.out.println(results);
@@ -100,10 +102,21 @@ public class BN implements Model {
         saveExperiment(path, header, results);
     }
     
-    
     @Override
     public String toString() {
         return dag.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof BN bn)) return false;
+
+        return this.dag.equals(bn.dag);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.dag.hashCode();
     }
 }
 
