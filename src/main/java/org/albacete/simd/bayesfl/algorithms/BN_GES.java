@@ -69,6 +69,12 @@ public class BN_GES implements LocalAlgorithm {
         this(algorithmName);
         this.refinement = refinement;
     }
+    
+    public BN_GES(String algorithmName, String refinement, int nInterleaving) {
+        this(algorithmName);
+        this.refinement = refinement;
+        this.nInterleaving = nInterleaving;
+    }
 
     /**
      * Build the local model using the algorithm, without previous local model.
@@ -112,6 +118,8 @@ public class BN_GES implements LocalAlgorithm {
                 GES(dataSet);
                 break;
         }
+        
+        algorithm.setnItInterleaving(this.nInterleaving);
 
         /* If there is a previous local model, use it as base. If is null (for example, with a call of
            "public Model buildLocalModel(Data data)"), the model isn't an instance of BN. */

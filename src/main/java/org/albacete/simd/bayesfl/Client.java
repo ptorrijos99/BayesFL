@@ -65,6 +65,11 @@ public class Client {
     private int id;
 
     /**
+     * The number of clients.
+     */
+    private int nClients;
+
+    /**
      * The stats flag.
      */
     private boolean stats = false;
@@ -111,7 +116,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
         
         if (stats)  {
-            localModel.saveStats(this.experimentName + "_build", id, data, iteration, time);
+            localModel.saveStats(this.experimentName + ",build", nClients, id, data, iteration, time);
         }
     }
 
@@ -130,7 +135,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
 
         if (stats) {
-            localModel.saveStats(this.experimentName + "_fusion", id, data, iteration, time);
+            localModel.saveStats(this.experimentName + ",fusion", nClients, id, data, iteration, time);
         }
         
         // If defined, perform a refinement to the local model
@@ -140,7 +145,7 @@ public class Client {
             time = (System.currentTimeMillis() - start) / 1000;
 
             if (stats)  {
-                localModel.saveStats(this.experimentName + "_refin", id, data, iteration, time);
+                localModel.saveStats(this.experimentName + ",refin", nClients, id, data, iteration, time);
             }
         }
     }
@@ -151,6 +156,14 @@ public class Client {
      */
     public void setID(int id) {
         this.id = id;
+    }
+
+    /**
+     * Set the number of clients.
+     * @param nClients The number of clients.
+     */
+    public void setNClients(int nClients) {
+        this.nClients = nClients;
     }
 
     /**

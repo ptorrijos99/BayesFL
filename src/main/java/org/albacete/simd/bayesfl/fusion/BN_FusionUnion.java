@@ -38,7 +38,6 @@ import org.albacete.simd.bayesfl.model.Model;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import org.albacete.simd.utils.Utils;
 
 public class BN_FusionUnion implements Fusion {
 
@@ -53,10 +52,8 @@ public class BN_FusionUnion implements Fusion {
         dags.add(((BN) model2).getModel());
 
         ConsensusUnion fusion = new ConsensusUnion(dags);
-        Dag union = fusion.union();
-        Utils.removeInconsistencies(union);
-        
-        return new BN(union);
+
+        return new BN(fusion.union());
     }
 
     @Override
@@ -73,9 +70,7 @@ public class BN_FusionUnion implements Fusion {
         }
 
         ConsensusUnion fusion = new ConsensusUnion(dags);
-        Dag union = fusion.union();
-        Utils.removeInconsistencies(union);
-        
-        return new BN(union);
+
+        return new BN(fusion.union());
     }
 }

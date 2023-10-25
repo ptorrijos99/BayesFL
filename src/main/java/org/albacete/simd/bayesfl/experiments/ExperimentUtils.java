@@ -47,6 +47,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
 import org.albacete.simd.bayesfl.data.Data;
+import org.albacete.simd.threads.GESThread;
+import org.albacete.simd.utils.Problem;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
@@ -81,23 +83,37 @@ public class ExperimentUtils {
         }
     }
     
+    public static double calculateBDeuGESTHREAD(Data data, Dag dag) {
+        if ((data instanceof BN_DataSet dat)) {
+            Problem problem = dat.getProblem();
+            if (dat.getProblem() != null) {
+                return GESThread.scoreGraph(dag, problem);
+            } 
+        }
+        return -1;
+    }
+    
     public static double calculateBDeu(Data data, Dag dag) {
-        if (data.getData() != null) {
-            BDeuScore bdeu = new BDeuScore((DataSet) data.getData());
-            Fges fges = new Fges(bdeu);
-            return fges.scoreDag(dag);
-        } 
+        if ((data instanceof BN_DataSet dat)) {
+            if (dat.getData() != null) {
+                BDeuScore bdeu = new BDeuScore(dat.getData());
+                Fges fges = new Fges(bdeu);
+                return fges.scoreDag(dag);
+            } 
+        }
         return -1;
     }
     
     public static int calculateSMHD(Data data, Dag dag) {
-        if (((BN_DataSet) data).getOriginalBNPath() != null) {
-            try {
-                MlBayesIm originalBN = readOriginalBayesianNetwork(((BN_DataSet) data).getOriginalBNPath());
-                return Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
-            } catch (Exception e) { e.printStackTrace(); }
+        if ((data instanceof BN_DataSet dat)) {
+            if (dat.getOriginalBNPath() != null) {
+                try {
+                    MlBayesIm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
+                    return Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
+                } catch (Exception e) { e.printStackTrace(); }
+            }
         }
-        return -1;
+        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
     }
     
     /**
