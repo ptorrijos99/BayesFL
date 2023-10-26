@@ -150,8 +150,7 @@ public class Server {
             
             // 5. Check if any of the clients has changued their model
             if (checkConvergence()) break;
-            System.out.println("Fuera del IF");
-        }System.out.println("  Fuera del FOR");
+        }
     }
     
     private boolean checkConvergence() {

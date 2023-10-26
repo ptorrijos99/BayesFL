@@ -84,7 +84,7 @@ public class BN implements Model {
         else client = "Client";
         
         String path = client + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,fusionC,refinement,fusionS,epoch,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,fusionC,refinement,fusionS,epoch,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +
