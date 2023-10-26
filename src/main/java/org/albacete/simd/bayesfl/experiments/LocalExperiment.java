@@ -67,12 +67,12 @@ public class LocalExperiment {
         int maxEdgesIt = Integer.MAX_VALUE;
         int nIterations = 100;
 
-        String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
-        launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd_paths, maxEdgesIt, nIterations);
+        //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
+        //launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
-        //String bbdd = "0";
-        //int nClients = 20;
-        //launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd, nClients, 5);
+        String bbdd = "0";
+        int nClients = 20;
+        launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd, nClients, maxEdgesIt, nIterations);
     }
     
     public static void multipleExperiment() {
@@ -129,11 +129,11 @@ public class LocalExperiment {
                 }
                 
                 BNDataSets.get(i).setOriginalBNPath("./res/networks/" + net + ".xbif");
-                LocalAlgorithm algorithm = new BN_GES(algName, refinement);
+                LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
                 Client client = new Client(fusionClient, algorithm, BNDataSets.get(i));
                 client.setStats(true);
-                client.setExperimentName(algName + "," + fusionC + "," + refinement + "," + fusionS);
+                client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }
 
@@ -148,7 +148,7 @@ public class LocalExperiment {
             server.setStats(true);
             server.setOriginalBNPath("./res/networks/" + net + ".xbif");
             server.setBBDDName(net);
-            server.setExperimentName(algName + "," + fusionC + "," + refinement + "," + fusionS);
+            server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
             server.setnIterations(nIterations);
 
             server.run();
