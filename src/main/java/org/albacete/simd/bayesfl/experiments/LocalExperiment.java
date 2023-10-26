@@ -76,20 +76,25 @@ public class LocalExperiment {
     }
     
     public static void multipleExperiment() {
-        String[] nets = new String[]{"alarm", "barley", "child", "hailfinder", "hepar2", "insurance", "mildew", "water", "win95pts", "andes", "link", "pigs", "pathfinder", "diabetes", "munin"};
+        String[] nets = new String[]{"child", "water", "insurance", "alarm", "hailfinder", "hepar2", "mildew", "barley", "win95pts", "pathfinder", "andes", "pigs", "diabetes", "link", "munin"};
         
-        String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
+        //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
+        String bbdd = "0";
+        int[] nClients = {2, 4, 6, 8, 10, 15, 20};
         String[] algNames = new String[]{"pGES", "GES"};
         String[] refinements = new String[]{"None"};
-        int[] maxEdgesIts = new int[]{5, 10, 15, 20, 50, 100, 200};
+        int[] maxEdgesIts = new int[]{5, 10, 20, 50, 100, 200, 10000};
+        int maxIts = 10000;
         
         for (String net : nets) {
             for (String algorithm : algNames) {
                 for (String refinement : refinements) {
-                    for (int maxEdgesIt : maxEdgesIts) {
-                        launchExperiment(net, algorithm, refinement, "BN_FusionUnion", "BN_FusionUnion", bbdd_paths, maxEdgesIt, 5);
-                        launchExperiment(net, algorithm, refinement, "BN_FusionIntersection", "BN_FusionIntersection", bbdd_paths, maxEdgesIt, 5);
-                        System.gc();
+                    for (int nClient : nClients) {
+                        for (int maxEdgesIt : maxEdgesIts) {
+                            launchExperiment(net, algorithm, refinement, "BN_FusionUnion", "BN_FusionUnion", bbdd, nClient, maxEdgesIt, maxIts);
+                            launchExperiment(net, algorithm, refinement, "BN_FusionIntersection", "BN_FusionIntersection", bbdd, nClient, maxEdgesIt, maxIts);
+                            System.gc();
+                        }
                     }
                 }
             }
@@ -147,7 +152,7 @@ public class LocalExperiment {
 
             server.setStats(true);
             server.setOriginalBNPath("./res/networks/" + net + ".xbif");
-            server.setBBDDName(net);
+            server.setBBDDName(net + "." + bbdd);
             server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
             server.setnIterations(nIterations);
 
