@@ -152,22 +152,20 @@ public class Server {
             clients.stream().forEach(client -> client.fusion(globalModel));
             
             // 5. Check if any of the clients has changued their model
-            if (checkConvergence()) break;
+            if (checkConvergence(lastLocalModels)) break;
+            else if (checkConvergence(last2LocalModels)) break;
         }
     }
     
-    private boolean checkConvergence() {
+    private boolean checkConvergence(Model[] previousModels) {
         for (int i = 0; i < localModels.length; i++) {
             if (stats) {
                 // Checking that the score is the same (if calculated in stats)
-                if ((lastLocalModels[i] == null) ||
-                        !(Math.abs(localModels[i].getScore() - lastLocalModels[i].getScore()) < 0.0001)) return false;
-                if ((last2LocalModels[i] == null) ||
-                        !(Math.abs(localModels[i].getScore() - last2LocalModels[i].getScore()) < 0.0001)) return false;
-                
+                if ((previousModels[i] == null) ||
+                        !(Math.abs(localModels[i].getScore() - previousModels[i].getScore()) < 0.0001)) return false;
             } else {
                 // Checking if the entire model is the same
-                if (!localModels[i].equals(lastLocalModels[i])) return false;
+                if (!localModels[i].equals(previousModels[i])) return false;
             }
         }
 
