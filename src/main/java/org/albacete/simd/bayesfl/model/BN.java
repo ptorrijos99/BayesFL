@@ -42,6 +42,8 @@ import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
 public class BN implements Model {
     
     private Dag dag;
+    
+    private double score;
 
     public BN() {
         this.dag = new Dag();
@@ -77,6 +79,7 @@ public class BN implements Model {
         
         int smhd = calculateSMHD(data, this.dag);
         double bdeu = calculateBDeu(data, this.dag);
+        this.score = bdeu;
         int threads = Runtime.getRuntime().availableProcessors();
         
         String client;
@@ -100,6 +103,17 @@ public class BN implements Model {
         System.out.println(results);
 
         saveExperiment(path, header, results);
+    }
+    
+    @Override
+    public double getScore(){
+        return this.score;
+    }
+    
+    @Override
+    public double getScore(Data data) {
+        this.score = calculateBDeu(data, this.dag);
+        return this.score;
     }
     
     @Override

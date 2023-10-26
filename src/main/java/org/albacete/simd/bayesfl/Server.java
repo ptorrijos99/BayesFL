@@ -62,9 +62,10 @@ public class Server {
     private final Model[] localModels;
     
     /**
-     * The local models of the clients on the previous iteration.
+     * The local models of the clients on the two previous iterations.
      */
     private Model[] lastLocalModels;
+    private Model[] last2LocalModels;
 
     /**
      * The number of iterations of the algorithm.
@@ -100,6 +101,7 @@ public class Server {
         }
         localModels = new Model[clients.size()];
         lastLocalModels = new Model[clients.size()];
+        last2LocalModels = new Model[clients.size()];
     }
 
     /**
@@ -127,6 +129,7 @@ public class Server {
 
             // 2. Get the local models
             for (Client client : clients) {
+                last2LocalModels[client.getID()] = lastLocalModels[client.getID()];
                 lastLocalModels[client.getID()] = localModels[client.getID()];
                 localModels[client.getID()] = client.getLocalModel();
             }
@@ -155,8 +158,19 @@ public class Server {
     
     private boolean checkConvergence() {
         for (int i = 0; i < localModels.length; i++) {
-            if (!localModels[i].equals(lastLocalModels[i])) return false;}
-        
+            if (stats) {
+                // Checking that the score is the same (if calculated in stats)
+                if ((lastLocalModels[i] == null) ||
+                        !(Math.abs(localModels[i].getScore() - lastLocalModels[i].getScore()) < 0.0001)) return false;
+                if ((last2LocalModels[i] == null) ||
+                        !(Math.abs(localModels[i].getScore() - last2LocalModels[i].getScore()) < 0.0001)) return false;
+                
+            } else {
+                // Checking if the entire model is the same
+                if (!localModels[i].equals(lastLocalModels[i])) return false;
+            }
+        }
+
         return true;
     }
 
