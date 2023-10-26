@@ -40,4 +40,8 @@ public interface Model {
     void setModel(Object model);
 
     public void saveStats(String operation, int nClients, int id, Data data, int iteration, double time);
+    
+    double getScore();
+    
+    double getScore(Data data);
 }
