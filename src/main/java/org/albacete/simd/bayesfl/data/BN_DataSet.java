@@ -72,6 +72,8 @@ public class BN_DataSet implements Data {
         for (int currentBucket = 0; currentBucket < N; currentBucket++) {
             int first = (int) Math.ceil(currentBucket * bucketSize);
             int last = (int) Math.ceil(currentBucket * bucketSize + bucketSize);
+            
+            if (last > actualSampleSize) last = actualSampleSize;
 
             int[] rows = new int[last-first];
             int index = 0;
@@ -79,7 +81,7 @@ public class BN_DataSet implements Data {
                 rows[index] = i;
                 index++;
             }
-            
+
             dataSets.add(new BoxDataSet(new VerticalDoubleDataBox(data.getDoubleData().getSelection(rows, cols).transpose().toArray()), data.getVariables()));
         }
         return dataSets;
