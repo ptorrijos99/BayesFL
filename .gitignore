@@ -47,3 +47,13 @@ desktop.ini
 ### Results folder ###
 results/
 results-2/
+
+### Notebooks folder
+notebooks/
+
+### Baseline algorithms
+baselines/
+
+### Specific experiment scripts folder
+scripts/
+
