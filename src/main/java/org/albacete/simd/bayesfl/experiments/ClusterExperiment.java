@@ -62,14 +62,16 @@ public class ClusterExperiment {
         
         // Read the parameters from file
         String net = parameters[0];
-        String algorithm = parameters[1];
-        String refinement = parameters[2];
-        String fusionC = parameters[3];
-        String fusionS = parameters[4];
-        String bbdd = parameters[5];
+        String bbdd = parameters[1];
+        String algorithm = parameters[2];
+        String refinement = parameters[3];
+        String fusionC = parameters[4];
+        String fusionS = parameters[5];
         int nClients = Integer.parseInt(parameters[6]);
         int maxEdgesIt = Integer.parseInt(parameters[7]);
         int nIterations = Integer.parseInt(parameters[8]);
+        
+        LocalExperiment.PATH = "/tmp/pablo.torrijos/";
         
         // Launch the experiment
         launchExperiment(net, algorithm, refinement, fusionC, fusionS, bbdd, nClients, maxEdgesIt, nIterations);

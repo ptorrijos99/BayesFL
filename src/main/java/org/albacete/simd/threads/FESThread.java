@@ -149,6 +149,7 @@ public class FESThread extends GESThread {
             bestScore = bestInsert;
 
             // Inserting edge
+            //System.out.println("Thread " + getId() + " inserting: (" + x_i + ", " + y_i + ", " + t_0 + "), score: " + bestScore);
             insert(x_i, y_i, t_0, graph);
             
             // Checking cycles?
