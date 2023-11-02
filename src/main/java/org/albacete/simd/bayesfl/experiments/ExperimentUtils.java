@@ -53,12 +53,8 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 public class ExperimentUtils {
-    
-    final static String SAVEPATH = "results/";
 
-    public static void saveExperiment(String restPath, String header, String data) {
-        String path = SAVEPATH + restPath;
-        
+    public static void saveExperiment(String path, String header, String data) {
         // Create the directory if it does not exist
         File directory = new File(path.substring(0, path.lastIndexOf("/")));
         if (!directory.exists()){

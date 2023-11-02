@@ -74,6 +74,8 @@ public class Client {
      */
     private boolean stats = false;
     
+    private String path;
+    
     private int iteration;
     
     private String experimentName;
@@ -116,7 +118,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
         
         if (stats)  {
-            localModel.saveStats(this.experimentName + ",build", nClients, id, data, iteration, time);
+            localModel.saveStats(this.experimentName + ",build", path, nClients, id, data, iteration, time);
         }
     }
 
@@ -135,7 +137,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
 
         if (stats) {
-            localModel.saveStats(this.experimentName + ",fusion", nClients, id, data, iteration, time);
+            localModel.saveStats(this.experimentName + ",fusion", path, nClients, id, data, iteration, time);
         }
         
         // If defined, perform a refinement to the local model
@@ -145,7 +147,7 @@ public class Client {
             time = (System.currentTimeMillis() - start) / 1000;
 
             if (stats)  {
-                localModel.saveStats(this.experimentName + ",refin", nClients, id, data, iteration, time);
+                localModel.saveStats(this.experimentName + ",refin", path, nClients, id, data, iteration, time);
             }
         }
     }
@@ -186,8 +188,9 @@ public class Client {
      * Set the stats flag.
      * @param stats The stats flag.
      */
-    public void setStats(boolean stats) {
+    public void setStats(boolean stats, String path) {
         this.stats = stats;
+        this.path = path;
     }
 
     public void setExperimentName(String experimentName) {

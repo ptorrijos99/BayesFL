@@ -72,7 +72,7 @@ public class BN implements Model {
     }
 
     @Override
-    public void saveStats(String operation, int nClients, int id, Data data, int iteration, double time) {
+    public void saveStats(String operation, String path, int nClients, int id, Data data, int iteration, double time) {
         if (!(data instanceof BN_DataSet)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
@@ -86,7 +86,7 @@ public class BN implements Model {
         if (id == -1) client = "Server";
         else client = "Client";
         
-        String path = client + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
+        String complet_path = path + "results/" + client + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
         String header = "bbdd,algorithm,maxEdges,fusionC,refinement,fusionS,epoch,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
@@ -102,7 +102,7 @@ public class BN implements Model {
         
         System.out.println(results);
 
-        saveExperiment(path, header, results);
+        saveExperiment(complet_path, header, results);
     }
     
     @Override

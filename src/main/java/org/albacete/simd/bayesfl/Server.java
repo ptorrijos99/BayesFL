@@ -76,6 +76,8 @@ public class Server {
      * The stats flag.
      */
     private boolean stats = false;
+    
+    private String path;
 
     private String originalBNPath;
     
@@ -145,7 +147,7 @@ public class Server {
                     data = new BN_DataSet(this.bbddName);
                     ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
                 }
-                globalModel.saveStats(experimentName + ",server", clients.size(), -1, data, iteration, time);
+                globalModel.saveStats(experimentName + ",server", path, clients.size(), -1, data, iteration, time);
             }
             
             // 4. Fuse the global model with each local model on the clients
@@ -176,8 +178,9 @@ public class Server {
      * Set the stats flag.
      * @param stats The stats flag.
      */
-    public void setStats(boolean stats) {
+    public void setStats(boolean stats, String path) {
         this.stats = stats;
+        this.path = path;
     }
 
     /**

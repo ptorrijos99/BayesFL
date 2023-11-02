@@ -52,20 +52,22 @@ import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
 import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 
 public class LocalExperiment {
+    public static String PATH = "./";
+    
     public static void main(String[] args) {
         simpleExperiment();
         //multipleExperiment();
     }
     
     public static void simpleExperiment() {
-        String net = "andes";
+        String net = "pathfinder";
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "BN_FusionUnion";
         String fusionServer = "BN_FusionUnion";
         
-        int maxEdgesIt = Integer.MAX_VALUE;
-        int nIterations = 100;
+        int maxEdgesIt = 200;
+        int nIterations = 100000;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd_paths, maxEdgesIt, nIterations);
@@ -106,17 +108,12 @@ public class LocalExperiment {
                     + "Net: " + net + ", Alg Name: " + algName + ", Max. Edges It.: " + maxEdgesIt + ", Refinement: " + refinement + ", Fusion Client: " + fusionC + ", Fusion Server: " + fusionS
                             + "\n-----------------------------------------------------------------------------");
         
-        String savePath = "results/temp/" + net + "-" + algName + "-" + maxEdgesIt + "-" + refinement + "-" + fusionC + "-" + fusionS + "-" + bbdd + "-" + nClients;
-               
-        // Create the directory if it does not exist
-        File directory = new File(savePath.substring(0, savePath.lastIndexOf("/")));
-        if (!directory.exists()){
-            directory.mkdirs();
-        }
-        
+        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS + ",server";
+        String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
+
         if ((!checkExistentFile(savePath))) { 
             
-            DataSet allData = readData("./res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
 
             ArrayList<BN_DataSet> BNDataSets = new ArrayList<>();
@@ -133,11 +130,11 @@ public class LocalExperiment {
                     fusionClient = new BN_FusionUnion();
                 }
                 
-                BNDataSets.get(i).setOriginalBNPath("./res/networks/" + net + ".xbif");
+                BNDataSets.get(i).setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
                 LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
                 Client client = new Client(fusionClient, algorithm, BNDataSets.get(i));
-                client.setStats(true);
+                client.setStats(true, PATH);
                 client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }
@@ -150,8 +147,8 @@ public class LocalExperiment {
                 }
             Server server = new Server(fusionServer, clients);
 
-            server.setStats(true);
-            server.setOriginalBNPath("./res/networks/" + net + ".xbif");
+            server.setStats(true, PATH);
+            server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setBBDDName(net + "." + bbdd);
             server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
             server.setnIterations(nIterations);
@@ -169,13 +166,8 @@ public class LocalExperiment {
                     + "Net: " + net + ", Alg Name: " + algName + ", Max. Edges It.: " + maxEdgesIt + ", Refinement: " + refinement + ", Fusion Client: " + fusionC + ", Fusion Server: " + fusionS
                             + "\n-----------------------------------------------------------------------------");
         
-        String savePath = "results/temp/" + net + "-" + algName + "-" + maxEdgesIt + "-" + refinement + "-" + fusionC + "-" + fusionS + "-" + clientBBDDs.length;
-               
-        // Create the directory if it does not exist
-        File directory = new File(savePath.substring(0, savePath.lastIndexOf("/")));
-        if (!directory.exists()){
-            directory.mkdirs();
-        }
+        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS + ",server";
+        String savePath = "./results/Server/" + net + "_" + operation + "_" + clientBBDDs.length + "_-1.csv";
         
         if ((!checkExistentFile(savePath))) { 
             ArrayList<Client> clients = new ArrayList<>();
@@ -186,12 +178,12 @@ public class LocalExperiment {
                 } else if (fusionC.equals("BN_FusionUnion")) {
                     fusionClient = new BN_FusionUnion();
                 }
-                BN_DataSet data = new BN_DataSet("./res/networks/BBDD/" + net + "." + bbdd + ".csv", net + "_" + bbdd);
-                data.setOriginalBNPath("./res/networks/" + net + ".xbif");
+                BN_DataSet data = new BN_DataSet(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv", net + "_" + bbdd);
+                data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
                 LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
                 Client client = new Client(fusionClient, algorithm, data);
-                client.setStats(true);
+                client.setStats(true, PATH);
                 client.setExperimentName(algName + "," + maxEdgesIt + ',' + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }
@@ -204,8 +196,8 @@ public class LocalExperiment {
                 }
             Server server = new Server(fusionServer, clients);
 
-            server.setStats(true);
-            server.setOriginalBNPath("./res/networks/" + net + ".xbif");
+            server.setStats(true, PATH);
+            server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setBBDDName(net);
             server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
             server.setnIterations(nIterations);
