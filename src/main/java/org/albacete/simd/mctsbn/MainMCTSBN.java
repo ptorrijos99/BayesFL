@@ -22,7 +22,7 @@ public class MainMCTSBN {
     public static void main(String[] args) {
         String networkFolder = "./res/networks/";
         String net_name = "alarm";
-        String bbdd_path = networkFolder + "BBDD/" + net_name + ".ALL.csv";
+        String bbdd_path = networkFolder + "BBDD/" + net_name + ".0.csv";
         String netPath = networkFolder + net_name + ".xbif";
 
 
@@ -30,16 +30,17 @@ public class MainMCTSBN {
 
         MCTSBN mctsbn = new MCTSBN(problem, 3000);
 
+        mctsbn.EXPLOITATION_CONSTANT = 100;
         mctsbn.NUMBER_SWAPS = 0.2;
-        mctsbn.PROBABILITY_SWAP = 0.2;
-        mctsbn.initializeAlgorithm = "fGES";
+        mctsbn.PROBABILITY_SWAP = 0.25;
+        mctsbn.initializeAlgorithm = "pGES";
 
         long startTime = System.currentTimeMillis();
         addEndHook(mctsbn,startTime, netPath, problem);
 
         Dag result = mctsbn.search();
-        long endTime = System.currentTimeMillis();
-        double score = GESThread.scoreGraph(result, problem);
+        //long endTime = System.currentTimeMillis();
+        //double score = GESThread.scoreGraph(result, problem);
 
         System.out.println("MCTSBN FINISHED!");
         //System.out.println("Total time: " + (endTime - startTime)*1.0 / 1000);

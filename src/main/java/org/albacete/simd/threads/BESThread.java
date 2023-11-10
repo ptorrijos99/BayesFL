@@ -1,22 +1,13 @@
 package org.albacete.simd.threads;
 
-import consensusBN.PowerSet;
-import consensusBN.PowerSetFabric;
-import consensusBN.SubSet;
 import edu.cmu.tetrad.graph.*;
 import org.albacete.simd.utils.Problem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import static org.albacete.simd.utils.Utils.pdagToDag;
 
-@SuppressWarnings("DuplicatedCode")
 public class BESThread extends GESThread {
-
 
     private static int threadCounter = 1;
 
@@ -56,37 +47,32 @@ public class BESThread extends GESThread {
      * @return PDAG that contains either the result of the BES or FES method.
      */
     private Graph search() {
-        if (!S.isEmpty()) {
-            startTime = System.currentTimeMillis();
-            numTotalCalls=0;
-            numNonCachedCalls=0;
-            //localScoreCache.clear();
+        startTime = System.currentTimeMillis();
+        numTotalCalls=0;
+        numNonCachedCalls=0;
 
-            Graph graph = new EdgeListGraph(this.initialDag);
-            //buildIndexing(graph);
+        Graph graph = new EdgeListGraph(this.initialDag);
 
-            // Method 1-- original.
-            double scoreInitial = scoreDag(graph);
+        // Method 1-- original.
+        double scoreInitial = scoreDag(graph);
 
-            // Do backward search.
-            bes(graph, scoreInitial);
+        // Do backward search.
+        bes(graph, scoreInitial);
 
-            long endTime = System.currentTimeMillis();
-            this.elapsedTime = endTime - startTime;
+        long endTime = System.currentTimeMillis();
+        this.elapsedTime = endTime - startTime;
 
-            double newScore = scoreDag(graph);
-            // If we improve the score, return the new graph
-            if (newScore > scoreInitial) {
-                this.modelBDeu = newScore;
-                this.flag = true;
-                return graph;
-            } else {
-                //System.out.println("   ["+getId()+"] ELSE");
-                this.modelBDeu = scoreInitial;
-                this.flag = false;
-                return this.initialDag;
-            }
-        } else return this.initialDag;
+        double newScore = scoreDag(graph);
+        // If we improve the score, return the new graph
+        if (newScore > scoreInitial) {
+            this.modelBDeu = newScore;
+            this.flag = true;
+            return graph;
+        } else {
+            this.modelBDeu = scoreInitial;
+            this.flag = false;
+            return this.initialDag;
+        }
     }
 
     /**
@@ -114,31 +100,16 @@ public class BESThread extends GESThread {
         bestDelete = bs(graph,bestScore);
 
         while(x_d != null){
-            // Changing best score because x_d, and y_d are not null
-            bestScore = bestDelete;
-
             // Deleting edge
-            //System.out.println("Thread " + getId() + " deleting: (" + x_d + ", " + y_d + ", " + h_0+ ")");
             delete(x_d,y_d,h_0, graph);
-            
-            // Checking cycles?
-            //System.out.println("  Ciclos: " + graph.existsDirectedCycle());
 
             //PDAGtoCPDAG
             rebuildPattern(graph);
-            
-            // Printing score
-            /*if (!h_0.isEmpty())
-                System.out.println("Score: " + nf.format(bestScore) + " (+" + nf.format(bestDelete-score) +")\tOperator: " + graph.getEdge(x_d, y_d) + " " + h_0);
-            else
-                System.out.println("Score: " + nf.format(bestScore) + " (+" + nf.format(bestDelete-score) +")\tOperator: " + graph.getEdge(x_d, y_d));
-            */
+
             bestScore = bestDelete;
-            //System.out.println("    Real Score" + scoreGraph(graph, problem));
 
             // Checking that the maximum number of edges has not been reached
             if (getMaxNumEdges() != -1 && graph.getNumEdges() > getMaxNumEdges()) {
-                //System.out.println("Maximum edges reached");
                 break;
             }
 
@@ -150,7 +121,6 @@ public class BESThread extends GESThread {
 
         }
         return bestScore;
-
     }
 
     /**
@@ -161,11 +131,6 @@ public class BESThread extends GESThread {
      * @return score of the best possible deletion found.
      */
     private double bs(Graph graph, double initialScore){
-        //   	System.out.println("\n** BACKWARD ELIMINATION SEARCH");
-        //   	System.out.println("Initial Score = " + nf.format(initialScore));
-
-        PowerSetFabric.setMode(PowerSetFabric.MODE_BES);
-
         x_d = y_d = null;
         h_0 = null;
         
@@ -175,9 +140,7 @@ public class BESThread extends GESThread {
             EdgeSearch[] arrScores = new EdgeSearch[edgesInGraph.size()];
             List<Edge> edges = new ArrayList<>(edgesInGraph);
 
-            Arrays.parallelSetAll(arrScores, e->{
-                return scoreEdge(graph, edges.get(e), initialScore);
-            });
+            Arrays.parallelSetAll(arrScores, e-> scoreEdge(graph, edges.get(e), initialScore));
 
             List<EdgeSearch> list = Arrays.asList(arrScores);
             EdgeSearch max = Collections.max(list);
@@ -190,122 +153,54 @@ public class BESThread extends GESThread {
             
             return max.score;
         }
-        
         return initialScore;
     }
     
     private EdgeSearch scoreEdge(Graph graph, Edge edge, double initialScore) {
-        // Checking if the edge is actually inside the graph
-        if(S.contains(edge)) {
-            Node _x = Edges.getDirectedEdgeTail(edge);
-            Node _y = Edges.getDirectedEdgeHead(edge);
+        Node _x = edge.getNode1();
+        Node _y = edge.getNode2();
 
-            List<Node> hNeighbors = getSubsetOfNeighbors(_x, _y, graph);
-            PowerSet hSubsets = PowerSetFabric.getPowerSet(_x, _y, hNeighbors);
-            
-            double changueEval;
-            double evalScore;
-            double bestScore = initialScore; 
-            SubSet bestSubSet = new SubSet();
-            
-            while(hSubsets.hasMoreElements()) {
-                SubSet hSubset = hSubsets.nextElement();
-                changueEval = deleteEval(_x, _y, hSubset, graph);
-                
-                evalScore = initialScore + changueEval;
+        List<Node> hNeighbors = getSubsetOfNeighbors(_x, _y, graph);
+        List<HashSet<Node>> hSubsets = generatePowerSet(hNeighbors);
 
-                if (evalScore > bestScore) {
-                    // START TEST 1
-                    List<Node> naYXH = findNaYX(_x, _y, graph);
-                    naYXH.removeAll(hSubset);
-                    if (isClique(naYXH, graph)) {
-                        // END TEST 1
-                        bestScore = evalScore;
-                        bestSubSet = hSubset;
-                    }
-                }
-            }
-            return new EdgeSearch(bestScore, bestSubSet, edge);
-        }
-        return new EdgeSearch(initialScore, new SubSet(), edge);
-    }
-    
-    /**
-     * BS method of the BES algorithm. It finds the best possible edge, alongside with the subset h_0 that is best suited
-     * for deletion in the current graph.
-     * @param graph current graph of the thread.
-     * @param initialScore score the current graph has.
-     * @return score of the best possible deletion found.
-     */
-    private double bs2(Graph graph, double initialScore){
-        //   	System.out.println("\n** BACKWARD ELIMINATION SEARCH");
-        //   	System.out.println("Initial Score = " + nf.format(initialScore));
-
-        PowerSetFabric.setMode(PowerSetFabric.MODE_BES);
+        double changueEval;
+        double evalScore;
         double bestScore = initialScore;
+        HashSet<Node> bestSubSet = new HashSet<>();
 
-        x_d = y_d = null;
-        h_0 = null;
+        for (HashSet<Node> hSubset : hSubsets) {
+            changueEval = deleteEval(_x, _y, hSubset, graph);
 
-        List<Edge> edges = new ArrayList<>(S);
+            evalScore = initialScore + changueEval;
 
-/*
-        for (TupleNode tupleNode : this.S) {
-            Node _x = tupleNode.x;
-            Node _y = tupleNode.y;
-            // Adding Edges to check
-            edges.add(Edges.directedEdge(_x, _y));
-            edges.add(Edges.directedEdge(_y, _x));
-        }
-*/
-        for (Edge edge : edges) {
-
-            //Checking time
-            /*if(isTimeout()) {
-                System.out.println("Timeout in BESTHREAD id: " + getId());
-                break;
-            }*/
-
-            // Checking if the edge is actually inside the graph
-            if(!graph.containsEdge(edge))
-                continue;
-
-            Node _x = Edges.getDirectedEdgeTail(edge);
-            Node _y = Edges.getDirectedEdgeHead(edge);
-
-            List<Node> hNeighbors = getSubsetOfNeighbors(_x, _y, graph);
-            //                List<Set<Node>> hSubsets = powerSet(hNeighbors);
-            PowerSet hSubsets= PowerSetFabric.getPowerSet(_x,_y,hNeighbors);
-
-            while(hSubsets.hasMoreElements()) {
-                SubSet hSubset=hSubsets.nextElement();
-                double deleteEval = deleteEval(_x, _y, hSubset, graph);
-                double evalScore = initialScore + deleteEval;
-
-                //                    System.out.println("Attempt removing " + _x + "-->" + _y + "(" +
-                //                            evalScore + ")");
-
-                if (!(evalScore > bestScore)) {
-                    continue;
-                }
-
+            if (evalScore > bestScore) {
                 // START TEST 1
-                List<Node> naYXH = findNaYX(_x, _y, graph);
+                HashSet<Node> naYXH = findNaYX(_x, _y, graph);
                 naYXH.removeAll(hSubset);
-                if (!isClique(naYXH, graph)) {
-                    continue;
+                if (isClique(naYXH, graph)) {
+                    // END TEST 1
+                    bestScore = evalScore;
+                    bestSubSet = hSubset;
                 }
-                // END TEST 1
-
-                bestScore = evalScore;
-                x_d = _x;
-                y_d = _y;
-                h_0 = hSubset;
             }
+        }
+        return new EdgeSearch(bestScore, bestSubSet, edge);
+    }
 
+    public static List<HashSet<Node>> generatePowerSet(List<Node> nodes) {
+        List<HashSet<Node>> subsets = new ArrayList<>();
+
+        for (int i = 0; i < Math.pow(2, nodes.size()); i++) {
+            HashSet<Node> newSubSet = new HashSet<>();
+            String selection = Integer.toBinaryString(i);
+            for (int j = selection.length() - 1; j >= 0; j--) {
+                if (selection.charAt(j) == '1') {
+                    newSubSet.add(nodes.get(selection.length() - j - 1));
+                }
+            }
+            subsets.add(newSubSet);
         }
 
-        return bestScore;
+        return subsets;
     }
-    
 }

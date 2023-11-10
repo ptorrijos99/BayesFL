@@ -1,57 +1,99 @@
 package org.albacete.simd.mctsbn;
 
-import java.util.Arrays;
-import org.albacete.simd.utils.Problem;
-import org.jetbrains.annotations.NotNull;
+import org.albacete.simd.utils.ProblemMCTS;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
-public class TreeNode implements Comparable<TreeNode>{
+public class TreeNode implements Comparable<TreeNode> {
 
-    private final State state;
+    public final Integer node;
     private final TreeNode parent;
-    private Set<TreeNode> children = new HashSet<>();
-    
+    private final Set<TreeNode> children = new HashSet<>();
+    private final Set<Integer> childrenIDs = new HashSet<>();
+
+    private final LinkedHashSet<Integer> order;
+    private final ProblemMCTS problem;
+    private double localScore;
+
     private int numVisits = 0;
     private double totalReward = 0;
-
     private double UCTSCore = 0;
-    
-    private final HillClimbingEvaluator hc;
-    
+
     private boolean fullyExpanded;
     private boolean isExpanded = false;
 
     MCTSBN mctsbn;
 
-    public TreeNode(State state, TreeNode parent, MCTSBN mctsbn) {
-        this.state = state;
-        this.hc = state.getHC();
+    public TreeNode(Integer node, TreeNode parent) {
+        this.node = node;
         this.parent = parent;
+        this.order = new LinkedHashSet<>(parent.order);
+        this.order.add(node);
+
+        this.problem = parent.problem;
+        this.parent.addChild(this);
+        
         this.numVisits = 0;
         this.totalReward = 0;
-        this.fullyExpanded = state.isTerminal();
-        this.mctsbn = mctsbn;
-        
-        if (this.parent != null) {
-            this.parent.addChild(this);
-            this.numVisits = 1;
+        this.fullyExpanded = isTerminal();
+
+        /*
+        if (node != -1) {
+            // Evaluating the new node if its not the root
+            HashSet<Integer> candidates = new HashSet<>(allVars.size());
+            for (Integer candidate : allVars) {
+                if (!order.contains(candidate)) {
+                    candidates.add(candidate);
+                }
+            }
+            this.localScore += hc.evaluate(this.node, candidates).bdeu;
         }
+         */
     }
 
-    public boolean isTerminal() {
-        return state.isTerminal();
-    }
+    public TreeNode(ProblemMCTS problem) {
+        this.problem = problem;
 
-    public State getState() {
-        return state;
+        this.node = -1;
+        this.parent = null;
+        this.order = new LinkedHashSet<>();
+        this.order.add(this.node);
+
+        this.numVisits = 0;
+        this.totalReward = 0;
+        this.fullyExpanded = true;
     }
 
     public TreeNode getParent() {
         return parent;
+    }
+
+    public Set<TreeNode> getChildren() {
+        return children;
+    }
+          
+    public Set<Integer> getChildrenIDs() {
+        return childrenIDs;
+    }
+
+    public TreeNode newChild(Integer node){
+        return new TreeNode(node, this);
+    }
+
+    public List<Integer> getPossibleChilds(ArrayList<Integer> orderPGES){
+        List<Integer> possibleActions = new ArrayList<>();
+        for(Integer var : orderPGES){
+            if(!order.contains(var)){
+                possibleActions.add(var);
+            }
+        }
+        return possibleActions;
+    }
+
+    public void addChild(TreeNode child){
+        this.children.add(child);
+        this.childrenIDs.add(child.node);
+        this.isExpanded = true;
     }
 
     public int getNumVisits() {
@@ -61,31 +103,11 @@ public class TreeNode implements Comparable<TreeNode>{
     public double getTotalReward() {
         return totalReward;
     }
-    
+
     public double getUCTScore() {
         return UCTSCore;
     }
 
-    public Set<TreeNode> getChildren() {
-        return children;
-    }
-
-    public Set<Integer> getChildrenAction(){
-        Set<Integer> actions = new HashSet<>();
-        for (TreeNode child: children) {
-            actions.add(child.state.getNode());
-        }
-        return actions;
-    }
-
-    public void setChildren(Set<TreeNode> children) {
-        this.children = children;
-    }
-
-    public void addChild(TreeNode child){
-        this.children.add(child);
-        this.isExpanded = true;
-    }
 
     public boolean isFullyExpanded() {
         return fullyExpanded;
@@ -95,22 +117,22 @@ public class TreeNode implements Comparable<TreeNode>{
         this.fullyExpanded = fullyExpanded;
     }
 
-    public void setNumVisits(int numVisits) {
-        this.numVisits = numVisits;
-    }
-
-    public void setTotalReward(double totalReward) {
-        this.totalReward = totalReward;
+    public LinkedHashSet<Integer> getOrder() {
+        return order;
     }
 
     public void addReward(double reward){
         totalReward += reward;
     }
 
+    public void setTotalReward(double totalReward) {
+        this.totalReward = totalReward;
+    }
+
     public void incrementOneVisit(){
         this.numVisits++;
     }
-    
+
     public void decrementOneVisit(){
         this.numVisits--;
     }
@@ -119,8 +141,19 @@ public class TreeNode implements Comparable<TreeNode>{
         return isExpanded;
     }
 
-    public void setExpanded(boolean expanded) {
-        isExpanded = expanded;
+    public boolean isTerminal(){
+        return order.size() == problem.getVariables().size();
+    }
+
+    public void updateUCT() {
+        if(this.parent == null && this.fullyExpanded){
+            UCTSCore = Double.NEGATIVE_INFINITY;
+        } else {
+            double exploitationScore = mctsbn.EXPLOITATION_CONSTANT * (this.getTotalReward() / this.getNumVisits());
+            double explorationScore = mctsbn.EXPLORATION_CONSTANT * Math.sqrt(Math.log(this.parent.getNumVisits()) / this.getNumVisits());
+
+            UCTSCore = exploitationScore + explorationScore;
+        }
     }
 
     @Override
@@ -132,10 +165,10 @@ public class TreeNode implements Comparable<TreeNode>{
 
     private void print(StringBuilder buffer, String prefix, String childrenPrefix) {
         buffer.append(prefix);
-        buffer.append("N" + state.getNode());
-        
+        buffer.append("N" + node);
+
         String results;
-        
+
         double exploitationScore = mctsbn.EXPLOITATION_CONSTANT * (this.getTotalReward() / this.getNumVisits());
 
         if(this.parent == null){
@@ -145,7 +178,7 @@ public class TreeNode implements Comparable<TreeNode>{
             results = "  \t" + this.getNumVisits() + "   UCT " + UCTSCore + ",   BDeu " + exploitationScore + ",   EXP " + explorationScore;
         }
         buffer.append(results);
-        
+
         buffer.append('\n');
         for (Iterator<TreeNode> it = children.iterator(); it.hasNext();) {
             TreeNode next = it.next();
@@ -156,29 +189,9 @@ public class TreeNode implements Comparable<TreeNode>{
             }
         }
     }
-    
-    public void updateUCT(double bestAStar) {
-        if(this.parent == null && this.fullyExpanded){
-            UCTSCore = Double.NEGATIVE_INFINITY;
-        } else {
-            double exploitationScore = mctsbn.EXPLOITATION_CONSTANT * (this.getTotalReward() / this.getNumVisits());
-            double explorationScore = mctsbn.EXPLORATION_CONSTANT * Math.sqrt(Math.log(this.parent.getNumVisits()) / this.getNumVisits());
-            /*double aStar = state.getLocalScore();
-            for (Integer node : state.getPossibleActions()) {
-                aStar += hc.bestBDeuForNode[node];
-            }
-            //System.out.println("localScore: " + state.getLocalScore() + ", aStar: " + aStar + ", bestAStar: " + bestAStar);
-            aStar -= bestAStar;
-            aStar /= Problem.nInstances;
-            aStar *= MCTSBN.A_STAR_CONSTANT;*/
-
-            UCTSCore = exploitationScore + explorationScore;
-            //System.out.println("UCT: " + UCTSCore + ".   \t" + exploitationScore + ".   \t" + explorationScore + ".   \t" + aStar);
-        }
-    }
 
     @Override
-    public int compareTo(@NotNull TreeNode o) {
+    public int compareTo(TreeNode o) {
         return Double.compare(this.UCTSCore, o.UCTSCore);
     }
 
@@ -186,17 +199,16 @@ public class TreeNode implements Comparable<TreeNode>{
     public boolean equals(Object obj) {
         if(this == obj)
             return true;
-        if(!(obj instanceof TreeNode))
+        if(!(obj instanceof TreeNode other))
             return false;
-        TreeNode other = (TreeNode) obj;
 
-        return this.state.equals(other.state);
+        return Objects.equals(this.node, other.node);
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.state);
+        hash = 29 * hash + this.node;
         return hash;
     }
 

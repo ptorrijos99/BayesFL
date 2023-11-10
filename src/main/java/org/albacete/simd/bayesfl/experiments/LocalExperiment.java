@@ -60,20 +60,20 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "pathfinder";
+        String net = "andes";
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "BN_FusionUnion";
         String fusionServer = "BN_FusionUnion";
         
-        int maxEdgesIt = 200;
-        int nIterations = 100000;
+        int maxEdgesIt = 50;
+        int nIterations = 100;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 20;
+        int nClients = 4;
         launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd, nClients, maxEdgesIt, nIterations);
     }
     
@@ -134,7 +134,7 @@ public class LocalExperiment {
                 LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
                 Client client = new Client(fusionClient, algorithm, BNDataSets.get(i));
-                client.setStats(true, PATH);
+                client.setStats(true, true, PATH);
                 client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }
@@ -183,7 +183,7 @@ public class LocalExperiment {
                 LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
                 Client client = new Client(fusionClient, algorithm, data);
-                client.setStats(true, PATH);
+                client.setStats(true, true, PATH);
                 client.setExperimentName(algName + "," + maxEdgesIt + ',' + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }

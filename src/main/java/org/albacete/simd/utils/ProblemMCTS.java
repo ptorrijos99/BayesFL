@@ -21,9 +21,11 @@ public class ProblemMCTS extends Problem {
      */
     private final ConcurrentHashMap<String,Double> localScoreCache = new ConcurrentHashMap<>();
 
-    public static double emptyGraphScore;
+    public double emptyGraphScore;
 
-    public static int nInstances;
+    public int nInstances;
+
+
 
     public ProblemMCTS (DataSet dataSet){
         super(dataSet);
