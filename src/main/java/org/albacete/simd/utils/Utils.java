@@ -1,6 +1,5 @@
 package org.albacete.simd.utils;
 
-import consensusBN.PairWiseConsensusBES;
 import edu.cmu.tetrad.bayes.BayesIm;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
@@ -9,7 +8,6 @@ import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.data.DiscreteVariable;
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.SearchGraphUtils;
 import weka.classifiers.bayes.BayesNet;
 
 import java.io.File;
@@ -48,7 +46,7 @@ public class Utils {
             for (Node pNode : pNodes) {
                 x = pNode;
 
-                if (p.getChildren(x).size() > 0) {
+                if (!p.getChildren(x).isEmpty()) {
                     continue;
                 }
 
@@ -66,7 +64,7 @@ public class Utils {
                         }
                     }
                 }
-                if (neighbors.size() > 0) {
+                if (!neighbors.isEmpty()) {
                     Collection<Node> parents = p.getParents(x);
                     Set<Node> all = new HashSet<>(neighbors);
                     all.addAll(parents);
@@ -85,7 +83,7 @@ public class Utils {
                 break;
             }
             pNodes.remove(x);
-        } while (pNodes.size() > 0);
+        } while (!pNodes.isEmpty());
     }
 
     /**
@@ -255,17 +253,6 @@ public class Utils {
             setofbns.remove(i);
             setofbns.add(i, newdag);
         }
-    }
-
-    public static int compare(Dag bn1, Dag bn2){
-        ArrayList<Dag> dags = new ArrayList<>();
-        dags.add(bn1);
-        dags.add(bn2);
-        ensureVariables(dags);
-        PairWiseConsensusBES kl = new PairWiseConsensusBES(dags.get(0), dags.get(1));
-        kl.getFusion();
-        int hmd =  kl.getHammingDistance();
-        return hmd;
     }
 
     public static int SHD (Dag bn1, Dag bn2) {

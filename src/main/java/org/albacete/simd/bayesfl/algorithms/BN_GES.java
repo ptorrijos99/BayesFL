@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 /**
- *    BN_pGES.java
+ *    BN_GES.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
@@ -78,7 +78,7 @@ public class BN_GES implements LocalAlgorithm {
 
     /**
      * Build the local model using the algorithm, without previous local model.
-     * @param data The Data used to build the Model (BN).
+     * @param data The Data (BN_DataSet) used to build the Model (BN).
      * @return The model build by the algorithm.
      */
     @Override
@@ -89,7 +89,7 @@ public class BN_GES implements LocalAlgorithm {
     /**
      * Build the local model using the algorithm.
      * @param localModel The previous local Model (BN) that the algorithm uses as base.
-     * @param data The Data used to build the Model.
+     * @param data The Data (BN_DataSet) used to build the Model (BN).
      * @return The model build by the algorithm.
      */
     @Override

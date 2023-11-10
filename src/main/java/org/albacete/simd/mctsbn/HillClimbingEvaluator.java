@@ -22,7 +22,7 @@ public class HillClimbingEvaluator {
     
     private final ConcurrentHashMap<String,Double> localScoreCache;
 
-    private List<Integer> order;
+    private ArrayList<Integer> order;
 
     private Graph graph;
 
@@ -43,18 +43,15 @@ public class HillClimbingEvaluator {
         metric = new BDeuScore(problem.getData());
     }
 
-    public HillClimbingEvaluator(ProblemMCTS problem, List<Integer> order, ConcurrentHashMap<String,Double> localScoreCache){
+    public HillClimbingEvaluator(ProblemMCTS problem, ArrayList<Integer> order, ConcurrentHashMap<String,Double> localScoreCache){
         this(problem, localScoreCache);
         setOrder(order);
     }
 
 
-
     public Pair evaluate(int child, Collection<Integer> candidates){
         int iteration = 0;
 
-        //System.out.println("\n-------------- " + child + " --------------");
-        
         Set<Integer> parents = new HashSet<>();
         double bdeuFinal = 0;
 
@@ -94,17 +91,14 @@ public class HillClimbingEvaluator {
                 int bp = bestParent.get();
                 if(parents.contains(bp)) {
                     parents.remove(bp);
-                    //System.out.println("   BEST PARENT DEL: " + bp + ", SCORE: " + bestScore.get());
                 }
                 else {
                     parents.add(bp);
-                    //System.out.println("   BEST PARENT ADD: " + bp + ", SCORE: " + bestScore.get());
                 }
                 iteration++;
                 bdeuFinal += bestScore.get();
             } 
             else {
-                //System.out.println("     FIN DE LA ITERACIÓN: " + bestParent.get() + ", SCORE: " + bestScore.get());
                 break;
             }
         }
@@ -161,14 +155,11 @@ public class HillClimbingEvaluator {
 
     public double localBdeuScore(int nNode, int[] nParents) {
         Double oldScore = localScoreCache.get(nNode + Arrays.toString(nParents));
-        //problem.counter.getAndIncrement();
 
         if (oldScore != null) {
             return oldScore;
         }
-        
-        //problem.counterSinDict.getAndIncrement();
-        
+
         double fLogScore = metric.localScore(nNode, nParents);
         localScoreCache.put(nNode + Arrays.toString(nParents), fLogScore);
 
@@ -192,14 +183,7 @@ public class HillClimbingEvaluator {
             
             candidates.add(node);
         }
-        
-        //System.out.println("Obtained result: " + finalScore + "\t-> " + order);
 
-        
-        //System.out.println("\n TOTAL CALCULATIONS:  " + (problem.counter.get() - c1));
-        //System.out.println(" TOTAL CALCULATIONS no dictionary:  " + (problem.counterSinDict.get() - c2));
-        //System.out.println(" SIZE OF CONCURRENT: " + localScoreCache.size());
-        
         return finalScore;
     }
     
@@ -212,7 +196,7 @@ public class HillClimbingEvaluator {
         return graph;
     }
     
-    public final void setOrder(List<Integer> order) {
+    public final void setOrder(ArrayList<Integer> order) {
         this.order = order;
     }
      

@@ -70,9 +70,14 @@ public class Client {
     private int nClients;
 
     /**
-     * The stats flag.
+     * The build stats flag.
      */
-    private boolean stats = false;
+    private boolean buildStats = false;
+
+    /**
+     * The fusion stats flag.
+     */
+    private boolean fusionStats = false;
     
     private String path;
     
@@ -117,7 +122,7 @@ public class Client {
         localModel = localAlgorithm.buildLocalModel(localModel, data);
         double time = (System.currentTimeMillis() - start) / 1000;
         
-        if (stats)  {
+        if (buildStats)  {
             localModel.saveStats(this.experimentName + ",build", path, nClients, id, data, iteration, time);
         }
     }
@@ -136,7 +141,7 @@ public class Client {
         localModel = localFusion.fusion(localModel, globalModel);
         double time = (System.currentTimeMillis() - start) / 1000;
 
-        if (stats) {
+        if (fusionStats) {
             localModel.saveStats(this.experimentName + ",fusion", path, nClients, id, data, iteration, time);
         }
         
@@ -146,7 +151,7 @@ public class Client {
             localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
             time = (System.currentTimeMillis() - start) / 1000;
 
-            if (stats)  {
+            if (fusionStats)  {
                 localModel.saveStats(this.experimentName + ",refin", path, nClients, id, data, iteration, time);
             }
         }
@@ -186,10 +191,12 @@ public class Client {
 
     /**
      * Set the stats flag.
-     * @param stats The stats flag.
+     * @param buildStats The stats flag.
+     * @param fusionStats The stats flag.
      */
-    public void setStats(boolean stats, String path) {
-        this.stats = stats;
+    public void setStats(boolean buildStats, boolean fusionStats, String path) {
+        this.buildStats = buildStats;
+        this.fusionStats = fusionStats;
         this.path = path;
     }
 

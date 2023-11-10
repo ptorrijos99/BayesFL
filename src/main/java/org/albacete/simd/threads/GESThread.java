@@ -1,12 +1,9 @@
 package org.albacete.simd.threads;
 
-import consensusBN.SubSet;
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.search.MeekRules;
 import edu.cmu.tetrad.search.SearchGraphUtils;
 import edu.cmu.tetrad.util.NumberFormatUtil;
-import org.albacete.simd.framework.BackwardStage;
-import org.albacete.simd.framework.ForwardStage;
 import org.albacete.simd.utils.LocalScoreCacheConcurrent;
 import org.albacete.simd.utils.Problem;
 
@@ -115,7 +112,7 @@ public abstract class GESThread implements Runnable{
     /**
      * Subset T of Nodes with which X and Y are inserted.
      */
-    protected SubSet t_0;
+    protected HashSet<Node> t_0;
 
     /**
      * Node X from the edge X->Y that can be deleted from the graph.
@@ -130,7 +127,7 @@ public abstract class GESThread implements Runnable{
     /**
      * Subset H of Nodes with which X and Y are deleted.
      */
-    protected SubSet h_0;
+    protected HashSet<Node> h_0;
 
     /**
      * Id of the thread
@@ -154,17 +151,12 @@ public abstract class GESThread implements Runnable{
     public static double insertEval(Node x, Node y, Set<Node> t, Graph graph, Problem problem) {
         // set1 contains x; set2 does not.
         Set<Node> set1;
-//        if(t.isEmpty()){
-//            set1 = new HashSet<>();
-//        }
-//        else{
-            set1 = new HashSet<>(findNaYX(x, y, graph));
-//        }
+        set1 = new HashSet<>(findNaYX(x, y, graph));
         set1.addAll(t);
         set1.addAll(graph.getParents(y));
         Set<Node> set2 = new HashSet<>(set1);
         set1.add(x);
-        return scoreGraphChange(y, set1, set2, graph, problem);
+        return scoreGraphChange(y, set1, set2, problem);
     }
 
 
@@ -230,7 +222,7 @@ public abstract class GESThread implements Runnable{
         Set<Node> set2 = new HashSet<>(set1);
         set1.remove(x);
         set2.add(x);
-        return scoreGraphChange(y, set1, set2, graph, problem);
+        return scoreGraphChange(y, set1, set2, problem);
     }
 
     /**
@@ -241,21 +233,23 @@ public abstract class GESThread implements Runnable{
      * @param x Node X
      * @param y Node Y
      * @param graph current graph of the problem
-     * @return List of nodes that are connected to Y and adjacent to X.
+     * @return Set of nodes that are connected to Y and adjacent to X.
      */
-    protected static List<Node> findNaYX(Node x, Node y, Graph graph) {
-        List<Node> adjY = graph.getAdjacentNodes(y);
-        List<Node> naYX = new LinkedList<>(adjY);
+    protected static HashSet<Node> findNaYX(Node x, Node y, Graph graph) {
+        HashSet<Node> naYX = new HashSet<>(graph.getAdjacentNodes(y));
         naYX.retainAll(graph.getAdjacentNodes(x));
-        
-        for (int i = naYX.size() - 1; i >= 0; i--) {
-            Node z = naYX.get(i);
+
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+
+        for (Node z : naYX) {
             Edge edge = graph.getEdge(y, z);
 
             if (!Edges.isUndirectedEdge(edge)) {
-                naYX.remove(z);
+                nodesToRemove.add(z);
             }
         }
+
+        nodesToRemove.forEach(naYX::remove);
 
         return naYX;
     }
@@ -266,7 +260,7 @@ public abstract class GESThread implements Runnable{
      * @param graph Current graph of the stage
      * @return true if there is a clique, false otherwise.
      */
-    protected static boolean isClique(List<Node> set, Graph graph) {
+    protected static boolean isClique(Set<Node> set, Graph graph) {
         List<Node> setNeighbors = new LinkedList<>(set);
         for (int i = 0; i < setNeighbors.size() - 1; i++) {
             for (int j = i + 1; j < setNeighbors.size(); j++) {
@@ -280,16 +274,16 @@ public abstract class GESThread implements Runnable{
 
     /**
      * Verifies if every semi-directed path from y to x contains a node in naYXT.
-     * @param x Starting node of the test.
-     * @param y Ending node of the test
+     *
+     * @param x     Starting node of the test.
+     * @param y     Ending node of the test
      * @param naYXT List of nodes being checked to be in the semi-directed path between x and y.
      * @param graph Current graph of the stage.
-     * @param marked Set of Nodes being stored to avoid cycles.
      * @return true if there is a semi-directed path between x and y that contains a node stored in naYXT,
      * false if there isn't.
      */
-    protected static boolean isSemiDirectedBlocked(Node x, Node y, List<Node> naYXT,
-                                          Graph graph, Set<Node> marked) {
+    protected static boolean isSemiDirectedBlocked(Node x, Node y, Set<Node> naYXT,
+                                          Graph graph) {
         if (naYXT.contains(y)) {
             return true;
         }
@@ -319,24 +313,6 @@ public abstract class GESThread implements Runnable{
             }
         }
         return true;
-
-        /*for (Node node1 : graph.getNodes()) {
-            if (node1 == y || marked.contains(node1)) {
-                continue;
-            }
-            
-            if (graph.isAdjacentTo(y, node1) && !graph.isParentOf(node1, y)) {
-                marked.add(node1);
-
-                if (!isSemiDirectedBlocked(x, node1, naYXT, graph, marked)) {
-                    return false;
-                }
-
-                marked.remove(node1);
-            }
-        }
-
-        return true;*/
     }
     
     /**
@@ -447,46 +423,17 @@ public abstract class GESThread implements Runnable{
 
     /**
      * Score difference of the node y when it is associated as child with one set of parents and when it is associated with another one.
-     * @param y {@link Node Node} being considered for the score.
+     *
+     * @param y        {@link Node Node} being considered for the score.
      * @param parents1 Set of {@link Node Node} of the first set of parents.
      * @param parents2 Set of {@link Node Node} of the second set of parents.
      * @return Score difference between both possibilities.
      */
     public static double scoreGraphChange(Node y, Set<Node> parents1,
-                                   Set<Node> parents2, Graph graph, Problem problem) {
-
-        /*
-        // Creating hashindeces map
-        HashMap<Node, Integer> index = new HashMap<>();
-
-        // Building map
-        for (Node next : graph.getNodes()) {
-            for (int i = 0; i < varNames.length; i++) {
-                if (varNames[i].equals(next.getName())) {
-                    index.put(next, i);
-                    break;
-                }
-            }
-        }
-        */
-
-/*
-        System.out.println("DEBUG Score Graph Change of:");
-        System.out.println("Node: " + y);
-        System.out.println("Parents1: " + parents1);
-        System.out.println("Parents2: " + parents2);
-        System.out.println("HashIndices: " + index);
-        System.out.println("-------------------------------");
-*/
+                                          Set<Node> parents2, Problem problem) {
 
         HashMap<Node, Integer> index = problem.getHashIndices();
-/*
-        if(index == null){
-            System.out.println("REBUILDING HASHINDECES IN GRAPHSCORESCHANGE");
-            problem.buildIndexing(graph);
-            index = problem.getHashIndices();
-        }
-*/
+
         // Getting indexes
         int yIndex = index.get(y);
         int[] parentIndices1 = new int[parents1.size()];
@@ -532,63 +479,6 @@ public abstract class GESThread implements Runnable{
         numNonCachedCalls++;
 
         double fLogScore = problem.getBDeu().localScore(nNode, nParents);
-        
-        /*  int[] nValues = problem.getnValues();
-            int[][] cases = problem.getCases();
-
-
-            int numValues=nValues[nNode];
-            int numParents=nParents.length;
-
-            double ess= problem.getSamplePrior();
-            double essPenalty = 1.0;
-            double kappa= problem.getStructurePrior();
-
-            int[] numValuesParents=new int[nParents.length];
-            int cardinality=1;
-            for(int i=0;i<numValuesParents.length;i++) {
-
-                numValuesParents[i]=nValues[nParents[i]];
-                cardinality*=numValuesParents[i];
-            }
-
-            int[][] Ni_jk = new int[cardinality][numValues];
-    
-            double Np_ijk = (essPenalty * ess) / (numValues*cardinality);
-            double Np_ij = (essPenalty *ess) / cardinality;
-
-            // initialize
-            for (int j = 0; j < cardinality;j++)
-                for(int k= 0; k<numValues; k++)
-                    Ni_jk[j][k] = 0;
-
-            for (int[] aCase : cases) {
-                int iCPT = 0;
-                for (int iParent = 0; iParent < numParents; iParent++) {
-                    iCPT = iCPT * numValuesParents[iParent] + aCase[nParents[iParent]];
-                }
-                Ni_jk[iCPT][aCase[nNode]]++;
-            }
-
-            for (int iParent = 0; iParent < cardinality; iParent++) {
-                double N_ij = 0;
-                double N_ijk;
-
-                for (int iSymbol = 0; iSymbol < numValues; iSymbol++) {
-                    if (Ni_jk[iParent][iSymbol] != 0) {
-                        N_ijk = Ni_jk[iParent][iSymbol];
-                        fLogScore += ProbUtils.lngamma(N_ijk + Np_ijk);
-                        fLogScore -= ProbUtils.lngamma(Np_ijk);
-                        N_ij += N_ijk;
-                    }
-                }
-                if (Np_ij != 0)
-                    fLogScore += ProbUtils.lngamma(Np_ij);
-                if (Np_ij + N_ij != 0)
-                    fLogScore -= ProbUtils.lngamma(Np_ij + N_ij);
-            }
-            fLogScore += Math.log(kappa) * cardinality * (numValues - 1);
-        */
 
         localScoreCache.add(nNode, setParents, fLogScore);
         return fLogScore;
@@ -729,7 +619,7 @@ public abstract class GESThread implements Runnable{
     //-----------------------------THREAD METHODS--------------------------------//
 
     /**
-     * Gets the flag of the thread that indicates if the thread has added or deleted an edge in it's algorithm stage.
+     * Gets the flag of the thread that indicates if the thread has added or deleted an edge in its algorithm stage.
      * @return the flag of the thread
      * @throws InterruptedException Exception caused by external interruption
      */
@@ -800,26 +690,4 @@ public abstract class GESThread implements Runnable{
         return problem.getLocalScoreCache();
     }
 
-    protected boolean isTimeout(){
-        //return ((timeout != -1) &&
-        //        ((System.currentTimeMillis() - startTime) > timeout));
-        long time = (System.currentTimeMillis() - startTime);
-        double zScore = 0;
-        //System.out.println("Forward Meantime: " + ForwardStage.meanTimeTotal);
-        //System.out.println("Backward Meantime: " + BackwardStage.meanTimeTotal);
-
-        if(isForwards) {
-            if (ForwardStage.meanTimeTotal != 0)
-                zScore = (time - ForwardStage.meanTimeTotal) / Math.sqrt(ForwardStage.varianceTimeTotal);
-        }
-        else{
-            if (BackwardStage.meanTimeTotal != 0)
-                zScore = (time - BackwardStage.meanTimeTotal) / Math.sqrt(BackwardStage.varianceTimeTotal);
-
-        }
-        if(zScore > 3)
-            System.out.println("Timeout! Finishing Thread");
-        return zScore > 3;
-
-    }
 }

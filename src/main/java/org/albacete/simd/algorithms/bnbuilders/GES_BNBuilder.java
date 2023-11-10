@@ -24,13 +24,13 @@ public class GES_BNBuilder extends BNBuilder {
 
 
     public GES_BNBuilder(DataSet data, boolean parallel) {
-        super(data, 1, -1, -1);
+        super(data, 1, Integer.MAX_VALUE, Integer.MAX_VALUE);
         super.setInitialGraph(new EdgeListGraph(new LinkedList<>(problem.getVariables())));
         this.parallel = parallel;
     }
 
     public GES_BNBuilder(String path, boolean parallel) {
-        super(path, 1, -1, -1);
+        super(path, 1, Integer.MAX_VALUE, Integer.MAX_VALUE);
         super.setInitialGraph(new EdgeListGraph(new LinkedList<>(problem.getVariables())));
         this.parallel = parallel;
     }
@@ -48,7 +48,7 @@ public class GES_BNBuilder extends BNBuilder {
     }
 
     public GES_BNBuilder(Graph initialDag, Problem problem, Set<Edge> subsetEdges, boolean parallel) {
-        super(initialDag, problem, 1, -1,-1);
+        super(initialDag, problem, 1, Integer.MAX_VALUE,Integer.MAX_VALUE);
         super.setOfArcs = subsetEdges;
         super.setInitialGraph(new EdgeListGraph(initialDag));
         this.parallel = parallel;
