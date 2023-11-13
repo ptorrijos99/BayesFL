@@ -58,8 +58,9 @@ public class ConsensusUnion {
             case "MeanEdgesLimit":
                 int meanEdges = 0;
                 for (Dag d : dags) {
-                    meanEdges += d.getNumEdges() / dags.size();
+                    meanEdges += d.getNumEdges();
                 }
+                meanEdges /= dags.size();
                 return applyNumberEdgesLimit(alpha, edgeFrequency, edges, meanEdges);
             // Option 2: Add the edges in order of frequency, until the max number of edges of the DAGs is reached
             case "MaxEdgesLimit":
@@ -79,8 +80,9 @@ public class ConsensusUnion {
             case "FrequencyMeanLimit":
                 int meanFrequency = 0;
                 for (Integer frequency : edgeFrequency.values()) {
-                    meanFrequency += frequency / edgeFrequency.size();
+                    meanFrequency += frequency;
                 }
+                meanFrequency /= edgeFrequency.size();
                 return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, meanFrequency);
             // Option 5: Add the edges in order of frequency, until the frequency of the edges is more than 1
             case "FrequencyOneLimit":
@@ -129,13 +131,11 @@ public class ConsensusUnion {
         Dag union = new Dag(alpha);
         int numEdges = 0;
         for (Edge edge : edges) {
-            if (edgeFrequency.get(edge) > limit) {
-                union.addEdge(edge);
-            }
-            numEdges++;
             if (numEdges >= limit) {
                 break;
             }
+            union.addEdge(edge);
+            numEdges++;
         }
         return union;
     }
