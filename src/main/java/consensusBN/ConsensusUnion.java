@@ -8,18 +8,18 @@ import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Endpoint;
 import edu.cmu.tetrad.graph.Node;
 
-import static consensusBN.BetaToAlpha.transform;
+import static consensusBN.AlphaOrder.alphaOrder;
+import static consensusBN.BetaToAlpha.transformToAlpha;
 
 public class ConsensusUnion {
 
     public static Dag fusionUnion(ArrayList<Dag> dags) {
-        AlphaOrder heuristic = new AlphaOrder(dags);
-        ArrayList<Node> alpha = heuristic.computeAlphaH2();
+        ArrayList<Node> alpha = alphaOrder(dags);
 
         ArrayList<Dag> outputDags = new ArrayList<>();
 
         for (Dag dag : dags) {
-            outputDags.add(transform(dag, alpha));
+            outputDags.add(transformToAlpha(dag, alpha));
         }
 
         Dag union = new Dag(alpha);
@@ -32,7 +32,6 @@ public class ConsensusUnion {
                     }
                 }
             }
-
         }
         return union;
     }
