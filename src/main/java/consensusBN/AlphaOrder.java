@@ -12,39 +12,30 @@ import edu.cmu.tetrad.graph.Node;
 
 public class AlphaOrder {
 
-    ArrayList<Dag> setOfDags;
-    ArrayList<Node> alpha;
-    ArrayList<Dag> setOfauxG;
-
-    public AlphaOrder(ArrayList<Dag> dags) {
-        this.setOfDags = dags;
-        this.alpha = new ArrayList<>();
-        this.setOfauxG = new ArrayList<>();
-
-        for (Dag i : setOfDags) {
+    // Heurística para encontrar un orden de consenso.
+    // Se basa en los enlaces que generaría seguir una secuencia creada desde los nodos sumideros hacia arriba.
+    public static ArrayList<Node> alphaOrder(ArrayList<Dag> dags) {
+        ArrayList<Dag> auxDags = new ArrayList<>();
+        for (Dag i : dags) {
             Dag aux_G = new Dag(i);
-            setOfauxG.add(aux_G);
+            auxDags.add(aux_G);
         }
-    }
 
-    // heuistica para encontrar un orden de conceso. Se basa en los enlaces que generaria seguir una secuencia creada desde los nodos sumideros hacia arriba.
-    public ArrayList<Node> computeAlphaH2() {
-        List<Node> nodes = setOfDags.get(0).getNodes();
+        List<Node> nodes = new ArrayList<>(dags.get(0).getNodes());
         LinkedList<Node> computedAlpha = new LinkedList<>();
 
         while (!nodes.isEmpty()) {
-            Node node_alpha = computeNextH2(nodes);
+            Node node_alpha = computeNext(auxDags, nodes);
             computedAlpha.addFirst(node_alpha);
-            for (Dag g : this.setOfauxG) {
+            for (Dag g : auxDags) {
                 removeNode(g, node_alpha);
             }
             nodes.remove(node_alpha);
         }
-        this.alpha = new ArrayList<>(computedAlpha);
-        return this.alpha;
+        return new ArrayList<>(computedAlpha);
     }
 
-    Node computeNextH2(List<Node> nodes) {
+    static Node computeNext(List<Dag> dags, List<Node> nodes) {
         int changes;
         int inversion = 0;
         int addition = 0;
@@ -52,7 +43,7 @@ public class AlphaOrder {
         int min = Integer.MAX_VALUE;
 
         for (Node nodei : nodes) {
-            for (Dag g : this.setOfauxG) {
+            for (Dag g : dags) {
                 ArrayList<Edge> inserted = new ArrayList<>();
                 List<Node> children = g.getChildren(nodei);
                 inversion += (children.size() - 1);
@@ -96,7 +87,7 @@ public class AlphaOrder {
         return bestNode;
     }
 
-    void removeNode(Dag g, Node node_alpha) {
+    static void removeNode(Dag g, Node node_alpha) {
         Node node_alpha_g = g.getNode(node_alpha.getName());
 
         List<Node> children = g.getChildren(node_alpha_g);
