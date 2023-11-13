@@ -55,8 +55,8 @@ public class LocalExperiment {
     public static String PATH = "./";
     
     public static void main(String[] args) {
-        simpleExperiment();
-        //multipleExperiment();
+        //simpleExperiment();
+        multipleExperiment();
     }
     
     public static void simpleExperiment() {
@@ -64,7 +64,7 @@ public class LocalExperiment {
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "Union";
-        String fusionServer = "MeanEdgesLimit";
+        String fusionServer = "FrequencyMeanLimit";
         
         int maxEdgesIt = 50;
         int nIterations = 100;
@@ -78,24 +78,29 @@ public class LocalExperiment {
     }
     
     public static void multipleExperiment() {
-        String[] nets = new String[]{"child", "water", "insurance", "alarm", "hailfinder", "hepar2", "mildew", "barley", "win95pts", "pathfinder", "andes", "pigs", "diabetes", "link", "munin"};
-        
+        //String[] nets = new String[]{"child", "water", "insurance", "alarm", "hailfinder", "hepar2", "mildew", "barley", "win95pts", "pathfinder", "andes", "pigs", "diabetes", "link", "munin"};
+        String[] nets = new String[]{"alarm", "pathfinder"};
+
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         String bbdd = "0";
-        int[] nClients = {2, 4, 6, 8, 10, 15, 20};
-        String[] algNames = new String[]{"pGES", "GES"};
+        //int[] nClients = {2, 4, 6, 8, 10, 15, 20};
+        int[] nClients = {4};
+        String[] algNames = new String[]{"GES"};
         String[] refinements = new String[]{"None"};
-        int[] maxEdgesIts = new int[]{5, 10, 20, 50, 100, 200, 10000};
-        int maxIts = 10000;
+        //int[] maxEdgesIts = new int[]{5, 10, 20, 50, 100, 200, 10000};
+        int[] maxEdgesIts = new int[]{50};
+        int maxIts = 50;
+        String[] fusionClients = new String[]{"Union", "MeanEdgesLimit", "MaxEdgesLimit", "MinEdgesLimit", "FrequencyMeanLimit", "FrequencyOneLimit", "FrequencyTwoLimit", "Consensus90", "Consensus80", "Consensus50", "MaxParentsTwo", "MaxParentsThree"};
         
         for (String net : nets) {
-            for (String algorithm : algNames) {
-                for (String refinement : refinements) {
-                    for (int nClient : nClients) {
-                        for (int maxEdgesIt : maxEdgesIts) {
-                            launchExperiment(net, algorithm, refinement, "BN_FusionUnion", "BN_FusionUnion", bbdd, nClient, maxEdgesIt, maxIts);
-                            launchExperiment(net, algorithm, refinement, "BN_FusionIntersection", "BN_FusionIntersection", bbdd, nClient, maxEdgesIt, maxIts);
-                            System.gc();
+            for (String fusion : fusionClients) {
+                for (String algorithm : algNames) {
+                    for (String refinement : refinements) {
+                        for (int nClient : nClients) {
+                            for (int maxEdgesIt : maxEdgesIts) {
+                                launchExperiment(net, algorithm, refinement, "Union", fusion, bbdd, nClient, maxEdgesIt, maxIts);
+                                System.gc();
+                            }
                         }
                     }
                 }
