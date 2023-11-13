@@ -1,4 +1,4 @@
-package consensusBN.circularFusion;
+package org.albacete.simd.framework;
 
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;

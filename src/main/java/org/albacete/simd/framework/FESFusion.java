@@ -1,12 +1,10 @@
 package org.albacete.simd.framework;
 
-import consensusBN.ConsensusUnion;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Edges;
 import edu.cmu.tetrad.graph.Graph;
-import edu.cmu.tetrad.search.SearchGraphUtils;
 import org.albacete.simd.threads.FESThread;
 import org.albacete.simd.utils.Problem;
 
@@ -17,7 +15,7 @@ import java.util.Set;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Utils;
 
-import static org.albacete.simd.utils.Utils.pdagToDag;
+import static consensusBN.ConsensusUnion.fusionUnion;
 
 public class FESFusion extends FusionStage{
 
@@ -34,8 +32,7 @@ public class FESFusion extends FusionStage{
     @Override
     public Dag fusion() {
         // Applying ConsensusUnion fusion
-        ConsensusUnion fusion = new ConsensusUnion(this.graphs);
-        Graph fusionGraph = fusion.union();
+        Graph fusionGraph = fusionUnion(this.graphs);
 
         // Applying FES to the fusion graph
         if (currentGraph == null) {

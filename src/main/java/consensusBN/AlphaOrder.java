@@ -27,53 +27,8 @@ public class AlphaOrder {
         }
     }
 
-    public int[][] computeDirectedPathFromTo(Dag graph) {
-
-        LinkedList<Edge> dpathNewEdges = new LinkedList<>(graph.getEdges());
-        List<Node> dpathNodes;
-        dpathNodes = graph.getNodes();
-
-        int numNodes = dpathNodes.size();
-        int[][] dpath = new int[numNodes][numNodes];
-
-        while (!dpathNewEdges.isEmpty()) {
-            Edge edge = dpathNewEdges.removeFirst();
-            Node _nodeT = Edges.getDirectedEdgeTail(edge);
-            Node _nodeH = Edges.getDirectedEdgeHead(edge);
-            int _indexT = dpathNodes.indexOf(_nodeT);
-            int _indexH = dpathNodes.indexOf(_nodeH);
-            dpath[_indexT][_indexH] = 1;
-            for (int i = 0; i < dpathNodes.size(); i++) {
-                computePath(dpath, _indexT, _indexH, i, dpath[i]);
-                computePath(dpath, i, i, _indexH, dpath[_indexT]);
-            }
-        }
-
-        return dpath;
-    }
-
-    private void computePath(int[][] dpath, int _indexT, int _indexH, int i, int[] ints) {
-        int dPathT;
-        int dPathH;
-        int mindPath;
-        dPathT = dpath[i][_indexT];
-        if (dPathT >= 1) {
-            dPathH = ints[_indexH];
-            if (dPathH == 0) {
-                ints[_indexH] = dPathT + 1;
-            } else {
-                mindPath = Math.min(dPathH, dPathT + 1);
-                ints[_indexH] = mindPath;
-            }
-        }
-    }
-
-    public List<Node> getNodes() {
-        return (setOfDags.get(0).getNodes());
-    }
-
     // heuistica para encontrar un orden de conceso. Se basa en los enlaces que generaria seguir una secuencia creada desde los nodos sumideros hacia arriba.
-    public void computeAlphaH2() {
+    public ArrayList<Node> computeAlphaH2() {
         List<Node> nodes = setOfDags.get(0).getNodes();
         LinkedList<Node> computedAlpha = new LinkedList<>();
 
@@ -86,6 +41,7 @@ public class AlphaOrder {
             nodes.remove(node_alpha);
         }
         this.alpha = new ArrayList<>(computedAlpha);
+        return this.alpha;
     }
 
     Node computeNextH2(List<Node> nodes) {

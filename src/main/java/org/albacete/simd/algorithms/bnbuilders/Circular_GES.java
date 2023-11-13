@@ -1,6 +1,6 @@
 package org.albacete.simd.algorithms.bnbuilders;
 
-import consensusBN.circularFusion.CircularDag;
+import org.albacete.simd.framework.CircularDag;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Graph;
@@ -15,8 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.albacete.simd.threads.BESThread;
 import org.albacete.simd.threads.FESThread;
 import org.albacete.simd.utils.Utils;
