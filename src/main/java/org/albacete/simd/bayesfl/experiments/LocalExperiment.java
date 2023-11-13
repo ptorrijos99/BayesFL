@@ -60,21 +60,21 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "andes";
+        String net = "alarm";
         String algName = "GES";
         String refinement = "None";
-        String fusionClient = "BN_FusionUnion";
-        String fusionServer = "BN_FusionUnion";
+        String fusionClient = "Union";
+        String fusionServer = "MeanEdgesLimit";
         
         int maxEdgesIt = 50;
         int nIterations = 100;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
-        //launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd_paths, maxEdgesIt, nIterations);
+        //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
         int nClients = 4;
-        launchExperiment(net, algName, refinement, fusionClient,fusionServer, bbdd, nClients, maxEdgesIt, nIterations);
+        launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd, nClients, maxEdgesIt, nIterations);
     }
     
     public static void multipleExperiment() {
@@ -126,8 +126,9 @@ public class LocalExperiment {
                 Fusion fusionClient = null;
                 if (fusionC.equals("BN_FusionIntersection")) {
                     fusionClient = new BN_FusionIntersection();
-                } else if (fusionC.equals("BN_FusionUnion")) {
+                } else {
                     fusionClient = new BN_FusionUnion();
+                    ((BN_FusionUnion) fusionClient).setMode(fusionC);
                 }
                 
                 BNDataSets.get(i).setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
@@ -142,63 +143,15 @@ public class LocalExperiment {
             Fusion fusionServer = null;
                 if (fusionS.equals("BN_FusionIntersection")) {
                     fusionServer = new BN_FusionIntersection();
-                } else if (fusionS.equals("BN_FusionUnion")) {
+                } else {
                     fusionServer = new BN_FusionUnion();
+                    ((BN_FusionUnion) fusionServer).setMode(fusionS);
                 }
             Server server = new Server(fusionServer, clients);
 
             server.setStats(true, PATH);
             server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setBBDDName(net + "." + bbdd);
-            server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
-            server.setnIterations(nIterations);
-
-            server.run();
-            
-            writeExistentFile(savePath);
-        } else {
-            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        }
-    }
-
-    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String fusionS, String[] clientBBDDs, int maxEdgesIt, int nIterations) {
-        System.out.println("\n\n\n----------------------------------------------------------------------------- \n"
-                    + "Net: " + net + ", Alg Name: " + algName + ", Max. Edges It.: " + maxEdgesIt + ", Refinement: " + refinement + ", Fusion Client: " + fusionC + ", Fusion Server: " + fusionS
-                            + "\n-----------------------------------------------------------------------------");
-        
-        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS + ",server";
-        String savePath = "./results/Server/" + net + "_" + operation + "_" + clientBBDDs.length + "_-1.csv";
-        
-        if ((!checkExistentFile(savePath))) { 
-            ArrayList<Client> clients = new ArrayList<>();
-            for (String bbdd : clientBBDDs) {
-                Fusion fusionClient = null;
-                if (fusionC.equals("BN_FusionIntersection")) {
-                    fusionClient = new BN_FusionIntersection();
-                } else if (fusionC.equals("BN_FusionUnion")) {
-                    fusionClient = new BN_FusionUnion();
-                }
-                BN_DataSet data = new BN_DataSet(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv", net + "_" + bbdd);
-                data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-                LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
-
-                Client client = new Client(fusionClient, algorithm, data);
-                client.setStats(true, true, PATH);
-                client.setExperimentName(algName + "," + maxEdgesIt + ',' + fusionC + "," + refinement + "," + fusionS);
-                clients.add(client);
-            }
-
-            Fusion fusionServer = null;
-                if (fusionS.equals("BN_FusionIntersection")) {
-                    fusionServer = new BN_FusionIntersection();
-                } else if (fusionS.equals("BN_FusionUnion")) {
-                    fusionServer = new BN_FusionUnion();
-                }
-            Server server = new Server(fusionServer, clients);
-
-            server.setStats(true, PATH);
-            server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-            server.setBBDDName(net);
             server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
             server.setnIterations(nIterations);
 

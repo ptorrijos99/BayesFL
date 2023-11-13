@@ -40,6 +40,8 @@ import java.util.ArrayList;
 
 public class BN_FusionUnion implements Fusion {
 
+    private String mode = "union";
+
     @Override
     public Model fusion(Model model1, Model model2) {
         if (!(model1 instanceof BN) || !(model2 instanceof BN)) {
@@ -50,7 +52,7 @@ public class BN_FusionUnion implements Fusion {
         dags.add(((BN) model1).getModel());
         dags.add(((BN) model2).getModel());
 
-        return new BN(fusionUnion(dags));
+        return new BN(fusionUnion(dags, this.mode));
     }
 
     @Override
@@ -66,6 +68,10 @@ public class BN_FusionUnion implements Fusion {
             dags.add(((BN) model).getModel());
         }
 
-        return new BN(fusionUnion(dags));
+        return new BN(fusionUnion(dags, this.mode));
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }
