@@ -31,11 +31,10 @@
 
 package org.albacete.simd.bayesfl.fusion;
 
-import consensusBN.ConsensusUnion;
+import static consensusBN.ConsensusUnion.fusionUnion;
 import edu.cmu.tetrad.graph.*;
 import org.albacete.simd.bayesfl.model.BN;
 import org.albacete.simd.bayesfl.model.Model;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -51,13 +50,11 @@ public class BN_FusionUnion implements Fusion {
         dags.add(((BN) model1).getModel());
         dags.add(((BN) model2).getModel());
 
-        ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
+        return new BN(fusionUnion(dags));
     }
 
     @Override
-    public Model fusion(Model @NotNull [] models) {
+    public Model fusion(Model [] models) {
         for (Model model : models) {
             if (!(model instanceof BN)) {
                 throw new IllegalArgumentException("The models must be objects of the BN class to use BN_FusionUnion");
@@ -69,8 +66,6 @@ public class BN_FusionUnion implements Fusion {
             dags.add(((BN) model).getModel());
         }
 
-        ConsensusUnion fusion = new ConsensusUnion(dags);
-
-        return new BN(fusion.union());
+        return new BN(fusionUnion(dags));
     }
 }

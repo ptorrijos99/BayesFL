@@ -3,18 +3,13 @@ package org.albacete.simd.experiments;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.search.BDeuScore;
 import edu.cmu.tetrad.search.Fges;
-import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
-import org.albacete.simd.clustering.Clustering;
-import org.albacete.simd.clustering.HierarchicalClustering;
+
+import org.albacete.simd.algorithms.bnbuilders.*;
+import org.albacete.simd.clustering.*;
 import org.albacete.simd.framework.BNBuilder;
 import org.albacete.simd.utils.Utils;
 
 import java.io.IOException;
-import org.albacete.simd.algorithms.bnbuilders.Circular_GES;
-import org.albacete.simd.algorithms.bnbuilders.Empty;
-import org.albacete.simd.algorithms.bnbuilders.Fges_BNBuilder;
-import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
-import org.albacete.simd.clustering.RandomClustering;
 
 public class SimpleBNExperiment {
 
@@ -22,9 +17,9 @@ public class SimpleBNExperiment {
     public static void main(String[] args){
         // 1. Configuration
         String networkFolder = "./res/networks/";
-        String net_name = "pathfinder";
+        String net_name = "alarm";
         String net_path = networkFolder + net_name + ".xbif";
-        String bbdd_path = networkFolder + "BBDD/" + net_name + ".2.csv";
+        String bbdd_path = networkFolder + "BBDD/" + net_name + ".0.csv";
         DataSet ds = Utils.readData(bbdd_path);
         String test_path = networkFolder + "BBDD/tests/" + net_name + "_test.csv";
 
