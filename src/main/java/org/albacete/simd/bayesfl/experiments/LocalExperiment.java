@@ -55,8 +55,8 @@ public class LocalExperiment {
     public static String PATH = "./";
     
     public static void main(String[] args) {
-        //simpleExperiment();
-        multipleExperiment();
+        simpleExperiment();
+        //multipleExperiment();
     }
     
     public static void simpleExperiment() {
@@ -64,7 +64,9 @@ public class LocalExperiment {
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "Union";
-        String fusionServer = "FrequencyMeanLimit";
+        String fusionServer = "Frequency";
+        String limitC = "0";
+        String limitS = "3";
         
         int maxEdgesIt = 50;
         int nIterations = 100;
@@ -73,47 +75,17 @@ public class LocalExperiment {
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 4;
-        launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd, nClients, maxEdgesIt, nIterations);
-    }
-    
-    public static void multipleExperiment() {
-        //String[] nets = new String[]{"child", "water", "insurance", "alarm", "hailfinder", "hepar2", "mildew", "barley", "win95pts", "pathfinder", "andes", "pigs", "diabetes", "link", "munin"};
-        String[] nets = new String[]{"alarm", "pathfinder"};
-
-        //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
-        String bbdd = "0";
-        //int[] nClients = {2, 4, 6, 8, 10, 15, 20};
-        int[] nClients = {4};
-        String[] algNames = new String[]{"GES"};
-        String[] refinements = new String[]{"None"};
-        //int[] maxEdgesIts = new int[]{5, 10, 20, 50, 100, 200, 10000};
-        int[] maxEdgesIts = new int[]{50};
-        int maxIts = 50;
-        String[] fusionClients = new String[]{"Union", "MeanEdgesLimit", "MaxEdgesLimit", "MinEdgesLimit", "FrequencyMeanLimit", "FrequencyOneLimit", "FrequencyTwoLimit", "Consensus90", "Consensus80", "Consensus50", "MaxParentsTwo", "MaxParentsThree"};
-        
-        for (String net : nets) {
-            for (String fusion : fusionClients) {
-                for (String algorithm : algNames) {
-                    for (String refinement : refinements) {
-                        for (int nClient : nClients) {
-                            for (int maxEdgesIt : maxEdgesIts) {
-                                launchExperiment(net, algorithm, refinement, "Union", fusion, bbdd, nClient, maxEdgesIt, maxIts);
-                                System.gc();
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        int nClients = 2;
+        launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
-    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String fusionS, String bbdd, int nClients, int maxEdgesIt, int nIterations) {
+
+    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, int maxEdgesIt, int nIterations) {
         System.out.println("\n\n\n----------------------------------------------------------------------------- \n"
                     + "Net: " + net + ", Alg Name: " + algName + ", Max. Edges It.: " + maxEdgesIt + ", Refinement: " + refinement + ", Fusion Client: " + fusionC + ", Fusion Server: " + fusionS
                             + "\n-----------------------------------------------------------------------------");
         
-        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS + ",server";
+        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS + ",server";
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         if ((!checkExistentFile(savePath))) { 
@@ -134,6 +106,7 @@ public class LocalExperiment {
                 } else {
                     fusionClient = new BN_FusionUnion();
                     ((BN_FusionUnion) fusionClient).setMode(fusionC);
+                    ((BN_FusionUnion) fusionClient).setLimit(limitC);
                 }
                 
                 BNDataSets.get(i).setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
@@ -151,13 +124,14 @@ public class LocalExperiment {
                 } else {
                     fusionServer = new BN_FusionUnion();
                     ((BN_FusionUnion) fusionServer).setMode(fusionS);
+                    ((BN_FusionUnion) fusionServer).setLimit(limitS);
                 }
             Server server = new Server(fusionServer, clients);
 
             server.setStats(true, PATH);
             server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setBBDDName(net + "." + bbdd);
-            server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
+            server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS);
             server.setnIterations(nIterations);
 
             server.run();

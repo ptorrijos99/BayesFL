@@ -20,7 +20,7 @@ public class ConsensusUnion {
      * @return The union of the DAGs.
      */
     public static Dag fusionUnion(ArrayList<Dag> dags) {
-        return fusionUnion(dags, "union");
+        return fusionUnion(dags, "Union", "0");
     }
 
     /**
@@ -28,7 +28,7 @@ public class ConsensusUnion {
      * @param dags The DAGs to be fused.
      * @return The union of the DAGs.
      */
-    public static Dag fusionUnion(ArrayList<Dag> dags, String method) {
+    public static Dag fusionUnion(ArrayList<Dag> dags, String method, String limit) {
         ArrayList<Node> alpha = alphaOrder(dags);
 
         ArrayList<Dag> outputDags = new ArrayList<>();
@@ -53,61 +53,16 @@ public class ConsensusUnion {
         List<Edge> edges = new ArrayList<>(edgeFrequency.keySet());
         edges.sort((o1, o2) -> edgeFrequency.get(o2) - edgeFrequency.get(o1));
 
-        switch (method) {
-            // Option 1: Add the edges in order of frequency, until the mean number of edges of the DAGs is reached
-            case "MeanEdgesLimit":
-                int meanEdges = 0;
-                for (Dag d : dags) {
-                    meanEdges += d.getNumEdges();
-                }
-                meanEdges /= dags.size();
-                return applyNumberEdgesLimit(alpha, edgeFrequency, edges, meanEdges);
-            // Option 2: Add the edges in order of frequency, until the max number of edges of the DAGs is reached
-            case "MaxEdgesLimit":
-                int maxEdges = 0;
-                for (Dag d : dags) {
-                    maxEdges = Math.max(maxEdges, d.getNumEdges());
-                }
-                return applyNumberEdgesLimit(alpha, edgeFrequency, edges, maxEdges);
-            // Option 3: Add the edges in order of frequency, until the min number of edges of the DAGs is reached
-            case "MinEdgesLimit":
-                int minEdges = Integer.MAX_VALUE;
-                for (Dag d : dags) {
-                    minEdges = Math.min(minEdges, d.getNumEdges());
-                }
-                return applyNumberEdgesLimit(alpha, edgeFrequency, edges, minEdges);
-            // Option 4: Add the edges in order of frequency, until the frequency of the edges is less than the mean
-            case "FrequencyMeanLimit":
-                int meanFrequency = 0;
-                for (Integer frequency : edgeFrequency.values()) {
-                    meanFrequency += frequency;
-                }
-                meanFrequency /= edgeFrequency.size();
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, meanFrequency);
-            // Option 5: Add the edges in order of frequency, until the frequency of the edges is more than 1
-            case "FrequencyOneLimit":
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, 1);
-            // Option 6: Add the edges in order of frequency, until the frequency of the edges is more than 2
-            case "FrequencyTwoLimit":
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, 2);
-            // Option 7: Add the edges in order of frequency, with the consensus of 90% of the DAGs
-            case "Consensus90":
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, (int) Math.ceil(dags.size() * 0.9));
-            // Option 8: Add the edges in order of frequency, with the consensus of 80% of the DAGs
-            case "Consensus80":
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, (int) Math.ceil(dags.size() * 0.8));
-            // Option 9: Add the edges in order of frequency, with the consensus of 50% of the DAGs
-            case "Consensus50":
-                return applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, (int) Math.ceil(dags.size() * 0.5));
-            // Option 10: Add the edges in order of frequency, limiting the maximum number of parents of each node to 2
-            case "MaxParentsTwo":
-                return applyMaxParents(alpha, edges, 2);
-            // Option 11: Add the edges in order of frequency, limiting the maximum number of parents of each node to 3
-            case "MaxParentsThree":
-                return applyMaxParents(alpha, edges, 3);
-        }
-
-        return applyUnion(alpha, outputDags);
+        return switch (method) {
+            // Option 1: Add the edges in order of frequency, until the maximum number of edges of the DAGs is reached
+            case "MaxEdges" -> applyNumberEdgesLimit(alpha, dags, edges, limit);
+            // Option 2: Add the edges in order of frequency, until the frequency of the edges is more than a number
+            case "MaxFrequency" -> applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, limit);
+            // Option 3: Add the edges in order of frequency, limiting the maximum number of parents of each node
+            case "MaxParents" -> applyMaxParents(alpha, edges, limit);
+            // Default: Total union of the DAGs
+            default -> applyUnion(alpha, outputDags);
+        };
     }
 
     // Add all the edges
@@ -127,11 +82,30 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, until the number of edges is less than a number
-    private static Dag applyNumberEdgesLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, int limit) {
+    private static Dag applyNumberEdgesLimit(ArrayList<Node> alpha, ArrayList<Dag> dags, List<Edge> edges, String limit) {
+        int lim = 0;
+        if (limit.equals("Mean")) {
+            for (Dag d : dags) {
+                lim += d.getNumEdges();
+            }
+            lim /= dags.size();
+        } else if (limit.equals("Max")) {
+            for (Dag d : dags) {
+                lim = Math.max(lim, d.getNumEdges());
+            }
+        } else if (limit.equals("Min")) {
+            lim = Integer.MAX_VALUE;
+            for (Dag d : dags) {
+                lim = Math.min(lim, d.getNumEdges());
+            }
+        } else {
+            lim = Integer.parseInt(limit);
+        }
+
         Dag union = new Dag(alpha);
         int numEdges = 0;
         for (Edge edge : edges) {
-            if (numEdges >= limit) {
+            if (numEdges >= lim) {
                 break;
             }
             union.addEdge(edge);
@@ -140,11 +114,21 @@ public class ConsensusUnion {
         return union;
     }
 
-    // Add the edges in order of frequency, until the frequency of the edges is less than a number
-    private static Dag applyEdgesFrequencyLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, int limit) {
+    // Add the edges in order of frequency, until the frequency of the edges is less or equal than a number
+    private static Dag applyEdgesFrequencyLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, String limit) {
+        int lim = 0;
+        if (limit.equals("Mean")) {
+            for (Integer frequency : edgeFrequency.values()) {
+                lim += frequency;
+            }
+            lim /= edgeFrequency.size();
+        } else {
+            lim = Integer.parseInt(limit);
+        }
+
         Dag union = new Dag(alpha);
         for (Edge edge : edges) {
-            if (edgeFrequency.get(edge) > limit) {
+            if (edgeFrequency.get(edge) >= lim) {
                 union.addEdge(edge);
             }
         }
@@ -152,7 +136,8 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, limiting the maximum number of parents of each node
-    private static Dag applyMaxParents(ArrayList<Node> alpha, List<Edge> edges, int maxParents) {
+    private static Dag applyMaxParents(ArrayList<Node> alpha, List<Edge> edges, String maxParents) {
+        int lim = Integer.parseInt(maxParents);
         Dag union = new Dag(alpha);
         for (Edge edge : edges) {
             Node child;
@@ -162,12 +147,10 @@ public class ConsensusUnion {
                 child = edge.getNode2();
             }
 
-            if (union.getParents(child).size() < maxParents) {
+            if (union.getParents(child).size() < lim) {
                 union.addEdge(edge);
             }
         }
         return union;
     }
-
-
 }
