@@ -1,6 +1,6 @@
 package org.albacete.simd.mctsbn;
 
-import org.albacete.simd.utils.ProblemMCTS;
+import org.albacete.simd.utils.Problem;
 
 import java.util.*;
 
@@ -12,8 +12,7 @@ public class TreeNode implements Comparable<TreeNode> {
     private final Set<Integer> childrenIDs = new HashSet<>();
 
     private final LinkedHashSet<Integer> order;
-    private final ProblemMCTS problem;
-    private double localScore;
+    private final Problem problem;
 
     private int numVisits = 0;
     private double totalReward = 0;
@@ -31,33 +30,22 @@ public class TreeNode implements Comparable<TreeNode> {
         this.order.add(node);
 
         this.problem = parent.problem;
+        this.mctsbn = parent.mctsbn;
         this.parent.addChild(this);
         
         this.numVisits = 0;
         this.totalReward = 0;
         this.fullyExpanded = isTerminal();
-
-        /*
-        if (node != -1) {
-            // Evaluating the new node if its not the root
-            HashSet<Integer> candidates = new HashSet<>(allVars.size());
-            for (Integer candidate : allVars) {
-                if (!order.contains(candidate)) {
-                    candidates.add(candidate);
-                }
-            }
-            this.localScore += hc.evaluate(this.node, candidates).bdeu;
-        }
-         */
     }
 
-    public TreeNode(ProblemMCTS problem) {
+    public TreeNode(Problem problem, MCTSBN mctsbn) {
         this.problem = problem;
+        
+        this.mctsbn = mctsbn;
 
         this.node = -1;
         this.parent = null;
         this.order = new LinkedHashSet<>();
-        this.order.add(this.node);
 
         this.numVisits = 0;
         this.totalReward = 0;

@@ -54,25 +54,20 @@ import java.util.Set;
 public class BN_GES implements LocalAlgorithm {
 
     private BNBuilder algorithm;
-    private final String algorithmName;
-    private String dataName;
+    private String algorithmName = "GES";
     private String refinement = "None";
     private int nGESThreads = 4;
     private int nInterleaving = Integer.MAX_VALUE;
 
-    
-    public BN_GES(String algorithmName) {
-        this.algorithmName = algorithmName;
-    }
+    public BN_GES() {}
 
     public BN_GES(String algorithmName, String refinement) {
-        this(algorithmName);
+        this.algorithmName = algorithmName;
         this.refinement = refinement;
     }
-    
+
     public BN_GES(String algorithmName, String refinement, int nInterleaving) {
-        this(algorithmName);
-        this.refinement = refinement;
+        this(algorithmName, refinement);
         this.nInterleaving = nInterleaving;
     }
 
@@ -99,7 +94,6 @@ public class BN_GES implements LocalAlgorithm {
         }
 
         DataSet dataSet = ((BN_DataSet) data).getData();
-        dataName = data.getName();
 
         // Initialize the algorithm
         switch (algorithmName) {
@@ -119,29 +113,26 @@ public class BN_GES implements LocalAlgorithm {
                 break;
         }
         
-        algorithm.setnItInterleaving(this.nInterleaving);
+        algorithm.setnItInterleaving(nInterleaving);
 
         /* If there is a previous local model, use it as base. If is null (for example, with a call of
            "public Model buildLocalModel(Data data)"), the model isn't an instance of BN. */
         if (localModel instanceof BN bn) {
-            Graph graph = bn.getModel();
-            algorithm.setInitialGraph(graph);
+            algorithm.setInitialGraph(bn.getModel());
         }
 
         // Search with the algorithm created
-        BN result = new BN(algorithm.search());
-
-        return result;
+        return new BN(algorithm.search());
     }
 
     private void pGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new PGESwithStages(data, clustering, this.nGESThreads, Integer.MAX_VALUE, this.nInterleaving, false, true, true);
+        algorithm = new PGESwithStages(data, clustering, nGESThreads, Integer.MAX_VALUE, nInterleaving, false, true, true);
     }
 
     private void cGES (DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
-        algorithm = new Circular_GES(data, clustering, this.nGESThreads, this.nInterleaving, "c4");
+        algorithm = new Circular_GES(data, clustering, nGESThreads, nInterleaving, "c4");
     }
 
     private void fGES (DataSet data) {
@@ -242,16 +233,6 @@ public class BN_GES implements LocalAlgorithm {
         }
 
         return candidates;
-    }
-
-    @Override
-    public String toString() {
-        String string = "| " + algorithmName + " Algorithm.  " +
-                "Database: " + dataName + ", Threads: " + Runtime.getRuntime().availableProcessors();
-        if (algorithmName.equals("pGES") || algorithmName.equals("cGES")) {
-            string = string + ", GESThreads: " + nGESThreads + ", Interleaving: " + nInterleaving;
-        }
-        return string + "\n|";
     }
 
     public void setNGESThreads(int nGESThreads) {

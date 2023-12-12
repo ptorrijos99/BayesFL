@@ -41,6 +41,11 @@ public class MCT implements Model {
 
     private BN bestBN;
 
+    public MCT(TreeNode treeRoot, BN bestBN) {
+        this.treeRoot = treeRoot;
+        this.bestBN = bestBN;
+    }
+
     @Override
     public Object getModel() {
         return treeRoot;
@@ -56,7 +61,7 @@ public class MCT implements Model {
     }
 
     @Override
-    public void saveStats(String operation, String path, int nClients, int id, Data data, int iteration, double time) {
+    public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
 
     }
 

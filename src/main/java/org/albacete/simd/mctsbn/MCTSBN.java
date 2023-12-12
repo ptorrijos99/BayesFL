@@ -17,7 +17,7 @@ import org.albacete.simd.clustering.HierarchicalClustering;
 import org.albacete.simd.framework.BNBuilder;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Utils;
-import org.albacete.simd.utils.ProblemMCTS;
+import org.albacete.simd.utils.Problem;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
@@ -54,7 +54,7 @@ public class MCTSBN {
     /**
      * Problem of the search
      */
-    private final ProblemMCTS problem;
+    private final Problem problem;
     private final ArrayList<Integer> allVars;
     public final HillClimbingEvaluator hc;
 
@@ -62,7 +62,7 @@ public class MCTSBN {
 
     private double bestScore = Double.NEGATIVE_INFINITY;
     private List<Integer> bestOrder = new ArrayList<>();
-    private LinkedHashSet<Integer> bestPartialOrder = new LinkedHashSet<>();
+
     private Graph bestDag = null;
 
     private boolean convergence = false;
@@ -89,7 +89,10 @@ public class MCTSBN {
     BufferedWriter csvWriter;
     String firstPart;
 
-    public MCTSBN(ProblemMCTS problem, int iterationLimit){
+    // If it's the first execution of the algorithm, so the tree is empty
+    Boolean first = true;
+
+    public MCTSBN(Problem problem, int iterationLimit){
         this.problem = problem;
         this.cache = problem.getConcurrentHashMap();
         this.ITERATION_LIMIT = iterationLimit;
@@ -97,7 +100,7 @@ public class MCTSBN {
         this.allVars = hc.nodeToIntegerList(problem.getVariables());
     }
 
-    public MCTSBN(ProblemMCTS problem, int iterationLimit, double exploitConstant, double numberSwaps, double probabilitySwap, String initializeAlgorithm){
+    public MCTSBN(Problem problem, int iterationLimit, double exploitConstant, double numberSwaps, double probabilitySwap, String initializeAlgorithm){
         this.problem = problem;
         this.cache = problem.getConcurrentHashMap();
         this.ITERATION_LIMIT = iterationLimit;
@@ -112,12 +115,45 @@ public class MCTSBN {
     }
 
     public Dag search(TreeNode root){
+        if (first) expandFirstRound(root);
+        first = false;
+
+        System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
+        
+        // Search loop
+        for (int i = 0; i < ITERATION_LIMIT; i++) {
+            // Executing round
+            long startTime = System.currentTimeMillis();
+            executeRound();
+            long endTime = System.currentTimeMillis();
+            // Calculating time of the iteration
+            double totalTimeRound = 1.0 * (endTime - startTime) / 1000;
+
+            saveRound(i, totalTimeRound);
+            if(convergence){
+                System.out.println("Convergence has been found. Ending search");
+                break;
+            }
+        }
+
+        try {
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException ex) { ex.printStackTrace(); }
+
+        return new Dag(bestDag);
+    }
+
+    public Dag search(){
+        TreeNode root = new TreeNode(problem, this);
+        return this.search(root);
+    }
+
+    public void expandFirstRound(TreeNode root) {
         initializeWriter();
 
         // 1. Set Root
         this.root = root;
-
-        System.out.println("\n\nSTARTING warmup\n------------------------------------------------------");
 
         // 2. Add PGES order
         switch (this.initializeAlgorithm) {
@@ -145,7 +181,7 @@ public class MCTSBN {
 
         double random_const = PROBABILITY_SWAP;
         PROBABILITY_SWAP = 0;
-        
+
         double[] rewards = new double[allVars.size()];
         for (int i = 0; i < allVars.size()-1; i++) {
             // Expand selected node
@@ -159,10 +195,10 @@ public class MCTSBN {
         this.root.setFullyExpanded(true);
 
         PROBABILITY_SWAP = random_const;
-        
+
         // 4. Train the normalizer with the mean and sd of the scores of all vars
         normalize_fit(rewards);
-        
+
         // Convert the BDeus obtained
         root.setTotalReward(normalize_predict(root.getTotalReward()));
         for (TreeNode tn : root.getChildren()) {
@@ -172,81 +208,6 @@ public class MCTSBN {
 
         // 5. Update the UCT's
         updateUCTList();
-
-
-        System.out.println(Arrays.toString(hc.bestBDeuForNode));
-        System.out.println(this);
-        
-
-        System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
-        
-        // 6. Search loop
-        for (int i = 0; i < ITERATION_LIMIT; i++) {
-            //System.out.println("Iteration " + i + "...");
-
-            // Executing round
-            long startTime = System.currentTimeMillis();
-            executeRound();
-            long endTime = System.currentTimeMillis();
-            // Calculating time of the iteration
-            double totalTimeRound = 1.0 * (endTime - startTime) / 1000;
-
-            // Showing tree structure
-            //System.out.println("Tree Structure:");
-            //System.out.println(this);
-
-            saveRound(i, totalTimeRound);
-            if(convergence){
-                System.out.println("Convergence has been found. Ending search");
-                break;
-            }
-        }
-
-        try {
-            csvWriter.flush();
-            csvWriter.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
-        //System.out.println(queueToString());
-        //System.out.println("Finished...");
-        //System.out.println("Tree Structure: ");
-        //System.out.println(this);
-        // return Best Dag
-        return new Dag(bestDag);
-    }
-
-
-    public Dag search(){
-        TreeNode root = new TreeNode(problem);
-        return this.search(root);
-    }
-
-    private void initializeWriter () {
-        // Creating the folder if not exists
-        File directory = new File("results-it");
-        if (! directory.exists()){
-            directory.mkdir();
-        }
-
-        String savePath = "results-it/experiment_mcts_" + initializeAlgorithm + "_" +
-                this.problem.getData().getName() + "_it" + this.ITERATION_LIMIT + "_ex" + this.EXPLOITATION_CONSTANT
-                + "_ps" + this.NUMBER_SWAPS + "_ns" + this.PROBABILITY_SWAP + ".csv";
-        file = new File(savePath);
-        try {
-            csvWriter = new BufferedWriter(new FileWriter(savePath, true));
-            if (file.length() == 0) {
-                String header = "algorithm,bbdd,itLimit,exploitConst,numSwaps,probSwap,bdeuMCTS,iteration,time\n";
-                csvWriter.append(header);
-            }
-            csvWriter.flush();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        this.firstPart = "mcts-" + initializeAlgorithm + "," + this.problem.getData().getName() + "," +
-                this.ITERATION_LIMIT  + "," + this.EXPLOITATION_CONSTANT + "," + this.NUMBER_SWAPS + "," + this.PROBABILITY_SWAP + ",";
     }
 
     /**
@@ -297,8 +258,7 @@ public class MCTSBN {
         }
         return selection;
     }
-    
-    
+
     /**
      * Expands the nodes in the list of selected nodes. The nodes are expanded by creating n child for each selected node.
      * @param selection List of selected nodes
@@ -316,7 +276,6 @@ public class MCTSBN {
             //2. Get actions already taken for this node
             Set<Integer> childrenActions = node.getChildrenIDs();
             for (Integer action: actions) {
-
                 // Checking if the number of expansion for this node is greater than the limit
                 if(nExpansion >= NUM_EXPAND)
                     break;
@@ -340,11 +299,10 @@ public class MCTSBN {
         return expansion;
     }
 
-    synchronized private void checkBestScore(double score, List<Integer> order, LinkedHashSet<Integer> partialOrder) {
+    synchronized private void checkBestScore(double score, List<Integer> order) {
         if(score > bestScore){
             bestScore = score;
             bestOrder = order;
-            bestPartialOrder = partialOrder;
             bestDag = hc.getGraph();
         }
     }
@@ -384,7 +342,7 @@ public class MCTSBN {
             scoreSum+= score;
             
             // Updating best score, order and graph
-            checkBestScore(score, finalOrder, node.getOrder());
+            checkBestScore(score, finalOrder);
         }
         scoreSum = scoreSum / NUM_ROLLOUTS;
 
@@ -496,20 +454,15 @@ public class MCTSBN {
     private double normalize_predict(double sample) {
         return (sample - mean) / standardDeviation;
     }
-
-    
-    private double printUCB(TreeNode o) {
-        if(o.getParent() == null){
-            return Double.MAX_VALUE;
-        }
-        return ((o.getTotalReward() / o.getNumVisits()) - problem.emptyGraphScore ) / problem.nInstances +
-                    this.EXPLORATION_CONSTANT * Math.sqrt(Math.log(o.getParent().getNumVisits()) / o.getNumVisits());
-    }
     
     public void updateUCTList() {
         for (TreeNode tn : selectionSet){
             tn.updateUCT();
         }
+    }
+
+    public void setInitialTree(TreeNode root) {
+        this.root = root;
     }
     
     private void saveRound(int iteration, double totalTimeRound) {
@@ -526,44 +479,36 @@ public class MCTSBN {
         }
     }
 
-    /**
-     *
-     * @param node
-     * @param explorationValue
-     * @return
-     */
-    public TreeNode getBestChild(TreeNode node, double explorationValue){
-        // Initial configuration
-        double bestValue = Double.NEGATIVE_INFINITY;
-        List<TreeNode> bestNodes = new ArrayList<>();
-
-        for (TreeNode child: node.getChildren()
-        ) {
-            // Evaluating the child of the node
-            double nodeValue = child.getTotalReward() / child.getNumVisits() +
-                    explorationValue * Math.sqrt(Math.log(node.getNumVisits()) / child.getNumVisits());
-            // Checking if the child is a better selection
-            if(nodeValue > bestValue){
-                bestValue = nodeValue;
-                bestNodes.clear();
-                bestNodes.add(child);
-            } else if (nodeValue == bestValue) {
-                bestNodes.add(child);
-            }
+    private void initializeWriter () {
+        // Creating the folder if not exists
+        File directory = new File("results-it");
+        if (! directory.exists()){
+            directory.mkdir();
         }
-        // Select a random TreeNode of the bestNodes list
-        int index = (int)(Math.random() * bestNodes.size());
 
-        return bestNodes.get(index);
+        String savePath = "results-it/experiment_mcts_" + initializeAlgorithm + "_" +
+                this.problem.getData().getName() + "_it" + this.ITERATION_LIMIT + "_ex" + this.EXPLOITATION_CONSTANT
+                + "_ps" + this.NUMBER_SWAPS + "_ns" + this.PROBABILITY_SWAP + ".csv";
+        file = new File(savePath);
+        try {
+            csvWriter = new BufferedWriter(new FileWriter(savePath, true));
+            if (file.length() == 0) {
+                String header = "algorithm,bbdd,itLimit,exploitConst,numSwaps,probSwap,bdeuMCTS,iteration,time\n";
+                csvWriter.append(header);
+            }
+            csvWriter.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        this.firstPart = "mcts-" + initializeAlgorithm + "," + this.problem.getData().getName() + "," +
+                this.ITERATION_LIMIT  + "," + this.EXPLOITATION_CONSTANT + "," + this.NUMBER_SWAPS + "," + this.PROBABILITY_SWAP + ",";
     }
 
     public List<Integer> getBestOrder(){
         return bestOrder;
     }
 
-    public double getBestScore(){
-        return bestScore;
-    }
 
     public Graph getBestDag() {
         return bestDag;
@@ -578,11 +523,7 @@ public class MCTSBN {
         return root.toString();
     }
 
-    public String toStringOrder(List<Integer> order){
-        StringBuilder result = new StringBuilder();
-        for (Integer o: order) {
-            result.append(problem.getVarNames()[o]).append(" < ");
-        }
-        return result.toString();
+    public TreeNode getTreeRoot() {
+        return root;
     }
 }

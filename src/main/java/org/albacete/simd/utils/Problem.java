@@ -6,10 +6,12 @@ import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.Node;
 import edu.cmu.tetrad.search.BDeuScore;
+import org.albacete.simd.threads.GESThread;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Problem {
 
@@ -21,12 +23,12 @@ public class Problem {
     /**
      * Array of variable names from the data set, in order.
      */
-    private String[] varNames;
+    private final String[] varNames;
 
     /**
      * List of variables in the data set, in order.
      */
-    private List<Node> variables;
+    private final List<Node> variables;
 
     /**
      * For discrete data scoring, the structure prior.
@@ -59,9 +61,24 @@ public class Problem {
     protected LocalScoreCacheConcurrent localScoreCache = new LocalScoreCacheConcurrent();
 
     /**
+     * Caches scores for MCTS discrete search.
+     */
+    private final ConcurrentHashMap<String,Double> localScoreCacheMCTS = new ConcurrentHashMap<>();
+
+    /**
      * BDeu Score.
      */
     protected BDeuScore bdeu;
+
+    /**
+     * Score of the empty graph.
+     */
+    public double emptyGraphScore;
+
+    /**
+     * Number of instances of the dataset.
+     */
+    public int nInstances;
 
 
     public Problem(DataSet dataSet){
@@ -93,6 +110,9 @@ public class Problem {
         buildIndexing(graph);
         
         bdeu = new BDeuScore(data);
+
+        emptyGraphScore = GESThread.scoreGraph(new EdgeListGraph(new LinkedList<>(getVariables())), this);
+        nInstances = dataSet.getNumRows();
     }
 
 
@@ -178,6 +198,10 @@ public class Problem {
     public LocalScoreCacheConcurrent getLocalScoreCache() {
         return localScoreCache;
     }
+
+    public ConcurrentHashMap<String,Double> getConcurrentHashMap() {
+        return localScoreCacheMCTS;
+    }
     
     public BDeuScore getBDeu() {
         return bdeu;
@@ -186,5 +210,22 @@ public class Problem {
     public void setData(DataSet data) {
         this.data = data;
     }
+
+    public Node getNode(String name){
+        for (Node node: getVariables()) {
+            if(node.getName().equals(name))
+                return node;
+        }
+        return null;
+    }
+
+    public Node getNode(int id){
+        for (Node node: getVariables()) {
+            if(hashIndices.get(node) == id)
+                return node;
+        }
+        return null;
+    }
+
 
 }

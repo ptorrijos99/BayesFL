@@ -79,7 +79,7 @@ public class ExperimentUtils {
         }
     }
     
-    public static double calculateBDeuGESTHREAD(Data data, Dag dag) {
+    public static double calculateBDeuGESThread(Data data, Dag dag) {
         if ((data instanceof BN_DataSet dat)) {
             Problem problem = dat.getProblem();
             if (dat.getProblem() != null) {

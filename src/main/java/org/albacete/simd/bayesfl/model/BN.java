@@ -72,37 +72,28 @@ public class BN implements Model {
     }
 
     @Override
-    public void saveStats(String operation, String path, int nClients, int id, Data data, int iteration, double time) {
-        if (!(data instanceof BN_DataSet)) {
-            throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
-        }
-        
+    public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
         int smhd = calculateSMHD(data, this.dag);
-        double bdeu = calculateBDeu(data, this.dag);
-        this.score = bdeu;
+        this.score = calculateBDeu(data, this.dag);
         int threads = Runtime.getRuntime().availableProcessors();
-        
-        String client;
-        if (id == -1) client = "Server";
-        else client = "Client";
-        
-        String complet_path = path + "results/" + client + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,fusionC,refinement,fusionS,epoch,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
+
+        String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
+        String header = "bbdd,algorithm,maxEdges,fusionC,refinement,fusionS,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +
                         id + "," +
                         iteration + "," +
                         data.getNInstances() + "," +
-                        threads + "," + 
-                        bdeu + "," +
+                        threads + "," +
+                        this.score + "," +
                         smhd + "," +
                         this.dag.getEdges().size() + "," +
                         time + "\n";
         
         System.out.println(results);
 
-        saveExperiment(complet_path, header, results);
+        saveExperiment(completePath, header, results);
     }
     
     @Override

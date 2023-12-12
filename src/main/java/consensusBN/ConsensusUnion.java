@@ -55,11 +55,13 @@ public class ConsensusUnion {
 
         return switch (method) {
             // Option 1: Add the edges in order of frequency, until the maximum number of edges of the DAGs is reached
-            case "MaxEdges" -> applyNumberEdgesLimit(alpha, dags, edges, limit);
+            case "MaxEdges" -> applyEdgesLimit(alpha, dags, edges, limit);
             // Option 2: Add the edges in order of frequency, until the frequency of the edges is more than a number
-            case "MaxFrequency" -> applyEdgesFrequencyLimit(alpha, edgeFrequency, edges, limit);
+            case "MaxFrequency" -> applyFrequencyLimit(alpha, edgeFrequency, edges, limit);
             // Option 3: Add the edges in order of frequency, limiting the maximum number of parents of each node
             case "MaxParents" -> applyMaxParents(alpha, edges, limit);
+            // Option 4: Add the edges in order of frequency, limiting the maximum treewidth
+            case "MaxTreewidth" -> applyMaxTreewidth(alpha, edges, limit);
             // Default: Total union of the DAGs
             default -> applyUnion(alpha, outputDags);
         };
@@ -82,7 +84,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, until the number of edges is less than a number
-    private static Dag applyNumberEdgesLimit(ArrayList<Node> alpha, ArrayList<Dag> dags, List<Edge> edges, String limit) {
+    private static Dag applyEdgesLimit(ArrayList<Node> alpha, ArrayList<Dag> dags, List<Edge> edges, String limit) {
         int lim = 0;
         if (limit.equals("Mean")) {
             for (Dag d : dags) {
@@ -115,7 +117,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, until the frequency of the edges is less or equal than a number
-    private static Dag applyEdgesFrequencyLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, String limit) {
+    private static Dag applyFrequencyLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, String limit) {
         int lim = 0;
         if (limit.equals("Mean")) {
             for (Integer frequency : edgeFrequency.values()) {
@@ -153,4 +155,25 @@ public class ConsensusUnion {
         }
         return union;
     }
+
+    // Add the edges in order of frequency, limiting the maximum tree width
+    private static Dag applyMaxTreewidth(ArrayList<Node> alpha, List<Edge> edges, String maxTreewidth) {
+        int lim = Integer.parseInt(maxTreewidth);
+        Dag union = new Dag(alpha);
+
+        // Fist step: Moralize the
+
+        return union;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

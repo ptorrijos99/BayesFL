@@ -31,7 +31,9 @@
 
 package org.albacete.simd.bayesfl;
 
+import org.albacete.simd.bayesfl.convergence.Convergence;
 import org.albacete.simd.bayesfl.fusion.Fusion;
+import org.albacete.simd.bayesfl.model.BN;
 import org.albacete.simd.bayesfl.model.Model;
 
 import java.util.Collection;
@@ -47,9 +49,9 @@ public class Server {
     private final Fusion globalFusion;
 
     /**
-     * The global model build by the server.
+     * The convergence criteria.
      */
-    private Model globalModel;
+    private final Convergence convergence;
 
     /**
      * The clients that will send their local models to the server.
@@ -57,15 +59,14 @@ public class Server {
     private final Collection<Client> clients;
 
     /**
+     * The global model build by the server.
+     */
+    private Model globalModel;
+
+    /**
      * The local models of the clients.
      */
     private final Model[] localModels;
-    
-    /**
-     * The local models of the clients on the two previous iterations.
-     */
-    private Model[] lastLocalModels;
-    private Model[] last2LocalModels;
 
     /**
      * The number of iterations of the algorithm.
@@ -76,24 +77,27 @@ public class Server {
      * The stats flag.
      */
     private boolean stats = false;
+
+    /**
+     * The data used only in experiments for the stats.
+     */
+    private Data data;
     
     private String path;
 
-    private String originalBNPath;
-    
-    private String bbddName;
-            
     private String experimentName;
 
     /**
      * Constructor of the class Server.
      * @param globalFusion The Fusion operator that will be used to perform the fusion of the local models that the clients
      * send with the global model of the server.
+     * @param convergence The convergence criteria.
      * @param clients The Clients that will be run.
      */
-    public Server(Fusion globalFusion, Collection<Client> clients) {
+    public Server(Fusion globalFusion, Convergence convergence, Collection<Client> clients) {
         this.globalFusion = globalFusion;
         this.clients = clients;
+        this.convergence = convergence;
 
         int id = 0;
         for (Client client : clients) {
@@ -102,8 +106,6 @@ public class Server {
             id++;
         }
         localModels = new Model[clients.size()];
-        lastLocalModels = new Model[clients.size()];
-        last2LocalModels = new Model[clients.size()];
     }
 
     /**
@@ -111,10 +113,11 @@ public class Server {
      * @param globalFusion The Fusion operator that will be used to perform the fusion of the local models that the clients
      * send with the global model of the server.
      * @param globalModel The starting global model.
+     * @param convergence The convergence criteria.
      * @param clients The Clients that will be run.
      */
-    public Server(Fusion globalFusion, Model globalModel, Collection<Client> clients) {
-        this(globalFusion, clients);
+    public Server(Fusion globalFusion, Model globalModel, Convergence convergence, Collection<Client> clients) {
+        this(globalFusion, convergence, clients);
         this.globalModel = globalModel;
     }
 
@@ -123,7 +126,7 @@ public class Server {
      */
     public void run() {
         // For each iteration of the algorithm
-        for (int iteration = 1; iteration < nIterations+1; iteration++) {
+        for (int iteration = 1; iteration <= nIterations; iteration++) {
             System.out.println("\n\n\nITERATION " + iteration + "\n");
             
             // 1. Create the local model of each client with a ParallelStream
@@ -131,47 +134,24 @@ public class Server {
 
             // 2. Get the local models
             for (Client client : clients) {
-                last2LocalModels[client.getID()] = lastLocalModels[client.getID()];
-                lastLocalModels[client.getID()] = localModels[client.getID()];
                 localModels[client.getID()] = client.getLocalModel();
             }
 
-            // 3. Fuse the local models into a global model
+            // 3. Check if any of the clients has changed their model
+            if (convergence.checkConvergence(localModels)) break;
+
+            // 4. Fuse the local models into a global model
             double start = System.currentTimeMillis();
             globalModel = globalFusion.fusion(localModels);
             double time = (System.currentTimeMillis() - start) / 1000;
             
             if (stats) {
-                Data data = null;
-                if (this.originalBNPath != null) {
-                    data = new BN_DataSet(this.bbddName);
-                    ((BN_DataSet)data).setOriginalBNPath(this.originalBNPath);
-                }
-                globalModel.saveStats(experimentName + ",server", path, clients.size(), -1, data, iteration, time);
+                globalModel.saveStats(experimentName, "Server", path, clients.size(), -1, data, iteration, time);
             }
             
-            // 4. Fuse the global model with each local model on the clients
+            // 5. Fuse the global model with each local model on the clients
             clients.stream().forEach(client -> client.fusion(globalModel));
-            
-            // 5. Check if any of the clients has changued their model
-            if (checkConvergence(lastLocalModels)) break;
-            else if (checkConvergence(last2LocalModels)) break;
         }
-    }
-    
-    private boolean checkConvergence(Model[] previousModels) {
-        for (int i = 0; i < localModels.length; i++) {
-            if (stats) {
-                // Checking that the score is the same (if calculated in stats)
-                if ((previousModels[i] == null) ||
-                        !(Math.abs(localModels[i].getScore() - previousModels[i].getScore()) < 0.0001)) return false;
-            } else {
-                // Checking if the entire model is the same
-                if (!localModels[i].equals(previousModels[i])) return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -184,17 +164,13 @@ public class Server {
     }
 
     /**
-     * Sets the path of the original BN. Used only in experiments for the stats.
-     * @param path Path of the original BN.
+     * Sets the data used only in experiments for the stats.
+     * @param data The data used only in experiments for the stats.
      */
-    public void setOriginalBNPath(String path) {
-        this.originalBNPath = path;
+    public void setData(Data data) {
+        this.data = data;
     }
-    
-    public void setBBDDName(String bbddName) {
-        this.bbddName = bbddName;
-    }
-    
+
     public void setExperimentName(String experimentName) {
         this.experimentName = experimentName;
     }
