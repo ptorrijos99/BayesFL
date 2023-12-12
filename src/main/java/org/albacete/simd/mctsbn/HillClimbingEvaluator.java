@@ -13,12 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.albacete.simd.utils.ProblemMCTS;
+import org.albacete.simd.utils.Problem;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class HillClimbingEvaluator {
 
-    private final ProblemMCTS problem;
+    private final Problem problem;
     
     private final ConcurrentHashMap<String,Double> localScoreCache;
 
@@ -31,19 +31,15 @@ public class HillClimbingEvaluator {
     private final static int MAX_ITERATIONS = 1000;
 
     private final BDeuScore metric;
-    
-    protected final double[] bestBDeuForNode;
 
-
-    public HillClimbingEvaluator(ProblemMCTS problem, ConcurrentHashMap<String,Double> localScoreCache){
+    public HillClimbingEvaluator(Problem problem, ConcurrentHashMap<String,Double> localScoreCache){
         this.problem = problem;
         this.localScoreCache = localScoreCache;
         this.graph = new EdgeListGraph();
-        this.bestBDeuForNode = new double [problem.getVariables().size()];
         metric = new BDeuScore(problem.getData());
     }
 
-    public HillClimbingEvaluator(ProblemMCTS problem, ArrayList<Integer> order, ConcurrentHashMap<String,Double> localScoreCache){
+    public HillClimbingEvaluator(Problem problem, ArrayList<Integer> order, ConcurrentHashMap<String,Double> localScoreCache){
         this(problem, localScoreCache);
         setOrder(order);
     }
@@ -83,7 +79,6 @@ public class HillClimbingEvaluator {
                     bestScore.set(score);
                     bestParent.set(candidate);
                 }
-                 
             });
             
             // Updating graph
@@ -102,12 +97,7 @@ public class HillClimbingEvaluator {
                 break;
             }
         }
-        
-        // Updating best BDeu for Node
-        if (bdeuFinal > bestBDeuForNode[child]) {
-            bestBDeuForNode[child] = bdeuFinal;
-        }
-        
+
         return new Pair(child, parents, bdeuFinal);
     }
 

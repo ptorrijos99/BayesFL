@@ -3,7 +3,6 @@ package org.albacete.simd.mctsbn;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.utils.Problem;
-import org.albacete.simd.utils.ProblemMCTS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,11 +15,11 @@ public class MainHCEvaluator {
     public static void main(String[] args) {
         String networkFolder = "./res/networks/";
         String net_name = "pigs";
-        String bbdd_path = networkFolder + "BBDD/" + net_name + ".xbif50003_.csv";
+        String bbdd_path = networkFolder + "BBDD/" + net_name + ".3.csv";
         String net_path = networkFolder + net_name + ".xbif";
 
         int seed = 11231231;
-        ProblemMCTS problem = new ProblemMCTS(bbdd_path);
+        Problem problem = new Problem(bbdd_path);
         //List<Node> bestOrder = new ArrayList<>();
         //HypDistrib,DuctFlow,CardiacMixing,Disease,LungFlow,CO2Report,HypoxiaInO2,XrayReport,Age,LVH,LowerBodyO2,CO2,ChestXray,LVHreport,BirthAsphyxia,GruntingReport,Grunting,Sick,LungParench,RUQO2
         /*bestOrder.add(problem.getNode("BirthAsphyxia"));

@@ -43,7 +43,10 @@ import org.albacete.simd.bayesfl.Client;
 import org.albacete.simd.bayesfl.Server;
 import org.albacete.simd.bayesfl.algorithms.BN_GES;
 import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
+import org.albacete.simd.bayesfl.convergence.BN_Convergence;
+import org.albacete.simd.bayesfl.convergence.Convergence;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
 import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
 import org.albacete.simd.bayesfl.fusion.Fusion;
@@ -75,32 +78,25 @@ public class LocalExperiment {
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 2;
+        int nClients = 20;
         launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
 
     public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, int maxEdgesIt, int nIterations) {
-        System.out.println("\n\n\n----------------------------------------------------------------------------- \n"
-                    + "Net: " + net + ", Alg Name: " + algName + ", Max. Edges It.: " + maxEdgesIt + ", Refinement: " + refinement + ", Fusion Client: " + fusionC + ", Fusion Server: " + fusionS
-                            + "\n-----------------------------------------------------------------------------");
-        
         String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS + ",server";
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        if ((!checkExistentFile(savePath))) { 
+        //if ((!checkExistentFile(savePath))) {
             
             DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
 
-            ArrayList<BN_DataSet> BNDataSets = new ArrayList<>();
-            for (int i = 0; i < nClients; i++) {
-                BNDataSets.add(new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i)));
-            }
-
             ArrayList<Client> clients = new ArrayList<>();
             for (int i = 0; i < nClients; i++) {
-                Fusion fusionClient = null;
+                BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
+
+                Fusion fusionClient;
                 if (fusionC.equals("BN_FusionIntersection")) {
                     fusionClient = new BN_FusionIntersection();
                 } else {
@@ -108,17 +104,17 @@ public class LocalExperiment {
                     ((BN_FusionUnion) fusionClient).setMode(fusionC);
                     ((BN_FusionUnion) fusionClient).setLimit(limitC);
                 }
-                
-                BNDataSets.get(i).setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+
+                data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
                 LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
 
-                Client client = new Client(fusionClient, algorithm, BNDataSets.get(i));
+                Client client = new Client(fusionClient, algorithm, data);
                 client.setStats(true, true, PATH);
                 client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
                 clients.add(client);
             }
 
-            Fusion fusionServer = null;
+            Fusion fusionServer;
                 if (fusionS.equals("BN_FusionIntersection")) {
                     fusionServer = new BN_FusionIntersection();
                 } else {
@@ -126,20 +122,24 @@ public class LocalExperiment {
                     ((BN_FusionUnion) fusionServer).setMode(fusionS);
                     ((BN_FusionUnion) fusionServer).setLimit(limitS);
                 }
-            Server server = new Server(fusionServer, clients);
+
+            Convergence convergence = new BN_Convergence(2);
+            Server server = new Server(fusionServer, convergence, clients);
 
             server.setStats(true, PATH);
-            server.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-            server.setBBDDName(net + "." + bbdd);
+            BN_DataSet data = new BN_DataSet(net + "." + bbdd);
+            data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+            server.setData(data);
+
             server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS);
             server.setnIterations(nIterations);
 
             server.run();
             
             writeExistentFile(savePath);
-        } else {
-            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        }
+       // } else {
+        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        //}
     }
 
     public static boolean checkExistentFile(String savePath) {

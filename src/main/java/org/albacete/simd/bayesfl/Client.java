@@ -123,7 +123,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
         
         if (buildStats)  {
-            localModel.saveStats(this.experimentName + ",build", path, nClients, id, data, iteration, time);
+            localModel.saveStats(this.experimentName, "Client/Build",path, nClients, id, data, iteration, time);
         }
     }
 
@@ -142,7 +142,7 @@ public class Client {
         double time = (System.currentTimeMillis() - start) / 1000;
 
         if (fusionStats) {
-            localModel.saveStats(this.experimentName + ",fusion", path, nClients, id, data, iteration, time);
+            localModel.saveStats(this.experimentName, "Client/Fusion", path, nClients, id, data, iteration, time);
         }
         
         // If defined, perform a refinement to the local model
@@ -152,7 +152,7 @@ public class Client {
             time = (System.currentTimeMillis() - start) / 1000;
 
             if (fusionStats)  {
-                localModel.saveStats(this.experimentName + ",refin", path, nClients, id, data, iteration, time);
+                localModel.saveStats(this.experimentName, "Client/Refinement", path, nClients, id, data, iteration, time);
             }
         }
     }
