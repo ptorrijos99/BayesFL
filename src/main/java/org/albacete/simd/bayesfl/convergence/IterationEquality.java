@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 /**
- *    BN_Convergence.java
+ *    IterationEquality.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
@@ -35,13 +35,18 @@ import org.albacete.simd.bayesfl.model.Model;
 
 import java.util.LinkedList;
 
-public class BN_Convergence implements Convergence {
+/**
+ * This convergence criterion checks if the local models have converged by checking if all the models of this iteration
+ * are the same as the models of the previous iterations. The number of previous iterations to check is specified in
+ * the constructor.
+ */
+public class IterationEquality implements Convergence {
 
     private final LinkedList<Model[]> lastLocalModels;
 
     private int maxModelsSaved;
 
-    public BN_Convergence(int maxModelsSaved) {
+    public IterationEquality(int maxModelsSaved) {
         this.maxModelsSaved = maxModelsSaved;
 
         lastLocalModels = new LinkedList<>();
