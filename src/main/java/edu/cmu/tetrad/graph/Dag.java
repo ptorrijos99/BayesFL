@@ -60,8 +60,8 @@ public final class Dag implements Graph {
      */
     private int size;
 
+    // CHANGED: nodesHash (node -> index), reduces time complexity
     private Map<Node, Integer> nodesHash = new HashMap<>();
-    int n = 0;
 
     private boolean pag;
     private boolean CPDAG;
@@ -129,6 +129,7 @@ public final class Dag implements Graph {
 
     //===============================PUBLIC METHODS======================//
 
+    // NEW: New method to obtain a topological order of the nodes
     public ArrayList<Node> getTopologicalOrder(){
         Random random = new Random();
 
@@ -137,7 +138,7 @@ public final class Dag implements Graph {
 
         Dag graphCopy = new Dag(this);
 
-        // S -> Nodos raíz, sin padres
+        // S -> Root nodes, without parents
         for (Node node : graphCopy.getNodes()) {
             if (graphCopy.getParents(node).isEmpty()) {
                 S.add(node);
@@ -148,8 +149,8 @@ public final class Dag implements Graph {
             Node node = S.remove(random.nextInt(S.size()));
             L.add(node);
 
-            // Borramos el nodo, y los enlaces a los hijos.
-            // Si ahora los hijos no tienen padres, los añadimos a S
+            // Delete the node, and the edges to the children.
+            // If now the children have no parents, we add them to S
             for (Node children : graphCopy.getAdjacentNodes(node)) {
                 graphCopy.removeEdgesNRRDPath(node, children);
                 if (graphCopy.getParents(children).isEmpty()) {
@@ -165,6 +166,7 @@ public final class Dag implements Graph {
         throw new UnsupportedOperationException();
     }
 
+    // CHANGED: nodesHash
     public boolean addEdge(Edge edge) {
         reconstituteDpath();
         Node _node1 = Edges.getDirectedEdgeTail(edge);
@@ -257,6 +259,12 @@ public final class Dag implements Graph {
         return o instanceof Dag && getGraph().equals(o);
     }
 
+    // CHANGED: New method, without this contains() method don't work
+    public int hashCode() {
+        return getGraph().hashCode();
+    }
+
+    // CHANGED: nodesHash
     public boolean existsDirectedPathFromTo(Node node1, Node node2) {
 
 

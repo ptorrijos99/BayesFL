@@ -43,10 +43,10 @@ import org.albacete.simd.bayesfl.Client;
 import org.albacete.simd.bayesfl.Server;
 import org.albacete.simd.bayesfl.algorithms.BN_GES;
 import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
-import org.albacete.simd.bayesfl.convergence.BN_Convergence;
+import org.albacete.simd.bayesfl.convergence.IterationEquality;
 import org.albacete.simd.bayesfl.convergence.Convergence;
+import org.albacete.simd.bayesfl.convergence.ModelEquality;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
 import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
 import org.albacete.simd.bayesfl.fusion.Fusion;
@@ -78,7 +78,7 @@ public class LocalExperiment {
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 20;
+        int nClients = 2;
         launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
@@ -123,7 +123,7 @@ public class LocalExperiment {
                     ((BN_FusionUnion) fusionServer).setLimit(limitS);
                 }
 
-            Convergence convergence = new BN_Convergence(2);
+            Convergence convergence = new ModelEquality();
             Server server = new Server(fusionServer, convergence, clients);
 
             server.setStats(true, PATH);
