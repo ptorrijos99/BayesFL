@@ -59,14 +59,14 @@ public class LocalMCTSExperiment {
         String intitialAlgorithm = "pGES";
 
         int maxEdgesIt = 50;
-        int nIterations = 10 ;
+        int nIterations = 10;
 
         int exploitation = 10;
         double probability_swap = 0.2;
         double number_swaps = 0.2;
 
         String bbdd = "0";
-        int nClients = 2;
+        int nClients = 20;
         launchExperiment(net, algName, bbdd, nClients, maxEdgesIt, nIterations, exploitation, probability_swap, number_swaps, intitialAlgorithm);
     }
 

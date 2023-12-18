@@ -35,6 +35,8 @@ import org.albacete.simd.bayesfl.model.MCT;
 import org.albacete.simd.bayesfl.model.Model;
 import org.albacete.simd.mctsbn.TreeNode;
 
+import java.util.ArrayList;
+
 public class MCT_Fusion implements Fusion {
     /**
      * Perform the fusion of two MCT models.
@@ -62,8 +64,13 @@ public class MCT_Fusion implements Fusion {
             }
         }
 
+        ArrayList<BN> candidates = new ArrayList<>();
+        for (Model model : models) {
+            candidates.add(((MCT) model).getBestBN());
+        }
+
         MCT model = (MCT) models[0];
-        MCT fused = new MCT((TreeNode) model.getModel(), model.getBestBN());
+        MCT fused = new MCT((TreeNode) model.getModel(), candidates);
 
         for (int i = 1; i < models.length; i++) {
             model = (MCT) models[i];

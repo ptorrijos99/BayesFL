@@ -93,6 +93,7 @@ public class MCT_MCTS implements LocalAlgorithm {
            "public Model buildLocalModel(Data data)"), the model isn't an instance of MCT. */
         if (localModel instanceof MCT mct) {
             algorithm.setInitialTree((TreeNode) mct.getModel());
+            mct.calculateBestBN(data);
         }
 
         // Search with the algorithm created
