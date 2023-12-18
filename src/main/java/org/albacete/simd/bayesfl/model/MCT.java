@@ -35,6 +35,8 @@ import edu.cmu.tetrad.graph.Dag;
 import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.mctsbn.TreeNode;
 
+import java.util.ArrayList;
+
 import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
 
 public class MCT implements Model {
@@ -43,9 +45,16 @@ public class MCT implements Model {
 
     private BN bestBN;
 
+    private ArrayList<BN> candidates = new ArrayList<>();
+
     public MCT(TreeNode treeRoot, BN bestBN) {
         this.treeRoot = treeRoot;
         this.bestBN = bestBN;
+    }
+
+    public MCT(TreeNode treeRoot, ArrayList<BN> candidates) {
+        this.treeRoot = treeRoot;
+        this.candidates = candidates;
     }
 
     @Override
@@ -96,6 +105,18 @@ public class MCT implements Model {
     @Override
     public double getScore(Data data) {
         return bestBN.getScore(data);
+    }
+    
+    public double calculateBestBN(Data data) {
+        double score = bestBN.getScore();
+        for (BN candidate : candidates) {
+            double candidateScore = candidate.getScore(data);
+            if (candidateScore > score) {
+                score = candidateScore;
+                bestBN = candidate;
+            }
+        }
+        return score;
     }
 
     @Override
