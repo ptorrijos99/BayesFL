@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 /**
- *    IterationsLimit.java
+ *    NoneConvergence.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
@@ -33,7 +33,7 @@ package org.albacete.simd.bayesfl.convergence;
 
 import org.albacete.simd.bayesfl.model.Model;
 
-public class IterationsLimit implements Convergence {
+public class NoneConvergence implements Convergence {
 
     /**
      * Checks if the local models have converged.

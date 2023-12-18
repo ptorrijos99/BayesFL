@@ -42,14 +42,12 @@ public class MCTSBN {
     public double PROBABILITY_SWAP = 0.5;
 
     public double NUMBER_SWAPS = 0.5;
-    
-    private final int NUM_ROLLOUTS = 1;
 
-    private final int NUM_SELECTION = 1;
+    public final int NUM_ROLLOUTS = 1;
 
-    private final int NUM_EXPAND = 1;
+    public final int NUM_SELECTION = 1;
 
-    private final int RANDOM_SELECTIONS = 3;
+    public final int NUM_EXPAND = 1;
 
     /**
      * Problem of the search
@@ -89,8 +87,6 @@ public class MCTSBN {
     BufferedWriter csvWriter;
     String firstPart;
 
-    // If it's the first execution of the algorithm, so the tree is empty
-    Boolean first = true;
 
     public MCTSBN(Problem problem, int iterationLimit){
         this.problem = problem;
@@ -112,11 +108,22 @@ public class MCTSBN {
         this.EXPLOITATION_CONSTANT = exploitConstant;
         this.NUMBER_SWAPS = numberSwaps;
         this.PROBABILITY_SWAP = probabilitySwap;
-    }
+     }
 
-    public Dag search(TreeNode root){
-        if (first) expandFirstRound(root);
-        first = false;
+    public Dag search(){
+        // 1. Initialize the writer
+        initializeWriter();
+
+        if (root == null) {
+            root = new TreeNode(problem, this);
+            long startTime = System.currentTimeMillis();
+            expandFirstRound();
+
+            long endTime = System.currentTimeMillis();
+            // Calculating time of the iteration
+            double totalTimeRound = 1.0 * (endTime - startTime) / 1000;
+            saveRound(-1, totalTimeRound);
+        }
 
         System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
         
@@ -144,17 +151,7 @@ public class MCTSBN {
         return new Dag(bestDag);
     }
 
-    public Dag search(){
-        TreeNode root = new TreeNode(problem, this);
-        return this.search(root);
-    }
-
-    public void expandFirstRound(TreeNode root) {
-        initializeWriter();
-
-        // 1. Set Root
-        this.root = root;
-
+    public void expandFirstRound() {
         // 2. Add PGES order
         switch (this.initializeAlgorithm) {
             default:
@@ -183,13 +180,13 @@ public class MCTSBN {
         PROBABILITY_SWAP = 0;
 
         double[] rewards = new double[allVars.size()];
-        for (int i = 0; i < allVars.size()-1; i++) {
+        for (int i = 0; i < allVars.size(); i++) {
             // Expand selected node
             TreeNode expandedNode = expand(selection).get(0);
 
             // Rollout and Backpropagation
             double reward = rollout(expandedNode);
-            rewards[i] = reward;
+            rewards[expandedNode.node] = reward;
             backPropagate(expandedNode, reward);
         }
         this.root.setFullyExpanded(true);
@@ -201,13 +198,10 @@ public class MCTSBN {
 
         // Convert the BDeus obtained
         root.setTotalReward(normalize_predict(root.getTotalReward()));
-        for (TreeNode tn : root.getChildren()) {
+        for (TreeNode tn : root.getChildren().keySet()) {
             double reward = normalize_predict(tn.getTotalReward());
             tn.setTotalReward(reward);
         }
-
-        // 5. Update the UCT's
-        updateUCTList();
     }
 
     /**
@@ -228,8 +222,6 @@ public class MCTSBN {
             double reward = rollout(expandedNode);
             backPropagate(expandedNode, normalize_predict(reward));
         });
-
-        updateUCTList();
     }
 
     /**
@@ -268,7 +260,6 @@ public class MCTSBN {
         List<TreeNode> expansion = new ArrayList<>();
 
         for (TreeNode node : selection) {
-
             int nExpansion = 0;
 
             //1. Get all possible actions
@@ -310,7 +301,7 @@ public class MCTSBN {
     /**
      * Random policy rollout. Given a state with a partial order, we generate a random order that starts off with the initial order
      * @param node TreeNode that provides the partial order for a final randomly generated order.
-     * @return
+     * @return Score obtained from the rollout
      */
     public double rollout(TreeNode node){
         // Generating candidates and shuffling
@@ -351,18 +342,15 @@ public class MCTSBN {
 
     /**
      * Backpropagates the reward and visits of the nodes where a rollout has been done.
-     * @param node Node that
-     * @param reward
+     * @param node Node that has been expanded
+     * @param reward Reward obtained from the rollout
      */
     synchronized public void backPropagate(TreeNode node, double reward){
-        // REVISAR!!!!
+        // Add one visit and total reward to the currentNode
+        node.backPropagate(reward);
+
         TreeNode currentNode = node;
-        currentNode.decrementOneVisit();
         while (currentNode != null){
-            // Add one visit and total reward to the currentNode
-            currentNode.incrementOneVisit();
-            currentNode.addReward(reward);
-            
             if(!currentNode.isFullyExpanded()) {
                 selectionSet.add(currentNode);
             }
@@ -435,7 +423,6 @@ public class MCTSBN {
      * Normalize (standardize) the sample, so it is has a mean of 0 and a standard deviation of 1.
      *
      * @param sample Sample to normalize.
-     * @return normalized (standardized) sample.
      * @since 2.2
      */
     private void normalize_fit(double[] sample) {
@@ -443,7 +430,7 @@ public class MCTSBN {
 
         // Add the data from the series to stats
         for (double v : sample) {
-            stats.addValue(v);
+            stats.addValue(v / this.problem.getData().getNumRows());
         }
 
         // Compute mean and standard deviation
@@ -452,13 +439,8 @@ public class MCTSBN {
     }
     
     private double normalize_predict(double sample) {
-        return (sample - mean) / standardDeviation;
-    }
-    
-    public void updateUCTList() {
-        for (TreeNode tn : selectionSet){
-            tn.updateUCT();
-        }
+        sample = sample/this.problem.getData().getNumRows();
+        return (sample- mean) / standardDeviation;
     }
 
     public void setInitialTree(TreeNode root) {

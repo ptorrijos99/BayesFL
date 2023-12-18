@@ -49,6 +49,7 @@ public class MCT_MCTS implements LocalAlgorithm {
     private double numberSwaps = 0.2;
     private String initializeAlgorithm = "pGES";
 
+    private MCTSBN algorithm;
 
     public MCT_MCTS() {}
 
@@ -84,7 +85,9 @@ public class MCT_MCTS implements LocalAlgorithm {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
 
-        MCTSBN algorithm = new MCTSBN(((BN_DataSet) data).getProblem(), limitIteration, exploitation, probabilitySwap, numberSwaps, initializeAlgorithm);
+        if (algorithm == null) {
+            algorithm = new MCTSBN(((BN_DataSet) data).getProblem(), limitIteration, exploitation, probabilitySwap, numberSwaps, initializeAlgorithm);
+        }
 
         /* If there is a previous local model, use it as base. If is null (for example, with a call of
            "public Model buildLocalModel(Data data)"), the model isn't an instance of MCT. */
@@ -115,6 +118,6 @@ public class MCT_MCTS implements LocalAlgorithm {
      */
     @Override
     public String getRefinementName() {
-        return null;
+        return "None";
     }
 }
