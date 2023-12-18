@@ -26,12 +26,14 @@
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
- *
  */
 
 package org.albacete.simd.bayesfl.fusion;
 
+import org.albacete.simd.bayesfl.model.BN;
+import org.albacete.simd.bayesfl.model.MCT;
 import org.albacete.simd.bayesfl.model.Model;
+import org.albacete.simd.mctsbn.TreeNode;
 
 public class MCT_Fusion implements Fusion {
     /**
@@ -43,7 +45,7 @@ public class MCT_Fusion implements Fusion {
      */
     @Override
     public Model fusion(Model model1, Model model2) {
-        return null;
+        return fusion(new Model[]{model1,model2});
     }
 
     /**
@@ -54,6 +56,28 @@ public class MCT_Fusion implements Fusion {
      */
     @Override
     public Model fusion(Model[] models) {
-        return null;
+        for (Model model : models) {
+            if (!(model instanceof MCT)) {
+                throw new IllegalArgumentException("The models must be objects of the MCT class to use MCT_Fusion");
+            }
+        }
+
+        MCT model = (MCT) models[0];
+        MCT fused = new MCT((TreeNode) model.getModel(), model.getBestBN());
+
+        for (int i = 1; i < models.length; i++) {
+            model = (MCT) models[i];
+
+            TreeNode fusedNode = (TreeNode) fused.getModel();
+            TreeNode modelNode = (TreeNode) model.getModel();
+
+            for (TreeNode child : modelNode.getChildren().keySet()) {
+                fusedNode.addChild(child);
+            }
+        }
+
+        return fused;
     }
 }
+
+

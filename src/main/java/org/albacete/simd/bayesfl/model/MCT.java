@@ -35,6 +35,8 @@ import edu.cmu.tetrad.graph.Dag;
 import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.mctsbn.TreeNode;
 
+import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
+
 public class MCT implements Model {
 
     private TreeNode treeRoot;
@@ -62,7 +64,28 @@ public class MCT implements Model {
 
     @Override
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
+        Dag dag = this.bestBN.getModel();
+        int smhd = calculateSMHD(data, dag);
+        double bdeu = getScore(data);
+        int threads = Runtime.getRuntime().availableProcessors();
 
+        String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
+        String header = "bbdd,algorithm,maxEdges,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
+        String results = data.getName() + "," +
+                operation + "," +
+                nClients + "," +
+                id + "," +
+                iteration + "," +
+                data.getNInstances() + "," +
+                threads + "," +
+                bdeu + "," +
+                smhd + "," +
+                dag.getEdges().size() + "," +
+                time + "\n";
+
+        System.out.println(results);
+
+        saveExperiment(completePath, header, results);
     }
 
     @Override
@@ -73,5 +96,14 @@ public class MCT implements Model {
     @Override
     public double getScore(Data data) {
         return bestBN.getScore(data);
+    }
+
+    @Override
+    public String toString() {
+        return treeRoot.toString();
+    }
+
+    public BN getBestBN() {
+        return bestBN;
     }
 }

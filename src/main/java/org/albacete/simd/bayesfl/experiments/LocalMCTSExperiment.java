@@ -34,18 +34,13 @@ package org.albacete.simd.bayesfl.experiments;
 import edu.cmu.tetrad.data.DataSet;
 import org.albacete.simd.bayesfl.Client;
 import org.albacete.simd.bayesfl.Server;
-import org.albacete.simd.bayesfl.algorithms.BN_GES;
 import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
 import org.albacete.simd.bayesfl.algorithms.MCT_MCTS;
 import org.albacete.simd.bayesfl.convergence.Convergence;
-import org.albacete.simd.bayesfl.convergence.IterationsLimit;
+import org.albacete.simd.bayesfl.convergence.NoneConvergence;
 import org.albacete.simd.bayesfl.data.BN_DataSet;
 import org.albacete.simd.bayesfl.fusion.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
@@ -59,16 +54,16 @@ public class LocalMCTSExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "alarm";
+        String net = "andes";
         String algName = "MCTS";
         String intitialAlgorithm = "pGES";
 
         int maxEdgesIt = 50;
-        int nIterations = 100;
+        int nIterations = 10 ;
 
-        int exploitation = 50;
-        double probability_swap = 0.5;
-        double number_swaps = 0.5;
+        int exploitation = 10;
+        double probability_swap = 0.2;
+        double number_swaps = 0.2;
 
         String bbdd = "0";
         int nClients = 2;
@@ -80,7 +75,7 @@ public class LocalMCTSExperiment {
         String operation = algName + "," + maxEdgesIt + ",server";
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        if ((!LocalExperiment.checkExistentFile(savePath))) {
+        //if ((!LocalExperiment.checkExistentFile(savePath))) {
             DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
 
@@ -99,7 +94,7 @@ public class LocalMCTSExperiment {
             }
 
             Fusion fusionServer = new MCT_Fusion();
-            Convergence convergence = new IterationsLimit();
+            Convergence convergence = new NoneConvergence();
             Server server = new Server(fusionServer, convergence, clients);
 
             server.setStats(true, PATH);
@@ -113,9 +108,9 @@ public class LocalMCTSExperiment {
             server.run();
             
             LocalExperiment.writeExistentFile(savePath);
-        } else {
-            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        }
+        //} else {
+        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        //}
     }
 
 }
