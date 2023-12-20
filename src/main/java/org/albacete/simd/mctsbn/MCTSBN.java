@@ -39,9 +39,9 @@ public class MCTSBN {
     
     public double EXPLOITATION_CONSTANT = 50;
     
-    public double PROBABILITY_SWAP = 0.5;
+    public double PROBABILITY_SWAP = 0.25;
 
-    public double NUMBER_SWAPS = 0.5;
+    public double NUMBER_SWAPS = 0.25;
 
     public final int NUM_ROLLOUTS = 1;
 

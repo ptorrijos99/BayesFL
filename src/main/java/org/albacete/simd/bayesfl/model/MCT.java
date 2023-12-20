@@ -55,6 +55,7 @@ public class MCT implements Model {
     public MCT(TreeNode treeRoot, ArrayList<BN> candidates) {
         this.treeRoot = treeRoot;
         this.candidates = candidates;
+        this.bestBN = candidates.get(0);
     }
 
     @Override
