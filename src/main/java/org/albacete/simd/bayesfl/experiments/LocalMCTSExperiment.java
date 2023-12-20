@@ -54,16 +54,16 @@ public class LocalMCTSExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "andes";
+        String net = "insurance";
         String algName = "MCTS";
         String intitialAlgorithm = "pGES";
 
-        int maxEdgesIt = 50;
-        int nIterations = 10;
+        int maxEdgesIt = 20;
+        int nIterations = 100;
 
         int exploitation = 10;
-        double probability_swap = 0.2;
-        double number_swaps = 0.2;
+        double probability_swap = 0.25;
+        double number_swaps = 0.25;
 
         String bbdd = "0";
         int nClients = 20;
