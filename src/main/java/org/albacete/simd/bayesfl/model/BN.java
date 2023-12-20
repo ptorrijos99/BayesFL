@@ -78,7 +78,7 @@ public class BN implements Model {
         int threads = Runtime.getRuntime().availableProcessors();
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,fusionC,refinement,fusionS,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,refinement,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +
