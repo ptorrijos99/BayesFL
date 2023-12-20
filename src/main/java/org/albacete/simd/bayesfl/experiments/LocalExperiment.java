@@ -31,25 +31,23 @@
 
 package org.albacete.simd.bayesfl.experiments;
 
+import edu.cmu.tetrad.data.DataSet;
+import org.albacete.simd.bayesfl.Client;
+import org.albacete.simd.bayesfl.Server;
+import org.albacete.simd.bayesfl.algorithms.BN_GES;
+import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
+import org.albacete.simd.bayesfl.convergence.Convergence;
+import org.albacete.simd.bayesfl.convergence.ModelEquality;
+import org.albacete.simd.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
+import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
+import org.albacete.simd.bayesfl.fusion.Fusion;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import edu.cmu.tetrad.data.DataSet;
-
-import org.albacete.simd.bayesfl.Client;
-import org.albacete.simd.bayesfl.Server;
-import org.albacete.simd.bayesfl.algorithms.BN_GES;
-import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
-import org.albacete.simd.bayesfl.convergence.IterationEquality;
-import org.albacete.simd.bayesfl.convergence.Convergence;
-import org.albacete.simd.bayesfl.convergence.ModelEquality;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
-import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
-import org.albacete.simd.bayesfl.fusion.Fusion;
 
 import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
 import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
@@ -63,31 +61,31 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "alarm";
+        String net = "pathfinder";
         String algName = "GES";
         String refinement = "None";
-        String fusionClient = "Union";
-        String fusionServer = "Frequency";
-        String limitC = "0";
-        String limitS = "3";
+        String fusionClient = "MaxTreewidth";
+        String fusionServer = "MaxTreewidth";
+        String limitC = "1";
+        String limitS = "1";
         
-        int maxEdgesIt = 50;
-        int nIterations = 100;
+        int maxEdgesIt = 10000000;
+        int nIterations = 1;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 2;
+        int nClients = 5;
         launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
 
     public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, int maxEdgesIt, int nIterations) {
-        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS + ",server";
+        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        //if ((!checkExistentFile(savePath))) {
+        //TODO: if ((!checkExistentFile(savePath))) {
             
             DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
@@ -110,7 +108,7 @@ public class LocalExperiment {
 
                 Client client = new Client(fusionClient, algorithm, data);
                 client.setStats(true, true, PATH);
-                client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + refinement + "," + fusionS);
+                client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS);
                 clients.add(client);
             }
 

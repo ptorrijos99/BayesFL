@@ -1,16 +1,13 @@
 package consensusBN;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.Endpoint;
-import edu.cmu.tetrad.graph.Node;
+import edu.cmu.tetrad.bayes.GraphTools;
+import edu.cmu.tetrad.graph.*;
 
 import static consensusBN.AlphaOrder.alphaOrder;
 import static consensusBN.BetaToAlpha.transformToAlpha;
+import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 
 public class ConsensusUnion {
 
@@ -86,22 +83,25 @@ public class ConsensusUnion {
     // Add the edges in order of frequency, until the number of edges is less than a number
     private static Dag applyEdgesLimit(ArrayList<Node> alpha, ArrayList<Dag> dags, List<Edge> edges, String limit) {
         int lim = 0;
-        if (limit.equals("Mean")) {
-            for (Dag d : dags) {
-                lim += d.getNumEdges();
+        switch (limit) {
+            case "Mean" -> {
+                for (Dag d : dags) {
+                    lim += d.getNumEdges();
+                }
+                lim /= dags.size();
             }
-            lim /= dags.size();
-        } else if (limit.equals("Max")) {
-            for (Dag d : dags) {
-                lim = Math.max(lim, d.getNumEdges());
+            case "Max" -> {
+                for (Dag d : dags) {
+                    lim = Math.max(lim, d.getNumEdges());
+                }
             }
-        } else if (limit.equals("Min")) {
-            lim = Integer.MAX_VALUE;
-            for (Dag d : dags) {
-                lim = Math.min(lim, d.getNumEdges());
+            case "Min" -> {
+                lim = Integer.MAX_VALUE;
+                for (Dag d : dags) {
+                    lim = Math.min(lim, d.getNumEdges());
+                }
             }
-        } else {
-            lim = Integer.parseInt(limit);
+            default -> lim = Integer.parseInt(limit);
         }
 
         Dag union = new Dag(alpha);
@@ -158,10 +158,33 @@ public class ConsensusUnion {
 
     // Add the edges in order of frequency, limiting the maximum tree width
     private static Dag applyMaxTreewidth(ArrayList<Node> alpha, List<Edge> edges, String maxTreewidth) {
-        int lim = Integer.parseInt(maxTreewidth);
+        int maxCliqueSize = Integer.parseInt(maxTreewidth);
         Dag union = new Dag(alpha);
 
-        // Fist step: Moralize the
+        for (Edge edge : edges) {
+            // 0. Add the edge
+            union.addEdge(edge);
+
+            // 1. Moralize the graph
+            Graph undirectedGraph = moralize(union);
+
+            // 2. Triangulate the graph
+            // tetrad-lib/src/main/java/edu/cmu/tetrad/bayes/JunctionTreeAlgorithm.java#L106
+            Node[] maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
+            GraphTools.fillIn(undirectedGraph, maximumCardinalityOrdering);
+
+            // 3. Find the maximum clique size
+            maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
+            Map<Node, Set<Node>> cliques = GraphTools.getCliques(maximumCardinalityOrdering, undirectedGraph);
+
+            // 4. If the maximum clique size is greater than the limit, remove the edge
+            for (Set<Node> clique : cliques.values()) {
+                if (clique.size() > maxCliqueSize) {
+                    union.removeEdge(edge);
+                    break;
+                }
+            }
+        }
 
         return union;
     }
