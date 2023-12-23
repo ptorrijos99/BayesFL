@@ -26,6 +26,10 @@ public class ConsensusUnion {
      * @return The union of the DAGs.
      */
     public static Dag fusionUnion(ArrayList<Dag> dags, String method, String limit) {
+        if (method.equals("GeneticTW")) {
+            return new GeneticTreeWidthUnion(Integer.parseInt(limit), 42).fusionUnion(dags);
+        }
+
         ArrayList<Node> alpha = alphaOrder(dags);
 
         ArrayList<Dag> outputDags = new ArrayList<>();
@@ -58,17 +62,17 @@ public class ConsensusUnion {
             // Option 3: Add the edges in order of frequency, limiting the maximum number of parents of each node
             case "MaxParents" -> applyMaxParents(alpha, edges, limit);
             // Option 4: Add the edges in order of frequency, limiting the maximum treewidth
-            case "MaxTreewidth" -> applyMaxTreewidth(alpha, edges, limit);
+            case "MaxTreewidth" -> applyGreedyMaxTreewidth(alpha, edges, limit);
             // Default: Total union of the DAGs
             default -> applyUnion(alpha, outputDags);
         };
     }
 
     // Add all the edges
-    private static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> outputDags) {
+    private static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> dags) {
         Dag union = new Dag(alpha);
         for (Node nodei : alpha) {
-            for (Dag d : outputDags) {
+            for (Dag d : dags) {
                 List<Node> parent = d.getParents(nodei);
                 for (Node pa : parent) {
                     if (!union.isParentOf(pa, nodei)) {
@@ -156,8 +160,8 @@ public class ConsensusUnion {
         return union;
     }
 
-    // Add the edges in order of frequency, limiting the maximum tree width
-    private static Dag applyMaxTreewidth(ArrayList<Node> alpha, List<Edge> edges, String maxTreewidth) {
+    // Add the edges in order of frequency, limiting the maximum tree width. Greedy algorithm.
+    public static Dag applyGreedyMaxTreewidth(ArrayList<Node> alpha, List<Edge> edges, String maxTreewidth) {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
         Dag union = new Dag(alpha);
 
@@ -188,6 +192,8 @@ public class ConsensusUnion {
 
         return union;
     }
+
+
 }
 
 
