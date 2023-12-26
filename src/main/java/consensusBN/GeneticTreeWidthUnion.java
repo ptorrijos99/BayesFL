@@ -1,10 +1,7 @@
 package consensusBN;
 
 import edu.cmu.tetrad.bayes.GraphTools;
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.Graph;
-import edu.cmu.tetrad.graph.Node;
+import edu.cmu.tetrad.graph.*;
 
 import java.util.*;
 
@@ -16,8 +13,8 @@ import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 public class GeneticTreeWidthUnion {
 
     // Parameters
-    public int numIterations = 5000;
-    public int populationSize = 100;
+    public int numIterations = 2000;
+    public int populationSize = 50;
     public int maxTreewidth;
     public String method = "Gamez";
 
@@ -109,8 +106,8 @@ public class GeneticTreeWidthUnion {
             System.out.println("Iteration " + j);
             evaluate();
             crossover();
+            evaluate();
             mutate();
-            replace();
         }
     }
 
@@ -122,7 +119,6 @@ public class GeneticTreeWidthUnion {
             evaluate();
             crossover();
             mutate();
-            replace();
         }
     }
 
@@ -152,7 +148,7 @@ public class GeneticTreeWidthUnion {
     private void evaluate() {
         fitness = new double[populationSize];
         for (int i = 0; i < populationSize; i++) {
-            fitness[i] = calculateFitness(population[i],i);
+            fitness[i] = calculateFitness(i, 0);
         }
 
         System.out.println("Fitness: ");
@@ -171,7 +167,7 @@ public class GeneticTreeWidthUnion {
         // Add the best individual of the last iteration to the new population
         int bestIndex = 0;
         double bestFitness = 0;
-        for (int i = 0; i < populationSize; i++) {
+        for (int i = 1; i < populationSize; i++) {
             if (fitness[i] > bestFitness) {
                 bestFitness = fitness[i];
                 bestIndex = i;
@@ -201,6 +197,20 @@ public class GeneticTreeWidthUnion {
         }
 
         population = newPopulation;
+
+        for (int i = 0; i < populationSize; i++) {
+            double x = (double) treeWidths[i] / maxTreewidth;
+
+            // Number of trues
+            int numTrues = 0;
+            for (int j = 0; j < totalEdges; j++) {
+                if (population[i][j]) {
+                    numTrues++;
+                }
+            }
+            System.out.println(i + " | FIT " + String.format("%.1f", fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | TRUES: " + numTrues);
+        }
+
     }
 
     private void mutate() {
@@ -252,15 +262,12 @@ public class GeneticTreeWidthUnion {
             System.out.println(i + " | FIT " + String.format("%.1f",fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | TRUES: " + numTrues + ", " + finalNumTrues);
         }
     }
-    private void replace() {
 
-    }
-
-    private double calculateFitness(boolean[] individual, int index) {
+    private double calculateFitness(int index, int recursive) {
         // 1. Create the DAG that corresponds to the individual
         Dag union = new Dag(alpha);
         for (int i = 0; i < totalEdges; i++) {
-            if (individual[i]) {
+            if (population[index][i]) {
                 union.addEdge(edges.get(i));
             }
         }
@@ -287,18 +294,58 @@ public class GeneticTreeWidthUnion {
 
         double fitness;
         if (maxCliqueSize > maxTreewidth) {
-            fitness = union.getNumEdges() * ((double) maxTreewidth / maxCliqueSize);
+            population[index] = fixIndividual(population[index], cliques, recursive);
+            return calculateFitness(index, recursive+1);
+            //fitness = union.getNumEdges() * ((double) maxTreewidth / maxCliqueSize);
         } else {
             fitness = union.getNumEdges() * ((double) maxCliqueSize / maxTreewidth);
         }
 
         if (fitness > bestFitness && maxCliqueSize <= maxTreewidth) {
-            bestIndividual = individual;
+            bestIndividual = population[index].clone();
             bestDag = union;
             bestFitness = fitness;
         }
 
         return fitness;
+    }
+
+    private boolean[] fixIndividual(boolean[] individual, Map<Node, Set<Node>> cliques, int recursive) {
+        boolean[] fixed = individual.clone();
+        for (Node node : cliques.keySet()) {
+            Set<Node> clique = cliques.get(node);
+            if (clique.size() > maxTreewidth - recursive) {
+                int numToRemove = clique.size() - maxTreewidth + recursive;
+                for (Node neighbor : clique) {
+                    if (numToRemove == 0) {
+                        break;
+                    }
+                    if (neighbor.equals(node)) {
+                        continue;
+                    }
+                    boolean removed = false;
+
+                    Integer position1 = edgePosition.get(new Edge(node, neighbor, Endpoint.TAIL, Endpoint.ARROW));
+                    if (position1!=null && fixed[position1]) {
+                        fixed[position1] = false;
+                        removed = true;
+                    }
+                    Integer position2 = edgePosition.get(new Edge(neighbor, node, Endpoint.TAIL, Endpoint.ARROW));
+                    if (position2!=null && fixed[position2]) {
+                        fixed[position2] = false;
+                        removed = true;
+                    }
+                    if (removed) {
+                        numToRemove--;
+                    }
+                    Set<Node> neighborClique = cliques.get(neighbor);
+                    if (neighborClique != null) {
+                        neighborClique.remove(node);
+                    }
+                }
+            }
+        }
+        return fixed;
     }
 
 
