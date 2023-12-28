@@ -13,8 +13,8 @@ import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 public class GeneticTreeWidthUnion {
 
     // Parameters
-    public int numIterations = 2000;
-    public int populationSize = 50;
+    public int numIterations = 5000;
+    public int populationSize = 20;
     public int maxTreewidth;
     public String method = "Gamez";
 
@@ -35,6 +35,8 @@ public class GeneticTreeWidthUnion {
     private int[] treeWidths = new int[populationSize];
     int maxFreq;
     int minFreq;
+
+    int greedyEdges;
 
     Random random;
 
@@ -93,6 +95,7 @@ public class GeneticTreeWidthUnion {
         }
 
         System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
+        System.out.println("Greedy edges: " + greedyEdges);
 
         return bestDag;
     }
@@ -132,13 +135,20 @@ public class GeneticTreeWidthUnion {
         for (int i = 0; i < totalEdges; i++) {
             population[0][i] = greedy.containsEdge(edges.get(i));
         }
+        greedyEdges = greedy.getNumEdges();
 
-        for (int i = 1; i < populationSize; i++) {
+        // Add the greedy solutions with maxTreewidth-1 to the population
+        greedy = applyGreedyMaxTreewidth(alpha, edges, String.valueOf(maxTreewidth-1));
+        for (int i = 0; i < totalEdges; i++) {
+            population[1][i] = greedy.containsEdge(edges.get(i));
+        }
+
+        for (int i = 2; i < populationSize; i++) {
             for (int j = 0; j < totalEdges; j++) {
                 if (uniform) {
                     population[i][j] = random.nextBoolean();
                 } else {
-                    double normalized = (double) (edgeFrequencyArray.get(j) - minFreq) /(maxFreq-minFreq);
+                    double normalized = (double) (edgeFrequencyArray.get(j) - minFreq) / (maxFreq-minFreq);
                     population[i][j] = random.nextDouble() < 1/(1-Math.log(normalized));
                 }
             }
@@ -225,7 +235,6 @@ public class GeneticTreeWidthUnion {
                 }
             }
 
-
             for (int j = 0; j < totalEdges; j++) {
                 if (population[i][j]) {
                     double probRemove;
@@ -294,11 +303,11 @@ public class GeneticTreeWidthUnion {
 
         double fitness;
         if (maxCliqueSize > maxTreewidth) {
-            population[index] = fixIndividual(population[index], cliques, recursive);
-            return calculateFitness(index, recursive+1);
-            //fitness = union.getNumEdges() * ((double) maxTreewidth / maxCliqueSize);
+            //population[index] = fixIndividual(population[index], cliques, recursive);
+            //return calculateFitness(index, recursive+1);
+            fitness = union.getNumEdges() * ((double) maxTreewidth / maxCliqueSize);
         } else {
-            fitness = union.getNumEdges() * ((double) maxCliqueSize / maxTreewidth);
+            fitness = union.getNumEdges(); // * ((double) maxTreewidth / maxCliqueSize);// * ((double) maxCliqueSize / maxTreewidth);
         }
 
         if (fitness > bestFitness && maxCliqueSize <= maxTreewidth) {
