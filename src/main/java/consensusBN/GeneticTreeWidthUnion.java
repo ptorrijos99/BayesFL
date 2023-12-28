@@ -2,12 +2,14 @@ package consensusBN;
 
 import edu.cmu.tetrad.bayes.GraphTools;
 import edu.cmu.tetrad.graph.*;
+import org.albacete.simd.utils.Utils;
 
 import java.util.*;
 
 import static consensusBN.AlphaOrder.alphaOrder;
 import static consensusBN.BetaToAlpha.transformToAlpha;
 import static consensusBN.ConsensusUnion.applyGreedyMaxTreewidth;
+import static consensusBN.ConsensusUnion.applyUnion;
 import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 
 public class GeneticTreeWidthUnion {
@@ -18,27 +20,31 @@ public class GeneticTreeWidthUnion {
     public int maxTreewidth;
     public String method = "Gamez";
 
-    // Variables
+    // Best values
     private boolean[] bestIndividual;
     private Dag bestDag;
     private double bestFitness;
 
 
-    private boolean[][] population;
+    // "Final" variables
+    private final Random random;
     private int totalEdges;
     private ArrayList<Node> alpha;
     private ArrayList<Edge> edges;
     private ArrayList<Integer> edgeFrequencyArray;
     private HashMap<Edge, Integer> edgePosition;
     private HashMap<Edge, Integer> edgeFrequency;
+    private int maxFreq;
+    private int minFreq;
+    private int greedyEdges;
+    private Dag fusionUnion;
+
+
+    // Variables
+    private boolean[][] population;
     private double[] fitness;
     private int[] treeWidths = new int[populationSize];
-    int maxFreq;
-    int minFreq;
 
-    int greedyEdges;
-
-    Random random;
 
     public GeneticTreeWidthUnion(int maxTreewidth) {
         this.maxTreewidth = maxTreewidth;
@@ -62,6 +68,8 @@ public class GeneticTreeWidthUnion {
         for (Dag dag : dags) {
             alphaDags.add(transformToAlpha(dag, alpha));
         }
+
+        fusionUnion = applyUnion(alpha, alphaDags);
 
         // Order the edges of all the DAGs by the number of times they appear
         int i = 0;
@@ -89,7 +97,7 @@ public class GeneticTreeWidthUnion {
         minFreq = Collections.min(edgeFrequency.values());
 
         if (method.equals("Gamez")) {
-            fusionUnionGamez(alphaDags);
+            fusionUnionGamez();
         } else {
             fusionUnionPuerta(alphaDags);
         }
@@ -101,7 +109,7 @@ public class GeneticTreeWidthUnion {
     }
 
 
-    private void fusionUnionGamez(ArrayList<Dag> dags) {
+    private void fusionUnionGamez() {
         // Genetic algorithm
         System.out.println("Initializing");
         initialize();
@@ -205,12 +213,10 @@ public class GeneticTreeWidthUnion {
                 System.arraycopy(population[index4], crossoverPoint, newPopulation[i], crossoverPoint, totalEdges-crossoverPoint);
             }
         }
-
         population = newPopulation;
 
         for (int i = 0; i < populationSize; i++) {
             double x = (double) treeWidths[i] / maxTreewidth;
-
             // Number of trues
             int numTrues = 0;
             for (int j = 0; j < totalEdges; j++) {
@@ -305,9 +311,9 @@ public class GeneticTreeWidthUnion {
         if (maxCliqueSize > maxTreewidth) {
             //population[index] = fixIndividual(population[index], cliques, recursive);
             //return calculateFitness(index, recursive+1);
-            fitness = union.getNumEdges() * ((double) maxTreewidth / maxCliqueSize);
+            fitness = Utils.SMHD(union, fusionUnion) * ((double) maxTreewidth / maxCliqueSize);
         } else {
-            fitness = union.getNumEdges(); // * ((double) maxTreewidth / maxCliqueSize);// * ((double) maxCliqueSize / maxTreewidth);
+            fitness = Utils.SMHD(union, fusionUnion);
         }
 
         if (fitness > bestFitness && maxCliqueSize <= maxTreewidth) {
