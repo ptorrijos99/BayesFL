@@ -95,21 +95,21 @@ public class MainMCTSBN {
                 hc.search();
                 Dag hcDag = new Dag(hc.getGraph());
                 double bdeu = GESThread.scoreGraph(hcDag, problem);
-                double shd = Utils.SHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), hcDag);
+                double shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), hcDag);
                 System.out.println("\n Best HC: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
                 bdeu = GESThread.scoreGraph(dagOriginal, problem);
-                shd = Utils.SHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), dagOriginal);
+                shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), dagOriginal);
                 System.out.println("\n Original: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
                 Dag PGESdag = new Dag(mctsbn.getPGESDag());
                 bdeu = GESThread.scoreGraph(PGESdag, problem);
-                shd = Utils.SHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), PGESdag);
+                shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), PGESdag);
                 System.out.println("\n PGES: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
                 Dag mctsDag = new Dag(mctsbn.getBestDag());
                 bdeu = GESThread.scoreGraph(mctsDag, problem);
-                shd = Utils.SHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), mctsDag);
+                shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), mctsDag);
                 System.out.println("\n MCTS: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
             }

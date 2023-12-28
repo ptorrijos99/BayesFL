@@ -255,7 +255,7 @@ public class Utils {
         }
     }
 
-    public static int SHD (Dag bn1, Dag bn2) {
+    public static int SMHD(Dag bn1, Dag bn2) {
 
         ArrayList<Dag> dags = new ArrayList<>();
         dags.add(bn1);

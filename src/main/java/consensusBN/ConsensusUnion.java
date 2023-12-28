@@ -69,7 +69,7 @@ public class ConsensusUnion {
     }
 
     // Add all the edges
-    private static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> dags) {
+    public static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> dags) {
         Dag union = new Dag(alpha);
         for (Node nodei : alpha) {
             for (Dag d : dags) {

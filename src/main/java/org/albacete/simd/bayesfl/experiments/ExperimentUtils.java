@@ -33,7 +33,6 @@ package org.albacete.simd.bayesfl.experiments;
 
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.search.BDeuScore;
 import edu.cmu.tetrad.search.Fges;
@@ -105,7 +104,7 @@ public class ExperimentUtils {
             if (dat.getOriginalBNPath() != null) {
                 try {
                     MlBayesIm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
-                    return Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
+                    return Utils.SMHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
                 } catch (Exception e) { e.printStackTrace(); }
             }
         }
