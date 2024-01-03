@@ -27,7 +27,7 @@ public class ConsensusUnion {
      */
     public static Dag fusionUnion(ArrayList<Dag> dags, String method, String limit) {
         if (method.equals("GeneticTW")) {
-            return new GeneticTreeWidthUnion(Integer.parseInt(limit), 42).fusionUnion(dags);
+            return new GeneticTreeWidthUnion(42, Integer.parseInt(limit)).fusionUnion(dags);
         }
 
         ArrayList<Node> alpha = alphaOrder(dags);
@@ -166,22 +166,13 @@ public class ConsensusUnion {
         Dag union = new Dag(alpha);
 
         for (Edge edge : edges) {
-            // 0. Add the edge
+            // Add the edge
             union.addEdge(edge);
 
-            // 1. Moralize the graph
-            Graph undirectedGraph = moralize(union);
+            // Get the cliques of the union
+            Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(union);
 
-            // 2. Triangulate the graph
-            // tetrad-lib/src/main/java/edu/cmu/tetrad/bayes/JunctionTreeAlgorithm.java#L106
-            Node[] maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
-            GraphTools.fillIn(undirectedGraph, maximumCardinalityOrdering);
-
-            // 3. Find the maximum clique size
-            maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
-            Map<Node, Set<Node>> cliques = GraphTools.getCliques(maximumCardinalityOrdering, undirectedGraph);
-
-            // 4. If the maximum clique size is greater than the limit, remove the edge
+            // If the maximum clique size is greater than the limit, remove the edge
             for (Set<Node> clique : cliques.values()) {
                 if (clique.size() > maxCliqueSize) {
                     union.removeEdge(edge);
@@ -191,6 +182,31 @@ public class ConsensusUnion {
         }
 
         return union;
+    }
+
+    public static Map<Node, Set<Node>> getMoralTriangulatedCliques(Dag dag) {
+        // 1. Moralize the graph
+        EdgeListGraph undirectedGraph = (EdgeListGraph) moralize(dag);
+
+        // 2. Triangulate the graph
+        // tetrad-lib/src/main/java/edu/cmu/tetrad/bayes/JunctionTreeAlgorithm.java#L106
+        Node[] maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
+        GraphTools.fillIn(undirectedGraph, maximumCardinalityOrdering);
+
+        // 3. Find the maximum clique size
+        maximumCardinalityOrdering = GraphTools.getMaximumCardinalityOrdering(undirectedGraph);
+        return GraphTools.getCliques(maximumCardinalityOrdering, undirectedGraph);
+    }
+
+    public static int getTreeWidth(Dag dag) {
+        Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(dag);
+        int maxCliqueSize = 0;
+        for (Set<Node> clique : cliques.values()) {
+            if (clique.size() > maxCliqueSize) {
+                maxCliqueSize = clique.size();
+            }
+        }
+        return maxCliqueSize;
     }
 
 
