@@ -31,6 +31,7 @@
 
 package org.albacete.simd.bayesfl.experiments;
 
+import consensusBN.GeneticTreeWidthUnion;
 import edu.cmu.tetrad.data.DataSet;
 import org.albacete.simd.bayesfl.Client;
 import org.albacete.simd.bayesfl.Server;
@@ -61,22 +62,22 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "pathfinder";
+        String net = "alarm";
         String algName = "GES";
         String refinement = "None";
-        String fusionClient = "MaxTreewidth";
-        String fusionServer = "MaxTreewidth";
-        String limitC = "1";
-        String limitS = "1";
+        String fusionClient = "Union";
+        String fusionServer = "MaxTreewidth";//"GeneticTW" "MaxTreewidth"
+        String limitC = "4";
+        String limitS = "4";
         
-        int maxEdgesIt = 10000000;
+        int maxEdgesIt = 100000;
         int nIterations = 1;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 5;
+        int nClients = 10;
         launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
