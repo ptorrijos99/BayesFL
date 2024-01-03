@@ -60,7 +60,7 @@ public class EdgeListGraph implements Graph {
      *
      * @serial
      */
-    final Set<Edge> edgesSet;
+    final Map<Edge, Edge> edgesSet;
 
     /**
      * Map from each node to the List of edges connected to that node.
@@ -118,7 +118,7 @@ public class EdgeListGraph implements Graph {
         this.edgeLists = new HashMap<>();
         this.neighboursMap = new HashMap();
         this.nodes = new HashSet<>();
-        this.edgesSet = new HashSet<>();
+        this.edgesSet = new HashMap<>();
         this.namesHash = new HashMap<>();
     }
 
@@ -565,17 +565,28 @@ public class EdgeListGraph implements Graph {
     @Override
     public Edge getEdge(Node node1, Node node2) {
         Set<Edge> edges = this.edgeLists.get(node1);
-
         if (edges == null) {
             return null;
         }
 
-        for (Edge edge : edges) {
-            if (edge.getNode1().equals(node1) && edge.getNode2().equals(node2)) {
-                return edge;
-            } else if (edge.getNode1().equals(node2) && edge.getNode2().equals(node1)) {
-                return edge;
-            }
+        Edge edge = new Edge(node1, node2, Endpoint.TAIL, Endpoint.ARROW);
+        if (edges.contains(edge)) {
+            return edgesSet.get(edge);
+        }
+
+        edge = new Edge(node2, node1, Endpoint.TAIL, Endpoint.ARROW);
+        if (edges.contains(edge)) {
+            return edgesSet.get(edge);
+        }
+
+        edge = new Edge(node1, node2, Endpoint.TAIL, Endpoint.TAIL);
+        if (edges.contains(edge)) {
+            return edgesSet.get(edge);
+        }
+
+        edge = new Edge(node2, node1, Endpoint.TAIL, Endpoint.TAIL);
+        if (edges.contains(edge)) {
+            return edgesSet.get(edge);
         }
 
         return null;
@@ -1033,7 +1044,7 @@ public class EdgeListGraph implements Graph {
     public List<Node> getAdjacentNodes(Node node) {
         return new ArrayList(neighboursMap.get(node));
     }
-    
+
     /**
      * @return the set of nodes adjacent to the given node. If there are
      * multiple edges between X and Y, Y will show up twice in the list of
@@ -1180,9 +1191,9 @@ public class EdgeListGraph implements Graph {
             this.edgeLists.get(edge.getNode1()).add(edge);
             this.edgeLists.get(edge.getNode2()).add(edge);
 
-            this.edgesSet.add(edge);
+            this.edgesSet.put(edge,edge);
             
-            // Ahora ambos nodos son vecinos
+            // Now the two nodes are neighbours
             this.neighboursMap.get(edge.getNode1()).add(edge.getNode2());
             this.neighboursMap.get(edge.getNode2()).add(edge.getNode1());
 
@@ -1245,7 +1256,7 @@ public class EdgeListGraph implements Graph {
      */
     @Override
     public Set<Edge> getEdges() {
-        return new HashSet<>(this.edgesSet);
+        return new HashSet<>(this.edgesSet.keySet());
     }
 
     /**
@@ -1253,7 +1264,7 @@ public class EdgeListGraph implements Graph {
      */
     @Override
     public boolean containsEdge(Edge edge) {
-        return this.edgesSet.contains(edge);
+        return this.edgesSet.containsKey(edge);
     }
 
     /**
@@ -1302,7 +1313,7 @@ public class EdgeListGraph implements Graph {
         if (o instanceof EdgeListGraph) {
             EdgeListGraph _o = (EdgeListGraph) o;
             boolean nodesEqual = new HashSet<>(_o.nodes).equals(new HashSet<>(this.nodes));
-            boolean edgesEqual = new HashSet<>(_o.edgesSet).equals(new HashSet<>(this.edgesSet));
+            boolean edgesEqual = new HashMap<>(_o.edgesSet).equals(new HashMap<>(this.edgesSet));
             return (nodesEqual && edgesEqual);
         } else {
             Graph graph = (Graph) o;
@@ -1338,7 +1349,7 @@ public class EdgeListGraph implements Graph {
 
     @Override
     public void reorientAllWith(Endpoint endpoint) {
-        for (Edge edge : new ArrayList<>(this.edgesSet)) {
+        for (Edge edge : this.edgesSet.keySet()) {
             Node a = edge.getNode1();
             Node b = edge.getNode2();
 
@@ -1383,6 +1394,10 @@ public class EdgeListGraph implements Graph {
     @Override
     public List<Node> getNodes() {
         return new ArrayList<>(this.nodes);
+    }
+
+    public Set<Node> getNodesSet() {
+        return this.nodes;
     }
 
     @Override
@@ -1445,7 +1460,7 @@ public class EdgeListGraph implements Graph {
     @Override
     public boolean removeEdge(Edge edge) {
         synchronized (this.edgeLists) {
-            if (!this.edgesSet.contains(edge)) {
+            if (!this.edgesSet.containsKey(edge)) {
                 return false;
             }
 
@@ -1456,7 +1471,7 @@ public class EdgeListGraph implements Graph {
             edgeList2 = new HashSet<>(edgeList2);
             
             // Si no existe el enlace inverso, dejan de ser vecinos
-            if (!edgesSet.contains(edge.reverse())){
+            if (!edgesSet.containsKey(edge.reverse())){
                 this.neighboursMap.get(edge.getNode1()).remove(edge.getNode2());
                 this.neighboursMap.get(edge.getNode2()).remove(edge.getNode1());
             }
@@ -1519,7 +1534,9 @@ public class EdgeListGraph implements Graph {
 
         boolean changed = false;
         Set<Edge> edgeList1 = this.edgeLists.get(node);    //list of edges connected to that node
-        edgesSet.removeAll(edgeList1);
+        for (Edge edge : edgeList1) {
+            this.edgesSet.remove(edge);
+        }
 
         for (Iterator<Edge> i = edgeList1.iterator(); i.hasNext(); ) {
             Edge edge = (i.next());

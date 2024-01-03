@@ -16,7 +16,6 @@ import java.util.*;
 
 public class Utils {
 
-
     private static Random random = new Random();
     
     /**
@@ -94,8 +93,6 @@ public class Utils {
      * @return The subsets of the listOfArcs in an ArrayList of TupleNode.
      */
     public static List<Set<Edge>> split(Set<Edge> listOfArcs, int numSplits) {
-
-
         List<Set<Edge>> subSets = new ArrayList<>(numSplits);
 
         // Shuffling arcs
@@ -121,7 +118,6 @@ public class Utils {
         subSets.add(sub);
 
         return subSets;
-
     }
 
     public static void setSeed(long seed){
@@ -181,7 +177,6 @@ public class Utils {
         return setOfArcs;
     }
 
-
     /**
      * Stores the data from a csv as a DataSet object.
      * @param path
@@ -225,7 +220,6 @@ public class Utils {
     }
 
     private static void ensureVariables(ArrayList<Dag> setofbns){
-
         List<Node> nodes = setofbns.get(0).getNodes();
         //System.out.println("Nodes: " + nodes);
         for(int i = 1 ; i< setofbns.size(); i++) {
@@ -256,57 +250,47 @@ public class Utils {
     }
 
     public static int SMHD(Dag bn1, Dag bn2) {
-
-        ArrayList<Dag> dags = new ArrayList<>();
+        /*ArrayList<Dag> dags = new ArrayList<>();
         dags.add(bn1);
         dags.add(bn2);
-        ensureVariables(dags);
+        ensureVariables(dags);*/
+        Graph g1 = new EdgeListGraph(bn1);
+        Graph g2 = new EdgeListGraph(bn2);
 
-        Graph g1 = new EdgeListGraph(dags.get(0));
-        Graph g2 = new EdgeListGraph(dags.get(1));
-
-        for(Node n: dags.get(0).getNodes()) {
-            List<Node> p = dags.get(0).getParents(n);
-            for (int i=0; i<p.size()-1;i++)
-                for(int j=i+1; j<p.size();j++) {
-                    Edge e1 = g1.getEdge(p.get(i), p.get(j));
-                    Edge e2 = g1.getEdge(p.get(j), p.get(i));
-                    if(e1==null && e2 == null) {
-                        Edge e = new Edge(p.get(i),p.get(j),Endpoint.TAIL,Endpoint.TAIL);
+        for(Node n: bn1.getNodes()) {
+            List<Node> p = bn1.getParents(n);
+            for (int i=0; i<p.size()-1;i++) {
+                for (int j = i + 1; j < p.size(); j++) {
+                    if (!g1.isAdjacentTo(p.get(i), p.get(j))) {
+                        Edge e = new Edge(p.get(i), p.get(j), Endpoint.TAIL, Endpoint.TAIL);
                         g1.addEdge(e);
                     }
                 }
+            }
         }
 
-        for(Node n: dags.get(1).getNodes()) {
-            List<Node> p = dags.get(1).getParents(n);
-            for (int i=0; i<p.size()-1;i++)
-                for(int j=i+1; j<p.size();j++) {
-                    Edge e1 = g2.getEdge(p.get(i), p.get(j));
-                    Edge e2 = g2.getEdge(p.get(j), p.get(i));
-                    if(e1==null && e2 == null) {
-                        Edge e = new Edge(p.get(i),p.get(j),Endpoint.TAIL,Endpoint.TAIL);
+        for(Node n: bn2.getNodes()) {
+            List<Node> p = bn2.getParents(n);
+            for (int i=0; i<p.size()-1;i++) {
+                for (int j = i + 1; j < p.size(); j++) {
+                    if (!g2.isAdjacentTo(p.get(i), p.get(j))) {
+                        Edge e = new Edge(p.get(i), p.get(j), Endpoint.TAIL, Endpoint.TAIL);
                         g2.addEdge(e);
                     }
                 }
+            }
         }
 
         int sum = 0;
         for(Edge e: g1.getEdges()) {
-            Edge e2 = g2.getEdge(e.getNode1(), e.getNode2());
-            Edge e3 = g2.getEdge(e.getNode2(), e.getNode1());
-            if(e2 == null && e3 == null) sum++;
+            if(!g2.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
         }
 
         for(Edge e: g2.getEdges()) {
-            Edge e2 = g1.getEdge(e.getNode1(), e.getNode2());
-            Edge e3 = g1.getEdge(e.getNode2(), e.getNode1());
-            if(e2 == null && e3 == null) sum++;
+            if(!g1.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
         }
         return sum;
     }
-
-
 
     public static List<Node> getMarkovBlanket(Dag bn, Node n){
         List<Node> mb = new ArrayList<>();
@@ -325,7 +309,6 @@ public class Utils {
                 }
             }
         }
-
         return mb;
     }
 
@@ -338,7 +321,6 @@ public class Utils {
      * @return
      */
     public static double [] avgMarkovBlanquetdif(Dag original, Dag created) {
-
         if (original.getNodes().size() != created.getNodes().size())
             return null;
 
@@ -353,14 +335,12 @@ public class Utils {
         double plusNodes = 0;
         double minusNodes = 0;
 
-
         for (Node e1 : original.getNodes()) {
             Node e2 = created.getNode(e1.getName());
 
             // Creating Markov's Blanket
             List<Node> mb1 = getMarkovBlanket(original, e1);
             List<Node> mb2 = getMarkovBlanket(created, e2);
-
 
             ArrayList<String> names1 = new ArrayList<String>();
             ArrayList<String> names2 = new ArrayList<String>();
@@ -391,7 +371,6 @@ public class Utils {
         }
 
         // Differences of MM
-
         result[0] = differenceNodes;
         result[1] = plusNodes;
         result[2] = minusNodes;
@@ -423,7 +402,6 @@ public class Utils {
                 nodeH = e.getNode1();
             }
 
-
             if(g.existsDirectedPathFromTo(nodeT, nodeH)){
                 System.out.println("Directed path from " + nodeT + " to " + nodeH +"\t Deleting Edge...");
                 g.removeEdge(e);
@@ -431,42 +409,33 @@ public class Utils {
         }
         // Adding graph from each thread to the graphs array
         return new Dag(g);
-
     }
 
     public static double LL(BayesIm bn, DataSet data) {
-
         BayesIm bayesIm;
-
         int[][][] observedCounts;
 
         Graph graph = bn.getDag();
         Node[] nodes = new Node[graph.getNumNodes()];
 
         observedCounts = new int[nodes.length][][];
-
         int[][] observedCountsRowSum = new int[nodes.length][];
 
         bayesIm = new MlBayesIm(bn);
 
         for (int i = 0; i < nodes.length; i++) {
-
             int numRows = bayesIm.getNumRows(i);
             observedCounts[i] = new int[numRows][];
-
             observedCountsRowSum[i] = new int[numRows];
 
             for (int j = 0; j < numRows; j++) {
-
                 observedCountsRowSum[i][j] = 0;
-
                 int numCols = bayesIm.getNumColumns(i);
                 observedCounts[i][j] = new int[numCols];
             }
         }
 
         //At this point set values in observedCounts
-
         for (int j = 0; j < data.getNumColumns(); j++) {
             DiscreteVariable var = (DiscreteVariable) data.getVariables().get(j);
             String varName = var.getName();
@@ -482,12 +451,8 @@ public class Utils {
                 }
 
                 for (int i = 0; i < data.getNumRows(); i++) {
-
                     observedCounts[varIndex][0][data.getInt(i, j)] += 1.0;
-
-
                 }
-
             }
             else {    //For variables with parents:
                 int numRows = bayesIm.getNumRows(varIndex);
@@ -503,7 +468,6 @@ public class Utils {
 
                     for (int i = 0; i < data.getNumRows(); i++) {
                         //for a case where the parent values = parValues increment the estCount
-
                         boolean parentMatch = true;
 
                         for (int p = 0; p < parentVarIndices.length; p++) {
@@ -516,17 +480,11 @@ public class Utils {
                         if (!parentMatch) {
                             continue;  //Not a matching case; go to next.
                         }
-
                         observedCounts[varIndex][row][data.getInt(i, j)] += 1;
                     }
-
                 }
-
             }
-
-
         }
-
 
         for (int i = 0; i < nodes.length; i++) {
             for (int j = 0; j < bayesIm.getNumRows(i); j++) {
@@ -537,7 +495,6 @@ public class Utils {
         }
 
         double sum = 0.0;
-
         int n = nodes.length;
 
         for (int i = 0; i < n; i++) {
@@ -555,11 +512,8 @@ public class Utils {
                         e.printStackTrace();
                     }
                 }
-
             }
-
         }
-
         return sum / data.getNumRows() / data.getNumColumns();
     }
 
@@ -594,7 +548,5 @@ public class Utils {
         }
         //System.out.println(graph);
         return new BayesPm(graph);
-
     }
-
 }

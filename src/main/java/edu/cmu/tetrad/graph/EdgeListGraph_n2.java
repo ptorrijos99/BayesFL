@@ -132,7 +132,7 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
             this.edgeLists.get(edge.getNode1()).add(edge);
             this.edgeLists.get(edge.getNode2()).add(edge);
 
-            this.edgesSet.add(edge);
+            this.edgesSet.put(edge,edge);
             
             // Ahora ambos nodos son vecinos
             this.neighboursMap.get(edge.getNode1()).add(edge.getNode2());
@@ -167,7 +167,7 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
     @Override
     public boolean removeEdge(Edge edge) {
         synchronized (this.edgeLists) {
-            if (!this.edgesSet.contains(edge)) {
+            if (!this.edgesSet.containsKey(edge)) {
                 return false;
             }
 
@@ -178,7 +178,7 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
             edgeList2 = new HashSet<>(edgeList2);
             
             // Si no existe el enlace inverso, dejan de ser vecinos
-            if (!edgesSet.contains(edge.reverse())){
+            if (!edgesSet.containsKey(edge.reverse())){
                 this.neighboursMap.get(edge.getNode1()).remove(edge.getNode2());
                 this.neighboursMap.get(edge.getNode2()).remove(edge.getNode1());
             }
@@ -281,7 +281,7 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
      */
     @Override
     public Set<Edge> getEdges() {
-        return new HashSet<>(this.edgesSet);
+        return new HashSet<>(this.edgesSet.keySet());
     }
     
     /**
@@ -326,7 +326,9 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
 
         boolean changed = false;
         Set<Edge> edgeList1 = this.edgeLists.get(node);    //list of edges connected to that node
-        edgesSet.removeAll(edgeList1);
+        for (Edge e : edgeList1) {
+            this.edgesSet.remove(e);
+        }
 
         for (Iterator<Edge> i = edgeList1.iterator(); i.hasNext(); ) {
             Edge edge = (i.next());
@@ -495,7 +497,7 @@ public class EdgeListGraph_n2 extends EdgeListGraph {
         if (o instanceof EdgeListGraph_n2) {
             EdgeListGraph_n2 _o = (EdgeListGraph_n2) o;
             boolean nodesEqual = new HashSet<>(_o.nodesHash).equals(new HashSet<>(this.nodesHash));
-            boolean edgesEqual = new HashSet<>(_o.edgesSet).equals(new HashSet<>(this.edgesSet));
+            boolean edgesEqual = new HashSet<>(_o.edgesSet.keySet()).equals(new HashSet<>(this.edgesSet.keySet()));
             return (nodesEqual && edgesEqual);
         } else {
             Graph graph = (Graph) o;
