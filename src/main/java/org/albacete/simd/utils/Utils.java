@@ -549,4 +549,180 @@ public class Utils {
         //System.out.println(graph);
         return new BayesPm(graph);
     }
+
+    public static Map<Node, Set<Node>> getMoralTriangulatedCliques(Dag dag) {
+        // 1. Moralize the graph
+        EdgeListGraph undirectedGraph = (EdgeListGraph) moralize(dag);
+
+        // 2. Triangulate the graph
+        // tetrad-lib/src/main/java/edu/cmu/tetrad/bayes/JunctionTreeAlgorithm.java#L106
+        Node[] maximumCardinalityOrdering = getMaximumCardinalityOrdering(undirectedGraph);
+        fillIn(undirectedGraph, maximumCardinalityOrdering);
+
+        // 3. Find the maximum clique size
+        maximumCardinalityOrdering = getMaximumCardinalityOrdering(undirectedGraph);
+        return getCliques(maximumCardinalityOrdering, undirectedGraph);
+    }
+
+    public static int getTreeWidth(Dag dag) {
+        Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(dag);
+        int maxCliqueSize = 0;
+        for (Set<Node> clique : cliques.values()) {
+            if (clique.size() > maxCliqueSize) {
+                maxCliqueSize = clique.size();
+            }
+        }
+        return maxCliqueSize;
+    }
+
+    /**
+     * Get cliques in a decomposable graph. A clique is a fully-connected
+     * subgraph.
+     *
+     * @param graph    decomposable graph
+     * @param ordering maximum cardinality ordering
+     * @return set of cliques
+     */
+    public static Map<Node, Set<Node>> getCliques(Node[] ordering, Graph graph) {
+        Map<Node, Set<Node>> cliques = new HashMap<>();
+        for (int i = ordering.length - 1; i >= 0; i--) {
+            Node v = ordering[i];
+
+            Set<Node> clique = new HashSet<>();
+            clique.add(v);
+
+            for (int j = 0; j < i; j++) {
+                Node w = ordering[j];
+                if (graph.isAdjacentTo(v, w)) {
+                    clique.add(w);
+                }
+            }
+
+            cliques.put(v, clique);
+        }
+
+        // remove subcliques
+        cliques.forEach((k1, v1) -> cliques.forEach((k2, v2) -> {
+            if ((k1 != k2) && !(v1.isEmpty() || v2.isEmpty()) && v1.containsAll(v2)) {
+                v2.clear();
+            }
+        }));
+
+        // remove empty sets from map
+        while (cliques.values().remove(Collections.EMPTY_SET)) {
+            // empty.
+        }
+
+        return cliques;
+    }
+
+    /**
+     * Apply Tarjan and Yannakakis (1984) fill in algorithm for graph
+     * triangulation. An undirected graph is triangulated if every cycle of
+     * length greater than 4 has a chord.
+     *
+     * @param graph    moral graph
+     * @param ordering maximum cardinality ordering
+     */
+    public static void fillIn(Graph graph, Node[] ordering) {
+        int numOfNodes = ordering.length;
+
+        // in reverse order, insert edges between any non-adjacent neighbors that are lower numbered in the ordering.
+        for (int i = numOfNodes - 1; i >= 0; i--) {
+            Node v = ordering[i];
+
+            // find pairs of neighbors with lower order
+            for (int j = 0; j < i; j++) {
+                Node w = ordering[j];
+                if (graph.isAdjacentTo(v, w)) {
+                    for (int k = j + 1; k < i; k++) {
+                        Node x = ordering[k];
+                        if (graph.isAdjacentTo(x, v)) {
+                            graph.addUndirectedEdge(x, w); // fill in edge
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Perform Tarjan and Yannakakis (1984) maximum cardinality search (MCS) to
+     * get the maximum cardinality ordering.
+     *
+     * CHANGED: getAdjacentNodesSet() instead of getAdjacentNodes()
+     *
+     * @param graph moral graph
+     * @return maximum cardinality ordering of the graph
+     */
+    public static Node[] getMaximumCardinalityOrdering(EdgeListGraph graph) {
+        int numOfNodes = graph.getNumNodes();
+        if (numOfNodes == 0) {
+            return new Node[0];
+        }
+
+        Node[] ordering = new Node[numOfNodes];
+        Set<Node> numbered = new HashSet<>(numOfNodes);
+        for (int i = 0; i < numOfNodes; i++) {
+            // find an unnumbered node that is adjacent to the most number of numbered nodes
+            Node maxCardinalityNode = null;
+            int maxCardinality = -1;
+            for (Node v : graph.getNodesSet()) {
+                if (!numbered.contains(v)) {
+                    // count the number of times node v is adjacent to numbered node w
+                    int cardinality = (int) graph.getAdjacentNodesSet(v).stream()
+                            .filter(numbered::contains)
+                            .count();
+
+                    // find the maximum cardinality
+                    if (cardinality > maxCardinality) {
+                        maxCardinality = cardinality;
+                        maxCardinalityNode = v;
+                    }
+                }
+            }
+
+            // add the node with maximum cardinality to the ordering and number it
+            ordering[i] = maxCardinalityNode;
+            numbered.add(maxCardinalityNode);
+        }
+
+        return ordering;
+    }
+
+    /**
+     * Create a moral graph. A graph is moralized if an edge is added between
+     * two parents with common a child and the edge orientation is removed,
+     * making an undirected graph.
+     *
+     * @param graph to moralized
+     * @return a moral graph
+     */
+    public static Graph moralize(Graph graph) {
+        Graph moralGraph = new EdgeListGraph(graph.getNodes());
+
+        // make skeleton
+        graph.getEdges()
+                .forEach(e -> moralGraph.addUndirectedEdge(e.getNode1(), e.getNode2()));
+
+        // add edges to connect parents with common child
+        graph.getNodes()
+                .forEach(node -> {
+                    List<Node> parents = graph.getParents(node);
+                    if (!(parents == null || parents.isEmpty()) && parents.size() > 1) {
+                        Node[] p = parents.toArray(new Node[0]);
+                        for (int i = 0; i < p.length; i++) {
+                            for (int j = i + 1; j < p.length; j++) {
+                                Node node1 = p[i];
+                                Node node2 = p[j];
+                                if (!moralGraph.isAdjacentTo(node1, node2)) {
+                                    moralGraph.addUndirectedEdge(node1, node2);
+                                }
+                            }
+                        }
+                    }
+                });
+
+        return moralGraph;
+    }
 }
