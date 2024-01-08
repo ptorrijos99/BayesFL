@@ -7,13 +7,13 @@ import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.utils.Utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 
-import static consensusBN.ConsensusUnion.getTreeWidth;
 import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
 import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
+import static org.albacete.simd.utils.Utils.getTreeWidth;
+
 
 public class Experiments {
 
@@ -33,6 +33,7 @@ public class Experiments {
             parameters = line.split(" ");
         }
         catch(Exception e){ System.out.println(e); }
+        //String[] parameters = new String[]{"10", "10", "1000", "1000", "1"};
 
         System.out.println("Number of hyperparams: " + parameters.length);
         int i=0;
@@ -46,8 +47,8 @@ public class Experiments {
         //String bbdd = parameters[1];
         int numNodes = Integer.parseInt(parameters[0]);
         int nClients = Integer.parseInt(parameters[1]);
-        int nIterations = Integer.parseInt(parameters[2]);
-        int popSize = Integer.parseInt(parameters[3]);
+        int popSize = Integer.parseInt(parameters[2]);
+        int nIterations = Integer.parseInt(parameters[3]);
         int seed = Integer.parseInt(parameters[4]);
 
         // Launch the experiment
@@ -57,44 +58,13 @@ public class Experiments {
     public static void main(String[] args) {
         //String net = "alarm";
         //String bbdd = "0";
-        int numNodes = 100;
+        int numNodes = 10;
         int nClients = 20;
         int popSize = 20;
-        int nIterations = 1000;
+        int nIterations = 100;
         int seed = 42;
 
         launchExperiment(numNodes, nClients, popSize, nIterations, seed);
-    }
-
-    public static void launchExperiment(int numNodes, int nClients, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
-
-        // Generate the DAGs
-        RandomBN randomBN = new RandomBN(seed, numNodes, nClients);
-        randomBN.generate();
-        ArrayList<Dag> dags = randomBN.setOfRandomDags;
-
-        // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
-        geneticUnion.populationSize = popSize;
-        geneticUnion.numIterations = nIterations;
-
-        geneticUnion.initializeVars(dags);
-        Dag unionDag = geneticUnion.fusionUnion;
-
-        // Find the treewidth of the union of the dags
-        int treewidth = getTreeWidth(unionDag);
-        System.out.println("Fusion Union Treewidth: " + treewidth);
-
-        // Execute the genetic union for each treewidth from 2 to the limit
-        for (int tw = 2; tw < treewidth; tw++) {
-            System.out.println("Treewidth: " + tw);
-            geneticUnion.maxTreewidth = tw;
-            Dag twUnion = geneticUnion.fusionUnion(dags);
-        }
-
-        // Save results
-
     }
 
     public static void launchExperimentData(String net, String bbdd, int nClients, int popSize, int nIterations, int seed) {
@@ -130,8 +100,73 @@ public class Experiments {
             System.out.println("Treewidth: " + tw);
             Dag twUnion = geneticUnion.fusionUnion(dags);
         }
+    }
 
-        // Save results
+    public static void launchExperiment(int numNodes, int nClients, int popSize, int nIterations, int seed) {
+        // Generate the DAGs
+        RandomBN randomBN = new RandomBN(seed, numNodes, nClients);
+        randomBN.generate();
+        ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
+        // Find the treewidth of the union of the dags
+        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
+        geneticUnion.populationSize = popSize;
+        geneticUnion.numIterations = nIterations;
+
+        geneticUnion.initializeVars(dags);
+        Dag unionDag = geneticUnion.fusionUnion;
+
+        // Find the treewidth of the union of the dags
+        int treewidth = getTreeWidth(unionDag);
+        System.out.println("Fusion Union Treewidth: " + treewidth);
+
+        // Execute the genetic union for each treewidth from 2 to the limit
+        for (int tw = 2; tw < treewidth; tw++) {
+            System.out.println("Treewidth: " + tw);
+            geneticUnion.maxTreewidth = tw;
+            geneticUnion.fusionUnion(dags);
+
+            // Save results
+            saveRound(geneticUnion, tw, numNodes, nClients, popSize, nIterations, seed);
+        }
+    }
+
+    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int maxTW, int numNodes, int nDags, int popSize, int nIterations, int seed) {
+        String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
+
+        String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
+
+        String line = numNodes + "," +
+                nDags + "," +
+                popSize + "," +
+                nIterations + "," +
+                seed + "," +
+                getTreeWidth(geneticUnion.fusionUnion) + "," +
+                maxTW + "," +
+                getTreeWidth(geneticUnion.greedyDag) + "," +
+                getTreeWidth(geneticUnion.bestDag) + "," +
+                geneticUnion.fusionUnion.getNumEdges() + "," +
+                geneticUnion.greedyDag.getNumEdges() + "," +
+                geneticUnion.bestDag.getNumEdges() + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.greedyDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + "," +
+                geneticUnion.executionTimeUnion + "," +
+                geneticUnion.executionTimeGreedy + "," +
+                geneticUnion.executionTime + "\n";
+
+        BufferedWriter csvWriter;
+        try {
+            if (!new File("./results/Server/").exists()) {
+                new File("./results/Server/").mkdir();
+            }
+
+            csvWriter = new BufferedWriter(new FileWriter(savePath, true));
+            if (new File(savePath).length() == 0) {
+                csvWriter.write(header);
+            }
+            csvWriter.write(line);
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) { System.out.println(e); }
     }
 }
