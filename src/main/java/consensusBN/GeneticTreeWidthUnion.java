@@ -1,15 +1,14 @@
 package consensusBN;
 
-import edu.cmu.tetrad.bayes.GraphTools;
 import edu.cmu.tetrad.graph.*;
 import org.albacete.simd.utils.Utils;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import static consensusBN.AlphaOrder.alphaOrder;
 import static consensusBN.BetaToAlpha.transformToAlpha;
 import static consensusBN.ConsensusUnion.*;
-import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 
 public class GeneticTreeWidthUnion {
 
@@ -19,10 +18,13 @@ public class GeneticTreeWidthUnion {
     public int maxTreewidth = 5;
     public String method = "Gamez";
 
-    // Best values
+    // Best values and stats
     private boolean[] bestIndividual;
-    private Dag bestDag;
-    private double bestFitness = Double.MAX_VALUE;
+    public Dag bestDag;
+    public double bestFitness = Double.MAX_VALUE;
+    public double executionTime;
+    public double executionTimeUnion;
+    public double executionTimeGreedy;
 
     // "Final" variables
     private final Random random;
@@ -35,13 +37,13 @@ public class GeneticTreeWidthUnion {
     private HashMap<Edge, Integer> edgeFrequency;
     private int maxFreq;
     private int minFreq;
-    private Dag greedyDag;
+    public Dag greedyDag;
     public Dag fusionUnion;
 
     // Variables
     private boolean[][] population;
     private double[] fitness;
-    private int[] treeWidths = new int[populationSize];
+    private int[] treeWidths;
 
     public GeneticTreeWidthUnion() {
         random = new Random();
@@ -56,6 +58,30 @@ public class GeneticTreeWidthUnion {
         random = new Random(seed);
     }
 
+    /**
+     * Complete union of the DAGs limiting the tree-width of the fused DAG.
+     * @param dags The DAGs to be fused.
+     * @return The union of the DAGs.
+     */
+    public Dag fusionUnion(ArrayList<Dag> dags) {
+        double startTime = System.currentTimeMillis();
+        initializeVars(dags);
+
+        if (method.equals("Gamez")) {
+            fusionUnionGamez();
+        } else {
+            fusionUnionPuerta(alphaDags);
+        }
+
+        executionTime = (System.currentTimeMillis() - startTime) / 1000;
+
+        System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
+        System.out.println("Greedy SMHD: " + Utils.SMHD(fusionUnion,greedyDag) + " | Greedy edges: " + greedyDag.getNumEdges());
+
+
+        return bestDag;
+    }
+
     public void initializeVars(ArrayList<Dag> dags) {
         // Transform the DAGs to the same alpha order
         alpha = alphaOrder(dags);
@@ -64,7 +90,9 @@ public class GeneticTreeWidthUnion {
             alphaDags.add(transformToAlpha(dag, alpha));
         }
 
+        double startTime = System.currentTimeMillis();
         fusionUnion = applyUnion(alpha, alphaDags);
+        executionTimeUnion = (System.currentTimeMillis() - startTime) / 1000;
 
         // Order the edges of all the DAGs by the number of times they appear
         int i = 0;
@@ -90,28 +118,10 @@ public class GeneticTreeWidthUnion {
         totalEdges = edgeFrequency.size();
         maxFreq = Collections.max(edgeFrequency.values());
         minFreq = Collections.min(edgeFrequency.values()) - 1;
+
+        treeWidths = new int[populationSize];
+        population = new boolean[populationSize][totalEdges];
     }
-
-    /**
-     * Complete union of the DAGs limiting the tree-width of the fused DAG.
-     * @param dags The DAGs to be fused.
-     * @return The union of the DAGs.
-     */
-    public Dag fusionUnion(ArrayList<Dag> dags) {
-        initializeVars(dags);
-
-        if (method.equals("Gamez")) {
-            fusionUnionGamez();
-        } else {
-            fusionUnionPuerta(alphaDags);
-        }
-
-        System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
-        System.out.println("Greedy SMHD: " + Utils.SMHD(fusionUnion,greedyDag) + " | Greedy edges: " + greedyDag.getNumEdges());
-
-        return bestDag;
-    }
-
 
     private void fusionUnionGamez() {
         // Genetic algorithm
@@ -126,7 +136,6 @@ public class GeneticTreeWidthUnion {
         }
     }
 
-
     private void fusionUnionPuerta(ArrayList<Dag> dags) {
         // Genetic algorithm
         initialize();
@@ -137,16 +146,16 @@ public class GeneticTreeWidthUnion {
         }
     }
 
-
     private void initialize() {
-        population = new boolean[populationSize][totalEdges];
         boolean uniform = minFreq == maxFreq;
 
         // Add the greedy solution to the population
+        double startTime = System.currentTimeMillis();
         greedyDag = applyGreedyMaxTreewidth(alpha, edges, String.valueOf(maxTreewidth));
         for (int i = 0; i < totalEdges; i++) {
             population[0][i] = greedyDag.containsEdge(edges.get(i));
         }
+        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
 
         // Add the greedy solutions with maxTreewidth-1 to the population
         Dag greedy = applyGreedyMaxTreewidth(alpha, edges, String.valueOf(maxTreewidth-1));
@@ -168,9 +177,10 @@ public class GeneticTreeWidthUnion {
 
     private void evaluate() {
         fitness = new double[populationSize];
-        for (int i = 0; i < populationSize; i++) {
-            fitness[i] = calculateFitness(i, 0);
-        }
+
+        IntStream.range(0, populationSize)
+                .parallel()
+                .forEach(i -> fitness[i] = calculateFitness(i, 0));
 
         System.out.println("Fitness: ");
         for (int i = 0; i < populationSize; i++) {
@@ -332,7 +342,7 @@ public class GeneticTreeWidthUnion {
         }
 
         // Get the cliques
-        treeWidths[index] = getTreeWidth(union);
+        treeWidths[index] = Utils.getTreeWidth(union);
 
         double fitness;
         if (treeWidths[index] > maxTreewidth) {
