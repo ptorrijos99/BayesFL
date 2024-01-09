@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.GraphNode;
-import edu.cmu.tetrad.graph.GraphUtils;
-import edu.cmu.tetrad.graph.Node;
+import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.*;
 
@@ -40,6 +37,7 @@ public class RandomBN {
 	public ArrayList<BayesIm> setOfRandomBNs;
 	DataSet dataSamples;
 	private boolean simulate = false;
+	private boolean initialDag = false;
 	private int sampleSize = 100;
 
 
@@ -79,6 +77,47 @@ public class RandomBN {
 			GraphNode node = new GraphNode("X" + nf.format(i));
 			this.nodesDags.add(node);
 		}
+	}
+
+	/** Uses a real initial DAG */
+	public RandomBN(BayesIm bayesIm, int seed, int numBNs){
+		Graph dag = bayesIm.getDag();
+		this.initialDag = true;
+
+		this.seed = seed;
+		this.generator = new Random(seed);
+		this.numNodes = dag.getNumNodes();
+
+		int maxInDegree = 0;
+		int maxOutDegree = 0;
+		for (Node node : dag.getNodes()) {
+			if (dag.getIndegree(node) > maxInDegree) {
+				maxInDegree = dag.getIndegree(node);
+			}
+			if (dag.getOutdegree(node) > maxOutDegree) {
+				maxOutDegree = dag.getOutdegree(node);
+			}
+		}
+
+		// Maximum number of parents of each node
+		this.maxInDegree = maxInDegree + 1;
+		// Maximum number of children of each node
+		this.maxOutDegree = maxOutDegree + 1;
+
+		this.maxDegree = numNodes - 1;
+		this.maxEdges = (int) (dag.getNumEdges() * 1.1);
+		this.numBNs = numBNs;
+		this.numIterations = (int) (numNodes * 0.75);
+
+		this.parentMatrix = null;
+		this.childMatrix = null;
+		this.initialParentMatrix = null;
+		this.initialChildMatrix = null;
+
+		this.setOfRandomDags = new ArrayList<Dag>();
+		this.setOfRandomBNs = new ArrayList<BayesIm>();
+
+		this.nodesDags = new ArrayList<>(dag.getNodes());
 	}
 
 	public RandomBN(int seed, int numNodes, int numEdges, int numBNs, int numIterations){
@@ -190,7 +229,7 @@ public class RandomBN {
 	}
 
 	public void generate(){
-		generateInitialDag();
+		if(!this.initialDag) generateInitialDag();
 		generateDags();
 		generateProps();
 		if(this.simulate) sampling();
