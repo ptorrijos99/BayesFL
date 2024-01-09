@@ -67,41 +67,6 @@ public class Experiments {
         launchExperiment(numNodes, nClients, popSize, nIterations, seed);
     }
 
-    public static void launchExperimentData(String net, String bbdd, int nClients, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + net + "." + bbdd + "_GeneticTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
-
-        // Read the .csv and divide the data into nClients
-        DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
-        ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
-        ArrayList<Dag> dags = new ArrayList<>();
-
-        // Execute GES in each data division
-        for (int i = 0; i < nClients; i++) {
-            GES_BNBuilder algorithm = new GES_BNBuilder(divisionData.get(i), true);
-            algorithm.setnItInterleaving(Integer.MAX_VALUE);
-            Graph graph = algorithm.search();
-            dags.add(new Dag(Utils.removeInconsistencies(graph)));
-        }
-
-        // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
-        geneticUnion.populationSize = popSize;
-        geneticUnion.numIterations = nIterations;
-
-        geneticUnion.initializeVars(dags);
-        Dag unionDag = geneticUnion.fusionUnion;
-
-        // Find the treewidth of the union of the dags
-        int treewidth = getTreeWidth(unionDag);
-        System.out.println("Fusion Union Treewidth: " + treewidth);
-
-        // Execute the genetic union for each treewidth from 2 to the limit
-        for (int tw = 2; tw < treewidth; tw++) {
-            System.out.println("Treewidth: " + tw);
-            Dag twUnion = geneticUnion.fusionUnion(dags);
-        }
-    }
-
     public static void launchExperiment(int numNodes, int nClients, int popSize, int nIterations, int seed) {
         // Generate the DAGs
         RandomBN randomBN = new RandomBN(seed, numNodes, nClients);
@@ -115,7 +80,7 @@ public class Experiments {
 
         // Find the treewidth of the dags sampled
         int maxTW = 0;
-        int meanTW = 0;
+        double meanTW = 0;
         int minTW = Integer.MAX_VALUE;
         for (Dag dag : dags) {
             int temp = getTreeWidth(dag);
@@ -145,9 +110,9 @@ public class Experiments {
     }
 
 
-    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int minTW, int meanTW, int maxTW, int tw, int numNodes, int nDags, int popSize, int nIterations, int seed) {
+    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int minTW, double meanTW, int maxTW, int tw, int numNodes, int nDags, int popSize, int nIterations, int seed) {
         String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
-        String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
+        String header = "numNodes,nDags,popSize,nIterations,seed,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
 
         String line = numNodes + "," +
                 nDags + "," +
