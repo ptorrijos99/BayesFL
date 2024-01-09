@@ -7,8 +7,12 @@ import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.data.DiscreteVariable;
+import edu.cmu.tetrad.graph.EdgeListGraph;
+import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.*;
 import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
+import weka.estimators.Estimator;
 
 import java.io.File;
 import java.io.IOException;
@@ -548,6 +552,51 @@ public class Utils {
         }
         //System.out.println(graph);
         return new BayesPm(graph);
+    }
+
+    /**
+     * Transforms a BayesNet read from a xbif file into a BayesIm object for tetrad, with probability tables
+     *
+     * @param wekabn BayesNet read from an xbif file
+     * @return The BayesIm of the BayesNet
+     */
+    public static MlBayesIm transformBayesNetToBayesIm(BayesNet wekabn) {
+        BayesPm bayesPm = transformBayesNetToBayesPm(wekabn);
+
+        for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
+            Node node = bayesPm.getNode(wekabn.getNodeName(indexNode));
+            bayesPm.setNumCategories(node, wekabn.getCardinality(indexNode));
+        }
+
+        MlBayesIm bayesIm = new MlBayesIm(bayesPm);
+
+        for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
+            double[][] probTable = getProbabilityTable(wekabn.m_Distributions[indexNode]);
+            int indexInIm = bayesIm.getNodeIndex(bayesIm.getNode(wekabn.getNodeName(indexNode)));
+
+            bayesIm.setProbability(indexInIm, probTable);
+        }
+        return bayesIm;
+    }
+
+    /**
+     * Gets the probability table of an array of WEKA estimators
+     *
+     * @param estimators Array of WEKA estimators
+     * @return The probability table of the estimators
+     */
+    public static double[][] getProbabilityTable(Estimator[] estimators) {
+        int nRows = estimators.length;
+        int nCols = ((DiscreteEstimatorBayes)estimators[0]).getNumSymbols();
+        double[][] table = new double[nRows][nCols];
+
+        for (int i = 0; i < nRows; i++) {
+            Estimator estimator = estimators[i];
+            for (int j = 0; j < nCols; j++) {
+                table[i][j] = estimator.getProbability(j);
+            }
+        }
+        return table;
     }
 
     public static Map<Node, Set<Node>> getMoralTriangulatedCliques(Dag dag) {
