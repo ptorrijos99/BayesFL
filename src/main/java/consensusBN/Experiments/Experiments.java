@@ -113,6 +113,19 @@ public class Experiments {
         geneticUnion.populationSize = popSize;
         geneticUnion.numIterations = nIterations;
 
+        // Find the treewidth of the dags sampled
+        int maxTW = 0;
+        int meanTW = 0;
+        int minTW = Integer.MAX_VALUE;
+        for (Dag dag : dags) {
+            int temp = getTreeWidth(dag);
+            if (temp > maxTW) maxTW = temp;
+            if (temp < minTW) minTW = temp;
+            meanTW += temp;
+        }
+        meanTW /= dags.size();
+
+
         geneticUnion.initializeVars(dags);
         Dag unionDag = geneticUnion.fusionUnion;
 
@@ -127,13 +140,13 @@ public class Experiments {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(geneticUnion, tw, numNodes, nClients, popSize, nIterations, seed);
+            saveRound(geneticUnion, minTW, meanTW, maxTW, tw, numNodes, nClients, popSize, nIterations, seed);
         }
     }
 
-    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int maxTW, int numNodes, int nDags, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
 
+    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int minTW, int meanTW, int maxTW, int tw, int numNodes, int nDags, int popSize, int nIterations, int seed) {
+        String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
         String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
 
         String line = numNodes + "," +
@@ -141,8 +154,11 @@ public class Experiments {
                 popSize + "," +
                 nIterations + "," +
                 seed + "," +
-                getTreeWidth(geneticUnion.fusionUnion) + "," +
+                minTW + "," +
+                meanTW + "," +
                 maxTW + "," +
+                getTreeWidth(geneticUnion.fusionUnion) + "," +
+                tw + "," +
                 getTreeWidth(geneticUnion.greedyDag) + "," +
                 getTreeWidth(geneticUnion.bestDag) + "," +
                 geneticUnion.fusionUnion.getNumEdges() + "," +
