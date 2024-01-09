@@ -67,9 +67,9 @@ public class Experiments {
         launchExperiment(numNodes, nClients, popSize, nIterations, seed);
     }
 
-    public static void launchExperiment(int numNodes, int nClients, int popSize, int nIterations, int seed) {
+    public static void launchExperiment(int numNodes, int nDags, int popSize, int nIterations, int seed) {
         // Generate the DAGs
-        RandomBN randomBN = new RandomBN(seed, numNodes, nClients);
+        RandomBN randomBN = new RandomBN(seed, numNodes, nDags);
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
@@ -105,7 +105,7 @@ public class Experiments {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(geneticUnion, minTW, meanTW, maxTW, tw, numNodes, nClients, popSize, nIterations, seed);
+            saveRound(geneticUnion, minTW, meanTW, maxTW, tw, numNodes, nDags, popSize, nIterations, seed);
         }
     }
 
