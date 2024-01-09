@@ -2,12 +2,16 @@ package consensusBN.Experiments;
 
 import consensusBN.GeneticTreeWidthUnion;
 import edu.cmu.tetrad.bayes.BayesIm;
+import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.JunctionTreeAlgorithm;
+import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.utils.Utils;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -70,11 +74,23 @@ public class ExperimentsRealBN {
         launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
     }
 
-    public static void launchExperiment(String net, String bbdd, int nClients, int popSize, int nIterations, int seed) {
-        // Read the .csv and divide the data into nClients
-        DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
-        ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
-        ArrayList<Dag> dags = new ArrayList<>();
+    public static void launchExperiment(String net, String bbdd, int nDags, int popSize, int nIterations, int seed) {
+        // Read the .csv
+        DataSet data = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+
+        // Read the .xbif
+        BIFReader bayesianReader = new BIFReader();
+        try {
+            bayesianReader.processFile(PATH + "res/networks/" + net + ".xbif");
+        } catch (Exception e) {throw new RuntimeException(e);}
+
+        //Transforming the BayesNet into a BayesIm
+        MlBayesIm bayesIm = Utils.transformBayesNetToBayesIm(bayesianReader);
+
+        // Generate the DAGs
+        RandomBN randomBN = new RandomBN(bayesIm, seed, nDags);
+        randomBN.generate();
+        ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
@@ -107,7 +123,7 @@ public class ExperimentsRealBN {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(net+"."+bbdd, geneticUnion, minTW, meanTW, maxTW, tw, nClients, popSize, nIterations, seed);
+            saveRound(net+"."+bbdd, geneticUnion, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, seed);
         }
     }
 
