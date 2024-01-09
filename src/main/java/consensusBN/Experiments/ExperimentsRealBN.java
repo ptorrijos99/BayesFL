@@ -1,13 +1,18 @@
 package consensusBN.Experiments;
 
 import consensusBN.GeneticTreeWidthUnion;
+import edu.cmu.tetrad.bayes.BayesIm;
+import edu.cmu.tetrad.bayes.JunctionTreeAlgorithm;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.utils.Utils;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
@@ -15,7 +20,7 @@ import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 
-public class Experiments {
+public class ExperimentsRealBN {
 
     public static String PATH = "./";
 
@@ -33,7 +38,7 @@ public class Experiments {
             parameters = line.split(" ");
         }
         catch(Exception e){ System.out.println(e); }
-        //String[] parameters = new String[]{"10", "10", "1000", "1000", "1"};
+        //String[] parameters = new String[]{"andes", "0", "10", "1000", "1000", "1"};
 
         System.out.println("Number of hyperparams: " + parameters.length);
         int i=0;
@@ -43,35 +48,33 @@ public class Experiments {
         }
 
         // Read the parameters from file
-        //String net = parameters[0];
-        //String bbdd = parameters[1];
-        int numNodes = Integer.parseInt(parameters[0]);
-        int nClients = Integer.parseInt(parameters[1]);
-        int popSize = Integer.parseInt(parameters[2]);
-        int nIterations = Integer.parseInt(parameters[3]);
-        int seed = Integer.parseInt(parameters[4]);
+        String net = parameters[0];
+        String bbdd = parameters[1];
+        int nClients = Integer.parseInt(parameters[2]);
+        int popSize = Integer.parseInt(parameters[3]);
+        int nIterations = Integer.parseInt(parameters[4]);
+        int seed = Integer.parseInt(parameters[5]);
 
         // Launch the experiment
-        launchExperiment(numNodes, nClients, popSize, nIterations, seed);
+        launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
     }*/
 
     public static void main(String[] args) {
-        //String net = "alarm";
-        //String bbdd = "0";
-        int numNodes = 10;
+        String net = "alarm";
+        String bbdd = "0";
         int nClients = 20;
         int popSize = 20;
         int nIterations = 100;
         int seed = 42;
 
-        launchExperiment(numNodes, nClients, popSize, nIterations, seed);
+        launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
     }
 
-    public static void launchExperiment(int numNodes, int nClients, int popSize, int nIterations, int seed) {
-        // Generate the DAGs
-        RandomBN randomBN = new RandomBN(seed, numNodes, nClients);
-        randomBN.generate();
-        ArrayList<Dag> dags = randomBN.setOfRandomDags;
+    public static void launchExperiment(String net, String bbdd, int nClients, int popSize, int nIterations, int seed) {
+        // Read the .csv and divide the data into nClients
+        DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+        ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
+        ArrayList<Dag> dags = new ArrayList<>();
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
@@ -90,7 +93,6 @@ public class Experiments {
         }
         meanTW /= dags.size();
 
-
         geneticUnion.initializeVars(dags);
         Dag unionDag = geneticUnion.fusionUnion;
 
@@ -105,16 +107,15 @@ public class Experiments {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(geneticUnion, minTW, meanTW, maxTW, tw, numNodes, nClients, popSize, nIterations, seed);
+            saveRound(net+"."+bbdd, geneticUnion, minTW, meanTW, maxTW, tw, nClients, popSize, nIterations, seed);
         }
     }
 
+    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, int seed) {
+        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
+        String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
 
-    public static void saveRound(GeneticTreeWidthUnion geneticUnion, int minTW, double meanTW, int maxTW, int tw, int numNodes, int nDags, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + numNodes + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
-        String header = "numNodes,nDags,popSize,nIterations,seed,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
-
-        String line = numNodes + "," +
+        String line = bbdd + "," +
                 nDags + "," +
                 popSize + "," +
                 nIterations + "," +
@@ -149,5 +150,10 @@ public class Experiments {
             csvWriter.flush();
             csvWriter.close();
         } catch (IOException e) { System.out.println(e); }
+    }
+
+    public static void calculateProbs(BayesIm bayesIm) {
+        JunctionTreeAlgorithm jta = new JunctionTreeAlgorithm(bayesIm);
+
     }
 }
