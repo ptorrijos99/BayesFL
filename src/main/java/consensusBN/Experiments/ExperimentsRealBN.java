@@ -64,9 +64,9 @@ public class ExperimentsRealBN {
     }*/
 
     public static void main(String[] args) {
-        String net = "alarm";
+        String net = "child";
         String bbdd = "0";
-        int nClients = 20;
+        int nClients = 5;
         int popSize = 20;
         int nIterations = 100;
         int seed = 42;
@@ -84,11 +84,8 @@ public class ExperimentsRealBN {
             bayesianReader.processFile(PATH + "res/networks/" + net + ".xbif");
         } catch (Exception e) {throw new RuntimeException(e);}
 
-        //Transforming the BayesNet into a BayesIm
-        MlBayesIm bayesIm = Utils.transformBayesNetToBayesIm(bayesianReader);
-
         // Generate the DAGs
-        RandomBN randomBN = new RandomBN(bayesIm, seed, nDags);
+        RandomBN randomBN = new RandomBN(bayesianReader, data, seed, nDags);
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
