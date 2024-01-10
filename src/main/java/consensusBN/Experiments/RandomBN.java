@@ -2,12 +2,15 @@ package consensusBN.Experiments;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.*;
+import org.albacete.simd.utils.Utils;
+import weka.classifiers.bayes.BayesNet;
 
 public class RandomBN {
 	int seed;
@@ -37,8 +40,12 @@ public class RandomBN {
 	public ArrayList<BayesIm> setOfRandomBNs;
 	DataSet dataSamples;
 	private boolean simulate = false;
-	private boolean initialDag = false;
+	private boolean initialRealDag = false;
 	private int sampleSize = 100;
+
+	private MlBayesIm originalBayesIm;
+	private DataSet data;
+	private ArrayList<String>[] categories;
 
 
 	/** Uses the parameters of paper "Efficient and accurate structural fusion of Bayesian networks"*/
@@ -80,9 +87,21 @@ public class RandomBN {
 	}
 
 	/** Uses a real initial DAG */
-	public RandomBN(BayesIm bayesIm, int seed, int numBNs){
-		Graph dag = bayesIm.getDag();
-		this.initialDag = true;
+	public RandomBN(BayesNet bayesNet, DataSet data, int seed, int numBNs){
+		this.data = data;
+
+		//Transforming the BayesNet into a BayesIm
+		this.originalBayesIm = Utils.transformBayesNetToBayesIm(bayesNet);
+
+		this.categories = new ArrayList[this.originalBayesIm.getNumNodes()];
+		for (Node node : data.getVariables()) {
+			Node nodeGraph = this.originalBayesIm.getNode(node.getName());
+			int indexTetrad = this.originalBayesIm.getNodeIndex(nodeGraph);
+			this.categories[indexTetrad] = new ArrayList<>(((DiscreteVariable)node).getCategories());
+		}
+
+		Graph dag = this.originalBayesIm.getDag();
+		this.initialRealDag = true;
 
 		this.seed = seed;
 		this.generator = new Random(seed);
@@ -229,7 +248,7 @@ public class RandomBN {
 	}
 
 	public void generate(){
-		if(!this.initialDag) generateInitialDag();
+		generateInitialDag();
 		generateDags();
 		generateProps();
 		if(this.simulate) sampling();
@@ -240,12 +259,22 @@ public class RandomBN {
 	}
 
 	private void generateProps() {
-		BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(0), 2, 2);
-		MlBayesIm bn = new MlBayesIm(bayesPm,MlBayesIm.RANDOM);
-		this.setOfRandomBNs.add(bn);
-		for(int i = 1; i < this.numBNs; i++){
-			bayesPm = new BayesPm(this.setOfRandomDags.get(i), 2, 2);
-			this.setOfRandomBNs.add(new MlBayesIm(bayesPm));
+		if (!this.initialRealDag) {
+			for(int i = 0; i < this.numBNs; i++){
+				BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
+				this.setOfRandomBNs.add(new MlBayesIm(bayesPm,MlBayesIm.RANDOM));
+			}
+		} else {
+			for(int i = 0; i < this.numBNs; i++){
+				 BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
+
+				for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+					bayesPm.setNumCategories(nodesDags.get(j), this.categories[j].size());
+					bayesPm.setCategories(nodesDags.get(j), this.categories[j]);
+				}
+				BayesIm bayesIm = new EmBayesEstimator(bayesPm, data).getEstimatedIm();
+				this.setOfRandomBNs.add(bayesIm);
+			}
 		}
 	}
 
@@ -349,7 +378,9 @@ public class RandomBN {
 	 * addition to acyclicity, some other conditions have been added in.
 	 */
 	private void generateInitialDag(){
-		initialDag();
+		if (this.initialRealDag) initialDagRealBN();
+		else initialDag();
+
 		if (getNumNodes() <= 1) {
 			return;
 		}
@@ -623,6 +654,40 @@ public class RandomBN {
 			parentMatrix[i][1] = i - 1;
 			childMatrix[i][0] = 2;
 			childMatrix[i][1] = i + 1;
+		}
+	}
+
+	private void initialDagRealBN(){
+		parentMatrix = new int[getNumNodes()][getMaxDegree() + 2];
+		childMatrix = new int[getNumNodes()][getMaxDegree() + 2];
+
+		for (int i = 0; i < getNumNodes(); i++) {
+			parentMatrix[i][0] = 1;;
+			childMatrix[i][0] = 1;
+			for (int j = 1; j < getMaxDegree() + 1; j++) {
+				parentMatrix[i][j] = -5;;
+				childMatrix[i][j] = -5;
+			}
+		}
+
+		for (Edge edge : this.originalBayesIm.getDag().getEdges()) {
+			// Ensure that node1 --> node2
+			Node node1, node2;
+			if (edge.getEndpoint1() == Endpoint.TAIL) {
+				node1 = edge.getNode1();
+				node2 = edge.getNode2();
+			}
+			else {
+				node1 = edge.getNode2();
+				node2 = edge.getNode1();
+			}
+
+			// Save the index of the nodes
+			randomParent = this.nodesDags.indexOf(node1);
+			randomChild = this.nodesDags.indexOf(node2);
+
+			// Add the edge
+			addEdge();
 		}
 	}
 
