@@ -27,7 +27,7 @@ public class RandomBN {
 	int[][] initialParentMatrix;
 	int[][] initialChildMatrix;
 	public ArrayList<Dag> setOfRandomDags;
-	ArrayList<Node> nodesDags;
+	public ArrayList<Node> nodesDags;
 	/**
      * Parent of random edge. 0 is the default parent node.
      */
@@ -43,9 +43,9 @@ public class RandomBN {
 	private boolean initialRealDag = false;
 	private int sampleSize = 100;
 
-	private MlBayesIm originalBayesIm;
-	private DataSet data;
-	private ArrayList<String>[] categories;
+	public MlBayesIm originalBayesIm;
+	public DataSet data;
+	public ArrayList<String>[] categories;
 
 
 	/** Uses the parameters of paper "Efficient and accurate structural fusion of Bayesian networks"*/
@@ -266,7 +266,7 @@ public class RandomBN {
 			}
 		} else {
 			for(int i = 0; i < this.numBNs; i++){
-				 BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
+				BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
 
 				for (int j = 0; j < bayesPm.getNumNodes(); j++) {
 					bayesPm.setNumCategories(nodesDags.get(j), this.categories[j].size());
