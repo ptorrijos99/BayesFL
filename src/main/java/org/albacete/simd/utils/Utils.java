@@ -534,13 +534,14 @@ public class Utils {
      * @return The BayesPm of the BayesNet
      */
     public static BayesPm transformBayesNetToBayesPm(BayesNet wekabn) {
-        Dag graph = new Dag();
+        ArrayList<Node> nodes = new ArrayList<>();
 
         // Getting nodes from weka network and adding them to a GraphNode
         for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
-            GraphNode node = new GraphNode(wekabn.getNodeName(indexNode));
-            graph.addNode(node);
+            nodes.add(new GraphNode(wekabn.getNodeName(indexNode)));
         }
+        Dag graph = new Dag(nodes);
+
         // Adding all of the edges from the wekabn into the new Graph
         for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
             int nParent = wekabn.getNrOfParents(indexNode);
@@ -573,6 +574,50 @@ public class Utils {
         for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
             double[][] probTable = getProbabilityTable(wekabn.m_Distributions[indexNode]);
             int indexInIm = bayesIm.getNodeIndex(bayesIm.getNode(wekabn.getNodeName(indexNode)));
+
+            bayesIm.setProbability(indexInIm, probTable);
+        }
+        return bayesIm;
+    }
+
+    /**
+     * Transforms a BayesNet read from a xbif file into a BayesIm object for tetrad, with variables and probability tables
+     * with a specific order of the categories
+     *
+     * @param wekabn BayesNet read from an xbif file
+     * @return The BayesIm of the BayesNet
+     */
+    public static MlBayesIm transformBayesNetToBayesIm(BayesNet wekabn, ArrayList<String>[] categories) {
+        BayesPm bayesPm = transformBayesNetToBayesPm(wekabn);
+
+        String[][] classWekaOrder = new String[wekabn.getNrOfNodes()][];
+
+        for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
+            Node node = bayesPm.getNode(wekabn.getNodeName(indexNode));
+            bayesPm.setNumCategories(node, wekabn.getCardinality(indexNode));
+
+            classWekaOrder[indexNode] = new String[wekabn.getCardinality(indexNode)];
+
+            for (int j=0; j < wekabn.getCardinality(indexNode); j++){
+                classWekaOrder[indexNode][j] = wekabn.m_Instances.attribute(indexNode).value(j);
+            }
+        }
+
+        MlBayesIm bayesIm = new MlBayesIm(bayesPm);
+
+        for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
+            double[][] probTableWeka = getProbabilityTable(wekabn.m_Distributions[indexNode]);
+            double[][] probTable = new double[probTableWeka.length][];
+            int indexInIm = bayesIm.getNodeIndex(bayesIm.getNode(wekabn.getNodeName(indexNode)));
+
+            // TODO: Poner la tabla en el orden de las características de tetrad
+            for (int i=0; i < probTableWeka.length; i++){
+                probTable[i] = new double[probTableWeka[i].length];
+                for (int j=0; j < probTableWeka[i].length; j++){
+                    int index = categories[indexNode].indexOf(classWekaOrder[indexNode][j]);
+                    probTable[i][index] = probTableWeka[i][j];
+                }
+            }
 
             bayesIm.setProbability(indexInIm, probTable);
         }

@@ -90,15 +90,13 @@ public class RandomBN {
 	public RandomBN(BayesNet bayesNet, DataSet data, int seed, int numBNs){
 		this.data = data;
 
-		//Transforming the BayesNet into a BayesIm
-		this.originalBayesIm = Utils.transformBayesNetToBayesIm(bayesNet);
-
-		this.categories = new ArrayList[this.originalBayesIm.getNumNodes()];
+		this.categories = new ArrayList[data.getNumColumns()];
 		for (Node node : data.getVariables()) {
-			Node nodeGraph = this.originalBayesIm.getNode(node.getName());
-			int indexTetrad = this.originalBayesIm.getNodeIndex(nodeGraph);
-			this.categories[indexTetrad] = new ArrayList<>(((DiscreteVariable)node).getCategories());
+			this.categories[data.getColumn(node)] = new ArrayList<>(((DiscreteVariable)node).getCategories());
 		}
+
+		//Transforming the BayesNet into a BayesIm
+		this.originalBayesIm = Utils.transformBayesNetToBayesIm(bayesNet, categories);
 
 		Graph dag = this.originalBayesIm.getDag();
 		this.initialRealDag = true;

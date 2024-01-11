@@ -51,7 +51,7 @@ public class EdgeListGraph implements Graph {
      *
      * @serial
      */
-    protected HashSet<Node> nodes;
+    protected LinkedHashSet<Node> nodes;
     
     private HashMap<Node,Set<Node>> neighboursMap;
 
@@ -117,7 +117,7 @@ public class EdgeListGraph implements Graph {
     public EdgeListGraph() {
         this.edgeLists = new HashMap<>();
         this.neighboursMap = new HashMap();
-        this.nodes = new HashSet<>();
+        this.nodes = new LinkedHashSet<>();
         this.edgesSet = new HashMap<>();
         this.namesHash = new HashMap<>();
     }
@@ -139,7 +139,7 @@ public class EdgeListGraph implements Graph {
         }
 
         this.neighboursMap = new HashMap(graph.getNumNodes());
-        this.nodes = new HashSet(graph.getNumNodes());
+        this.nodes = new LinkedHashSet(graph.getNumNodes());
         this.namesHash = new HashMap<>(graph.getNumNodes());
         
         transferNodesAndEdges(graph);
@@ -177,7 +177,7 @@ public class EdgeListGraph implements Graph {
         }
 
         this.neighboursMap = new HashMap(nodes.size());
-        this.nodes = new HashSet(nodes.size());
+        this.nodes = new LinkedHashSet(nodes.size());
         
         for (Node variable : nodes) {
             if (!addNode(variable)) {
