@@ -8,10 +8,7 @@ import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -63,8 +60,8 @@ public class ExperimentsRealBN {
         String net = "child";
         String bbdd = "0";
         int nClients = 5;
-        int popSize = 20;
-        int nIterations = 100;
+        int popSize = 2;
+        int nIterations = 1;
         int seed = 42;
 
         launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
