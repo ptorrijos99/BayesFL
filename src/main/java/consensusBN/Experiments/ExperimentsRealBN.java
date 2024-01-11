@@ -4,10 +4,8 @@ import consensusBN.GeneticTreeWidthUnion;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Graph;
-import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
+import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.utils.Utils;
-import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.BufferedWriter;
@@ -15,8 +13,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
 import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
 
@@ -85,6 +84,8 @@ public class ExperimentsRealBN {
         RandomBN randomBN = new RandomBN(bayesianReader, data, seed, nDags);
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
+
+        marginals(randomBN.originalBayesIm, randomBN.categories);
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
@@ -164,6 +165,7 @@ public class ExperimentsRealBN {
     }
 
     public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, RandomBN randomBN) {
+        // Get the different BNs as BayesIm
         // Original BN
         BayesIm originalBN = randomBN.originalBayesIm;
 
@@ -199,39 +201,87 @@ public class ExperimentsRealBN {
         BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
 
+        // Calculate the marginals
+        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories);
+        double[][] originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories);
+        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories);
+        double[][] greedyBNMarginals = marginals(greedyBN, randomBN.categories);
+        double[][] geneticBNMarginals = marginals(geneticBN, randomBN.categories);
+        double[][] unionBNMarginals = marginals(unionBN, randomBN.categories);
+
+
+        String probs = ",";
+
+        // Calculate the mean difference between all the marginals and the original BN
+        probs += getMeanDiffBetweenMarginals(originalBNrecalcMarginals, originalBNMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNMarginals) + ",";
+
+        // Calculate the mean difference between all the marginals and the original BN with the recalculated probabilities
+        probs += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNrecalcMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals) + ",";
+
         return null;
     }
 
-    public static double[][] meanMarginals(BayesIm bn) {
+    public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories) {
+        System.out.println(Arrays.toString(categories) + " " + bn);
         double[][] marginals = new double[bn.getNumNodes()][];
         for (int i = 0; i < bn.getNumNodes(); i++) {
-            //marginals[i] = bn.getNode(i).getMarginal();
+            marginals[i] = new double[categories[i].size()];
+
+            // Get the multiplication of the categories size of the parents
+            List<Node> parents = bn.getDag().getParents(bn.getNode(i));
+            int size = 1;
+            for (Node parent : parents) {
+                int indexParent = bn.getNodeIndex(parent);
+                size *= categories[indexParent].size();
+            }
+
+            // Calculate the marginals
+            for (int j = 0; j < marginals[i].length; j++) {
+                for (int k = 0; k < size; k++) {
+                    marginals[i][j] += bn.getProbability(i, k, j);
+                }
+                marginals[i][j] /= size;
+            }
         }
+
         return marginals;
     }
 
-    public static ArrayList<double[][]> meanMarginals(ArrayList<BayesIm> bns) {
-        ArrayList<double[][]> marginals = new ArrayList<>();
+    public static ArrayList<double[][]> marginals(ArrayList<BayesIm> bns, ArrayList<String>[] categories) {
+        ArrayList<double[][]> margs = new ArrayList<>();
         for (BayesIm bn : bns) {
-            marginals.add(meanMarginals(bn));
+            margs.add(marginals(bn,categories));
         }
-        return marginals;
+        return margs;
     }
 
     /** Returns the mean difference between two marginals.
      *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]
      *  Returns: ((0.1 + 0.1) + (0.2 + 0.1 + 0.3)) / 2 = 0.4
      */
-    public static double getMeanDifferenceBetweenMarginals(double[][] marg1, double[][] marg2) {
+    public static double getMeanDiffBetweenMarginals(double[][] marg1, double[][] marg2) {
         double diff = 0;
-
         for (int i = 0; i < marg1.length; i++) {
             for (int j = 0; j < marg1[i].length; j++) {
                 diff += Math.abs(marg1[i][j] - marg2[i][j]);
             }
         }
-
         return diff / (marg1.length);
+    }
+
+    public static double getMeanDiffBetweenMarginals(ArrayList<double[][]> marg1, double[][] marg2) {
+        double diff = 0;
+        for (double[][] doubles : marg1) {
+            diff += getMeanDiffBetweenMarginals(doubles, marg2);
+        }
+        return diff / marg1.size();
     }
 
 
