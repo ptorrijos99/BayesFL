@@ -63,8 +63,8 @@ public class ExperimentsRealBN {
         String net = "child";
         String bbdd = "0";
         int nClients = 5;
-        int popSize = 2;
-        int nIterations = 1;
+        int popSize = 20;
+        int nIterations = 100;
         int seed = 42;
 
         launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
@@ -232,7 +232,7 @@ public class ExperimentsRealBN {
         probs += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
         probs += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNrecalcMarginals) + ",";
         probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals) + ",";
+        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals);
 
         return probs;
     }
