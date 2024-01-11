@@ -1,10 +1,7 @@
 package consensusBN.Experiments;
 
 import consensusBN.GeneticTreeWidthUnion;
-import edu.cmu.tetrad.bayes.BayesIm;
-import edu.cmu.tetrad.bayes.BayesPm;
-import edu.cmu.tetrad.bayes.JunctionTreeAlgorithm;
-import edu.cmu.tetrad.bayes.MlBayesIm;
+import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
@@ -120,11 +117,11 @@ public class ExperimentsRealBN {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(net+"."+bbdd, geneticUnion, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, seed);
+            saveRound(net+"."+bbdd, geneticUnion, randomBN, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, seed);
         }
     }
 
-    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, int seed) {
+    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, int seed) {
         String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
         String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
 
@@ -147,7 +144,8 @@ public class ExperimentsRealBN {
                 Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + "," +
                 geneticUnion.executionTimeUnion + "," +
                 geneticUnion.executionTimeGreedy + "," +
-                geneticUnion.executionTime + "\n";
+                geneticUnion.executionTime +
+                calculateProbs(geneticUnion, randomBN) + "\n";
 
         BufferedWriter csvWriter;
         try {
@@ -165,8 +163,76 @@ public class ExperimentsRealBN {
         } catch (IOException e) { System.out.println(e); }
     }
 
-    public static void calculateProbs(BayesIm bayesIm) {
-        JunctionTreeAlgorithm jta = new JunctionTreeAlgorithm(bayesIm);
+    public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, RandomBN randomBN) {
+        // Original BN
+        BayesIm originalBN = randomBN.originalBayesIm;
 
+        // Recalculate probabilities of the original BN given the data
+        BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
+        BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+
+        // Get the BayesIm of the sampled graphs
+        ArrayList<BayesIm> sampledBNs = randomBN.setOfRandomBNs;
+
+        // Get the BayesIm of the greedy graph
+        bayesPm = new BayesPm(geneticUnion.greedyDag);
+        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        }
+        BayesIm greedyBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+
+        // Get the BayesIm of the genetic graph
+        bayesPm = new BayesPm(geneticUnion.bestDag);
+        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        }
+        BayesIm geneticBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+
+        // Get the BayesIm of the union graph
+        bayesPm = new BayesPm(geneticUnion.fusionUnion);
+        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        }
+        BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+
+
+        return null;
     }
+
+    public static double[][] meanMarginals(BayesIm bn) {
+        double[][] marginals = new double[bn.getNumNodes()][];
+        for (int i = 0; i < bn.getNumNodes(); i++) {
+            //marginals[i] = bn.getNode(i).getMarginal();
+        }
+        return marginals;
+    }
+
+    public static ArrayList<double[][]> meanMarginals(ArrayList<BayesIm> bns) {
+        ArrayList<double[][]> marginals = new ArrayList<>();
+        for (BayesIm bn : bns) {
+            marginals.add(meanMarginals(bn));
+        }
+        return marginals;
+    }
+
+    /** Returns the mean difference between two marginals.
+     *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]
+     *  Returns: ((0.1 + 0.1) + (0.2 + 0.1 + 0.3)) / 2 = 0.4
+     */
+    public static double getMeanDifferenceBetweenMarginals(double[][] marg1, double[][] marg2) {
+        double diff = 0;
+
+        for (int i = 0; i < marg1.length; i++) {
+            for (int j = 0; j < marg1[i].length; j++) {
+                diff += Math.abs(marg1[i][j] - marg2[i][j]);
+            }
+        }
+
+        return diff / (marg1.length);
+    }
+
+
 }
