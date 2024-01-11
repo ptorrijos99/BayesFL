@@ -124,7 +124,13 @@ public class ExperimentsRealBN {
 
     public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, int seed) {
         String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
-        String header = "numNodes,nDags,popSize,nIterations,seed,unionTW,maxTW,greedyTW,geneticTW,unionEdges,greedyEdges,geneticEdges,greedySMHD,geneticSMHD,timeUnion,timeGreedy,time\n";
+        String header = "numNodes,nDags,popSize,nIterations,seed," +
+                "minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW," +
+                "unionEdges,greedyEdges,geneticEdges," +
+                "greedySMHD,geneticSMHD," +
+                "timeUnion,timeGreedy,time," +
+                "diffRealRecalc,diffRealSampled,diffRealGreedy,diffRealGenetic,diffRealUnion,diffRecalcSampled,diffRecalcGreedy,diffRecalcGenetic,diffRecalcUnion" +
+                "\n";
 
         String line = bbdd + "," +
                 nDags + "," +
@@ -232,9 +238,7 @@ public class ExperimentsRealBN {
     }
 
     public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
-        System.out.println(Arrays.toString(categories));
         double[][] marginals = new double[bn.getNumNodes()][];
-        System.out.println(bn.getDag().getNodes());
 
         int indexOrder = 0;
         for (Node node : orderNodes) {
