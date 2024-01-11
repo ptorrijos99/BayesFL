@@ -63,8 +63,8 @@ public class ExperimentsRealBN {
         String net = "child";
         String bbdd = "0";
         int nClients = 5;
-        int popSize = 20;
-        int nIterations = 100;
+        int popSize = 2;
+        int nIterations = 1;
         int seed = 42;
 
         launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
@@ -85,7 +85,7 @@ public class ExperimentsRealBN {
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
-        marginals(randomBN.originalBayesIm, randomBN.categories);
+        marginals(randomBN.originalBayesIm, randomBN.categories, randomBN.nodesDags);
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
@@ -171,6 +171,10 @@ public class ExperimentsRealBN {
 
         // Recalculate probabilities of the original BN given the data
         BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
+        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        }
         BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
         // Get the BayesIm of the sampled graphs
@@ -202,13 +206,12 @@ public class ExperimentsRealBN {
 
 
         // Calculate the marginals
-        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories);
-        double[][] originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories);
-        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories);
-        double[][] greedyBNMarginals = marginals(greedyBN, randomBN.categories);
-        double[][] geneticBNMarginals = marginals(geneticBN, randomBN.categories);
-        double[][] unionBNMarginals = marginals(unionBN, randomBN.categories);
-
+        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories, randomBN.nodesDags);
+        double[][] originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories, randomBN.nodesDags);
+        double[][] greedyBNMarginals = marginals(greedyBN, randomBN.categories, randomBN.nodesDags);
+        double[][] geneticBNMarginals = marginals(geneticBN, randomBN.categories, randomBN.nodesDags);
+        double[][] unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
 
         String probs = ",";
 
@@ -225,39 +228,44 @@ public class ExperimentsRealBN {
         probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
         probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals) + ",";
 
-        return null;
+        return probs;
     }
 
-    public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories) {
-        System.out.println(Arrays.toString(categories) + " " + bn);
+    public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
+        System.out.println(Arrays.toString(categories));
         double[][] marginals = new double[bn.getNumNodes()][];
-        for (int i = 0; i < bn.getNumNodes(); i++) {
-            marginals[i] = new double[categories[i].size()];
+        System.out.println(bn.getDag().getNodes());
+
+        int indexOrder = 0;
+        for (Node node : orderNodes) {
+            int indexBN = bn.getNodeIndex(node);
+            marginals[indexOrder] = new double[categories[indexOrder].size()];
 
             // Get the multiplication of the categories size of the parents
-            List<Node> parents = bn.getDag().getParents(bn.getNode(i));
+            List<Node> parents = bn.getDag().getParents(node);
             int size = 1;
             for (Node parent : parents) {
-                int indexParent = bn.getNodeIndex(parent);
+                int indexParent = orderNodes.indexOf(parent);
                 size *= categories[indexParent].size();
             }
 
             // Calculate the marginals
-            for (int j = 0; j < marginals[i].length; j++) {
+            for (int j = 0; j < marginals[indexOrder].length; j++) {
                 for (int k = 0; k < size; k++) {
-                    marginals[i][j] += bn.getProbability(i, k, j);
+                    marginals[indexOrder][j] += bn.getProbability(indexBN, k, j);
                 }
-                marginals[i][j] /= size;
+                marginals[indexOrder][j] /= size;
             }
+            indexOrder++;
         }
 
         return marginals;
     }
 
-    public static ArrayList<double[][]> marginals(ArrayList<BayesIm> bns, ArrayList<String>[] categories) {
+    public static ArrayList<double[][]> marginals(ArrayList<BayesIm> bns, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
         ArrayList<double[][]> margs = new ArrayList<>();
         for (BayesIm bn : bns) {
-            margs.add(marginals(bn,categories));
+            margs.add(marginals(bn,categories,orderNodes));
         }
         return margs;
     }
