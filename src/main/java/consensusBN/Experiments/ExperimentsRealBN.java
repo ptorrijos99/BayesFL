@@ -68,6 +68,13 @@ public class ExperimentsRealBN {
     }
 
     public static void launchExperiment(String net, String bbdd, int nDags, int popSize, int nIterations, int seed) {
+        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
+        if (new File(savePath).exists()) {
+            System.out.println("The experiment has already been done.");
+            System.out.println("Path: " + savePath);
+            return;
+        }
+
         // Read the .csv
         DataSet data = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
 
@@ -194,9 +201,9 @@ public class ExperimentsRealBN {
             BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
             originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError oome) {
+        } catch (OutOfMemoryError | IllegalArgumentException ex) {
             //Log the info
-            System.err.println("REAL RECALCULATED GRAPH: Array size too large");
+            System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
         }
 
         // Get the BayesIm of the sampled graphs
@@ -215,9 +222,9 @@ public class ExperimentsRealBN {
             BayesIm greedyBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeGreedy = (System.currentTimeMillis() - start) / 1000.0;
             greedyBNMarginals = marginals(greedyBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError oome) {
+        } catch (OutOfMemoryError | IllegalArgumentException ex) {
             //Log the info
-            System.err.println("GREEDY GRAPH: Array size too large");
+            System.err.println("GREEDY GRAPH: Array size too large: " + ex.getClass());
         }
 
         // Get the BayesIm of the genetic graph
@@ -231,9 +238,9 @@ public class ExperimentsRealBN {
             BayesIm geneticBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeGenetic = (System.currentTimeMillis() - start) / 1000.0;
             geneticBNMarginals = marginals(geneticBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError oome) {
+        } catch (OutOfMemoryError | IllegalArgumentException ex) {
             //Log the info
-            System.err.println("GENETIC GRAPH: Array size too large");
+            System.err.println("GENETIC GRAPH: Array size too large: " + ex.getClass());
         }
 
         // Get the BayesIm of the union graph
@@ -247,9 +254,9 @@ public class ExperimentsRealBN {
             BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeUnion = (System.currentTimeMillis() - start) / 1000.0;
             unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError oome) {
+        } catch (OutOfMemoryError | IllegalArgumentException ex) {
             //Log the info
-            System.err.println("UNION GRAPH: Array size too large");
+            System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
         }
 
         String returnString = ",";
