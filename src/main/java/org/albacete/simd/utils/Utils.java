@@ -615,6 +615,12 @@ public class Utils {
                 probTable[i] = new double[probTableWeka[i].length];
                 for (int j=0; j < probTableWeka[i].length; j++){
                     int index = categories[indexNode].indexOf(classWekaOrder[indexNode][j]);
+
+                    if (index == -1) {
+                        categories[indexNode].add(classWekaOrder[indexNode][j]);
+                        index = categories[indexNode].indexOf(classWekaOrder[indexNode][j]);
+                    }
+
                     probTable[i][index] = probTableWeka[i][j];
                 }
             }
