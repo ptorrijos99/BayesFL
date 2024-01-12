@@ -59,7 +59,7 @@ public class ExperimentsRealBN {
     public static void main(String[] args) {
         String net = "child";
         String bbdd = "0";
-        int nClients = 5;
+        int nClients = 4;
         int popSize = 2;
         int nIterations = 1;
         int seed = 42;
@@ -126,7 +126,8 @@ public class ExperimentsRealBN {
                 "unionEdges,greedyEdges,geneticEdges," +
                 "greedySMHD,geneticSMHD," +
                 "timeUnion,timeGreedy,time," +
-                "diffRealRecalc,diffRealSampled,diffRealGreedy,diffRealGenetic,diffRealUnion,diffRecalcSampled,diffRecalcGreedy,diffRecalcGenetic,diffRecalcUnion" +
+                "diffRealRecalc,diffRealSampled,diffRealGreedy,diffRealGenetic,diffRealUnion,diffRecalcSampled,diffRecalcGreedy,diffRecalcGenetic,diffRecalcUnion," +
+                "timeRecalc,timeSampled,timeGreedy,timeGenetic,timeUnion" +
                 "\n";
 
         String line = bbdd + "," +
@@ -168,70 +169,112 @@ public class ExperimentsRealBN {
     }
 
     public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, RandomBN randomBN) {
-        // Get the different BNs as BayesIm
-        // Original BN
+        // Calculate the marginals of the original BN
         BayesIm originalBN = randomBN.originalBayesIm;
+        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories, randomBN.nodesDags);
+        double[][] originalBNrecalcMarginals = null;
+        double[][] unionBNMarginals = null;
+        double[][] greedyBNMarginals = null;
+        double[][] geneticBNMarginals = null;
+
+        double timeRecalc = -1;
+        double timeSampled = -1;
+        double timeGreedy = -1;
+        double timeGenetic = -1;
+        double timeUnion = -1;
 
         // Recalculate probabilities of the original BN given the data
-        BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
-        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
+            originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError oome) {
+            //Log the info
+            System.err.println("REAL RECALCULATED GRAPH: Array size too large");
         }
-        BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
         // Get the BayesIm of the sampled graphs
         ArrayList<BayesIm> sampledBNs = randomBN.setOfRandomBNs;
+        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories, randomBN.nodesDags);
+        timeSampled = randomBN.timeSample;
 
         // Get the BayesIm of the greedy graph
-        bayesPm = new BayesPm(geneticUnion.greedyDag);
-        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(geneticUnion.greedyDag);
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm greedyBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeGreedy = (System.currentTimeMillis() - start) / 1000.0;
+            greedyBNMarginals = marginals(greedyBN, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError oome) {
+            //Log the info
+            System.err.println("GREEDY GRAPH: Array size too large");
         }
-        BayesIm greedyBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
         // Get the BayesIm of the genetic graph
-        bayesPm = new BayesPm(geneticUnion.bestDag);
-        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(geneticUnion.bestDag);
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm geneticBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeGenetic = (System.currentTimeMillis() - start) / 1000.0;
+            geneticBNMarginals = marginals(geneticBN, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError oome) {
+            //Log the info
+            System.err.println("GENETIC GRAPH: Array size too large");
         }
-        BayesIm geneticBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
         // Get the BayesIm of the union graph
-        bayesPm = new BayesPm(geneticUnion.fusionUnion);
-        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeUnion = (System.currentTimeMillis() - start) / 1000.0;
+            unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError oome) {
+            //Log the info
+            System.err.println("UNION GRAPH: Array size too large");
         }
-        BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
 
-
-        // Calculate the marginals
-        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories, randomBN.nodesDags);
-        double[][] originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories, randomBN.nodesDags);
-        double[][] greedyBNMarginals = marginals(greedyBN, randomBN.categories, randomBN.nodesDags);
-        double[][] geneticBNMarginals = marginals(geneticBN, randomBN.categories, randomBN.nodesDags);
-        double[][] unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-
-        String probs = ",";
+        String returnString = ",";
 
         // Calculate the mean difference between all the marginals and the original BN
-        probs += getMeanDiffBetweenMarginals(originalBNrecalcMarginals, originalBNMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(originalBNrecalcMarginals, originalBNMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNMarginals) + ",";
 
         // Calculate the mean difference between all the marginals and the original BN with the recalculated probabilities
-        probs += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNrecalcMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
-        probs += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals);
+        returnString += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals) + ",";
 
-        return probs;
+        // Add the times
+        returnString += timeRecalc + ",";
+        returnString += timeSampled + ",";
+        returnString += timeGreedy + ",";
+        returnString += timeGenetic + ",";
+        returnString += timeUnion;
+
+        return returnString;
     }
 
     public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
@@ -276,6 +319,8 @@ public class ExperimentsRealBN {
      *  Returns: ((0.1 + 0.1) + (0.2 + 0.1 + 0.3)) / 2 = 0.4
      */
     public static double getMeanDiffBetweenMarginals(double[][] marg1, double[][] marg2) {
+        if (marg1 == null) return -1;
+        if (marg2 == null) return -2;
         double diff = 0;
         for (int i = 0; i < marg1.length; i++) {
             for (int j = 0; j < marg1[i].length; j++) {
