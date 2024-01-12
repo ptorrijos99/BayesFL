@@ -46,6 +46,7 @@ public class RandomBN {
 	public MlBayesIm originalBayesIm;
 	public DataSet data;
 	public ArrayList<String>[] categories;
+	public double timeSample;
 
 
 	/** Uses the parameters of paper "Efficient and accurate structural fusion of Bayesian networks"*/
@@ -263,6 +264,7 @@ public class RandomBN {
 				this.setOfRandomBNs.add(new MlBayesIm(bayesPm,MlBayesIm.RANDOM));
 			}
 		} else {
+			double start = System.currentTimeMillis();
 			for(int i = 0; i < this.numBNs; i++){
 				BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
 
@@ -273,6 +275,7 @@ public class RandomBN {
 				BayesIm bayesIm = new EmBayesEstimator(bayesPm, data).getEstimatedIm();
 				this.setOfRandomBNs.add(bayesIm);
 			}
+			this.timeSample = ((System.currentTimeMillis() - start) / 1000.0) / this.numBNs;
 		}
 	}
 
