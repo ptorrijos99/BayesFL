@@ -610,7 +610,6 @@ public class Utils {
             double[][] probTable = new double[probTableWeka.length][];
             int indexInIm = bayesIm.getNodeIndex(bayesIm.getNode(wekabn.getNodeName(indexNode)));
 
-            // TODO: Poner la tabla en el orden de las características de tetrad
             for (int i=0; i < probTableWeka.length; i++){
                 probTable[i] = new double[probTableWeka[i].length];
                 for (int j=0; j < probTableWeka[i].length; j++){

@@ -2,13 +2,14 @@ package consensusBN;
 
 import java.util.*;
 
-import edu.cmu.tetrad.bayes.GraphTools;
 import edu.cmu.tetrad.graph.*;
+import edu.cmu.tetrad.graph.EdgeListGraph;
+import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
 
 import static consensusBN.AlphaOrder.alphaOrder;
 import static consensusBN.BetaToAlpha.transformToAlpha;
-import static edu.cmu.tetrad.bayes.GraphTools.moralize;
 
 public class ConsensusUnion {
 

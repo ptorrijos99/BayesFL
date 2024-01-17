@@ -9,8 +9,13 @@ import java.util.Random;
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.*;
+import edu.cmu.tetrad.graph.EdgeListGraph;
+import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.BayesNet;
+
+import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 public class RandomBN {
 	int seed;
@@ -19,6 +24,7 @@ public class RandomBN {
 	int maxInDegree;
 	int maxOutDegree;
 	int maxDegree;
+	int maxTreeWidth;
 	int maxEdges;
 	int numBNs;
 	int numIterations;
@@ -41,6 +47,7 @@ public class RandomBN {
 	DataSet dataSamples;
 	private boolean simulate = false;
 	private boolean initialRealDag = false;
+	private boolean props = true;
 	private int sampleSize = 100;
 
 	public MlBayesIm originalBayesIm;
@@ -51,6 +58,8 @@ public class RandomBN {
 
 	/** Uses the parameters of paper "Efficient and accurate structural fusion of Bayesian networks"*/
 	public RandomBN(int seed, int numNodes, int numBNs){
+		this.props = false;
+
 		this.seed = seed;
 		this.generator = new Random(seed);
 		this.numNodes = numNodes;
@@ -59,6 +68,8 @@ public class RandomBN {
 		this.maxInDegree = 3;
 		// Maximum number of children of each node
 		this.maxOutDegree = 4;
+
+		this.maxTreeWidth = numNodes - 1;
 
 		this.maxDegree = numNodes - 1;
 		this.maxEdges = (int) (numNodes * 2.5);
@@ -88,7 +99,7 @@ public class RandomBN {
 	}
 
 	/** Uses a real initial DAG */
-	public RandomBN(BayesNet bayesNet, DataSet data, int seed, int numBNs){
+	public RandomBN(BayesNet bayesNet, DataSet data, int seed, int numBNs, double twLimit){
 		this.data = data;
 
 		this.categories = new ArrayList[data.getNumColumns()];
@@ -126,6 +137,9 @@ public class RandomBN {
 		this.maxEdges = (int) (dag.getNumEdges() * 1.1);
 		this.numBNs = numBNs;
 		this.numIterations = (int) (numNodes * 0.75);
+
+		int originalTreeWidth = getTreeWidth(new Dag (this.originalBayesIm.getDag()));
+		this.maxTreeWidth = (int) twLimit * originalTreeWidth;
 
 		this.parentMatrix = null;
 		this.childMatrix = null;
@@ -249,7 +263,7 @@ public class RandomBN {
 	public void generate(){
 		generateInitialDag();
 		generateDags();
-		generateProps();
+		if(this.props) generateProps();
 		if(this.simulate) sampling();
 	}
 
@@ -265,17 +279,23 @@ public class RandomBN {
 			}
 		} else {
 			double start = System.currentTimeMillis();
-			for(int i = 0; i < this.numBNs; i++){
-				BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
+			try {
+				for (int i = 0; i < this.numBNs; i++) {
+					BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
 
-				for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-					bayesPm.setNumCategories(nodesDags.get(j), this.categories[j].size());
-					bayesPm.setCategories(nodesDags.get(j), this.categories[j]);
+					for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+						bayesPm.setNumCategories(nodesDags.get(j), this.categories[j].size());
+						bayesPm.setCategories(nodesDags.get(j), this.categories[j]);
+					}
+					BayesIm bayesIm = new EmBayesEstimator(bayesPm, data).getEstimatedIm();
+					this.setOfRandomBNs.add(bayesIm);
 				}
-				BayesIm bayesIm = new EmBayesEstimator(bayesPm, data).getEstimatedIm();
-				this.setOfRandomBNs.add(bayesIm);
+				this.timeSample = ((System.currentTimeMillis() - start) / 1000.0) / this.numBNs;
+			} catch (OutOfMemoryError | Exception ex) {
+				System.gc();
+				//Log the info
+				System.err.println("SAMPLED GRAPH: Array size too large: " + ex.getClass());
 			}
-			this.timeSample = ((System.currentTimeMillis() - start) / 1000.0) / this.numBNs;
 		}
 	}
 
@@ -450,7 +470,8 @@ public class RandomBN {
 
 				if (totalEdges < getMaxEdges() && maxDegreeNotExceeded() &&
 						maxIndegreeNotExceeded() &&
-						maxOutdegreeNotExceeded() && isAcyclic()) {
+						maxOutdegreeNotExceeded() && isAcyclic() &&
+						maxTreeWidthNotExceeded()) {
 					addEdge();
 				}
 				else {
@@ -466,7 +487,8 @@ public class RandomBN {
 		else {
 			if (totalEdges < getMaxEdges() && maxDegreeNotExceeded() &&
 					maxIndegreeNotExceeded() && maxOutdegreeNotExceeded() &&
-					isAcyclic()) {
+					isAcyclic() &&
+					maxTreeWidthNotExceeded()) {
 				addEdge();
 				totalEdges++;
 			}
@@ -490,6 +512,13 @@ public class RandomBN {
 			}
 		}
 		return false;
+	}
+
+	private boolean maxTreeWidthNotExceeded() {
+		if (this.maxTreeWidth == 0) {
+			return true;
+		}
+		return getTreeWidth(getDag()) < this.maxTreeWidth;
 	}
 
 	/**

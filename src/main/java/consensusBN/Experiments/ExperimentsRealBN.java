@@ -4,13 +4,13 @@ import consensusBN.GeneticTreeWidthUnion;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
@@ -50,25 +50,27 @@ public class ExperimentsRealBN {
         int nClients = Integer.parseInt(parameters[2]);
         int popSize = Integer.parseInt(parameters[3]);
         int nIterations = Integer.parseInt(parameters[4]);
-        int seed = Integer.parseInt(parameters[5]);
+        double twLimit = Double.parseDouble(parameters[5]);
+        int seed = Integer.parseInt(parameters[6]);
 
         // Launch the experiment
-        launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
+        launchExperiment(net, bbdd, nClients, popSize, nIterations, twLimit, seed);
     }*/
 
     public static void main(String[] args) {
         String net = "child";
         String bbdd = "0";
-        int nClients = 4;
+        int nClients = 10;
         int popSize = 2;
         int nIterations = 1;
-        int seed = 42;
+        double twLimit = 2;
+        int seed = 1;
 
-        launchExperiment(net, bbdd, nClients, popSize, nIterations, seed);
+        launchExperiment(net, bbdd, nClients, popSize, nIterations, twLimit, seed);
     }
 
-    public static void launchExperiment(String net, String bbdd, int nDags, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
+    public static void launchExperiment(String net, String bbdd, int nDags, int popSize, int nIterations, double twLimit, int seed) {
+        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
         if (new File(savePath).exists()) {
             System.out.println("The experiment has already been done.");
             System.out.println("Path: " + savePath);
@@ -85,7 +87,7 @@ public class ExperimentsRealBN {
         } catch (Exception e) {throw new RuntimeException(e);}
 
         // Generate the DAGs
-        RandomBN randomBN = new RandomBN(bayesianReader, data, seed, nDags);
+        RandomBN randomBN = new RandomBN(bayesianReader, data, seed, nDags, twLimit);
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
@@ -122,19 +124,23 @@ public class ExperimentsRealBN {
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(net+"."+bbdd, geneticUnion, randomBN, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, seed);
+            saveRound(net+"."+bbdd, geneticUnion, randomBN, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed);
         }
     }
 
-    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, int seed) {
-        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + ".csv";
+    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed) {
+        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
         String header = "numNodes,nDags,popSize,nIterations,seed," +
-                "minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW," +
+                "sampledTWLimit,originalTW,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW," +
+                "originalMeanParents,greedyMeanParents,geneticMeanParents,unionMeanParents," +
+                "originalMaxParents,greedyMaxParents,geneticMaxParents,unionMaxParents," +
                 "unionEdges,greedyEdges,geneticEdges," +
                 "greedySMHD,geneticSMHD," +
                 "timeUnion,timeGreedy,time," +
-                "diffRealRecalc,diffRealSampled,diffRealGreedy,diffRealGenetic,diffRealUnion,diffRecalcSampled,diffRecalcGreedy,diffRecalcGenetic,diffRecalcUnion," +
-                "timeRecalc,timeSampled,timeGreedy,timeGenetic,timeUnion" +
+                "diffAbsSampled,diffAbsGreedy,diffAbsGenetic,diffAbsUnion," +
+                "diffCuadSampled,diffCuadGreedy,diffCuadGenetic,diffCuadUnion," +
+                "diffKLSampled,diffKLGreedy,diffKLGenetic,diffKLUnion," +
+                "timeProbsRecalc,timeProbsSampled,timeProbsGreedy,timeProbsGenetic,timeProbsUnion" +
                 "\n";
 
         String line = bbdd + "," +
@@ -142,6 +148,8 @@ public class ExperimentsRealBN {
                 popSize + "," +
                 nIterations + "," +
                 seed + "," +
+                twLimit + "," +
+                getTreeWidth(new Dag(randomBN.originalBayesIm.getDag())) + "," +
                 minTW + "," +
                 meanTW + "," +
                 maxTW + "," +
@@ -149,6 +157,16 @@ public class ExperimentsRealBN {
                 tw + "," +
                 getTreeWidth(geneticUnion.greedyDag) + "," +
                 getTreeWidth(geneticUnion.bestDag) + "," +
+
+                meanParents(randomBN.originalBayesIm.getDag()) + "," +
+                meanParents(geneticUnion.greedyDag) + "," +
+                meanParents(geneticUnion.bestDag) + "," +
+                meanParents(geneticUnion.fusionUnion) + "," +
+                maxParents(randomBN.originalBayesIm.getDag()) + "," +
+                maxParents(geneticUnion.greedyDag) + "," +
+                maxParents(geneticUnion.bestDag) + "," +
+                maxParents(geneticUnion.fusionUnion) + "," +
+
                 geneticUnion.fusionUnion.getNumEdges() + "," +
                 geneticUnion.greedyDag.getNumEdges() + "," +
                 geneticUnion.bestDag.getNumEdges() + "," +
@@ -183,6 +201,7 @@ public class ExperimentsRealBN {
         double[][] unionBNMarginals = null;
         double[][] greedyBNMarginals = null;
         double[][] geneticBNMarginals = null;
+        ArrayList<double[][]> sampledBNsMarginals = new ArrayList<>();
 
         double timeRecalc = -1;
         double timeSampled = -1;
@@ -201,15 +220,32 @@ public class ExperimentsRealBN {
             BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
             originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | IllegalArgumentException ex) {
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
             //Log the info
             System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
         }
 
         // Get the BayesIm of the sampled graphs
-        ArrayList<BayesIm> sampledBNs = randomBN.setOfRandomBNs;
-        ArrayList<double[][]> sampledBNsMarginals = marginals(sampledBNs, randomBN.categories, randomBN.nodesDags);
-        timeSampled = randomBN.timeSample;
+        for (Dag sampledDag : randomBN.setOfRandomDags) {
+            try {
+                double start = System.currentTimeMillis();
+                BayesPm bayesPm = new BayesPm(sampledDag);
+                for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                    bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                    bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+                }
+                BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
+                else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
+            } catch (OutOfMemoryError | Exception ex) {
+                System.gc();
+                //Log the info
+                System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
+            }
+        }
+        timeSampled /= randomBN.setOfRandomDags.size();
 
         // Get the BayesIm of the greedy graph
         try{
@@ -222,7 +258,8 @@ public class ExperimentsRealBN {
             BayesIm greedyBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeGreedy = (System.currentTimeMillis() - start) / 1000.0;
             greedyBNMarginals = marginals(greedyBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | IllegalArgumentException ex) {
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
             //Log the info
             System.err.println("GREEDY GRAPH: Array size too large: " + ex.getClass());
         }
@@ -238,7 +275,8 @@ public class ExperimentsRealBN {
             BayesIm geneticBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeGenetic = (System.currentTimeMillis() - start) / 1000.0;
             geneticBNMarginals = marginals(geneticBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | IllegalArgumentException ex) {
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
             //Log the info
             System.err.println("GENETIC GRAPH: Array size too large: " + ex.getClass());
         }
@@ -254,25 +292,31 @@ public class ExperimentsRealBN {
             BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             timeUnion = (System.currentTimeMillis() - start) / 1000.0;
             unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | IllegalArgumentException ex) {
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
             //Log the info
             System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
         }
 
         String returnString = ",";
 
-        // Calculate the mean difference between all the marginals and the original BN
-        returnString += getMeanDiffBetweenMarginals(originalBNrecalcMarginals, originalBNMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNMarginals) + ",";
+        // Calculate the mean absolute difference between all the marginals and the original BN with the recalculated probabilities
+        returnString += getMeanAbsoluteDiff(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanAbsoluteDiff(greedyBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanAbsoluteDiff(geneticBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanAbsoluteDiff(unionBNMarginals, originalBNrecalcMarginals) + ",";
 
-        // Calculate the mean difference between all the marginals and the original BN with the recalculated probabilities
-        returnString += getMeanDiffBetweenMarginals(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(greedyBNMarginals, originalBNrecalcMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(geneticBNMarginals, originalBNrecalcMarginals) + ",";
-        returnString += getMeanDiffBetweenMarginals(unionBNMarginals, originalBNrecalcMarginals) + ",";
+        // Calculate the mean quadratic difference between all the marginals and the original BN with the recalculated probabilities
+        returnString += getMeanQuadraticDiff(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanQuadraticDiff(greedyBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanQuadraticDiff(geneticBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanQuadraticDiff(unionBNMarginals, originalBNrecalcMarginals) + ",";
+
+        // Calculate the mean Kullback-Leiber difference between all the marginals and the original BN with the recalculated probabilities
+        returnString += getMeanKLDiff(sampledBNsMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanKLDiff(greedyBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanKLDiff(geneticBNMarginals, originalBNrecalcMarginals) + ",";
+        returnString += getMeanKLDiff(unionBNMarginals, originalBNrecalcMarginals) + ",";
 
         // Add the times
         returnString += timeRecalc + ",";
@@ -323,27 +367,86 @@ public class ExperimentsRealBN {
 
     /** Returns the mean difference between two marginals.
      *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]
-     *  Returns: ((0.1 + 0.1) + (0.2 + 0.1 + 0.3)) / 2 = 0.4
+     *  Returns: ((0.1 + 0.1) / 2 + (0.2 + 0.1 + 0.3) / 3)) / 2 = 0.15
      */
-    public static double getMeanDiffBetweenMarginals(double[][] marg1, double[][] marg2) {
+    public static double getMeanAbsoluteDiff(double[][] marg1, double[][] marg2) {
         if (marg1 == null) return -1;
         if (marg2 == null) return -2;
         double diff = 0;
         for (int i = 0; i < marg1.length; i++) {
             for (int j = 0; j < marg1[i].length; j++) {
-                diff += Math.abs(marg1[i][j] - marg2[i][j]);
+                diff += (Math.abs(marg1[i][j] - marg2[i][j]) / marg1[i].length);
             }
         }
         return diff / (marg1.length);
     }
 
-    public static double getMeanDiffBetweenMarginals(ArrayList<double[][]> marg1, double[][] marg2) {
+    public static double getMeanAbsoluteDiff(ArrayList<double[][]> marg1, double[][] marg2) {
         double diff = 0;
         for (double[][] doubles : marg1) {
-            diff += getMeanDiffBetweenMarginals(doubles, marg2);
+            diff += getMeanAbsoluteDiff(doubles, marg2);
         }
         return diff / marg1.size();
     }
+
+    /** Returns the mean quadratic difference between two marginals. */
+    public static double getMeanQuadraticDiff(double[][] marg1, double[][] marg2) {
+        if (marg1 == null) return -1;
+        if (marg2 == null) return -2;
+        double diff = 0;
+        for (int i = 0; i < marg1.length; i++) {
+            for (int j = 0; j < marg1[i].length; j++) {
+                diff += (Math.pow(marg1[i][j] - marg2[i][j], 2) / marg1[i].length);
+            }
+        }
+        return diff / (marg1.length);
+    }
+
+    public static double getMeanQuadraticDiff(ArrayList<double[][]> marg1, double[][] marg2) {
+        double diff = 0;
+        for (double[][] doubles : marg1) {
+            diff += getMeanQuadraticDiff(doubles, marg2);
+        }
+        return diff / marg1.size();
+    }
+
+    /** Returns the mean Kullback-Leiber difference between two marginals. */
+    public static double getMeanKLDiff(double[][] marg1, double[][] marg2) {
+        if (marg1 == null) return -1;
+        if (marg2 == null) return -2;
+        double diff = 0;
+        for (int i = 0; i < marg1.length; i++) {
+            for (int j = 0; j < marg1[i].length; j++) {
+                diff += ((marg1[i][j] * Math.log(marg1[i][j] / marg2[i][j])) / marg1[i].length);
+            }
+        }
+        return diff / (marg1.length);
+    }
+
+    public static double getMeanKLDiff(ArrayList<double[][]> marg1, double[][] marg2) {
+        double diff = 0;
+        for (double[][] doubles : marg1) {
+            diff += getMeanKLDiff(doubles, marg2);
+        }
+        return diff / marg1.size();
+    }
+
+    public static double meanParents(Graph dag) {
+        double nParents = 0;
+        for (Node node : dag.getNodes()) {
+            nParents += dag.getParents(node).size();
+        }
+        return nParents / dag.getNumNodes();
+    }
+
+    public static int maxParents(Graph dag) {
+        int nParents = 0;
+        for (Node node : dag.getNodes()) {
+            if (dag.getParents(node).size() > nParents) nParents = dag.getParents(node).size();
+        }
+        return nParents;
+    }
+
 
 
 }
