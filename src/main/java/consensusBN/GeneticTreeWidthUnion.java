@@ -1,6 +1,9 @@
 package consensusBN;
 
 import edu.cmu.tetrad.graph.*;
+import edu.cmu.tetrad.graph.EdgeListGraph;
+import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
 
 import java.util.*;

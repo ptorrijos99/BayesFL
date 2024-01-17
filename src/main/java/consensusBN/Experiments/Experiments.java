@@ -1,17 +1,12 @@
 package consensusBN.Experiments;
 
 import consensusBN.GeneticTreeWidthUnion;
-import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Graph;
-import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.utils.Utils;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
-import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 
@@ -59,10 +54,10 @@ public class Experiments {
         //String net = "alarm";
         //String bbdd = "0";
         int numNodes = 10;
-        int nClients = 20;
+        int nClients = 10;
         int popSize = 20;
         int nIterations = 100;
-        int seed = 42;
+        int seed = 1;
 
         launchExperiment(numNodes, nClients, popSize, nIterations, seed);
     }
@@ -72,6 +67,14 @@ public class Experiments {
         RandomBN randomBN = new RandomBN(seed, numNodes, nDags);
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
+
+        int i = 0;
+        for (Dag dag : dags) {
+            System.out.println("DAG " + i + ", Treewidth: " + getTreeWidth(dag));
+            System.out.println(dag);
+            System.out.println();
+            i++;
+        }
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
