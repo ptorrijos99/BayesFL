@@ -70,11 +70,35 @@ public class ExperimentsRealBN {
     }
 
     public static void launchExperiment(String net, String bbdd, int nDags, int popSize, int nIterations, double twLimit, int seed) {
-        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
+        String savePath = "./results/Server/" + net+"."+bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
+        int tw = 2;
+
         if (new File(savePath).exists()) {
-            System.out.println("The experiment has already been done.");
-            System.out.println("Path: " + savePath);
-            return;
+            System.out.println("File exists: " + savePath);
+            // Check the maximum executed treewidth in the file
+            BufferedReader br = null;
+            try {
+                br = new BufferedReader(new FileReader(savePath));
+            } catch (FileNotFoundException ignored) {}
+
+            // Read last line
+            String lastLine = null;
+            try {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    lastLine = line;
+                }
+            } catch (IOException ignored) {}
+
+            // Get the maximum treewidth
+            tw = Integer.parseInt(lastLine.split(",")[11]);
+            System.out.println("Maximum treewidth found in file: " + tw);
+            tw += 1;
+
+            // Close the file
+            try {
+                br.close();
+            } catch (IOException ignored) {}
         }
 
         // Read the .csv
@@ -117,18 +141,80 @@ public class ExperimentsRealBN {
         int treewidth = getTreeWidth(unionDag);
         System.out.println("Fusion Union Treewidth: " + treewidth);
 
-        // Execute the genetic union for each treewidth from 2 to the limit
-        for (int tw = 2; tw < treewidth; tw++) {
+        BayesIm originalBN = randomBN.originalBayesIm;
+        double[][] originalBNrecalcMarginals = null;
+        double[][] unionBNMarginals = null;
+        ArrayList<double[][]> sampledBNsMarginals = new ArrayList<>();
+        double timeRecalc = -1;
+        double timeSampled = -1;
+        double timeUnion = -1;
+        // Recalculate probabilities of the original BN given the data
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
+            originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
+            //Log the info
+            System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
+        }
+
+        // Get the BayesIm of the sampled graphs
+        for (Dag sampledDag : randomBN.setOfRandomDags) {
+            try {
+                double start = System.currentTimeMillis();
+                BayesPm bayesPm = new BayesPm(sampledDag);
+                for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                    bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                    bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+                }
+                BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
+                else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
+            } catch (OutOfMemoryError | Exception ex) {
+                System.gc();
+                //Log the info
+                System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
+            }
+        }
+        timeSampled /= randomBN.setOfRandomDags.size();
+
+        // Get the BayesIm of the union graph
+        try{
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            timeUnion = (System.currentTimeMillis() - start) / 1000.0;
+            unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
+            //Log the info
+            System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
+        }
+
+        // Execute the genetic union for each treewidth from the last executed to the limit
+        for (; tw < treewidth; tw++) {
             System.out.println("Treewidth: " + tw);
             geneticUnion.maxTreewidth = tw;
             geneticUnion.fusionUnion(dags);
 
             // Save results
-            saveRound(net+"."+bbdd, geneticUnion, randomBN, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed);
+            saveRound(net+"."+bbdd, geneticUnion, randomBN, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
         }
     }
 
-    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed) {
+    public static void saveRound(String bbdd, GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
         String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
         String header = "numNodes,nDags,popSize,nIterations,seed," +
                 "sampledTWLimit,originalTW,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,geneticTW," +
@@ -175,7 +261,7 @@ public class ExperimentsRealBN {
                 geneticUnion.executionTimeUnion + "," +
                 geneticUnion.executionTimeGreedy + "," +
                 geneticUnion.executionTime +
-                calculateProbs(geneticUnion, randomBN) + "\n";
+                calculateProbs(geneticUnion, randomBN, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals) + "\n";
 
         BufferedWriter csvWriter;
         try {
@@ -193,59 +279,12 @@ public class ExperimentsRealBN {
         } catch (IOException e) { System.out.println(e); }
     }
 
-    public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, RandomBN randomBN) {
-        // Calculate the marginals of the original BN
-        BayesIm originalBN = randomBN.originalBayesIm;
-        double[][] originalBNMarginals = marginals(originalBN, randomBN.categories, randomBN.nodesDags);
-        double[][] originalBNrecalcMarginals = null;
-        double[][] unionBNMarginals = null;
+    public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, RandomBN randomBN, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
         double[][] greedyBNMarginals = null;
         double[][] geneticBNMarginals = null;
-        ArrayList<double[][]> sampledBNsMarginals = new ArrayList<>();
 
-        double timeRecalc = -1;
-        double timeSampled = -1;
         double timeGreedy = -1;
         double timeGenetic = -1;
-        double timeUnion = -1;
-
-        // Recalculate probabilities of the original BN given the data
-        try{
-            double start = System.currentTimeMillis();
-            BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
-            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-            }
-            BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-            timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
-            originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | Exception ex) {
-            System.gc();
-            //Log the info
-            System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
-        }
-
-        // Get the BayesIm of the sampled graphs
-        for (Dag sampledDag : randomBN.setOfRandomDags) {
-            try {
-                double start = System.currentTimeMillis();
-                BayesPm bayesPm = new BayesPm(sampledDag);
-                for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                    bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                    bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-                }
-                BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
-                if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
-                else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
-            } catch (OutOfMemoryError | Exception ex) {
-                System.gc();
-                //Log the info
-                System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
-            }
-        }
-        timeSampled /= randomBN.setOfRandomDags.size();
 
         // Get the BayesIm of the greedy graph
         try{
@@ -279,23 +318,6 @@ public class ExperimentsRealBN {
             System.gc();
             //Log the info
             System.err.println("GENETIC GRAPH: Array size too large: " + ex.getClass());
-        }
-
-        // Get the BayesIm of the union graph
-        try{
-            double start = System.currentTimeMillis();
-            BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
-            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-            }
-            BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-            timeUnion = (System.currentTimeMillis() - start) / 1000.0;
-            unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-        } catch (OutOfMemoryError | Exception ex) {
-            System.gc();
-            //Log the info
-            System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
         }
 
         String returnString = ",";
