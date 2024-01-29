@@ -139,7 +139,7 @@ public class RandomBN {
 		this.numIterations = (int) (numNodes * 0.75);
 
 		int originalTreeWidth = getTreeWidth(new Dag (this.originalBayesIm.getDag()));
-		this.maxTreeWidth = (int) twLimit * originalTreeWidth;
+		this.maxTreeWidth = (int) (twLimit * originalTreeWidth);
 
 		this.parentMatrix = null;
 		this.childMatrix = null;
