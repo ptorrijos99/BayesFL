@@ -141,6 +141,11 @@ public class ExperimentsRealBN {
         int treewidth = getTreeWidth(unionDag);
         System.out.println("Fusion Union Treewidth: " + treewidth);
 
+        if (treewidth <= tw) {
+            System.out.println("The treewidth of the union is lower or equal than the treewidth limit");
+            return;
+        }
+
         BayesIm originalBN = randomBN.originalBayesIm;
         double[][] originalBNrecalcMarginals = null;
         double[][] unionBNMarginals = null;
