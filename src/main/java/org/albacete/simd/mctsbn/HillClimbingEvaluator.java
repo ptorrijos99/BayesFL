@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -170,11 +171,39 @@ public class HillClimbingEvaluator {
             
             Integer[] arr = parents.toArray(new Integer[0]);
             finalScore += localBdeuScore(node, ArrayUtils.toPrimitive(arr));
-            
+
             candidates.add(node);
         }
 
         return finalScore;
+    }
+
+    public Graph searchUnrestricted(){
+        graph = new EdgeListGraph(problem.getVariables());
+        Set<Integer> candidates = new HashSet<>(this.nodeToIntegerList(problem.getVariables()));
+        double score = Double.NEGATIVE_INFINITY;//GESThread.scoreGraph(hcDag, problem);
+        double lastScore = 0;
+
+        while (lastScore > score) {
+            lastScore = score;
+            for (int node : this.nodeToIntegerList(problem.getVariables())) {
+                candidates.remove(node);
+                Set<Integer> parents = evaluate(node, candidates).set;
+                for (int parent : parents) {
+                    // Check cycles
+                    if (graph.isAncestorOf(problem.getNode(node), problem.getNode(parent))) {
+                        continue;
+                    }
+
+                    Edge edge = Edges.directedEdge(problem.getNode(parent), problem.getNode(node));
+                    graph.addEdge(edge);
+                }
+                candidates.add(node);
+            }
+            score = GESThread.scoreGraph(graph, problem);
+        }
+
+        return graph;
     }
     
 

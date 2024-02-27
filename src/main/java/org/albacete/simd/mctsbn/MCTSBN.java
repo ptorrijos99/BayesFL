@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
 import org.albacete.simd.clustering.Clustering;
 import org.albacete.simd.clustering.HierarchicalClustering;
@@ -74,7 +75,7 @@ public class MCTSBN {
     private double mean;
     private double standardDeviation;
 
-    private Dag PGESdag;
+    private Dag initializeDag;
     
     private final ArrayList<ArrayList> orderSet = new ArrayList<>();
 
@@ -122,13 +123,14 @@ public class MCTSBN {
             long endTime = System.currentTimeMillis();
             // Calculating time of the iteration
             double totalTimeRound = 1.0 * (endTime - startTime) / 1000;
-            saveRound(-1, totalTimeRound);
+            saveRound(String.valueOf(1), totalTimeRound);
         }
 
         System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
-        
+
+        double lastScore = this.bestScore;
         // Search loop
-        for (int i = 0; i < ITERATION_LIMIT; i++) {
+        for (int i = 2; i < ITERATION_LIMIT; i++) {
             // Executing round
             long startTime = System.currentTimeMillis();
             executeRound();
@@ -136,7 +138,11 @@ public class MCTSBN {
             // Calculating time of the iteration
             double totalTimeRound = 1.0 * (endTime - startTime) / 1000;
 
-            saveRound(i, totalTimeRound);
+            if (this.bestScore > lastScore) {
+                lastScore = this.bestScore;
+                saveRound(String.valueOf(i), totalTimeRound);
+            }
+
             if(convergence){
                 System.out.println("Convergence has been found. Ending search");
                 break;
@@ -155,6 +161,12 @@ public class MCTSBN {
         // 2. Add PGES order
         switch (this.initializeAlgorithm) {
             default:
+            case "HC":
+                initializeWithHC();
+                break;
+            case "GES":
+                initializeWithGES();
+                break;
             case "pGES":
                 initializeWithPGES(4);
                 break;
@@ -188,6 +200,9 @@ public class MCTSBN {
             double reward = rollout(expandedNode);
             rewards[expandedNode.node] = reward;
             backPropagate(expandedNode, reward);
+
+            String i_str = String.format("0.%0" + String.valueOf(allVars.size()).length() + "d", i);
+            saveRound(i_str, 0);
         }
         this.root.setFullyExpanded(true);
 
@@ -363,6 +378,20 @@ public class MCTSBN {
     private ArrayList<Integer> getRandomOrder() {
         return new ArrayList(orderSet.get(random.nextInt(orderSet.size())));
     }
+
+    private void initializeWithHC() {
+        double init = System.currentTimeMillis();
+        HillClimbingEvaluator hc = new HillClimbingEvaluator(problem, cache);
+        Dag dag = new Dag(hc.searchUnrestricted());
+        initialize(dag, init);
+    }
+
+    private void initializeWithGES() {
+        double init = System.currentTimeMillis();
+        GES_BNBuilder alg = new GES_BNBuilder(problem.getData(), true);
+        Dag dag = new Dag(alg.search());
+        initialize(dag, init);
+    }
     
     private void initializeWithPGES(int nThreads) {        
         // Execute PGES to obtain a good order
@@ -413,10 +442,10 @@ public class MCTSBN {
             orderSet.add(hc.nodeToIntegerList(currentDag.getTopologicalOrder()));
         }
 
-        System.out.println("\n\nFINISHED PGES (" + ((System.currentTimeMillis() - init)/1000.0) + " s). BDeu: " + GESThread.scoreGraph(currentDag, problem));
+        System.out.println("\n\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s). BDeu: " + GESThread.scoreGraph(currentDag, problem));
 
         this.PGESTime = (System.currentTimeMillis() - init)/1000.0;
-        this.PGESdag = currentDag;
+        this.initializeDag = currentDag;
     }
     
     /**
@@ -447,7 +476,7 @@ public class MCTSBN {
         this.root = root;
     }
     
-    private void saveRound(int iteration, double totalTimeRound) {
+    private void saveRound(String iteration, double totalTimeRound) {
         try {
             String result = (firstPart
                     + bestScore + ","
@@ -462,13 +491,14 @@ public class MCTSBN {
     }
 
     private void initializeWriter () {
+        String PATH = ExperimentMCTSLauncher.PATH;
         // Creating the folder if not exists
-        File directory = new File("results-it");
+        File directory = new File(PATH + "results-it");
         if (! directory.exists()){
             directory.mkdir();
         }
 
-        String savePath = "results-it/experiment_mcts_" + initializeAlgorithm + "_" +
+        String savePath = PATH + "results-it/experiment_mcts-" + initializeAlgorithm + "_" +
                 this.problem.getData().getName() + "_it" + this.ITERATION_LIMIT + "_ex" + this.EXPLOITATION_CONSTANT
                 + "_ps" + this.NUMBER_SWAPS + "_ns" + this.PROBABILITY_SWAP + ".csv";
         file = new File(savePath);
@@ -496,8 +526,8 @@ public class MCTSBN {
         return bestDag;
     }
 
-    public Dag getPGESDag() {
-        return PGESdag;
+    public Dag getInitializeDag() {
+        return initializeDag;
     }
 
     @Override
