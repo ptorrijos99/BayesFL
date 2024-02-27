@@ -29,9 +29,9 @@ public class MainMCTSBN {
         MCTSBN mctsbn = new MCTSBN(problem, 3000);
 
         mctsbn.EXPLOITATION_CONSTANT = 100;
-        mctsbn.NUMBER_SWAPS = 0.2;
-        mctsbn.PROBABILITY_SWAP = 0.25;
-        mctsbn.initializeAlgorithm = "pGES";
+        mctsbn.NUMBER_SWAPS = 0;
+        mctsbn.PROBABILITY_SWAP = 0;
+        mctsbn.initializeAlgorithm = "HC";
 
         long startTime = System.currentTimeMillis();
         addEndHook(mctsbn,startTime, netPath, problem);
@@ -102,10 +102,10 @@ public class MainMCTSBN {
                 shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), dagOriginal);
                 System.out.println("\n Original: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
-                Dag PGESdag = new Dag(mctsbn.getPGESDag());
+                Dag PGESdag = new Dag(mctsbn.getInitializeDag());
                 bdeu = GESThread.scoreGraph(PGESdag, problem);
                 shd = Utils.SMHD(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), PGESdag);
-                System.out.println("\n PGES: \n    BDeu: " + bdeu + "\n    SHD: " + shd);
+                System.out.println("\n " + mctsbn.initializeAlgorithm + ": \n    BDeu: " + bdeu + "\n    SHD: " + shd);
 
                 Dag mctsDag = new Dag(mctsbn.getBestDag());
                 bdeu = GESThread.scoreGraph(mctsDag, problem);
