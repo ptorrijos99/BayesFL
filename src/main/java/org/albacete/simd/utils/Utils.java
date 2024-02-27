@@ -538,7 +538,7 @@ public class Utils {
 
         // Getting nodes from weka network and adding them to a GraphNode
         for (int indexNode = 0; indexNode < wekabn.getNrOfNodes(); indexNode++) {
-            nodes.add(new GraphNode(wekabn.getNodeName(indexNode)));
+            nodes.add(new DiscreteVariable(wekabn.getNodeName(indexNode)));
         }
         Dag graph = new Dag(nodes);
 

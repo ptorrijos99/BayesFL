@@ -86,7 +86,7 @@ public class LocalExperiment {
         String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        //TODO: if ((!checkExistentFile(savePath))) {
+        if ((!checkExistentFile(savePath))) {
             
             DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
@@ -136,9 +136,9 @@ public class LocalExperiment {
             server.run();
             
             writeExistentFile(savePath);
-       // } else {
-        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        //}
+        } else {
+            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        }
     }
 
     public static boolean checkExistentFile(String savePath) {

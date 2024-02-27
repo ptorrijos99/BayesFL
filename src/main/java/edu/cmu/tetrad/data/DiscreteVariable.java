@@ -326,11 +326,11 @@ public final class DiscreteVariable extends AbstractVariable
     public final boolean equals(Object o) {
 
         //AJ
-        if (!(o instanceof DiscreteVariable)) {
+        if (!(o instanceof Node)) {
             return false;
         }
 
-        DiscreteVariable variable = (DiscreteVariable) o;
+        Node variable = (Node) o;
 
         if (!(getName().equals(variable.getName()))) {
             return false;
