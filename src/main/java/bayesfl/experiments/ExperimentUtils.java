@@ -29,7 +29,7 @@
  *
  */
 
-package org.albacete.simd.bayesfl.experiments;
+package bayesfl.experiments;
 
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
@@ -44,8 +44,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.data.Data;
+import bayesfl.data.BN_DataSet;
+import bayesfl.data.Data;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
 import org.albacete.simd.utils.Utils;

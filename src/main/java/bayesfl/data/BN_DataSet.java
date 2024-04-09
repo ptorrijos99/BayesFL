@@ -1,4 +1,4 @@
-package org.albacete.simd.bayesfl.data;
+package bayesfl.data;
 
 import edu.cmu.tetrad.data.BoxDataSet;
 import edu.cmu.tetrad.data.DataReader;

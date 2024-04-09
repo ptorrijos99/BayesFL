@@ -29,12 +29,12 @@
  *
  */
 
-package org.albacete.simd.bayesfl;
+package bayesfl;
 
-import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
-import org.albacete.simd.bayesfl.data.Data;
-import org.albacete.simd.bayesfl.fusion.Fusion;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.algorithms.LocalAlgorithm;
+import bayesfl.data.Data;
+import bayesfl.fusion.Fusion;
+import bayesfl.model.Model;
 
 public class Client {
 

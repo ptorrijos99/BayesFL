@@ -29,19 +29,18 @@
  *
  */
 
-package org.albacete.simd.bayesfl.algorithms;
+package bayesfl.algorithms;
 
-import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Dag;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.data.Data;
-import org.albacete.simd.bayesfl.model.BN;
-import org.albacete.simd.bayesfl.model.MCT;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.data.BN_DataSet;
+import bayesfl.data.Data;
+import bayesfl.model.BN;
+import bayesfl.model.MCT;
+import bayesfl.model.Model;
 import org.albacete.simd.mctsbn.MCTSBN;
 import org.albacete.simd.mctsbn.TreeNode;
 
-import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.calculateBDeu;
+import static bayesfl.experiments.ExperimentUtils.calculateBDeu;
 
 public class MCT_MCTS implements LocalAlgorithm {
 

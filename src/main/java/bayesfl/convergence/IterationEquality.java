@@ -29,9 +29,9 @@
  *
  */
 
-package org.albacete.simd.bayesfl.convergence;
+package bayesfl.convergence;
 
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.model.Model;
 
 import java.util.LinkedList;
 

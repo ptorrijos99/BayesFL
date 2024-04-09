@@ -22,28 +22,60 @@
  *  SOFTWARE.
  */
 /**
- *    NoneConvergence.java
+ *    IterationEquality.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.albacete.simd.bayesfl.convergence;
+package bayesfl.convergence;
 
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.model.Model;
 
-public class NoneConvergence implements Convergence {
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * This convergence criterion checks if the local models have converged by checking if all the models of this iteration
+ * have appeared in any of the previous iterations.
+ */
+public class ModelEquality implements Convergence {
+
+    private List<Set<Model>> lastLocalModels;
 
     /**
-     * Checks if the local models have converged.
-     * Always returns false, so the algorithm will run for a fixed number of iterations.
+     * Checks if the local models have converged by checking if all the models of this iteration
+     * have appeared in any of the previous iterations.
      *
      * @param localModels The local models of the clients.
-     * @return False.
+     * @return True if the local models have converged, false otherwise.
      */
     @Override
     public boolean checkConvergence(Model[] localModels) {
-        return false;
+        boolean convergence = true;
+
+        if (lastLocalModels == null) {
+            lastLocalModels = new ArrayList<>(localModels.length);
+            for (int i = 0; i < localModels.length; i++) {
+                lastLocalModels.add(new HashSet<>());
+            }
+        }
+
+        for (int i = 0; i < localModels.length; i++) {
+            convergence = lastLocalModels.get(i).contains(localModels[i]);
+            if (!convergence) {
+                break;
+            }
+        }
+
+        Model[] clones = localModels.clone();
+        for (int i = 0; i < clones.length; i++) {
+            lastLocalModels.get(i).add(clones[i]);
+        }
+
+        return convergence;
     }
 }

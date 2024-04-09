@@ -29,15 +29,14 @@
  *
  */
 
-package org.albacete.simd.bayesfl.model;
+package bayesfl.model;
 
+import bayesfl.experiments.ExperimentUtils;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 
 import org.albacete.simd.utils.Utils;
-import org.albacete.simd.bayesfl.data.Data;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
+import bayesfl.data.Data;
 
 public class BN implements Model {
     
@@ -73,8 +72,8 @@ public class BN implements Model {
 
     @Override
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
-        int smhd = calculateSMHD(data, this.dag);
-        this.score = calculateBDeu(data, this.dag);
+        int smhd = ExperimentUtils.calculateSMHD(data, this.dag);
+        this.score = ExperimentUtils.calculateBDeu(data, this.dag);
         int threads = Runtime.getRuntime().availableProcessors();
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
@@ -93,7 +92,7 @@ public class BN implements Model {
         
         System.out.println(results);
 
-        saveExperiment(completePath, header, results);
+        ExperimentUtils.saveExperiment(completePath, header, results);
     }
     
     @Override
@@ -103,7 +102,7 @@ public class BN implements Model {
     
     @Override
     public double getScore(Data data) {
-        this.score = calculateBDeu(data, this.dag);
+        this.score = ExperimentUtils.calculateBDeu(data, this.dag);
         return this.score;
     }
     

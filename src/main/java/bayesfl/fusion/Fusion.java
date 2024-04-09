@@ -1,18 +1,18 @@
 /*
  *  The MIT License (MIT)
- *
+ *  
  *  Copyright (c) 2022 Universidad de Castilla-La Mancha, España
- *
+ *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
  *  in the Software without restriction, including without limitation the rights
  *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  *  copies of the Software, and to permit persons to whom the Software is
  *  furnished to do so, subject to the following conditions:
- *
+ *  
  *  The above copyright notice and this permission notice shall be included in all
  *  copies or substantial portions of the Software.
- *
+ *  
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,26 +22,33 @@
  *  SOFTWARE.
  */
 /**
- *    Model.java
+ *    LocalFusion.java
  *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 
-package org.albacete.simd.bayesfl.model;
+package bayesfl.fusion;
 
-import org.albacete.simd.bayesfl.data.Data;
+import bayesfl.model.Model;
 
-public interface Model {
+public interface Fusion {
 
-    Object getModel();
+    /**
+     * Perform the fusion of two models.
+     * @param model1 The first model to fuse.
+     * @param model2 The second model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model model1, Model model2);
 
-    void setModel(Object model);
+    /**
+     * Perform the fusion of many models.
+     * @param models The array of Model to fuse.
+     * @return The global model fused.
+     */
+    Model fusion(Model[] models);
 
-    public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time);
-    
-    double getScore();
-    
-    double getScore(Data data);
 }
+

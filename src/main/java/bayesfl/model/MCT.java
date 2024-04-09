@@ -29,15 +29,14 @@
  *
  */
 
-package org.albacete.simd.bayesfl.model;
+package bayesfl.model;
 
+import bayesfl.experiments.ExperimentUtils;
 import edu.cmu.tetrad.graph.Dag;
-import org.albacete.simd.bayesfl.data.Data;
+import bayesfl.data.Data;
 import org.albacete.simd.mctsbn.TreeNode;
 
 import java.util.ArrayList;
-
-import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.*;
 
 public class MCT implements Model {
 
@@ -91,7 +90,7 @@ public class MCT implements Model {
             }
         }
 
-        int smhd = calculateSMHD(data, dag);
+        int smhd = ExperimentUtils.calculateSMHD(data, dag);
         int threads = Runtime.getRuntime().availableProcessors();
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
@@ -110,7 +109,7 @@ public class MCT implements Model {
 
         System.out.println(results);
 
-        saveExperiment(completePath, header, results);
+        ExperimentUtils.saveExperiment(completePath, header, results);
     }
 
     @Override

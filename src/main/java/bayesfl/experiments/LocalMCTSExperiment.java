@@ -29,22 +29,21 @@
  *
  */
 
-package org.albacete.simd.bayesfl.experiments;
+package bayesfl.experiments;
 
+import bayesfl.algorithms.LocalAlgorithm;
+import bayesfl.algorithms.MCT_MCTS;
+import bayesfl.convergence.Convergence;
+import bayesfl.data.BN_DataSet;
+import bayesfl.fusion.Fusion;
+import bayesfl.fusion.FusionPosition;
+import bayesfl.fusion.MCT_Fusion;
 import edu.cmu.tetrad.data.DataSet;
-import org.albacete.simd.bayesfl.Client;
-import org.albacete.simd.bayesfl.Server;
-import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
-import org.albacete.simd.bayesfl.algorithms.MCT_MCTS;
-import org.albacete.simd.bayesfl.convergence.Convergence;
-import org.albacete.simd.bayesfl.convergence.NoneConvergence;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.fusion.*;
+import bayesfl.Client;
+import bayesfl.Server;
+import bayesfl.convergence.NoneConvergence;
 
 import java.util.ArrayList;
-
-import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
-import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 
 public class LocalMCTSExperiment {
     public static String PATH = "./";
@@ -76,8 +75,8 @@ public class LocalMCTSExperiment {
         String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
-            DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
-            ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
+            DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
             for (int i = 0; i < nClients; i++) {

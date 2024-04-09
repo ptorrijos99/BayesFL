@@ -28,11 +28,11 @@
  * @author Pablo Torrijos Arenas
  */
 
-package org.albacete.simd.bayesfl.fusion;
+package bayesfl.fusion;
 
-import org.albacete.simd.bayesfl.model.BN;
-import org.albacete.simd.bayesfl.model.MCT;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.model.BN;
+import bayesfl.model.MCT;
+import bayesfl.model.Model;
 import org.albacete.simd.mctsbn.TreeNode;
 
 import java.util.ArrayList;
