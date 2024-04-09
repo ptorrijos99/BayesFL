@@ -29,11 +29,11 @@
  *
  */
 
-package org.albacete.simd.bayesfl.fusion;
+package bayesfl.fusion;
 
+import bayesfl.model.BN;
 import edu.cmu.tetrad.graph.*;
-import org.albacete.simd.bayesfl.model.BN;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.model.Model;
 
 import java.util.ArrayList;
 

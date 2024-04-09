@@ -13,7 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
+import static bayesfl.data.BN_DataSet.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 

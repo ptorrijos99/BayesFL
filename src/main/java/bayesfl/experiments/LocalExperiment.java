@@ -29,29 +29,25 @@
  *
  */
 
-package org.albacete.simd.bayesfl.experiments;
+package bayesfl.experiments;
 
-import consensusBN.GeneticTreeWidthUnion;
+import bayesfl.algorithms.BN_GES;
+import bayesfl.algorithms.LocalAlgorithm;
+import bayesfl.convergence.Convergence;
+import bayesfl.data.BN_DataSet;
+import bayesfl.fusion.BN_FusionIntersection;
+import bayesfl.fusion.BN_FusionUnion;
+import bayesfl.fusion.Fusion;
 import edu.cmu.tetrad.data.DataSet;
-import org.albacete.simd.bayesfl.Client;
-import org.albacete.simd.bayesfl.Server;
-import org.albacete.simd.bayesfl.algorithms.BN_GES;
-import org.albacete.simd.bayesfl.algorithms.LocalAlgorithm;
-import org.albacete.simd.bayesfl.convergence.Convergence;
-import org.albacete.simd.bayesfl.convergence.ModelEquality;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.fusion.BN_FusionIntersection;
-import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
-import org.albacete.simd.bayesfl.fusion.Fusion;
+import bayesfl.Client;
+import bayesfl.Server;
+import bayesfl.convergence.ModelEquality;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static org.albacete.simd.bayesfl.data.BN_DataSet.divideDataSet;
-import static org.albacete.simd.bayesfl.data.BN_DataSet.readData;
 
 public class LocalExperiment {
     public static String PATH = "./";
@@ -88,8 +84,8 @@ public class LocalExperiment {
 
         if ((!checkExistentFile(savePath))) {
             
-            DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
-            ArrayList<DataSet> divisionData = divideDataSet(allData, nClients);
+            DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
             for (int i = 0; i < nClients; i++) {

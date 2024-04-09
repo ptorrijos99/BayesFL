@@ -1,4 +1,4 @@
-package org.albacete.simd.bayesfl.experiments;
+package bayesfl.experiments;
 
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;

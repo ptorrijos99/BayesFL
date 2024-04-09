@@ -29,11 +29,11 @@
  *
  */
 
-package org.albacete.simd.bayesfl.experiments;
+package bayesfl.experiments;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import static org.albacete.simd.bayesfl.experiments.LocalExperiment.launchExperiment;
+import static bayesfl.experiments.LocalExperiment.launchExperiment;
 
 public class ClusterExperiment {
     

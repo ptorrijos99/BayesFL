@@ -29,7 +29,7 @@
  *
  */
 
-package org.albacete.simd.bayesfl.algorithms;
+package bayesfl.algorithms;
 
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Edge;
@@ -43,10 +43,10 @@ import org.albacete.simd.clustering.HierarchicalClustering;
 import org.albacete.simd.framework.BNBuilder;
 import org.albacete.simd.threads.BESThread;
 import org.albacete.simd.threads.FESThread;
-import org.albacete.simd.bayesfl.data.BN_DataSet;
-import org.albacete.simd.bayesfl.data.Data;
-import org.albacete.simd.bayesfl.model.BN;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.data.BN_DataSet;
+import bayesfl.data.Data;
+import bayesfl.model.BN;
+import bayesfl.model.Model;
 
 import java.util.HashSet;
 import java.util.Set;

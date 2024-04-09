@@ -29,12 +29,12 @@
  *
  */
 
-package org.albacete.simd.bayesfl.fusion;
+package bayesfl.fusion;
 
 import static consensusBN.ConsensusUnion.fusionUnion;
 import edu.cmu.tetrad.graph.*;
-import org.albacete.simd.bayesfl.model.BN;
-import org.albacete.simd.bayesfl.model.Model;
+import bayesfl.model.BN;
+import bayesfl.model.Model;
 
 import java.util.ArrayList;
 
