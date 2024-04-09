@@ -135,7 +135,7 @@ public class Client {
      */
     protected void fusion(Model globalModel) {
         Model oldModel = localModel;
-        
+
         // Perform the fusion between the local and the global model
         double start = System.currentTimeMillis();
         localModel = localFusion.fusion(localModel, globalModel);
