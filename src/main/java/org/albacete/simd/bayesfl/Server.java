@@ -32,6 +32,7 @@
 package org.albacete.simd.bayesfl;
 
 import org.albacete.simd.bayesfl.convergence.Convergence;
+import org.albacete.simd.bayesfl.fusion.BN_FusionUnion;
 import org.albacete.simd.bayesfl.fusion.Fusion;
 import org.albacete.simd.bayesfl.model.BN;
 import org.albacete.simd.bayesfl.model.Model;
@@ -148,7 +149,7 @@ public class Server {
             if (stats) {
                 globalModel.saveStats(experimentName, "Server", path, clients.size(), -1, data, iteration, time);
             }
-            
+
             // 5. Fuse the global model with each local model on the clients
             clients.stream().forEach(client -> client.fusion(globalModel));
         }

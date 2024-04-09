@@ -56,24 +56,24 @@ public class LocalMCTSExperiment {
     public static void simpleExperiment() {
         String net = "insurance";
         String algName = "MCTS";
-        String intitialAlgorithm = "pGES";
+        String intitialAlgorithm = "GES";
 
-        int maxEdgesIt = 20;
-        int nIterations = 100;
+        int limitIteration = 10;
+        int nIterations = 50;
 
-        int exploitation = 10;
-        double probability_swap = 0.25;
-        double number_swaps = 0.25;
+        int exploitation = 100;
+        double probability_swap = 0;
+        double number_swaps = 0;
 
         String bbdd = "0";
-        int nClients = 20;
-        launchExperiment(net, algName, bbdd, nClients, maxEdgesIt, nIterations, exploitation, probability_swap, number_swaps, intitialAlgorithm);
+        int nClients = 10;
+        launchExperiment(net, algName, bbdd, nClients, limitIteration, nIterations, exploitation, probability_swap, number_swaps, intitialAlgorithm);
     }
 
-    public static void launchExperiment(String net, String algName, String bbdd, int nClients, int maxEdgesIt, int nIterations, int exploitation, double probability_swap, double number_swaps, String initializeAlgorithm) {
+    public static void launchExperiment(String net, String algName, String bbdd, int nClients, int limitIteration, int nIterations, int exploitation, double probability_swap, double number_swaps, String intitialAlgorithm) {
 
-        String operation = algName + "," + maxEdgesIt + ",server";
-        String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
+        String operation = algName + "-" + intitialAlgorithm + "," + limitIteration;
+        String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
             DataSet allData = readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
@@ -85,11 +85,11 @@ public class LocalMCTSExperiment {
 
                 BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
                 data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-                LocalAlgorithm algorithm = new MCT_MCTS(maxEdgesIt, exploitation, probability_swap, number_swaps, initializeAlgorithm);
+                LocalAlgorithm algorithm = new MCT_MCTS(limitIteration, exploitation, probability_swap, number_swaps, intitialAlgorithm);
 
                 Client client = new Client(fusionClient, algorithm, data);
-                client.setStats(true, true, PATH);
-                client.setExperimentName(algName + "," + maxEdgesIt);
+                client.setStats(true, false, PATH);
+                client.setExperimentName(operation);
                 clients.add(client);
             }
 
@@ -102,7 +102,7 @@ public class LocalMCTSExperiment {
             data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setData(data);
 
-            server.setExperimentName(algName + "," + maxEdgesIt);
+            server.setExperimentName(operation);
             server.setnIterations(nIterations);
 
             server.run();

@@ -148,6 +148,9 @@ public class LocalExperiment {
     }
     
     public static void writeExistentFile(String savePath) {
+        File file = new File(savePath);
+        file.getParentFile().mkdirs();
+
         BufferedWriter csvWriter = null;
         try {
             csvWriter = new BufferedWriter(new FileWriter(savePath, true));
