@@ -92,6 +92,10 @@ public class GeneticTreeWidthUnion {
         for (Dag dag : dags) {
             alphaDags.add(transformToAlpha(dag, alpha));
         }
+        System.out.println("Alpha order: " + alpha);
+        for (Dag dag : alphaDags) {
+            System.out.println(dag);
+        }
 
         double startTime = System.currentTimeMillis();
         fusionUnion = applyUnion(alpha, alphaDags);
@@ -128,10 +132,10 @@ public class GeneticTreeWidthUnion {
 
     private void fusionUnionGamez() {
         // Genetic algorithm
-        System.out.println("Initializing");
+        //System.out.println("Initializing");
         initialize();
         for (int j = 0; j < numIterations; j++) {
-            System.out.println("Iteration " + j);
+            //System.out.println("Iteration " + j);
             evaluate();
             crossover();
             evaluate();
@@ -185,17 +189,17 @@ public class GeneticTreeWidthUnion {
                 .parallel()
                 .forEach(i -> fitness[i] = calculateFitness(i, 0));
 
-        System.out.println("Fitness: ");
+        /*System.out.println("Fitness: ");
         for (int i = 0; i < populationSize; i++) {
             System.out.printf("%.2f ", fitness[i]);
         }
-        System.out.println();
+        System.out.println();*/
     }
 
     private void crossover() {
         boolean[][] newPopulation = new boolean[populationSize][totalEdges];
         // Add the best global individual to the new population
-        System.out.println("Best individual: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
+        //System.out.println("Best individual: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
         newPopulation[0] = bestIndividual.clone();
 
         // Add the best individual of the last iteration to the new population
@@ -207,7 +211,7 @@ public class GeneticTreeWidthUnion {
                 bestIndex = i;
             }
         }
-        System.out.println("Best individual of the last iteration: " + bestFitness);
+        //System.out.println("Best individual of the last iteration: " + bestFitness);
         newPopulation[1] = population[bestIndex];
 
         tournamentCrossover(newPopulation);
@@ -222,7 +226,7 @@ public class GeneticTreeWidthUnion {
                     numTrues++;
                 }
             }
-            System.out.println(i + " | FIT " + String.format("%.1f", fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues);
+            //System.out.println(i + " | FIT " + String.format("%.1f", fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues);
         }
 
     }
@@ -331,7 +335,7 @@ public class GeneticTreeWidthUnion {
                     finalNumTrues++;
                 }
             }
-            System.out.println(i + " | FIT " + String.format("%.1f",fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues + ", " + finalNumTrues);
+            //System.out.println(i + " | FIT " + String.format("%.1f",fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues + ", " + finalNumTrues);
         }
     }
 

@@ -41,7 +41,7 @@ public class BN_DataSet implements Data {
         this.name = name;
     }
 
-    public static DataSet readData (String path) {
+    public static DataSet readData(String path) {
         // Initial Configuration
         DataReader reader = new DataReader();
         reader.setDelimiter(DelimiterType.COMMA);

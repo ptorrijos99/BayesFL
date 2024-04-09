@@ -13,6 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
+import org.albacete.simd.bayesfl.data.BN_DataSet;
+import org.albacete.simd.bayesfl.data.Data;
 import org.albacete.simd.clustering.Clustering;
 import org.albacete.simd.clustering.HierarchicalClustering;
 import org.albacete.simd.framework.BNBuilder;
@@ -21,6 +23,8 @@ import org.albacete.simd.utils.Utils;
 import org.albacete.simd.utils.Problem;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
+import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.calculateBDeu;
 
 public class MCTSBN {
 
@@ -31,7 +35,7 @@ public class MCTSBN {
     /**
      * Iteration limit of the search
      */
-    private final int ITERATION_LIMIT;
+    private int ITERATION_LIMIT;
 
     /**
      * Exploration constant c for the UCT equation: UCT_j = X_j + c * sqrt(ln(N) / n_j)
@@ -126,7 +130,7 @@ public class MCTSBN {
             saveRound(String.valueOf(1), totalTimeRound);
         }
 
-        System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
+        //System.out.println("\n\nSTARTING MCTSBN\n------------------------------------------------------");
 
         double lastScore = this.bestScore;
         // Search loop
@@ -442,7 +446,9 @@ public class MCTSBN {
             orderSet.add(hc.nodeToIntegerList(currentDag.getTopologicalOrder()));
         }
 
-        System.out.println("\n\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s). BDeu: " + GESThread.scoreGraph(currentDag, problem));
+        System.out.println("\n\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s)");
+        // Score with fGES
+        System.out.println("BDeu: " + calculateBDeu(new BN_DataSet(problem.getData(),"data"), currentDag));
 
         this.PGESTime = (System.currentTimeMillis() - init)/1000.0;
         this.initializeDag = currentDag;
@@ -490,11 +496,11 @@ public class MCTSBN {
         }
     }
 
-    private void initializeWriter () {
+    private void initializeWriter() {
         String PATH = ExperimentMCTSLauncher.PATH;
         // Creating the folder if not exists
         File directory = new File(PATH + "results-it");
-        if (! directory.exists()){
+        if (!directory.exists()){
             directory.mkdir();
         }
 
@@ -526,6 +532,11 @@ public class MCTSBN {
         return bestDag;
     }
 
+    public void setBestDag(Graph dag, double score) {
+        this.bestDag = dag;
+        this.bestScore = score;
+    }
+
     public Dag getInitializeDag() {
         return initializeDag;
     }
@@ -537,5 +548,9 @@ public class MCTSBN {
 
     public TreeNode getTreeRoot() {
         return root;
+    }
+
+    public void setIterationLimit(int limit) {
+        this.ITERATION_LIMIT = limit;
     }
 }

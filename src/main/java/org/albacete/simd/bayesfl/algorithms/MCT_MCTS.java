@@ -41,13 +41,15 @@ import org.albacete.simd.bayesfl.model.Model;
 import org.albacete.simd.mctsbn.MCTSBN;
 import org.albacete.simd.mctsbn.TreeNode;
 
+import static org.albacete.simd.bayesfl.experiments.ExperimentUtils.calculateBDeu;
+
 public class MCT_MCTS implements LocalAlgorithm {
 
     private int limitIteration = 10;
     private double exploitation = 50;
     private double probabilitySwap = 0.25;
     private double numberSwaps = 0.2;
-    private String initializeAlgorithm = "pGES";
+    private String initializeAlgorithm = "GES";
 
     private MCTSBN algorithm;
 
@@ -89,16 +91,23 @@ public class MCT_MCTS implements LocalAlgorithm {
             algorithm = new MCTSBN(((BN_DataSet) data).getProblem(), limitIteration, exploitation, probabilitySwap, numberSwaps, initializeAlgorithm);
         }
 
+        BN lastModel = null;
+
         /* If there is a previous local model, use it as base. If is null (for example, with a call of
            "public Model buildLocalModel(Data data)"), the model isn't an instance of MCT. */
         if (localModel instanceof MCT mct) {
             algorithm.setInitialTree((TreeNode) mct.getModel());
+            System.out.println(" BDeu inicial: " + calculateBDeu(data, lastModel.getModel()));
             mct.calculateBestBN(data);
+            lastModel = mct.getBestBN();
+            algorithm.setBestDag(lastModel.getModel(), lastModel.getScore());
+            System.out.println(" BDeu después BestBN: " + calculateBDeu(data, lastModel.getModel()));
         }
 
         // Search with the algorithm created
         Dag bestBN = algorithm.search();
-        return new MCT(algorithm.getTreeRoot(), new BN(bestBN));
+        System.out.println(" BDeu final: " + calculateBDeu(data, bestBN) + "\n");
+        return new MCT(algorithm.getTreeRoot(), new BN(bestBN), lastModel);
     }
 
     /**

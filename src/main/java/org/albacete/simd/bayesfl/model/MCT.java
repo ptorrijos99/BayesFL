@@ -45,11 +45,18 @@ public class MCT implements Model {
 
     private BN bestBN;
 
+    private BN lastBN;
+
     private ArrayList<BN> candidates = new ArrayList<>();
 
     public MCT(TreeNode treeRoot, BN bestBN) {
         this.treeRoot = treeRoot;
         this.bestBN = bestBN;
+    }
+
+    public MCT(TreeNode treeRoot, BN bestBN, BN lastBN) {
+        this(treeRoot, bestBN);
+        this.lastBN = lastBN;
     }
 
     public MCT(TreeNode treeRoot, ArrayList<BN> candidates) {
@@ -75,8 +82,16 @@ public class MCT implements Model {
     @Override
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
         Dag dag = this.bestBN.getModel();
-        int smhd = calculateSMHD(data, dag);
+
         double bdeu = getScore(data);
+        if (this.lastBN != null) {
+            double lastBDeu = this.lastBN.getScore();
+            if (bdeu <= lastBDeu) {
+                return;
+            }
+        }
+
+        int smhd = calculateSMHD(data, dag);
         int threads = Runtime.getRuntime().availableProcessors();
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
@@ -109,14 +124,17 @@ public class MCT implements Model {
     }
     
     public double calculateBestBN(Data data) {
-        double score = bestBN.getScore();
+        double score = bestBN.getScore(data);
+        System.out.println("Initial score: " + score);
         for (BN candidate : candidates) {
             double candidateScore = candidate.getScore(data);
             if (candidateScore > score) {
+                System.out.println("  New best score: " + candidateScore);
                 score = candidateScore;
                 bestBN = candidate;
             }
         }
+        System.out.println("Best score: " + score);
         return score;
     }
 
