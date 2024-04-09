@@ -96,16 +96,13 @@ public class MCT_MCTS implements LocalAlgorithm {
            "public Model buildLocalModel(Data data)"), the model isn't an instance of MCT. */
         if (localModel instanceof MCT mct) {
             algorithm.setInitialTree((TreeNode) mct.getModel());
-            System.out.println(" BDeu inicial: " + calculateBDeu(data, lastModel.getModel()));
             mct.calculateBestBN(data);
             lastModel = mct.getBestBN();
             algorithm.setBestDag(lastModel.getModel(), lastModel.getScore());
-            System.out.println(" BDeu después BestBN: " + calculateBDeu(data, lastModel.getModel()));
         }
 
         // Search with the algorithm created
         Dag bestBN = algorithm.search();
-        System.out.println(" BDeu final: " + calculateBDeu(data, bestBN) + "\n");
         return new MCT(algorithm.getTreeRoot(), new BN(bestBN), lastModel);
     }
 

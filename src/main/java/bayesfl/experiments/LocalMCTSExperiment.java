@@ -53,25 +53,26 @@ public class LocalMCTSExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "insurance";
+        String net = "alarm";
         String algName = "MCTS";
         String intitialAlgorithm = "GES";
 
-        int limitIteration = 10;
-        int nIterations = 50;
+        int limitIteration = 20;
+        int nIterations = 100;
 
         int exploitation = 100;
-        double probability_swap = 0;
-        double number_swaps = 0;
+        double probability_swap = 0.25;
+        double number_swaps = 0.25;
 
         String bbdd = "0";
-        int nClients = 10;
+        int nClients = 20;
         launchExperiment(net, algName, bbdd, nClients, limitIteration, nIterations, exploitation, probability_swap, number_swaps, intitialAlgorithm);
+        launchExperimentWoFED(net, algName, bbdd, nClients, limitIteration, nIterations, exploitation, probability_swap, number_swaps, intitialAlgorithm);
     }
 
     public static void launchExperiment(String net, String algName, String bbdd, int nClients, int limitIteration, int nIterations, int exploitation, double probability_swap, double number_swaps, String intitialAlgorithm) {
 
-        String operation = algName + "-" + intitialAlgorithm + "," + limitIteration;
+        String operation = algName + "-" + intitialAlgorithm + "-FED," + limitIteration + "," + exploitation + "," + probability_swap + "," + number_swaps;
         String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
@@ -107,6 +108,49 @@ public class LocalMCTSExperiment {
             server.run();
             
             LocalExperiment.writeExistentFile(savePath);
+        //} else {
+        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        //}
+    }
+
+    public static void launchExperimentWoFED(String net, String algName, String bbdd, int nClients, int limitIteration, int nIterations, int exploitation, double probability_swap, double number_swaps, String intitialAlgorithm) {
+
+        String operation = algName + "-" + intitialAlgorithm + "," + limitIteration;
+        String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
+
+        //if ((!LocalExperiment.checkExistentFile(savePath))) {
+        DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+        ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
+
+        ArrayList<Client> clients = new ArrayList<>();
+        for (int i = 0; i < nClients; i++) {
+            Fusion fusionClient = new FusionPosition(0);
+
+            BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
+            data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+            LocalAlgorithm algorithm = new MCT_MCTS(limitIteration, exploitation, probability_swap, number_swaps, intitialAlgorithm);
+
+            Client client = new Client(fusionClient, algorithm, data);
+            client.setStats(true, false, PATH);
+            client.setExperimentName(operation);
+            clients.add(client);
+        }
+
+        Fusion fusionServer = new FusionPosition(-1);
+        Convergence convergence = new NoneConvergence();
+        Server server = new Server(fusionServer, convergence, clients);
+
+        server.setStats(true, PATH);
+        BN_DataSet data = new BN_DataSet(net + "." + bbdd);
+        data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+        server.setData(data);
+
+        server.setExperimentName(operation);
+        server.setnIterations(nIterations);
+
+        server.run();
+
+        LocalExperiment.writeExistentFile(savePath);
         //} else {
         //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
         //}

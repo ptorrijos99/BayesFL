@@ -444,9 +444,9 @@ public class MCTSBN {
             orderSet.add(hc.nodeToIntegerList(currentDag.getTopologicalOrder()));
         }
 
-        System.out.println("\n\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s)");
+        System.out.println("\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s)");
         // Score with fGES
-        System.out.println("BDeu: " + calculateBDeu(new BN_DataSet(problem.getData(),"data"), currentDag));
+        //System.out.println("BDeu: " + calculateBDeu(new BN_DataSet(problem.getData(),"data"), currentDag));
 
         this.PGESTime = (System.currentTimeMillis() - init)/1000.0;
         this.initializeDag = currentDag;

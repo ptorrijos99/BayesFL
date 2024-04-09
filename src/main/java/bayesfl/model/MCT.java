@@ -58,6 +58,12 @@ public class MCT implements Model {
         this.lastBN = lastBN;
     }
 
+    /**
+     * Constructor for the MCT class. It receives the tree root and the candidates to be evaluated.
+     * To be used to create the fused MCT. Then, clients try the best BNs of the other clients.
+     * @param treeRoot The root of the tree.
+     * @param candidates The candidate BNs to be evaluated.
+     */
     public MCT(TreeNode treeRoot, ArrayList<BN> candidates) {
         this.treeRoot = treeRoot;
         this.candidates = candidates;
@@ -94,7 +100,7 @@ public class MCT implements Model {
         int threads = Runtime.getRuntime().availableProcessors();
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,exploitation,probSwap,nSwaps,nClients,id,iteration,instances,threads,bdeu,SMHD,edges,time(s)\n";
         String results = data.getName() + "," +
                 operation + "," +
                 nClients + "," +
@@ -121,20 +127,20 @@ public class MCT implements Model {
     public double getScore(Data data) {
         return bestBN.getScore(data);
     }
-    
-    public double calculateBestBN(Data data) {
+
+    /**
+     * Calculate the best BN of the candidates.
+      * @param data The data to be used to calculate the metrics.
+     */
+    public void calculateBestBN(Data data) {
         double score = bestBN.getScore(data);
-        System.out.println("Initial score: " + score);
         for (BN candidate : candidates) {
             double candidateScore = candidate.getScore(data);
             if (candidateScore > score) {
-                System.out.println("  New best score: " + candidateScore);
                 score = candidateScore;
                 bestBN = candidate;
             }
         }
-        System.out.println("Best score: " + score);
-        return score;
     }
 
     @Override
