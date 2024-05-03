@@ -185,8 +185,17 @@ public class Client {
      * Get the local model of the client.
      * @return The local Model of the client.
      */
-    protected Model getLocalModel() {
+    public Model getLocalModel() {
         return localModel;
+    }
+
+    /**
+     * Get the local algorithm used to build the local model.
+     * 
+     * @return The local algorithm used to build the local model.
+     */
+    public LocalAlgorithm getLocalAlgorithm() {
+        return this.localAlgorithm;
     }
 
     /**
