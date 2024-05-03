@@ -110,7 +110,7 @@ public class ExperimentUtils {
         }
         throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
     }
-    
+
     /**
      * Read the original Bayesian Network from the BIF file in the netPath.
      * @return The original Bayesian Network.
