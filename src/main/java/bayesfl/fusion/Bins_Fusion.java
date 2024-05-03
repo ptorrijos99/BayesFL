@@ -28,11 +28,6 @@
 package bayesfl.fusion;
 
 /**
- * Standard imports.
- */
-import java.util.Arrays;
-
-/**
  * Third-party imports.
  */
 import org.apache.commons.math3.stat.StatUtils;

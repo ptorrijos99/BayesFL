@@ -28,12 +28,6 @@
 package bayesfl.model;
 
 /**
- * Standard imports.
- */
-import java.util.Arrays;
-
-import EBNC.wdBayes;
-/**
  * Third-party imports.
  */
 import weka.classifiers.evaluation.Evaluation;

@@ -28,11 +28,6 @@
 package bayesfl.algorithms;
 
 /**
- * Standard imports.
- */
-import java.util.Arrays;
-
-/**
  * Third-party imports.
  */
 import DataStructure.wdBayesParametersTree;
