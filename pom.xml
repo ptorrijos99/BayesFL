@@ -15,10 +15,16 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencies>
-        <!-- Apache dependencies -->
+        <!-- Apache -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
@@ -54,6 +60,36 @@
             <version>3.8.6</version>
         </dependency>
 
+        <!-- Local -->
+        <dependency>
+            <groupId>com.github.alfaro96</groupId>
+            <artifactId>EBNC</artifactId>
+            <version>54ccfc3fd6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.recommenders</groupId>
+            <artifactId>jayes</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/jayes.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/jgrapht-jdk1.6.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unknown</groupId>
+            <artifactId>jniwrapper</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/lib/jniwrapper.jar</systemPath>
+        </dependency>
 
     </dependencies>
 
@@ -73,7 +109,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.albacete.simd.bayesfl.experiments.ClusterExperiment</mainClass>
+                            <mainClass>bayesfl.experiments.ClusterExperiment</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

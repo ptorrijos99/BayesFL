@@ -180,4 +180,12 @@ public class Server {
     public void setnIterations(int nIterations) {
         this.nIterations = nIterations;
     }
+
+    /**
+     * Get the global model of the server.
+     * @return The global model of the server.
+     */
+    public Model getGlobalModel() {
+        return globalModel;
+    }
 }
