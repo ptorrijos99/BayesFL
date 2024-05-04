@@ -40,8 +40,6 @@ import bayesfl.model.Model;
 import org.albacete.simd.mctsbn.MCTSBN;
 import org.albacete.simd.mctsbn.TreeNode;
 
-import static bayesfl.experiments.ExperimentUtils.calculateBDeu;
-
 public class MCT_MCTS implements LocalAlgorithm {
 
     private int limitIteration = 10;

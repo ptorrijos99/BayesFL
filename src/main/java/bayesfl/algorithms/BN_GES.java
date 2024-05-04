@@ -252,5 +252,4 @@ public class BN_GES implements LocalAlgorithm {
     public String getRefinementName() {
         return refinement;
     }
-
 }
