@@ -1,6 +1,6 @@
 package bayesfl.experiments;
 
-import bayesfl.data.CPT_Instances;
+import bayesfl.data.Weka_Instances;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A1DE;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A2DE;
@@ -16,9 +16,9 @@ import weka.core.Instances;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Random;
 
+import static bayesfl.data.Weka_Instances.divide;
 import static bayesfl.experiments.ExperimentUtils.getClassificationMetrics;
 
 
@@ -85,9 +85,9 @@ public class classificationBaselinesExperiment {
         }
     }*/
 
-    public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int folds, String algorithm, int nTrees) throws Exception {
+    public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, String algorithm, int nTrees) throws Exception {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
-        String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nTrees + "_" + folds + "_" + nClients + "_" + seed + ".csv";
+        String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
         String header = "bbdd,id,cv,algorithm,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,teAcc,tePr,teRc,teF1,time,timeTrain,timeTest\n";
 
         int threads = Runtime.getRuntime().availableProcessors();
@@ -101,11 +101,7 @@ public class classificationBaselinesExperiment {
         options[3] = ""+seed;
 
         // Read the data and stratify it to the number of clients
-        Instances allData = CPT_Instances.readData(bbddPath);
-
-        // Stratify each of the divisions
-        ArrayList<Instances> divisionData = CPT_Instances.divideDataSet(allData, nClients, folds, random);
-        System.out.println(" N instances divided: " + allData.numInstances() + " N clients: " + nClients + " N folds: " + folds);
+        Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed);
 
         // Initialize the classifier
         AbstractClassifier classifier = null;
@@ -147,13 +143,13 @@ public class classificationBaselinesExperiment {
         }
 
         // Repetitions of cross-validation
-        for (int cv = 0; cv < folds; cv++) {
+        for (int cv = 0; cv < nFolds; cv++) {
             for (int i = 0; i < nClients; i++) {
                 // Divide data in train and test
-                System.out.println("Client: " + i + " Fold: " + cv + " Train: " + divisionData.get(i).numInstances());
+                Instances train = splits[cv][i][0];
+                Instances test = splits[cv][i][1];
 
-                Instances train = divisionData.get(i).trainCV(folds, cv, random);
-                Instances test = divisionData.get(i).testCV(folds, cv);
+                Weka_Instances data = new Weka_Instances((bbdd + "," + i + "," + cv), train, test);
 
                 double start = System.currentTimeMillis();
                 classifier.buildClassifier(train);

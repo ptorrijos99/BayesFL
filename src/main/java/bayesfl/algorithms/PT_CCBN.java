@@ -51,7 +51,7 @@ import bayesfl.model.PT;
 /**
  * A class representing a naive Bayes algorithm.
  */
-public class CCBN implements LocalAlgorithm {
+public class PT_CCBN implements LocalAlgorithm {
 
     /**
      * A dummy class to set the cut points of the discretization filter.
@@ -138,7 +138,7 @@ public class CCBN implements LocalAlgorithm {
      * 
      * @param options The options to set the parameters of the algorithm.
      */
-    public CCBN(String[] options) {
+    public PT_CCBN(String[] options) {
         this(options, null);
     }
 
@@ -148,7 +148,7 @@ public class CCBN implements LocalAlgorithm {
      * @param options The options to set the parameters of the algorithm.
      * @param cutPoints The cut points of the discretization filter.
      */
-    public CCBN(String[] options, double[][] cutPoints) {
+    public PT_CCBN(String[] options, double[][] cutPoints) {
         // Initialize the minimizer for the posterior parameter estimation
         this.minimizer = new Minimizer();
         StopConditions sc = minimizer.getStopConditions();
@@ -215,7 +215,7 @@ public class CCBN implements LocalAlgorithm {
     /**
      * Builds a local model using the provided data and existing local model.
      *
-     * @param oldModel The existing local model. This parameter is not used.
+     * @param localModel The previous local model.
      * @param data The data to build the model from.
      * @return The built local model.
      */
@@ -226,7 +226,7 @@ public class CCBN implements LocalAlgorithm {
         }
 
         PT model = (PT) localModel;
-        double parameters[] = model.getModel();
+        double[] parameters = model.getModel();
 
         try {
             // Note that the parameters provided to the optimization function are not modified,

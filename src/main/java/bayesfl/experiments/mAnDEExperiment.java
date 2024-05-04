@@ -6,16 +6,16 @@ import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.algorithms.mAnDETree_mAnDE;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
-import bayesfl.data.CPT_Instances;
+import bayesfl.data.Weka_Instances;
 import bayesfl.fusion.Fusion;
 import bayesfl.fusion.FusionPosition;
 import bayesfl.fusion.mAnDETree_Fusion;
 import weka.core.Instances;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static bayesfl.data.Weka_Instances.divide;
 
 
 public class mAnDEExperiment {
@@ -80,7 +80,7 @@ public class mAnDEExperiment {
         experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
     }
 
-    public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int folds, int n, int nTrees, double bagSize, String ensemble, double addNB) {
+    public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int nFolds, int n, int nTrees, double bagSize, String ensemble, double addNB) {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
 
         Random random = new Random(seed);
@@ -90,25 +90,18 @@ public class mAnDEExperiment {
         operation += "," + seed + "," + nTrees + "," + bagSize + "," + ensemble + "," + addNB;
 
         // Read the data and stratify it to the number of clients
-        Instances allData = CPT_Instances.readData(bbddPath);
-
-        // Stratify each of the divisions
-        ArrayList<Instances> divisionData = CPT_Instances.divideDataSet(allData, nClients, folds, random);
-
-        System.out.println(" N instances divided: " + allData.numInstances() + " N clients: " + nClients + " N folds: " + folds);
+        Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed);
 
         // Repetitions of cross-validation
-        for (int cv = 0; cv < folds; cv++){
+        for (int cv = 0; cv < nFolds; cv++){
             ArrayList<Client> clients = new ArrayList<>();
 
             for (int i = 0; i < nClients; i++) {
                 // Divide data in train and test
-                System.out.println("Client: " + i + " Fold: " + cv + " Train: " + divisionData.get(i).numInstances());
+                Instances train = splits[cv][i][0];
+                Instances test = splits[cv][i][1];
 
-                Instances train = divisionData.get(i).trainCV(folds, cv, random);
-                Instances test = divisionData.get(i).testCV(folds, cv);
-
-                CPT_Instances data = new CPT_Instances(train, test, (bbdd + "," + i + "," + cv));
+                Weka_Instances data = new Weka_Instances((bbdd + "," + i + "," + cv), train, test);
                 LocalAlgorithm algorithm = new mAnDETree_mAnDE(n, nTrees, bagSize, ensemble, addNB);
 
                 int position = 0;

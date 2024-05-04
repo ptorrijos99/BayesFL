@@ -31,23 +31,22 @@ package bayesfl.experiments;
  * Standard imports.
  */
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Third-party imports.
  */
+import bayesfl.data.Weka_Instances;
 import weka.core.Instances;
 
 /**
  * Local application imports.
  */
 import bayesfl.algorithms.Bins_MDLP;
-import bayesfl.algorithms.CCBN;
+import bayesfl.algorithms.PT_CCBN;
 import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
-import bayesfl.data.Weka;
 import bayesfl.fusion.Bins_Fusion;
 import bayesfl.fusion.Fusion;
 import bayesfl.fusion.FusionPosition;
@@ -55,6 +54,8 @@ import bayesfl.fusion.PT_Fusion_Client;
 import bayesfl.fusion.PT_Fusion_Server;
 import bayesfl.Client;
 import bayesfl.Server;
+
+import static bayesfl.data.Weka_Instances.divide;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -112,7 +113,7 @@ public class CCBNExperiment {
         models = validate(datasetName, splits, seed, models, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
 
         // Second step, federate the class-conditional Bayesian network classifier
-        algorithmName = "CCBN";
+        algorithmName = "PT_CCBN";
         buildStats = true;
         fusionStats = true;
         stats = false;
@@ -122,49 +123,6 @@ public class CCBNExperiment {
         outputPath = baseOutputPath + datasetName + "/" + algorithmName + "_" + suffix + "_" + seed + ".csv";
 
         models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
-    }
-
-    /**
-     * Divide the data for the experiment for the given number of folds and clients.
-     *
-     * @param name The name of the dataset.
-     * @param path The path of the dataset.
-     * @param nFolds The number of folds.
-     * @param nClients The number of clients.
-     * @param seed The seed.
-     * @return The divided data.
-     */
-    public static Instances[][][] divide(String name, String path, int nFolds, int nClients, int seed) {
-        Data data = new Weka(name, path);
-        Instances instances = (Instances) data.getData();
-
-        // Stratify the data for the clients
-        Random random = new Random(seed);
-        instances.randomize(random);
-        instances.stratify(nClients);
-
-        Instances[][][] splits = new Instances[nFolds][nClients][2];
-
-        for (int i = 0; i < nClients; i++) {
-            // Get the data for the client, which corresponds
-            // to the testing data for the first level split
-            Instances all = instances.testCV(nClients, i);
-
-            // Stratify the data for the folds
-            random = new Random(seed + i);
-            all.randomize(random);
-            all.stratify(nFolds);
-
-            for (int j = 0; j < nFolds; j++) {
-                // Get the training and testing data for the fold
-                Instances train = all.trainCV(nFolds, j, random);
-                Instances test = all.testCV(nFolds, j);
-                splits[j][i][0] = train;
-                splits[j][i][1] = test;
-            }
-        }
-
-        return splits;
     }
 
     /**
@@ -182,9 +140,9 @@ public class CCBNExperiment {
             case "Bins_MDLP":
                 return new Bins_MDLP(options);
             // Class-conditional Bayesian network
-            case "CCBN":
+            case "PT_CCBN":
                 double[][] cutPoints = (double[][]) model;
-                return new CCBN(options, cutPoints);
+                return new PT_CCBN(options, cutPoints);
             // Add more algorithms here
             default:
                 return null;
@@ -207,7 +165,7 @@ public class CCBNExperiment {
             case "Bins_MDLP":
                 return "";
             // Class-conditional Bayesian network
-            case "CCBN":
+            case "PT_CCBN":
                 return fold + "," + algorithmName + "," + seed + "," + nClients;
             // Add more algorithms here
             default:
@@ -230,7 +188,6 @@ public class CCBNExperiment {
      * @param fusionServer The server fusion method.
      * @param convergence The convergence method.
      * @param nIterations The number of iterations.
-     * @param operation The operation.
      * @param outputPath The output path.
      * @return The models.
      */
@@ -278,7 +235,7 @@ public class CCBNExperiment {
         for (int i = 0; i < nClients; i++) {
             Instances train = partitions[i][0];
             Instances test = partitions[i][1];
-            Data data = new Weka(datasetName, train, test);
+            Data data = new Weka_Instances(datasetName, train, test);
 
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model);
             Client client = new Client(fusionClient, algorithm, data);

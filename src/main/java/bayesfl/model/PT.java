@@ -39,7 +39,7 @@ import weka.core.Instances;
  */
 import bayesfl.experiments.ExperimentUtils;
 import bayesfl.data.Data;
-import bayesfl.data.Weka;
+import bayesfl.data.Weka_Instances;
 
 /**
  * A class representing class-conditional Bayesian networks.
@@ -111,7 +111,7 @@ public class PT implements Model {
      * @param time The time.
      */
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
-        Weka weka = (Weka) data;
+        Weka_Instances weka = (Weka_Instances) data;
         Instances train = (Instances) weka.getTrain();
         Instances test = (Instances) weka.getTest();
 

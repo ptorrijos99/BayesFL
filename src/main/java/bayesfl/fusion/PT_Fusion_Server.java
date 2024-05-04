@@ -72,7 +72,7 @@ public class PT_Fusion_Server implements Fusion {
         for (int i = 0; i < models.length; i++) {
             // Add the local parameters to the global parameters
             model = (PT) models[i];
-            double local[] = model.getModel();
+            double[] local = model.getModel();
             global = MathArrays.ebeAdd(global, local);
         }
 

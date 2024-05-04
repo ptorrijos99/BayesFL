@@ -32,8 +32,8 @@
 package bayesfl.model;
 
 import bayesfl.algorithms.mAnDETree_mAnDE;
-import bayesfl.data.CPT_Instances;
 import bayesfl.data.Data;
+import bayesfl.data.Weka_Instances;
 import bayesfl.experiments.ExperimentUtils;
 import org.albacete.simd.mAnDE.mAnDE;
 import org.albacete.simd.mAnDE.mSPnDE;
@@ -75,7 +75,7 @@ public class mAnDETree implements Model {
 
     @Override
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
-        if (!(data instanceof CPT_Instances)) {
+        if (!(data instanceof Weka_Instances)) {
             throw new IllegalArgumentException("The data must be object of the CPT_Instances class");
         }
 
@@ -83,8 +83,8 @@ public class mAnDETree implements Model {
 
         int threads = Runtime.getRuntime().availableProcessors();
 
-        Instances train = (Instances) data.getData();
-        Instances test = ((CPT_Instances) data).getTest();
+        Instances train = ((Weka_Instances) data).getTrain();
+        Instances test = ((Weka_Instances) data).getTest();
 
         double start = System.currentTimeMillis();
         try {
