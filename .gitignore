@@ -60,4 +60,3 @@ scripts/
 res/classification/AnDE/Census-Income_(KDD).arff
 src/main/java/consensusBN/Experiments/prueba.java
 /scripts-slurm
-/src/main/java/bayesfl/experiments/utils
