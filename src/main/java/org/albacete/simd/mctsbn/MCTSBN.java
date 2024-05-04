@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
-import bayesfl.data.BN_DataSet;
 import org.albacete.simd.clustering.Clustering;
 import org.albacete.simd.clustering.HierarchicalClustering;
 import org.albacete.simd.framework.BNBuilder;
@@ -21,8 +20,6 @@ import org.albacete.simd.utils.Utils;
 import org.albacete.simd.utils.Problem;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-
-import static bayesfl.experiments.ExperimentUtils.calculateBDeu;
 
 public class MCTSBN {
 

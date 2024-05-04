@@ -31,7 +31,7 @@
 
 package bayesfl.model;
 
-import bayesfl.experiments.ExperimentUtils;
+import bayesfl.experiments.utils.ExperimentUtils;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Graph;
 
