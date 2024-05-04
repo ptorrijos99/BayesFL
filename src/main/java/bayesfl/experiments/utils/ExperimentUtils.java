@@ -79,6 +79,36 @@ public class ExperimentUtils {
             Logger.getLogger(ExperimentUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static String[] readParametersFromArgs(String[] args) {
+        int i=0;
+        for (String string : args) {
+            System.out.println("arg[" + i + "]: " + string);
+            i++;
+        }
+        int index = Integer.parseInt(args[0]);
+        String paramsFileName = args[1];
+
+        // Read the parameters from args
+        String[] parameters = null;
+        try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
+            String line;
+            for (i = 0; i < index; i++)
+                br.readLine();
+            line = br.readLine();
+            parameters = line.split(" ");
+        }
+        catch(Exception e){ System.out.println(e); }
+
+        System.out.println("Number of hyperparams: " + parameters.length);
+        i=0;
+        for (String string : parameters) {
+            System.out.println("Param[" + i + "]: " + string);
+            i++;
+        }
+
+        return parameters;
+    }
     
     public static double calculateBDeuGESThread(Data data, Dag dag) {
         if ((data instanceof BN_DataSet dat)) {

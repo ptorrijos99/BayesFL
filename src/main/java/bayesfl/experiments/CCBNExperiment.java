@@ -56,6 +56,7 @@ import bayesfl.Client;
 import bayesfl.Server;
 
 import static bayesfl.data.Weka_Instances.divide;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -70,7 +71,7 @@ public class CCBNExperiment {
     /**
      * The base path for the results.
      */
-    private static String baseOutputPath = "res/experiments/";
+    private static String baseOutputPath = "results/";
 
     /**
      * Run the experiment.
@@ -84,9 +85,9 @@ public class CCBNExperiment {
      * @param seed The seed.
      * @param suffix The suffix for the output file.
      */
-    public static void run(String datasetName, String[] discretizerOptions, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
+    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
         // Get the cross-validation splits for each client
-        String datasetPath = baseDatasetPath + datasetName + ".arff";
+        String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
         Instances[][][] splits = divide(datasetName, datasetPath, nFolds, nClients, seed);
 
         // Initialize the variables for running the federated learning
@@ -120,7 +121,7 @@ public class CCBNExperiment {
         fusionClient = new PT_Fusion_Client();
         fusionServer = new PT_Fusion_Server();
         convergence = new NoneConvergence();
-        outputPath = baseOutputPath + datasetName + "/" + algorithmName + "_" + suffix + "_" + seed + ".csv";
+        outputPath = baseOutputPath + algorithmName + "_" + suffix + "_" + seed + ".csv";
 
         models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
@@ -260,19 +261,31 @@ public class CCBNExperiment {
      * @param args The arguments.
      */
     public static void main(String[] args) {
-        String datasetName = args[0];
-        String structure = args[1];  // Possibles values: "NB"
-        String parameterLearning = args[2];  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
-        int nClients = Integer.parseInt(args[3]);
-        int nIterations = Integer.parseInt(args[4]);
-        int nFolds = Integer.parseInt(args[5]);
-        int seed = Integer.parseInt(args[6]);
+        //args = readParametersFromArgs(args);
+
+        String folder = "AnDE";
+        String datasetName = "Iris_Classification";
+        int nClients = 5;
+        int seed = 42;
+        int nFolds = 5;
+        String structure = "NB";  // Possibles values: "NB"
+        String parameterLearning = "dCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
+        int nIterations = 2;
+
+        /*String folder = args[0];
+        String datasetName = args[1];
+        int nClients = Integer.parseInt(args[2]);
+        int seed = Integer.parseInt(args[3]);
+        int nFolds = Integer.parseInt(args[4]);
+        String structure = args[5];  // Possibles values: "NB"
+        String parameterLearning = args[6];  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
+        int nIterations = Integer.parseInt(args[7]);*/
 
         String[] discretizerOptions = new String[] {""};
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning};
 
-        String suffix = structure + "_" + parameterLearning;
+        String suffix = structure + "_" + parameterLearning + '_' + nClients;
 
-        CCBNExperiment.run(datasetName, discretizerOptions, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
+        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
     }
 }

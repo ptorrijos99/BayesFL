@@ -166,7 +166,16 @@ public class mAnDETree implements Model {
         mAnDE.mSPnDEs = this.models;
         mAnDE.calculateTables_mSPnDEs();
 
-        return getClassificationMetrics(mAnDE, train)[0];
+        Evaluation evaluation = null;
+        try {
+            evaluation = new Evaluation(train);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String num = getClassificationMetrics(mAnDE, evaluation, train).split(",")[0];
+        return Double.parseDouble(num);
     }
 
     public mAnDETree_mAnDE getAlgorithm() {

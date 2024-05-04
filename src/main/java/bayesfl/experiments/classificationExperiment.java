@@ -1,6 +1,5 @@
 package bayesfl.experiments;
 
-import bayesfl.data.Weka_Instances;
 import bayesfl.experiments.utils.ExperimentUtils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A1DE;
@@ -16,44 +15,18 @@ import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Random;
 
 import static bayesfl.data.Weka_Instances.divide;
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 
-public class classificationBaselinesExperiment {
+public class classificationExperiment {
     public static String PATH = "./";
 
     public static void main(String[] args) {
-        int i=0;
-        for (String string : args) {
-            System.out.println("arg[" + i + "]: " + string);
-            i++;
-        }
-        int index = Integer.parseInt(args[0]);
-        String paramsFileName = args[1];
-        int threads = Integer.parseInt(args[2]);
-
-        // Read the parameters from args
-        String[] parameters = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
-            String line;
-            for (i = 0; i < index; i++)
-                br.readLine();
-            line = br.readLine();
-            parameters = line.split(" ");
-        }
-        catch(Exception e){ System.out.println(e); }
-
-        System.out.println("Number of hyperparams: " + parameters.length);
-        i=0;
-        for (String string : parameters) {
-            System.out.println("Param[" + i + "]: " + string);
-            i++;
-        }
+        String[] parameters = readParametersFromArgs(args);
 
         // Read the parameters from file
         String folder = parameters[0];
