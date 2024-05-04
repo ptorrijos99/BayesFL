@@ -41,7 +41,6 @@ import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
 import org.albacete.simd.utils.Utils;
-import org.apache.commons.lang3.ArrayUtils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.net.BIFReader;
 import weka.core.Instances;

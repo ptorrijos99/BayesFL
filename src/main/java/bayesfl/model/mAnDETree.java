@@ -93,8 +93,6 @@ public class mAnDETree implements Model {
             throw new RuntimeException(e);
         }
 
-        System.out.println("SaveStats: " + this.models);
-
         mAnDE.mSPnDEs = this.models;
         mAnDE.calculateTables_mSPnDEs();
         double timeTables = (System.currentTimeMillis() - start) / 1000;
@@ -107,14 +105,32 @@ public class mAnDETree implements Model {
         double[] testMetrics = getClassificationMetrics(mAnDE, test);
         double timeTest = (System.currentTimeMillis() - start) / 1000;
 
-        String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,teAcc,teRp,teRc,teF1,time,timeTables,timeTrain,timeTest\n";
+        // Calculate data of mSPnDEs created
+        double var = 0;
+        double max = 0;
+        double min = Double.POSITIVE_INFINITY;
+        for (mSPnDE a : mAnDE.mSPnDEs.values()) {
+            if (a.getNChildren() > max)
+                max = a.getNChildren();
+            if (a.getNChildren() < min)
+                min = a.getNChildren();
+            var += a.getNChildren();
+        }
+
+        String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + ".csv";
+        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,teAcc,tePr,teRc,teF1,time,timeTables,timeTrain,timeTest\n";
         String results = data.getName() + "," +
                 operation + "," +
                 nClients + "," +
                 iteration + "," +
                 data.getNInstances() + "," +
                 threads + "," +
+
+                mAnDE.mSPnDEs.size() + "," +
+                (var/mAnDE.mSPnDEs.size()) + "," +
+                max + "," +
+                min + "," +
+
                 trainMetrics[0] + "," +
                 trainMetrics[1] + "," +
                 trainMetrics[2] + "," +
@@ -123,6 +139,7 @@ public class mAnDETree implements Model {
                 testMetrics[1] + "," +
                 testMetrics[2] + "," +
                 testMetrics[3] + "," +
+
                 time + "," +
                 timeTables + "," +
                 timeTrain + "," +

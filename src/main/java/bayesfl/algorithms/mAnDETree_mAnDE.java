@@ -45,7 +45,7 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
 
     private double bagSize = 100;
     private String ensemble = "RandomForest";
-    private int addNB = 0;
+    private double addNB = 0;
 
     public mAnDETree_mAnDE() {}
 
@@ -53,7 +53,7 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
         this.n = n;
     }
 
-    public mAnDETree_mAnDE(int n, int nTrees, double bagSize, String ensemble, int addNB) {
+    public mAnDETree_mAnDE(int n, int nTrees, double bagSize, String ensemble, double addNB) {
         this(n);
         this.nTrees = nTrees;
         this.bagSize = bagSize;
