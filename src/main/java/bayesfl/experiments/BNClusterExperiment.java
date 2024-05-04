@@ -35,7 +35,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import static bayesfl.experiments.LocalExperiment.launchExperiment;
 
-public class ClusterExperiment {
+public class BNClusterExperiment {
     
     public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
