@@ -224,8 +224,6 @@ public class mAnDE extends AbstractClassifier implements
         // Delete instances with no class
         instances.deleteWithMissingClass();
 
-        System.out.println(" - mAnDE: Checking data...");
-
         // We driscretise
         discretizer = new weka.filters.supervised.attribute.Discretize();
         discretizer.setInputFormat(instances);
@@ -236,8 +234,6 @@ public class mAnDE extends AbstractClassifier implements
     public void buildTrees() throws Exception {
         // We initialize the index dictionaries
         //initializeNameToIndex();
-
-        System.out.println(" - mAnDE: Building classifier...");
 
         // We check that with this bagSize, we will have more than
         // minimumInstances instances (default 3)
@@ -251,7 +247,7 @@ public class mAnDE extends AbstractClassifier implements
         build_mSPnDEs();
 
         // If we have not created mSPnDE's
-        if (mSPnDEs.isEmpty()) {
+        /*if (mSPnDEs.isEmpty()) {
             HashSet<String> done = new HashSet<>();
             done.add(getEnsemble());
 
@@ -287,13 +283,7 @@ public class mAnDE extends AbstractClassifier implements
                 nb = new NaiveBayes();
                 nb.buildClassifier(data);
             }
-        }
-
-        if (getAddNB() != 0 && !mSPnDEs.isEmpty())
-        {
-            nb = new NaiveBayes();
-            nb.buildClassifier(data);
-        }
+        }*/
     }
 
     /**
@@ -386,10 +376,21 @@ public class mAnDE extends AbstractClassifier implements
      * terminates when all have executed it.
      */
     public void calculateTables_mSPnDEs() {
-        System.out.println(" - mAnDE: Calculating tables...");
+        if (getAddNB() != 0 || mSPnDEs.isEmpty())
+        {
+            nb = new NaiveBayes();
+            try {
+                nb.buildClassifier(data);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
 
+        if (mSPnDEs.isEmpty()) {
+            modeNB = true;
+        }
         // If we have not run Naive Bayes, we calculate the mAnDETree tables.
-        if (!modeNB) {
+        else {
             // Define global variables
             y = data.classIndex();
             classNumValues = data.classAttribute().numValues();
@@ -406,7 +407,7 @@ public class mAnDE extends AbstractClassifier implements
         data.delete();
 
         // Print data of mSPnDEs created
-        double var = 0;
+        /*double var = 0;
         double max = 0;
         double min = Double.POSITIVE_INFINITY;
         for (mSPnDE a : mSPnDEs.values()) {
@@ -416,7 +417,7 @@ public class mAnDE extends AbstractClassifier implements
                 min = a.getNChildren();
             var += a.getNChildren();
         }
-        System.out.println("mSPnDEs," + mSPnDEs.size() + "," + (var/mSPnDEs.size()) + "," + max + "," + min);
+        System.out.println("mSPnDEs," + mSPnDEs.size() + "," + (var/mSPnDEs.size()) + "," + max + "," + min);*/
     }
 
     /**

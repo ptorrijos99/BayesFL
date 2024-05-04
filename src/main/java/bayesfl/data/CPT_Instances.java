@@ -76,8 +76,6 @@ public class CPT_Instances implements Data {
             throw new IllegalArgumentException("The data must be object of the Instances class");
         }
 
-        System.out.println("Setting data\n\n");
-
         this.train = (Instances) data;
     }
 

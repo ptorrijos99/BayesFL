@@ -57,3 +57,4 @@ baselines/
 ### Specific experiment scripts folder
 scripts/
 
+res/classification/AnDE/Census-Income_(KDD).arff

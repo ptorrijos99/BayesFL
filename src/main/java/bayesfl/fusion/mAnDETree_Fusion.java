@@ -28,8 +28,7 @@ public class mAnDETree_Fusion implements Fusion {
         int i=0;
         for (Model model : models) {
             ConcurrentHashMap<Object, mSPnDE> mSPnDEs = ((mAnDETree) model).getModel();
-            System.out.println("mSPnDEs " + i + ": " + mSPnDEs);
-            
+
             for (Object key : mSPnDEs.keySet()) {
                 // If the fused model contains the key, we add the children of the model to the fused model
                 if (fusedSPnDEs.containsKey(key)) {
@@ -45,9 +44,6 @@ public class mAnDETree_Fusion implements Fusion {
             }
             i++;
         }
-
-        System.out.println("\nmSPnDEs fusion: " + fusedSPnDEs);
-
 
         return new mAnDETree(fusedSPnDEs, ((mAnDETree) models[0]).getAlgorithm());
     }
