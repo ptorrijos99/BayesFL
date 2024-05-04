@@ -34,14 +34,15 @@ package bayesfl.model;
 import bayesfl.algorithms.mAnDETree_mAnDE;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import bayesfl.experiments.ExperimentUtils;
+import bayesfl.experiments.utils.ExperimentUtils;
 import org.albacete.simd.mAnDE.mAnDE;
 import org.albacete.simd.mAnDE.mSPnDE;
+import weka.classifiers.evaluation.Evaluation;
 import weka.core.Instances;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import static bayesfl.experiments.ExperimentUtils.getClassificationMetrics;
+import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
 
 public class mAnDETree implements Model {
 
@@ -97,13 +98,16 @@ public class mAnDETree implements Model {
         mAnDE.calculateTables_mSPnDEs();
         double timeTables = (System.currentTimeMillis() - start) / 1000;
 
-        start = System.currentTimeMillis();
-        double[] trainMetrics = getClassificationMetrics(mAnDE, train);
-        double timeTrain = (System.currentTimeMillis() - start) / 1000;
+        Evaluation evaluation = null;
+        try {
+            evaluation = new Evaluation(train);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        start = System.currentTimeMillis();
-        double[] testMetrics = getClassificationMetrics(mAnDE, test);
-        double timeTest = (System.currentTimeMillis() - start) / 1000;
+        String trainMetrics = getClassificationMetrics(mAnDE, evaluation, train);
+        String testMetrics = getClassificationMetrics(mAnDE, evaluation, test);
 
         // Calculate data of mSPnDEs created
         double var = 0;
@@ -118,7 +122,7 @@ public class mAnDETree implements Model {
         }
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,teAcc,tePr,teRc,teF1,time,timeTables,timeTrain,timeTest\n";
+        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,timeTrain,teAcc,tePr,teRc,teF1,timeTest,time,timeTables\n";
         String results = data.getName() + "," +
                 operation + "," +
                 nClients + "," +
@@ -131,19 +135,11 @@ public class mAnDETree implements Model {
                 max + "," +
                 min + "," +
 
-                trainMetrics[0] + "," +
-                trainMetrics[1] + "," +
-                trainMetrics[2] + "," +
-                trainMetrics[3] + "," +
-                testMetrics[0] + "," +
-                testMetrics[1] + "," +
-                testMetrics[2] + "," +
-                testMetrics[3] + "," +
+                trainMetrics +
+                testMetrics +
 
                 time + "," +
-                timeTables + "," +
-                timeTrain + "," +
-                timeTest + "\n";
+                timeTables + "\n";
 
         System.out.println(results);
 

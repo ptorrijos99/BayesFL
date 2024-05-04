@@ -1,12 +1,14 @@
 package bayesfl.experiments;
 
 import bayesfl.data.Weka_Instances;
+import bayesfl.experiments.utils.ExperimentUtils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A1DE;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A2DE;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.bayes.net.search.local.TAN;
+import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.Bagging;
 import weka.classifiers.trees.J48;
@@ -19,7 +21,7 @@ import java.io.FileReader;
 import java.util.Random;
 
 import static bayesfl.data.Weka_Instances.divide;
-import static bayesfl.experiments.ExperimentUtils.getClassificationMetrics;
+import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
 
 
 public class classificationBaselinesExperiment {
@@ -88,7 +90,7 @@ public class classificationBaselinesExperiment {
     public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, String algorithm, int nTrees) throws Exception {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
         String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,teAcc,tePr,teRc,teF1,time,timeTrain,timeTest\n";
+        String header = "bbdd,id,cv,algorithm,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,timeTrain,teAcc,tePr,teRc,teF1,timeTest,time\n";
 
         int threads = Runtime.getRuntime().availableProcessors();
 
@@ -149,19 +151,21 @@ public class classificationBaselinesExperiment {
                 Instances train = splits[cv][i][0];
                 Instances test = splits[cv][i][1];
 
-                Weka_Instances data = new Weka_Instances((bbdd + "," + i + "," + cv), train, test);
-
                 double start = System.currentTimeMillis();
                 classifier.buildClassifier(train);
                 double time = (System.currentTimeMillis() - start) / 1000;
 
-                start = System.currentTimeMillis();
-                double[] trainMetrics = getClassificationMetrics(classifier, train);
-                double timeTrain = (System.currentTimeMillis() - start) / 1000;
+                Evaluation evaluation = null;
+                try {
+                    evaluation = new Evaluation(train);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                start = System.currentTimeMillis();
-                double[] testMetrics = getClassificationMetrics(classifier, test);
-                double timeTest = (System.currentTimeMillis() - start) / 1000;
+                String trainMetrics = getClassificationMetrics(classifier, evaluation, train);
+
+                String testMetrics = getClassificationMetrics(classifier, evaluation, test);
 
                 String results = bbdd + "," +
                         i + "," +
@@ -174,18 +178,10 @@ public class classificationBaselinesExperiment {
                         train.numInstances() + "," +
                         threads + "," +
 
-                        trainMetrics[0] + "," +
-                        trainMetrics[1] + "," +
-                        trainMetrics[2] + "," +
-                        trainMetrics[3] + "," +
-                        testMetrics[0] + "," +
-                        testMetrics[1] + "," +
-                        testMetrics[2] + "," +
-                        testMetrics[3] + "," +
+                        trainMetrics +
+                        testMetrics +
 
-                        time + "," +
-                        timeTrain + "," +
-                        timeTest + "\n";
+                        time + "\n";
 
                 System.out.println(results);
 
