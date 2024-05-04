@@ -1,7 +1,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2022 Universidad de Castilla-La Mancha, España
+ *  Copyright (c) 2024 Universidad de Castilla-La Mancha, España
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
  */
 /**
  *    BN_GES.java
- *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2024 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
@@ -125,21 +125,21 @@ public class BN_GES implements LocalAlgorithm {
         return new BN(algorithm.search());
     }
 
-    private void pGES (DataSet data) {
+    private void pGES(DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
         algorithm = new PGESwithStages(data, clustering, nGESThreads, Integer.MAX_VALUE, nInterleaving, false, true, true);
     }
 
-    private void cGES (DataSet data) {
+    private void cGES(DataSet data) {
         HierarchicalClustering clustering = new HierarchicalClustering();
         algorithm = new Circular_GES(data, clustering, nGESThreads, nInterleaving, "c4");
     }
 
-    private void fGES (DataSet data) {
+    private void fGES(DataSet data) {
         algorithm = new Fges_BNBuilder(data, false);
     }
 
-    private void GES (DataSet data) {
+    private void GES(DataSet data) {
         algorithm = new GES_BNBuilder(data, true);
     }
 
@@ -182,7 +182,7 @@ public class BN_GES implements LocalAlgorithm {
      * @param data The Data used to build the Model.
      * @return The refined model build by the algorithm.
      */
-    private Graph refinementFES (Graph oldModel, Graph localModel, DataSet data) {
+    private Graph refinementFES(Graph oldModel, Graph localModel, DataSet data) {
         Set<Edge> candidates = getEdgesDifferences(oldModel, localModel);
 
         FESThread fes = new FESThread(algorithm.getProblem(), oldModel, candidates, candidates.size(), false, true,true);
@@ -202,7 +202,7 @@ public class BN_GES implements LocalAlgorithm {
      * @param data The Data used to build the Model.
      * @return The refined model build by the algorithm.
      */
-    private Graph refinementBES (Graph oldModel, Graph localModel, DataSet data) {
+    private Graph refinementBES(Graph oldModel, Graph localModel, DataSet data) {
         Set<Edge> candidates = getEdgesDifferences(localModel, oldModel);
 
         BESThread bes = new BESThread(algorithm.getProblem(), oldModel, candidates);

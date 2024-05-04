@@ -31,25 +31,27 @@
 
 package bayesfl.experiments;
 
+import bayesfl.data.BN_DataSet;
+import bayesfl.data.Data;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.search.BDeuScore;
 import edu.cmu.tetrad.search.Fges;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import bayesfl.data.BN_DataSet;
-import bayesfl.data.Data;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
 import org.albacete.simd.utils.Utils;
+import org.apache.commons.lang3.ArrayUtils;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.net.BIFReader;
+import weka.core.Instances;
+
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static weka.core.Utils.maxIndex;
+import static weka.core.Utils.mean;
 
 public class ExperimentUtils {
 
@@ -111,6 +113,69 @@ public class ExperimentUtils {
         throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
     }
 
+    public static double[] getClassificationMetrics(AbstractClassifier classifier, Instances data) {
+        double[] metrics = new double[4];
+
+        try {
+            double[][] predictions = classifier.distributionsForInstances(data);
+            int numClasses = data.numClasses();
+            int numInstances = data.numInstances();
+
+            double correct = 0;
+            double[] truePositivesPerClass = new double[numClasses];
+            double[] falsePositivesPerClass = new double[numClasses];
+            double[] actualPositivesPerClass = new double[numClasses];
+
+            for (int i = 0; i < numInstances; i++) {
+                int actualClass = (int) data.instance(i).classValue();
+                int predictedClass = maxIndex(predictions[i]);
+                actualPositivesPerClass[actualClass]++;
+                if (actualClass == predictedClass) {
+                    correct++;
+                    truePositivesPerClass[actualClass]++;
+                } else {
+                    falsePositivesPerClass[predictedClass]++;
+                }
+            }
+
+            double accuracy = correct / numInstances;
+
+            double[] precision = new double[numClasses];
+            double[] recall = new double[numClasses];
+            double[] fScore = new double[numClasses];
+
+            for (int i = 0; i < numClasses; i++) {
+                if (truePositivesPerClass[i] + falsePositivesPerClass[i] > 0) {
+                    precision[i] = truePositivesPerClass[i] / (truePositivesPerClass[i] + falsePositivesPerClass[i]);
+                } else {
+                    precision[i] = 0;
+                }
+
+                if (actualPositivesPerClass[i] > 0) {
+                    recall[i] = truePositivesPerClass[i] / actualPositivesPerClass[i];
+                } else {
+                    recall[i] = 0;
+                }
+
+                if (precision[i] + recall[i] > 0) {
+                    fScore[i] = 2 * (precision[i] * recall[i]) / (precision[i] + recall[i]);
+                } else {
+                    fScore[i] = 0;
+                }
+            }
+
+            metrics[0] = accuracy;
+            metrics[1] = mean(precision);
+            metrics[2] = mean(recall);
+            metrics[3] = mean(fScore);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return metrics;
+    }
+    
     /**
      * Read the original Bayesian Network from the BIF file in the netPath.
      * @return The original Bayesian Network.

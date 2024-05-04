@@ -1,7 +1,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2022 Universidad de Castilla-La Mancha, España
+ *  Copyright (c) 2024 Universidad de Castilla-La Mancha, España
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
  */
 /**
  *    BN.java
- *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2024 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
