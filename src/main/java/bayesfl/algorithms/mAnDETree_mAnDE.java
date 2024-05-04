@@ -31,8 +31,8 @@
 
 package bayesfl.algorithms;
 
-import bayesfl.data.CPT_Instances;
 import bayesfl.data.Data;
+import bayesfl.data.Weka_Instances;
 import bayesfl.model.Model;
 import bayesfl.model.mAnDETree;
 import org.albacete.simd.mAnDE.mAnDE;
@@ -68,7 +68,7 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
 
     @Override
     public Model buildLocalModel(Model localModel, Data data) {
-        if (!(data instanceof CPT_Instances)) {
+        if (!(data instanceof Weka_Instances)) {
             throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
         }
 

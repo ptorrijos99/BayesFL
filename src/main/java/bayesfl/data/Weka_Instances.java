@@ -33,20 +33,17 @@ package bayesfl.data;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.core.Instances;
 
+import java.util.Random;
+
 /**
  * A class representing a dataset in Weka format.
  */
-public class Weka implements Data {
+public class Weka_Instances implements Data {
 
     /**
      * The name of the dataset.
      */
     private String name;
-
-    /**
-     * The path to the dataset.
-     */
-    private String path;
 
     /**
      * The training data.
@@ -64,13 +61,12 @@ public class Weka implements Data {
      * @param name The name of the dataset.
      * @param path The path to the dataset.
      */
-    public Weka(String name, String path) {
+    public Weka_Instances(String name, String path) {
         this.name = name;
-        this.path = path;
 
         try {
             // Assume the last attribute is the class variable
-            DataSource source = new DataSource(this.path);
+            DataSource source = new DataSource(path);
             this.train = source.getDataSet();
             this.train.setClassIndex(this.train.numAttributes() - 1);
         }
@@ -87,10 +83,53 @@ public class Weka implements Data {
      * @param train The training data.
      * @param test The testing data.
      */
-    public Weka(String name, Instances train, Instances test) {
+    public Weka_Instances(String name, Instances train, Instances test) {
         this.name = name;
         this.train = train;
         this.test = test;
+    }
+
+    /**
+     * Divide the data for the experiment for the given number of folds and clients.
+     *
+     * @param name The name of the dataset.
+     * @param path The path of the dataset.
+     * @param nFolds The number of folds.
+     * @param nClients The number of clients.
+     * @param seed The seed.
+     * @return The divided data.
+     */
+    public static Instances[][][] divide(String name, String path, int nFolds, int nClients, int seed) {
+        Data data = new Weka_Instances(name, path);
+        Instances instances = (Instances) data.getData();
+
+        // Stratify the data for the clients
+        Random random = new Random(seed);
+        instances.randomize(random);
+        instances.stratify(nClients);
+
+        Instances[][][] splits = new Instances[nFolds][nClients][2];
+
+        for (int i = 0; i < nClients; i++) {
+            // Get the data for the client, which corresponds
+            // to the testing data for the first level split
+            Instances all = instances.testCV(nClients, i);
+
+            // Stratify the data for the folds
+            random = new Random(seed + i);
+            all.randomize(random);
+            all.stratify(nFolds);
+
+            for (int j = 0; j < nFolds; j++) {
+                // Get the training and testing data for the fold
+                Instances train = all.trainCV(nFolds, j, random);
+                Instances test = all.testCV(nFolds, j);
+                splits[j][i][0] = train;
+                splits[j][i][1] = test;
+            }
+        }
+
+        return splits;
     }
 
     /**
@@ -98,6 +137,7 @@ public class Weka implements Data {
      * 
      * @return The data.
     */
+    @Override
     public Object getData() {
         return this.train;
     }
@@ -107,8 +147,13 @@ public class Weka implements Data {
      * 
      * @param data The data.
      */
+    @Override
     public void setData(Object data) {
-        this.train = (Instances) train;
+        if (!(data instanceof Instances)) {
+            throw new IllegalArgumentException("The data must be object of the Instances class");
+        }
+
+        this.train = (Instances) data;
     }
 
     /**
@@ -134,6 +179,7 @@ public class Weka implements Data {
      * 
      * @return The name of the dataset.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -143,6 +189,7 @@ public class Weka implements Data {
      * 
      * @return The number of instances in the dataset.
      */
+    @Override
     public int getNInstances() {
         return this.train.numInstances();
     }
