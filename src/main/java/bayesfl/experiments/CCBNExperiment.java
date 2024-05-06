@@ -71,7 +71,7 @@ public class CCBNExperiment {
     /**
      * The base path for the results.
      */
-    private static String baseOutputPath = "results/";
+    private static String baseOutputPath = "";
 
     /**
      * Run the experiment.

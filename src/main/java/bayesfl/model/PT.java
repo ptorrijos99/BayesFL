@@ -143,7 +143,7 @@ public class PT implements Model {
 
         statistics += time + "\n";
 
-        ExperimentUtils.saveExperiment(epoch + "/" + path, header, statistics);
+        ExperimentUtils.saveExperiment("results/" + epoch + "/" + path, header, statistics);
     }
 
 
