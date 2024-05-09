@@ -270,6 +270,7 @@ public class CCBNExperiment {
         int nFolds = 5;
         String structure = "NB";  // Possibles values: "NB"
         String parameterLearning = "dCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
+        String maxIterations = "10";
         int nIterations = 2;
 
         /*String folder = args[0];
@@ -282,7 +283,7 @@ public class CCBNExperiment {
         int nIterations = Integer.parseInt(args[7]);*/
 
         String[] discretizerOptions = new String[] {""};
-        String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning};
+        String[] algorithmOptions = new String[] {"-I", maxIterations, "-S", structure, "-P", parameterLearning};
 
         String suffix = structure + "_" + parameterLearning + '_' + nClients;
 
