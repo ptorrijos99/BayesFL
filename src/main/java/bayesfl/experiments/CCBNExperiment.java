@@ -47,6 +47,8 @@ import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
+import static bayesfl.data.Weka_Instances.divide;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 import bayesfl.fusion.Bins_Fusion;
 import bayesfl.fusion.Fusion;
 import bayesfl.fusion.FusionPosition;
@@ -55,8 +57,6 @@ import bayesfl.fusion.PT_Fusion_Server;
 import bayesfl.Client;
 import bayesfl.Server;
 
-import static bayesfl.data.Weka_Instances.divide;
-import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -121,7 +121,7 @@ public class CCBNExperiment {
         fusionClient = new PT_Fusion_Client();
         fusionServer = new PT_Fusion_Server();
         convergence = new NoneConvergence();
-        outputPath = baseOutputPath + algorithmName + "_" + suffix + "_" + seed + ".csv";
+        outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
         models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
@@ -264,14 +264,14 @@ public class CCBNExperiment {
         //args = readParametersFromArgs(args);
 
         String folder = "AnDE";
-        String datasetName = "Iris_Classification";
-        int nClients = 5;
-        int seed = 42;
-        int nFolds = 5;
+        String datasetName = "Covertype";
         String structure = "NB";  // Possibles values: "NB"
         String parameterLearning = "dCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
         String maxIterations = "10";
-        int nIterations = 2;
+        int nClients = 5;
+        int seed = 42;
+        int nFolds = 5;
+        int nIterations = 10;
 
         /*String folder = args[0];
         String datasetName = args[1];
@@ -283,9 +283,9 @@ public class CCBNExperiment {
         int nIterations = Integer.parseInt(args[7]);*/
 
         String[] discretizerOptions = new String[] {""};
-        String[] algorithmOptions = new String[] {"-I", maxIterations, "-S", structure, "-P", parameterLearning};
+        String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
 
-        String suffix = structure + "_" + parameterLearning + '_' + nClients;
+        String suffix = structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + "_" + nIterations + ".csv";
 
         CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
     }
