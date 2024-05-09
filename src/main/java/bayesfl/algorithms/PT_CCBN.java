@@ -114,14 +114,14 @@ public class PT_CCBN implements LocalAlgorithm {
     private ObjectiveFunction function;
 
     /**
+     * The maximum number of iterations.
+     */
+	private int maxIterations;
+
+    /**
      * The maximum gradient norm.
      */
     private final double maxGradientNorm = 0.000000000000000000000000000000001;
-
-    /**
-     * The maximum number of iterations.
-     */
-	private final int maxIterations = 10000;
 
     /**
      * The name of the algorithm.
@@ -149,12 +149,6 @@ public class PT_CCBN implements LocalAlgorithm {
      * @param cutPoints The cut points of the discretization filter.
      */
     public PT_CCBN(String[] options, double[][] cutPoints) {
-        // Initialize the minimizer for the posterior parameter estimation
-        this.minimizer = new Minimizer();
-        StopConditions sc = minimizer.getStopConditions();
-        sc.setMaxGradientNorm(this.maxGradientNorm);
-        sc.setMaxIterations(this.maxIterations);
-
         // Copy the options to avoid modifying the original array
         options = options.clone();
 
@@ -168,6 +162,15 @@ public class PT_CCBN implements LocalAlgorithm {
         catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        // Get the number of iterations from the algorithm
+        this.maxIterations = this.algorithm.getM_MaxIterations();
+
+        // Initialize the minimizer for the posterior parameter estimation
+        this.minimizer = new Minimizer();
+        StopConditions sc = minimizer.getStopConditions();
+        sc.setMaxGradientNorm(this.maxGradientNorm);
+        sc.setMaxIterations(this.maxIterations);
 
         if (cutPoints != null) {
             // Set the discretization filter if cut points are provided
@@ -215,7 +218,7 @@ public class PT_CCBN implements LocalAlgorithm {
     /**
      * Builds a local model using the provided data and existing local model.
      *
-     * @param localModel The previous local model.
+     * @param oldModel The existing local model. This parameter is not used.
      * @param data The data to build the model from.
      * @return The built local model.
      */
@@ -226,7 +229,7 @@ public class PT_CCBN implements LocalAlgorithm {
         }
 
         PT model = (PT) localModel;
-        double[] parameters = model.getModel();
+        double parameters[] = model.getModel();
 
         try {
             // Note that the parameters provided to the optimization function are not modified,
