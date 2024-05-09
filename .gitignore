@@ -38,6 +38,7 @@ nbactions.xml
 
 ### VS Code ###
 .vscode/
+.devcontainer
 
 ### System ###
 .DS_Store
