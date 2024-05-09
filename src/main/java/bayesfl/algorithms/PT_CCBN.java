@@ -229,7 +229,7 @@ public class PT_CCBN implements LocalAlgorithm {
         }
 
         PT model = (PT) localModel;
-        double parameters[] = model.getModel();
+        double[] parameters = model.getModel();
 
         try {
             // Note that the parameters provided to the optimization function are not modified,
