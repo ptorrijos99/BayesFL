@@ -218,7 +218,7 @@ public class PT_CCBN implements LocalAlgorithm {
     /**
      * Builds a local model using the provided data and existing local model.
      *
-     * @param oldModel The existing local model. This parameter is not used.
+     * @param localModel The existing local model.
      * @param data The data to build the model from.
      * @return The built local model.
      */

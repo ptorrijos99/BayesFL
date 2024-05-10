@@ -64,7 +64,7 @@
         <dependency>
             <groupId>com.github.alfaro96</groupId>
             <artifactId>EBNC</artifactId>
-            <version>54ccfc3fd6</version>
+            <version>c2a3e9e23c</version>
         </dependency>
 
         <dependency>
