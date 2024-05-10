@@ -261,9 +261,9 @@ public class CCBNExperiment {
      * @param args The arguments.
      */
     public static void main(String[] args) {
-        //args = readParametersFromArgs(args);
+        args = readParametersFromArgs(args);
 
-        String folder = "AnDE";
+        /*String folder = "AnDE";
         String datasetName = "Iris_Classification";
         int nClients = 5;
         int seed = 42;
@@ -271,16 +271,17 @@ public class CCBNExperiment {
         String structure = "NB";  // Possibles values: "NB"
         String parameterLearning = "dCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
         String maxIterations = "10";
-        int nIterations = 2;
+        int nIterations = 2;*/
 
-        /*String folder = args[0];
+        String folder = args[0];
         String datasetName = args[1];
         int nClients = Integer.parseInt(args[2]);
         int seed = Integer.parseInt(args[3]);
         int nFolds = Integer.parseInt(args[4]);
         String structure = args[5];  // Possibles values: "NB"
         String parameterLearning = args[6];  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
-        int nIterations = Integer.parseInt(args[7]);*/
+        String maxIterations = args[7];
+        int nIterations = Integer.parseInt(args[8]);
 
         String[] discretizerOptions = new String[] {""};
         String[] algorithmOptions = new String[] {"-I", maxIterations, "-S", structure, "-P", parameterLearning};
