@@ -35,6 +35,7 @@ import java.util.ArrayList;
 /**
  * Third-party imports.
  */
+import bayesfl.algorithms.PT_NB;
 import bayesfl.data.Weka_Instances;
 import weka.core.Instances;
 
@@ -121,7 +122,48 @@ public class CCBNExperiment {
         fusionClient = new PT_Fusion_Client();
         fusionServer = new PT_Fusion_Server();
         convergence = new NoneConvergence();
-        outputPath = baseOutputPath + algorithmName + "_" + suffix;
+        outputPath = baseOutputPath + algorithmName + "_" + suffix + ".csv";
+
+        models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
+    }
+
+    public static void runWEKANB(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
+        // Get the cross-validation splits for each client
+        String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
+        Instances[][][] splits = divide(datasetName, datasetPath, nFolds, nClients, seed);
+
+        // Initialize the variables for running the federated learning
+        String algorithmName;
+        boolean buildStats;
+        boolean fusionStats;
+        boolean stats;
+        Fusion fusionClient;
+        Fusion fusionServer;
+        Convergence convergence;
+        String outputPath;
+        Object[] models = new Object[nFolds];
+
+        // First step, federate the discretization
+        // to get the cut points for the algorithm
+        algorithmName = "Bins_MDLP";
+        buildStats = false;
+        fusionStats = false;
+        stats = false;
+        fusionClient = new FusionPosition(-1);
+        fusionServer = new Bins_Fusion();
+        convergence = new NoneConvergence();
+        outputPath = "";
+        models = validate(datasetName, splits, seed, models, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
+
+        // Second step, federate the class-conditional Bayesian network classifier
+        algorithmName = "PT_NB";
+        buildStats = true;
+        fusionStats = true;
+        stats = false;
+        fusionClient = new FusionPosition(-1);
+        fusionServer = new PT_Fusion_Server();
+        convergence = new NoneConvergence();
+        outputPath = baseOutputPath + datasetName + "_" + suffix + "_" + seed +  ".csv";
 
         models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
@@ -144,6 +186,9 @@ public class CCBNExperiment {
             case "PT_CCBN":
                 double[][] cutPoints = (double[][]) model;
                 return new PT_CCBN(options, cutPoints);
+            case "PT_NB":
+                double[][] cutPoints2 = (double[][]) model;
+                return new PT_NB(cutPoints2);
             // Add more algorithms here
             default:
                 return null;
@@ -157,9 +202,10 @@ public class CCBNExperiment {
      * @param algorithmName The name of the algorithm.
      * @param seed The seed.
      * @param nClients The number of clients.
+     * @param algorithmOptions The options for the algorithm.
      * @return The operation.
      */
-    private static String getOperation(int fold, String algorithmName, int seed, int nClients) {
+    private static String getOperation(int fold, String algorithmName, int seed, int nClients, String[] algorithmOptions) {
         // The operation depends on the algorithm
         switch (algorithmName) {
             // Supervised discretization method
@@ -167,7 +213,11 @@ public class CCBNExperiment {
                 return "";
             // Class-conditional Bayesian network
             case "PT_CCBN":
-                return fold + "," + algorithmName + "," + seed + "," + nClients;
+                String algName = algorithmOptions[1] + '-' + algorithmOptions[3];
+                return fold + "," + algName + "," + seed + "," + nClients;
+            // WEKA Naive Bayes
+            case "PT_NB":
+                return fold + ",NB-FED," + seed + "," + nClients;
             // Add more algorithms here
             default:
                 return "";
@@ -192,7 +242,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The models.
      */
-    private static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
@@ -202,7 +252,7 @@ public class CCBNExperiment {
             int nClients = partitions.length;
 
             Object model = models[i];
-            String operation = getOperation(i, algorithmName, seed, nClients);
+            String operation = getOperation(i, algorithmName, seed, nClients, algorithmOptions);
 
             models[i] = run(datasetName, partitions, algorithmName, algorithmOptions, model, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
         }
@@ -231,7 +281,7 @@ public class CCBNExperiment {
      */
     private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, Object model, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
         int nClients = partitions.length;
-        ArrayList<Client> clients = new ArrayList<Client>(nClients);
+        ArrayList<Client> clients = new ArrayList<>(nClients);
 
         for (int i = 0; i < nClients; i++) {
             Instances train = partitions[i][0];
