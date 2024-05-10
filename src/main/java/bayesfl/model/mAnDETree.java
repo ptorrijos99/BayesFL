@@ -122,7 +122,7 @@ public class mAnDETree implements Model {
         }
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,timeTrain,teAcc,tePr,teRc,teF1,timeTest,time,timeTables\n";
+        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time,timeTables\n";
         String results = data.getName() + "," +
                 operation + "," +
                 nClients + "," +

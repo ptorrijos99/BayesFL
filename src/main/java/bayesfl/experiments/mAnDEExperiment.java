@@ -12,6 +12,8 @@ import bayesfl.fusion.FusionPosition;
 import bayesfl.fusion.mAnDETree_Fusion;
 import weka.core.Instances;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ import static bayesfl.data.Weka_Instances.divide;
 public class mAnDEExperiment {
     public static String PATH = "./";
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         int i=0;
         for (String string : args) {
             System.out.println("arg[" + i + "]: " + string);
@@ -62,9 +64,9 @@ public class mAnDEExperiment {
         double addNB = Double.parseDouble(parameters[9]);
 
         experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
-    }*/
+    }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String folder = "NB";
         String bbdd = "Poker_Hand";
         int nClients = 5;
@@ -74,11 +76,11 @@ public class mAnDEExperiment {
         int nTrees = 1;
         double bagSize = 10;
         String ensemble = "RF";
-        double addNB = 0;
+        double addNB = 0.3;
 
         //experimentmAnDE(false, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
         experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
-    }
+    }*/
 
     public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int nFolds, int n, int nTrees, double bagSize, String ensemble, double addNB) {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
