@@ -49,14 +49,14 @@ import bayesfl.model.Model;
 import bayesfl.model.PT;
 
 /**
- * A class representing a naive Bayes algorithm.
+ * A class representing a wdBayes Naive Bayes algorithm.
  */
 public class PT_CCBN implements LocalAlgorithm {
 
     /**
      * A dummy class to set the cut points of the discretization filter.
      */
-    private class Dummy extends Discretize {
+    protected static class Dummy extends Discretize {
 
         /**
          * Auxiliar variable to store the cut points.
@@ -74,7 +74,7 @@ public class PT_CCBN implements LocalAlgorithm {
         /**
          * Set the cut points.
          *
-         * @param cutPoints
+         * @param cutPoints The cut points to set.
          */
         public void setCutPoints(double[][] cutPoints) {
             // We cannot set the cut points directly because they

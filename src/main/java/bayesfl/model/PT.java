@@ -33,6 +33,8 @@ package bayesfl.model;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
+import weka.estimators.Estimator;
+import EBNC.wdBayes;
 
 /**
  * Local application imports.
@@ -40,9 +42,9 @@ import weka.core.Instances;
 import bayesfl.experiments.utils.ExperimentUtils;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
+
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
 
-import EBNC.wdBayes;
 
 /**
  * A class representing class-conditional Bayesian networks.
@@ -50,9 +52,19 @@ import EBNC.wdBayes;
 public class PT implements Model {
 
     /**
-     * The model parameters.
+     * The model parameters. Used in wdBayes (NBw, NBb and NBe algorithms).
      */
     private double[] parameters;
+
+    /**
+     * The class distribution. Used in WEKA NaiveBayes.
+     */
+    private Estimator m_ClassDistribution;
+
+    /**
+     * The distributions of the variables. Used in WEKA NaiveBayes.
+     */
+    private Estimator[][] m_Distributions;
 
     /**
      * The classifier.
@@ -65,7 +77,7 @@ public class PT implements Model {
     private String header = "bbdd,id,cv,algorithm,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
-     * Constructor.
+     * Constructor. wdBayes.
      *
      * @param parameters The parameters of the model.
      * @param classifier The classifier.
@@ -76,12 +88,41 @@ public class PT implements Model {
     }
 
     /**
+     * Constructor. WEKA NaiveBayes.
+     *
+     * @param m_ClassDistribution The class distribution.
+     * @param m_Distributions The distributions of the variables.
+     * @param classifier The classifier.
+     */
+    public PT(Estimator m_ClassDistribution, Estimator[][] m_Distributions, FilteredClassifier classifier) {
+        this.m_ClassDistribution = m_ClassDistribution;
+        this.m_Distributions = m_Distributions;
+        this.classifier = classifier;
+    }
+
+    /**
      * Gets the model.
      * 
      * @return The model.
      */
     public double[] getModel() {
         return this.parameters;
+    }
+
+    /**
+     * Gets the class distribution.
+     * @return The class distribution.
+     */
+    public Estimator getM_ClassDistribution() {
+        return this.m_ClassDistribution;
+    }
+
+    /**
+     * Gets the distributions of the variables.
+     * @return The distributions of the variables.
+     */
+    public Estimator[][] getM_Distributions() {
+        return this.m_Distributions;
     }
 
     /**
