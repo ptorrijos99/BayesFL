@@ -40,9 +40,9 @@ import weka.core.Instances;
 import bayesfl.experiments.utils.ExperimentUtils;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
 
+import EBNC.wdBayes;
 
 /**
  * A class representing class-conditional Bayesian networks.
@@ -62,7 +62,7 @@ public class PT implements Model {
     /**
      * The header for the file.
      */
-    private String header = "bbdd,id,cv,algorithm,seed,nClients,epoch,iteration,instances,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private String header = "bbdd,id,cv,algorithm,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor.
@@ -118,6 +118,8 @@ public class PT implements Model {
         Instances train = weka.getTrain();
         Instances test = weka.getTest();
 
+        wdBayes classifier = (wdBayes) this.classifier.getClassifier();
+
         Evaluation evaluation = null;
 
         try {
@@ -132,8 +134,9 @@ public class PT implements Model {
 
         String bbdd = data.getName();
         int instances = train.numInstances();
+        int maxIterations = classifier.getM_MaxIterations();
 
-        statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + ",";
+        statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + "," + maxIterations + ",";
 
         metrics = getClassificationMetrics(this.classifier, evaluation, train);
         statistics += metrics;
