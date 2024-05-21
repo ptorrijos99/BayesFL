@@ -128,12 +128,6 @@ public class mAnDEExperiment {
             server.setnIterations(1);
 
             server.run();
-
-            //LocalExperiment.writeExistentFile(savePath);
         }
     }
-
-
-
-
 }

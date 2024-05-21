@@ -180,16 +180,7 @@ public class classificationExperiment {
                 classifier.buildClassifier(train);
                 double time = (System.currentTimeMillis() - start) / 1000;
 
-                Evaluation evaluation = null;
-                try {
-                    evaluation = new Evaluation(train);
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-
                 String trainMetrics = getClassificationMetrics(classifier, train);
-
                 String testMetrics = getClassificationMetrics(classifier, test);
 
                 String results = bbdd + "," +
@@ -213,7 +204,5 @@ public class classificationExperiment {
                 ExperimentUtils.saveExperiment(completePath, header, results);
             }
         }
-
-
     }
 }
