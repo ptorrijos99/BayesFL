@@ -39,15 +39,29 @@ import bayesfl.model.Model;
 import bayesfl.model.PT;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
+import weka.core.Attribute;
+import weka.core.Instances;
 import weka.estimators.DiscreteEstimator;
+
+import java.util.ArrayList;
 
 class DummyNB extends NaiveBayes {
     public void setDistributions(DiscreteEstimator[][] m_Distributions) {
         this.m_Distributions = m_Distributions;
+
+        // Initialize this.m_Instances because it is used in the method distributionForInstance() to obtain weights
+        ArrayList<Attribute> attInfo = new ArrayList<>();
+        for (int i = 0; i < m_Distributions.length; i++) {
+            attInfo.add(new Attribute("att" + i));
+        }
+        this.m_Instances = new Instances("Instances", attInfo, 0);
     }
 
     public void setClassDistribution(DiscreteEstimator m_ClassDistribution) {
         this.m_ClassDistribution = m_ClassDistribution;
+
+        // Initialize this.m_NumClasses because it is used in the method distributionForInstance()
+        this.m_NumClasses = m_ClassDistribution.getNumSymbols();
     }
 }
 
@@ -96,19 +110,12 @@ public class PT_Fusion_Server implements Fusion {
                 }
             }
 
-            System.out.println("Fusing " + models.length + " models");
-            System.out.println("Antes: " + m_ClassDistribution);
-
             for (Model value : models) {
                 model = (PT) value;
-
                 try {
                     // Add the class distribution of all the clients
                     DiscreteEstimator classDist = (DiscreteEstimator) model.getM_ClassDistribution();
-                    //classDist.
                     m_ClassDistribution.aggregate(classDist);
-
-                    System.out.println("  Suma: " + model.getM_ClassDistribution());
 
                     // Add each var distribution of all the clients
                     for (int j = 0; j < numAtts; j++) {
@@ -120,8 +127,6 @@ public class PT_Fusion_Server implements Fusion {
                     throw new RuntimeException(e);
                 }
             }
-
-            System.out.println("Después: " + m_ClassDistribution);
 
             DummyNB naiveBayes = new DummyNB();
             naiveBayes.setDistributions(m_Distributions);

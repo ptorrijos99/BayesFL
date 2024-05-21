@@ -44,7 +44,7 @@ import bayesfl.model.Model;
 /**
  * A class representing a discrezation algorithm.
  */
-public class Bins_MDLP implements LocalAlgorithm, Cloneable {
+public class Bins_MDLP implements LocalAlgorithm {
 
     /**
      * The options for the discretization method.
@@ -59,7 +59,7 @@ public class Bins_MDLP implements LocalAlgorithm, Cloneable {
     /**
      * The name of the algorithm.
      */
-    private String algorithmName = "None";
+    private String algorithmName = "Bins_MDLP";
 
     /**
      * The name of the refinement method.

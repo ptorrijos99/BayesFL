@@ -98,16 +98,8 @@ public class mAnDETree implements Model {
         mAnDE.calculateTables_mSPnDEs();
         double timeTables = (System.currentTimeMillis() - start) / 1000;
 
-        Evaluation evaluation = null;
-        try {
-            evaluation = new Evaluation(train);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String trainMetrics = getClassificationMetrics(mAnDE, evaluation, train);
-        String testMetrics = getClassificationMetrics(mAnDE, evaluation, test);
+        String trainMetrics = getClassificationMetrics(mAnDE, train);
+        String testMetrics = getClassificationMetrics(mAnDE, test);
 
         // Calculate data of mSPnDEs created
         double var = 0;
@@ -121,7 +113,11 @@ public class mAnDETree implements Model {
             var += a.getNChildren();
         }
 
-        String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + ".csv";
+        // Get only the name of the dataset
+        String nameExceptIdCv = data.getName();
+        nameExceptIdCv = nameExceptIdCv.substring(0, nameExceptIdCv.indexOf(","));
+
+        String completePath = path + "results/" + epoch + "/" + nameExceptIdCv + "_" + operation + "_" + nClients + ".csv";
         String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time,timeTables\n";
         String results = data.getName() + "," +
                 operation + "," +
@@ -174,7 +170,7 @@ public class mAnDETree implements Model {
             e.printStackTrace();
         }
 
-        String num = getClassificationMetrics(mAnDE, evaluation, train).split(",")[0];
+        String num = getClassificationMetrics(mAnDE, train).split(",")[0];
         return Double.parseDouble(num);
     }
 

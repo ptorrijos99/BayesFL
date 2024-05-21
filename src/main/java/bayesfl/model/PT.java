@@ -30,6 +30,8 @@ package bayesfl.model;
 /**
  * Third-party imports.
  */
+import weka.classifiers.AbstractClassifier;
+import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
@@ -159,30 +161,25 @@ public class PT implements Model {
         Instances train = weka.getTrain();
         Instances test = weka.getTest();
 
-        wdBayes classifier = (wdBayes) this.classifier.getClassifier();
-
-        Evaluation evaluation = null;
-
-        try {
-            evaluation = new Evaluation(train);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        Classifier classifier = this.classifier.getClassifier();
 
         String statistics = "";
         String metrics;
 
         String bbdd = data.getName();
         int instances = train.numInstances();
-        int maxIterations = classifier.getM_MaxIterations();
+        statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + ",";
 
-        statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + "," + maxIterations + ",";
+        int maxIterations = 0;
+        if (classifier instanceof wdBayes) {
+            maxIterations = ((wdBayes) classifier).getM_MaxIterations();
+        }
+        statistics +=  + maxIterations + ",";
 
-        metrics = getClassificationMetrics(this.classifier, evaluation, train);
+        metrics = getClassificationMetrics(this.classifier, train);
         statistics += metrics;
 
-        metrics = getClassificationMetrics(this.classifier, evaluation, test);
+        metrics = getClassificationMetrics(this.classifier, test);
         statistics += metrics;
 
         statistics += time + "\n";
