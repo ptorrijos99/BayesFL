@@ -48,8 +48,6 @@ import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
-import static bayesfl.data.Weka_Instances.divide;
-import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 import bayesfl.fusion.Bins_Fusion;
 import bayesfl.fusion.Fusion;
 import bayesfl.fusion.FusionPosition;
@@ -58,6 +56,8 @@ import bayesfl.fusion.PT_Fusion_Server;
 import bayesfl.Client;
 import bayesfl.Server;
 
+import static bayesfl.data.Weka_Instances.divide;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -115,55 +115,23 @@ public class CCBNExperiment {
         models = validate(datasetName, splits, seed, models, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
 
         // Second step, federate the class-conditional Bayesian network classifier
-        algorithmName = "PT_CCBN";
+
+        // WEKA NaiveBayes
+        if (algorithmOptions[3].equals("WEKA")) {
+            algorithmName = "PT_NB";
+            fusionClient = new FusionPosition(-1);
+        }
+        // wdBayes
+        else {
+            algorithmName = "PT_CCBN";
+            fusionClient = new PT_Fusion_Client();
+        }
         buildStats = true;
         fusionStats = true;
         stats = false;
-        fusionClient = new PT_Fusion_Client();
         fusionServer = new PT_Fusion_Server();
         convergence = new NoneConvergence();
-        outputPath = baseOutputPath + algorithmName + "_" + suffix + ".csv";
-
-        models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
-    }
-
-    public static void runWEKANB(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
-        // Get the cross-validation splits for each client
-        String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
-        Instances[][][] splits = divide(datasetName, datasetPath, nFolds, nClients, seed);
-
-        // Initialize the variables for running the federated learning
-        String algorithmName;
-        boolean buildStats;
-        boolean fusionStats;
-        boolean stats;
-        Fusion fusionClient;
-        Fusion fusionServer;
-        Convergence convergence;
-        String outputPath;
-        Object[] models = new Object[nFolds];
-
-        // First step, federate the discretization
-        // to get the cut points for the algorithm
-        algorithmName = "Bins_MDLP";
-        buildStats = false;
-        fusionStats = false;
-        stats = false;
-        fusionClient = new FusionPosition(-1);
-        fusionServer = new Bins_Fusion();
-        convergence = new NoneConvergence();
-        outputPath = "";
-        models = validate(datasetName, splits, seed, models, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
-
-        // Second step, federate the class-conditional Bayesian network classifier
-        algorithmName = "PT_NB";
-        buildStats = true;
-        fusionStats = true;
-        stats = false;
-        fusionClient = new FusionPosition(-1);
-        fusionServer = new PT_Fusion_Server();
-        convergence = new NoneConvergence();
-        outputPath = baseOutputPath + datasetName + "_" + suffix + "_" + seed +  ".csv";
+        outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
         models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
@@ -180,18 +148,22 @@ public class CCBNExperiment {
         // The algorithm depends on its name
         switch (name) {
             // Supervised discretization method
-            case "Bins_MDLP":
+            case "Bins_MDLP" -> {
                 return new Bins_MDLP(options);
+            }
             // Class-conditional Bayesian network
-            case "PT_CCBN":
+            case "PT_CCBN" -> {
                 double[][] cutPoints = (double[][]) model;
                 return new PT_CCBN(options, cutPoints);
-            case "PT_NB":
-                double[][] cutPoints2 = (double[][]) model;
-                return new PT_NB(cutPoints2);
+            }
+            case "PT_NB" -> {
+                double[][] cutPoints = (double[][]) model;
+                return new PT_NB(cutPoints);
+            }
             // Add more algorithms here
-            default:
+            default -> {
                 return null;
+            }
         }
     }
 
@@ -314,14 +286,14 @@ public class CCBNExperiment {
         args = readParametersFromArgs(args);
 
         /*String folder = "AnDE";
-        String datasetName = "Iris_Classification";
+        String datasetName = "Adult";
         int nClients = 5;
         int seed = 42;
-        int nFolds = 5;
+        int nFolds = 2;
         String structure = "NB";  // Possibles values: "NB"
-        String parameterLearning = "dCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
+        String parameterLearning = "wCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
         String maxIterations = "10";
-        int nIterations = 2;*/
+        int nIterations = 1;*/
 
         String folder = args[0];
         String datasetName = args[1];
@@ -329,14 +301,14 @@ public class CCBNExperiment {
         int seed = Integer.parseInt(args[3]);
         int nFolds = Integer.parseInt(args[4]);
         String structure = args[5];  // Possibles values: "NB"
-        String parameterLearning = args[6];  // Possibles values: "dCCBN", "wCCBN", "eCCBN"
+        String parameterLearning = args[6];  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
         String maxIterations = args[7];
         int nIterations = Integer.parseInt(args[8]);
 
         String[] discretizerOptions = new String[] {""};
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
 
-        String suffix = structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + "_" + nIterations + ".csv";
+        String suffix = datasetName + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + "_" + nIterations + ".csv";
 
         CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
     }

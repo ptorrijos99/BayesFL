@@ -7,6 +7,7 @@ import bayesfl.algorithms.mAnDETree_mAnDE;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Weka_Instances;
+import bayesfl.experiments.utils.ExperimentUtils;
 import bayesfl.fusion.Fusion;
 import bayesfl.fusion.FusionPosition;
 import bayesfl.fusion.mAnDETree_Fusion;
@@ -32,6 +33,8 @@ public class mAnDEExperiment {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
         int threads = Integer.parseInt(args[2]);
+
+        ExperimentUtils.experimentID = index;
 
         // Read the parameters from args
         String[] parameters = null;
@@ -67,25 +70,24 @@ public class mAnDEExperiment {
     }
 
     /*public static void main(String[] args) {
-        String folder = "NB";
-        String bbdd = "Poker_Hand";
-        int nClients = 5;
-        int seed = 42;
-        int folds = 2;
+        String folder = "AnDE";
+        String bbdd = "Adult";
+        int nClients = 100;
+        int seed = 2;
+        int folds = 5;
         int n = 1;
         int nTrees = 1;
-        double bagSize = 10;
+        double bagSize = 1;
         String ensemble = "RF";
-        double addNB = 0.3;
+        double addNB = 0;
 
+        ExperimentUtils.experimentID = 0;
         //experimentmAnDE(false, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
         experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
     }*/
 
     public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int nFolds, int n, int nTrees, double bagSize, String ensemble, double addNB) {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
-
-        Random random = new Random(seed);
 
         String operation = "mA" + n + "DE";
         if (federated) operation += "-FED";

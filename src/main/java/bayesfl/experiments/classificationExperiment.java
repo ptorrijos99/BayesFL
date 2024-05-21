@@ -188,9 +188,9 @@ public class classificationExperiment {
                     e.printStackTrace();
                 }
 
-                String trainMetrics = getClassificationMetrics(classifier, evaluation, train);
+                String trainMetrics = getClassificationMetrics(classifier, train);
 
-                String testMetrics = getClassificationMetrics(classifier, evaluation, test);
+                String testMetrics = getClassificationMetrics(classifier, test);
 
                 String results = bbdd + "," +
                         i + "," +

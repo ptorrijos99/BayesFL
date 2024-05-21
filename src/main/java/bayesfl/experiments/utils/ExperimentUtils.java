@@ -44,6 +44,8 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.net.BIFReader;
 import weka.classifiers.evaluation.Evaluation;
+import weka.classifiers.evaluation.NominalPrediction;
+import weka.classifiers.evaluation.Prediction;
 import weka.core.Instances;
 
 import java.io.*;
@@ -54,6 +56,8 @@ import static weka.core.Utils.maxIndex;
 import static weka.core.Utils.mean;
 
 public class ExperimentUtils {
+
+    public static int experimentID = -1;
 
     public static void saveExperiment(String path, String header, String data) {
         // Create the directory if it does not exist
@@ -77,6 +81,24 @@ public class ExperimentUtils {
             
         } catch (IOException ex) {
             Logger.getLogger(ExperimentUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Save the name of the results csv on ./results/done/
+        if (experimentID != -1) {
+            String nameOfResultscsv = path.substring(path.lastIndexOf("/") + 1);
+            try {
+                // if "./results/done/experimentID.done" is empty, add a line
+                File doneFile = new File("./results/done/" + experimentID + ".done");
+
+                if (doneFile.length() == 0) {
+                    BufferedWriter doneWriter = new BufferedWriter(new FileWriter(doneFile, true));
+                    doneWriter.append(nameOfResultscsv + "\n");
+                    doneWriter.flush();
+                    doneWriter.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ExperimentUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -146,12 +168,18 @@ public class ExperimentUtils {
     /**
      * Get the metrics of the model. The metrics are accuracy, precision, recall, F1-score, and prediction time.
      *
-     * @param evaluation The evaluation object.
      * @param instances The instances.
      * @return The metrics of the model in the form of a string.
      */
-    public static String getClassificationMetrics(AbstractClassifier classifier, Evaluation evaluation, Instances instances) {
+    public static String getClassificationMetrics(AbstractClassifier classifier, Instances instances) {
         int numClasses = instances.numClasses();
+
+        Evaluation evaluation;
+        try {
+            evaluation = new Evaluation(instances);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // Initialize the start time of the evaluation
         double time = System.currentTimeMillis();
@@ -191,7 +219,7 @@ public class ExperimentUtils {
 
         return accuracy + "," + precision + "," + recall + "," + f1 + "," + time + ",";
     }
-    
+
     /**
      * Read the original Bayesian Network from the BIF file in the netPath.
      * @return The original Bayesian Network.
