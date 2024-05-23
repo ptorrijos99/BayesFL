@@ -32,7 +32,6 @@ package bayesfl.algorithms;
  */
 import weka.core.Instances;
 import weka.filters.Filter;
-import weka.filters.supervised.attribute.Discretize;
 
 /**
  * Local application imports.
@@ -54,7 +53,7 @@ public class Bins_MDLP implements LocalAlgorithm {
     /**
      * The discretization method.
      */
-    private Discretize discretizer;
+    private Filter discretizer;
 
     /**
      * The name of the algorithm.
@@ -67,11 +66,22 @@ public class Bins_MDLP implements LocalAlgorithm {
     private String refinement = "None";
 
     /**
+     * Whether the algorithm is supervised or not.
+     */
+    private boolean supervised;
+
+    /**
      * Constructor.
      */
-    public Bins_MDLP(String[] options) {
+    public Bins_MDLP(boolean supervised, String[] options) {
         this.options = options.clone();
-        this.discretizer = new Discretize();
+        this.supervised = supervised;
+
+        if (supervised) {
+            this.discretizer = new weka.filters.supervised.attribute.Discretize();
+        } else {
+            this.discretizer = new weka.filters.unsupervised.attribute.Discretize();
+        }
 
         try {
             this.discretizer.setOptions(this.options);
@@ -102,9 +112,14 @@ public class Bins_MDLP implements LocalAlgorithm {
         double[][] cutPoints = new double[numAttributes][];
     
         for (int i = 0; i < numAttributes; i++) {
-            cutPoints[i] = this.discretizer.getCutPoints(i);
+            if (this.supervised) {
+                weka.filters.supervised.attribute.Discretize discretizer = (weka.filters.supervised.attribute.Discretize) this.discretizer;
+                cutPoints[i] = discretizer.getCutPoints(i);
+            } else {
+                weka.filters.unsupervised.attribute.Discretize discretizer = (weka.filters.unsupervised.attribute.Discretize) this.discretizer;
+                cutPoints[i] = discretizer.getCutPoints(i);
+            }
         }
-
         return new Bins(cutPoints);
     }
 
