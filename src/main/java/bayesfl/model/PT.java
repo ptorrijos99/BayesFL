@@ -76,7 +76,7 @@ public class PT implements Model {
     /**
      * The header for the file.
      */
-    private String header = "bbdd,id,cv,algorithm,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor. wdBayes.

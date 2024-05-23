@@ -78,7 +78,7 @@ public class CCBNExperiment {
      * Run the experiment.
      *
      * @param datasetName The name of the dataset.
-     * @param discretizerOptions The options for the discretizer.
+     * @param nBins The number of bins.
      * @param algorithmOptions The options for the algorithm.
      * @param nClients The number of clients.
      * @param nIterations The number of iterations.
@@ -86,7 +86,7 @@ public class CCBNExperiment {
      * @param seed The seed.
      * @param suffix The suffix for the output file.
      */
-    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
+    public static void run(String folder, String datasetName, int nBins, String[] algorithmOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
         // Get the cross-validation splits for each client
         String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
         Instances[][][] splits = divide(datasetName, datasetPath, nFolds, nClients, seed);
@@ -112,7 +112,15 @@ public class CCBNExperiment {
         fusionServer = new Bins_Fusion();
         convergence = new NoneConvergence();
         outputPath = "";
-        models = validate(datasetName, splits, seed, models, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
+
+        String[] discretizerOptions;
+        if (nBins == -1) {
+            discretizerOptions = new String[] {""};
+        } else {
+            discretizerOptions = new String[] {"-F", "-B", ""+nBins};
+        }
+
+        models = validate(datasetName, splits, seed, models, nBins, algorithmName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
 
         // Second step, federate the class-conditional Bayesian network classifier
 
@@ -133,7 +141,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
-        models = validate(datasetName, splits, seed, models, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
+        models = validate(datasetName, splits, seed, models, nBins, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
 
     /**
@@ -149,7 +157,12 @@ public class CCBNExperiment {
         switch (name) {
             // Supervised discretization method
             case "Bins_MDLP" -> {
-                return new Bins_MDLP(options);
+                // If options is empty, supervised, else unsupervised
+                if (options.length == 0) {
+                    return new Bins_MDLP(true, options);
+                } else {
+                    return new Bins_MDLP(false, options);
+                }
             }
             // Class-conditional Bayesian network
             case "PT_CCBN" -> {
@@ -177,7 +190,7 @@ public class CCBNExperiment {
      * @param algorithmOptions The options for the algorithm.
      * @return The operation.
      */
-    private static String getOperation(int fold, String algorithmName, int seed, int nClients, String[] algorithmOptions) {
+    private static String getOperation(int fold, String algorithmName, int nBins, int seed, int nClients, String[] algorithmOptions) {
         // The operation depends on the algorithm
         switch (algorithmName) {
             // Supervised discretization method
@@ -186,10 +199,10 @@ public class CCBNExperiment {
             // Class-conditional Bayesian network
             case "PT_CCBN":
                 String algName = algorithmOptions[1] + '-' + algorithmOptions[3];
-                return fold + "," + algName + "," + seed + "," + nClients;
+                return fold + "," + algName + "," + nBins + "," + seed + "," + nClients;
             // WEKA Naive Bayes
             case "PT_NB":
-                return fold + ",NB-FED," + seed + "," + nClients;
+                return fold + ",NB-FED," + nBins + "," + seed + "," + nClients;
             // Add more algorithms here
             default:
                 return "";
@@ -214,7 +227,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The models.
      */
-    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, int nBins, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
@@ -224,7 +237,7 @@ public class CCBNExperiment {
             int nClients = partitions.length;
 
             Object model = models[i];
-            String operation = getOperation(i, algorithmName, seed, nClients, algorithmOptions);
+            String operation = getOperation(i, algorithmName, nBins, seed, nClients, algorithmOptions);
 
             models[i] = run(datasetName, partitions, algorithmName, algorithmOptions, model, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
         }
@@ -283,33 +296,43 @@ public class CCBNExperiment {
      * @param args The arguments.
      */
     public static void main(String[] args) {
-        args = readParametersFromArgs(args);
+        //args = readParametersFromArgs(args);
 
-        /*String folder = "AnDE";
+        String folder = "AnDE";
         String datasetName = "Adult";
-        int nClients = 5;
+        //int nClients = 500;
         int seed = 42;
-        int nFolds = 2;
+        int nFolds = 5;
+        int nIterations = 1;
         String structure = "NB";  // Possibles values: "NB"
-        String parameterLearning = "wCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
+        String parameterLearning = "WEKA";  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
         String maxIterations = "10";
-        int nIterations = 1;*/
+        int nBins = -1;
 
-        String folder = args[0];
+        /*String folder = args[0];
         String datasetName = args[1];
         int nClients = Integer.parseInt(args[2]);
         int seed = Integer.parseInt(args[3]);
         int nFolds = Integer.parseInt(args[4]);
-        String structure = args[5];  // Possibles values: "NB"
-        String parameterLearning = args[6];  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
-        String maxIterations = args[7];
-        int nIterations = Integer.parseInt(args[8]);
+        int nIterations = Integer.parseInt(args[5]);
+        String structure = args[6];  // Possibles values: "NB"
+        String parameterLearning = args[7];  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
+        String maxIterations = args[8];
+        String nBins = args[9];
+        */
 
-        String[] discretizerOptions = new String[] {""};
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
 
-        String suffix = datasetName + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + "_" + nIterations + ".csv";
 
-        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
+
+        int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+        for (int nClients : nClientss) {
+            System.out.println("Running with " + nClients + " clients");
+            String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + ".csv";
+            CCBNExperiment.run(folder, datasetName, nBins, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
+        }
+
+        //String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + ".csv";
+        //CCBNExperiment.run(folder, datasetName, nBins, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
     }
 }

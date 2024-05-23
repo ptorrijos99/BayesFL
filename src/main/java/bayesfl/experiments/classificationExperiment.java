@@ -2,14 +2,12 @@ package bayesfl.experiments;
 
 import EBNC.wdBayes;
 import bayesfl.experiments.utils.ExperimentUtils;
-import org.apache.commons.math3.ode.nonstiff.AdaptiveStepsizeFieldIntegrator;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A1DE;
 import weka.classifiers.bayes.AveragedNDependenceEstimators.A2DE;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.bayes.net.search.local.TAN;
-import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.meta.Bagging;
 import weka.classifiers.meta.FilteredClassifier;
@@ -17,9 +15,7 @@ import weka.classifiers.trees.J48;
 import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
-import weka.filters.supervised.attribute.Discretize;
-
-import java.util.Random;
+import weka.filters.Filter;
 
 import static bayesfl.data.Weka_Instances.divide;
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
@@ -29,7 +25,7 @@ import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 public class classificationExperiment {
     public static String PATH = "./";
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         String[] parameters = readParametersFromArgs(args);
 
         // Read the parameters from file
@@ -46,28 +42,36 @@ public class classificationExperiment {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
-    /*public static void main(String[] args) {
-        String folder = "Nuevas";
-        String bbdd = "Amazon_Employee_Access";
-        int nClients = 5;
-        String algorithm = "NB";
-        int seed = 1;
+    public static void main(String[] args) {
+        String folder = "AnDE";
+        String bbdd = "Adult";
+        //int nClients = 100;
+        String algorithm = "NBw";
+        int seed = 42;
         int folds = 5;
+        int nBins = 10;
         int nTrees = 100;
 
+
         try {
-            experimentBaseline(folder, bbdd, nClients, seed, folds, algorithm, nTrees);
+            int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+            for (int nClients : nClientss) {
+                System.out.println("Running with " + nClients + " clients");
+                experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
+            }
+
+            //experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
-    public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, String algorithm, int nTrees) throws Exception {
+    public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, int nBins, String algorithm, int nTrees) throws Exception {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
-        String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,timeTrain,teAcc,tePr,teRc,teF1,timeTest,time\n";
+        String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nBins + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
+        String header = "bbdd,id,cv,algorithm,bins,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
         int threads = Runtime.getRuntime().availableProcessors();
 
@@ -80,6 +84,16 @@ public class classificationExperiment {
 
         // Read the data and stratify it to the number of clients
         Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed);
+
+        // Initialize the filter
+        Filter filter = null;
+        if (nBins > 0) {
+            filter = new weka.filters.unsupervised.attribute.Discretize();
+            String[] filterOptions = new String[] {"-F", "-B", ""+nBins};
+            filter.setOptions(filterOptions);
+        } else {
+            filter = new weka.filters.supervised.attribute.Discretize();
+        }
 
         // Initialize the classifier
         AbstractClassifier classifier = null;
@@ -98,8 +112,9 @@ public class classificationExperiment {
                 ((RandomForest) classifier).setNumIterations(nTrees);
             }
             case "NB" -> {
-                classifier = new NaiveBayes();
-                ((NaiveBayes) classifier).setUseSupervisedDiscretization(true);
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(filter);
+                ((FilteredClassifier) classifier).setClassifier(new NaiveBayes());
             }
             case "GaussianNB" -> classifier = new NaiveBayes();
             case "A1DE" -> classifier = new A1DE();
@@ -117,17 +132,17 @@ public class classificationExperiment {
             // WEKA classifiers with discretization
             case "J48-Dis" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 ((FilteredClassifier) classifier).setClassifier(new J48());
             }
             case "REPTree-Dis" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 ((FilteredClassifier) classifier).setClassifier(new REPTree());
             }
             case "Bagging-Dis" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 Bagging bagging = new Bagging();
                 bagging.setOptions(options);
                 bagging.setNumIterations(nTrees);
@@ -135,7 +150,7 @@ public class classificationExperiment {
             }
             case "RF-Dis" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 Bagging rf = new RandomForest();
                 rf.setOptions(options);
                 rf.setNumIterations(nTrees);
@@ -145,7 +160,7 @@ public class classificationExperiment {
             // wdBayes classifier
             case "NBw" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 wdBayes wd = new wdBayes();
                 String[] algorithmOptions = new String[] {"-S", "NB", "-P", "wCCBN"};
                 wd.setOptions(algorithmOptions);
@@ -153,7 +168,7 @@ public class classificationExperiment {
             }
             case "NBd" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 wdBayes wd = new wdBayes();
                 String[] algorithmOptions = new String[] {"-S", "NB", "-P", "dCCBN"};
                 wd.setOptions(algorithmOptions);
@@ -161,7 +176,7 @@ public class classificationExperiment {
             }
             case "NBe" -> {
                 classifier = new FilteredClassifier();
-                ((FilteredClassifier) classifier).setFilter(new Discretize());
+                ((FilteredClassifier) classifier).setFilter(filter);
                 wdBayes wd = new wdBayes();
                 String[] algorithmOptions = new String[] {"-S", "NB", "-P", "eCCBN"};
                 wd.setOptions(algorithmOptions);
@@ -187,6 +202,7 @@ public class classificationExperiment {
                         i + "," +
                         cv + "," +
                         algorithm + "," +
+                        nBins + "," +
                         seed + "," +
                         nTrees + "," +
                         nClients + "," +
