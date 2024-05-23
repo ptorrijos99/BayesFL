@@ -86,7 +86,7 @@ public class mSP1DE implements mSPnDE, Serializable {
                     [mAnDE.varNumValues[child]]); //Xj
         });
 
-        // Creation of the contigency tables
+        // Creation of the contingency tables
         for (int i = 0; i < mAnDE.numInstances; i++) {
             Instance inst = mAnDE.data.get(i);
 

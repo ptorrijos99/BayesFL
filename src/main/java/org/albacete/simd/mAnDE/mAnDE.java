@@ -224,7 +224,7 @@ public class mAnDE extends AbstractClassifier implements
         // Delete instances with no class
         instances.deleteWithMissingClass();
 
-        // We driscretise
+        // Discretize instances
         discretizer = new weka.filters.supervised.attribute.Discretize();
         discretizer.setInputFormat(instances);
         data = weka.filters.Filter.useFilter(instances, discretizer);
@@ -232,9 +232,6 @@ public class mAnDE extends AbstractClassifier implements
     }
 
     public void buildTrees() throws Exception {
-        // We initialize the index dictionaries
-        //initializeNameToIndex();
-
         // We check that with this bagSize, we will have more than
         // minimumInstances instances (default 3)
         if (bagSize > 0) {
@@ -245,45 +242,6 @@ public class mAnDE extends AbstractClassifier implements
 
         // Create the mSPnDE's
         build_mSPnDEs();
-
-        // If we have not created mSPnDE's
-        /*if (mSPnDEs.isEmpty()) {
-            HashSet<String> done = new HashSet<>();
-            done.add(getEnsemble());
-
-            setBagSize(100);
-            setBaseClass("J48");
-            setAddNB(0.4);
-
-            String[] posClassifiers = {"Bagging", "RF", "AdaBoost"};
-
-            // We try with Bagging, RF and Boosting
-            for (int i = 0; i < posClassifiers.length; i++) {
-                if (done.contains(posClassifiers[i])) {
-                    continue;
-                }
-
-                setEnsemble(posClassifiers[i]);
-                done.add(posClassifiers[i]);
-
-                // Try to build the mSPnDEs with the new configuration
-                //try {
-                build_mSPnDEs();
-                //} catch (Exception ex) {}
-
-                // If we have created mSPnDEs, we end up with
-                if (!mSPnDEs.isEmpty()) {
-                    break;
-                }
-            }
-
-            // If nothing works, we run NB
-            if (mSPnDEs.isEmpty()) {
-                modeNB = true;
-                nb = new NaiveBayes();
-                nb.buildClassifier(data);
-            }
-        }*/
     }
 
     /**
@@ -294,7 +252,7 @@ public class mAnDE extends AbstractClassifier implements
 
         List<Classifier> trees;
         Classifier base;
-        
+
         switch (baseClass) {
             case "REPTree":
                 base = new REPTree();
@@ -460,29 +418,6 @@ public class mAnDE extends AbstractClassifier implements
             elem.moreChildren(brothers);
             elem.moreChildren(grandchildren);
         } catch (NullPointerException ex) {}
-    }
-
-    /**
-     * Returns the number of nSPnDEs and Variables per nSPnDE.
-     *
-     * @return The number of nSPnDEs and Variables per nSPnDE.
-     * @throws java.io.IOException
-     */
-    public double[] nSPnDEs_variables() throws IOException {
-        double[] res = new double[2];
-        res[0] = mSPnDEs.size();
-        res[1] = 0;
-        mSPnDEs.values().forEach((spode) -> {
-            res[1] += (spode.getNChildren() / res[0]);
-        });
-
-        File f = new File("temp.txt");
-        FileWriter file = new FileWriter(f, true);
-        PrintWriter pw = new PrintWriter(file, true);
-        pw.println(res[0] + "," + res[1]);
-        file.close();
-
-        return res;
     }
 
     /**
