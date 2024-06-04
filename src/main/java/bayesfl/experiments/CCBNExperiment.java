@@ -296,9 +296,9 @@ public class CCBNExperiment {
      * @param args The arguments.
      */
     public static void main(String[] args) {
-        //args = readParametersFromArgs(args);
+        args = readParametersFromArgs(args);
 
-        String folder = "AnDE";
+        /*String folder = "AnDE";
         String datasetName = "Adult";
         //int nClients = 500;
         int seed = 42;
@@ -307,9 +307,9 @@ public class CCBNExperiment {
         String structure = "NB";  // Possibles values: "NB"
         String parameterLearning = "WEKA";  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
         String maxIterations = "10";
-        int nBins = -1;
+        int nBins = -1;*/
 
-        /*String folder = args[0];
+        String folder = args[0];
         String datasetName = args[1];
         int nClients = Integer.parseInt(args[2]);
         int seed = Integer.parseInt(args[3]);
@@ -318,21 +318,21 @@ public class CCBNExperiment {
         String structure = args[6];  // Possibles values: "NB"
         String parameterLearning = args[7];  // Possibles values: "dCCBN", "wCCBN", "eCCBN". "WEKA" for WEKA NB.
         String maxIterations = args[8];
-        String nBins = args[9];
-        */
+        int nBins = Integer.parseInt(args[9]);
+
 
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
 
 
 
-        int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+        /*int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
         for (int nClients : nClientss) {
             System.out.println("Running with " + nClients + " clients");
             String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + ".csv";
             CCBNExperiment.run(folder, datasetName, nBins, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
-        }
+        }*/
 
-        //String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + ".csv";
-        //CCBNExperiment.run(folder, datasetName, nBins, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
+        String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + ".csv";
+        CCBNExperiment.run(folder, datasetName, nBins, algorithmOptions, nClients, nIterations, nFolds, seed, suffix);
     }
 }

@@ -111,6 +111,8 @@ public class ExperimentUtils {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
 
+        ExperimentUtils.experimentID = index;
+
         // Read the parameters from args
         String[] parameters = null;
         try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {

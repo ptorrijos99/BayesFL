@@ -19,52 +19,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static bayesfl.data.Weka_Instances.divide;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 
 public class mAnDEExperiment {
     public static String PATH = "./";
 
     public static void main(String[] args) {
-        int i=0;
-        for (String string : args) {
-            System.out.println("arg[" + i + "]: " + string);
-            i++;
-        }
-        int index = Integer.parseInt(args[0]);
-        String paramsFileName = args[1];
-        int threads = Integer.parseInt(args[2]);
-
-        ExperimentUtils.experimentID = index;
-
-        // Read the parameters from args
-        String[] parameters = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
-            String line;
-            for (i = 0; i < index; i++)
-                br.readLine();
-            line = br.readLine();
-            parameters = line.split(" ");
-        }
-        catch(Exception e){ System.out.println(e); }
-
-        System.out.println("Number of hyperparams: " + parameters.length);
-        i=0;
-        for (String string : parameters) {
-            System.out.println("Param[" + i + "]: " + string);
-            i++;
-        }
+        args = readParametersFromArgs(args);
 
         // Read the parameters from file
-        String folder = parameters[0];
-        String bbdd = parameters[1];
-        int nClients = Integer.parseInt(parameters[2]);
-        int seed = Integer.parseInt(parameters[3]);
-        int folds = Integer.parseInt(parameters[4]);
-        int n = Integer.parseInt(parameters[5]);
-        int nTrees = Integer.parseInt(parameters[6]);
-        double bagSize = Double.parseDouble(parameters[7]);
-        String ensemble = parameters[8];
-        double addNB = Double.parseDouble(parameters[9]);
+        String folder = args[0];
+        String bbdd = args[1];
+        int nClients = Integer.parseInt(args[2]);
+        int seed = Integer.parseInt(args[3]);
+        int folds = Integer.parseInt(args[4]);
+        int n = Integer.parseInt(args[5]);
+        int nTrees = Integer.parseInt(args[6]);
+        double bagSize = Double.parseDouble(args[7]);
+        String ensemble = args[8];
+        double addNB = Double.parseDouble(args[9]);
 
         experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
     }
