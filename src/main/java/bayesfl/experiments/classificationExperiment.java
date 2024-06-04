@@ -46,23 +46,23 @@ public class classificationExperiment {
 
     public static void main(String[] args) {
         String folder = "AnDE";
-        String bbdd = "Adult";
-        //int nClients = 100;
-        String algorithm = "NBw";
+        String bbdd = "Vowel";
+        int nClients = 5;
+        String algorithm = "NB";
         int seed = 42;
         int folds = 5;
-        int nBins = 10;
+        int nBins = -1;
         int nTrees = 100;
 
 
         try {
-            int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
+            /*int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
             for (int nClients : nClientss) {
                 System.out.println("Running with " + nClients + " clients");
                 experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
-            }
+            }*/
 
-            //experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
+            experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

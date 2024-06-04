@@ -16,7 +16,7 @@ public class saveBBDDsMetadata {
 
         // Crear archivo CSV para escribir los metadatos
         FileWriter csvWriter = new FileWriter("./res/classification/metadata-.csv");
-        csvWriter.append("name,subfolder,nInstances,nAttributes,nClasses\n");
+        csvWriter.append("name,subfolder,nInstances,nAttributes,nClasses,discAtts,numAtts\n");
 
         // Leer los archivos .arff en cada subcarpeta y calcular los metadatos
         for (File subfolder : subfolders) {
@@ -36,9 +36,22 @@ public class saveBBDDsMetadata {
                 int nAttributes = data.numAttributes();
                 int nClasses = data.numClasses();
 
+                int discAtts = 0;
+                int numAtts = 0;
+                for (int i = 0; i < nAttributes; i++) {
+                    if (data.attribute(i).isNumeric()) {
+                        numAtts++;
+                    } else {
+                        discAtts++;
+                    }
+                }
+
+                String metadata = name + "," + subfolderName + "," + nInstances + "," +
+                        nAttributes + "," + nClasses + "," + discAtts + "," + numAtts + "\n";
+                System.out.println(metadata);
+
                 // Escribir los metadatos en el archivo CSV
-                csvWriter.append(name + "," + subfolderName + "," + nInstances + "," +
-                        nAttributes + "," + nClasses + "\n");
+                csvWriter.append(metadata);
 
                 csvWriter.flush();
             }
