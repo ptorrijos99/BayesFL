@@ -62,3 +62,5 @@ res/classification/AnDE/Census-Income_(KDD).arff
 src/main/java/consensusBN/Experiments/prueba.java
 /scripts-slurm
 res/classification/metadata nIters.csv
+/res/classification/Big
+res/regression/Year_Prediction_MSD.arff
