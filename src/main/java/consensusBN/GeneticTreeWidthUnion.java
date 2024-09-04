@@ -1,7 +1,6 @@
 package consensusBN;
 
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
@@ -49,16 +48,16 @@ public class GeneticTreeWidthUnion {
     private int[] treeWidths;
 
     public GeneticTreeWidthUnion() {
-        random = new Random();
+        this.random = new Random();
     }
 
     public GeneticTreeWidthUnion(int seed) {
-        random = new Random(seed);
+        this.random = new Random(seed);
     }
 
     public GeneticTreeWidthUnion(int seed, int maxTreewidth) {
         this.maxTreewidth = maxTreewidth;
-        random = new Random(seed);
+        this.random = new Random(seed);
     }
 
     /**
@@ -80,8 +79,7 @@ public class GeneticTreeWidthUnion {
 
         System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
         System.out.println("Greedy SMHD: " + Utils.SMHD(fusionUnion,greedyDag) + " | Greedy edges: " + greedyDag.getNumEdges());
-
-
+        
         return bestDag;
     }
 

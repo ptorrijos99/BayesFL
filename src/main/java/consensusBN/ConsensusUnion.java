@@ -3,7 +3,6 @@ package consensusBN;
 import java.util.*;
 
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
@@ -73,12 +72,12 @@ public class ConsensusUnion {
     // Add all the edges
     public static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> dags) {
         Dag union = new Dag(alpha);
-        for (Node nodei : alpha) {
+        for (Node node : alpha) {
             for (Dag d : dags) {
-                List<Node> parent = d.getParents(nodei);
+                List<Node> parent = d.getParents(node);
                 for (Node pa : parent) {
-                    if (!union.isParentOf(pa, nodei)) {
-                        union.addEdge(new Edge(pa, nodei, Endpoint.TAIL, Endpoint.ARROW));
+                    if (!union.isParentOf(pa, node)) {
+                        union.addEdge(new Edge(pa, node, Endpoint.TAIL, Endpoint.ARROW));
                     }
                 }
             }
