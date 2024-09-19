@@ -12,6 +12,9 @@ import static consensusBN.BetaToAlpha.transformToAlpha;
 
 public class ConsensusUnion {
 
+    public static Dag initialDag;
+    public static boolean allPossibleArcs = true;
+
     /**
      * Complete union of the DAGs, previously transformed to the same alpha order.
      * @param dags The DAGs to be fused.
@@ -28,7 +31,7 @@ public class ConsensusUnion {
      */
     public static Dag fusionUnion(ArrayList<Dag> dags, String method, String limit) {
         if (method.equals("GeneticTW")) {
-            return new GeneticTreeWidthUnion(42, Integer.parseInt(limit)).fusionUnion(dags);
+            return new GeneticTreeWidthUnion(dags, 42, Integer.parseInt(limit)).fusionUnion();
         }
 
         ArrayList<Node> alpha = alphaOrder(dags);
@@ -64,6 +67,8 @@ public class ConsensusUnion {
             case "MaxParents" -> applyMaxParents(alpha, edges, limit);
             // Option 4: Add the edges in order of frequency, limiting the maximum treewidth
             case "MaxTreewidth" -> applyGreedyMaxTreewidth(alpha, edges, limit);
+            // Option 5: Search for the union that maximizes the similarity with the original fusion, limiting the maximum treewidth
+            case "SuperGreedyMaxTreewidth" -> applySuperGreedyMaxTreewidth(initialDag, alpha, dags, limit);
             // Default: Total union of the DAGs
             default -> applyUnion(alpha, outputDags);
         };
@@ -181,13 +186,126 @@ public class ConsensusUnion {
                 }
             }
         }
-
         return union;
+    }
+
+    // GES-like algorithm. In each iteration, adds, removes or reverses the edge that maximizes the score while the tw
+    // is less than the limit. Stops when no edge can be added, removed or reversed without decreasing the score.
+    private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, ArrayList<Node> alpha, ArrayList<Dag> dags, String maxTreewidth) {
+        int maxCliqueSize = Integer.parseInt(maxTreewidth);
+
+        Dag finalDag;
+        if (initialDag == null) {
+            finalDag = new Dag(alpha);
+        } else{
+            finalDag = new Dag(initialDag);
+        }
+
+        // Get the union fusion
+        Dag union = fusionUnion(dags);
+
+        int bestScore = Utils.SMHD(union, finalDag);
+
+        Set<Edge> notIncludedArcs;
+        if (allPossibleArcs) {
+            notIncludedArcs = Utils.calculateArcs(alpha);
+        }
+        else {
+            notIncludedArcs = union.getEdges();
+        }
+
+        Set<Edge> includedArcs = new HashSet<>();
+
+        // While there is improvement in the score with less treewidth than the limit
+        while (true) {
+            Dag iterationDag = null;
+            Edge iterationEdge = null;
+            int iterationScore = bestScore;
+            int operation = -1;
+
+            // Evaluate operations (add, reverse, remove arcs)
+            for (int op = 0; op < 3; op++) {
+                Set<Edge> arcSet = (op == 0) ? notIncludedArcs : includedArcs;
+
+                for (Edge arc : arcSet) {
+                    Dag dag = new Dag(finalDag);
+                    int newScore = tryArc(union, dag, arc, maxCliqueSize, op);
+
+                    if (newScore < iterationScore) {
+                        iterationScore = newScore;
+                        iterationDag = dag;
+                        iterationEdge = arc;
+                        operation = op;
+                    }
+                }
+            }
+
+            // If no operation improves the score, stop
+            if (operation == -1) break;
+
+            // Update the variables
+            finalDag = iterationDag;
+            bestScore = iterationScore;
+
+            switch (operation) {
+                case 0:  // Add arc
+                    notIncludedArcs.remove(iterationEdge);
+                    includedArcs.add(iterationEdge);
+                    break;
+                case 1:  // Remove arc
+                    includedArcs.remove(iterationEdge);
+                    notIncludedArcs.add(iterationEdge);
+                    break;
+                case 2:  // Reverse arc
+                    includedArcs.remove(iterationEdge);
+                    notIncludedArcs.add(iterationEdge);
+
+                    Edge reversedEdge = new Edge(iterationEdge.getNode2(), iterationEdge.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
+                    includedArcs.add(reversedEdge);
+                    notIncludedArcs.remove(reversedEdge);
+                    break;
+            }
+        }
+        return finalDag;
     }
 
 
 
+    private static int tryArc(Dag union, Dag dag, Edge arc, int maxCliqueSize, int operation) {
+        if (operation == 0) {  // Add arc
+            // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
+            if (dag.existsDirectedPathFromTo(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
+
+            dag.addEdge(arc);
+        } else if (operation == 1) {  // Remove arc
+            dag.removeEdge(arc);
+            return Utils.SMHD(union, dag);  // No treewidth or cycle calculation needed, only can be less or equal than the previous
+        } else {  // Reverse arc
+            dag.removeEdge(arc);
+
+            // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
+            if (dag.existsDirectedPathFromTo(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
+
+            dag.addEdge(new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW));
+        }
+
+        // Verify the treewidth
+        for (Set<Node> clique : Utils.getMoralTriangulatedCliques(dag).values()) {
+            if (clique.size() > maxCliqueSize) return Integer.MAX_VALUE;
+        }
+
+        if (!dag.findCycle().isEmpty()) return Integer.MAX_VALUE;
+
+        return Utils.SMHD(union, dag);
+    }
+
+
+
+
 }
+
+
+
 
 
 
