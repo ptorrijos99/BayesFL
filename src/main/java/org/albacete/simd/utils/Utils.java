@@ -3,13 +3,11 @@ package org.albacete.simd.utils;
 import edu.cmu.tetrad.bayes.BayesIm;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.data.DataReader;
-import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.data.DelimiterType;
-import edu.cmu.tetrad.data.DiscreteVariable;
+import edu.cmu.tetrad.data.*;
 import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.*;
+import edu.cmu.tetrad.search.SearchGraphUtils;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
 import weka.estimators.Estimator;
@@ -260,36 +258,8 @@ public class Utils {
     }
 
     public static int SMHD(Graph bn1, Graph bn2) {
-        /*ArrayList<Dag> dags = new ArrayList<>();
-        dags.add(bn1);
-        dags.add(bn2);
-        ensureVariables(dags);*/
-        Graph g1 = new EdgeListGraph(bn1);
-        Graph g2 = new EdgeListGraph(bn2);
-
-        for(Node n: bn1.getNodes()) {
-            List<Node> p = bn1.getParents(n);
-            for (int i=0; i<p.size()-1;i++) {
-                for (int j = i + 1; j < p.size(); j++) {
-                    if (!g1.isAdjacentTo(p.get(i), p.get(j))) {
-                        Edge e = new Edge(p.get(i), p.get(j), Endpoint.TAIL, Endpoint.TAIL);
-                        g1.addEdge(e);
-                    }
-                }
-            }
-        }
-
-        for(Node n: bn2.getNodes()) {
-            List<Node> p = bn2.getParents(n);
-            for (int i=0; i<p.size()-1;i++) {
-                for (int j = i + 1; j < p.size(); j++) {
-                    if (!g2.isAdjacentTo(p.get(i), p.get(j))) {
-                        Edge e = new Edge(p.get(i), p.get(j), Endpoint.TAIL, Endpoint.TAIL);
-                        g2.addEdge(e);
-                    }
-                }
-            }
-        }
+        Graph g1 = moralize(bn1);
+        Graph g2 = moralize(bn2);
 
         int sum = 0;
         for(Edge e: g1.getEdges()) {
@@ -301,6 +271,45 @@ public class Utils {
         }
         return sum;
     }
+
+    private static Graph connectParents(Graph bn) {
+        EdgeListGraph g = new EdgeListGraph(bn);
+        for(Node n: bn.getNodes()) {
+            List<Node> p = bn.getParents(n);
+            for (int i=0; i<p.size()-1;i++) {
+                for (int j = i + 1; j < p.size(); j++) {
+                    if (!g.isAdjacentTo(p.get(i), p.get(j))) {
+                        Edge e = new Edge(p.get(i), p.get(j), Endpoint.TAIL, Endpoint.TAIL);
+                        g.addEdge(e);
+                    }
+                }
+            }
+        }
+        return g;
+    }
+
+    public static int SHD(Dag bn1, Dag bn2) {
+        int sum = 0;
+        for (Edge e : bn1.getEdges()) {
+            if (!bn2.containsEdge(e)) {
+                sum++;  // Edge in bn1 but not in bn2 (counts reverse edges)
+            }
+        }
+
+        for (Edge e : bn2.getEdges()) {
+            if (!bn1.containsEdge(e) && !bn1.containsEdge(e.reverse())) {
+                sum++;  // Edge in bn2 but not in bn1 (without counting reverse edges, as they are already counted)
+            }
+        }
+        return sum;
+    }
+
+
+    /*public static int fusionSimilarity(Dag bn1, Dag bn2) {
+
+    }*/
+
+
 
     public static List<Node> getMarkovBlanket(Dag bn, Node n){
         List<Node> mb = new ArrayList<>();
