@@ -31,8 +31,8 @@ public class GeneticTreeWidthUnion {
     // "Final" variables
     private final Random random;
     private int totalEdges;
-    private ArrayList<Node> alpha;
-    private ArrayList<Dag> alphaDags;
+    private final ArrayList<Node> alpha;
+    private final ArrayList<Dag> alphaDags;
     private ArrayList<Edge> edges;
     private ArrayList<Integer> edgeFrequencyArray;
     private HashMap<Edge, Integer> edgePosition;
@@ -47,43 +47,9 @@ public class GeneticTreeWidthUnion {
     private double[] fitness;
     private int[] treeWidths;
 
-    public GeneticTreeWidthUnion() {
-        this.random = new Random();
-    }
-
-    public GeneticTreeWidthUnion(int seed) {
+    public GeneticTreeWidthUnion(ArrayList<Dag> dags, int seed) {
         this.random = new Random(seed);
-    }
 
-    public GeneticTreeWidthUnion(int seed, int maxTreewidth) {
-        this.maxTreewidth = maxTreewidth;
-        this.random = new Random(seed);
-    }
-
-    /**
-     * Complete union of the DAGs limiting the tree-width of the fused DAG.
-     * @param dags The DAGs to be fused.
-     * @return The union of the DAGs.
-     */
-    public Dag fusionUnion(ArrayList<Dag> dags) {
-        double startTime = System.currentTimeMillis();
-        initializeVars(dags);
-
-        if (method.equals("Gamez")) {
-            fusionUnionGamez();
-        } else {
-            fusionUnionPuerta(alphaDags);
-        }
-
-        executionTime = (System.currentTimeMillis() - startTime) / 1000;
-
-        System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
-        System.out.println("Greedy SMHD: " + Utils.SMHD(fusionUnion,greedyDag) + " | Greedy edges: " + greedyDag.getNumEdges());
-        
-        return bestDag;
-    }
-
-    public void initializeVars(ArrayList<Dag> dags) {
         // Transform the DAGs to the same alpha order
         alpha = alphaOrder(dags);
         alphaDags = new ArrayList<>();
@@ -95,10 +61,92 @@ public class GeneticTreeWidthUnion {
             System.out.println(dag);
         }
 
+        // Apply the union of the DAGs
         double startTime = System.currentTimeMillis();
         fusionUnion = applyUnion(alpha, alphaDags);
         executionTimeUnion = (System.currentTimeMillis() - startTime) / 1000;
+    }
 
+    public GeneticTreeWidthUnion(ArrayList<Dag> dags, int seed, int maxTreewidth) {
+        this(dags, seed);
+        this.maxTreewidth = maxTreewidth;
+    }
+
+    /**
+     * Complete union of the DAGs limiting the tree-width of the fused DAG.
+     * @return The union of the DAGs.
+     */
+    public Dag fusionUnion() {
+        double startTime = System.currentTimeMillis();
+        initializeVars();
+
+        if (method.equals("Gamez")) {
+            fusionUnionGamez();
+        } else {
+            fusionUnionPuerta();
+        }
+
+        executionTime = (System.currentTimeMillis() - startTime) / 1000;
+
+        System.out.println("Best fitness: " + bestFitness + " | Edges: " + bestDag.getNumEdges());
+        System.out.println("Greedy SMHD: " + Utils.SMHD(fusionUnion,greedyDag) + " | Greedy edges: " + greedyDag.getNumEdges());
+        
+        return bestDag;
+    }
+
+    private void fusionUnionGamez() {
+        // Genetic algorithm
+        //System.out.println("Initializing");
+        initialize();
+        for (int i = 0; i < numIterations; i++) {
+            //System.out.println("Iteration " + j);
+            evaluate();
+            crossover();
+            evaluate();
+            mutate();
+        }
+    }
+
+    private void fusionUnionPuerta() {
+        // Genetic algorithm
+        initialize();
+        for (int i = 0; i < numIterations; i++) {
+            evaluate();
+            crossover();
+            mutate();
+        }
+    }
+
+    private void initialize() {
+        boolean uniform = minFreq == maxFreq;
+
+        // Add the greedy solution to the population
+        double startTime = System.currentTimeMillis();
+        greedyDag = applyGreedyMaxTreewidth(alpha, edges, ""+maxTreewidth);
+        for (int i = 0; i < totalEdges; i++) {
+            population[0][i] = greedyDag.containsEdge(edges.get(i));
+        }
+        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
+
+        // Add the greedy solutions with maxTreewidth-1 to the population
+        Dag greedy = applyGreedyMaxTreewidth(alpha, edges, ""+(maxTreewidth-1));
+        for (int i = 0; i < totalEdges; i++) {
+            population[1][i] = greedy.containsEdge(edges.get(i));
+        }
+
+        for (int i = 2; i < populationSize; i++) {
+            for (int j = 0; j < totalEdges; j++) {
+                if (uniform) {
+                    population[i][j] = random.nextBoolean();
+                } else {
+                    double normalized = (double) (edgeFrequencyArray.get(j) - minFreq) / (maxFreq-minFreq);
+                    population[i][j] = random.nextDouble() < 1/(1-Math.log(normalized));
+                }
+            }
+        }
+    }
+
+    private void initializeVars() {
         // Order the edges of all the DAGs by the number of times they appear
         int i = 0;
         edgeFrequency = new HashMap<>();
@@ -126,58 +174,6 @@ public class GeneticTreeWidthUnion {
 
         treeWidths = new int[populationSize];
         population = new boolean[populationSize][totalEdges];
-    }
-
-    private void fusionUnionGamez() {
-        // Genetic algorithm
-        //System.out.println("Initializing");
-        initialize();
-        for (int j = 0; j < numIterations; j++) {
-            //System.out.println("Iteration " + j);
-            evaluate();
-            crossover();
-            evaluate();
-            mutate();
-        }
-    }
-
-    private void fusionUnionPuerta(ArrayList<Dag> dags) {
-        // Genetic algorithm
-        initialize();
-        for (int j = 0; j < numIterations; j++) {
-            evaluate();
-            crossover();
-            mutate();
-        }
-    }
-
-    private void initialize() {
-        boolean uniform = minFreq == maxFreq;
-
-        // Add the greedy solution to the population
-        double startTime = System.currentTimeMillis();
-        greedyDag = applyGreedyMaxTreewidth(alpha, edges, String.valueOf(maxTreewidth));
-        for (int i = 0; i < totalEdges; i++) {
-            population[0][i] = greedyDag.containsEdge(edges.get(i));
-        }
-        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
-
-        // Add the greedy solutions with maxTreewidth-1 to the population
-        Dag greedy = applyGreedyMaxTreewidth(alpha, edges, String.valueOf(maxTreewidth-1));
-        for (int i = 0; i < totalEdges; i++) {
-            population[1][i] = greedy.containsEdge(edges.get(i));
-        }
-
-        for (int i = 2; i < populationSize; i++) {
-            for (int j = 0; j < totalEdges; j++) {
-                if (uniform) {
-                    population[i][j] = random.nextBoolean();
-                } else {
-                    double normalized = (double) (edgeFrequencyArray.get(j) - minFreq) / (maxFreq-minFreq);
-                    population[i][j] = random.nextDouble() < 1/(1-Math.log(normalized));
-                }
-            }
-        }
     }
 
     private void evaluate() {
@@ -215,7 +211,7 @@ public class GeneticTreeWidthUnion {
         tournamentCrossover(newPopulation);
         //uniformCrossover(newPopulation);
 
-        for (int i = 0; i < populationSize; i++) {
+        /*for (int i = 0; i < populationSize; i++) {
             double x = (double) treeWidths[i] / maxTreewidth;
             // Number of trues
             int numTrues = 0;
@@ -224,8 +220,8 @@ public class GeneticTreeWidthUnion {
                     numTrues++;
                 }
             }
-            //System.out.println(i + " | FIT " + String.format("%.1f", fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues);
-        }
+            System.out.println(i + " | FIT " + String.format("%.1f", fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues);
+        }*/
 
     }
 
@@ -326,14 +322,14 @@ public class GeneticTreeWidthUnion {
                 }
             }
 
-            // final number of trues
+            /* final number of trues
             int finalNumTrues = 0;
             for (int j = 0; j < totalEdges; j++) {
                 if (population[i][j]) {
                     finalNumTrues++;
                 }
             }
-            //System.out.println(i + " | FIT " + String.format("%.1f",fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues + ", " + finalNumTrues);
+            System.out.println(i + " | FIT " + String.format("%.1f",fitness[i]) + " | TW " + treeWidths[i] + " | x " + x + " | Edges: " + numTrues + ", " + finalNumTrues); */
         }
     }
 

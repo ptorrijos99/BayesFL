@@ -134,14 +134,23 @@ public class Utils {
      * @param data DataSet used to calculate the arcs between its columns (nodes).
      */
     public static Set<Edge> calculateArcs(DataSet data) {
+        return calculateArcs(data.getVariables());
+    }
+
+    /**
+     * Calculates the amount of possible arcs between the variables of the dataset and stores it.
+     *
+     * @param variables List of nodes used to calculate the arcs between its nodes.
+     */
+    public static Set<Edge> calculateArcs(List<Node> variables) {
+        int N = variables.size();
+
         //0. Accumulator
-        Set<Edge> setOfArcs = new HashSet<>(data.getNumColumns() * (data.getNumColumns() - 1));
-        //1. Get edges (variables)
-        List<Node> variables = data.getVariables();
-        //int index = 0;
-        //2. Iterate over variables and save pairs
-        for (int i = 0; i < data.getNumColumns() - 1; i++) {
-            for (int j = i + 1; j < data.getNumColumns(); j++) {
+        Set<Edge> setOfArcs = new HashSet<>(N * (N - 1));
+
+        //1. Iterate over variables and save pairs
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = i + 1; j < N; j++) {
                 // Getting pair of variables (Each variable is different)
                 Node var_A = variables.get(i);
                 Node var_B = variables.get(j);
@@ -149,9 +158,6 @@ public class Utils {
                 //3. Storing both pairs
                 setOfArcs.add(Edges.directedEdge(var_A, var_B));
                 setOfArcs.add(Edges.directedEdge(var_B, var_A));
-                //index++;
-                //this.setOfArcs[index] = new TupleNode(var_B,var_A);
-                //index++;
             }
         }
         return setOfArcs;
@@ -253,7 +259,7 @@ public class Utils {
         }
     }
 
-    public static int SMHD(Dag bn1, Dag bn2) {
+    public static int SMHD(Graph bn1, Graph bn2) {
         /*ArrayList<Dag> dags = new ArrayList<>();
         dags.add(bn1);
         dags.add(bn2);

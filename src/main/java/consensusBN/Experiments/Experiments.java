@@ -77,7 +77,7 @@ public class Experiments {
         }
 
         // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(seed);
+        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(dags, seed);
         geneticUnion.populationSize = popSize;
         geneticUnion.numIterations = nIterations;
 
@@ -93,8 +93,6 @@ public class Experiments {
         }
         meanTW /= dags.size();
 
-
-        geneticUnion.initializeVars(dags);
         Dag unionDag = geneticUnion.fusionUnion;
 
         // Find the treewidth of the union of the dags
@@ -105,7 +103,7 @@ public class Experiments {
         for (int tw = 2; tw < treewidth; tw++) {
             System.out.println("Treewidth: " + tw);
             geneticUnion.maxTreewidth = tw;
-            geneticUnion.fusionUnion(dags);
+            geneticUnion.fusionUnion();
 
             // Save results
             saveRound(geneticUnion, minTW, meanTW, maxTW, tw, numNodes, nDags, popSize, nIterations, seed);
