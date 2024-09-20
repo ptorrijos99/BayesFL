@@ -1,5 +1,7 @@
 package org.albacete.simd.utils;
 
+import consensusBN.BetaToAlpha;
+import consensusBN.ConsensusUnion;
 import edu.cmu.tetrad.bayes.BayesIm;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
@@ -272,6 +274,7 @@ public class Utils {
         return sum;
     }
 
+    // This function was used in the SMHD instead of moralize
     private static Graph connectParents(Graph bn) {
         EdgeListGraph g = new EdgeListGraph(bn);
         for(Node n: bn.getNodes()) {
@@ -288,13 +291,12 @@ public class Utils {
         return g;
     }
 
+    /**
+     * SHD for DAGs: number of arcs added, deleted and reversed to make the two DAGs match.
+     * Reversed arcs are counted only once.
+     */
     public static int SHD(Dag bn1, Dag bn2) {
-        int sum = 0;
-        for (Edge e : bn1.getEdges()) {
-            if (!bn2.containsEdge(e)) {
-                sum++;  // Edge in bn1 but not in bn2 (counts reverse edges)
-            }
-        }
+        int sum = countDifferences(bn1, bn2);
 
         for (Edge e : bn2.getEdges()) {
             if (!bn1.containsEdge(e) && !bn1.containsEdge(e.reverse())) {
@@ -304,11 +306,74 @@ public class Utils {
         return sum;
     }
 
+    /**
+     * SHD for PDAGs: number of operations (add or delete an undirected edge; and add, remove, or reverse the
+     * orientation of an arc). All operations have a cost of 1.
+     */
+    public static int SHDundir(Graph bn1, Graph bn2) {
+        int sum = countDifferences(bn1, bn2);
 
-    /*public static int fusionSimilarity(Dag bn1, Dag bn2) {
+        for (Edge e : bn2.getEdges()) {
+            if (e.isDirected()) {
+                if (!bn1.containsEdge(e) && !bn1.containsEdge(e.reverse())) {
+                    sum++;  // Directed edge in bn2 but not in bn1 (without counting reverse edges, as they are already counted)
+                }
+            } else {
+                if (!bn1.containsEdge(e)) {
+                    sum++;  // Undirected edge in bn2 but not in bn1
+                }
+            }
+        }
 
-    }*/
+        return sum;
+    }
 
+
+    public static int fusionSimilarity(Dag g1, Dag g2) {
+        // 𝐺+ = GESℎ𝑑({𝐺1, 𝐺2})  // Optimal fusion, Algorithm 6  (here we use approximate fusion for efficiency)
+        Dag gPlus = ConsensusUnion.fusionUnion(Arrays.asList(g1, g2));
+
+        // 𝜎 = a topological order for 𝐺+
+        List<Node> sigma = gPlus.getTopologicalOrder();
+
+        // 𝐺𝜎 = MethodA(𝐺,𝜎)  // Minimal 𝐼-map, Algorithm 1
+        Dag gSigma1 = BetaToAlpha.transformToAlpha(g1, sigma);
+        Dag gSigma2 = BetaToAlpha.transformToAlpha(g2, sigma);
+
+        // Get the undirected graphs for each DAG
+        Graph undirectedG1 = undirectedGraphFromDag(g1);
+        Graph undirectedGSigma1 = undirectedGraphFromDag(gSigma1);
+        Graph undirectedG2 = undirectedGraphFromDag(g2);
+        Graph undirectedGSigma2 = undirectedGraphFromDag(gSigma2);
+
+        // Calculate the structural differences between the sets of edges
+        int diff = 0;
+        diff += countDifferences(undirectedGSigma1, undirectedGSigma2);  // |Eσ1' ⧵ Eσ2'|
+        diff += countDifferences(undirectedGSigma2, undirectedGSigma1);  // |Eσ2' ⧵ Eσ1'|
+        diff += countDifferences(undirectedGSigma1, undirectedG1);       // |Eσ1' ⧵ E′1|
+        diff += countDifferences(undirectedGSigma2, undirectedG2);       // |Eσ2' ⧵ E′2|
+
+        return diff;
+    }
+
+    public static Graph undirectedGraphFromDag(Dag dag) {
+        Graph undirectedGraph = new EdgeListGraph(dag.getNodes());
+        dag.getEdges().forEach(e -> undirectedGraph.addUndirectedEdge(e.getNode1(), e.getNode2()));
+        return undirectedGraph;
+    }
+
+    /**
+     * Counts the number of edges that are in g1 but not in g2.
+     */
+    public static int countDifferences(Graph g1, Graph g2) {
+        int diff = 0;
+        for (Edge e : g1.getEdges()) {
+            if (!g2.containsEdge(e)) {
+                diff++;
+            }
+        }
+        return diff;
+    }
 
 
     public static List<Node> getMarkovBlanket(Dag bn, Node n){
