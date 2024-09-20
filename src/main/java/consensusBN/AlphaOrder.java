@@ -13,7 +13,7 @@ public class AlphaOrder {
 
     // Heurística para encontrar un orden de consenso.
     // Se basa en los enlaces que generaría seguir una secuencia creada desde los nodos sumideros hacia arriba.
-    public static ArrayList<Node> alphaOrder(ArrayList<Dag> dags) {
+    public static ArrayList<Node> alphaOrder(List<Dag> dags) {
         ArrayList<Dag> auxDags = new ArrayList<>();
         for (Dag i : dags) {
             Dag aux_G = new Dag(i);

@@ -47,7 +47,7 @@ public class GeneticTreeWidthUnion {
     private double[] fitness;
     private int[] treeWidths;
 
-    public GeneticTreeWidthUnion(ArrayList<Dag> dags, int seed) {
+    public GeneticTreeWidthUnion(List<Dag> dags, int seed) {
         this.random = new Random(seed);
 
         // Transform the DAGs to the same alpha order
@@ -67,7 +67,7 @@ public class GeneticTreeWidthUnion {
         executionTimeUnion = (System.currentTimeMillis() - startTime) / 1000;
     }
 
-    public GeneticTreeWidthUnion(ArrayList<Dag> dags, int seed, int maxTreewidth) {
+    public GeneticTreeWidthUnion(List<Dag> dags, int seed, int maxTreewidth) {
         this(dags, seed);
         this.maxTreewidth = maxTreewidth;
     }
