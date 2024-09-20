@@ -10,7 +10,7 @@ import edu.cmu.tetrad.graph.Endpoint;
 
 public class BetaToAlpha {
 
-    public static Dag transformToAlpha(Dag G, ArrayList<Node> alfa) {
+    public static Dag transformToAlpha(Dag G, List<Node> alfa) {
         HashMap<Node, Integer> alfaHash = new HashMap<>();
         for (int i = 0; i < alfa.size(); i++) {
             Node n = alfa.get(i);

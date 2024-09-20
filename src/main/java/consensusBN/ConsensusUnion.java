@@ -20,7 +20,7 @@ public class ConsensusUnion {
      * @param dags The DAGs to be fused.
      * @return The union of the DAGs.
      */
-    public static Dag fusionUnion(ArrayList<Dag> dags) {
+    public static Dag fusionUnion(List<Dag> dags) {
         return fusionUnion(dags, "Union", "0");
     }
 
@@ -29,7 +29,7 @@ public class ConsensusUnion {
      * @param dags The DAGs to be fused.
      * @return The union of the DAGs.
      */
-    public static Dag fusionUnion(ArrayList<Dag> dags, String method, String limit) {
+    public static Dag fusionUnion(List<Dag> dags, String method, String limit) {
         if (method.equals("GeneticTW")) {
             return new GeneticTreeWidthUnion(dags, 42, Integer.parseInt(limit)).fusionUnion();
         }
@@ -75,7 +75,7 @@ public class ConsensusUnion {
     }
 
     // Add all the edges
-    public static Dag applyUnion(ArrayList<Node> alpha, ArrayList<Dag> dags) {
+    public static Dag applyUnion(List<Node> alpha, List<Dag> dags) {
         Dag union = new Dag(alpha);
         for (Node node : alpha) {
             for (Dag d : dags) {
@@ -91,7 +91,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, until the number of edges is less than a number
-    private static Dag applyEdgesLimit(ArrayList<Node> alpha, ArrayList<Dag> dags, List<Edge> edges, String limit) {
+    private static Dag applyEdgesLimit(List<Node> alpha, List<Dag> dags, List<Edge> edges, String limit) {
         int lim = 0;
         switch (limit) {
             case "Mean" -> {
@@ -127,7 +127,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, until the frequency of the edges is less or equal than a number
-    private static Dag applyFrequencyLimit(ArrayList<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, String limit) {
+    private static Dag applyFrequencyLimit(List<Node> alpha, HashMap<Edge, Integer> edgeFrequency, List<Edge> edges, String limit) {
         int lim = 0;
         if (limit.equals("Mean")) {
             for (Integer frequency : edgeFrequency.values()) {
@@ -148,7 +148,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, limiting the maximum number of parents of each node
-    private static Dag applyMaxParents(ArrayList<Node> alpha, List<Edge> edges, String maxParents) {
+    private static Dag applyMaxParents(List<Node> alpha, List<Edge> edges, String maxParents) {
         int lim = Integer.parseInt(maxParents);
         Dag union = new Dag(alpha);
         for (Edge edge : edges) {
@@ -167,7 +167,7 @@ public class ConsensusUnion {
     }
 
     // Add the edges in order of frequency, limiting the maximum tree width. Greedy algorithm.
-    public static Dag applyGreedyMaxTreewidth(ArrayList<Node> alpha, List<Edge> edges, String maxTreewidth) {
+    public static Dag applyGreedyMaxTreewidth(List<Node> alpha, List<Edge> edges, String maxTreewidth) {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
         Dag union = new Dag(alpha);
 
@@ -191,7 +191,7 @@ public class ConsensusUnion {
 
     // GES-like algorithm. In each iteration, adds, removes or reverses the edge that maximizes the score while the tw
     // is less than the limit. Stops when no edge can be added, removed or reversed without decreasing the score.
-    private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, ArrayList<Node> alpha, ArrayList<Dag> dags, String maxTreewidth) {
+    private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, List<Node> alpha, List<Dag> dags, String maxTreewidth) {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
         Dag finalDag;
