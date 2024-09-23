@@ -11,11 +11,11 @@ import static consensusBN.ConsensusUnion.applyGreedyMaxTreewidth;
 public class Fusion_Method implements Population {
 
     private Random random;
+    private int maxTreewidth;
 
     private List<Node> alpha;
     private ArrayList<Edge> edgesAlpha;
     private int totalEdges;
-    private int maxTreewidth;
     private HashMap<Edge, Integer> edgeFrequency;
     private ArrayList<Integer> edgeFrequencyArray;
 

@@ -131,13 +131,22 @@ public class ExperimentsRealBN {
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(dags, seed);
         geneticUnion.populationSize = popSize;
         geneticUnion.candidatesFromInitialDAGs = false;
+        geneticUnion.repeatCandidates = false;
         geneticUnion.numIterations = nIterations;
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnionPuerta = new GeneticTreeWidthUnion(dags, seed);
         geneticUnionPuerta.populationSize = popSize;
         geneticUnionPuerta.candidatesFromInitialDAGs = true;
+        geneticUnionPuerta.repeatCandidates = true;
         geneticUnionPuerta.numIterations = nIterations;
+
+        // Find the treewidth of the union of the dags
+        GeneticTreeWidthUnion geneticUnionPuerta2 = new GeneticTreeWidthUnion(dags, seed);
+        geneticUnionPuerta2.populationSize = popSize;
+        geneticUnionPuerta2.candidatesFromInitialDAGs = true;
+        geneticUnionPuerta2.repeatCandidates = false;
+        geneticUnionPuerta2.numIterations = nIterations;
 
         // Find the treewidth of the dags sampled
         int maxTW = 0;
@@ -236,7 +245,14 @@ public class ExperimentsRealBN {
             geneticUnionPuerta.maxTreewidth = tw;
             geneticUnionPuerta.fusionUnion();
 
+            System.out.println("Greedy Puerta SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.greedyDag) + " | Edges: " + geneticUnionPuerta.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTimeGreedy);
             System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.bestDag) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
+
+            geneticUnionPuerta2.maxTreewidth = tw;
+            geneticUnionPuerta2.fusionUnion();
+
+            System.out.println("Greedy Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.greedyDag) + " | Edges: " + geneticUnionPuerta2.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTimeGreedy);
+            System.out.println("Genetic Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.bestDag) + " | Edges: " + geneticUnionPuerta2.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTime);
 
             double start = System.currentTimeMillis();
             ConsensusUnion.allPossibleArcs = false;

@@ -3,24 +3,26 @@ package consensusBN.Method;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Node;
+import org.albacete.simd.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import static consensusBN.ConsensusUnion.applyUnion;
+import static consensusBN.ConsensusUnion.*;
 
 public class InitialDAGs_Method implements Population {
 
     private Random random;
 
-    private List<Edge> edgesOriginal;
+    private List<Edge>[] edgesOriginal;
     private int nDags;
     private int[] nEdges;
+    private int totalEdges;
+    private int[] firstIndex;
     private List<Node> alpha;
     private int maxTreewidth;
 
     private Dag greedyDag;
+    private List<Dag> greedyDags;
     private double executionTimeGreedy;
 
     @Override
@@ -31,11 +33,24 @@ public class InitialDAGs_Method implements Population {
 
         nDags = dags.size();
         nEdges = new int[nDags];
-        this.edgesOriginal = new ArrayList<>();
+        this.edgesOriginal = new ArrayList[nDags];
+        this.firstIndex = new int[nDags];
         for (int i = 0; i < nDags; i++) {
             nEdges[i] = dags.get(i).getNumEdges();
-            edgesOriginal.addAll(dags.get(i).getEdges());
+            edgesOriginal[i] = new ArrayList<>(dags.get(i).getEdges());
+            totalEdges += nEdges[i];
+            if (i == 0) {
+                firstIndex[i] = 0;
+            } else {
+                firstIndex[i] = firstIndex[i-1] + nEdges[i-1];
+            }
         }
+
+        double startTime = System.currentTimeMillis();
+        greedyDags = originalDAGsGreedyTreewidthBefore(dags, ""+maxTreewidth);
+        greedyDag = fusionUnion(greedyDags);
+
+        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
     }
 
     /**
@@ -43,18 +58,32 @@ public class InitialDAGs_Method implements Population {
      */
     @Override
     public boolean[][] initializePopulation(int populationSize) {
-        int totalEdges = edgesOriginal.size();
         boolean[][] population = new boolean[populationSize][totalEdges];
 
-        for (int i = 0; i < populationSize; i++) {
-            for (int j = 0; j < totalEdges; j++) {
+        // Add the greedy solution to the population
+        for (int i = 0; i < nDags; i++) {
+            for (Edge edge : greedyDags.get(i).getEdges()) {
+                population[0][edgesOriginal[i].indexOf(edge) + firstIndex[i]] = true;
+            }
+        }
+
+        // Add the greedy solution with maxTreewidth-1 to the population
+        List<Dag> greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, ""+(maxTreewidth-1));
+        for (int i = 0; i < nDags; i++) {
+            for (Edge edge : greedyDagsMaxTreewidthMinusOne.get(i).getEdges()) {
+                population[1][edgesOriginal[i].indexOf(edge) + firstIndex[i]] = true;
+            }
+        }
+
+        for (int i = 2; i < populationSize; i++) {
+            for (int j = 2; j < totalEdges; j++) {
                 population[i][j] = random.nextBoolean();
             }
         }
 
         return population;
     }
-
+    
     @Override
     public Dag getUnionFromChromosome(boolean[] chromosome) {
         // Create the DAG that corresponds to each individual
@@ -69,14 +98,14 @@ public class InitialDAGs_Method implements Population {
         return union;
     }
 
-    private ArrayList<Dag> fromChromosomeToDags(boolean[] individual) {
+    private ArrayList<Dag> fromChromosomeToDags(boolean[] chromosome) {
         ArrayList<Dag> dags = new ArrayList<>();
         int cumulativeEdges = 0;
         for (int i = 0; i < nDags; i++) {
             Dag dag = new Dag(alpha);
             for (int j = 0; j < nEdges[i]; j++) {
-                if (individual[cumulativeEdges]) {
-                    dag.addEdge(edgesOriginal.get(cumulativeEdges));
+                if (chromosome[cumulativeEdges]) {
+                    dag.addEdge(edgesOriginal[i].get(j));
                 }
                 cumulativeEdges++;
             }
@@ -88,7 +117,7 @@ public class InitialDAGs_Method implements Population {
 
     @Override
     public Dag getGreedyDag() {
-        return null;
+        return greedyDag;
     }
 
     @Override

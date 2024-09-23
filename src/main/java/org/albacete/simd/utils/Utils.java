@@ -745,13 +745,7 @@ public class Utils {
 
     public static int getTreeWidth(Dag dag) {
         Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(dag);
-        int maxCliqueSize = 0;
-        for (Set<Node> clique : cliques.values()) {
-            if (clique.size() > maxCliqueSize) {
-                maxCliqueSize = clique.size();
-            }
-        }
-        return maxCliqueSize;
+        return cliques.values().stream().mapToInt(Set::size).max().orElse(0);
     }
 
     /**
