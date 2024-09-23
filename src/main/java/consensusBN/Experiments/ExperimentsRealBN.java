@@ -130,7 +130,14 @@ public class ExperimentsRealBN {
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(dags, seed);
         geneticUnion.populationSize = popSize;
+        geneticUnion.candidatesFromInitialDAGs = false;
         geneticUnion.numIterations = nIterations;
+
+        // Find the treewidth of the union of the dags
+        GeneticTreeWidthUnion geneticUnionPuerta = new GeneticTreeWidthUnion(dags, seed);
+        geneticUnionPuerta.populationSize = popSize;
+        geneticUnionPuerta.candidatesFromInitialDAGs = true;
+        geneticUnionPuerta.numIterations = nIterations;
 
         // Find the treewidth of the dags sampled
         int maxTW = 0;
@@ -219,35 +226,43 @@ public class ExperimentsRealBN {
 
         // Execute the genetic union for each treewidth from the last executed to the limit
         for (; tw < treewidth; tw++) {
-            System.out.println("Treewidth: " + tw);
+            System.out.println("\nTreewidth: " + tw);
             geneticUnion.maxTreewidth = tw;
             geneticUnion.fusionUnion();
+
+            System.out.println("Greedy SMHD:\t\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.greedyDag) + " | Edges: " + geneticUnion.greedyDag.getNumEdges() + " | Time: " + geneticUnion.executionTimeGreedy);
+            System.out.println("Genetic SMHD: \t\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + " | Edges: " + geneticUnion.bestDag.getNumEdges() + " | Time: " + geneticUnion.executionTime);
+
+            geneticUnionPuerta.maxTreewidth = tw;
+            geneticUnionPuerta.fusionUnion();
+
+            System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.bestDag) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
 
             double start = System.currentTimeMillis();
             ConsensusUnion.allPossibleArcs = false;
             Dag superGreedyVacia = ConsensusUnion.fusionUnion(dags, "SuperGreedyMaxTreewidth", ""+tw);
             double timeSuperGreedyVacia = (System.currentTimeMillis() - start) / 1000.0;
-            System.out.println("SuperGreedy vacia SMHD: " + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + " | Edges: " + superGreedyVacia.getNumEdges() + " | Time: " + timeSuperGreedyVacia);
+            System.out.println("SuperGreedy v SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + " | Edges: " + superGreedyVacia.getNumEdges() + " | Time: " + timeSuperGreedyVacia);
 
             start = System.currentTimeMillis();
             ConsensusUnion.allPossibleArcs = true;
             Dag superGreedyVaciaAll = ConsensusUnion.fusionUnion(dags, "SuperGreedyMaxTreewidth", ""+tw);
             double timeSuperGreedyVaciaAll = (System.currentTimeMillis() - start) / 1000.0;
-            System.out.println("SuperGreedy vacia all SMHD: " + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVaciaAll) + " | Edges: " + superGreedyVaciaAll.getNumEdges() + " | Time: " + timeSuperGreedyVaciaAll);
+            System.out.println("SuperGreedy v a SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVaciaAll) + " | Edges: " + superGreedyVaciaAll.getNumEdges() + " | Time: " + timeSuperGreedyVaciaAll);
 
             start = System.currentTimeMillis();
             ConsensusUnion.allPossibleArcs = false;
             ConsensusUnion.initialDag = geneticUnion.greedyDag;
             Dag superGreedy = ConsensusUnion.fusionUnion(dags, "SuperGreedyMaxTreewidth", ""+tw);
             double timeSuperGreedy = (System.currentTimeMillis() - start) / 1000.0;
-            System.out.println("SuperGreedy SMHD: " + Utils.SMHD(geneticUnion.fusionUnion,superGreedy) + " | Edges: " + superGreedy.getNumEdges() + " | Time: " + timeSuperGreedy);
+            System.out.println("SuperGreedy SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedy) + " | Edges: " + superGreedy.getNumEdges() + " | Time: " + timeSuperGreedy);
 
             start = System.currentTimeMillis();
             ConsensusUnion.allPossibleArcs = true;
             ConsensusUnion.initialDag = geneticUnion.greedyDag;
             Dag superGreedyAll = ConsensusUnion.fusionUnion(dags, "SuperGreedyMaxTreewidth", ""+tw);
             double timeSuperGreedyAll = (System.currentTimeMillis() - start) / 1000.0;
-            System.out.println("SuperGreedy SMHD all: " + Utils.SMHD(geneticUnion.fusionUnion,superGreedyAll) + " | Edges: " + superGreedyAll.getNumEdges() + " | Time: " + timeSuperGreedyAll);
+            System.out.println("SuperGreedy SMHD a:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedyAll) + " | Edges: " + superGreedyAll.getNumEdges() + " | Time: " + timeSuperGreedyAll);
 
             // Save results
             saveRound(net+"."+bbdd, geneticUnion, randomBN, superGreedy, timeSuperGreedy, superGreedyAll, timeSuperGreedyAll, superGreedyVacia, timeSuperGreedyVacia, superGreedyVaciaAll, timeSuperGreedyVaciaAll, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
