@@ -30,8 +30,16 @@ public class ConsensusUnion {
      * @return The union of the DAGs.
      */
     public static Dag fusionUnion(List<Dag> dags, String method, String limit) {
-        if (method.equals("GeneticTW")) {
-            return new GeneticTreeWidthUnion(dags, 42, Integer.parseInt(limit)).fusionUnion();
+        switch (method) {
+            case "GeneticTW" -> {
+                return new GeneticTreeWidthUnion(dags, 42, Integer.parseInt(limit)).fusionUnion();
+            }
+            case "MaxTreewidthBefore" -> {
+                return applyGreedyMaxTreewidthBefore(dags, limit);
+            }
+            case "MaxTreewidthBeforeWoRepeat" -> {
+                return applyGreedyMaxTreewidthBeforeWoRepeat(dags, limit);
+            }
         }
 
         ArrayList<Node> alpha = alphaOrder(dags);
@@ -189,6 +197,105 @@ public class ConsensusUnion {
         return union;
     }
 
+    // Add the edges in order of frequency, limiting the maximum tree width. Try to add the edges on the original DAGs,
+    // instead of in the union, to obtain a union that respect the limit of treewidth. Do not repeat the edges that
+    // appears in more than one original DAG. Greedy algorithm.
+    public static Dag applyGreedyMaxTreewidthBeforeWoRepeat(List<Dag> dags, String maxTreewidth) {
+        List<Dag> transformedDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, maxTreewidth);
+        return fusionUnion(transformedDags);
+    }
+
+    public static List<Dag> originalDAGsGreedyTreewidthBeforeWoRepeat(List<Dag> dags, String maxTreewidth) {
+        int maxCliqueSize = Integer.parseInt(maxTreewidth);
+
+        ArrayList<Dag> outputDags = new ArrayList<>();
+        for (Dag ignored : dags) {
+            outputDags.add(new Dag(dags.get(0).getNodes()));
+        }
+
+        // Order the edges of all the DAGs by the number of times they appear
+        HashMap<Edge, Integer> edgeFrequency = new HashMap<>();
+        HashMap<Edge, List<Integer>> edgeDag = new HashMap<>();
+
+        for (Dag d : dags) {
+            for (Edge edge : d.getEdges()) {
+                edgeFrequency.put(edge, edgeFrequency.getOrDefault(edge, 0) + 1);
+                edgeDag.putIfAbsent(edge, new ArrayList<>());
+                edgeDag.get(edge).add(dags.indexOf(d));
+            }
+        }
+
+        List<Edge> edges = new ArrayList<>(edgeFrequency.keySet());
+        edges.sort((o1, o2) -> edgeFrequency.get(o2) - edgeFrequency.get(o1));
+
+        for (Edge edge : edges) {
+            // Add the edge to the DAGs that have it initially
+            for (int dagIndex : edgeDag.get(edge)) {
+                outputDags.get(dagIndex).addEdge(edge);
+            }
+
+            // Get the union fusion
+            Dag union = fusionUnion(outputDags);
+
+            // Get the cliques of the union
+            Map<Node, Set<Node>> cliques = Utils.getMoralTriangulatedCliques(union);
+
+            // If the maximum clique size is greater than the limit, remove the edge
+            for (Set<Node> clique : cliques.values()) {
+                if (clique.size() > maxCliqueSize) {
+                    for (int dagIndex : edgeDag.get(edge)) {
+                        outputDags.get(dagIndex).removeEdge(edge);
+                    }
+                    break;
+                }
+            }
+        }
+
+        return outputDags;
+    }
+
+
+    // Add the edges in order of frequency, limiting the maximum tree width. Try to add the edges on the original DAGs,
+    // instead of in the union, to obtain a union that respect the limit of treewidth. Greedy algorithm.
+    public static Dag applyGreedyMaxTreewidthBefore(List<Dag> dags, String maxTreewidth) {
+        List<Dag> transformedDags = originalDAGsGreedyTreewidthBefore(dags, maxTreewidth);
+        return fusionUnion(transformedDags);
+    }
+
+    public static List<Dag> originalDAGsGreedyTreewidthBefore(List<Dag> dags, String maxTreewidth) {
+        int maxCliqueSize = Integer.parseInt(maxTreewidth);
+
+        ArrayList<Dag> outputDags = new ArrayList<>();
+        List<List<Edge>> edges = new ArrayList<>();
+        for (Dag dag : dags) {
+            outputDags.add(new Dag(dags.get(0).getNodes()));
+            edges.add(new LinkedList<>(dag.getEdges()));
+        }
+
+        // While all lists are not empty, try to add a new edge, each time from a different list, while respecting the limit
+        while (edges.stream().anyMatch(list -> !list.isEmpty())) {
+            for (int i = 0; i < edges.size(); i++) {
+                if (edges.get(i).isEmpty()) continue;
+
+                Edge edge = edges.get(i).remove(0);
+                outputDags.get(i).addEdge(edge);
+
+                // Get the union fusion and check the treewidth
+                Dag union = fusionUnion(outputDags);
+                Map<Node, Set<Node>> cliques = Utils.getMoralTriangulatedCliques(union);
+                for (Set<Node> clique : cliques.values()) {
+                    // If the treewidth is greather than the limit, remove the edge
+                    if (clique.size() > maxCliqueSize) {
+                        outputDags.get(i).removeEdge(edge);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return outputDags;
+    }
+
     // GES-like algorithm. In each iteration, adds, removes or reverses the edge that maximizes the score while the tw
     // is less than the limit. Stops when no edge can be added, removed or reversed without decreasing the score.
     private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, List<Node> alpha, List<Dag> dags, String maxTreewidth) {
@@ -268,8 +375,6 @@ public class ConsensusUnion {
         }
         return finalDag;
     }
-
-
 
     private static int tryArc(Dag union, Dag dag, Edge arc, int maxCliqueSize, int operation) {
         if (operation == 0) {  // Add arc
