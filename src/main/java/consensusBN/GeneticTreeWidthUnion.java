@@ -23,6 +23,8 @@ public class GeneticTreeWidthUnion {
     public int maxTreewidth = 5;
     public Boolean candidatesFromInitialDAGs = false;
     public Boolean repeatCandidates = false;
+    public Boolean useSuperGreedy = false;
+    public Boolean addEmptySuperGreedy = false;
 
     // Best values and stats
     private boolean[] bestIndividual;
@@ -58,7 +60,6 @@ public class GeneticTreeWidthUnion {
         for (Dag dag : dags) {
             alphaDags.add(transformToAlpha(dag, alpha));
         }
-        System.out.println("Alpha order: " + alpha);
 
         // Apply the union of the DAGs
         double startTime = System.currentTimeMillis();
@@ -81,17 +82,14 @@ public class GeneticTreeWidthUnion {
 
         if (candidatesFromInitialDAGs) {
             if (!repeatCandidates) {
-                System.out.println("Initial DAGs without repeat");
                 method = new InitialDAGsWoRepeat_Method();
             }
             else {
-                System.out.println("Initial DAGs with repeat");
                 method = new InitialDAGs_Method();
             }
         }
         else {
-            System.out.println("Fusion without repeat");
-            method = new Fusion_Method();
+            method = new Fusion_Method(useSuperGreedy, addEmptySuperGreedy);
         }
 
         method.initialize(originalDags, alpha, alphaDags, maxTreewidth, random);
