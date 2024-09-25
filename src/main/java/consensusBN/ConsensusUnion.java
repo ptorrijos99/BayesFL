@@ -399,7 +399,7 @@ public class ConsensusUnion {
             if (clique.size() > maxCliqueSize) return Integer.MAX_VALUE;
         }
 
-        if (!dag.findCycle().isEmpty()) return Integer.MAX_VALUE;
+        //if (!dag.findCycle().isEmpty()) return Integer.MAX_VALUE;
 
         return Utils.SMHD(union, dag);
     }

@@ -17,7 +17,7 @@ public class SimpleBNExperiment {
     public static void main(String[] args){
         // 1. Configuration
         String networkFolder = "./res/networks/";
-        String net_name = "andes";
+        String net_name = "sachs";
         String net_path = networkFolder + net_name + ".xbif";
         String bbdd_path = networkFolder + "BBDD/" + net_name + ".0.csv";
         DataSet ds = Utils.readData(bbdd_path);
@@ -31,7 +31,7 @@ public class SimpleBNExperiment {
         BNBuilder algorithm = new PGESwithStages(ds, clustering, 4, 30, 10000, false, true, true);
         //BNBuilder algorithm = new GES_BNBuilder(ds, true);
         //BNBuilder algorithm = new Circular_GES(ds, clustering, 4, 100000, "c4");
-        //BNBuilder algorithm = new Fges_BNBuilder(ds);
+        //BNBuilder algorithm = new Fges_BNBuilder(ds, false);
         //BNBuilder algorithm = new Empty(ds);
         
         // Experiment
