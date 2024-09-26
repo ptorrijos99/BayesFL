@@ -5,7 +5,7 @@ import edu.cmu.tetrad.data.DiscreteVariable;
 import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Graph;
 import edu.cmu.tetrad.graph.Node;
-import edu.cmu.tetrad.search.BDeuScore;
+import edu.cmu.tetrad.search.score.BdeuScore;
 import org.albacete.simd.threads.GESThread;
 
 import java.util.HashMap;
@@ -68,7 +68,7 @@ public class Problem {
     /**
      * BDeu Score.
      */
-    protected BDeuScore bdeu;
+    protected BdeuScore bdeu;
 
     /**
      * Score of the empty graph.
@@ -109,7 +109,7 @@ public class Problem {
         Graph graph = new EdgeListGraph(new LinkedList<Node>(this.variables));
         buildIndexing(graph);
         
-        bdeu = new BDeuScore(data);
+        bdeu = new BdeuScore(data);
 
         emptyGraphScore = GESThread.scoreGraph(new EdgeListGraph(new LinkedList<>(getVariables())), this);
         nInstances = dataSet.getNumRows();
@@ -203,7 +203,7 @@ public class Problem {
         return localScoreCacheMCTS;
     }
     
-    public BDeuScore getBDeu() {
+    public BdeuScore getBDeu() {
         return bdeu;
     }
 

@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import edu.cmu.tetrad.search.score.IndTestScore;
+import edu.cmu.tetrad.search.test.IndTestChiSquare;
 import org.albacete.simd.algorithms.bnbuilders.GES_BNBuilder;
 import org.albacete.simd.algorithms.bnbuilders.PGESwithStages;
 import org.albacete.simd.clustering.Clustering;
@@ -177,9 +179,6 @@ public class MCTSBN {
                 break;
             case "CPC":
                 initializeWithCPC();
-                break;
-            case "PC-Max":
-                initializeWithPCMax();
                 break;
         }
 
@@ -412,33 +411,27 @@ public class MCTSBN {
         initialize(dag, init);
     }
 
+    // TODO: Revisar tests estadísticos
     private void initializeWithPC() {
         double init = System.currentTimeMillis();
-        IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
+        IndependenceTest bdeu_test = new IndTestChiSquare(problem.getData(),0.05);
         Pc alg = new Pc(bdeu_test);
         Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
+    // TODO: Revisar tests estadísticos
     private void initializeWithCPC() {
         double init = System.currentTimeMillis();
-        IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
+        IndependenceTest bdeu_test = new IndTestChiSquare(problem.getData(),0.05);
         Cpc alg = new Cpc(bdeu_test);
-        Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
-        initialize(dag, init);
-    }
-
-    private void initializeWithPCMax() {
-        double init = System.currentTimeMillis();
-        IndependenceTest bdeu_test = new IndTestScore(problem.getBDeu());
-        PcStableMax alg = new PcStableMax(bdeu_test);
         Dag dag = new Dag(Utils.removeInconsistencies(alg.search()));
         initialize(dag, init);
     }
 
     private void initialize(Dag currentDag, double init) {
         for (int i = 0; i < 10000; i++) {
-            orderSet.add(hc.nodeToIntegerList(currentDag.getTopologicalOrder()));
+            orderSet.add(hc.nodeToIntegerList(Utils.getTopologicalOrder(currentDag)));
         }
 
         System.out.println("\nFINISHED " + this.initializeAlgorithm + " (" + ((System.currentTimeMillis() - init)/1000.0) + " s)");

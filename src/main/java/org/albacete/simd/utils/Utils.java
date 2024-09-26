@@ -9,14 +9,18 @@ import edu.cmu.tetrad.data.*;
 import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.SearchGraphUtils;
+import edu.pitt.dbmi.data.reader.*;
+import edu.pitt.dbmi.data.reader.tabular.*;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
 import weka.estimators.Estimator;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
+
+import static edu.cmu.tetrad.util.DataConvertUtils.toDataModel;
 
 public class Utils {
 
@@ -194,19 +198,45 @@ public class Utils {
      * @return DataSet containing the data from the csv file.
      */
     public static DataSet readData(String path){
-        // Initial Configuration
-        DataReader reader = new DataReader();
-        reader.setDelimiter(DelimiterType.COMMA);
-        reader.setMaxIntegralDiscrete(100);
-        DataSet dataSet = null;
-        // Reading data
+        Path dataFile = Path.of(path);
+
+        // Reading the header of the columns
+        TabularColumnReader columnReader = new TabularColumnFileReader(dataFile, Delimiter.COMMA);
+        boolean isDiscrete = true;
+        DataColumn[] dataColumns;
         try {
-            dataSet = reader.parseTabular(new File(path));
+            dataColumns = columnReader.readInDataColumns(isDiscrete);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
-        return dataSet;
+        // Reading the data
+        TabularDataReader dataReader = new TabularDataFileReader(dataFile, Delimiter.COMMA);
+        Data data;
+        try {
+            data = dataReader.read(dataColumns, isDiscrete);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        int[][] dataValues = ((VerticalDiscreteTabularData)data).getData();
+        // Convert to double
+        double[][] doubleDataValues = new double[dataValues.length][dataValues[0].length];
+        for (int i = 0; i < dataValues.length; i++) {
+            for (int j = 0; j < dataValues[0].length; j++) {
+                doubleDataValues[i][j] = dataValues[i][j];
+            }
+        }
+
+        DiscreteDataColumn[] columns = ((VerticalDiscreteTabularData)data).getDataColumns();
+        // Convert to list<Node>
+        List<Node> columnNodes = new ArrayList<>();
+        for (DiscreteDataColumn column : columns) {
+            columnNodes.add(new DiscreteVariable(column.getDataColumn().getName(), column.getCategories()));
+        }
+
+        // Convert to DataSet
+        return new BoxDataSet(new VerticalDoubleDataBox(doubleDataValues), columnNodes);
     }
 
 
@@ -274,6 +304,18 @@ public class Utils {
         return sum;
     }
 
+    public static int SMHDwithoutMoralize(Graph bn1, Graph bn2) {
+        int sum = 0;
+        for(Edge e: bn1.getEdges()) {
+            if(!bn2.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
+        }
+
+        for(Edge e: bn2.getEdges()) {
+            if(!bn1.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
+        }
+        return sum;
+    }
+
     // This function was used in the SMHD instead of moralize
     private static Graph connectParents(Graph bn) {
         EdgeListGraph g = new EdgeListGraph(bn);
@@ -336,7 +378,7 @@ public class Utils {
         Dag gPlus = ConsensusUnion.fusionUnion(Arrays.asList(g1, g2));
 
         // 𝜎 = a topological order for 𝐺+
-        List<Node> sigma = gPlus.getTopologicalOrder();
+        List<Node> sigma = getTopologicalOrder(gPlus);
 
         // 𝐺𝜎 = MethodA(𝐺,𝜎)  // Minimal 𝐼-map, Algorithm 1
         Dag gSigma1 = BetaToAlpha.transformToAlpha(g1, sigma);
@@ -487,8 +529,7 @@ public class Utils {
                 nodeT = e.getNode2();
                 nodeH = e.getNode1();
             }
-
-            if(g.existsDirectedPathFromTo(nodeT, nodeH)){
+            if(g.paths().existsDirectedPath(nodeT, nodeH)){
                 System.out.println("Directed path from " + nodeT + " to " + nodeH +"\t Deleting Edge...");
                 g.removeEdge(e);
             }
@@ -605,7 +646,7 @@ public class Utils {
 
     public static double LL(Dag g, DataSet data) {
         BayesPm bnaux = new BayesPm(g);
-        MlBayesIm bnOut = new MlBayesIm(bnaux, MlBayesIm.MANUAL);
+        MlBayesIm bnOut = new MlBayesIm(bnaux, MlBayesIm.InitializationMethod.MANUAL);
         return LL(bnOut, data);
     }
 
@@ -806,7 +847,7 @@ public class Utils {
         for (int i = numOfNodes - 1; i >= 0; i--) {
             Node v = ordering[i];
 
-            // find pairs of neighbors with lower order
+            /*// find pairs of neighbors with lower order
             for (int j = 0; j < i; j++) {
                 Node w = ordering[j];
                 if (graph.isAdjacentTo(v, w)) {
@@ -817,8 +858,29 @@ public class Utils {
                         }
                     }
                 }
+            }*/
+
+            // TODO: CAMBIADO PARA MÁS EFICIENCIA
+            // Conjunto de vecinos de v que tienen un índice menor a i
+            Set<Node> neighbors = new HashSet<>();
+            for (int j = 0; j < i; j++) {
+                Node w = ordering[j];
+                if (graph.isAdjacentTo(v, w)) {
+                    neighbors.add(w);
+                }
+            }
+
+            // Crear aristas entre los vecinos no adyacentes
+            for (Node w : neighbors) {
+                for (Node x : neighbors) {
+                    if (!graph.isAdjacentTo(w, x)) {
+                        graph.addUndirectedEdge(w, x); // fill in edge
+                    }
+                }
             }
         }
+
+
     }
 
     /**
@@ -899,5 +961,138 @@ public class Utils {
                 });
 
         return moralGraph;
+    }
+
+    public static ArrayList<Node> getTopologicalOrder(Dag dag){
+        Random random = new Random();
+
+        ArrayList<Node> L = new ArrayList<>();
+        ArrayList<Node> S = new ArrayList<>();
+
+        Dag graphCopy = new Dag(dag);
+
+        // S -> Root nodes, without parents
+        for (Node node : graphCopy.getNodes()) {
+            if (graphCopy.getParents(node).isEmpty()) {
+                S.add(node);
+            }
+        }
+
+        while (!S.isEmpty()) {
+            Node node = S.remove(random.nextInt(S.size()));
+            L.add(node);
+
+            // Delete the node, and the edges to the children.
+            // If now the children have no parents, we add them to S
+            for (Node children : graphCopy.getAdjacentNodes(node)) {
+                graphCopy.removeEdges(node, children);
+                if (graphCopy.getParents(children).isEmpty()) {
+                    S.add(children);
+                }
+            }
+        }
+
+        return L;
+    }
+
+    /**
+     * Converts a graph to a Graphviz .dot file
+     */
+    public static String graphToDot(Graph graph) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("digraph g {\n");
+        for (Edge edge : graph.getEdges()) {
+            String n1 = edge.getNode1().getName();
+            String n2 = edge.getNode2().getName();
+
+            Endpoint end1 = edge.getEndpoint1();
+            Endpoint end2 = edge.getEndpoint2();
+
+            if (n1.compareTo(n2) > 0) {
+                String temp = n1;
+                n1 = n2;
+                n2 = temp;
+
+                Endpoint tmp = end1;
+                end1 = end2;
+                end2 = tmp;
+            }
+            builder.append(" \"").append(n1).append("\" -> \"").append(n2).append("\" [");
+
+            if (end1 != Endpoint.TAIL) {
+                builder.append("dir=both, ");
+            }
+
+            builder.append("arrowtail=");
+            if (end1 == Endpoint.ARROW) {
+                builder.append("normal");
+            } else if (end1 == Endpoint.TAIL) {
+                builder.append("none");
+            } else if (end1 == Endpoint.CIRCLE) {
+                builder.append("odot");
+            }
+            builder.append(", arrowhead=");
+            if (end2 == Endpoint.ARROW) {
+                builder.append("normal");
+            } else if (end2 == Endpoint.TAIL) {
+                builder.append("none");
+            } else if (end2 == Endpoint.CIRCLE) {
+                builder.append("odot");
+            }
+
+            // Bootstrapping
+            List<EdgeTypeProbability> edgeTypeProbabilities = edge.getEdgeTypeProbabilities();
+            if (edgeTypeProbabilities != null && !edgeTypeProbabilities.isEmpty()) {
+                StringBuilder label = new StringBuilder(n1 + " - " + n2);
+                for (EdgeTypeProbability edgeTypeProbability : edgeTypeProbabilities) {
+                    EdgeTypeProbability.EdgeType edgeType = edgeTypeProbability.getEdgeType();
+                    double probability = edgeTypeProbability.getProbability();
+                    if (probability > 0) {
+                        StringBuilder edgeTypeString = new StringBuilder();
+                        switch (edgeType) {
+                            case nil:
+                                edgeTypeString = new StringBuilder("no edge");
+                                break;
+                            case ta:
+                                edgeTypeString = new StringBuilder("-->");
+                                break;
+                            case at:
+                                edgeTypeString = new StringBuilder("&lt;--");
+                                break;
+                            case ca:
+                                edgeTypeString = new StringBuilder("o->");
+                                break;
+                            case ac:
+                                edgeTypeString = new StringBuilder("&lt;-o");
+                                break;
+                            case cc:
+                                edgeTypeString = new StringBuilder("o-o");
+                                break;
+                            case aa:
+                                edgeTypeString = new StringBuilder("&lt;-&gt;");
+                                break;
+                            case tt:
+                                edgeTypeString = new StringBuilder("---");
+                                break;
+                        }
+
+                        List<Edge.Property> properties = edgeTypeProbability.getProperties();
+                        if (properties != null && !properties.isEmpty()) {
+                            for (Edge.Property property : properties) {
+                                edgeTypeString.append(" ").append(property.toString());
+                            }
+                        }
+
+                        label.append("\\n[").append(edgeTypeString).append("]:").append(edgeTypeProbability.getProbability());
+                    }
+                }
+                builder.append(", label=\"").append(label).append("\", fontname=courier");
+            }
+
+            builder.append("]; \n");
+        }
+        builder.append("}");
+
+        return builder.toString();
     }
 }

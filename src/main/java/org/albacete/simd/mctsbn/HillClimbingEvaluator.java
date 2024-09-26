@@ -1,7 +1,7 @@
 package org.albacete.simd.mctsbn;
 
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.BDeuScore;
+import edu.cmu.tetrad.search.score.BdeuScore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,13 +31,13 @@ public class HillClimbingEvaluator {
 
     private final static int MAX_ITERATIONS = 1000;
 
-    private final BDeuScore metric;
+    private final BdeuScore metric;
 
     public HillClimbingEvaluator(Problem problem, ConcurrentHashMap<String,Double> localScoreCache){
         this.problem = problem;
         this.localScoreCache = localScoreCache;
         this.graph = new EdgeListGraph();
-        metric = new BDeuScore(problem.getData());
+        metric = new BdeuScore(problem.getData());
     }
 
     public HillClimbingEvaluator(Problem problem, ArrayList<Integer> order, ConcurrentHashMap<String,Double> localScoreCache){
@@ -191,7 +191,7 @@ public class HillClimbingEvaluator {
                 Set<Integer> parents = evaluate(node, candidates).set;
                 for (int parent : parents) {
                     // Check cycles
-                    if (graph.isAncestorOf(problem.getNode(node), problem.getNode(parent))) {
+                    if (graph.paths().existsDirectedPath(problem.getNode(node), problem.getNode(parent))) {
                         continue;
                     }
 

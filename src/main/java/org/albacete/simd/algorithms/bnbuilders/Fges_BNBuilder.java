@@ -2,7 +2,7 @@ package org.albacete.simd.algorithms.bnbuilders;
 
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.Graph;
-import edu.cmu.tetrad.search.BDeuScore;
+import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.framework.*;
 
@@ -22,15 +22,14 @@ public class Fges_BNBuilder extends BNBuilder {
 
     @Override
     public Graph search(){
-        BDeuScore bdeu = new BDeuScore(this.getData());
+        BdeuScore bdeu = new BdeuScore(this.getData());
 
         Fges fges = new Fges(bdeu);
         fges.setFaithfulnessAssumed(setFaithfulnessAssumed);
         Graph initialGraph = super.getInitialGraph();
         if (initialGraph != null) {
-            fges.setExternalGraph(initialGraph);
+            fges.setInitialGraph(initialGraph);
         }
-        
         
         this.currentGraph = fges.search();
         this.score = fges.scoreDag(currentGraph);

@@ -42,6 +42,7 @@ import edu.cmu.tetrad.data.DataSet;
 import bayesfl.Client;
 import bayesfl.Server;
 import bayesfl.convergence.ModelEquality;
+import org.albacete.simd.utils.Utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -84,7 +85,7 @@ public class LocalExperiment {
 
         if ((!checkExistentFile(savePath))) {
             
-            DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();

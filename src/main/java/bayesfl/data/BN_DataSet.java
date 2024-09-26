@@ -1,15 +1,12 @@
 package bayesfl.data;
 
 import edu.cmu.tetrad.data.BoxDataSet;
-import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.data.VerticalDoubleDataBox;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import org.albacete.simd.utils.Problem;
+import org.albacete.simd.utils.Utils;
 
 public class BN_DataSet implements Data {
 
@@ -30,7 +27,7 @@ public class BN_DataSet implements Data {
     }
     
     public BN_DataSet(String path, String name) {
-        this.data = readData(path);
+        this.data = Utils.readData(path);
         this.problem = new Problem(data);
         this.name = name;
     }
@@ -39,23 +36,6 @@ public class BN_DataSet implements Data {
         this.data = data;
         this.problem = new Problem(data);
         this.name = name;
-    }
-
-    public static DataSet readData(String path) {
-        // Initial Configuration
-        DataReader reader = new DataReader();
-        reader.setDelimiter(DelimiterType.COMMA);
-        reader.setMaxIntegralDiscrete(100);
-        DataSet dataSet = null;
-
-        // Reading data
-        try {
-            dataSet = reader.parseTabular(new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return dataSet;
     }
     
     public static ArrayList<DataSet> divideDataSet(DataSet data, int N) {

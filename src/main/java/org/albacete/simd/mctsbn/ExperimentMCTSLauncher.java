@@ -1,12 +1,8 @@
 package org.albacete.simd.mctsbn;
 
-import edu.cmu.tetrad.data.DiscreteVariable;
-import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.data.DataReader;
-import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
@@ -64,7 +60,7 @@ public class ExperimentMCTSLauncher {
             HillClimbingEvaluator hc = mctsbn.hc;
 
             Dag dagOriginal = new Dag(controlBayesianNetwork.getDag());
-            ArrayList<Node> ordenOriginal = dagOriginal.getTopologicalOrder();
+            ArrayList<Node> ordenOriginal = Utils.getTopologicalOrder(dagOriginal);
             ArrayList<Integer> ordenNuevosNodos = new ArrayList<>(ordenOriginal.size());
             for (Node node : ordenOriginal) {
                 for (Node node2 : problem.getVariables()) {
@@ -164,9 +160,6 @@ public class ExperimentMCTSLauncher {
         BayesPm bayesPm = Utils.transformBayesNetToBayesPm(bayesianNet);
         MlBayesIm bn2 = new MlBayesIm(bayesPm);
 
-        DataReader reader = new DataReader();
-        reader.setDelimiter(DelimiterType.COMMA);
-        reader.setMaxIntegralDiscrete(100);
         return bn2;
     }
 

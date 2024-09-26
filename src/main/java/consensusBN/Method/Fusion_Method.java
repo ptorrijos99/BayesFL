@@ -57,6 +57,8 @@ public class Fusion_Method implements Population {
                 if (added == null) {
                     edgesAlpha.add(edge);
                     edgeFrequencyArray.add(1);
+                } else {
+                    edgeFrequencyArray.set(edgesAlpha.indexOf(edge), added + 1);
                 }
             }
         }
@@ -103,8 +105,9 @@ public class Fusion_Method implements Population {
             timeSuperGreedy = (System.currentTimeMillis() - startTime) / 1000;
 
             for (int j = 0; j < totalEdges; j++) {
-                population[3][j] = superGreedyDag.containsEdge(edgesAlpha.get(j));
+                population[2][j] = superGreedyDag.containsEdge(edgesAlpha.get(j));
             }
+
             i++;
 
             if (addEmptySuperGreedy) {
@@ -116,7 +119,7 @@ public class Fusion_Method implements Population {
                 timeSuperGreedyEmpty = (System.currentTimeMillis() - startTime) / 1000;
 
                 for (int j = 0; j < totalEdges; j++) {
-                    population[2][j] = superGreedyEmptyDag.containsEdge(edgesAlpha.get(j));
+                    population[3][j] = superGreedyEmptyDag.containsEdge(edgesAlpha.get(j));
                 }
                 i++;
             }

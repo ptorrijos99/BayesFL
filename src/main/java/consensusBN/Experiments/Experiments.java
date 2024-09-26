@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static bayesfl.data.BN_DataSet.readData;
+import static org.albacete.simd.utils.Utils.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 
@@ -63,9 +63,9 @@ public class Experiments {
         String net = "asia.0";
 
         // Generic network (net = number of nodes)
-        //String net = ""+5;
+        //String net = ""+30;
 
-        int nClients = 4;
+        int nClients = 5;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -76,7 +76,12 @@ public class Experiments {
 
     public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed) {
         String savePath = "./results/Server/" + net + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
-        // TODO: DESCOMENTAR ESTAS LÍNEAS
+
+        // Check if the folder (and subfolders) exists
+        if (!new File("./results/Server/").exists()) {
+            new File("./results/Server/").mkdirs();
+        }
+
         // Check if the file exists, and if it does, get the maximum treewidth found
         int tw = 2;
         if (new File(savePath).exists()) {
@@ -139,7 +144,7 @@ public class Experiments {
 
 
 
-        // Print the dags
+        /*// Print the dags
         // Original DAG
         Dag originalDag = new Dag(randomBN.originalBayesIm.getDag());
         System.out.println("\nOriginal DAG with " + originalDag.getNumEdges() + " edges:");
@@ -147,7 +152,7 @@ public class Experiments {
         System.out.println("Treewidth: " + getTreeWidth(originalDag));
         System.out.println("MaxParents: " + maxParents(originalDag));
         System.out.println("MeanParents: " + meanParents(originalDag));
-        System.out.println(GraphUtils.graphToDot(randomBN.originalBayesIm.getDag()));
+        System.out.println(Utils.graphToDot(randomBN.originalBayesIm.getDag()));
         // Generated DAGs
         for (int i = 0; i < dags.size(); i++) {
             System.out.println("\nDAG " + i + " with " + dags.get(i).getNumEdges() + " edges:");
@@ -158,7 +163,7 @@ public class Experiments {
             System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, dags.get(i)));
             System.out.println("MaxParents: " + maxParents(dags.get(i)));
             System.out.println("MeanParents: " + meanParents(dags.get(i)));
-            System.out.println(GraphUtils.graphToDot(dags.get(i)));
+            System.out.println(Utils.graphToDot(dags.get(i)));
         }
 
         // Fusion DAG
@@ -171,9 +176,9 @@ public class Experiments {
         System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, unionDagPrueba));
         System.out.println("MaxParents: " + maxParents(unionDagPrueba));
         System.out.println("MeanParents: " + meanParents(unionDagPrueba));
-        System.out.println(GraphUtils.graphToDot(unionDagPrueba));
+        System.out.println(Utils.graphToDot(unionDagPrueba));
 
-
+*/
 
 
         // Find the treewidth of the union of the dags

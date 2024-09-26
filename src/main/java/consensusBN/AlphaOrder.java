@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.Endpoint;
-import edu.cmu.tetrad.graph.Node;
+import edu.cmu.tetrad.graph.*;
 
 public class AlphaOrder {
 
@@ -99,7 +96,7 @@ public class AlphaOrder {
                 child = children.get(i++);
                 g.removeEdge(node_alpha_g, child);
                 seguir = false;
-                if (g.existsDirectedPathFromTo(node_alpha_g, child)) {
+                if (g.paths().existsDirectedPath(node_alpha_g, child)) {
                     seguir = true;
                     g.addEdge(new Edge(node_alpha_g, child, Endpoint.TAIL, Endpoint.ARROW));
                 }

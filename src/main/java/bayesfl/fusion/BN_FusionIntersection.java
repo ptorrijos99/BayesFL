@@ -34,6 +34,7 @@ package bayesfl.fusion;
 import bayesfl.model.BN;
 import edu.cmu.tetrad.graph.*;
 import bayesfl.model.Model;
+import org.albacete.simd.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -69,7 +70,7 @@ public class BN_FusionIntersection implements Fusion {
     }
 
     private Dag fusionIntersection(Dag[] graphs) {
-        ArrayList<Node> order = new ArrayList<>(graphs[0].getCausalOrdering()); // Randomly first graph
+        ArrayList<Node> order = new ArrayList<>(Utils.getTopologicalOrder(graphs[0])); // Randomly first graph
 
         for(Dag graph : graphs) {
             for(Edge e : graph.getEdges()) {

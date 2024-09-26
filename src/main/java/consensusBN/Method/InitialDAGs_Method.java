@@ -3,7 +3,6 @@ package consensusBN.Method;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Node;
-import org.albacete.simd.utils.Utils;
 
 import java.util.*;
 
@@ -91,7 +90,7 @@ public class InitialDAGs_Method implements Population {
         Dag union = applyUnion(alpha, candidates);
 
         // Check cycles
-        if (!union.findCycle().isEmpty()) {
+        if (!union.paths().existsDirectedCycle()) {
             return null;
         }
 

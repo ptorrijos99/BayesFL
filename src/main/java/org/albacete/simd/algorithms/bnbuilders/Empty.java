@@ -3,7 +3,7 @@ package org.albacete.simd.algorithms.bnbuilders;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Graph;
-import edu.cmu.tetrad.search.BDeuScore;
+import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
 import java.util.LinkedList;
 import org.albacete.simd.framework.*;
@@ -20,7 +20,7 @@ public class Empty extends BNBuilder {
 
     @Override
     public Graph search(){
-        BDeuScore bdeu = new BDeuScore(this.getData());
+        BdeuScore bdeu = new BdeuScore(this.getData());
         Fges fges = new Fges(bdeu);
         currentGraph = new EdgeListGraph(new LinkedList<>(problem.getVariables()));
         this.score = fges.scoreDag(currentGraph);

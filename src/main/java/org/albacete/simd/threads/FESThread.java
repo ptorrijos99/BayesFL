@@ -1,8 +1,8 @@
 package org.albacete.simd.threads;
 
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.MeekRules;
-import edu.cmu.tetrad.search.SearchGraphUtils;
+import edu.cmu.tetrad.search.utils.MeekRules;
+import edu.cmu.tetrad.search.utils.GraphSearchUtils;
 import org.albacete.simd.utils.Problem;
 
 import java.util.*;
@@ -236,9 +236,8 @@ public class FESThread extends GESThread {
     }
 
     private Set<Node> revertToCPDAG(Graph graph) {
-        SearchGraphUtils.basicCPDAG(graph);
+        GraphSearchUtils.basicCpdag(graph);
         MeekRules rules = new MeekRules();
-        rules.setAggressivelyPreventCycles(true);
         return rules.orientImplied(graph);
     }
 

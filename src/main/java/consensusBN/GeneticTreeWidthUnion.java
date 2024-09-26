@@ -41,6 +41,7 @@ public class GeneticTreeWidthUnion {
     private final List<Dag> originalDags;
     public Dag greedyDag;
     public Dag fusionUnion;
+    public Graph moralGraphUnion;
 
     private double[] fitness;
     private int[] treeWidths;
@@ -64,6 +65,7 @@ public class GeneticTreeWidthUnion {
         // Apply the union of the DAGs
         double startTime = System.currentTimeMillis();
         fusionUnion = applyUnion(alpha, alphaDags);
+        moralGraphUnion = Utils.moralize(fusionUnion);
         executionTimeUnion = (System.currentTimeMillis() - startTime) / 1000;
     }
 
@@ -273,24 +275,25 @@ public class GeneticTreeWidthUnion {
     }
 
     private double calculateFitness(int index) {
-        Dag union = method.getUnionFromChromosome(population[index]);
-        if (union == null) {
+        Dag individualDag = method.getUnionFromChromosome(population[index]);
+        if (individualDag == null) {
             return Double.MAX_VALUE;
         }
 
         // Get the cliques
-        treeWidths[index] = Utils.getTreeWidth(union);
+        treeWidths[index] = Utils.getTreeWidth(individualDag);
+        Graph moralIndividualGraph = Utils.moralize(individualDag);
 
         double fitness;
         if (treeWidths[index] > maxTreewidth) {
-            fitness = Utils.SMHD(union, fusionUnion) * ((double)  treeWidths[index] / maxTreewidth);
+            fitness = Utils.SMHDwithoutMoralize(moralIndividualGraph, moralGraphUnion) * ((double)  treeWidths[index] / maxTreewidth);
         } else {
-            fitness = Utils.SMHD(union, fusionUnion);
+            fitness = Utils.SMHDwithoutMoralize(moralIndividualGraph, moralGraphUnion);
         }
 
         if (fitness < bestFitness && treeWidths[index] <= maxTreewidth) {
             bestIndividual = population[index].clone();
-            bestDag = union;
+            bestDag = individualDag;
             bestFitness = fitness;
         }
 
