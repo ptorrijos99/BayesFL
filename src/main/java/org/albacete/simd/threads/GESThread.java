@@ -1,8 +1,8 @@
 package org.albacete.simd.threads;
 
 import edu.cmu.tetrad.graph.*;
-import edu.cmu.tetrad.search.MeekRules;
-import edu.cmu.tetrad.search.SearchGraphUtils;
+import edu.cmu.tetrad.search.utils.MeekRules;
+import edu.cmu.tetrad.search.utils.GraphSearchUtils;
 import edu.cmu.tetrad.util.NumberFormatUtil;
 import org.albacete.simd.utils.LocalScoreCacheConcurrent;
 import org.albacete.simd.utils.Problem;
@@ -321,7 +321,7 @@ public abstract class GESThread implements Runnable{
      * @param graph Graph being rebuilt.
      */
     protected void rebuildPattern(Graph graph) {
-        SearchGraphUtils.basicCPDAG(graph);
+        GraphSearchUtils.basicCpdag(graph);
         pdag(graph);
     }
 
@@ -339,7 +339,6 @@ public abstract class GESThread implements Runnable{
      */
     protected void pdag(Graph graph) {
         MeekRules rules = new MeekRules();
-        rules.setAggressivelyPreventCycles(this.aggressivelyPreventCycles);
         rules.orientImplied(graph);
     }
 

@@ -2,6 +2,7 @@ package org.albacete.simd.framework;
 
 import edu.cmu.tetrad.graph.*;
 import org.albacete.simd.utils.Problem;
+import org.albacete.simd.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public abstract class FusionStage extends Stage {
 
 
     protected Dag fusionIntersection(){
-        ArrayList<Node> order = new ArrayList<>(this.currentGraph.getCausalOrdering()); // currentGraph.getCausalOrdering
+        ArrayList<Node> order = new ArrayList<>(Utils.getTopologicalOrder((Dag) this.currentGraph)); // currentGraph.getCausalOrdering
         for(int i = 0; i < this.graphs.size(); i++) {
             for(Edge e:this.graphs.get(i).getEdges()) {
                 if((order.indexOf(e.getNode1()) < order.indexOf(e.getNode2())) && (e.getEndpoint1()== Endpoint.TAIL && e.getEndpoint2()==Endpoint.ARROW))

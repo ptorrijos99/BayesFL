@@ -42,6 +42,7 @@ import edu.cmu.tetrad.data.DataSet;
 import bayesfl.Client;
 import bayesfl.Server;
 import bayesfl.convergence.NoneConvergence;
+import org.albacete.simd.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,7 @@ public class LocalMCTSExperiment {
         String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
-            DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
@@ -119,7 +120,7 @@ public class LocalMCTSExperiment {
         String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
-        DataSet allData = BN_DataSet.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+        DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
         ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
         ArrayList<Client> clients = new ArrayList<>();

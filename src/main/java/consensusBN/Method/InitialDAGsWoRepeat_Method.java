@@ -105,7 +105,7 @@ public class InitialDAGsWoRepeat_Method implements Population {
         Dag union = applyUnion(alpha, candidates);
 
         // Check cycles
-        if (!union.findCycle().isEmpty()) {
+        if (!union.paths().existsDirectedCycle()) {
             return null;
         }
 

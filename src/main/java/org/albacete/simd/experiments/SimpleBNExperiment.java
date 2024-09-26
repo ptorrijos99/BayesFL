@@ -1,8 +1,6 @@
 package org.albacete.simd.experiments;
 
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.search.BDeuScore;
-import edu.cmu.tetrad.search.Fges;
 
 import org.albacete.simd.algorithms.bnbuilders.*;
 import org.albacete.simd.clustering.*;
@@ -17,7 +15,7 @@ public class SimpleBNExperiment {
     public static void main(String[] args){
         // 1. Configuration
         String networkFolder = "./res/networks/";
-        String net_name = "sachs";
+        String net_name = "pigs";
         String net_path = networkFolder + net_name + ".xbif";
         String bbdd_path = networkFolder + "BBDD/" + net_name + ".0.csv";
         DataSet ds = Utils.readData(bbdd_path);
@@ -42,7 +40,7 @@ public class SimpleBNExperiment {
         experiment.printResults();
         String savePath = "results/prueba.txt";
         
-        /*BDeuScore bdeu = new BDeuScore(ds);
+        /*BdeuScore bdeu = new BdeuScore(ds);
         Fges fges = new Fges(bdeu);
         System.out.println("Score FGES: " + fges.scoreDag(experiment.resultingBayesianNetwork));*/
         

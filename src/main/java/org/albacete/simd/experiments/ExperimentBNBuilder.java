@@ -2,7 +2,6 @@ package org.albacete.simd.experiments;
 
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.data.DataReader;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.data.DelimiterType;
 import edu.cmu.tetrad.graph.Dag;
@@ -69,7 +68,7 @@ public class ExperimentBNBuilder {
     protected String log = "";
     protected String algName;
     protected long seed = -1;
-    private MlBayesIm controlBayesianNetwork;
+    private BayesPm controlBayesianNetwork;
     public Dag resultingBayesianNetwork;
 
 
@@ -242,23 +241,17 @@ public class ExperimentBNBuilder {
         System.out.println("BBDD_path: " + databasePath);
     }
 
-    private MlBayesIm readOriginalBayesianNetwork() throws Exception {
+    private BayesPm readOriginalBayesianNetwork() throws Exception {
         BIFReader bayesianReader = new BIFReader();
         bayesianReader.processFile(this.netPath);
         BayesNet bayesianNet = bayesianReader;
         System.out.println("Numero de variables: " + bayesianNet.getNrOfNodes());
 
         //Transforming the BayesNet into a BayesPm
-        BayesPm bayesPm = Utils.transformBayesNetToBayesPm(bayesianNet);
-        MlBayesIm bn2 = new MlBayesIm(bayesPm);
-
-        DataReader reader = new DataReader();
-        reader.setDelimiter(DelimiterType.COMMA);
-        reader.setMaxIntegralDiscrete(100);
-        return bn2;
+        return Utils.transformBayesNetToBayesPm(bayesianNet);
     }
 
-    private void calcuateMeasurements(MlBayesIm controlBayesianNetwork) {
+    private void calcuateMeasurements(BayesPm controlBayesianNetwork) {
         // Getting time
         this.elapsedTime = stopWatch.getTime(TimeUnit.MILLISECONDS);
         
@@ -272,7 +265,7 @@ public class ExperimentBNBuilder {
         this.differencesOfMalkovsBlanket = Utils.avgMarkovBlanquetdif(Utils.removeInconsistencies(controlBayesianNetwork.getDag()), algorithm.getCurrentDag());
         this.numberOfIterations = algorithm.getIterations();
         this.bdeuScore = GESThread.scoreGraph(algorithm.getCurrentDag(), algorithm.getProblem());
-        this.LogLikelihoodScore = Utils.LL(algorithm.getCurrentDag(), testDataset);
+        this.LogLikelihoodScore = -1;
     }
 
     public void printResults() {

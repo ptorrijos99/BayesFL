@@ -2,14 +2,12 @@ package consensusBN.Experiments;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.*;
-import edu.cmu.tetrad.graph.EdgeListGraph;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import org.albacete.simd.utils.Utils;
@@ -275,7 +273,7 @@ public class RandomBN {
 		if (!this.initialRealDag) {
 			for(int i = 0; i < this.numBNs; i++){
 				BayesPm bayesPm = new BayesPm(this.setOfRandomDags.get(i));
-				this.setOfRandomBNs.add(new MlBayesIm(bayesPm,MlBayesIm.RANDOM));
+				this.setOfRandomBNs.add(new MlBayesIm(bayesPm, MlBayesIm.InitializationMethod.RANDOM));
 			}
 		} else {
 			double start = System.currentTimeMillis();
@@ -387,7 +385,6 @@ public class RandomBN {
 			}
 		}
 
-		GraphUtils.circleLayout(dag, 200, 200, 150);
 		return dag;
 	}
 

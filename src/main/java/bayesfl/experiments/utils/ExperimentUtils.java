@@ -36,7 +36,7 @@ import bayesfl.data.Data;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.search.BDeuScore;
+import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.threads.GESThread;
 import org.albacete.simd.utils.Problem;
@@ -44,16 +44,11 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.net.BIFReader;
 import weka.classifiers.evaluation.Evaluation;
-import weka.classifiers.evaluation.NominalPrediction;
-import weka.classifiers.evaluation.Prediction;
 import weka.core.Instances;
 
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static weka.core.Utils.maxIndex;
-import static weka.core.Utils.mean;
 
 public class ExperimentUtils {
 
@@ -147,7 +142,7 @@ public class ExperimentUtils {
     public static double calculateBDeu(Data data, Dag dag) {
         if ((data instanceof BN_DataSet dat)) {
             if (dat.getData() != null) {
-                BDeuScore bdeu = new BDeuScore(dat.getData());
+                BdeuScore bdeu = new BdeuScore(dat.getData());
                 Fges fges = new Fges(bdeu);
                 return fges.scoreDag(dag);
             } 
@@ -159,7 +154,7 @@ public class ExperimentUtils {
         if ((data instanceof BN_DataSet dat)) {
             if (dat.getOriginalBNPath() != null) {
                 try {
-                    MlBayesIm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
+                    BayesPm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
                     return Utils.SMHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
                 } catch (Exception e) { e.printStackTrace(); }
             }
@@ -227,7 +222,7 @@ public class ExperimentUtils {
      * @return The original Bayesian Network.
      * @throws Exception If the file is not found.
      */
-    private static MlBayesIm readOriginalBayesianNetwork(String netPath) throws Exception {
+    private static BayesPm readOriginalBayesianNetwork(String netPath) throws Exception {
         final PrintStream err = new PrintStream(System.err);
         System.setErr(new PrintStream(OutputStream.nullOutputStream()));
 
@@ -239,6 +234,7 @@ public class ExperimentUtils {
         // Transforming the BayesNet into a BayesPm
         BayesPm bayesPm = Utils.transformBayesNetToBayesPm(bayesianReader);
 
-        return new MlBayesIm(bayesPm);
+        //return new MlBayesIm(bayesPm);
+        return bayesPm;
     }
 }

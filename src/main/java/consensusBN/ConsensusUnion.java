@@ -302,16 +302,23 @@ public class ConsensusUnion {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
         Dag finalDag;
+        Set<Edge> includedArcs;
         if (initialDag == null) {
             finalDag = new Dag(alpha);
+            includedArcs = new HashSet<>();
         } else{
             finalDag = new Dag(initialDag);
+            includedArcs = finalDag.getEdges();
         }
 
         // Get the union fusion
         Dag union = fusionUnion(dags);
+        Graph moralizedUnion = Utils.moralize(union);
 
-        int bestScore = Utils.SMHD(union, finalDag);
+        int bestScore = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(finalDag));
+
+        // TODO: VER POR QUÉ METE X11 SI NO ESTÁ EN LA FUSIÓN
+
 
         Set<Edge> notIncludedArcs;
         if (allPossibleArcs) {
@@ -319,28 +326,24 @@ public class ConsensusUnion {
         }
         else {
             notIncludedArcs = union.getEdges();
+            notIncludedArcs.removeAll(includedArcs);
         }
-
-        Set<Edge> includedArcs = new HashSet<>();
 
         // While there is improvement in the score with less treewidth than the limit
         while (true) {
-            Dag iterationDag = null;
             Edge iterationEdge = null;
             int iterationScore = bestScore;
             int operation = -1;
 
             // Evaluate operations (add, reverse, remove arcs)
-            for (int op = 0; op < 3; op++) {
+            for (int op = 0; op < 2; op++) {
                 Set<Edge> arcSet = (op == 0) ? notIncludedArcs : includedArcs;
 
                 for (Edge arc : arcSet) {
-                    Dag dag = new Dag(finalDag);
-                    int newScore = tryArc(union, dag, arc, maxCliqueSize, op);
+                    int newScore = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, op);
 
                     if (newScore < iterationScore) {
                         iterationScore = newScore;
-                        iterationDag = dag;
                         iterationEdge = arc;
                         operation = op;
                     }
@@ -351,62 +354,93 @@ public class ConsensusUnion {
             if (operation == -1) break;
 
             // Update the variables
-            finalDag = iterationDag;
             bestScore = iterationScore;
 
             switch (operation) {
                 case 0:  // Add arc
+                    finalDag.addEdge(iterationEdge);
                     notIncludedArcs.remove(iterationEdge);
                     includedArcs.add(iterationEdge);
                     break;
                 case 1:  // Remove arc
+                    finalDag.removeEdge(iterationEdge);
                     includedArcs.remove(iterationEdge);
                     notIncludedArcs.add(iterationEdge);
                     break;
                 case 2:  // Reverse arc
+                    Edge reversedEdge = new Edge(iterationEdge.getNode2(), iterationEdge.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
+
+                    finalDag.removeEdge(iterationEdge);
+                    finalDag.addEdge(reversedEdge);
+
                     includedArcs.remove(iterationEdge);
                     notIncludedArcs.add(iterationEdge);
 
-                    Edge reversedEdge = new Edge(iterationEdge.getNode2(), iterationEdge.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
                     includedArcs.add(reversedEdge);
                     notIncludedArcs.remove(reversedEdge);
                     break;
             }
         }
+
         return finalDag;
     }
 
-    private static int tryArc(Dag union, Dag dag, Edge arc, int maxCliqueSize, int operation) {
+    private static int tryArc(Graph moralizedUnion, Dag dag, Edge arc, int maxCliqueSize, int operation) {
+        int score;
+
         if (operation == 0) {  // Add arc
             // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
-            if (dag.existsDirectedPathFromTo(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
+            if (dag.paths().existsDirectedPath(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
 
             dag.addEdge(arc);
+
+            // Verify the treewidth
+            for (Set<Node> clique : Utils.getMoralTriangulatedCliques(dag).values()) {
+                if (clique.size() > maxCliqueSize) {
+                    dag.removeEdge(arc);
+                    return Integer.MAX_VALUE;
+                }
+            }
+
+            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));
+            dag.removeEdge(arc);
         } else if (operation == 1) {  // Remove arc
             dag.removeEdge(arc);
-            return Utils.SMHD(union, dag);  // No treewidth or cycle calculation needed, only can be less or equal than the previous
+            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));// No treewidth or cycle calculation needed, only can be less or equal than the previous
+            dag.addEdge(arc);
         } else {  // Reverse arc
             dag.removeEdge(arc);
 
             // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
-            if (dag.existsDirectedPathFromTo(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
+            if (dag.paths().existsDirectedPath(arc.getNode2(), arc.getNode1())) {
+                dag.addEdge(arc);
+                return Integer.MAX_VALUE;
+            }
 
-            dag.addEdge(new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW));
+            Edge newEdge = new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
+            dag.addEdge(newEdge);
+
+            // Verify the treewidth
+            for (Set<Node> clique : Utils.getMoralTriangulatedCliques(dag).values()) {
+                if (clique.size() > maxCliqueSize) {
+                    dag.removeEdge(newEdge);
+                    dag.addEdge(arc);
+                    return Integer.MAX_VALUE;
+                }
+            }
+
+            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));
+            dag.removeEdge(newEdge);
+            dag.addEdge(arc);
         }
 
-        // Verify the treewidth
-        for (Set<Node> clique : Utils.getMoralTriangulatedCliques(dag).values()) {
-            if (clique.size() > maxCliqueSize) return Integer.MAX_VALUE;
-        }
-
-        //if (!dag.findCycle().isEmpty()) return Integer.MAX_VALUE;
-
-        return Utils.SMHD(union, dag);
+        /*// Verify the cycles
+        if (!dag.paths().existsDirectedCycle()) {
+            System.out.println("\n\n CYCLE detected in the DAG");
+            return Integer.MAX_VALUE;
+        }*/
+        return score;
     }
-
-
-
-
 }
 
 
