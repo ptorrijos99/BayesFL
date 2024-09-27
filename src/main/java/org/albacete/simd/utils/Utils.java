@@ -861,7 +861,7 @@ public class Utils {
             }*/
 
             // TODO: CAMBIADO PARA MÁS EFICIENCIA
-            // Conjunto de vecinos de v que tienen un índice menor a i
+            // Set of neighbors of v that have an index less than i
             Set<Node> neighbors = new HashSet<>();
             for (int j = 0; j < i; j++) {
                 Node w = ordering[j];
@@ -870,9 +870,12 @@ public class Utils {
                 }
             }
 
-            // Crear aristas entre los vecinos no adyacentes
-            for (Node w : neighbors) {
-                for (Node x : neighbors) {
+            // Create edges between non-adjacent neighbors
+            List<Node> neighborList = new ArrayList<>(neighbors);
+            for (int j = 0; j < neighborList.size(); j++) {
+                Node w = neighborList.get(j);
+                for (int k = j + 1; k < neighborList.size(); k++) {
+                    Node x = neighborList.get(k);
                     if (!graph.isAdjacentTo(w, x)) {
                         graph.addUndirectedEdge(w, x); // fill in edge
                     }
@@ -900,7 +903,9 @@ public class Utils {
 
         Node[] ordering = new Node[numOfNodes];
         Set<Node> numbered = new HashSet<>(numOfNodes);
-        for (int i = 0; i < numOfNodes; i++) {
+
+        // Previous version (Tetrad)
+        /*for (int i = 0; i < numOfNodes; i++) {
             // find an unnumbered node that is adjacent to the most number of numbered nodes
             Node maxCardinalityNode = null;
             int maxCardinality = -1;
@@ -922,6 +927,37 @@ public class Utils {
             // add the node with maximum cardinality to the ordering and number it
             ordering[i] = maxCardinalityNode;
             numbered.add(maxCardinalityNode);
+        }*/
+
+        // Efficient version
+        // Map to store the cardinality of each node
+        Map<Node, Integer> cardinalityMap = new HashMap<>();
+        for (Node node : graph.getNodesSet()) {
+            cardinalityMap.put(node, 0); // Initially, no cardinality
+        }
+
+        // Priority queue (max-heap) to select the node with the highest cardinality
+        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> Integer.compare(cardinalityMap.get(b), cardinalityMap.get(a)));
+        pq.addAll(graph.getNodesSet());
+
+        for (int i = 0; i < numOfNodes; i++) {
+            // Get the node with the highest cardinality (more efficient than iterating over all)
+            Node maxCardinalityNode = pq.poll();
+
+            // Add the node to the ordering and mark it as numbered
+            ordering[i] = maxCardinalityNode;
+            numbered.add(maxCardinalityNode);
+
+            // Update the cardinality of unnumbered adjacent nodes
+            for (Node neighbor : graph.getAdjacentNodesSet(maxCardinalityNode)) {
+                if (!numbered.contains(neighbor)) {
+                    // Increment the cardinality of unnumbered neighbors
+                    cardinalityMap.put(neighbor, cardinalityMap.get(neighbor) + 1);
+                    // Update the position of the nodes in the priority queue
+                    pq.remove(neighbor);
+                    pq.add(neighbor);
+                }
+            }
         }
 
         return ordering;
