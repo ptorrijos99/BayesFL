@@ -801,12 +801,16 @@ public class Utils {
      */
     public static Map<Node, Set<Node>> getCliques(Node[] ordering, Graph graph) {
         Map<Node, Set<Node>> cliques = new HashMap<>();
+
+        // Create cliques
         for (int i = ordering.length - 1; i >= 0; i--) {
             Node v = ordering[i];
 
+            // Clique starts with node v
             Set<Node> clique = new HashSet<>();
             clique.add(v);
 
+            // Add neighbors that appear earlier in the ordering
             for (int j = 0; j < i; j++) {
                 Node w = ordering[j];
                 if (graph.isAdjacentTo(v, w)) {
@@ -814,15 +818,35 @@ public class Utils {
                 }
             }
 
+            // Add clique to map
             cliques.put(v, clique);
         }
 
-        // remove subcliques
-        cliques.forEach((k1, v1) -> cliques.forEach((k2, v2) -> {
+        // Remove subcliques
+        /*cliques.forEach((k1, v1) -> cliques.forEach((k2, v2) -> {
             if ((k1 != k2) && !(v1.isEmpty() || v2.isEmpty()) && v1.containsAll(v2)) {
                 v2.clear();
             }
-        }));
+        }));*/
+
+        // Order cliques by size (descending)
+        List<Map.Entry<Node, Set<Node>>> cliqueList = new ArrayList<>(cliques.entrySet());
+        cliqueList.sort((e1, e2) -> Integer.compare(e2.getValue().size(), e1.getValue().size()));
+
+        // Remove subcliques
+        for (int i = 0; i < cliqueList.size(); i++) {
+            Set<Node> v1 = cliqueList.get(i).getValue();
+            if (v1.isEmpty()) {
+                continue;
+            }
+            for (int j = i + 1; j < cliqueList.size(); j++) {
+                Set<Node> v2 = cliqueList.get(j).getValue();
+                // Optimization: Only compare if v1 is strictly larger than v2
+                if (!v2.isEmpty() && v1.containsAll(v2)) {
+                    v2.clear(); // Clear subclique
+                }
+            }
+        }
 
         // remove empty sets from map
         while (cliques.values().remove(Collections.EMPTY_SET)) {
@@ -975,26 +999,24 @@ public class Utils {
         Graph moralGraph = new EdgeListGraph(graph.getNodes());
 
         // make skeleton
-        graph.getEdges()
-                .forEach(e -> moralGraph.addUndirectedEdge(e.getNode1(), e.getNode2()));
+        graph.getEdges().forEach(e -> moralGraph.addUndirectedEdge(e.getNode1(), e.getNode2()));
 
         // add edges to connect parents with common child
-        graph.getNodes()
-                .forEach(node -> {
-                    List<Node> parents = graph.getParents(node);
-                    if (!(parents == null || parents.isEmpty()) && parents.size() > 1) {
-                        Node[] p = parents.toArray(new Node[0]);
-                        for (int i = 0; i < p.length; i++) {
-                            for (int j = i + 1; j < p.length; j++) {
-                                Node node1 = p[i];
-                                Node node2 = p[j];
-                                if (!moralGraph.isAdjacentTo(node1, node2)) {
-                                    moralGraph.addUndirectedEdge(node1, node2);
-                                }
-                            }
+        graph.getNodes().forEach(node -> {
+            List<Node> parents = graph.getParents(node);
+            if (parents != null && parents.size() > 1) {
+                Node[] p = parents.toArray(new Node[0]);
+                for (int i = 0; i < parents.size(); i++) {
+                    for (int j = i + 1; j < parents.size(); j++) {
+                        Node node1 = parents.get(i);
+                        Node node2 = parents.get(j);
+                        if (!moralGraph.isAdjacentTo(node1, node2)) {
+                            moralGraph.addUndirectedEdge(node1, node2);
                         }
                     }
-                });
+                }
+            }
+        });
 
         return moralGraph;
     }
