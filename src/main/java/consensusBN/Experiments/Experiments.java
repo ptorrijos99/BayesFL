@@ -21,6 +21,7 @@ import static org.albacete.simd.utils.Utils.getTreeWidth;
 public class Experiments {
 
     public static String PATH = "./";
+    public static boolean Puerta = true;
 
     // TODO: DESCOMENTAR ESTAS LÍNEAS
     /*public static void main(String[] args) {
@@ -60,12 +61,12 @@ public class Experiments {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "asia.0";
+        //String net = "asia.0";
 
         // Generic network (net = number of nodes)
-        //String net = ""+30;
+        String net = ""+50;
 
-        int nClients = 5;
+        int nClients = 50;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -208,19 +209,24 @@ public class Experiments {
         geneticUnionsgv.addEmptySuperGreedy = true;
         geneticUnionsgv.numIterations = nIterations;
 
-        /*// Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnionPuerta = new GeneticTreeWidthUnion(dags, seed);
-        geneticUnionPuerta.populationSize = popSize;
-        geneticUnionPuerta.candidatesFromInitialDAGs = true;
-        geneticUnionPuerta.repeatCandidates = true;
-        geneticUnionPuerta.numIterations = nIterations;
+        GeneticTreeWidthUnion geneticUnionPuerta = null;
+        GeneticTreeWidthUnion geneticUnionPuerta2 = null;
+        if (Puerta) {
+            // Find the treewidth of the union of the dags
+            geneticUnionPuerta = new GeneticTreeWidthUnion(dags, seed);
+            geneticUnionPuerta.populationSize = popSize;
+            geneticUnionPuerta.candidatesFromInitialDAGs = true;
+            geneticUnionPuerta.repeatCandidates = true;
+            geneticUnionPuerta.numIterations = nIterations;
 
-        // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnionPuerta2 = new GeneticTreeWidthUnion(dags, seed);
-        geneticUnionPuerta2.populationSize = popSize;
-        geneticUnionPuerta2.candidatesFromInitialDAGs = true;
-        geneticUnionPuerta2.repeatCandidates = false;
-        geneticUnionPuerta2.numIterations = nIterations;*/
+            // Find the treewidth of the union of the dags
+            geneticUnionPuerta2 = new GeneticTreeWidthUnion(dags, seed);
+            geneticUnionPuerta2.populationSize = popSize;
+            geneticUnionPuerta2.candidatesFromInitialDAGs = true;
+            geneticUnionPuerta2.repeatCandidates = false;
+            geneticUnionPuerta2.numIterations = nIterations;
+        }
+
 
         // Find the treewidth of the dags sampled
         int maxTW = 0;
@@ -341,17 +347,19 @@ public class Experiments {
             System.out.println("SuperGreedy v SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + " | Edges: " + superGreedyVacia.getNumEdges() + " | Time: " + timeSuperGreedyVacia);
 
 
-            /*geneticUnionPuerta.maxTreewidth = tw;
-            geneticUnionPuerta.fusionUnion();
+            if (Puerta) {
+                geneticUnionPuerta.maxTreewidth = tw;
+                geneticUnionPuerta.fusionUnion();
 
-            System.out.println("Greedy Puerta SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.greedyDag) + " | Edges: " + geneticUnionPuerta.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTimeGreedy);
-            System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.bestDag) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
+                System.out.println("Greedy Puerta SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.greedyDag) + " | Edges: " + geneticUnionPuerta.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTimeGreedy);
+                System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.bestDag) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
 
-            geneticUnionPuerta2.maxTreewidth = tw;
-            geneticUnionPuerta2.fusionUnion();
+                geneticUnionPuerta2.maxTreewidth = tw;
+                geneticUnionPuerta2.fusionUnion();
 
-            System.out.println("Greedy Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.greedyDag) + " | Edges: " + geneticUnionPuerta2.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTimeGreedy);
-            System.out.println("Genetic Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.bestDag) + " | Edges: " + geneticUnionPuerta2.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTime);
+                System.out.println("Greedy Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.greedyDag) + " | Edges: " + geneticUnionPuerta2.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTimeGreedy);
+                System.out.println("Genetic Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.bestDag) + " | Edges: " + geneticUnionPuerta2.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTime);
+            }
 
 
             /* double start = System.currentTimeMillis();
@@ -382,23 +390,27 @@ public class Experiments {
             */
 
             // Save results
-            saveRound(realNetwork, net, geneticUnion, geneticUnionsg, randomBN, superGreedy, timeSuperGreedy, superGreedyVacia, timeSuperGreedyVacia, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+            if (Puerta) {
+                saveRoundPuerta(realNetwork, net, geneticUnion, geneticUnionsg, geneticUnionsgv, geneticUnionPuerta, geneticUnionPuerta2, randomBN, superGreedy, timeSuperGreedy, superGreedyVacia, timeSuperGreedyVacia, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+            } else {
+                saveRound(realNetwork, net, geneticUnion, geneticUnionsg, geneticUnionsgv, randomBN, superGreedy, timeSuperGreedy, superGreedyVacia, timeSuperGreedyVacia, minTW, meanTW, maxTW, tw, nDags, popSize, nIterations, twLimit, seed, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+            }
         }
     }
 
-    public static void saveRound(boolean realNetwork, String bbdd, GeneticTreeWidthUnion geneticUnion, GeneticTreeWidthUnion geneticUnionsg, RandomBN randomBN, Dag superGreedy, double timeSuperGreedy, Dag superGreedyVacia, double timeSuperGreedyVacia, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
+    public static void saveRound(boolean realNetwork, String bbdd, GeneticTreeWidthUnion geneticUnion, GeneticTreeWidthUnion geneticUnionsg, GeneticTreeWidthUnion geneticUnionsgv, RandomBN randomBN, Dag superGreedy, double timeSuperGreedy, Dag superGreedyVacia, double timeSuperGreedyVacia, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
         String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
         String header = "numNodes,nDags,popSize,nIterations,seed," +
-                "sampledTWLimit,originalTW,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,sgTW,sgvTW,geneticTW,geneticsgTW," +
-                "originalMeanParents,greedyMeanParents,sgMeanParents,sgvMeanParents,geneticMeanParents,geneticsgMeanParents,unionMeanParents," +
-                "originalMaxParents,greedyMaxParents,sgMaxParents,sgvMaxParents,geneticMaxParents,geneticsgMaxParents,unionMaxParents," +
-                "unionEdges,greedyEdges,sgEdges,sgvEdges,geneticEdges,geneticsgEdges," +
-                "greedySMHD,sgSMHD,sgvSMHD,geneticSMHD,geneticsgSMHD," +
-                "timeUnion,timeGreedy,timeSG,timeSGv,timeGenetic,timeGeneticsg";
-        String headerProbs = ",diffAbsSampled,diffAbsGreedy,diffAbsSG,diffAbsSGv,diffAbsGenetic,diffAbsGeneticsg,diffAbsUnion," +
-                "diffCuadSampled,diffCuadGreedy,diffCuadSG,diffCuadSGv,diffCuadGenetic,diffCuadGeneticsg,diffCuadUnion," +
-                "diffKLSampled,diffKLGreedy,diffKLSG,diffKLSGv,diffKLGenetic,diffKLGeneticsg,diffKLUnion," +
-                "timeProbsRecalc,timeProbsSampled,timeProbsGreedy,timeProbsSG,timeProbsSGv,timeProbsGenetic,timeProbsGeneticsg,timeProbsUnion" +
+                "sampledTWLimit,originalTW,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,sgTW,sgvTW,geneticTW,geneticsgTW,geneticsgvTW," +
+                "originalMeanParents,greedyMeanParents,sgMeanParents,sgvMeanParents,geneticMeanParents,geneticsgMeanParents,geneticsgvMeanParents,unionMeanParents," +
+                "originalMaxParents,greedyMaxParents,sgMaxParents,sgvMaxParents,geneticMaxParents,geneticsgMaxParents,geneticsgvMaxParents,unionMaxParents," +
+                "unionEdges,greedyEdges,sgEdges,sgvEdges,geneticEdges,geneticsgEdges,geneticsgvEdges," +
+                "greedySMHD,sgSMHD,sgvSMHD,geneticSMHD,geneticsgSMHD,geneticsgvSMHD," +
+                "timeUnion,timeGreedy,timeSG,timeSGv,timeGenetic,timeGeneticsg,timeGeneticsgv\n";
+        String headerProbs = ",diffAbsSampled,diffAbsGreedy,diffAbsSG,diffAbsSGv,diffAbsGenetic,diffAbsGeneticsg,diffAbsGeneticsgv,diffAbsUnion," +
+                "diffCuadSampled,diffCuadGreedy,diffCuadSG,diffCuadSGv,diffCuadGenetic,diffCuadGeneticsg,diffCuadGeneticsgv,diffCuadUnion," +
+                "diffKLSampled,diffKLGreedy,diffKLSG,diffKLSGv,diffKLGenetic,diffKLGeneticsg,diffKLGeneticsgv,diffKLUnion," +
+                "timeProbsRecalc,timeProbsSampled,timeProbsGreedy,timeProbsSG,timeProbsSGv,timeProbsGenetic,timeProbsGeneticsg,timeProbsGeneticsgv,timeProbsUnion" +
                 "\n";
 
         double originalTW=-1, meanParents=0, maxParents=0;
@@ -435,6 +447,7 @@ public class Experiments {
                 getTreeWidth(superGreedyVacia) + "," +
                 getTreeWidth(geneticUnion.bestDag) + "," +
                 getTreeWidth(geneticUnionsg.bestDag) + "," +
+                getTreeWidth(geneticUnionsgv.bestDag) + "," +
 
                 meanParents + "," +
                 meanParents(geneticUnion.greedyDag) + "," +
@@ -442,6 +455,7 @@ public class Experiments {
                 meanParents(superGreedyVacia) + "," +
                 meanParents(geneticUnion.bestDag) + "," +
                 meanParents(geneticUnionsg.bestDag) + "," +
+                meanParents(geneticUnionsgv.bestDag) + "," +
                 meanParents(geneticUnion.fusionUnion) + "," +
                 maxParents + "," +
                 maxParents(geneticUnion.greedyDag) + "," +
@@ -449,6 +463,7 @@ public class Experiments {
                 maxParents(superGreedyVacia) + "," +
                 maxParents(geneticUnion.bestDag) + "," +
                 maxParents(geneticUnionsg.bestDag) + "," +
+                maxParents(geneticUnionsgv.bestDag) + "," +
                 maxParents(geneticUnion.fusionUnion) + "," +
 
                 geneticUnion.fusionUnion.getNumEdges() + "," +
@@ -457,16 +472,19 @@ public class Experiments {
                 superGreedyVacia.getNumEdges() + "," +
                 geneticUnion.bestDag.getNumEdges() + "," +
                 geneticUnionsg.bestDag.getNumEdges() + "," +
+                geneticUnionsgv.bestDag.getNumEdges() + "," +
                 Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.greedyDag) + "," +
                 Utils.SMHD(geneticUnion.fusionUnion,superGreedy) + "," +
                 Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + "," +
                 Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + "," +
                 Utils.SMHD(geneticUnionsg.fusionUnion,geneticUnionsg.bestDag) + "," +
+                Utils.SMHD(geneticUnionsgv.fusionUnion,geneticUnionsgv.bestDag) + "," +
                 geneticUnion.executionTimeUnion + "," +
                 geneticUnion.executionTimeGreedy + "," +
                 timeSuperGreedy + "," +
                 timeSuperGreedyVacia + "," +
                 geneticUnionsg.executionTime + "," +
+                geneticUnionsgv.executionTime + "," +
                 geneticUnion.executionTime;
 
         BufferedWriter csvWriter;
@@ -491,7 +509,8 @@ public class Experiments {
         } catch (IOException e) { System.out.println(e); }
 
         if (realNetwork) {
-            line = calculateProbs(geneticUnion, geneticUnionsg, randomBN, timeRecalc, timeSampled, timeUnion, superGreedy, superGreedyVacia, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals) + "\n";
+            Dag[] dags = {geneticUnion.greedyDag, superGreedy, superGreedyVacia, geneticUnion.bestDag, geneticUnionsg.bestDag, geneticUnionsgv.bestDag};
+            line = calculateProbs(dags, randomBN, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals) + "\n";
         }
         else {
             line = "\n";
@@ -504,9 +523,159 @@ public class Experiments {
         } catch (IOException e) { System.out.println(e); }
     }
 
-    public static String calculateProbs(GeneticTreeWidthUnion geneticUnion, GeneticTreeWidthUnion geneticUnionsg, RandomBN randomBN, double timeRecalc, double timeSampled, double timeUnion, Dag superGreedy, Dag superGreedyVacia, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
+    public static void saveRoundPuerta(boolean realNetwork, String bbdd, GeneticTreeWidthUnion geneticUnion, GeneticTreeWidthUnion geneticUnionsg, GeneticTreeWidthUnion geneticUnionsgv, GeneticTreeWidthUnion geneticUnionPuerta, GeneticTreeWidthUnion geneticUnionPuerta2, RandomBN randomBN, Dag superGreedy, double timeSuperGreedy, Dag superGreedyVacia, double timeSuperGreedyVacia, int minTW, double meanTW, int maxTW, int tw, int nDags, int popSize, int nIterations, double twLimit, int seed, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
+        String savePath = "./results/Server/" + bbdd + "_GeneticTWFusion_" + nDags + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + ".csv";
+        String header = "numNodes,nDags,popSize,nIterations,seed," +
+                "sampledTWLimit,originalTW,minTW,meanTW,maxTW,unionTW,limitTW,greedyTW,sgTW,sgvTW,geneticTW,geneticsgTW,geneticsgvTW,geneticPuertaTW,greedyPuertaTW,geneticPuerta2TW,greedyPuerta2TW," +
+                "originalMeanParents,greedyMeanParents,sgMeanParents,sgvMeanParents,geneticMeanParents,geneticsgMeanParents,geneticsgvMeanParents,geneticPuertaMeanParents,greedyPuertaMeanParents,geneticPuerta2MeanParents,greedyPuerta2MeanParents,unionMeanParents," +
+                "originalMaxParents,greedyMaxParents,sgMaxParents,sgvMaxParents,geneticMaxParents,geneticsgMaxParents,geneticsgvMaxParents,geneticPuertaMaxParents,greedyPuertaMaxParents,geneticPuerta2MaxParents,greedyPuerta2MaxParents,unionMaxParents," +
+                "unionEdges,greedyEdges,sgEdges,sgvEdges,geneticEdges,geneticsgEdges,geneticsgvEdges,geneticPuertaEdges,greedyPuertaEdges,geneticPuerta2Edges,greedyPuerta2Edges," +
+                "greedySMHD,sgSMHD,sgvSMHD,geneticSMHD,geneticsgSMHD,geneticsgvSMHD,geneticPuertaSMHD,greedyPuertaSMHD,geneticPuerta2SMHD,greedyPuerta2SMHD," +
+                "timeUnion,timeGreedy,timeSG,timeSGv,timeGenetic,timeGeneticsg,timeGeneticsgv,timePuerta,timeGreedyPuerta,timePuerta2,timeGreedyPuerta2";
+        // orden: geneticUnion.greedyDag, geneticUnionPuerta.greedyDag, geneticUnionPuerta2.greedyDag, superGreedy, superGreedyVacia, geneticUnion.bestDag, geneticUnionsg.bestDag, geneticUnionPuerta.bestDag, geneticUnionPuerta2.bestDag
+        String headerProbs = ",diffAbsSampled,diffAbsGreedy,diffAbsGreedyPuerta,diffAbsGreedyPuerta2,diffAbsSG,diffAbsSGv,diffAbsGenetic,diffAbsGeneticsg,diffAbsGeneticsgv,diffAbsUnion,diffAbsPuerta,diffAbsPuerta2," +
+                "diffCuadSampled,diffCuadGreedy,diffCuadGreedyPuerta,diffCuadGreedyPuerta2,diffCuadSG,diffCuadSGv,diffCuadGenetic,diffCuadGeneticsg,diffCuadGeneticsgv,diffCuadUnion,diffCuadPuerta,diffCuadPuerta2," +
+                "diffKLSampled,diffKLGreedy,diffKLGreedyPuerta,diffKLGreedyPuerta2,diffKLSG,diffKLSGv,diffKLGenetic,diffKLGeneticsg,diffKLGeneticsgv,diffKLUnion,diffKLPuerta,diffKLPuerta2," +
+                "timeProbsRecalc,timeProbsSampled,timeProbsGreedy,timeProbsGreedyPuerta,timeProbsGreedyPuerta2,timeProbsSG,timeProbsSGv,timeProbsGenetic,timeProbsGeneticsg,timeProbsGeneticsgv,timeProbsUnion,timeProbsPuerta,timeProbsPuerta2" +
+                "\n";
+
+        double originalTW=-1, meanParents=0, maxParents=0;
+        if (realNetwork) {
+            originalTW = getTreeWidth(new Dag(randomBN.originalBayesIm.getDag()));
+            meanParents = meanParents(randomBN.originalBayesIm.getDag());
+            maxParents = maxParents(randomBN.originalBayesIm.getDag());
+        }
+        else {
+            originalTW = meanTW;
+            for (Dag dag : randomBN.setOfRandomDags) {
+                meanParents += meanParents(dag);
+                maxParents += maxParents(dag);
+            }
+            meanParents /= randomBN.setOfRandomDags.size();
+            maxParents /= randomBN.setOfRandomDags.size();
+        }
+
+
+        String line = bbdd + "," +
+                nDags + "," +
+                popSize + "," +
+                nIterations + "," +
+                seed + "," +
+                twLimit + "," +
+                originalTW + "," +
+                minTW + "," +
+                meanTW + "," +
+                maxTW + "," +
+                getTreeWidth(geneticUnion.fusionUnion) + "," +
+                tw + "," +
+                getTreeWidth(geneticUnion.greedyDag) + "," +
+                getTreeWidth(superGreedy) + "," +
+                getTreeWidth(superGreedyVacia) + "," +
+                getTreeWidth(geneticUnion.bestDag) + "," +
+                getTreeWidth(geneticUnionsg.bestDag) + "," +
+                getTreeWidth(geneticUnionsgv.bestDag) + "," +
+                getTreeWidth(geneticUnionPuerta.bestDag) + "," +
+                getTreeWidth(geneticUnionPuerta.greedyDag) + "," +
+                getTreeWidth(geneticUnionPuerta2.bestDag) + "," +
+                getTreeWidth(geneticUnionPuerta2.bestDag) + "," +
+
+                meanParents + "," +
+                meanParents(geneticUnion.greedyDag) + "," +
+                meanParents(superGreedy) + "," +
+                meanParents(superGreedyVacia) + "," +
+                meanParents(geneticUnion.bestDag) + "," +
+                meanParents(geneticUnionsg.bestDag) + "," +
+                meanParents(geneticUnionsgv.bestDag)  + "," +
+                meanParents(geneticUnionPuerta.bestDag) + "," +
+                meanParents(geneticUnionPuerta.greedyDag) + "," +
+                meanParents(geneticUnionPuerta2.bestDag) + "," +
+                meanParents(geneticUnionPuerta2.greedyDag) + "," +
+                meanParents(geneticUnion.fusionUnion) + "," +
+                maxParents + "," +
+                maxParents(geneticUnion.greedyDag) + "," +
+                maxParents(superGreedy) + "," +
+                maxParents(superGreedyVacia) + "," +
+                maxParents(geneticUnion.bestDag) + "," +
+                maxParents(geneticUnionsg.bestDag) + "," +
+                maxParents(geneticUnionsgv.bestDag) + "," +
+                maxParents(geneticUnionPuerta.bestDag) + "," +
+                maxParents(geneticUnionPuerta.greedyDag) + "," +
+                maxParents(geneticUnionPuerta2.bestDag) + "," +
+                maxParents(geneticUnionPuerta2.greedyDag) + "," +
+                maxParents(geneticUnion.fusionUnion) + "," +
+
+                geneticUnion.fusionUnion.getNumEdges() + "," +
+                geneticUnion.greedyDag.getNumEdges() + "," +
+                superGreedy.getNumEdges() + "," +
+                superGreedyVacia.getNumEdges() + "," +
+                geneticUnion.bestDag.getNumEdges() + "," +
+                geneticUnionsg.bestDag.getNumEdges() + "," +
+                geneticUnionsgv.bestDag.getNumEdges() + "," +
+                geneticUnionPuerta.bestDag.getNumEdges() + "," +
+                geneticUnionPuerta.greedyDag.getNumEdges() + "," +
+                geneticUnionPuerta2.bestDag.getNumEdges() + "," +
+                geneticUnionPuerta2.greedyDag.getNumEdges() + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.greedyDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,superGreedy) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + "," +
+                Utils.SMHD(geneticUnionsg.fusionUnion,geneticUnionsg.bestDag) + "," +
+                Utils.SMHD(geneticUnionsgv.fusionUnion,geneticUnionsgv.bestDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.bestDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta.greedyDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.bestDag) + "," +
+                Utils.SMHD(geneticUnion.fusionUnion,geneticUnionPuerta2.greedyDag) + "," +
+                geneticUnion.executionTimeUnion + "," +
+                geneticUnion.executionTimeGreedy + "," +
+                timeSuperGreedy + "," +
+                timeSuperGreedyVacia + "," +
+                geneticUnion.executionTime + "," +
+                geneticUnionsg.executionTime + "," +
+                geneticUnionsgv.executionTime + "," +
+                geneticUnionPuerta.executionTime + "," +
+                geneticUnionPuerta.executionTimeGreedy + "," +
+                geneticUnionPuerta2.executionTime + "," +
+                geneticUnionPuerta2.executionTimeGreedy;
+
+        BufferedWriter csvWriter;
+        try {
+            if (!new File("./results/Server/").exists()) {
+                new File("./results/Server/").mkdir();
+            }
+
+            csvWriter = new BufferedWriter(new FileWriter(savePath, true));
+            if (new File(savePath).length() == 0) {
+                csvWriter.write(header);
+                if (realNetwork) {
+                    csvWriter.write(headerProbs);
+                }
+                else {
+                    csvWriter.write("\n");
+                }
+            }
+            csvWriter.write(line);
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) { System.out.println(e); }
+
+        if (realNetwork) {
+            Dag[] dags = {geneticUnion.greedyDag, geneticUnionPuerta.greedyDag, geneticUnionPuerta2.greedyDag, superGreedy, superGreedyVacia, geneticUnion.bestDag, geneticUnionsg.bestDag, geneticUnionsgv.bestDag, geneticUnionPuerta.bestDag, geneticUnionPuerta2.bestDag};
+            line = calculateProbs(dags, randomBN, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals) + "\n";
+        }
+
+        else {
+            line = "\n";
+        }
+        try {
+            csvWriter = new BufferedWriter(new FileWriter(savePath, true));
+            csvWriter.write(line);
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) { System.out.println(e); }
+    }
+
+    public static String calculateProbs(Dag[] dags, RandomBN randomBN, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
         // Almacenar los diferentes DAGs y resultados
-        Dag[] dags = {geneticUnion.greedyDag, superGreedy, superGreedyVacia, geneticUnion.bestDag, geneticUnionsg.bestDag};
         double[][][] marginals = new double[dags.length][][];
         double[] times = new double[dags.length];
 

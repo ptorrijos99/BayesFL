@@ -884,7 +884,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             this.parentsHash.remove(node2);
         }*/
 
-        if (Edges.isDirectedEdge(edge)) {
+        /*if (Edges.isDirectedEdge(edge)) {
             Node node = Edges.getDirectedEdgeTail(edge);
 
             if (node.getNodeType() == NodeType.ERROR) {
@@ -892,7 +892,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             }
         }
 
-        getPcs().firePropertyChange("edgeAdded", null, edge);
+        getPcs().firePropertyChange("edgeAdded", null, edge);*/
         return true;
     }
 

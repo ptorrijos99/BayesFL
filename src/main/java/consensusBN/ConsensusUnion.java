@@ -1,14 +1,18 @@
 package consensusBN;
 
+import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.*;
 
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
+import edu.cmu.tetrad.util.TaskManager;
 import org.albacete.simd.utils.Utils;
 
 import static consensusBN.AlphaOrder.alphaOrder;
 import static consensusBN.BetaToAlpha.transformToAlpha;
+import static org.albacete.simd.utils.Utils.getConnectedComponent;
 
 public class ConsensusUnion {
 
@@ -299,6 +303,8 @@ public class ConsensusUnion {
     // GES-like algorithm. In each iteration, adds, removes or reverses the edge that maximizes the score while the tw
     // is less than the limit. Stops when no edge can be added, removed or reversed without decreasing the score.
     private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, List<Node> alpha, List<Dag> dags, String maxTreewidth) {
+        int mejora = 0;
+        Set<Node> connectedComponent = new HashSet<>(alpha);
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
         Dag finalDag;
@@ -317,55 +323,81 @@ public class ConsensusUnion {
 
         int bestScore = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(finalDag));
 
-        // TODO: VER POR QUÉ METE X11 SI NO ESTÁ EN LA FUSIÓN
-
-
         Set<Edge> notIncludedArcs;
         if (allPossibleArcs) {
             notIncludedArcs = Utils.calculateArcs(alpha);
+            notIncludedArcs.removeAll(includedArcs);
         }
         else {
             notIncludedArcs = union.getEdges();
             notIncludedArcs.removeAll(includedArcs);
         }
 
+        // Crear un array de resultados
+        Result[] results = new Result[includedArcs.size() + notIncludedArcs.size()];
+
+        // Crear un array de booleanos para saber qué enlace está y cual no, incluyendo los enlaces incluidos y los no
+        boolean[] included = new boolean[includedArcs.size() + notIncludedArcs.size()];
+        ArrayList<Edge> allArcs = new ArrayList<>(includedArcs);
+        allArcs.addAll(notIncludedArcs);
+        for (int i = 0; i < includedArcs.size(); i++) {
+            included[i] = true;
+        }
+
         // While there is improvement in the score with less treewidth than the limit
         while (true) {
             Edge iterationEdge = null;
-            int iterationScore = bestScore;
-            int operation = -1;
 
             // Evaluate operations (add, reverse, remove arcs)
-            for (int op = 0; op < 2; op++) {
-                Set<Edge> arcSet = (op == 0) ? notIncludedArcs : includedArcs;
+            for (int i = 0; i < included.length; i++) {
+                Edge arc = allArcs.get(i);
+                if (connectedComponent.contains(arc.getNode1()) || connectedComponent.contains(arc.getNode2())) {
+                    if (included[i]) {
+                        results[i] = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 1, i);
 
-                for (Edge arc : arcSet) {
-                    int newScore = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, op);
-
-                    if (newScore < iterationScore) {
-                        iterationScore = newScore;
-                        iterationEdge = arc;
-                        operation = op;
+                        if (notIncludedArcs.contains(new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW))) {
+                            Result op2 = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 2, i);
+                            if (results[i] == null || (op2 != null && op2.score < results[i].score)) {
+                                results[i] = op2;
+                            }
+                        }
+                    } else {
+                        results[i] = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 0, i);
                     }
+                } else if (results[i] != null) {
+                    results[i].score = results[i].score - mejora;
                 }
             }
 
+            // Update the variables
+            int lastScore = bestScore;
+            int operation = -1;
+            int id = -1;
+            for (Result result : results) {
+                if (result != null && result.score < bestScore) {
+                    bestScore = result.score;
+                    iterationEdge = allArcs.get(result.id);
+                    operation = result.operation;
+                    id = result.id;
+                }
+            }
+            mejora = lastScore - bestScore;
+
             // If no operation improves the score, stop
             if (operation == -1) break;
-
-            // Update the variables
-            bestScore = iterationScore;
 
             switch (operation) {
                 case 0:  // Add arc
                     finalDag.addEdge(iterationEdge);
                     notIncludedArcs.remove(iterationEdge);
                     includedArcs.add(iterationEdge);
+                    included[id] = true;
                     break;
                 case 1:  // Remove arc
                     finalDag.removeEdge(iterationEdge);
                     includedArcs.remove(iterationEdge);
                     notIncludedArcs.add(iterationEdge);
+                    included[id] = false;
                     break;
                 case 2:  // Reverse arc
                     Edge reversedEdge = new Edge(iterationEdge.getNode2(), iterationEdge.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
@@ -375,22 +407,31 @@ public class ConsensusUnion {
 
                     includedArcs.remove(iterationEdge);
                     notIncludedArcs.add(iterationEdge);
+                    included[id] = false;
 
                     includedArcs.add(reversedEdge);
                     notIncludedArcs.remove(reversedEdge);
+                    int idReversed = allArcs.indexOf(reversedEdge);
+                    included[idReversed] = true;
                     break;
             }
+
+            // Obtener la componente conexa del nuevo enlace incluido
+            connectedComponent.clear();
+            Node node = iterationEdge.getNode1();
+            Graph moralizedGraph = Utils.moralize(finalDag);
+            connectedComponent.addAll(getConnectedComponent(moralizedGraph, node));
         }
 
         return finalDag;
     }
 
-    private static int tryArc(Graph moralizedUnion, Dag dag, Edge arc, int maxCliqueSize, int operation) {
-        int score;
+    private static Result tryArc(Graph moralizedUnion, Dag dag, Edge arc, int maxCliqueSize, int operation, int id) {
+        Result score;
 
         if (operation == 0) {  // Add arc
             // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
-            if (dag.paths().existsDirectedPath(arc.getNode2(), arc.getNode1())) return Integer.MAX_VALUE;
+            if (dag.paths().existsDirectedPath(arc.getNode2(), arc.getNode1())) return null;
 
             dag.addEdge(arc);
 
@@ -398,15 +439,15 @@ public class ConsensusUnion {
             for (Set<Node> clique : Utils.getMoralTriangulatedCliques(dag).values()) {
                 if (clique.size() > maxCliqueSize) {
                     dag.removeEdge(arc);
-                    return Integer.MAX_VALUE;
+                    return null;
                 }
             }
 
-            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));
+            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 0);
             dag.removeEdge(arc);
         } else if (operation == 1) {  // Remove arc
             dag.removeEdge(arc);
-            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));// No treewidth or cycle calculation needed, only can be less or equal than the previous
+            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 1);// No treewidth or cycle calculation needed, only can be less or equal than the previous
             dag.addEdge(arc);
         } else {  // Reverse arc
             dag.removeEdge(arc);
@@ -414,7 +455,7 @@ public class ConsensusUnion {
             // Check that the arc does not create a cycle (edge X -> Y, check that the path from Y to X is not possible)
             if (dag.paths().existsDirectedPath(arc.getNode2(), arc.getNode1())) {
                 dag.addEdge(arc);
-                return Integer.MAX_VALUE;
+                return null;
             }
 
             Edge newEdge = new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW);
@@ -425,21 +466,29 @@ public class ConsensusUnion {
                 if (clique.size() > maxCliqueSize) {
                     dag.removeEdge(newEdge);
                     dag.addEdge(arc);
-                    return Integer.MAX_VALUE;
+                    return null;
                 }
             }
 
-            score = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag));
+            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 2);
             dag.removeEdge(newEdge);
             dag.addEdge(arc);
         }
 
-        /*// Verify the cycles
-        if (!dag.paths().existsDirectedCycle()) {
-            System.out.println("\n\n CYCLE detected in the DAG");
-            return Integer.MAX_VALUE;
-        }*/
         return score;
+    }
+
+    // Create a class that saves the result
+    static class Result {
+        public int id;
+        public int score;
+        public int operation;
+
+        public Result(int id, int score, int operation) {
+            this.id = id;
+            this.score = score;
+            this.operation = operation;
+        }
     }
 }
 

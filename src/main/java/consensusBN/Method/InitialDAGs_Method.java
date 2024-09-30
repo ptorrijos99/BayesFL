@@ -6,19 +6,20 @@ import edu.cmu.tetrad.graph.Node;
 
 import java.util.*;
 
+import static consensusBN.BetaToAlpha.transformToAlpha;
 import static consensusBN.ConsensusUnion.*;
 
 public class InitialDAGs_Method implements Population {
 
     private Random random;
+    private int maxTreewidth;
 
+    private List<Node> alpha;
     private List<Edge>[] edgesOriginal;
     private int nDags;
     private int[] nEdges;
     private int totalEdges;
     private int[] firstIndex;
-    private List<Node> alpha;
-    private int maxTreewidth;
 
     private Dag greedyDag;
     private List<Dag> greedyDags;
@@ -48,7 +49,6 @@ public class InitialDAGs_Method implements Population {
         double startTime = System.currentTimeMillis();
         greedyDags = originalDAGsGreedyTreewidthBefore(dags, ""+maxTreewidth);
         greedyDag = fusionUnion(greedyDags);
-
         executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
     }
 
@@ -73,7 +73,7 @@ public class InitialDAGs_Method implements Population {
                 population[1][edgesOriginal[i].indexOf(edge) + firstIndex[i]] = true;
             }
         }
-
+        // Initialize the rest of the population with random individuals
         for (int i = 2; i < populationSize; i++) {
             for (int j = 2; j < totalEdges; j++) {
                 population[i][j] = random.nextBoolean();
@@ -87,14 +87,13 @@ public class InitialDAGs_Method implements Population {
     public Dag getUnionFromChromosome(boolean[] chromosome) {
         // Create the DAG that corresponds to each individual
         ArrayList<Dag> candidates = fromChromosomeToDags(chromosome);
-        Dag union = applyUnion(alpha, candidates);
 
-        // Check cycles
-        if (!union.paths().existsDirectedCycle()) {
-            return null;
+        ArrayList<Dag> outputDags = new ArrayList<>();
+        for (Dag dag : candidates) {
+            outputDags.add(transformToAlpha(dag, alpha));
         }
 
-        return union;
+        return applyUnion(alpha, outputDags);
     }
 
     private ArrayList<Dag> fromChromosomeToDags(boolean[] chromosome) {
