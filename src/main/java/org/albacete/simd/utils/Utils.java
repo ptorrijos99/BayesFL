@@ -293,15 +293,7 @@ public class Utils {
         Graph g1 = moralize(bn1);
         Graph g2 = moralize(bn2);
 
-        int sum = 0;
-        for(Edge e: g1.getEdges()) {
-            if(!g2.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
-        }
-
-        for(Edge e: g2.getEdges()) {
-            if(!g1.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
-        }
-        return sum;
+        return SMHDwithoutMoralize(g1, g2);
     }
 
     public static int SMHDwithoutMoralize(Graph bn1, Graph bn2) {
@@ -1051,6 +1043,25 @@ public class Utils {
         }
 
         return L;
+    }
+
+    public static Set<Node> getConnectedComponent(Graph graph, Node node) {
+        Set<Node> component = new HashSet<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        component.add(node);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            for (Node neighbor : graph.getAdjacentNodes(current)) {
+                if (!component.contains(neighbor)) {
+                    component.add(neighbor);
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        return component;
     }
 
     /**

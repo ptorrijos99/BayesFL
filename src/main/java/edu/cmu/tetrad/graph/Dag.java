@@ -85,9 +85,11 @@ public final class Dag implements Graph {
      * @throws java.lang.IllegalArgumentException if the given graph cannot for some reason be converted into a DAG.
      */
     public Dag(Graph graph) throws IllegalArgumentException {
-        if (graph.paths().existsDirectedCycle()) {
+        // TODO: ELIMINADA LA COMPROBACIÓN DE SI ES ACÍCLICO. EN SU LUGAR, SOLO SE COMPRUEBA EN LOS SITIOS DONDE
+        // SEA NECESARIO, YA QUE ES UN PROCESO COSTOSO
+        /*if (graph.paths().existsDirectedCycle()) {
             throw new IllegalArgumentException("That graph was not acyclic.");
-        }
+        }*/
 
         this.graph = new EdgeListGraph();
 
@@ -194,9 +196,10 @@ public final class Dag implements Graph {
      *                                  cycle
      */
     public boolean addEdge(Edge edge) {
-        if (!Edges.isDirectedEdge(edge)) {
+        // TODO: ELIMINADA LA COMPROBACIÓN DE SI ES UNA ARISTA DIRIGIDA.
+        /*if (!Edges.isDirectedEdge(edge)) {
             throw new IllegalArgumentException("Only directed edges may be added to a DAG.");
-        }
+        }*/
 
         // TODO: ELIMINADA LA COMPROBACIÓN DE SI ES ANCESTRO. EN SU LUGAR, SOLO SE COMPRUEBA EN LOS SITIOS DONDE
         // SEA NECESARIO, YA QUE ES UN PROCESO COSTOSO
@@ -675,9 +678,9 @@ public final class Dag implements Graph {
      * @throws NullPointerException     if no graph is provided
      */
     public void transferNodesAndEdges(Graph graph) throws IllegalArgumentException {
-        if (graph == null) {
+        /*if (graph == null) {
             throw new NullPointerException("No graph was provided.");
-        }
+        }*/
 
         for (Node node : graph.getNodes()) {
             if (!addNode(node)) {

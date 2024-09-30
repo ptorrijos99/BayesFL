@@ -6,8 +6,8 @@ import edu.cmu.tetrad.graph.Node;
 
 import java.util.*;
 
+import static consensusBN.BetaToAlpha.transformToAlpha;
 import static consensusBN.ConsensusUnion.*;
-
 
 public class InitialDAGsWoRepeat_Method implements Population {
 
@@ -102,18 +102,18 @@ public class InitialDAGsWoRepeat_Method implements Population {
     public Dag getUnionFromChromosome(boolean[] chromosome) {
         // Create the DAG that corresponds to each individual
         ArrayList<Dag> candidates = fromChromosomeToDags(chromosome);
-        Dag union = applyUnion(alpha, candidates);
 
-        // Check cycles
-        if (!union.paths().existsDirectedCycle()) {
-            return null;
+        ArrayList<Dag> outputDags = new ArrayList<>();
+        for (Dag dag : candidates) {
+            outputDags.add(transformToAlpha(dag, alpha));
         }
 
-        return union;
+        return applyUnion(alpha, outputDags);
     }
 
     private ArrayList<Dag> fromChromosomeToDags(boolean[] chromosome) {
         ArrayList<Dag> dags = new ArrayList<>();
+        int i = 0;
         for (Dag originalDag : originalDags) {
             Dag dag = new Dag(alpha);
             for (int j = 0; j < totalEdges; j++) {
