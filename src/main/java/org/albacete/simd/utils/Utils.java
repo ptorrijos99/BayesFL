@@ -296,6 +296,25 @@ public class Utils {
         return SMHDwithoutMoralize(g1, g2);
     }
 
+    /**
+     * Mean SMHD between a BN and a set of BNs
+     */
+    public static double SMHD(Graph bn1, List<Graph> bns) {
+        double smhd = 0;
+        for(Graph bn2: bns){
+            smhd += SMHD(bn1, bn2);
+        }
+        return smhd / bns.size();
+    }
+
+    public static double SMHD(Dag bn1, List<Dag> bns) {
+        double smhd = 0;
+        for(Dag bn2: bns){
+            smhd += SMHD(bn1, bn2);
+        }
+        return smhd / bns.size();
+    }
+
     public static int SMHDwithoutMoralize(Graph bn1, Graph bn2) {
         int sum = 0;
         for(Edge e: bn1.getEdges()) {
@@ -306,6 +325,17 @@ public class Utils {
             if(!bn1.isAdjacentTo(e.getNode1(), e.getNode2())) sum++;
         }
         return sum;
+    }
+
+    /**
+     * Mean SMHD between a BN and a set of BNs, without moralizing
+     */
+    public static double SMHDwithoutMoralize(Graph bn1, List<Graph> bns) {
+        double smhd = 0;
+        for(Graph bn2: bns){
+            smhd += SMHDwithoutMoralize(bn1, bn2);
+        }
+        return smhd / bns.size();
     }
 
     // This function was used in the SMHD instead of moralize
@@ -390,6 +420,14 @@ public class Utils {
         diff += countDifferences(undirectedGSigma2, undirectedG2);       // |Eσ2' ⧵ E′2|
 
         return diff;
+    }
+
+    public static double fusionSimilarity(Dag g1, List<Dag> bns) {
+        double sum = 0;
+        for(Dag g2: bns){
+            sum += fusionSimilarity(g1, g2);
+        }
+        return sum / bns.size();
     }
 
     public static Graph undirectedGraphFromDag(Dag dag) {
@@ -764,7 +802,7 @@ public class Utils {
         return table;
     }
 
-    public static Map<Node, Set<Node>> getMoralTriangulatedCliques(Dag dag) {
+    public static Map<Node, Set<Node>> getMoralTriangulatedCliques(Graph dag) {
         // 1. Moralize the graph
         EdgeListGraph undirectedGraph = (EdgeListGraph) moralize(dag);
 
@@ -778,7 +816,7 @@ public class Utils {
         return getCliques(maximumCardinalityOrdering, undirectedGraph);
     }
 
-    public static int getTreeWidth(Dag dag) {
+    public static int getTreeWidth(Graph dag) {
         Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(dag);
         return cliques.values().stream().mapToInt(Set::size).max().orElse(0);
     }

@@ -48,7 +48,7 @@ public class InitialDAGsWoRepeat_Method implements Population {
         edges = new ArrayList<>(edgeFrequency.keySet());
 
         double startTime = System.currentTimeMillis();
-        greedyDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, ""+maxTreewidth);
+        greedyDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, alpha, ""+maxTreewidth);
         greedyDag = fusionUnion(greedyDags);
         executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
 
@@ -76,7 +76,7 @@ public class InitialDAGsWoRepeat_Method implements Population {
         }
 
         // Add the greedy solutions with maxTreewidth-1 to the population
-        List<Dag> greedy = originalDAGsGreedyTreewidthBeforeWoRepeat(originalDags, ""+(maxTreewidth-1));
+        List<Dag> greedy = originalDAGsGreedyTreewidthBeforeWoRepeat(originalDags, alpha, ""+(maxTreewidth-1));
         for (int i = 0; i < totalEdges; i++) {
             for (Dag g : greedy) {
                 population[1][i] = g.containsEdge(edges.get(i)) || population[1][i];
