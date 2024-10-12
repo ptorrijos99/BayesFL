@@ -1,13 +1,10 @@
 package consensusBN;
 
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.*;
 
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.util.TaskManager;
 import org.albacete.simd.utils.Utils;
 
 import static consensusBN.AlphaOrder.alphaOrder;
@@ -17,7 +14,9 @@ import static org.albacete.simd.utils.Utils.getConnectedComponent;
 public class ConsensusUnion {
 
     public static Dag initialDag;
-    public static boolean allPossibleArcs = true;
+    public static boolean allPossibleArcs = false;
+    public static boolean metricAgainstOriginalDAGs = true;
+    public static boolean metricSMHD = false;
 
     /**
      * Complete union of the DAGs, previously transformed to the same alpha order.
@@ -205,11 +204,19 @@ public class ConsensusUnion {
     // instead of in the union, to obtain a union that respect the limit of treewidth. Do not repeat the edges that
     // appears in more than one original DAG. Greedy algorithm.
     public static Dag applyGreedyMaxTreewidthBeforeWoRepeat(List<Dag> dags, String maxTreewidth) {
-        List<Dag> transformedDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, maxTreewidth);
-        return fusionUnion(transformedDags);
+        List<Node> alpha = alphaOrder(dags);
+
+        List<Dag> newDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, alpha, maxTreewidth);
+
+        List<Dag> transformedDags = new ArrayList<>();
+        for (Dag dag : newDags) {
+            transformedDags.add(transformToAlpha(dag, alpha));
+        }
+
+        return applyUnion(alpha, transformedDags);
     }
 
-    public static List<Dag> originalDAGsGreedyTreewidthBeforeWoRepeat(List<Dag> dags, String maxTreewidth) {
+    public static List<Dag> originalDAGsGreedyTreewidthBeforeWoRepeat(List<Dag> dags, List<Node> alpha, String maxTreewidth) {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
         ArrayList<Dag> outputDags = new ArrayList<>();
@@ -238,8 +245,12 @@ public class ConsensusUnion {
                 outputDags.get(dagIndex).addEdge(edge);
             }
 
+            List<Dag> transformedDags = new ArrayList<>();
+            for (Dag dag : outputDags) {
+                transformedDags.add(transformToAlpha(dag, alpha));
+            }
             // Get the union fusion
-            Dag union = fusionUnion(outputDags);
+            Dag union = fusionUnion(transformedDags);
 
             // Get the cliques of the union
             Map<Node, Set<Node>> cliques = Utils.getMoralTriangulatedCliques(union);
@@ -262,11 +273,19 @@ public class ConsensusUnion {
     // Add the edges in order of frequency, limiting the maximum tree width. Try to add the edges on the original DAGs,
     // instead of in the union, to obtain a union that respect the limit of treewidth. Greedy algorithm.
     public static Dag applyGreedyMaxTreewidthBefore(List<Dag> dags, String maxTreewidth) {
-        List<Dag> transformedDags = originalDAGsGreedyTreewidthBefore(dags, maxTreewidth);
-        return fusionUnion(transformedDags);
+        List<Node> alpha = alphaOrder(dags);
+
+        List<Dag> newDags = originalDAGsGreedyTreewidthBefore(dags, alpha, maxTreewidth);
+
+        List<Dag> transformedDags = new ArrayList<>();
+        for (Dag dag : newDags) {
+            transformedDags.add(transformToAlpha(dag, alpha));
+        }
+
+        return applyUnion(alpha, transformedDags);
     }
 
-    public static List<Dag> originalDAGsGreedyTreewidthBefore(List<Dag> dags, String maxTreewidth) {
+    public static List<Dag> originalDAGsGreedyTreewidthBefore(List<Dag> dags, List<Node> alpha, String maxTreewidth) {
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
         ArrayList<Dag> outputDags = new ArrayList<>();
@@ -284,8 +303,14 @@ public class ConsensusUnion {
                 Edge edge = edges.get(i).remove(0);
                 outputDags.get(i).addEdge(edge);
 
-                // Get the union fusion and check the treewidth
-                Dag union = fusionUnion(outputDags);
+                // Get the union fusion
+                List<Dag> transformedDags = new ArrayList<>();
+                for (Dag dag : outputDags) {
+                    transformedDags.add(transformToAlpha(dag, alpha));
+                }
+                Dag union = fusionUnion(transformedDags);
+
+                // Check the treewidth
                 Map<Node, Set<Node>> cliques = Utils.getMoralTriangulatedCliques(union);
                 for (Set<Node> clique : cliques.values()) {
                     // If the treewidth is greather than the limit, remove the edge
@@ -303,7 +328,7 @@ public class ConsensusUnion {
     // GES-like algorithm. In each iteration, adds, removes or reverses the edge that maximizes the score while the tw
     // is less than the limit. Stops when no edge can be added, removed or reversed without decreasing the score.
     private static Dag applySuperGreedyMaxTreewidth(Dag initialDag, List<Node> alpha, List<Dag> dags, String maxTreewidth) {
-        int mejora = 0;
+        double mejora = 0;
         Set<Node> connectedComponent = new HashSet<>(alpha);
         int maxCliqueSize = Integer.parseInt(maxTreewidth);
 
@@ -319,9 +344,24 @@ public class ConsensusUnion {
 
         // Get the union fusion
         Dag union = fusionUnion(dags);
-        Graph moralizedUnion = Utils.moralize(union);
 
-        int bestScore = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(finalDag));
+        double bestScore;
+        Graph moralizedUnion = null;
+        List<Graph> moralizedInitialDAGs = null;
+        if (!metricAgainstOriginalDAGs) {
+            moralizedUnion = Utils.moralize(union);
+            bestScore = Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(finalDag));
+        } else {
+            if (metricSMHD) {
+                moralizedInitialDAGs = new ArrayList<>();
+                for (Dag dag : dags) {
+                    moralizedInitialDAGs.add(Utils.moralize(dag));
+                }
+                bestScore = Utils.SMHDwithoutMoralize(Utils.moralize(finalDag), moralizedInitialDAGs);
+            } else {
+                bestScore = Utils.fusionSimilarity(finalDag, dags);
+            }
+        }
 
         Set<Edge> notIncludedArcs;
         if (allPossibleArcs) {
@@ -353,16 +393,18 @@ public class ConsensusUnion {
                 Edge arc = allArcs.get(i);
                 if (connectedComponent.contains(arc.getNode1()) || connectedComponent.contains(arc.getNode2())) {
                     if (included[i]) {
-                        results[i] = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 1, i);
+                        // TODO: DEMOSTRAR QUE NUNCA SE PUEDE ELIMINAR UN ENLACE
+                        results[i] = tryArc(moralizedUnion, moralizedInitialDAGs, dags, finalDag, arc, maxCliqueSize, 1, i);
 
-                        if (notIncludedArcs.contains(new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW))) {
-                            Result op2 = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 2, i);
+                        // TODO: DEMOSTRAR QUE NUNCA SE PUEDE REVERTIR UN ENLACE
+                        /*if (notIncludedArcs.contains(new Edge(arc.getNode2(), arc.getNode1(), Endpoint.TAIL, Endpoint.ARROW))) {
+                            Result op2 = tryArc(moralizedUnion, moralizedInitialDAGs, dags, finalDag, arc, maxCliqueSize, 2, i);
                             if (results[i] == null || (op2 != null && op2.score < results[i].score)) {
                                 results[i] = op2;
                             }
-                        }
+                        }*/
                     } else {
-                        results[i] = tryArc(moralizedUnion, finalDag, arc, maxCliqueSize, 0, i);
+                        results[i] = tryArc(moralizedUnion, moralizedInitialDAGs, dags, finalDag, arc, maxCliqueSize, 0, i);
                     }
                 } else if (results[i] != null) {
                     results[i].score = results[i].score - mejora;
@@ -370,7 +412,7 @@ public class ConsensusUnion {
             }
 
             // Update the variables
-            int lastScore = bestScore;
+            double lastScore = bestScore;
             int operation = -1;
             int id = -1;
             for (Result result : results) {
@@ -426,7 +468,7 @@ public class ConsensusUnion {
         return finalDag;
     }
 
-    private static Result tryArc(Graph moralizedUnion, Dag dag, Edge arc, int maxCliqueSize, int operation, int id) {
+    private static Result tryArc(Graph moralizedUnion, List<Graph> moralizedInitialDAGs, List<Dag> initialDAGs, Dag dag, Edge arc, int maxCliqueSize, int operation, int id) {
         Result score;
 
         if (operation == 0) {  // Add arc
@@ -443,11 +485,27 @@ public class ConsensusUnion {
                 }
             }
 
-            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 0);
+            if (metricAgainstOriginalDAGs) {
+                if (metricSMHD) {
+                    score = new Result(id, Utils.SMHDwithoutMoralize(Utils.moralize(dag), moralizedInitialDAGs), 0);
+                } else {
+                    score = new Result(id, Utils.fusionSimilarity(dag, initialDAGs), 0);
+                }
+            } else {
+                score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 0);
+            }
             dag.removeEdge(arc);
         } else if (operation == 1) {  // Remove arc
             dag.removeEdge(arc);
-            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 1);// No treewidth or cycle calculation needed, only can be less or equal than the previous
+            if (metricAgainstOriginalDAGs) {
+                if (metricSMHD) {
+                    score = new Result(id, Utils.SMHDwithoutMoralize(Utils.moralize(dag), moralizedInitialDAGs), 1);
+                } else {
+                    score = new Result(id, Utils.fusionSimilarity(dag, initialDAGs), 1);
+                }
+            } else {
+                score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 1);// No treewidth or cycle calculation needed, only can be less or equal than the previous
+            }
             dag.addEdge(arc);
         } else {  // Reverse arc
             dag.removeEdge(arc);
@@ -470,7 +528,15 @@ public class ConsensusUnion {
                 }
             }
 
-            score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 2);
+            if (metricAgainstOriginalDAGs) {
+                if (metricSMHD) {
+                    score = new Result(id, Utils.SMHDwithoutMoralize(Utils.moralize(dag), moralizedInitialDAGs), 2);
+                } else {
+                    score = new Result(id, Utils.fusionSimilarity(dag, initialDAGs), 2);
+                }
+            } else {
+                score = new Result(id, Utils.SMHDwithoutMoralize(moralizedUnion, Utils.moralize(dag)), 2);
+            }
             dag.removeEdge(newEdge);
             dag.addEdge(arc);
         }
@@ -481,10 +547,10 @@ public class ConsensusUnion {
     // Create a class that saves the result
     static class Result {
         public int id;
-        public int score;
+        public double score;
         public int operation;
 
-        public Result(int id, int score, int operation) {
+        public Result(int id, double score, int operation) {
             this.id = id;
             this.score = score;
             this.operation = operation;
