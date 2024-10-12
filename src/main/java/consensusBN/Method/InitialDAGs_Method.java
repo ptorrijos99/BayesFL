@@ -47,7 +47,7 @@ public class InitialDAGs_Method implements Population {
         }
 
         double startTime = System.currentTimeMillis();
-        greedyDags = originalDAGsGreedyTreewidthBefore(dags, ""+maxTreewidth);
+        greedyDags = originalDAGsGreedyTreewidthBefore(dags, alpha, ""+maxTreewidth);
         greedyDag = fusionUnion(greedyDags);
         executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
     }
@@ -67,7 +67,7 @@ public class InitialDAGs_Method implements Population {
         }
 
         // Add the greedy solution with maxTreewidth-1 to the population
-        List<Dag> greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, ""+(maxTreewidth-1));
+        List<Dag> greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, alpha, ""+(maxTreewidth-1));
         for (int i = 0; i < nDags; i++) {
             for (Edge edge : greedyDagsMaxTreewidthMinusOne.get(i).getEdges()) {
                 population[1][edgesOriginal[i].indexOf(edge) + firstIndex[i]] = true;

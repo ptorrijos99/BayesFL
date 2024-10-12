@@ -39,6 +39,7 @@ public class GeneticTreeWidthUnion {
     private final List<Node> alpha;
     private final List<Dag> alphaDags;
     private final List<Dag> originalDags;
+    private List<Graph> originalMoralGraphs;
     public Dag greedyDag;
     public Dag fusionUnion;
     public Graph moralGraphUnion;
@@ -81,6 +82,13 @@ public class GeneticTreeWidthUnion {
     public Dag fusionUnion() {
         double startTime = System.currentTimeMillis();
         treeWidths = new int[populationSize];
+
+        if (metricAgainstOriginalDAGs && metricSMHD) {
+            originalMoralGraphs = new ArrayList<>();
+            for (Dag d : originalDags) {
+                originalMoralGraphs.add(Utils.moralize(d));
+            }
+        }
 
         if (candidatesFromInitialDAGs) {
             if (!repeatCandidates) {
@@ -282,13 +290,22 @@ public class GeneticTreeWidthUnion {
 
         // Get the cliques
         treeWidths[index] = Utils.getTreeWidth(individualDag);
-        Graph moralIndividualGraph = Utils.moralize(individualDag);
 
         double fitness;
-        if (treeWidths[index] > maxTreewidth) {
-            fitness = Utils.SMHDwithoutMoralize(moralIndividualGraph, moralGraphUnion) * ((double)  treeWidths[index] / maxTreewidth);
+        if (metricAgainstOriginalDAGs) {
+            if (metricSMHD) {
+                Graph moralIndividualGraph = Utils.moralize(individualDag);
+                fitness = Utils.SMHDwithoutMoralize(moralIndividualGraph, originalMoralGraphs);
+            } else {
+                fitness = Utils.fusionSimilarity(individualDag, originalDags);
+            }
         } else {
+            Graph moralIndividualGraph = Utils.moralize(individualDag);
             fitness = Utils.SMHDwithoutMoralize(moralIndividualGraph, moralGraphUnion);
+        }
+
+        if (treeWidths[index] > maxTreewidth) {
+            fitness = fitness * ((double)  treeWidths[index] / maxTreewidth);
         }
 
         if (fitness < bestFitness && treeWidths[index] <= maxTreewidth) {
