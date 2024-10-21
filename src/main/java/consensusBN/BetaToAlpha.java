@@ -2,6 +2,7 @@ package consensusBN;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import edu.cmu.tetrad.graph.Node;
 import edu.cmu.tetrad.graph.Dag;
@@ -20,14 +21,14 @@ public class BetaToAlpha {
         // Construct beta order as close as possible to alfa.
         ArrayList<Node> beta = new ArrayList<>(alfa.size());
         Dag G_aux = new Dag(G);
-
-        ArrayList<Node> sinkNodes = getSinkNodes(G_aux);
+        HashSet<Node> sinkNodes = new HashSet<>(getSinkNodes(G_aux));
 
         while (G_aux.getNumNodes() > 0) {
-            Node sink = sinkNodes.get(0);
+            Node sink = sinkNodes.iterator().next();
+
             List<Node> pa = G_aux.getParents(sink);
             G_aux.removeNode(sink);
-            sinkNodes.remove(0);
+            sinkNodes.remove(sink);
 
             // Compute the new sink nodes
             for (Node nodep : pa) {
