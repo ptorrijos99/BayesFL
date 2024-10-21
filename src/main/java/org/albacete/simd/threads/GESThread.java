@@ -235,7 +235,7 @@ public abstract class GESThread implements Runnable{
      * @param graph current graph of the problem
      * @return Set of nodes that are connected to Y and adjacent to X.
      */
-    protected static HashSet<Node> findNaYX(Node x, Node y, Graph graph) {
+    public static HashSet<Node> findNaYX(Node x, Node y, Graph graph) {
         HashSet<Node> naYX = new HashSet<>(graph.getAdjacentNodes(y));
         naYX.retainAll(graph.getAdjacentNodes(x));
 
@@ -674,6 +674,21 @@ public abstract class GESThread implements Runnable{
         }
 
         return tNeighbors;
+    }
+
+    public static List<Node> getHNeighbors(Node x, Node y, Graph graph) {
+        List<Node> hNeighbors = new LinkedList<>(graph.getAdjacentNodes(y));
+        hNeighbors.retainAll(graph.getAdjacentNodes(x));
+
+        for (int i = hNeighbors.size() - 1; i >= 0; i--) {
+            Node z = hNeighbors.get(i);
+            Edge edge = graph.getEdge(y, z);
+            if (!Edges.isUndirectedEdge(edge)) {
+                hNeighbors.remove(z);
+            }
+        }
+
+        return hNeighbors;
     }
 
     public int getIterations(){
