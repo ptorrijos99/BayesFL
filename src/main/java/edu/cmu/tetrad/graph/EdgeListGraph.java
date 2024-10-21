@@ -771,6 +771,8 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             throw new IllegalStateException(
                     "There is more than one edge between " + node1 + " and "
                             + node2);
+        } else if (edges.isEmpty()) {
+            return false;
         }
 
         removeTriplesNotInGraph();
