@@ -219,9 +219,9 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
      * @throws java.lang.IllegalArgumentException if the given node is not along the edge.
      */
     public final Endpoint getProximalEndpoint(Node node) {
-        if (this.node1 == node) {
+        if (this.node1.equals(node)) {
             return getEndpoint1();
-        } else if (this.node2 == node) {
+        } else if (this.node2.equals(node)) {
             return getEndpoint2();
         }
 
@@ -236,9 +236,9 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
      * @throws java.lang.IllegalArgumentException if the given node is not along the edge.
      */
     public final Endpoint getDistalEndpoint(Node node) {
-        if (this.node1 == node) {
+        if (this.node1.equals(node)) {
             return getEndpoint2();
-        } else if (this.node2 == node) {
+        } else if (this.node2.equals(node)) {
             return getEndpoint1();
         }
 
@@ -253,11 +253,11 @@ public class Edge implements TetradSerializable, Comparable<Edge> {
      * @return a {@link edu.cmu.tetrad.graph.Node} object
      */
     public final Node getDistalNode(Node node) {
-        if (this.node1 == node) {
+        if (this.node1.equals(node)) {
             return this.node2;
         }
 
-        if (this.node2 == node) {
+        if (this.node2.equals(node)) {
             return this.node1;
         }
 

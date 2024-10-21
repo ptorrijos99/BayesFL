@@ -1254,9 +1254,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
 
             // TODO: SIMPLIFIED AND USING EQUALS
             if (!node2.equals(node)) {
-                Set<Edge> edgeList2 = this.edgeLists.get(node2);
-                this.edgeLists.put(node2, edgeList2);
-                edgeList2.remove(edge);
+                this.edgeLists.get(node2).remove(edge);
                 this.edgesSet.remove(edge);
                 this.parentsHash.remove(edge.getNode1());
                 this.parentsHash.remove(edge.getNode2());
