@@ -104,6 +104,11 @@ public class EdgeListGraph implements Graph, TripleClassifier {
      */
     private Map<Node, List<Node>> parentsHash = new HashMap<>();
 
+    /**
+     * TODO: The childrens hash.
+     */
+    private Map<Node, List<Node>> childrensHash = new HashMap<>();
+
     //==============================CONSTUCTORS===========================//
 
     /**
@@ -167,6 +172,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
         this.edgesSet = new HashMap<>(graph.edgesSet);  // TODO: CHANGED FROM HASHSET TO MAP
         this.namesHash = new HashMap<>(graph.namesHash);
         this.parentsHash = new HashMap<>(graph.parentsHash);
+        this.childrensHash = new HashMap<>(graph.childrensHash);  // TODO: ADDED
 //        this.paths = new Paths(this);
 
         this.underLineTriples = graph.getUnderLines();
@@ -330,7 +336,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
      */
     @Override
     public synchronized List<Node> getChildren(Node node) {
-        List<Node> children = new ArrayList<>();
+        /*List<Node> children = new ArrayList<>();
 
         for (Edge edge : getEdges(node)) {
             if (Edges.isDirectedEdge(edge)) {
@@ -342,7 +348,32 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             }
         }
 
-        return children;
+        return children;*/
+
+        // TODO: CHANGED TO USE MAP, IMPROVING PERFORMANCE. SIMILAR TO getParents
+        if (!childrensHash.containsKey(node)) {
+            List<Node> children = new ArrayList<>();
+            Set<Edge> edges = this.edgeLists.get(node);
+
+            if (edges == null) {
+                throw new IllegalArgumentException("Node " + node + " is not in the graph.");
+            }
+
+            for (Edge edge : edges) {
+                if (edge == null) continue;
+
+                Endpoint endpoint1 = edge.getDistalEndpoint(node);
+                Endpoint endpoint2 = edge.getProximalEndpoint(node);
+
+                if (endpoint1 == Endpoint.ARROW && endpoint2 == Endpoint.TAIL) {
+                    children.add(edge.getDistalNode(node));
+                }
+            }
+
+            childrensHash.put(node, children);
+        }
+
+        return childrensHash.get(node);
     }
 
     /**
@@ -418,7 +449,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             return null;
         }
 
-        if (edges.size() == 0) {
+        if (edges.isEmpty()) {
             return null;
         }
 
@@ -746,6 +777,9 @@ public class EdgeListGraph implements Graph, TripleClassifier {
 
         parentsHash.remove(node1);
         parentsHash.remove(node2);
+        // TODO: ADDED
+        childrensHash.remove(node1);
+        childrensHash.remove(node2);
 
         return removeEdge(edges.get(0));  // TODO: CHANGED TO USE removeEdge WITH 1 EDGE
     }
@@ -852,6 +886,10 @@ public class EdgeListGraph implements Graph, TripleClassifier {
 
             this.parentsHash.remove(node1);
             this.parentsHash.remove(node2);
+
+            // TODO: ADDED
+            this.childrensHash.remove(node1);
+            this.childrensHash.remove(node2);
         }
 
         /*Map<Node, Set<Edge>> edgeListMap = this.edgeLists;
@@ -927,9 +965,10 @@ public class EdgeListGraph implements Graph, TripleClassifier {
         this.nodes.add(node);
         this.namesHash.put(node.getName(), node);
 
-        if (node.getNodeType() != NodeType.ERROR) {
+        // TODO: COMMENTED OUT BECAUSE IT IS NOT USED
+        /*if (node.getNodeType() != NodeType.ERROR) {
             getPcs().firePropertyChange("nodeAdded", null, node);
-        }
+        }*/
 
         return true;
     }
@@ -1202,6 +1241,10 @@ public class EdgeListGraph implements Graph, TripleClassifier {
             this.parentsHash.remove(edge.getNode1());
             this.parentsHash.remove(edge.getNode2());
 
+            // TODO: ADDED
+            this.childrensHash.remove(edge.getNode1());
+            this.childrensHash.remove(edge.getNode2());
+
             getPcs().firePropertyChange("edgeRemoved", edge, null);
             return true;
         }
@@ -1258,6 +1301,10 @@ public class EdgeListGraph implements Graph, TripleClassifier {
                 this.edgesSet.remove(edge);
                 this.parentsHash.remove(edge.getNode1());
                 this.parentsHash.remove(edge.getNode2());
+                // TODO: ADDED
+                this.childrensHash.remove(edge.getNode1());
+                this.childrensHash.remove(edge.getNode2());
+
                 changed = true;
             }
 
@@ -1278,6 +1325,7 @@ public class EdgeListGraph implements Graph, TripleClassifier {
         this.edgeLists.remove(node);
         //this.nodes.remove(node);   // TODO: CHANGED TO REMOVE NODE AFTER REMOVING EDGES
         this.parentsHash.remove(node);
+        this.childrensHash.remove(node);   // TODO: ADDED
         this.namesHash.remove(node.getName());
 
         removeTriplesNotInGraph();
