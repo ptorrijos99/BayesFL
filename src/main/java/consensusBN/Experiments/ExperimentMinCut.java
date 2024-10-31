@@ -2,11 +2,15 @@ package consensusBN.Experiments;
 
 import consensusBN.ConsensusUnion;
 import consensusBN.GeneticTreeWidthUnion;
+import consensusBN.Method.InitialDAGs_Method;
 import consensusBN.MinCutTreeWidthUnion;
-import consensusBN.Method.Fusion_Method;
-import edu.cmu.tetrad.bayes.*;
+import edu.cmu.tetrad.bayes.BayesIm;
+import edu.cmu.tetrad.bayes.BayesPm;
+import edu.cmu.tetrad.bayes.EmBayesEstimator;
 import edu.cmu.tetrad.data.DataSet;
-import edu.cmu.tetrad.graph.*;
+import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Graph;
+import edu.cmu.tetrad.graph.Node;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
@@ -15,17 +19,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.albacete.simd.utils.Utils.readData;
 import static org.albacete.simd.utils.Utils.getTreeWidth;
+import static org.albacete.simd.utils.Utils.readData;
 
 
-public class Experiments {
+public class ExperimentMinCut {
 
     public static String PATH = "./";
-    public static boolean Puerta = true;
     public static boolean verbose = false;
 
-    // TODO: DESCOMENTAR ESTAS LÍNEAS
+    // TODO: UNCOMMENT THIS LINES
     /*public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
@@ -56,13 +59,14 @@ public class Experiments {
         int nIterations = Integer.parseInt(parameters[3]);
         double twLimit = Double.parseDouble(parameters[4]);
         int seed = Integer.parseInt(parameters[5]);
+
         boolean againstOriginalDAGs = Boolean.parseBoolean(parameters[6]);
         boolean mectricIsSMHD = Boolean.parseBoolean(parameters[7]);
 
         ConsensusUnion.metricAgainstOriginalDAGs = againstOriginalDAGs;
         ConsensusUnion.metricSMHD = mectricIsSMHD;
 
-        String savePath = "./results/Server/" + net + "_GeneticTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
+        String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
 
         // Launch the experiment
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
@@ -73,11 +77,11 @@ public class Experiments {
         //String net = "child.0";
 
         // Generic network (net = number of nodes)
-        String net = ""+30;
+        String net = ""+10;
 
         verbose = true;
 
-        int nClients = 50;
+        int nClients = 10;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -89,7 +93,7 @@ public class Experiments {
         ConsensusUnion.metricAgainstOriginalDAGs = againstOriginalDAGs;
         ConsensusUnion.metricSMHD = mectricIsSMHD;
 
-        String savePath = "./results/Server/" + net + "_GeneticTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
+        String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
 
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
     }
@@ -100,11 +104,11 @@ public class Experiments {
             new File("./results/Server/").mkdirs();
         }
 
-        // Check if the file exists, and if it does, get the maximum treewidth found
-        int tw = 2;
+        // Check if the file exists, and if it does, get the minimum treewidth found
+        int tw;
         if (new File(savePath).exists()) {
             System.out.println("File exists: " + savePath);
-            // Check the maximum executed treewidth in the file
+            // Check the minimum executed treewidth in the file
             BufferedReader br = null;
             try {
                 br = new BufferedReader(new FileReader(savePath));
@@ -120,14 +124,23 @@ public class Experiments {
             } catch (IOException ignored) {}
 
             // Get the maximum treewidth
+            System.out.println(lastLine);
             tw = Integer.parseInt(lastLine.split(",")[13]);
-            System.out.println("Maximum treewidth found in file: " + tw);
-            tw += 1;
+            System.out.println("Minimum treewidth found in file: " + tw);
 
             // Close the file
             try {
                 br.close();
             } catch (IOException ignored) {}
+
+            // if tw == 2, the experiment is completed
+            if (tw == 2) {
+                System.out.println("The treewidth of the last executed round is 2");
+                return;
+            } else {
+                // Delete file
+                new File(savePath).delete();
+            }
         }
 
         RandomBN randomBN;
@@ -162,93 +175,10 @@ public class Experiments {
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
 
-        /*// Print the dags
-        // Original DAG
-        Dag originalDag = new Dag(randomBN.originalBayesIm.getDag());
-        System.out.println("\nOriginal DAG with " + originalDag.getNumEdges() + " edges:");
-        System.out.println("STATS: ");
-        System.out.println("Treewidth: " + getTreeWidth(originalDag));
-        System.out.println("MaxParents: " + maxParents(originalDag));
-        System.out.println("MeanParents: " + meanParents(originalDag));
-        System.out.println(Utils.graphToDot(randomBN.originalBayesIm.getDag()));
-        // Generated DAGs
-        for (int i = 0; i < dags.size(); i++) {
-            System.out.println("\nDAG " + i + " with " + dags.get(i).getNumEdges() + " edges:");
-            System.out.println("STATS: ");
-            System.out.println("Treewidth: " + getTreeWidth(dags.get(i)));
-            System.out.println("SHD: " + Utils.SHD(originalDag, dags.get(i)));
-            System.out.println("SMHD: " + Utils.SMHD(originalDag, dags.get(i)));
-            System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, dags.get(i)));
-            System.out.println("MaxParents: " + maxParents(dags.get(i)));
-            System.out.println("MeanParents: " + meanParents(dags.get(i)));
-            System.out.println(Utils.graphToDot(dags.get(i)));
-        }
-
-        // Fusion DAG
-        Dag unionDagPrueba = ConsensusUnion.fusionUnion(dags);
-        System.out.println("\nFusion DAG with " + unionDagPrueba.getNumEdges() + " edges:");
-        System.out.println("STATS: ");
-        System.out.println("Treewidth: " + getTreeWidth(unionDagPrueba));
-        System.out.println("SHD: " + Utils.SHD(originalDag, unionDagPrueba));
-        System.out.println("SMHD: " + Utils.SMHD(originalDag, unionDagPrueba));
-        System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, unionDagPrueba));
-        System.out.println("MaxParents: " + maxParents(unionDagPrueba));
-        System.out.println("MeanParents: " + meanParents(unionDagPrueba));
-        System.out.println(Utils.graphToDot(unionDagPrueba));*/
 
         // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(dags, seed);
-        geneticUnion.populationSize = popSize;
-        geneticUnion.candidatesFromInitialDAGs = false;
-        geneticUnion.repeatCandidates = false;
-        geneticUnion.useSuperGreedy = false;
-        geneticUnion.addEmptySuperGreedy = false;
-        geneticUnion.numIterations = nIterations;
-
-        // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnionsg = new GeneticTreeWidthUnion(dags, seed);
-        geneticUnionsg.populationSize = popSize;
-        geneticUnionsg.candidatesFromInitialDAGs = false;
-        geneticUnionsg.repeatCandidates = false;
-        geneticUnionsg.useSuperGreedy = true;
-        geneticUnionsg.addEmptySuperGreedy = false;
-        geneticUnionsg.numIterations = nIterations;
-
-        // Find the treewidth of the union of the dags
-        GeneticTreeWidthUnion geneticUnionsgv = new GeneticTreeWidthUnion(dags, seed);
-        geneticUnionsgv.populationSize = popSize;
-        geneticUnionsgv.candidatesFromInitialDAGs = false;
-        geneticUnionsgv.repeatCandidates = false;
-        geneticUnionsgv.useSuperGreedy = true;
-        geneticUnionsgv.addEmptySuperGreedy = true;
-        geneticUnionsgv.numIterations = nIterations;
-
-        GeneticTreeWidthUnion geneticUnionPuerta = null;
-        GeneticTreeWidthUnion geneticUnionPuertaBES = null;
-        GeneticTreeWidthUnion geneticUnionPuerta2 = null;
-        if (Puerta) {
-            // Find the treewidth of the union of the dags
-            geneticUnionPuerta = new GeneticTreeWidthUnion(dags, seed);
-            geneticUnionPuerta.populationSize = popSize;
-            geneticUnionPuerta.candidatesFromInitialDAGs = true;
-            geneticUnionPuerta.repeatCandidates = true;
-            geneticUnionPuerta.numIterations = nIterations;
-
-            // Find the treewidth of the union of the dags
-            geneticUnionPuertaBES = new GeneticTreeWidthUnion(dags, seed);
-            geneticUnionPuertaBES.populationSize = popSize;
-            geneticUnionPuertaBES.candidatesFromInitialDAGs = true;
-            geneticUnionPuertaBES.repeatCandidates = true;
-            geneticUnionPuertaBES.numIterations = nIterations;
-            geneticUnionPuertaBES.useMinCutBES = true;
-
-            // Find the treewidth of the union of the dags
-            geneticUnionPuerta2 = new GeneticTreeWidthUnion(dags, seed);
-            geneticUnionPuerta2.populationSize = popSize;
-            geneticUnionPuerta2.candidatesFromInitialDAGs = true;
-            geneticUnionPuerta2.repeatCandidates = false;
-            geneticUnionPuerta2.numIterations = nIterations;
-        }
+        MinCutTreeWidthUnion minCutUnion = new MinCutTreeWidthUnion(dags, seed, 2);
+        minCutUnion.experiments = true;
 
         // Find the treewidth of the dags sampled
         int maxTW = 0;
@@ -272,16 +202,12 @@ public class Experiments {
         }
         meanParents /= dags.size();
 
-        Dag unionDag = geneticUnion.fusionUnion;
+        Dag unionDag = minCutUnion.fusionUnion;
 
         // Find the treewidth of the union of the dags
         int unionTw = getTreeWidth(unionDag);
         System.out.println("Fusion Union Treewidth: " + unionTw);
 
-        if (unionTw <= tw) {
-            System.out.println("The treewidth of the union is lower or equal than the treewidth limit");
-            return;
-        }
 
         // Save the moralized original DAGs into a new list
         ArrayList<Graph> moralizedDags = new ArrayList<>();
@@ -308,7 +234,7 @@ public class Experiments {
                 }
                 BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
                 timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
-                originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+                originalBNrecalcMarginals = Experiments.marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
             } catch (OutOfMemoryError | Exception ex) {
                 System.gc();
                 //Log the info
@@ -325,7 +251,7 @@ public class Experiments {
                         bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
                     }
                     BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                    sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                    sampledBNsMarginals.add(Experiments.marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
                     if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
                     else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
                 } catch (OutOfMemoryError | Exception ex) {
@@ -339,14 +265,14 @@ public class Experiments {
             // Get the BayesIm of the union graph
             try {
                 double start = System.currentTimeMillis();
-                BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
+                BayesPm bayesPm = new BayesPm(minCutUnion.fusionUnion);
                 for (int j = 0; j < bayesPm.getNumNodes(); j++) {
                     bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
                     bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
                 }
                 BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
                 timeUnion = (System.currentTimeMillis() - start) / 1000.0;
-                unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+                unionBNMarginals = Experiments.marginals(unionBN, randomBN.categories, randomBN.nodesDags);
             } catch (OutOfMemoryError | Exception ex) {
                 System.gc();
                 //Log the info
@@ -354,96 +280,33 @@ public class Experiments {
             }
         }
 
+        // Heuristic Consensus BES (all of the treewidths)
+        minCutUnion.fusion();
+        List<Dag> outputExperimentDAGs = minCutUnion.outputExperimentDAGs;
+        List<Double> outputExperimentTimes = minCutUnion.outputExperimentTimes;
+
         // Execute the genetic union for each treewidth from the last executed to the limit
-        for (; tw < unionTw; tw++) {
+        for (tw = unionTw-1; tw >= 2; tw--) {
+
             System.out.println("\nTreewidth: " + tw);
-            geneticUnion.maxTreewidth = tw;
-            geneticUnion.fusionUnion();
-            
 
-            // Heuristic Consensus BES
-            double startHCBES = System.currentTimeMillis();
-            MinCutTreeWidthUnion hcBES = new MinCutTreeWidthUnion(dags, 10, tw);
-            Dag hcBESFusion = hcBES.fusion();
-            System.out.println("\nminCut BES SMHD: \t\t" + Utils.SMHD(geneticUnion.fusionUnion, hcBESFusion) + " | SMHD ORIG: " + Utils.SMHD(hcBESFusion, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(hcBESFusion, dags) + " | Edges: " + hcBESFusion.getNumEdges() + " | Time: " + ((System.currentTimeMillis() - startHCBES)/1000));
-            
+            Dag resultDag = outputExperimentDAGs.get(tw-2);
+            double resultTime = outputExperimentTimes.get(tw-2);
 
-            if (verbose) System.out.println("Genetic SMHD: \t\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnion.bestDag,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnion.bestDag,dags) + " | Edges: " + geneticUnion.bestDag.getNumEdges() + " | Time: " + geneticUnion.executionTime);
-
-            geneticUnionsg.maxTreewidth = tw;
-            geneticUnionsg.fusionUnion();
-
-            if (verbose) System.out.println("GeneticSG SMHD: \t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionsg.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionsg.bestDag,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionsg.bestDag,dags) + " | Edges: " + geneticUnionsg.bestDag.getNumEdges() + " | Time: " + geneticUnionsg.executionTime);
-
-            geneticUnionsgv.maxTreewidth = tw;
-            geneticUnionsgv.fusionUnion();
-
-            if (verbose) System.out.println("GeneticSG v SMHD: \t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnionsgv.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionsgv.bestDag,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionsgv.bestDag,dags) + " | Edges: " + geneticUnionsgv.bestDag.getNumEdges() + " | Time: " + geneticUnionsgv.executionTime);
-
-            Dag superGreedy = ((Fusion_Method)geneticUnionsgv.method).superGreedyDag;
-            Dag superGreedyVacia = ((Fusion_Method)geneticUnionsgv.method).superGreedyEmptyDag;
-            double timeSuperGreedy = ((Fusion_Method)geneticUnionsgv.method).timeSuperGreedy;
-            double timeSuperGreedyVacia = ((Fusion_Method)geneticUnionsgv.method).timeSuperGreedyEmpty;
-
-            if (verbose) {
-                System.out.println("Greedy SMHD:\t\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnion.greedyDag,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnion.greedyDag,dags) + " | Edges: " + geneticUnion.greedyDag.getNumEdges() + " | Time: " + geneticUnion.executionTimeGreedy);
-                System.out.println("SuperGreedy SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedy) + " | SMHD ORIG: " + Utils.SMHD(superGreedy,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(superGreedy,dags) + " | Edges: " + superGreedy.getNumEdges() + " | Time: " + timeSuperGreedy);
-                System.out.println("SuperGreedy v SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion,superGreedyVacia) + " | SMHD ORIG: " + Utils.SMHD(superGreedyVacia,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(superGreedyVacia,dags) + " | Edges: " + superGreedyVacia.getNumEdges() + " | Time: " + timeSuperGreedyVacia);
-            }
-
-            if (Puerta) {
-                geneticUnionPuertaBES.maxTreewidth = tw;
-                geneticUnionPuertaBES.fusionUnion();
-                if (verbose) {
-                    System.out.println("Greedy Puerta BES SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuertaBES.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuertaBES.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuertaBES.greedyDag, dags) + " | Edges: " + geneticUnionPuertaBES.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuertaBES.executionTimeGreedy);
-                    System.out.println("Genetic Puerta BES SMHD:" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuertaBES.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuertaBES.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuertaBES.bestDag, dags) + " | Edges: " + geneticUnionPuertaBES.bestDag.getNumEdges() + " | Time: " + geneticUnionPuertaBES.executionTime);
-                }
-
-                geneticUnionPuerta.maxTreewidth = tw;
-                geneticUnionPuerta.fusionUnion();
-                if (verbose) {
-                    System.out.println("Greedy Puerta SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta.greedyDag, dags) + " | Edges: " + geneticUnionPuerta.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTimeGreedy);
-                    System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta.bestDag, dags) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
-                }
-
-                geneticUnionPuerta2.maxTreewidth = tw;
-                geneticUnionPuerta2.fusionUnion();
-                if (verbose) {
-                    System.out.println("Greedy Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta2.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta2.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta2.greedyDag, dags) + " | Edges: " + geneticUnionPuerta2.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTimeGreedy);
-                    System.out.println("Genetic Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta2.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta2.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta2.bestDag, dags) + " | Edges: " + geneticUnionPuerta2.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTime);
-                }
-            }
-
-            // Save results
-            List<String> algorithms;
-            if (Puerta) {
-                algorithms = Arrays.asList("greedy", "sg", "sgv", "genetic", "geneticsg", "geneticsgv", "geneticPuerta", "greedyPuerta", "geneticPuerta2", "greedyPuerta2");
-            } else {
-                algorithms = Arrays.asList("greedy", "sg", "sgv", "genetic", "geneticsg", "geneticsgv");
-            }
-
+            List<String> algorithms = List.of("minCutBES");
             ExperimentData experimentData;
             if (realNetwork) {
-                experimentData = new ExperimentData(true, algorithms, meanParents, maxParents, twLimit, geneticUnion.fusionUnion, Utils.moralize(geneticUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+                experimentData = new ExperimentData(true, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
             } else {
-                //        public ExperimentData(boolean realNetwork, List<String> algorithms, Graph fusionUnion, Graph fusionUnionMoralized, List<Graph> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw) {
-                experimentData = new ExperimentData(false, algorithms, meanParents, maxParents, twLimit, geneticUnion.fusionUnion, Utils.moralize(geneticUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
+                experimentData = new ExperimentData(false, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
             }
 
-            List<AlgorithmResults> algorithmResultsList = new ArrayList<>(Arrays.asList(
-                    new AlgorithmResults(geneticUnion.greedyDag, geneticUnion.executionTimeGreedy),
-                    new AlgorithmResults(superGreedy, timeSuperGreedy),
-                    new AlgorithmResults(superGreedyVacia, timeSuperGreedyVacia),
-                    new AlgorithmResults(geneticUnion.bestDag, geneticUnion.executionTime),
-                    new AlgorithmResults(geneticUnionsg.bestDag, geneticUnionsg.executionTime),
-                    new AlgorithmResults(geneticUnionsgv.bestDag, geneticUnionsgv.executionTime)
+            if (verbose) System.out.println("minCut SMHD: \t\t" + Utils.SMHD(minCutUnion.fusionUnion, resultDag) + " | SMHD ORIG: " + Utils.SMHD(resultDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(resultDag, dags) + " | Edges: " + resultDag.getNumEdges() + " | Time: " + resultTime);
+
+            List<AlgorithmResults> algorithmResultsList = new ArrayList<>(List.of(
+                    new AlgorithmResults(resultDag, resultTime)
             ));
-            if (Puerta) {
-                algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta.bestDag, geneticUnionPuerta.executionTime));
-                algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta.greedyDag, geneticUnionPuerta.executionTimeGreedy));
-                algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta2.bestDag, geneticUnionPuerta2.executionTime));
-                algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta2.greedyDag, geneticUnionPuerta2.executionTimeGreedy));
-            }
+
             saveRound(experimentData, algorithmResultsList, randomBN, savePath);
         }
     }
@@ -507,10 +370,6 @@ public class Experiments {
 
         BufferedWriter csvWriter;
         try {
-            if (!new File("./results/Server/").exists()) {
-                new File("./results/Server/").mkdir();
-            }
-
             csvWriter = new BufferedWriter(new FileWriter(savePath, true));
             if (new File(savePath).length() == 0) {
                 csvWriter.write(header);
@@ -568,17 +427,17 @@ public class Experiments {
         double[][][] allMarginals = allMarginalsList.toArray(new double[0][][]);  // Convertir la lista a array de matrices
 
         // Añadir diferencias
-        returnString.append(getMeanAbsoluteDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
+        returnString.append(Experiments.getMeanAbsoluteDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
         for (double[][] m : allMarginals)
-            returnString.append(getMeanAbsoluteDiff(m, originalBNrecalcMarginals)).append(",");
+            returnString.append(Experiments.getMeanAbsoluteDiff(m, originalBNrecalcMarginals)).append(",");
 
-        returnString.append(getMeanQuadraticDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
+        returnString.append(Experiments.getMeanQuadraticDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
         for (double[][] m : allMarginals)
-            returnString.append(getMeanQuadraticDiff(m, originalBNrecalcMarginals)).append(",");
+            returnString.append(Experiments.getMeanQuadraticDiff(m, originalBNrecalcMarginals)).append(",");
 
-        returnString.append(getMeanKLDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
+        returnString.append(Experiments.getMeanKLDiff(sampledBNsMarginals, originalBNrecalcMarginals)).append(",");
         for (double[][] m : allMarginals)
-            returnString.append(getMeanKLDiff(m, originalBNrecalcMarginals)).append(",");
+            returnString.append(Experiments.getMeanKLDiff(m, originalBNrecalcMarginals)).append(",");
 
         // Añadir tiempos
         returnString.append(timeRecalc).append(",")
@@ -607,7 +466,7 @@ public class Experiments {
             }
             BayesIm bayesIm = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             result.time = (System.currentTimeMillis() - start) / 1000.0;
-            result.marginals = marginals(bayesIm, randomBN.categories, randomBN.nodesDags);
+            result.marginals = Experiments.marginals(bayesIm, randomBN.categories, randomBN.nodesDags);
         } catch (OutOfMemoryError | Exception ex) {
             System.gc();
             System.err.println("Array size too large: " + ex.getClass());
@@ -615,43 +474,6 @@ public class Experiments {
         return result;
     }
 
-
-    public static double[][] marginals(BayesIm bn, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
-        double[][] marginals = new double[bn.getNumNodes()][];
-
-        int indexOrder = 0;
-        for (Node node : orderNodes) {
-            int indexBN = bn.getNodeIndex(node);
-            marginals[indexOrder] = new double[categories[indexOrder].size()];
-
-            // Get the multiplication of the categories size of the parents
-            List<Node> parents = bn.getDag().getParents(node);
-            int size = 1;
-            for (Node parent : parents) {
-                int indexParent = orderNodes.indexOf(parent);
-                size *= categories[indexParent].size();
-            }
-
-            // Calculate the marginals
-            for (int j = 0; j < marginals[indexOrder].length; j++) {
-                for (int k = 0; k < size; k++) {
-                    marginals[indexOrder][j] += bn.getProbability(indexBN, k, j);
-                }
-                marginals[indexOrder][j] /= size;
-            }
-            indexOrder++;
-        }
-
-        return marginals;
-    }
-
-    public static ArrayList<double[][]> marginals(ArrayList<BayesIm> bns, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
-        ArrayList<double[][]> margs = new ArrayList<>();
-        for (BayesIm bn : bns) {
-            margs.add(marginals(bn,categories,orderNodes));
-        }
-        return margs;
-    }
 
     /** Returns the mean difference between two marginals.
      *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]

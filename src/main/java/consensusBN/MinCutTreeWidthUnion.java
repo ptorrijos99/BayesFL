@@ -9,38 +9,63 @@ import org.albacete.simd.utils.Utils;
 
 import static org.albacete.simd.utils.Utils.pdagToDag;
 
-public class HeuristicConsensusBES {
-	
-	ArrayList<Node> alpha;
-	Dag outputDag = null;
-	ArrayList<Dag> setOfdags;
-	ArrayList<Dag> setOfOutDags;
-	Dag union;
-	Map<String, List<Set<EdgeFordFulkerson>>> localCache = new HashMap<>();
-	int maxSize;  // 10
-	int maxTW;
+public class MinCutTreeWidthUnion {
 
-	
-	public HeuristicConsensusBES(ArrayList<Dag> dags, int maxSize, int maxTW){
-		this.setOfdags = new ArrayList<>();
+    public Dag outputDag = null;
+	public Dag fusionUnion;
+	public ArrayList<Dag> setOfInitialDAGs;
+    private final Map<String, List<Set<EdgeFordFulkerson>>> localCache = new HashMap<>();
+	private int maxSize;  // 10
+	private int maxTW;
+
+	public boolean experiments = false;
+	public List<Dag> outputExperimentDAGs = new ArrayList<>();
+	public List<Double> outputExperimentTimes = new ArrayList<>();
+	public List<List<Dag>> outputExperimentDAGsList = new ArrayList<>();
+
+	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW){
+		this.setOfInitialDAGs = new ArrayList<>();
 		for (Dag d : dags) {
-			this.setOfdags.add(new Dag(d));
+			this.setOfInitialDAGs.add(new Dag(d));
 		}
 
-		this.alpha = AlphaOrder.alphaOrder(dags);
-		this.setOfOutDags = new ArrayList<>();
+        ArrayList<Node> alpha = AlphaOrder.alphaOrder(dags);
+        ArrayList<Dag> alphaDAGs = new ArrayList<>();
 		for (Dag d : dags) {
-			this.setOfOutDags.add(BetaToAlpha.transformToAlpha(d, this.alpha));
+			alphaDAGs.add(BetaToAlpha.transformToAlpha(d, alpha));
 		}
 		this.maxSize = maxSize;
-		this.union = ConsensusUnion.fusionUnion(this.setOfOutDags);
+		this.fusionUnion = ConsensusUnion.fusionUnion(alphaDAGs);
 		this.maxTW = maxTW;
 	}
 
 	public Dag fusion(){
-		Graph graph = new EdgeListGraph(this.union);
+		double initialTime = System.currentTimeMillis();
+		Graph graph = new EdgeListGraph(this.fusionUnion);
+		int treeWidth;
+		int lastTreeWidth = 0;
+		if (experiments) {
+			lastTreeWidth = Utils.getTreeWidth(graph);
+		}
 
-		while (Utils.getTreeWidth(graph) > maxTW) {
+		while (true) {
+			treeWidth = Utils.getTreeWidth(graph);
+			if (experiments){
+				while (treeWidth < lastTreeWidth) {
+					//System.out.println("  TW: " + treeWidth);
+					Graph g = new EdgeListGraph(graph);
+					pdagToDag(g);
+					outputExperimentDAGs.add(new Dag(g));
+					outputExperimentTimes.add((System.currentTimeMillis() - initialTime) / 1000.0);
+					outputExperimentDAGsList.add(new ArrayList<>());
+					for (Dag d : setOfInitialDAGs) {
+						outputExperimentDAGsList.get(outputExperimentDAGsList.size() - 1).add(new Dag(d));
+					}
+					lastTreeWidth--;
+				}
+			}
+			if (treeWidth <= maxTW) break;
+
 			Node x = null, y = null;
 			double bestScore = Double.POSITIVE_INFINITY;
 			HashSet<Node> bestSubSet = new HashSet<>();
@@ -90,7 +115,7 @@ public class HeuristicConsensusBES {
 						minCut = new ArrayList<>();
 						LinkedList<Node> conditioning = new LinkedList<>(set);
 
-						for (Dag g : this.setOfdags) {
+						for (Dag g : this.setOfInitialDAGs) {
 							// TODO_: minCut. Cambiar por el mínimo número de enlaces que hay que borrar para que estén d-separados
 							Graph aux = constructConditionedGraph(g, _y, _x, conditioning);
 
@@ -104,13 +129,13 @@ public class HeuristicConsensusBES {
 							// Suma el tamaño del conjunto mínimo de corte al evalScore
 							evalScore += minCutEdges.size();
 						}
-						evalScore = evalScore / (double) this.setOfdags.size();
+						evalScore = evalScore / (double) this.setOfInitialDAGs.size();
 						this.localCache.put(key, minCut);
 					} else {
 						for (Set<EdgeFordFulkerson> minCutEdges : minCut) {
 							evalScore += minCutEdges.size();
 						}
-						evalScore = evalScore / (double) this.setOfdags.size();
+						evalScore = evalScore / (double) this.setOfInitialDAGs.size();
 					}
 
 					// TODO_: en nuestro caso queremos que sea lo menor posible, porque aquí mide d-separaciones
@@ -128,8 +153,8 @@ public class HeuristicConsensusBES {
 			GESThread.delete(x, y, bestSubSet, graph);
 
 			// TODO_: Borrar los enlaces de los grafos de entrada
-			for (int i = 0; i < this.setOfdags.size(); i++) {
-				Dag g = this.setOfdags.get(i);
+			for (int i = 0; i < this.setOfInitialDAGs.size(); i++) {
+				Dag g = this.setOfInitialDAGs.get(i);
 				Set<EdgeFordFulkerson> minCutEdges = bestMinCut.get(i);
 				for (EdgeFordFulkerson edge : minCutEdges) {
 					// TODO: Comprobar si es necesario borrar la arista en ambas direcciones
@@ -369,20 +394,13 @@ public class HeuristicConsensusBES {
 							for (int j = i + 1; j < pa.size(); j++) {
 								Node p1 = pa.get(i);
 								Node p2 = pa.get(j);
-								boolean found = false;
-								// Verificamos si ya están conectados
-								for (Edge edge : aux.getEdges()) {
-									if (edge.getNode1().equals(p1) && (edge.getNode2().equals(p2))) {
-										found = true;
-										break;
-									}
-									if (edge.getNode2().equals(p1) && (edge.getNode1().equals(p2))) {
-										found = true;
-										break;
-									}
+
+								Edge edge1 = new Edge(p1, p2, Endpoint.TAIL, Endpoint.ARROW);
+								Edge edge2 = new Edge(p1, p2, Endpoint.ARROW, Endpoint.TAIL);
+
+								if (!aux.containsEdge(edge1) && !aux.containsEdge(edge2)) {
+									aux.addUndirectedEdge(p1, p2);
 								}
-								// Si no están conectados, añadimos una arista no dirigida
-								if (!found) aux.addUndirectedEdge(p1, p2);
 							}
 						}
 					}
@@ -403,43 +421,13 @@ public class HeuristicConsensusBES {
 
 		return aux;
 	}
-
-	boolean dSeparated(Dag g, Node x, Node y, LinkedList<Node> cond){
-		// TODO_: Hasta aquí hace lo de los ancestros
-		Graph aux = constructConditionedGraph(g, x, y, cond);
-
-		// a partir de aquí buscamos si existe algún camino posible entre x e y
-		// tenemos que cambiarlo para buscar el mínimo corte para que no exista ese camino
-		// en el subconjunto que devuelve mínimo va a haber uno del grafo original (que no se haya generado al moralizar)
-
-		// 7. Segundo recorrido BFS para buscar un camino entre x e y
-		LinkedList<Node> open = new LinkedList<>();
-		HashMap<String,Node> close = new HashMap<>();
-		open.add(x);  // Comenzamos la búsqueda desde x
-
-		while (!open.isEmpty()){
-			Node a = open.getFirst();
-			if(a.equals(y)) return false;  // Si encontramos y, retornamos false (no están d-separados)
-			open.remove(a);
-			close.put(a.toString(),a);     // Marcamos el nodo como visitado
-
-			// Obtenemos los nodos adyacentes (vecinos)
-			List<Node> pa =aux.getAdjacentNodes(a);
-			for(Node p : pa){
-				// Si el nodo adyacente no ha sido visitado, lo añadimos a la lista de exploración
-				if(close.get(p.toString()) == null){
-					if(!open.contains(p)) open.addLast(p);
-				}
-			}
-		}
-
-		// Si no se encontró un camino entre x e y, están d-separados
-		return true;
-	}
-
     
     public Dag getFusion(){
     	return this.outputDag;
     }
+
+	public void setMaxTW(int maxTW) {
+		this.maxTW = maxTW;
+	}
 
 }

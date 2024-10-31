@@ -187,7 +187,7 @@ public class BESThread extends GESThread {
         return new EdgeSearch(bestScore, bestSubSet, edge);
     }
 
-    public static List<HashSet<Node>> generatePowerSet(List<Node> nodes) {
+    public static List<HashSet<Node>> generatePowerSet2(List<Node> nodes) {
         List<HashSet<Node>> subsets = new ArrayList<>();
 
         for (int i = 0; i < Math.pow(2, nodes.size()); i++) {
@@ -203,4 +203,22 @@ public class BESThread extends GESThread {
 
         return subsets;
     }
+
+    public static List<HashSet<Node>> generatePowerSet(List<Node> nodes) {
+        List<HashSet<Node>> subsets = new ArrayList<>();
+        int n = nodes.size();
+
+        for (int i = 0; i < (1 << n); i++) {  // Usa (1 << n) en lugar de Math.pow(2, n) para mayor eficiencia.
+            HashSet<Node> newSubSet = new HashSet<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) != 0) {  // Chequea si el bit j de i está activado.
+                    newSubSet.add(nodes.get(j));
+                }
+            }
+            subsets.add(newSubSet);
+        }
+
+        return subsets;
+    }
+
 }
