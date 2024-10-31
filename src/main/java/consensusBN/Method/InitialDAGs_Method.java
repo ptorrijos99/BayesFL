@@ -59,14 +59,14 @@ public class InitialDAGs_Method implements Population {
         }
 
         if (useMinCut && maxTreewidth > 1) {
-            minCutTreeWidthUnion = new MinCutTreeWidthUnion(dags, 10, maxTreewidth);
+            minCutTreeWidthUnion = new MinCutTreeWidthUnion(dags, 10, maxTreewidth-1);
             minCutTreeWidthUnion.experiments = true;
             minCutTreeWidthUnion.fusion();
 
             int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
-            greedyDags = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-1);
-            greedyDag = minCutTreeWidthUnion.outputExperimentDAGs.get(size-1);
-            executionTimeGreedy = minCutTreeWidthUnion.outputExperimentTimes.get(size-1);
+            greedyDags = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-2);
+            greedyDag = minCutTreeWidthUnion.outputExperimentDAGs.get(size-2);
+            executionTimeGreedy = minCutTreeWidthUnion.outputExperimentTimes.get(size-2);
         } else {
             double startTime = System.currentTimeMillis();
             greedyDags = originalDAGsGreedyTreewidthBefore(dags, alpha, "" + maxTreewidth);
@@ -92,11 +92,8 @@ public class InitialDAGs_Method implements Population {
         // Add the greedy solution with maxTreewidth-1 to the population
         List<Dag> greedyDagsMaxTreewidthMinusOne;
         if (useMinCut && maxTreewidth > 2) {
-            System.out.println("tw = " + maxTreewidth);
-            System.out.println("Using MinCut");
-            System.out.println("Size: " + minCutTreeWidthUnion.outputExperimentDAGsList.size());
             int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
-            greedyDagsMaxTreewidthMinusOne = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-2);
+            greedyDagsMaxTreewidthMinusOne = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-1);
         } else {
             greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, alpha, ""+(maxTreewidth-1));
         }

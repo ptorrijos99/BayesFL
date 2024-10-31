@@ -29,7 +29,7 @@ public class ExperimentMinCutGenetic {
     public static boolean verbose = false;
 
     // TODO: UNCOMMENT THIS LINES
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
 
@@ -70,9 +70,9 @@ public class ExperimentMinCutGenetic {
 
         // Launch the experiment
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }*/
+    }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Real network (net = net.bbdd)
         //String net = "child.0";
 
@@ -96,7 +96,7 @@ public class ExperimentMinCutGenetic {
         String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
 
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }
+    }*/
 
     public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, String savePath) {
         // Check if the folder (and subfolders) exists
@@ -280,7 +280,7 @@ public class ExperimentMinCutGenetic {
             geneticUnionPuertaBES.maxTreewidth = tw;
             geneticUnionPuertaBES.fusionUnion();
 
-            Dag geneticDag = geneticUnionPuertaBES.fusionUnion;
+            Dag geneticDag = geneticUnionPuertaBES.bestDag;
             double geneticTime = geneticUnionPuertaBES.executionTime;
 
             Dag greedyDag = geneticUnionPuertaBES.greedyDag;
@@ -294,8 +294,8 @@ public class ExperimentMinCutGenetic {
                 experimentData = new ExperimentData(false, algorithms, meanParents, maxParents, twLimit, geneticUnionPuertaBES.fusionUnion, Utils.moralize(geneticUnionPuertaBES.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
             }
 
-            if (verbose) System.out.println("Greedy minCut SMHD: \t\t" + Utils.SMHD(geneticUnionPuertaBES.fusionUnion, greedyDag) + " | SMHD ORIG: " + Utils.SMHD(greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(greedyDag, dags) + " | Edges: " + greedyDag.getNumEdges() + " | Time: " + greedyTime);
-            if (verbose) System.out.println("Genetic minCut SMHD: \t\t" + Utils.SMHD(geneticUnionPuertaBES.fusionUnion, geneticDag) + " | SMHD ORIG: " + Utils.SMHD(geneticDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticDag, dags) + " | Edges: " + geneticDag.getNumEdges() + " | Time: " + geneticTime);
+            if (verbose) System.out.println("Greedy minCut SMHD: \t\t" + Utils.SMHD(geneticUnionPuertaBES.fusionUnion, greedyDag) + " | SMHD ORIG: " + Utils.SMHD(greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(greedyDag, dags) + " | Edges: " + greedyDag.getNumEdges() + " | Time: " + greedyTime + " | TW: " + getTreeWidth(greedyDag));
+            if (verbose) System.out.println("Genetic minCut SMHD: \t\t" + Utils.SMHD(geneticUnionPuertaBES.fusionUnion, geneticDag) + " | SMHD ORIG: " + Utils.SMHD(geneticDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticDag, dags) + " | Edges: " + geneticDag.getNumEdges() + " | Time: " + geneticTime + " | TW: " + getTreeWidth(geneticDag));
 
             List<AlgorithmResults> algorithmResultsList = new ArrayList<>(Arrays.asList(
                     new AlgorithmResults(greedyDag, greedyTime),
