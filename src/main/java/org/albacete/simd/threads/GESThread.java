@@ -650,45 +650,38 @@ public abstract class GESThread implements Runnable{
         return this.currentGraph;
     }
 
-
-
     /**
-     * Get all nodes that are connected to Y by an undirected edge and not
-     * adjacent to X.
-     * @param x {@link Node Node} X, where the resulting nodes are neighbors of the {@link Node Node} Y, but not of X.
-     * @param y {@link Node Node} Y, where the resulting nodes are neighbors of the {@link Node Node} Y, but not of X.
-     * @param graph {@link Graph Graph} of the current constructed graph.
-     * @return {@link List List} of {@link Node Nodes} that are neighbors of the {@link Node Node} Y, but not of {@link Node Node} X.
+     * Checks if two nodes are connected by an undirected edge in the graph.
+     * @param graph The graph in which the edge is checked.
+     * @param node1 First node of the edge.
+     * @param node2 Second node of the edge.
+     * @return True if there is an undirected edge between node1 and node2.
      */
-    public static List<Node> getSubsetOfNeighbors(Node x, Node y, Graph graph) {
-        List<Node> tNeighbors = new LinkedList<>(graph.getAdjacentNodes(y));
-        tNeighbors.removeAll(graph.getAdjacentNodes(x));
-
-        for (int i = tNeighbors.size() - 1; i >= 0; i--) {
-            Node z = tNeighbors.get(i);
-            Edge edge = graph.getEdge(y, z);
-            
-            if (edge != null && !Edges.isUndirectedEdge(edge)) {
-                tNeighbors.remove(z);
-            }
-        }
-
-        return tNeighbors;
+    private static boolean isConnectedByUndirectedEdge(Graph graph, Node node1, Node node2) {
+        Edge edge = graph.getEdge(node1, node2);
+        return edge != null && Edges.isUndirectedEdge(edge);
     }
 
+    /**
+     * Gets all nodes that are neighbors of Y but not of X and are connected
+     * to Y by an undirected edge.
+     */
+    public static List<Node> getSubsetOfNeighbors(Node x, Node y, Graph graph) {
+        List<Node> neighbors = new LinkedList<>(graph.getAdjacentNodes(y));
+        neighbors.removeAll(graph.getAdjacentNodes(x));
+        neighbors.removeIf(z -> !isConnectedByUndirectedEdge(graph, y, z));
+        return neighbors;
+    }
+
+    /**
+     * Gets all nodes that are neighbors of both X and Y and are connected
+     * to Y by an undirected edge.
+     */
     public static List<Node> getHNeighbors(Node x, Node y, Graph graph) {
-        List<Node> hNeighbors = new LinkedList<>(graph.getAdjacentNodes(y));
-        hNeighbors.retainAll(graph.getAdjacentNodes(x));
-
-        for (int i = hNeighbors.size() - 1; i >= 0; i--) {
-            Node z = hNeighbors.get(i);
-            Edge edge = graph.getEdge(y, z);
-            if (!Edges.isUndirectedEdge(edge)) {
-                hNeighbors.remove(z);
-            }
-        }
-
-        return hNeighbors;
+        List<Node> neighbors = new LinkedList<>(graph.getAdjacentNodes(y));
+        neighbors.retainAll(graph.getAdjacentNodes(x));
+        neighbors.removeIf(z -> !isConnectedByUndirectedEdge(graph, y, z));
+        return neighbors;
     }
 
     public int getIterations(){
