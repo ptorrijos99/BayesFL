@@ -29,7 +29,7 @@ public class ExperimentMinCutGenetic {
     public static boolean verbose = false;
 
     // TODO: UNCOMMENT THIS LINES
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
 
@@ -70,18 +70,18 @@ public class ExperimentMinCutGenetic {
 
         // Launch the experiment
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }
+    }*/
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        //String net = "child.0";
+        String net = "hailfinder.0";
 
         // Generic network (net = number of nodes)
-        String net = ""+10;
+        //String net = ""+10;
 
         verbose = true;
 
-        int nClients = 10;
+        int nClients = 20;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -96,7 +96,7 @@ public class ExperimentMinCutGenetic {
         String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
 
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }*/
+    }
 
     public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, String savePath) {
         // Check if the folder (and subfolders) exists
@@ -404,12 +404,7 @@ public class ExperimentMinCutGenetic {
             marginals[i] = result.marginals;
             times[i] = result.time;
 
-            System.out.println("DAG " + i + " marginals calculated");
-            System.out.println("  DAG edges: " + dags[i].getNumEdges());
-            System.out.println("  DAG treewidth: " + getTreeWidth(dags[i]));
-            System.out.println("  DAG mean parents: " + meanParents(dags[i]));
-            System.out.println("  DAG max parents: " + maxParents(dags[i]));
-            System.out.println("  DAG time: " + result.time);
+            System.out.println("  DAG " + i + " marginals calculated. Time: " + result.time);
         }
 
         // Generar las métricas

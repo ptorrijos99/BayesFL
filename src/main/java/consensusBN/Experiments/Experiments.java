@@ -550,12 +550,7 @@ public class Experiments {
             marginals[i] = result.marginals;
             times[i] = result.time;
 
-            System.out.println("DAG " + i + " marginals calculated");
-            System.out.println("  DAG edges: " + dags[i].getNumEdges());
-            System.out.println("  DAG treewidth: " + getTreeWidth(dags[i]));
-            System.out.println("  DAG mean parents: " + meanParents(dags[i]));
-            System.out.println("  DAG max parents: " + maxParents(dags[i]));
-            System.out.println("  DAG time: " + result.time);
+            System.out.println("  DAG " + i + " marginals calculated. Time: " + result.time);
         }
 
         // Generar las métricas
