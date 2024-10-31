@@ -1,9 +1,6 @@
 package consensusBN;
 
-import consensusBN.Method.Fusion_Method;
-import consensusBN.Method.InitialDAGsWoRepeat_Method;
-import consensusBN.Method.InitialDAGs_Method;
-import consensusBN.Method.Population;
+import consensusBN.Method.*;
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.graph.Dag;
 import org.albacete.simd.utils.Utils;
@@ -25,6 +22,7 @@ public class GeneticTreeWidthUnion {
     public Boolean repeatCandidates = false;
     public Boolean useSuperGreedy = false;
     public Boolean addEmptySuperGreedy = false;
+    public Boolean useMinCutBES = false;
 
     // Best values and stats
     private boolean[] bestIndividual;
@@ -95,7 +93,11 @@ public class GeneticTreeWidthUnion {
                 method = new InitialDAGsWoRepeat_Method();
             }
             else {
-                method = new InitialDAGs_Method();
+                if (useMinCutBES) {
+                    method = new InitialDAGs_Method(true);
+                } else {
+                    method = new InitialDAGs_Method();
+                }
             }
         }
         else {

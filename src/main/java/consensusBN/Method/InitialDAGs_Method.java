@@ -1,5 +1,6 @@
 package consensusBN.Method;
 
+import consensusBN.MinCutTreeWidthUnion;
 import edu.cmu.tetrad.graph.Dag;
 import edu.cmu.tetrad.graph.Edge;
 import edu.cmu.tetrad.graph.Node;
@@ -25,6 +26,17 @@ public class InitialDAGs_Method implements Population {
     private List<Dag> greedyDags;
     private double executionTimeGreedy;
 
+    public Boolean useMinCut;
+    public MinCutTreeWidthUnion minCutTreeWidthUnion;
+
+    public InitialDAGs_Method() {
+        this.useMinCut = false;
+    }
+
+    public InitialDAGs_Method(Boolean useMinCut) {
+        this.useMinCut = useMinCut;
+    }
+
     @Override
     public void initialize(List<Dag> dags, List<Node> alpha, List<Dag> alphaDags, int maxTreewidth, Random random) {
         this.alpha = alpha;
@@ -46,10 +58,21 @@ public class InitialDAGs_Method implements Population {
             }
         }
 
-        double startTime = System.currentTimeMillis();
-        greedyDags = originalDAGsGreedyTreewidthBefore(dags, alpha, ""+maxTreewidth);
-        greedyDag = fusionUnion(greedyDags);
-        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
+        if (useMinCut && maxTreewidth > 1) {
+            minCutTreeWidthUnion = new MinCutTreeWidthUnion(dags, 10, maxTreewidth);
+            minCutTreeWidthUnion.experiments = true;
+            minCutTreeWidthUnion.fusion();
+
+            int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
+            greedyDags = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-1);
+            greedyDag = minCutTreeWidthUnion.outputExperimentDAGs.get(size-1);
+            executionTimeGreedy = minCutTreeWidthUnion.outputExperimentTimes.get(size-1);
+        } else {
+            double startTime = System.currentTimeMillis();
+            greedyDags = originalDAGsGreedyTreewidthBefore(dags, alpha, "" + maxTreewidth);
+            greedyDag = fusionUnion(greedyDags);
+            executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
+        }
     }
 
     /**
@@ -67,7 +90,17 @@ public class InitialDAGs_Method implements Population {
         }
 
         // Add the greedy solution with maxTreewidth-1 to the population
-        List<Dag> greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, alpha, ""+(maxTreewidth-1));
+        List<Dag> greedyDagsMaxTreewidthMinusOne;
+        if (useMinCut && maxTreewidth > 2) {
+            System.out.println("tw = " + maxTreewidth);
+            System.out.println("Using MinCut");
+            System.out.println("Size: " + minCutTreeWidthUnion.outputExperimentDAGsList.size());
+            int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
+            greedyDagsMaxTreewidthMinusOne = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-2);
+        } else {
+            greedyDagsMaxTreewidthMinusOne = originalDAGsGreedyTreewidthBefore(greedyDags, alpha, ""+(maxTreewidth-1));
+        }
+
         for (int i = 0; i < nDags; i++) {
             for (Edge edge : greedyDagsMaxTreewidthMinusOne.get(i).getEdges()) {
                 population[1][edgesOriginal[i].indexOf(edge) + firstIndex[i]] = true;

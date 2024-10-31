@@ -2,6 +2,7 @@ package consensusBN.Experiments;
 
 import consensusBN.ConsensusUnion;
 import consensusBN.GeneticTreeWidthUnion;
+import consensusBN.MinCutTreeWidthUnion;
 import consensusBN.Method.Fusion_Method;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.DataSet;
@@ -10,7 +11,6 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Experiments {
     public static boolean verbose = false;
 
     // TODO: DESCOMENTAR ESTAS LÍNEAS
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
 
@@ -66,18 +66,18 @@ public class Experiments {
 
         // Launch the experiment
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }
+    }*/
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        //String net = "asia.0";
+        //String net = "child.0";
 
         // Generic network (net = number of nodes)
-        String net = ""+10;
+        String net = ""+30;
 
         verbose = true;
 
-        int nClients = 20;
+        int nClients = 50;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -92,7 +92,7 @@ public class Experiments {
         String savePath = "./results/Server/" + net + "_GeneticTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + againstOriginalDAGs + "_" + mectricIsSMHD + ".csv";
 
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, savePath);
-    }*/
+    }
 
     public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, String savePath) {
         // Check if the folder (and subfolders) exists
@@ -120,7 +120,7 @@ public class Experiments {
             } catch (IOException ignored) {}
 
             // Get the maximum treewidth
-            tw = Integer.parseInt(lastLine.split(",")[11]);
+            tw = Integer.parseInt(lastLine.split(",")[13]);
             System.out.println("Maximum treewidth found in file: " + tw);
             tw += 1;
 
@@ -224,6 +224,7 @@ public class Experiments {
         geneticUnionsgv.numIterations = nIterations;
 
         GeneticTreeWidthUnion geneticUnionPuerta = null;
+        GeneticTreeWidthUnion geneticUnionPuertaBES = null;
         GeneticTreeWidthUnion geneticUnionPuerta2 = null;
         if (Puerta) {
             // Find the treewidth of the union of the dags
@@ -232,6 +233,14 @@ public class Experiments {
             geneticUnionPuerta.candidatesFromInitialDAGs = true;
             geneticUnionPuerta.repeatCandidates = true;
             geneticUnionPuerta.numIterations = nIterations;
+
+            // Find the treewidth of the union of the dags
+            geneticUnionPuertaBES = new GeneticTreeWidthUnion(dags, seed);
+            geneticUnionPuertaBES.populationSize = popSize;
+            geneticUnionPuertaBES.candidatesFromInitialDAGs = true;
+            geneticUnionPuertaBES.repeatCandidates = true;
+            geneticUnionPuertaBES.numIterations = nIterations;
+            geneticUnionPuertaBES.useMinCutBES = true;
 
             // Find the treewidth of the union of the dags
             geneticUnionPuerta2 = new GeneticTreeWidthUnion(dags, seed);
@@ -280,11 +289,84 @@ public class Experiments {
             moralizedDags.add(Utils.moralize(dag));
         }
 
+        double[][] originalBNrecalcMarginals = null;
+        double[][] unionBNMarginals = null;
+        ArrayList<double[][]> sampledBNsMarginals = null;
+        double timeRecalc = -1;
+        double timeSampled = -1;
+        double timeUnion = -1;
+        if (realNetwork) {
+            BayesIm originalBN = randomBN.originalBayesIm;
+            sampledBNsMarginals = new ArrayList<>();
+            // Recalculate probabilities of the original BN given the data
+            try {
+                double start = System.currentTimeMillis();
+                BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
+                for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                    bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                    bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+                }
+                BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
+                originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+            } catch (OutOfMemoryError | Exception ex) {
+                System.gc();
+                //Log the info
+                System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
+            }
+
+            // Get the BayesIm of the sampled graphs
+            for (Dag sampledDag : randomBN.setOfRandomDags) {
+                try {
+                    double start = System.currentTimeMillis();
+                    BayesPm bayesPm = new BayesPm(sampledDag);
+                    for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                        bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                        bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+                    }
+                    BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                    sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                    if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
+                    else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
+                } catch (OutOfMemoryError | Exception ex) {
+                    System.gc();
+                    //Log the info
+                    System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
+                }
+            }
+            timeSampled /= randomBN.setOfRandomDags.size();
+
+            // Get the BayesIm of the union graph
+            try {
+                double start = System.currentTimeMillis();
+                BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
+                for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                    bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                    bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+                }
+                BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                timeUnion = (System.currentTimeMillis() - start) / 1000.0;
+                unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+            } catch (OutOfMemoryError | Exception ex) {
+                System.gc();
+                //Log the info
+                System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
+            }
+        }
+
         // Execute the genetic union for each treewidth from the last executed to the limit
         for (; tw < unionTw; tw++) {
             System.out.println("\nTreewidth: " + tw);
             geneticUnion.maxTreewidth = tw;
             geneticUnion.fusionUnion();
+            
+
+            // Heuristic Consensus BES
+            double startHCBES = System.currentTimeMillis();
+            MinCutTreeWidthUnion hcBES = new MinCutTreeWidthUnion(dags, 10, tw);
+            Dag hcBESFusion = hcBES.fusion();
+            System.out.println("\nminCut BES SMHD: \t\t" + Utils.SMHD(geneticUnion.fusionUnion, hcBESFusion) + " | SMHD ORIG: " + Utils.SMHD(hcBESFusion, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(hcBESFusion, dags) + " | Edges: " + hcBESFusion.getNumEdges() + " | Time: " + ((System.currentTimeMillis() - startHCBES)/1000));
+            
 
             if (verbose) System.out.println("Genetic SMHD: \t\t\t" + Utils.SMHD(geneticUnion.fusionUnion,geneticUnion.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnion.bestDag,dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnion.bestDag,dags) + " | Edges: " + geneticUnion.bestDag.getNumEdges() + " | Time: " + geneticUnion.executionTime);
 
@@ -310,9 +392,15 @@ public class Experiments {
             }
 
             if (Puerta) {
+                geneticUnionPuertaBES.maxTreewidth = tw;
+                geneticUnionPuertaBES.fusionUnion();
+                if (verbose) {
+                    System.out.println("Greedy Puerta BES SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuertaBES.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuertaBES.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuertaBES.greedyDag, dags) + " | Edges: " + geneticUnionPuertaBES.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuertaBES.executionTimeGreedy);
+                    System.out.println("Genetic Puerta BES SMHD:" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuertaBES.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuertaBES.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuertaBES.bestDag, dags) + " | Edges: " + geneticUnionPuertaBES.bestDag.getNumEdges() + " | Time: " + geneticUnionPuertaBES.executionTime);
+                }
+
                 geneticUnionPuerta.maxTreewidth = tw;
                 geneticUnionPuerta.fusionUnion();
-
                 if (verbose) {
                     System.out.println("Greedy Puerta SMHD:\t\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta.greedyDag, dags) + " | Edges: " + geneticUnionPuerta.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTimeGreedy);
                     System.out.println("Genetic Puerta SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta.bestDag, dags) + " | Edges: " + geneticUnionPuerta.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta.executionTime);
@@ -320,7 +408,6 @@ public class Experiments {
 
                 geneticUnionPuerta2.maxTreewidth = tw;
                 geneticUnionPuerta2.fusionUnion();
-
                 if (verbose) {
                     System.out.println("Greedy Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta2.greedyDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta2.greedyDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta2.greedyDag, dags) + " | Edges: " + geneticUnionPuerta2.greedyDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTimeGreedy);
                     System.out.println("Genetic Puerta2 SMHD:\t" + Utils.SMHD(geneticUnion.fusionUnion, geneticUnionPuerta2.bestDag) + " | SMHD ORIG: " + Utils.SMHD(geneticUnionPuerta2.bestDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(geneticUnionPuerta2.bestDag, dags) + " | Edges: " + geneticUnionPuerta2.bestDag.getNumEdges() + " | Time: " + geneticUnionPuerta2.executionTime);
@@ -337,70 +424,6 @@ public class Experiments {
 
             ExperimentData experimentData;
             if (realNetwork) {
-                double[][] originalBNrecalcMarginals = null;
-                double[][] unionBNMarginals = null;
-                ArrayList<double[][]> sampledBNsMarginals;
-                double timeRecalc = -1;
-                double timeSampled = -1;
-                double timeUnion = -1;
-
-                BayesIm originalBN = randomBN.originalBayesIm;
-                sampledBNsMarginals = new ArrayList<>();
-                // Recalculate probabilities of the original BN given the data
-                try {
-                    double start = System.currentTimeMillis();
-                    BayesPm bayesPm = new BayesPm(originalBN.getBayesPm());
-                    for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                        bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                        bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-                    }
-                    BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                    timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
-                    originalBNrecalcMarginals = marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-                } catch (OutOfMemoryError | Exception ex) {
-                    System.gc();
-                    //Log the info
-                    System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
-                }
-
-                // Get the BayesIm of the sampled graphs
-                for (Dag sampledDag : randomBN.setOfRandomDags) {
-                    try {
-                        double start = System.currentTimeMillis();
-                        BayesPm bayesPm = new BayesPm(sampledDag);
-                        for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                            bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                            bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-                        }
-                        BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                        sampledBNsMarginals.add(marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
-                        if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
-                        else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
-                    } catch (OutOfMemoryError | Exception ex) {
-                        System.gc();
-                        //Log the info
-                        System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
-                    }
-                }
-                timeSampled /= randomBN.setOfRandomDags.size();
-
-                // Get the BayesIm of the union graph
-                try {
-                    double start = System.currentTimeMillis();
-                    BayesPm bayesPm = new BayesPm(geneticUnion.fusionUnion);
-                    for (int j = 0; j < bayesPm.getNumNodes(); j++) {
-                        bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
-                        bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
-                    }
-                    BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                    timeUnion = (System.currentTimeMillis() - start) / 1000.0;
-                    unionBNMarginals = marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-                } catch (OutOfMemoryError | Exception ex) {
-                    System.gc();
-                    //Log the info
-                    System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
-                }
-
                 experimentData = new ExperimentData(true, algorithms, meanParents, maxParents, twLimit, geneticUnion.fusionUnion, Utils.moralize(geneticUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
             } else {
                 //        public ExperimentData(boolean realNetwork, List<String> algorithms, Graph fusionUnion, Graph fusionUnionMoralized, List<Graph> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw) {
@@ -421,13 +444,11 @@ public class Experiments {
                 algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta2.bestDag, geneticUnionPuerta2.executionTime));
                 algorithmResultsList.add(new AlgorithmResults(geneticUnionPuerta2.greedyDag, geneticUnionPuerta2.executionTimeGreedy));
             }
-            saveRound(experimentData, algorithmResultsList, randomBN);
+            saveRound(experimentData, algorithmResultsList, randomBN, savePath);
         }
     }
 
-    public static void saveRound(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, RandomBN randomBN) {
-        String savePath = "./results/Server/" + experimentData.bbdd + "_GeneticTWFusion_" + experimentData.nDags + "_" + experimentData.popSize + "_" + experimentData.nIterations + "_" + experimentData.seed + "_" + experimentData.maxTWGeneratedDAGs + ".csv";
-
+    public static void saveRound(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, RandomBN randomBN, String savePath) {
         String header = generateDynamicHeader(experimentData.algorithms);
         String headerProbs = generateDynamicHeaderProbs(experimentData.algorithms);
 
@@ -528,6 +549,13 @@ public class Experiments {
             Result result = calculateMarginals(dags[i], randomBN);
             marginals[i] = result.marginals;
             times[i] = result.time;
+
+            System.out.println("DAG " + i + " marginals calculated");
+            System.out.println("  DAG edges: " + dags[i].getNumEdges());
+            System.out.println("  DAG treewidth: " + getTreeWidth(dags[i]));
+            System.out.println("  DAG mean parents: " + meanParents(dags[i]));
+            System.out.println("  DAG max parents: " + maxParents(dags[i]));
+            System.out.println("  DAG time: " + result.time);
         }
 
         // Generar las métricas
@@ -725,8 +753,8 @@ public class Experiments {
         StringBuilder headerProbs = new StringBuilder();
 
         algorithms = new ArrayList<>(algorithms);
-        algorithms.add(0, "union");
         algorithms.add(0, "sampled");
+        algorithms.add("union");
 
         String[] metrics = {"DiffAbs", "DiffCuad", "DiffKL"};
         for (String metric : metrics) {
