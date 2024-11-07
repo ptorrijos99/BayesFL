@@ -320,7 +320,7 @@ public abstract class GESThread implements Runnable{
      * Based on the algorithm described on @see <a href="http://www.jmlr.org/papers/volume3/chickering02b/chickering02b.pdf">Appendix C of (Chickering, 2002)</a>.
      * @param graph Graph being rebuilt.
      */
-    protected void rebuildPattern(Graph graph) {
+    public static void rebuildPattern(Graph graph) {
         GraphSearchUtils.basicCpdag(graph);
         pdag(graph);
     }
@@ -337,7 +337,7 @@ public abstract class GESThread implements Runnable{
      *
      * @param graph Graph being transformed into a PDAG.
      */
-    protected void pdag(Graph graph) {
+    public static void pdag(Graph graph) {
         MeekRules rules = new MeekRules();
         rules.orientImplied(graph);
     }

@@ -18,6 +18,7 @@ public class MinCutTreeWidthUnion {
 	private int maxSize;  // 10
 	private int maxTW;
 
+	public boolean equivalenceSearch = false;
 	public boolean experiments = false;
 	public List<Dag> outputExperimentDAGs = new ArrayList<>();
 	public List<Double> outputExperimentTimes = new ArrayList<>();
@@ -52,7 +53,7 @@ public class MinCutTreeWidthUnion {
 			treeWidth = Utils.getTreeWidth(graph);
 			if (experiments){
 				while (treeWidth < lastTreeWidth) {
-					//System.out.println("  TW: " + treeWidth);
+					System.out.println("  TW: " + treeWidth);
 					Graph g = new EdgeListGraph(graph);
 					pdagToDag(g);
 					outputExperimentDAGs.add(new Dag(g));
@@ -90,7 +91,12 @@ public class MinCutTreeWidthUnion {
 				Node _y = edge.getNode2();
 
 				List<Node> hNeighbors = GESThread.getHNeighbors(_x, _y, graph);
+
 				List<HashSet<Node>> hSubsets = BESThread.generatePowerSet(hNeighbors);
+
+				/*if (!hNeighbors.isEmpty()) {
+					System.out.println("HNeighbors: " + hNeighbors + ".  HSubsets: " + hSubsets);
+				}*/
 
 				for (HashSet<Node> hSubset : hSubsets) {
 					if(hSubset.size() > maxSize) continue;  // TODO: Meter también un random para comprobar solo algunos
@@ -149,15 +155,19 @@ public class MinCutTreeWidthUnion {
 				}
 			}
 
-			//System.out.println("DELETE " + graph.getEdge(x, y) + bestSubSet + " (" +bestScore + ")");
+			System.out.println(" DELETE " + graph.getEdge(x, y) + bestSubSet + " (" +bestScore + ")");
 			GESThread.delete(x, y, bestSubSet, graph);
+
+			// Makes a cpDAG from the graph if equivalence search is enabled. Otherwise, the graph is always just a DAG
+			if (equivalenceSearch) {
+				GESThread.rebuildPattern(graph);
+			}
 
 			// TODO_: Borrar los enlaces de los grafos de entrada
 			for (int i = 0; i < this.setOfInitialDAGs.size(); i++) {
 				Dag g = this.setOfInitialDAGs.get(i);
 				Set<EdgeFordFulkerson> minCutEdges = bestMinCut.get(i);
 				for (EdgeFordFulkerson edge : minCutEdges) {
-					// TODO: Comprobar si es necesario borrar la arista en ambas direcciones
 					g.removeEdge(edge.from, edge.to);
 					g.removeEdge(edge.to, edge.from);
 				}
