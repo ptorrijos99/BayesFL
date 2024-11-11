@@ -60,7 +60,7 @@ public class InitialDAGs_Method implements Population {
 
         if (useMinCut && maxTreewidth > 1) {
             minCutTreeWidthUnion = new MinCutTreeWidthUnion(dags, 10, maxTreewidth-1);
-            minCutTreeWidthUnion.experiments = true;
+            minCutTreeWidthUnion.experiments_tw = true;
             minCutTreeWidthUnion.fusion();
 
             int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
