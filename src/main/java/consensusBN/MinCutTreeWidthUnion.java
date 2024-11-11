@@ -15,14 +15,18 @@ public class MinCutTreeWidthUnion {
 	public Dag fusionUnion;
 	public ArrayList<Dag> setOfInitialDAGs;
     private final Map<String, List<Set<EdgeFordFulkerson>>> localCache = new HashMap<>();
-	private int maxSize;  // 10
+	private final int maxSize;  // 10
 	private int maxTW;
+	private double percentage = Double.POSITIVE_INFINITY;
+	double bestScore;
 
 	public boolean equivalenceSearch = false;
-	public boolean experiments = false;
+	public boolean experiments_tw = false;
+	public boolean experiments_perc = false;
 	public List<Dag> outputExperimentDAGs = new ArrayList<>();
 	public List<Double> outputExperimentTimes = new ArrayList<>();
 	public List<List<Dag>> outputExperimentDAGsList = new ArrayList<>();
+	public List<Double> outputExperimentPercentages = new ArrayList<>();
 
 	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW){
 		this.setOfInitialDAGs = new ArrayList<>();
@@ -40,18 +44,24 @@ public class MinCutTreeWidthUnion {
 		this.maxTW = maxTW;
 	}
 
+	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW, double percentage){
+		this(dags, maxSize, maxTW);
+		this.percentage = percentage;
+	}
+
 	public Dag fusion(){
 		double initialTime = System.currentTimeMillis();
 		Graph graph = new EdgeListGraph(this.fusionUnion);
 		int treeWidth;
 		int lastTreeWidth = 0;
-		if (experiments) {
+		double max_percentage = 0;
+		if (experiments_tw) {
 			lastTreeWidth = Utils.getTreeWidth(graph);
 		}
 
 		while (true) {
 			treeWidth = Utils.getTreeWidth(graph);
-			if (experiments){
+			if (experiments_tw){
 				while (treeWidth < lastTreeWidth) {
 					System.out.println("  TW: " + treeWidth);
 					Graph g = new EdgeListGraph(graph);
@@ -68,7 +78,7 @@ public class MinCutTreeWidthUnion {
 			if (treeWidth <= maxTW) break;
 
 			Node x = null, y = null;
-			double bestScore = Double.POSITIVE_INFINITY;
+			bestScore = Double.POSITIVE_INFINITY;
 			HashSet<Node> bestSubSet = new HashSet<>();
 			List<Set<EdgeFordFulkerson>> bestMinCut = new ArrayList<>();
 
@@ -155,6 +165,31 @@ public class MinCutTreeWidthUnion {
 				}
 			}
 
+			// If the best score is greater than the percentage, we stop the search
+			if (bestScore > percentage) {
+				break;
+			}
+
+			if (experiments_perc && max_percentage == 0) {
+				max_percentage = bestScore;
+			}
+
+			if (experiments_perc) {
+				if (bestScore > max_percentage) {
+					System.out.println("  PERC: " + max_percentage);
+					Graph g = new EdgeListGraph(graph);
+					pdagToDag(g);
+					outputExperimentDAGs.add(new Dag(g));
+					outputExperimentTimes.add((System.currentTimeMillis() - initialTime) / 1000.0);
+					outputExperimentDAGsList.add(new ArrayList<>());
+					for (Dag d : setOfInitialDAGs) {
+						outputExperimentDAGsList.get(outputExperimentDAGsList.size() - 1).add(new Dag(d));
+					}
+					outputExperimentPercentages.add(max_percentage);
+					max_percentage = bestScore;
+				}
+			}
+
 			System.out.println(" DELETE " + graph.getEdge(x, y) + bestSubSet + " (" +bestScore + ")");
 			GESThread.delete(x, y, bestSubSet, graph);
 
@@ -172,6 +207,20 @@ public class MinCutTreeWidthUnion {
 					g.removeEdge(edge.to, edge.from);
 				}
 			}
+		}
+
+		// Save last experiments_perc
+		if (experiments_perc) {
+			System.out.println("  PERC: " + max_percentage);
+			Graph g = new EdgeListGraph(graph);
+			pdagToDag(g);
+			outputExperimentDAGs.add(new Dag(g));
+			outputExperimentTimes.add((System.currentTimeMillis() - initialTime) / 1000.0);
+			outputExperimentDAGsList.add(new ArrayList<>());
+			for (Dag d : setOfInitialDAGs) {
+				outputExperimentDAGsList.get(outputExperimentDAGsList.size() - 1).add(new Dag(d));
+			}
+			outputExperimentPercentages.add(max_percentage);
 		}
 
 		pdagToDag(graph);
