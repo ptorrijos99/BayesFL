@@ -63,18 +63,26 @@ public class LocalExperiment {
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "Union";
-        String fusionServer = "MaxTreewidth";//"GeneticTW" "MaxTreewidth"
-        String limitC = "4";
-        String limitS = "4";
+        String fusionServer = "MaxFrequency";//"GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
         
-        int maxEdgesIt = 100000;
-        int nIterations = 1;
+        int maxEdgesIt = 10;
+        int nIterations = 100;
+
+        //int maxEdgesIt = 10000000;
+        //int nIterations = 1;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
         int nClients = 10;
+
+        int percentaje = 25;
+        int limitPerct = (int) Math.round(nClients * percentaje / 100.0);
+
+        String limitC = "4";
+        String limitS = "" + limitPerct;
+
         launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 

@@ -338,6 +338,14 @@ public class Utils {
         return smhd / bns.size();
     }
 
+    public static double SMHDwithoutMoralize(List<Graph> bns1, List<Graph> bns2) {
+        double smhd = 0;
+        for(int i = 0; i < bns1.size(); i++){
+            smhd += SMHDwithoutMoralize(bns1.get(i), bns2.get(i));
+        }
+        return smhd / bns1.size();
+    }
+
     // This function was used in the SMHD instead of moralize
     private static Graph connectParents(Graph bn) {
         EdgeListGraph g = new EdgeListGraph(bn);
@@ -370,6 +378,14 @@ public class Utils {
         return sum;
     }
 
+    public static int SHD(Dag bn1, List<Dag> bns) {
+        int sum = 0;
+        for(Dag bn2: bns){
+            sum += SHD(bn1, bn2);
+        }
+        return sum / bns.size();
+    }
+
 
 
     /**
@@ -396,6 +412,19 @@ public class Utils {
 
 
     public static int fusionSimilarity(Dag g1, Dag g2) {
+        List <Integer> diff = fusionSimilarityList(g1, g2);
+        return diff.get(0) + diff.get(1) + diff.get(2) + diff.get(3);
+    }
+
+    public static double fusionSimilarity(Dag g1, List<Dag> bns) {
+        double sum = 0;
+        for(Dag g2: bns){
+            sum += fusionSimilarity(g1, g2);
+        }
+        return sum / bns.size();
+    }
+
+    public static List<Integer> fusionSimilarityList(Dag g1, Dag g2) {
         // 𝐺+ = GESℎ𝑑({𝐺1, 𝐺2})  // Optimal fusion, Algorithm 6  (here we use approximate fusion for efficiency)
         Dag gPlus = ConsensusUnion.fusionUnion(Arrays.asList(g1, g2));
 
@@ -413,22 +442,55 @@ public class Utils {
         Graph undirectedGSigma2 = undirectedGraphFromDag(gSigma2);
 
         // Calculate the structural differences between the sets of edges
-        int diff = 0;
-        diff += countDifferences(undirectedGSigma1, undirectedGSigma2);  // |Eσ1' ⧵ Eσ2'|
-        diff += countDifferences(undirectedGSigma2, undirectedGSigma1);  // |Eσ2' ⧵ Eσ1'|
-        diff += countDifferences(undirectedGSigma1, undirectedG1);       // |Eσ1' ⧵ E′1|
-        diff += countDifferences(undirectedGSigma2, undirectedG2);       // |Eσ2' ⧵ E′2|
+        List <Integer> diff = new ArrayList<>();
+        diff.add(countDifferences(undirectedGSigma1, undirectedGSigma2));  // |Eσ1' ⧵ Eσ2'|
+        diff.add(countDifferences(undirectedGSigma2, undirectedGSigma1));  // |Eσ2' ⧵ Eσ1'|
+        diff.add(countDifferences(undirectedGSigma1, undirectedG1));       // |Eσ1' ⧵ E′1|
+        diff.add(countDifferences(undirectedGSigma2, undirectedG2));       // |Eσ2' ⧵ E′2|
 
         return diff;
     }
 
-    public static double fusionSimilarity(Dag g1, List<Dag> bns) {
-        double sum = 0;
-        for(Dag g2: bns){
-            sum += fusionSimilarity(g1, g2);
+    public static List<Double> fusionSimilarityList(Dag g1, List<Dag> bns) {
+        Double[] sum = new Double[4];
+        for(int i = 0; i < 4; i++){
+            sum[i] = 0.0;
         }
-        return sum / bns.size();
+
+        for(Dag g2: bns){
+            List<Integer> diff = fusionSimilarityList(g1, g2);
+            for(int i = 0; i < 4; i++){
+                sum[i] += diff.get(i);
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            sum[i] /= bns.size();
+        }
+
+        return Arrays.asList(sum);
     }
+
+    public static List<Double> fusionSimilarityList(List<Dag> bns1, List<Dag> bns2) {
+        Double[] sum = new Double[4];
+        for(int i = 0; i < 4; i++){
+            sum[i] = 0.0;
+        }
+
+        for(int i = 0; i < bns1.size(); i++){
+            List<Integer> diff = fusionSimilarityList(bns1.get(i), bns2.get(i));
+            for(int j = 0; j < 4; j++){
+                sum[j] += diff.get(j);
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            sum[i] /= bns1.size();
+        }
+
+        return Arrays.asList(sum);
+    }
+
 
     public static Graph undirectedGraphFromDag(Dag dag) {
         Graph undirectedGraph = new EdgeListGraph(dag.getNodes());
@@ -1049,6 +1111,14 @@ public class Utils {
         });
 
         return moralGraph;
+    }
+
+    public static List<Graph> moralize(List<Graph> graphs) {
+        List<Graph> moralGraphs = new ArrayList<>();
+        for (Graph graph : graphs) {
+            moralGraphs.add(moralize(graph));
+        }
+        return moralGraphs;
     }
 
     public static ArrayList<Node> getTopologicalOrder(Dag dag){

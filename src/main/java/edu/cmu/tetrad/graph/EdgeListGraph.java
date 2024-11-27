@@ -1039,8 +1039,8 @@ public class EdgeListGraph implements Graph, TripleClassifier {
         }
 
         if (o instanceof EdgeListGraph _o) {
-            boolean nodesEqual = new HashSet<>(_o.nodes).equals(new HashSet<>(this.nodes));
-            boolean edgesEqual = new HashMap<>(_o.edgesSet).equals(new HashMap<>(this.edgesSet));  // TODO: CHANGED TO USE MAP
+            boolean nodesEqual = _o.nodes.equals(this.nodes);
+            boolean edgesEqual = _o.edgesSet.equals(this.edgesSet);  // TODO: CHANGED TO USE MAP
 
             // to check discrepancies if necessary...
 //            if (!edgesEqual) {
