@@ -43,6 +43,10 @@ public class ConsensusUnion {
             case "MaxTreewidthBeforeWoRepeat" -> {
                 return applyGreedyMaxTreewidthBeforeWoRepeat(dags, limit);
             }
+            case "MinCut" -> {
+                MinCutTreeWidthUnion minCut = new MinCutTreeWidthUnion(dags, 10, 0, 0.5);
+                return minCut.fusion();
+            }
         }
 
         ArrayList<Node> alpha = alphaOrder(dags);

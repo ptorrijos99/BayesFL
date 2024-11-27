@@ -190,7 +190,7 @@ public class MinCutTreeWidthUnion {
 				}
 			}
 
-			System.out.println(" DELETE " + graph.getEdge(x, y) + bestSubSet + " (" +bestScore + ")");
+			//System.out.println(" DELETE " + graph.getEdge(x, y) + bestSubSet + " (" +bestScore + ")");
 			GESThread.delete(x, y, bestSubSet, graph);
 
 			// Makes a cpDAG from the graph if equivalence search is enabled. Otherwise, the graph is always just a DAG

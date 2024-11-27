@@ -136,6 +136,7 @@ public class Server {
             }
 
             // 3. Check if any of the clients has changed their model
+            Model[] globalModelArray = {globalModel};
             if (convergence.checkConvergence(localModels)) break;
 
             // 4. Fuse the local models into a global model

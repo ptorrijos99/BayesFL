@@ -15,12 +15,14 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.albacete.simd.utils.Utils.getTreeWidth;
-import static org.albacete.simd.utils.Utils.readData;
+import static consensusBN.ConsensusUnion.fusionUnion;
+import static org.albacete.simd.utils.Utils.*;
 
 
 public class ExperimentMinCut {
@@ -73,14 +75,14 @@ public class ExperimentMinCut {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        //String net = "asia.0";
+        String net = "child.0";
 
         // Generic network (net = number of nodes)
-        String net = ""+10;
+        //String net = ""+50;
 
         verbose = true;
 
-        int nClients = 10;
+        int nClients = 30;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -139,9 +141,16 @@ public class ExperimentMinCut {
         }
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
+        Dag realDag = new Dag(randomBN.originalBayesIm.getDag());
+
+        // Copy of dags
+        ArrayList<Dag> dagsCopy = new ArrayList<>();
+        for (Dag dag : dags) {
+            dagsCopy.add(new Dag(dag));
+        }
 
         // Set the algorithm. tw=2 to not limit the treewidth
-        MinCutTreeWidthUnion minCutUnion = new MinCutTreeWidthUnion(dags, seed, 2, Double.POSITIVE_INFINITY);
+        MinCutTreeWidthUnion minCutUnion = new MinCutTreeWidthUnion(dagsCopy, seed, 2, Double.POSITIVE_INFINITY);
         minCutUnion.experiments_tw = false;  // Disable the experiments_tw mode (write the result of each tw)
         minCutUnion.experiments_perc = true;  // Enable the experiments_perc mode (write the result of each percentage)
         minCutUnion.equivalenceSearch = equivalenceSearch;
@@ -186,23 +195,29 @@ public class ExperimentMinCut {
         List<Dag> outputExperimentDAGs = minCutUnion.outputExperimentDAGs;
         List<Double> outputExperimentTimes = minCutUnion.outputExperimentTimes;
         List<Double> outputExperimentPercentages = minCutUnion.outputExperimentPercentages;
+        List<List<Dag>> outputExperimentDAGsList = minCutUnion.outputExperimentDAGsList;
 
         // Write the results for each percentage
         for (int i = outputExperimentPercentages.size()-1; i >= 0; i--) {
-            System.out.println("\nPercentage: " + outputExperimentPercentages.get(i));
+            if (verbose) System.out.println("\nPercentage: " + outputExperimentPercentages.get(i));
 
             Dag resultDag = outputExperimentDAGs.get(i);
             double resultTime = outputExperimentTimes.get(i);
+            List<Dag> resultOriginalDags = outputExperimentDAGsList.get(i);
 
             int tw = getTreeWidth(resultDag);
 
-            List<String> algorithms = List.of("minCutBES");
-            ExperimentData experimentData = new ExperimentData(equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
+            List<String> algorithms = List.of("minCutBES","minCutBESNew");
+            ExperimentData experimentData = new ExperimentData(realDag, resultOriginalDags, equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
 
             if (verbose) System.out.println("minCut SMHD: \t\t" + Utils.SMHD(minCutUnion.fusionUnion, resultDag) + " | SMHD ORIG: " + Utils.SMHD(resultDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(resultDag, dags) + " | Edges: " + resultDag.getNumEdges() + " | Time: " + resultTime);
 
+            Dag newFusion = fusionUnion(resultOriginalDags);
+            if (verbose) System.out.println("minCut SMHD new: \t" + Utils.SMHD(minCutUnion.fusionUnion, newFusion) + " | SMHD ORIG: " + Utils.SMHD(newFusion, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(newFusion, dags) + " | Edges: " + newFusion.getNumEdges() + " | Time: " + resultTime);
+
             List<AlgorithmResults> algorithmResultsList = new ArrayList<>(List.of(
-                    new AlgorithmResults(resultDag, resultTime)
+                    new AlgorithmResults(resultDag, resultTime),
+                    new AlgorithmResults(newFusion, resultTime)
             ));
 
             saveRound(experimentData, algorithmResultsList, savePath);
@@ -276,18 +291,22 @@ public class ExperimentMinCut {
 
 
             for (int i = outputExperimentPercentages.size()-1; i >= 0; i--) {
-                System.out.println("\nPercentage minCut Inference: " + outputExperimentPercentages.get(i));
+                if (verbose) System.out.println("\nPercentage minCut Inference: " + outputExperimentPercentages.get(i));
 
                 Dag resultDag = outputExperimentDAGs.get(i);
                 double resultTime = outputExperimentTimes.get(i);
+                List<Dag> resultOriginalDags = outputExperimentDAGsList.get(i);
 
                 int tw = getTreeWidth(resultDag);
 
-                List<String> algorithms = List.of("minCutBES");
-                ExperimentData experimentData = new ExperimentData(equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+                List<String> algorithms = List.of("minCutBES","minCutBESNew");
+                ExperimentData experimentData = new ExperimentData(realDag, resultOriginalDags, equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
+
+                Dag newFusion = fusionUnion(resultOriginalDags);
 
                 List<AlgorithmResults> algorithmResultsList = new ArrayList<>(List.of(
-                        new AlgorithmResults(resultDag, resultTime)
+                        new AlgorithmResults(resultDag, resultTime),
+                        new AlgorithmResults(newFusion, resultTime)
                 ));
 
                 saveRoundProbabilities(experimentData, algorithmResultsList, randomBN, savePath);
@@ -298,6 +317,11 @@ public class ExperimentMinCut {
     public static void saveRound(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, String savePath) {
         String header = generateDynamicHeader(experimentData.algorithms);
         String headerProbs = generateDynamicHeaderProbs(experimentData.algorithms);
+
+        List<Graph> originalDagsMoralized = new ArrayList<>();
+        for (Dag dag : experimentData.resultOriginalDags) {
+            originalDagsMoralized.add(Utils.moralize(dag));
+        }
 
         // Crear la primera parte de la línea con los datos fijos
         StringBuilder lineBuilder = new StringBuilder();
@@ -326,29 +350,48 @@ public class ExperimentMinCut {
         // Añadir los resultados dinámicamente para cada algoritmo
         for (AlgorithmResults results : algorithmResultsList) {
             lineBuilder.append(",").append(getTreeWidth(results.dag));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
             lineBuilder.append(",").append(meanParents(results.dag));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
             lineBuilder.append(",").append(maxParents(results.dag));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
             lineBuilder.append(",").append(results.dag.getNumEdges());
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
+
             Graph moralizedResult = Utils.moralize(results.dag);
-            lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(experimentData.fusionUnionMoralized, moralizedResult));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
-            Graph moralizedResult = Utils.moralize(results.dag);
+            Graph moralizedReal = Utils.moralize(experimentData.realDAG);
+            lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(moralizedResult, experimentData.fusionUnionMoralized));
             lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(moralizedResult, experimentData.originalDAGsMoralized));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
-            lineBuilder.append(",").append(Utils.fusionSimilarity(results.dag, experimentData.originalDAGs));
-        }
-        for (AlgorithmResults results : algorithmResultsList) {
+            lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(moralizedResult, moralizedReal));
+
+            List<Double> fusSim = Utils.fusionSimilarityList(results.dag, experimentData.originalDAGs);
+            lineBuilder.append(",").append(fusSim.get(0));
+            lineBuilder.append(",").append(fusSim.get(1));
+            lineBuilder.append(",").append(fusSim.get(2));
+            lineBuilder.append(",").append(fusSim.get(3));
+
+            List<Integer> fusSim3 = Utils.fusionSimilarityList(results.dag, experimentData.realDAG);
+            lineBuilder.append(",").append(fusSim3.get(0));
+            lineBuilder.append(",").append(fusSim3.get(1));
+            lineBuilder.append(",").append(fusSim3.get(2));
+            lineBuilder.append(",").append(fusSim3.get(3));
+
+            lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(originalDagsMoralized, experimentData.originalDAGsMoralized));
+
+            List<Double> fusSim2 = Utils.fusionSimilarityList(experimentData.resultOriginalDags, experimentData.originalDAGs);
+            lineBuilder.append(",").append(fusSim2.get(0));
+            lineBuilder.append(",").append(fusSim2.get(1));
+            lineBuilder.append(",").append(fusSim2.get(2));
+            lineBuilder.append(",").append(fusSim2.get(3));
+
+            lineBuilder.append(",").append(Utils.SMHDwithoutMoralize(moralizedReal, originalDagsMoralized));
+
+            List<Double> fusSim4 = Utils.fusionSimilarityList(experimentData.realDAG, experimentData.resultOriginalDags);
+            lineBuilder.append(",").append(fusSim4.get(0));
+            lineBuilder.append(",").append(fusSim4.get(1));
+            lineBuilder.append(",").append(fusSim4.get(2));
+            lineBuilder.append(",").append(fusSim4.get(3));
+
             lineBuilder.append(",").append(results.executionTime);
+
+            if (verbose) System.out.println("FusSim: " + fusSim + " | FusSim2: " + fusSim2);
+            if (verbose) System.out.println("FusSim3: " + fusSim3 + " | FusSim4: " + fusSim4 + " | SMHD: " + Utils.SMHDwithoutMoralize(moralizedReal, originalDagsMoralized));
         }
 
         if (experimentData.realNetwork) {
@@ -382,34 +425,35 @@ public class ExperimentMinCut {
     public static void saveRoundProbabilities(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, RandomBN randomBN, String savePath) {
         if (!experimentData.realNetwork) return;
 
-        System.out.println("Calculating probabilities for the real network " + experimentData.bbdd + ", percentage " + experimentData.percentage);
+        if (verbose) System.out.println("Calculating probabilities for the real network " + experimentData.bbdd + ", percentage " + experimentData.percentage);
 
         Dag[] dags = algorithmResultsList.stream().map(a -> a.dag).toArray(Dag[]::new);
         String lineProbs = calculateProbs(dags, randomBN, experimentData.timeRecalc, experimentData.timeSampled, experimentData.timeUnion, experimentData.originalBNrecalcMarginals, experimentData.sampledBNsMarginals, experimentData.unionBNMarginals);
 
         List<String> lines = new ArrayList<>();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(savePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Error reading file: " + e.getMessage());
             return;
         }
 
-        System.out.println(" Tables of probabilities calculated");
+        String[] headerColumns = lines.get(0).split(",");
+        int percentageTag = Arrays.asList(headerColumns).indexOf("percentage");
 
-        String percentageTag = String.valueOf(experimentData.percentage);
+        String percentageValue = String.valueOf(experimentData.percentage);
         for (int i = 0; i < lines.size(); i++) {
-            if (lines.get(i).contains("," + percentageTag + ",")) {
-                String currentLine = lines.get(i);
+            String currentLine = lines.get(i);
 
-                // Delete the "," at the end of the line
+            String[] fields = currentLine.split(",");
+            if (fields[percentageTag].equals(percentageValue)) {
                 while (currentLine.endsWith(",")) {
                     currentLine = currentLine.substring(0, currentLine.length() - 1);
                 }
-
                 lines.set(i, currentLine + lineProbs);
                 break;
             }
@@ -421,7 +465,7 @@ public class ExperimentMinCut {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("Error writing file: " + e.getMessage());
         }
     }
 
@@ -581,9 +625,10 @@ public class ExperimentMinCut {
     private static String generateDynamicHeader(List<String> algorithms) {
         StringBuilder header = new StringBuilder("numNodes,nDags,popSize,nIterations,maxTWGeneratedDAGs,seed,metricAgainstOriginalDAGS,metricSMHD,percentage,equivalenceSearch,originalTW,unionTW,minTW,meanTW,maxTW,limitTW,originalMeanParents,originalMaxParents,unionEdges,unionSMHDoriginals,unionFusSimOriginals");
 
-        String[] metrics = {"TW", "MeanParents", "MaxParents", "Edges", "SMHD", "SMHDOriginal", "FusSim", "Time"};
-        for (String metric : metrics) {
-            for (String algo : algorithms) {
+        String[] metrics = {"TW", "MeanParents", "MaxParents", "Edges", "SMHD", "SMHDOriginal", "SMHDReal", "FusSim1", "FusSim2", "FusSim3", "FusSim4", "FusSimReal1", "FusSimReal2", "FusSimReal3", "FusSimReal4", "SMHDIniciales", "FusSimIniciales1", "FusSimIniciales2", "FusSimIniciales3", "FusSimIniciales4", "SMHDInicialesReal", "FusSimInicialesReal1", "FusSimInicialesReal2", "FusSimInicialesReal3", "FusSimInicialesReal4", "Time"};
+
+        for (String algo : algorithms) {
+            for (String metric : metrics) {
                 header.append(",").append(algo).append(metric);
             }
         }
@@ -624,6 +669,8 @@ public class ExperimentMinCut {
     }
 
     public static class ExperimentData {
+        public Dag realDAG;
+        public List<Dag> resultOriginalDags;
         public boolean equivalenceSearch;
         public double percentage;
         public boolean realNetwork;
@@ -654,7 +701,9 @@ public class ExperimentMinCut {
         public double[][] unionBNMarginals;
 
         // Constructor
-        public ExperimentData(boolean equivalenceSearch, double percentage, boolean realNetwork, List<String> algorithms, double meanParents, int maxParents, double maxTWGeneratedDAGs, Graph fusionUnion, Graph fusionUnionMoralized, List<Dag> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw) {
+        public ExperimentData(Dag realDAG, List<Dag> resultOriginalDags, boolean equivalenceSearch, double percentage, boolean realNetwork, List<String> algorithms, double meanParents, int maxParents, double maxTWGeneratedDAGs, Graph fusionUnion, Graph fusionUnionMoralized, List<Dag> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw) {
+            this.realDAG = realDAG;
+            this.resultOriginalDags = resultOriginalDags;
             this.equivalenceSearch = equivalenceSearch;
             this.percentage = percentage;
             this.realNetwork = realNetwork;
@@ -679,8 +728,8 @@ public class ExperimentMinCut {
             this.tw = tw;
         }
 
-        public ExperimentData(boolean equivalenceSearch, double percentage, boolean realNetwork, List<String> algorithms, double meanParents, int maxParents, double maxTWGeneratedDAGs, Graph fusionUnion, Graph fusionUnionMoralized, List<Dag> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
-            this(equivalenceSearch, percentage, realNetwork, algorithms, meanParents, maxParents, maxTWGeneratedDAGs, fusionUnion, fusionUnionMoralized, originalDAGs, originalDAGsMoralized, bbdd, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
+        public ExperimentData(Dag realDAG, List<Dag> resultOriginalDags, boolean equivalenceSearch, double percentage, boolean realNetwork, List<String> algorithms, double meanParents, int maxParents, double maxTWGeneratedDAGs, Graph fusionUnion, Graph fusionUnionMoralized, List<Dag> originalDAGs, List<Graph> originalDAGsMoralized, String bbdd, int nDags, int popSize, int nIterations, int seed, int originalTw, int unionTw, int minTW, double meanTW, int maxTW, int tw, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
+            this(realDAG, resultOriginalDags, equivalenceSearch, percentage, realNetwork, algorithms, meanParents, maxParents, maxTWGeneratedDAGs, fusionUnion, fusionUnionMoralized, originalDAGs, originalDAGsMoralized, bbdd, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
             this.timeRecalc = timeRecalc;
             this.timeSampled = timeSampled;
             this.timeUnion = timeUnion;

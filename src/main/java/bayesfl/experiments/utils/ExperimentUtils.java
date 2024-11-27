@@ -162,6 +162,18 @@ public class ExperimentUtils {
         throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
     }
 
+    public static int calculateFusSim(Data data, Dag dag) {
+        if ((data instanceof BN_DataSet dat)) {
+            if (dat.getOriginalBNPath() != null) {
+                try {
+                    BayesPm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
+                    return Utils.fusionSimilarity(Utils.removeInconsistencies(originalBN.getDag()), dag);
+                } catch (Exception e) { e.printStackTrace(); }
+            }
+        }
+        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+    }
+
     /**
      * Get the metrics of the model. The metrics are accuracy, precision, recall, F1-score, and prediction time.
      *
