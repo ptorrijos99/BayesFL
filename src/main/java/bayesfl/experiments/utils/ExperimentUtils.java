@@ -36,6 +36,9 @@ import bayesfl.data.Data;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.graph.Dag;
+import edu.cmu.tetrad.graph.Edge;
+import edu.cmu.tetrad.graph.Endpoint;
+import edu.cmu.tetrad.graph.Node;
 import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.threads.GESThread;
@@ -47,6 +50,7 @@ import weka.classifiers.evaluation.Evaluation;
 import weka.core.Instances;
 
 import java.io.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -248,5 +252,18 @@ public class ExperimentUtils {
 
         //return new MlBayesIm(bayesPm);
         return bayesPm;
+    }
+
+    public static Dag readDagFromMatrix(double[][] matrix, List<Node> nodes) {
+        Dag dag = new Dag(nodes);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] > 0) {
+                    Edge edge = new Edge(nodes.get(i), nodes.get(j), Endpoint.TAIL, Endpoint.ARROW);
+                    dag.addEdge(edge);
+                }
+            }
+        }
+        return dag;
     }
 }
