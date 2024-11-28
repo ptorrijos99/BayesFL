@@ -115,7 +115,7 @@ public class SaveInfoFromDARLS {
             //     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
             // String header = "bbdd,algorithm,maxEdges,fusionC,limitC,refinement,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,fusSim,edges,tw,time(s)\n";
 
-            bn.saveStats("DARLS," + N + ",,,,,", "0", PATH + "results/Server/", nClients, -1, data, 1, time);
+            bn.saveStats("DARLS," + N + ",,,,,", "0", PATH + "", nClients, -1, data, 1, time);
         } else {
             System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
         }
