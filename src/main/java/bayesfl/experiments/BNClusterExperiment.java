@@ -70,7 +70,7 @@ public class BNClusterExperiment {
         String fusionS = parameters[6];
         String limitS = parameters[7];
         int nClients = Integer.parseInt(parameters[8]);
-        int maxEdgesIt = Integer.parseInt(parameters[9]);
+        String maxEdgesIt = parameters[9];
         int nIterations = Integer.parseInt(parameters[10]);
         
         LocalExperiment.PATH = "/tmp/pablo.torrijos/";
