@@ -78,6 +78,11 @@ public class ConsensusUnion {
             case "MaxEdges" -> applyEdgesLimit(alpha, dags, edges, limit);
             // Option 2: Add the edges in order of frequency, until the frequency of the edges is more than a number
             case "MaxFrequency" -> applyFrequencyLimit(alpha, edgeFrequency, edges, limit);
+            // Option 2.5: Add the edges that appear in more than "limit" percentage of DAGs
+            case "Consensus" -> {
+                int lim = Integer.parseInt(limit) * dags.size() / 100;
+                yield applyFrequencyLimit(alpha, edgeFrequency, edges, lim + "");
+            }
             // Option 3: Add the edges in order of frequency, limiting the maximum number of parents of each node
             case "MaxParents" -> applyMaxParents(alpha, edges, limit);
             // Option 4: Add the edges in order of frequency, limiting the maximum treewidth
