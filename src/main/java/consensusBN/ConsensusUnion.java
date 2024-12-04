@@ -44,7 +44,7 @@ public class ConsensusUnion {
                 return applyGreedyMaxTreewidthBeforeWoRepeat(dags, limit);
             }
             case "MinCut" -> {
-                MinCutTreeWidthUnion minCut = new MinCutTreeWidthUnion(dags, 10, 0, 0.5);
+                MinCutTreeWidthUnion minCut = new MinCutTreeWidthUnion(dags, 10, 0, Double.parseDouble(limit));
                 return minCut.fusion();
             }
         }
