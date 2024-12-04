@@ -75,14 +75,14 @@ public class ExperimentMinCut {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "child.0";
+        String net = "pathfinder.0";
 
         // Generic network (net = number of nodes)
         //String net = ""+50;
 
         verbose = true;
 
-        int nClients = 30;
+        int nClients = 5;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;

@@ -59,13 +59,14 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "alarm";
+        String net = "child";
         String algName = "GES";
         String refinement = "None";
         String fusionClient = "Union";
-        String fusionServer = "MaxFrequency";//"GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
+        String fusionServer = "MinCut";  //"GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
         
-        int maxEdgesIt = 10;
+        String maxEdgesIt = "10";  // "0.15" "log2" "log10" "sqrt2" "sqrt3"...
+
         int nIterations = 100;
 
         //int maxEdgesIt = 10000000;
@@ -75,7 +76,7 @@ public class LocalExperiment {
         //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 10;
+        int nClients = 5;
 
         int percentaje = 25;
         int limitPerct = (int) Math.round(nClients * percentaje / 100.0);
@@ -87,16 +88,20 @@ public class LocalExperiment {
     }
 
 
-    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, int maxEdgesIt, int nIterations) {
-        String operation = algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS;
+    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations) {
+        DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+        int maxEdgesItInt = matchMaxEdgesIt(maxEdgesIt, allData.getNumColumns());
+
+        String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
+        System.out.println("Nodes: " + allData.getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
+
         if ((!checkExistentFile(savePath))) {
-            
-            DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
+
             for (int i = 0; i < nClients; i++) {
                 BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
 
@@ -110,11 +115,11 @@ public class LocalExperiment {
                 }
 
                 data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-                LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesIt);
+                LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesItInt);
 
                 Client client = new Client(fusionClient, algorithm, data);
                 client.setStats(true, true, PATH);
-                client.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS);
+                client.setExperimentName(operation);
                 clients.add(client);
             }
 
@@ -135,7 +140,7 @@ public class LocalExperiment {
             data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
             server.setData(data);
 
-            server.setExperimentName(algName + "," + maxEdgesIt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS);
+            server.setExperimentName(operation);
             server.setnIterations(nIterations);
 
             server.run();
@@ -144,6 +149,38 @@ public class LocalExperiment {
         } else {
             System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
         }
+    }
+
+    public static int matchMaxEdgesIt(String maxEdgesIt, int nNodes) {
+        int maxEdgesItInt;
+        if (maxEdgesIt.matches("\\d+")) {
+            // It's a positive integer
+            maxEdgesItInt = Integer.parseInt(maxEdgesIt);
+        } else if (maxEdgesIt.matches("\\d*\\.\\d+")) {
+            // It's a decimal
+            double maxEdgesItDouble = Double.parseDouble(maxEdgesIt);
+            if (maxEdgesItDouble > 1 || maxEdgesItDouble <= 0) maxEdgesItDouble = 1;
+            maxEdgesItInt = (int) Math.round(nNodes * maxEdgesItDouble);
+        } else if (maxEdgesIt.startsWith("log")) {
+            // Logarithm in base x of nNodes
+            double base = 2;
+            if (maxEdgesIt.length() > 3) { // Check if there is a number after "log"
+                base = Double.parseDouble(maxEdgesIt.substring(3).trim());
+            }
+            if (base <= 0 || base == 1) throw new IllegalArgumentException("log(x): x must be > 0 y != 1");
+            maxEdgesItInt = (int) Math.round(Math.log(nNodes) / Math.log(base)); // Cambio de base
+        } else if (maxEdgesIt.startsWith("sqrt")) {
+            // Root in base x of nNodes
+            double base = 2;
+            if (maxEdgesIt.length() > 4) { // Check if there is a number after "sqrt"
+                base = Double.parseDouble(maxEdgesIt.substring(4).trim());
+            }
+            if (base <= 0) throw new IllegalArgumentException("sqrt(x): x must be > 0");
+            maxEdgesItInt = (int) Math.round(Math.pow(nNodes, 1.0 / base)); // Root in base x
+        } else {
+            throw new IllegalArgumentException("Invalid format for maxEdgesIt");
+        }
+        return maxEdgesItInt;
     }
 
     public static boolean checkExistentFile(String savePath) {
