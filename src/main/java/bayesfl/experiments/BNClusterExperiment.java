@@ -73,7 +73,7 @@ public class BNClusterExperiment {
         String maxEdgesIt = parameters[9];
         int nIterations = Integer.parseInt(parameters[10]);
         
-        LocalExperiment.PATH = "/tmp/pablo.torrijos/";
+        LocalExperiment.PATH = "./";
         
         // Launch the experiment
         launchExperiment(net, algorithm, refinement, fusionC, limitC, fusionS, limitS, bbdd, nClients, maxEdgesIt, nIterations);
