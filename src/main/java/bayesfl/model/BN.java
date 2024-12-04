@@ -74,12 +74,13 @@ public class BN implements Model {
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
         this.score = ExperimentUtils.calculateBDeu(data, this.dag);
         int smhd = ExperimentUtils.calculateSMHD(data, this.dag);
+        int shd = ExperimentUtils.calculateSHD(data, this.dag);
         int fusSim = ExperimentUtils.calculateFusSim(data, this.dag);
         int threads = Runtime.getRuntime().availableProcessors();
         int tw = Utils.getTreeWidth(this.dag);
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,refinement,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,fusSim,edges,tw,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,refinement,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,SHD,fusSim,edges,tw,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +
@@ -89,6 +90,7 @@ public class BN implements Model {
                         threads + "," +
                         this.score + "," +
                         smhd + "," +
+                        shd + "," +
                         fusSim + "," +
                         this.dag.getEdges().size() + "," +
                         tw + "," +
