@@ -166,6 +166,18 @@ public class ExperimentUtils {
         throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
     }
 
+    public static int calculateSHD(Data data, Dag dag) {
+        if ((data instanceof BN_DataSet dat)) {
+            if (dat.getOriginalBNPath() != null) {
+                try {
+                    BayesPm originalBN = readOriginalBayesianNetwork(dat.getOriginalBNPath());
+                    return Utils.SHD(Utils.removeInconsistencies(originalBN.getDag()), dag);
+                } catch (Exception e) { e.printStackTrace(); }
+            }
+        }
+        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+    }
+
     public static int calculateFusSim(Data data, Dag dag) {
         if ((data instanceof BN_DataSet dat)) {
             if (dat.getOriginalBNPath() != null) {
