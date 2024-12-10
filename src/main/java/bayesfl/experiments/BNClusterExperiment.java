@@ -64,7 +64,7 @@ public class BNClusterExperiment {
         String net = parameters[0];
         String bbdd = parameters[1];
         String algorithm = parameters[2];
-        String refinement = parameters[3];
+        String convergence = parameters[3];
         String fusionC = parameters[4];
         String limitC = parameters[5];
         String fusionS = parameters[6];
@@ -76,7 +76,7 @@ public class BNClusterExperiment {
         LocalExperiment.PATH = "./";
         
         // Launch the experiment
-        launchExperiment(net, algorithm, refinement, fusionC, limitC, fusionS, limitS, bbdd, nClients, maxEdgesIt, nIterations);
+        launchExperiment(net, algorithm, convergence, fusionC, limitC, fusionS, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
 }
