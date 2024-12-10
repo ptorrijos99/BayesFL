@@ -61,7 +61,7 @@ public class ScoreImprovement implements Convergence {
         }
         scoreMean /= localModels.length;
 
-        if (scoreMean >= lastScoreMean) {
+        if (scoreMean > lastScoreMean) {
             convergence = false;
         }
 
