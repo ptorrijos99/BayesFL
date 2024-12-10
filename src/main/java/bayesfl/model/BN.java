@@ -80,7 +80,7 @@ public class BN implements Model {
         int tw = Utils.getTreeWidth(this.dag);
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,refinement,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,SHD,fusSim,edges,tw,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,convergence,fusionS,limitS,nClients,id,iteration,instances,threads,bdeu,SMHD,SHD,fusSim,edges,tw,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +

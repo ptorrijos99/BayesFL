@@ -23,7 +23,7 @@
  */
 /**
  *    LocalExperiment.java
- *    Copyright (C) 2023 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2025 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
@@ -34,6 +34,8 @@ package bayesfl.experiments;
 import bayesfl.algorithms.BN_GES;
 import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.convergence.Convergence;
+import bayesfl.convergence.MultipleConvergence;
+import bayesfl.convergence.ScoreImprovement;
 import bayesfl.data.BN_DataSet;
 import bayesfl.fusion.BN_FusionIntersection;
 import bayesfl.fusion.BN_FusionUnion;
@@ -61,38 +63,35 @@ public class LocalExperiment {
     public static void simpleExperiment() {
         String net = "child";
         String algName = "GES";
-        String refinement = "None";
+        String convergence = "Multiple";  // "Multiple" "Score" "Model"
         String fusionClient = "Union";
-        String fusionServer = "MinCut";  //"GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
+        String fusionServer = "MinCut";  //"Union" "Consensus" "GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
         
-        String maxEdgesIt = "10";  // "0.15" "log2" "log10" "sqrt2" "sqrt3"...
+        String maxEdgesIt = "5";  // "10" "0.15" "log2" "log10" "sqrt2" "sqrt3"...
 
-        int nIterations = 100;
+        int nIterations = 150;
 
         //int maxEdgesIt = 10000000;
         //int nIterations = 1;
 
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
-        //launchExperiment(net, algName, refinement, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
+        //launchExperiment(net, algName, convergence, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
         String bbdd = "0";
-        int nClients = 5;
+        int nClients = 100;
 
-        int percentaje = 25;
-        int limitPerct = (int) Math.round(nClients * percentaje / 100.0);
+        String limitC = "-1";
+        String limitS = "0.5";
 
-        String limitC = "4";
-        String limitS = "" + limitPerct;
-
-        launchExperiment(net, algName, refinement, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
+        launchExperiment(net, algName, convergence, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations);
     }
 
 
-    public static void launchExperiment(String net, String algName, String refinement, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations) {
+    public static void launchExperiment(String net, String algName, String convergence, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations) {
         DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
         int maxEdgesItInt = matchMaxEdgesIt(maxEdgesIt, allData.getNumColumns());
 
-        String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + refinement + "," + fusionS + "," + limitS;
+        String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + convergence + "," + fusionS + "," + limitS;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         System.out.println("Nodes: " + allData.getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
@@ -115,7 +114,7 @@ public class LocalExperiment {
                 }
 
                 data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
-                LocalAlgorithm algorithm = new BN_GES(algName, refinement, maxEdgesItInt);
+                LocalAlgorithm algorithm = new BN_GES(algName, "None", maxEdgesItInt);
 
                 Client client = new Client(fusionClient, algorithm, data);
                 client.setStats(true, true, PATH);
@@ -132,8 +131,19 @@ public class LocalExperiment {
                     ((BN_FusionUnion) fusionServer).setLimit(limitS);
                 }
 
-            Convergence convergence = new ModelEquality();
-            Server server = new Server(fusionServer, convergence, clients);
+            Convergence conv;
+            if (convergence.equals("Score")) {
+                conv = new ScoreImprovement();
+            } else if (convergence.equals("Model")) {
+                conv = new ModelEquality();
+            }
+            else {
+                Convergence[] convs = new Convergence[2];
+                convs[0] = new ScoreImprovement();
+                convs[1] = new ModelEquality();
+                conv = new MultipleConvergence(convs);
+            }
+            Server server = new Server(fusionServer, conv, clients);
 
             server.setStats(true, PATH);
             BN_DataSet data = new BN_DataSet(net + "." + bbdd);
