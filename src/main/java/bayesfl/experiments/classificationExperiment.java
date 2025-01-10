@@ -19,10 +19,9 @@ import weka.filters.Filter;
 
 import static bayesfl.data.Weka_Instances.divide;
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
-import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 
-public class classificationExperiment {
+public class ClassificationExperiment {
     public static String PATH = "./";
 
     /*public static void main(String[] args) {

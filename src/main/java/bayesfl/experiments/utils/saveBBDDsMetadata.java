@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 
-public class saveBBDDsMetadata {
+public class SaveBBDDsMetadata {
 
     public static void main(String[] args) throws Exception {
 
