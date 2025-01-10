@@ -7,7 +7,7 @@ import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
 
-public class toTXT {
+public class ToTXT {
 
     public static void main(String[] args) throws Exception {
         String PATH = "./res/networks/";
