@@ -74,7 +74,7 @@ public class ExperimentMinCutGenetic {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "hailfinder.0";
+        String net = "alarm.0";
 
         // Generic network (net = number of nodes)
         //String net = ""+10;
@@ -139,11 +139,13 @@ public class ExperimentMinCutGenetic {
         boolean realNetwork = net.contains(".");
         // Real network
         if (realNetwork) {
+            // Split the name of the network
+            String netName = net.split("\\.")[0];
+
             // Read the .csv
-            DataSet data = readData(PATH + "res/networks/BBDD/" + net + ".csv");
+            DataSet data = readData(PATH + "res/networks/BBDD/" + netName + "/" + net + ".csv");
 
             // Read the .xbif
-            String netName = net.split("\\.")[0];
             BIFReader bayesianReader = new BIFReader();
             try {
                 bayesianReader.processFile(PATH + "res/networks/" + netName + ".xbif");
@@ -190,8 +192,8 @@ public class ExperimentMinCutGenetic {
         double meanParents = 0;
         int maxParents = 0;
         for (Dag dag : dags) {
-            meanParents += meanParents(dag);
-            int temp = maxParents(dag);
+            meanParents += Experiments.meanParents(dag);
+            int temp = Experiments.maxParents(dag);
             if (temp > maxParents) maxParents = temp;
         }
         meanParents /= dags.size();
@@ -337,10 +339,10 @@ public class ExperimentMinCutGenetic {
             lineBuilder.append(",").append(getTreeWidth(results.dag));
         }
         for (AlgorithmResults results : algorithmResultsList) {
-            lineBuilder.append(",").append(meanParents(results.dag));
+            lineBuilder.append(",").append(Experiments.meanParents(results.dag));
         }
         for (AlgorithmResults results : algorithmResultsList) {
-            lineBuilder.append(",").append(maxParents(results.dag));
+            lineBuilder.append(",").append(Experiments.maxParents(results.dag));
         }
         for (AlgorithmResults results : algorithmResultsList) {
             lineBuilder.append(",").append(results.dag.getNumEdges());
@@ -463,90 +465,6 @@ public class ExperimentMinCutGenetic {
         }
         return result;
     }
-
-
-    /** Returns the mean difference between two marginals.
-     *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]
-     *  Returns: ((0.1 + 0.1) / 2 + (0.2 + 0.1 + 0.3) / 3)) / 2 = 0.15
-     */
-    public static double getMeanAbsoluteDiff(double[][] marg1, double[][] marg2) {
-        if (marg1 == null) return -1;
-        if (marg2 == null) return -2;
-        double diff = 0;
-        for (int i = 0; i < marg1.length; i++) {
-            for (int j = 0; j < marg1[i].length; j++) {
-                diff += (Math.abs(marg1[i][j] - marg2[i][j]) / marg1[i].length);
-            }
-        }
-        return diff / (marg1.length);
-    }
-
-    public static double getMeanAbsoluteDiff(ArrayList<double[][]> marg1, double[][] marg2) {
-        double diff = 0;
-        for (double[][] doubles : marg1) {
-            diff += getMeanAbsoluteDiff(doubles, marg2);
-        }
-        return diff / marg1.size();
-    }
-
-    /** Returns the mean quadratic difference between two marginals. */
-    public static double getMeanQuadraticDiff(double[][] marg1, double[][] marg2) {
-        if (marg1 == null) return -1;
-        if (marg2 == null) return -2;
-        double diff = 0;
-        for (int i = 0; i < marg1.length; i++) {
-            for (int j = 0; j < marg1[i].length; j++) {
-                diff += (Math.pow(marg1[i][j] - marg2[i][j], 2) / marg1[i].length);
-            }
-        }
-        return diff / (marg1.length);
-    }
-
-    public static double getMeanQuadraticDiff(ArrayList<double[][]> marg1, double[][] marg2) {
-        double diff = 0;
-        for (double[][] doubles : marg1) {
-            diff += getMeanQuadraticDiff(doubles, marg2);
-        }
-        return diff / marg1.size();
-    }
-
-    /** Returns the mean Kullback-Leiber difference between two marginals. */
-    public static double getMeanKLDiff(double[][] marg1, double[][] marg2) {
-        if (marg1 == null) return -1;
-        if (marg2 == null) return -2;
-        double diff = 0;
-        for (int i = 0; i < marg1.length; i++) {
-            for (int j = 0; j < marg1[i].length; j++) {
-                diff += ((marg1[i][j] * Math.log(marg1[i][j] / marg2[i][j])) / marg1[i].length);
-            }
-        }
-        return diff / (marg1.length);
-    }
-
-    public static double getMeanKLDiff(ArrayList<double[][]> marg1, double[][] marg2) {
-        double diff = 0;
-        for (double[][] doubles : marg1) {
-            diff += getMeanKLDiff(doubles, marg2);
-        }
-        return diff / marg1.size();
-    }
-
-    public static double meanParents(Graph dag) {
-        double nParents = 0;
-        for (Node node : dag.getNodes()) {
-            nParents += dag.getParents(node).size();
-        }
-        return nParents / dag.getNumNodes();
-    }
-
-    public static int maxParents(Graph dag) {
-        int nParents = 0;
-        for (Node node : dag.getNodes()) {
-            if (dag.getParents(node).size() > nParents) nParents = dag.getParents(node).size();
-        }
-        return nParents;
-    }
-
 
     private static String generateDynamicHeader(List<String> algorithms) {
         StringBuilder header = new StringBuilder("numNodes,nDags,popSize,nIterations,maxTWGeneratedDAGs,seed,metricAgainstOriginalDAGS,metricSMHD,originalTW,unionTW,minTW,meanTW,maxTW,limitTW,originalMeanParents,originalMaxParents,unionEdges,unionSMHDoriginals,unionFusSimOriginals");
