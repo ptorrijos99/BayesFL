@@ -15,12 +15,12 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
 import weka.estimators.Estimator;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-import static edu.cmu.tetrad.util.DataConvertUtils.toDataModel;
 
 public class Utils {
 
@@ -843,6 +843,17 @@ public class Utils {
         }
         return bayesIm;
     }
+
+    public static String readFile(String path){
+        String file = null;
+        try {
+            file = Files.readString(Path.of(path), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return file;
+    }
+
 
     /**
      * Gets the probability table of an array of WEKA estimators

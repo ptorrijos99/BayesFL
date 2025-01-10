@@ -48,7 +48,7 @@ public class RandomBN {
 	private boolean props = true;
 	private int sampleSize = 100;
 
-	public MlBayesIm originalBayesIm;
+	public BayesIm originalBayesIm;
 	public DataSet data;
 	public ArrayList<String>[] categories;
 	public double timeSample;
@@ -105,7 +105,7 @@ public class RandomBN {
 			this.categories[data.getColumn(node)] = new ArrayList<>(((DiscreteVariable)node).getCategories());
 		}
 
-		//Transforming the BayesNet into a BayesIm
+		// Transforming the BayesNet into a BayesIm
 		this.originalBayesIm = Utils.transformBayesNetToBayesIm(bayesNet, categories);
 
 		Graph dag = this.originalBayesIm.getDag();
