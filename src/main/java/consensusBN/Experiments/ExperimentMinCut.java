@@ -15,6 +15,7 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static consensusBN.ConsensusUnion.fusionUnion;
+import static consensusBN.Experiments.Experiments.getBDeuScore;
 import static org.albacete.simd.utils.Utils.*;
 
 
@@ -75,7 +77,7 @@ public class ExperimentMinCut {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "pathfinder.0";
+        String net = "alarm.0";
 
         // Generic network (net = number of nodes)
         //String net = ""+50;
@@ -91,14 +93,19 @@ public class ExperimentMinCut {
         ConsensusUnion.metricAgainstOriginalDAGs = true;
         ConsensusUnion.metricSMHD = true;
 
-        boolean equivalenceSearch = false;
+        boolean equivalenceSearch = true;
+
+        boolean probabilities = false;
+        boolean inference = true;
 
         String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + equivalenceSearch + ".csv";
 
-        launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, savePath);
+        launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, probabilities, inference, savePath);
     }
 
-    public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, boolean equivalenceSearch, String savePath) {
+    public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, boolean equivalenceSearch, boolean probabilities, boolean inference, String savePath) {
+        List<String> algorithms = List.of("minCutBES");
+
         // Check if the folder (and subfolders) exists
         if (!new File("./results/Server/").exists()) {
             new File("./results/Server/").mkdirs();
@@ -107,7 +114,7 @@ public class ExperimentMinCut {
         // Check if the file exists
         if (new File(savePath).exists()) {
             System.out.println("File exists: " + savePath);
-            return;
+            //return;
         }
 
         RandomBN randomBN;
@@ -115,11 +122,12 @@ public class ExperimentMinCut {
         boolean realNetwork = net.contains(".");
         // Real network
         if (realNetwork) {
+            String netName = net.split("\\.")[0];
+
             // Read the .csv
-            DataSet data = readData(PATH + "res/networks/BBDD/" + net + ".csv");
+            DataSet data = readData(PATH + "res/networks/BBDD/" + netName+ "/" + netName + "." + seed + ".csv");
 
             // Read the .xbif
-            String netName = net.split("\\.")[0];
             BIFReader bayesianReader = new BIFReader();
             try {
                 bayesianReader.processFile(PATH + "res/networks/" + netName + ".xbif");
@@ -207,33 +215,32 @@ public class ExperimentMinCut {
 
             int tw = getTreeWidth(resultDag);
 
-            List<String> algorithms = List.of("minCutBES","minCutBESNew");
             ExperimentData experimentData = new ExperimentData(realDag, resultOriginalDags, equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw);
-
-            if (verbose) System.out.println("minCut SMHD: \t\t" + Utils.SMHD(minCutUnion.fusionUnion, resultDag) + " | SMHD ORIG: " + Utils.SMHD(resultDag, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(resultDag, dags) + " | Edges: " + resultDag.getNumEdges() + " | Time: " + resultTime);
-
             Dag newFusion = fusionUnion(resultOriginalDags);
             if (verbose) System.out.println("minCut SMHD new: \t" + Utils.SMHD(minCutUnion.fusionUnion, newFusion) + " | SMHD ORIG: " + Utils.SMHD(newFusion, dags) + " | FusSim ORIG: " + Utils.fusionSimilarity(newFusion, dags) + " | Edges: " + newFusion.getNumEdges() + " | Time: " + resultTime);
 
             List<AlgorithmResults> algorithmResultsList = new ArrayList<>(List.of(
-                    new AlgorithmResults(resultDag, resultTime),
                     new AlgorithmResults(newFusion, resultTime)
             ));
 
-            saveRound(experimentData, algorithmResultsList, savePath);
+            saveRound(experimentData, algorithmResultsList, probabilities, inference, savePath);
         }
 
-
         // Write the inference results for each percentage
-        if (realNetwork) {
+        if (realNetwork && (probabilities || inference)) {
             double[][] originalBNrecalcMarginals = null;
             double[][] unionBNMarginals = null;
-            ArrayList<double[][]> sampledBNsMarginals = null;
+            ArrayList<double[][]> sampledBNsMarginals = new ArrayList<>();
+
             double timeRecalc = -1;
             double timeSampled = -1;
             double timeUnion = -1;
+
             BayesIm originalBN = randomBN.originalBayesIm;
-            sampledBNsMarginals = new ArrayList<>();
+            ArrayList<BayesIm> sampledBNs = new ArrayList<>();
+            BayesIm unionBN = null;
+            BayesIm originalBNrecalc = null;
+
             // Recalculate probabilities of the original BN given the data
             try {
                 double start = System.currentTimeMillis();
@@ -242,12 +249,10 @@ public class ExperimentMinCut {
                     bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
                     bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
                 }
-                BayesIm originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                originalBNrecalc = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
                 timeRecalc = (System.currentTimeMillis() - start) / 1000.0;
-                originalBNrecalcMarginals = Experiments.marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
             } catch (OutOfMemoryError | Exception ex) {
                 System.gc();
-                //Log the info
                 System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
             }
 
@@ -260,13 +265,11 @@ public class ExperimentMinCut {
                         bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
                         bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
                     }
-                    BayesIm sampledBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
-                    sampledBNsMarginals.add(Experiments.marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                    sampledBNs.add(new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm());
                     if (timeSampled == -1) timeSampled = (System.currentTimeMillis() - start) / 1000.0;
                     else timeSampled += (System.currentTimeMillis() - start) / 1000.0;
                 } catch (OutOfMemoryError | Exception ex) {
                     System.gc();
-                    //Log the info
                     System.err.println("REAL RECALCULATED GRAPH: Array size too large: " + ex.getClass());
                 }
             }
@@ -280,43 +283,45 @@ public class ExperimentMinCut {
                     bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
                     bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
                 }
-                BayesIm unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+                unionBN = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
                 timeUnion = (System.currentTimeMillis() - start) / 1000.0;
-                unionBNMarginals = Experiments.marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+
             } catch (OutOfMemoryError | Exception ex) {
                 System.gc();
-                //Log the info
                 System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
             }
 
+            if (originalBNrecalc != null) originalBNrecalcMarginals = Experiments.marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+            if (unionBN == null) unionBNMarginals = Experiments.marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+            for (BayesIm sampledBN : sampledBNs) {
+                if (sampledBN != null) sampledBNsMarginals.add(Experiments.marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+            }
 
             for (int i = outputExperimentPercentages.size()-1; i >= 0; i--) {
                 if (verbose) System.out.println("\nPercentage minCut Inference: " + outputExperimentPercentages.get(i));
 
-                Dag resultDag = outputExperimentDAGs.get(i);
                 double resultTime = outputExperimentTimes.get(i);
                 List<Dag> resultOriginalDags = outputExperimentDAGsList.get(i);
 
-                int tw = getTreeWidth(resultDag);
+                Dag newFusion = fusionUnion(resultOriginalDags);
+                int tw = getTreeWidth(newFusion);
 
-                List<String> algorithms = List.of("minCutBES","minCutBESNew");
                 ExperimentData experimentData = new ExperimentData(realDag, resultOriginalDags, equivalenceSearch, outputExperimentPercentages.get(i), realNetwork, algorithms, meanParents, maxParents, twLimit, minCutUnion.fusionUnion, Utils.moralize(minCutUnion.fusionUnion), dags, moralizedDags, net, nDags, popSize, nIterations, seed, originalTw, unionTw, minTW, meanTW, maxTW, tw, timeRecalc, timeSampled, timeUnion, originalBNrecalcMarginals, sampledBNsMarginals, unionBNMarginals);
 
-                Dag newFusion = fusionUnion(resultOriginalDags);
-
                 List<AlgorithmResults> algorithmResultsList = new ArrayList<>(List.of(
-                        new AlgorithmResults(resultDag, resultTime),
                         new AlgorithmResults(newFusion, resultTime)
                 ));
 
-                saveRoundProbabilities(experimentData, algorithmResultsList, randomBN, savePath);
+                if (probabilities) saveRoundProbabilities(experimentData, algorithmResultsList, originalBNrecalc, sampledBNs, unionBN, randomBN, false, savePath);
+                if (inference) saveRoundProbabilities(experimentData, algorithmResultsList, originalBNrecalc, sampledBNs, unionBN, randomBN, true, savePath);
             }
         }
     }
 
-    public static void saveRound(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, String savePath) {
+    public static void saveRound(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, boolean probabilities, boolean inference, String savePath) {
         String header = generateDynamicHeader(experimentData.algorithms);
         String headerProbs = generateDynamicHeaderProbs(experimentData.algorithms);
+        String headerInf = generateDynamicHeaderInf(experimentData.algorithms);
 
         List<Graph> originalDagsMoralized = new ArrayList<>();
         for (Dag dag : experimentData.resultOriginalDags) {
@@ -395,12 +400,22 @@ public class ExperimentMinCut {
         }
 
         if (experimentData.realNetwork) {
-            // If is a real network, add the spaces for the probabilities
-            String[] headerProbsColumns = headerProbs.split(",");
-            int numColumns = headerProbsColumns.length;
+            if (probabilities) {
+                // If is a real network, add the spaces for the probabilities
+                String[] headerProbsColumns = headerProbs.split(",");
+                int numColumns = headerProbsColumns.length;
 
-            // Add commas to the line
-            lineBuilder.append(",".repeat(Math.max(0, numColumns - 1)));
+                // Add commas to the line
+                lineBuilder.append(",".repeat(Math.max(0, numColumns - 1)));
+            }
+            if (inference) {
+                // If is a real network, add the spaces for the probabilities
+                String[] headerInfColumns = headerInf.split(",");
+                int numColumns = headerInfColumns.length;
+
+                // Add commas to the line
+                lineBuilder.append(",".repeat(Math.max(0, numColumns - 1)));
+            }
         }
 
         // Convertir a cadena final
@@ -412,7 +427,8 @@ public class ExperimentMinCut {
             if (new File(savePath).length() == 0) {
                 csvWriter.write(header);
                 if (experimentData.realNetwork) {
-                    csvWriter.write(headerProbs);
+                    if (probabilities) csvWriter.write(headerProbs);
+                    if (inference) csvWriter.write(headerInf);
                 }
                 csvWriter.write("\n");
             }
@@ -422,13 +438,16 @@ public class ExperimentMinCut {
         } catch (IOException e) { System.out.println(e); }
     }
 
-    public static void saveRoundProbabilities(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, RandomBN randomBN, String savePath) {
-        if (!experimentData.realNetwork) return;
-
-        if (verbose) System.out.println("Calculating probabilities for the real network " + experimentData.bbdd + ", percentage " + experimentData.percentage);
+    public static void saveRoundProbabilities(ExperimentData experimentData, List<AlgorithmResults> algorithmResultsList, BayesIm originalBNrecalc, ArrayList<BayesIm> sampledBNs, BayesIm unionBN, RandomBN randomBN, boolean inference, String savePath) {
+        if (verbose) {
+            String temp = inference ? "Inference" : "Probabilities";
+            System.out.println("Calculating " + temp + " for the real network " + experimentData.bbdd + ", percentage " + experimentData.percentage);
+        }
 
         Dag[] dags = algorithmResultsList.stream().map(a -> a.dag).toArray(Dag[]::new);
-        String lineProbs = calculateProbs(dags, randomBN, experimentData.timeRecalc, experimentData.timeSampled, experimentData.timeUnion, experimentData.originalBNrecalcMarginals, experimentData.sampledBNsMarginals, experimentData.unionBNMarginals);
+        String lineProbs;
+        if (!inference) lineProbs = calculateProbs(dags, randomBN, experimentData.timeRecalc, experimentData.timeSampled, experimentData.timeUnion, experimentData.originalBNrecalcMarginals, experimentData.sampledBNsMarginals, experimentData.unionBNMarginals);
+        else lineProbs = calculateInference(dags, originalBNrecalc, sampledBNs, unionBN, randomBN, experimentData.timeRecalc, experimentData.timeSampled, experimentData.timeUnion);
 
         List<String> lines = new ArrayList<>();
 
@@ -469,22 +488,92 @@ public class ExperimentMinCut {
         }
     }
 
+    public static String calculateInference(Dag[] dags, BayesIm originalBNrecalc, ArrayList<BayesIm> sampledBNs, BayesIm unionBN, RandomBN randomBN, double timeRecalc, double timeSampled, double timeUnion) {
+        DataSet data = randomBN.data;
+
+        // Save DAGs and results
+        BayesIm[] bayesIms = new BayesIm[dags.length];
+        double[] timesLL = new double[dags.length + 3];
+        double[] times = new double[dags.length + 3];
+
+        // Calculate bayesIm and times
+        for (int i = 0; i < dags.length; i++) {
+            Result2 result = calculateBayesIm(dags[i], randomBN);
+            bayesIms[i] = result.bayesIm;
+            times[i+3] = result.time;
+        }
+
+        // Generate the metrics
+        StringBuilder returnString = new StringBuilder(",");
+
+        double timeTemp = System.currentTimeMillis();
+        returnString.append(Experiments.calculateLogLikelihood(originalBNrecalc, data)).append(",");
+        timesLL[0] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+        times[0] = timeRecalc;
+        returnString.append(getBDeuScore(originalBNrecalc.getDag(), data)).append(",");
+
+        double sampledLogLik = 0;
+        double sampledBDeu = 0;
+        timeTemp = System.currentTimeMillis();
+        for (BayesIm sampledBN : sampledBNs) {
+            sampledLogLik += Experiments.calculateLogLikelihood(sampledBN, data);
+            sampledBDeu += getBDeuScore(sampledBN.getDag(), data);
+        }
+        sampledLogLik /= sampledBNs.size();
+        sampledBDeu /= sampledBNs.size();
+        timesLL[1] = ((System.currentTimeMillis() - timeTemp) / 1000.0) / sampledBNs.size();
+        times[1] = timeSampled;
+        returnString.append(sampledLogLik).append(",");
+        returnString.append(sampledBDeu).append(",");
+
+        timeTemp = System.currentTimeMillis();
+        returnString.append(Experiments.calculateLogLikelihood(unionBN, data)).append(",");
+        timesLL[2] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+        times[2] = timeUnion;
+        returnString.append(getBDeuScore(unionBN.getDag(), data)).append(",");
+
+        int i = 3;
+        for (BayesIm bayesIm : bayesIms) {
+            timeTemp = System.currentTimeMillis();
+            returnString.append(Experiments.calculateLogLikelihood(bayesIm, data)).append(",");
+            timesLL[i] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+            returnString.append(getBDeuScore(bayesIm.getDag(), data)).append(",");
+            i++;
+        }
+
+        // Add times of parametric learning
+        for (double time : times) {
+            returnString.append(time).append(",");
+        }
+
+        // Add times for the log likelihood
+        for (double time : timesLL) {
+            returnString.append(time).append(",");
+        }
+
+        // Remove the last comma
+        returnString.deleteCharAt(returnString.length() - 1);
+
+        return returnString.toString();
+    }
+
+
     public static String calculateProbs(Dag[] dags, RandomBN randomBN, double timeRecalc, double timeSampled, double timeUnion, double[][] originalBNrecalcMarginals, ArrayList<double[][]> sampledBNsMarginals, double[][] unionBNMarginals) {
-        // Almacenar los diferentes DAGs y resultados
+        // Save DAGs and results
         double[][][] marginals = new double[dags.length][][];
         double[] times = new double[dags.length];
 
-        // Calcular marginals y tiempos para todos los DAGs
+        // Calculate bayesIm and times
         for (int i = 0; i < dags.length; i++) {
             Result result = calculateMarginals(dags[i], randomBN);
             marginals[i] = result.marginals;
             times[i] = result.time;
         }
 
-        // Generar las métricas
+        // Generate metrics
         StringBuilder returnString = new StringBuilder(",");
 
-        // Listado de todas las matrices de márgenes para cálculo de métricas
+        // Matrix for the marginals of the union graph
         List<double[][]> allMarginalsList = new ArrayList<>(Arrays.asList(marginals));
         allMarginalsList.add(unionBNMarginals);
 
@@ -503,7 +592,7 @@ public class ExperimentMinCut {
         for (double[][] m : allMarginals)
             returnString.append(Experiments.getMeanKLDiff(m, originalBNrecalcMarginals)).append(",");
 
-        // Añadir tiempos
+        // Add times
         returnString.append(timeRecalc).append(",")
                 .append(timeSampled).append(",");
         for (double time : times) {
@@ -531,6 +620,29 @@ public class ExperimentMinCut {
             BayesIm bayesIm = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
             result.time = (System.currentTimeMillis() - start) / 1000.0;
             result.marginals = Experiments.marginals(bayesIm, randomBN.categories, randomBN.nodesDags);
+        } catch (OutOfMemoryError | Exception ex) {
+            System.gc();
+            System.err.println("Array size too large: " + ex.getClass());
+        }
+        return result;
+    }
+
+    static class Result2 {
+        BayesIm bayesIm;
+        double time;
+    }
+
+    private static Result2 calculateBayesIm(Dag dag, RandomBN randomBN) {
+        Result2 result = new Result2();
+        try {
+            double start = System.currentTimeMillis();
+            BayesPm bayesPm = new BayesPm(dag);
+            for (int j = 0; j < bayesPm.getNumNodes(); j++) {
+                bayesPm.setNumCategories(randomBN.nodesDags.get(j), randomBN.categories[j].size());
+                bayesPm.setCategories(randomBN.nodesDags.get(j), randomBN.categories[j]);
+            }
+            result.bayesIm = new EmBayesEstimator(bayesPm, randomBN.data).getEstimatedIm();
+            result.time = (System.currentTimeMillis() - start) / 1000.0;
         } catch (OutOfMemoryError | Exception ex) {
             System.gc();
             System.err.println("Array size too large: " + ex.getClass());
@@ -650,9 +762,36 @@ public class ExperimentMinCut {
             }
         }
 
-        headerProbs.append(",timeRecalc");
+        headerProbs.append(",recalcTimeProbs");
         for (String algo : algorithms) {
             headerProbs.append(",").append(algo).append("TimeProbs");
+        }
+
+        return headerProbs.toString();
+    }
+
+    private static String generateDynamicHeaderInf(List<String> algorithms) {
+        StringBuilder headerProbs = new StringBuilder();
+
+        ArrayList<String> algorithmsTemp = new ArrayList<>();
+        algorithmsTemp.add("recalc");
+        algorithmsTemp.add("sampled");
+        algorithmsTemp.add("union");
+        algorithmsTemp.addAll(algorithms);
+
+        String[] metrics = {"LL", "BDeu"};
+        for (String algo : algorithmsTemp) {
+            for (String metric : metrics) {
+                headerProbs.append(",").append(algo).append(metric);
+            }
+        }
+
+        for (String algo : algorithmsTemp) {
+            headerProbs.append(",").append(algo).append("TimeProbs");
+        }
+
+        for (String algo : algorithmsTemp) {
+            headerProbs.append(",").append(algo).append("TimeLL");
         }
 
         return headerProbs.toString();

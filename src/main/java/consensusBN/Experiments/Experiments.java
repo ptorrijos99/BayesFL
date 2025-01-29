@@ -7,16 +7,15 @@ import consensusBN.Method.Fusion_Method;
 import edu.cmu.tetrad.bayes.*;
 import edu.cmu.tetrad.data.DataSet;
 import edu.cmu.tetrad.graph.*;
+import org.albacete.simd.utils.Problem;
 import org.albacete.simd.utils.Utils;
 import weka.classifiers.bayes.net.BIFReader;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
-import static org.albacete.simd.utils.Utils.readData;
-import static org.albacete.simd.utils.Utils.getTreeWidth;
+import static org.albacete.simd.utils.Utils.*;
 
 
 public class Experiments {
@@ -161,40 +160,6 @@ public class Experiments {
         }
         randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
-
-        /*// Print the dags
-        // Original DAG
-        Dag originalDag = new Dag(randomBN.originalBayesIm.getDag());
-        System.out.println("\nOriginal DAG with " + originalDag.getNumEdges() + " edges:");
-        System.out.println("STATS: ");
-        System.out.println("Treewidth: " + getTreeWidth(originalDag));
-        System.out.println("MaxParents: " + maxParents(originalDag));
-        System.out.println("MeanParents: " + meanParents(originalDag));
-        System.out.println(Utils.graphToDot(randomBN.originalBayesIm.getDag()));
-        // Generated DAGs
-        for (int i = 0; i < dags.size(); i++) {
-            System.out.println("\nDAG " + i + " with " + dags.get(i).getNumEdges() + " edges:");
-            System.out.println("STATS: ");
-            System.out.println("Treewidth: " + getTreeWidth(dags.get(i)));
-            System.out.println("SHD: " + Utils.SHD(originalDag, dags.get(i)));
-            System.out.println("SMHD: " + Utils.SMHD(originalDag, dags.get(i)));
-            System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, dags.get(i)));
-            System.out.println("MaxParents: " + maxParents(dags.get(i)));
-            System.out.println("MeanParents: " + meanParents(dags.get(i)));
-            System.out.println(Utils.graphToDot(dags.get(i)));
-        }
-
-        // Fusion DAG
-        Dag unionDagPrueba = ConsensusUnion.fusionUnion(dags);
-        System.out.println("\nFusion DAG with " + unionDagPrueba.getNumEdges() + " edges:");
-        System.out.println("STATS: ");
-        System.out.println("Treewidth: " + getTreeWidth(unionDagPrueba));
-        System.out.println("SHD: " + Utils.SHD(originalDag, unionDagPrueba));
-        System.out.println("SMHD: " + Utils.SMHD(originalDag, unionDagPrueba));
-        System.out.println("FusSim: " + Utils.fusionSimilarity(originalDag, unionDagPrueba));
-        System.out.println("MaxParents: " + maxParents(unionDagPrueba));
-        System.out.println("MeanParents: " + meanParents(unionDagPrueba));
-        System.out.println(Utils.graphToDot(unionDagPrueba));*/
 
         // Find the treewidth of the union of the dags
         GeneticTreeWidthUnion geneticUnion = new GeneticTreeWidthUnion(dags, seed);
@@ -640,13 +605,65 @@ public class Experiments {
         return marginals;
     }
 
-    public static ArrayList<double[][]> marginals(ArrayList<BayesIm> bns, ArrayList<String>[] categories, ArrayList<Node> orderNodes) {
-        ArrayList<double[][]> margs = new ArrayList<>();
-        for (BayesIm bn : bns) {
-            margs.add(marginals(bn,categories,orderNodes));
+    public static double calculateLogLikelihood(BayesIm bn, DataSet data) {
+        double logLikelihood = 0.0;
+        int numInstances = data.getNumRows();
+
+        for (int d = 0; d < numInstances; d++) {  // Recorrer cada instancia
+            for (Node nodeTemp : bn.getVariables()) {  // Recorrer cada nodo
+                Node node = bn.getNode(nodeTemp.getName());
+                int nodeIndex = bn.getNodeIndex(node);
+
+                // 1. Obtener valor de la variable en esta instancia
+                int x_i = (int) data.getDouble(d, data.getColumn(node));  // Asume valores discretos como enteros
+
+                // 2. Calcular índice de configuración de los padres (k)
+                ArrayList<Integer> parentValues = new ArrayList<>();
+                for (Integer index : bn.getParents(nodeIndex)) {
+                    int indexOnData = data.getColumn(bn.getVariables().get(index));
+                    parentValues.add((int) data.getDouble(d, indexOnData));
+                }
+                int k = bn.getRowIndex(nodeIndex, parentValues.stream().mapToInt(i -> i).toArray());
+
+                // 3. Obtener probabilidad de la CPT
+                double prob = bn.getProbability(nodeIndex, k, x_i);
+
+                logLikelihood += Math.log(prob);
+            }
         }
-        return margs;
+
+        return logLikelihood;
     }
+
+    public static double getBDeuScore(Graph graph, DataSet data) {
+        Problem problem = new Problem(data);
+
+        if (graph == null){
+            return Double.NEGATIVE_INFINITY;
+        }
+        Graph dag = new EdgeListGraph(graph);
+        pdagToDag(dag);
+        HashMap<Node,Integer> hashIndices = problem.getHashIndices();
+
+        double _score = 0;
+
+        for (Node node : problem.getVariables()) {
+            List<Node> x = dag.getParents(node);
+
+            int[] parentIndices = new int[x.size()];
+
+            int count = 0;
+            for (Node parent : x) {
+                parentIndices[count++] = hashIndices.get(parent);
+            }
+
+            final double nodeScore = problem.getBDeu().localScore(hashIndices.get(node), parentIndices);
+
+            _score += nodeScore;
+        }
+        return _score;
+    }
+
 
     /** Returns the mean difference between two marginals.
      *  Example: marg1 = [[0.1, 0.9], [0.1, 0.6, 0.3]], marg2 = [[0.2, 0.8], [0.3, 0.7, 0.0]]

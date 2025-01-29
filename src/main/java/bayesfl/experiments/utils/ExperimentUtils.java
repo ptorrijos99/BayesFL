@@ -35,10 +35,7 @@ import bayesfl.data.BN_DataSet;
 import bayesfl.data.Data;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Edge;
-import edu.cmu.tetrad.graph.Endpoint;
-import edu.cmu.tetrad.graph.Node;
+import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
 import org.albacete.simd.threads.GESThread;
@@ -163,7 +160,7 @@ public class ExperimentUtils {
                 } catch (Exception e) { e.printStackTrace(); }
             }
         }
-        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+        return -1;
     }
 
     public static int calculateSHD(Data data, Dag dag) {
@@ -175,7 +172,7 @@ public class ExperimentUtils {
                 } catch (Exception e) { e.printStackTrace(); }
             }
         }
-        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+        return -1;
     }
 
     public static int calculateFusSim(Data data, Dag dag) {
@@ -187,7 +184,7 @@ public class ExperimentUtils {
                 } catch (Exception e) { e.printStackTrace(); }
             }
         }
-        throw new IllegalArgumentException("The data must be object of the BN_DataSet class");
+        return -1;
     }
 
     /**
@@ -273,6 +270,24 @@ public class ExperimentUtils {
                 if (matrix[i][j] > 0) {
                     Edge edge = new Edge(nodes.get(i), nodes.get(j), Endpoint.TAIL, Endpoint.ARROW);
                     dag.addEdge(edge);
+                }
+            }
+        }
+        return dag;
+    }
+
+    public static Graph readGraphFromMatrix(double[][] matrix, List<Node> nodes) {
+        Graph dag = new EdgeListGraph(nodes);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] > 0) {
+                    if (matrix[j][i] > 0 && i < j) {
+                        Edge edge = new Edge(nodes.get(i), nodes.get(j), Endpoint.TAIL, Endpoint.TAIL);
+                        dag.addEdge(edge);
+                    } else {
+                        Edge edge = new Edge(nodes.get(i), nodes.get(j), Endpoint.TAIL, Endpoint.ARROW);
+                        dag.addEdge(edge);
+                    }
                 }
             }
         }
