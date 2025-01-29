@@ -69,22 +69,25 @@ public class ExperimentMinCut {
         ConsensusUnion.metricAgainstOriginalDAGs = true;
         ConsensusUnion.metricSMHD = true;
 
+        boolean probabilities = false;
+        boolean inference = true;
+
         String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + equivalenceSearch + ".csv";
 
         // Launch the experiment
-        launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, savePath);
+        launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, probabilities, inference, savePath);
     }*/
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "alarm.0";
+        //String net = "alarm.0";
 
         // Generic network (net = number of nodes)
-        //String net = ""+50;
+        String net = ""+10;
 
         verbose = true;
 
-        int nClients = 5;
+        int nClients = 10;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -114,10 +117,11 @@ public class ExperimentMinCut {
         // Check if the file exists
         if (new File(savePath).exists()) {
             System.out.println("File exists: " + savePath);
-            //return;
+            return;
         }
 
         RandomBN randomBN;
+        Dag realDag = null;
         int originalTw = -1;
         boolean realNetwork = net.contains(".");
         // Real network
@@ -137,19 +141,21 @@ public class ExperimentMinCut {
 
             // Generate the DAGs
             randomBN = new RandomBN(bayesianReader, data, seed, nDags, twLimit);
+            randomBN.generate();
 
             // Calculate the treewidth of the original DAG
-            originalTw = getTreeWidth(randomBN.originalBayesIm.getDag());
+            realDag = new Dag(randomBN.originalBayesIm.getDag());
+            originalTw = getTreeWidth(realDag);
         }
         // Synthetic network
         else {
             // Generate the DAGs
             int numNodes = Integer.parseInt(net);
             randomBN = new RandomBN(seed, numNodes, nDags);
+            randomBN.generate();
+            realDag = new Dag(randomBN.setOfRandomDags.get(0));
         }
-        randomBN.generate();
         ArrayList<Dag> dags = randomBN.setOfRandomDags;
-        Dag realDag = new Dag(randomBN.originalBayesIm.getDag());
 
         // Copy of dags
         ArrayList<Dag> dagsCopy = new ArrayList<>();
