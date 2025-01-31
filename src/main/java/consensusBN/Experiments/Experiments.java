@@ -606,61 +606,71 @@ public class Experiments {
     }
 
     public static double calculateLogLikelihood(BayesIm bn, DataSet data) {
+        if (bn == null || data == null) return 0;
         double logLikelihood = 0.0;
-        int numInstances = data.getNumRows();
 
-        for (int d = 0; d < numInstances; d++) {  // Recorrer cada instancia
-            for (Node nodeTemp : bn.getVariables()) {  // Recorrer cada nodo
-                Node node = bn.getNode(nodeTemp.getName());
-                int nodeIndex = bn.getNodeIndex(node);
+        try {
+            int numInstances = data.getNumRows();
 
-                // 1. Obtener valor de la variable en esta instancia
-                int x_i = (int) data.getDouble(d, data.getColumn(node));  // Asume valores discretos como enteros
+            for (int d = 0; d < numInstances; d++) {  // Recorrer cada instancia
+                for (Node nodeTemp : bn.getVariables()) {  // Recorrer cada nodo
+                    Node node = bn.getNode(nodeTemp.getName());
+                    int nodeIndex = bn.getNodeIndex(node);
 
-                // 2. Calcular índice de configuración de los padres (k)
-                ArrayList<Integer> parentValues = new ArrayList<>();
-                for (Integer index : bn.getParents(nodeIndex)) {
-                    int indexOnData = data.getColumn(bn.getVariables().get(index));
-                    parentValues.add((int) data.getDouble(d, indexOnData));
+                    // 1. Obtener valor de la variable en esta instancia
+                    int x_i = (int) data.getDouble(d, data.getColumn(node));  // Asume valores discretos como enteros
+
+                    // 2. Calcular índice de configuración de los padres (k)
+                    ArrayList<Integer> parentValues = new ArrayList<>();
+                    for (Integer index : bn.getParents(nodeIndex)) {
+                        int indexOnData = data.getColumn(bn.getVariables().get(index));
+                        parentValues.add((int) data.getDouble(d, indexOnData));
+                    }
+                    int k = bn.getRowIndex(nodeIndex, parentValues.stream().mapToInt(i -> i).toArray());
+
+                    // 3. Obtener probabilidad de la CPT
+                    double prob = bn.getProbability(nodeIndex, k, x_i);
+
+                    logLikelihood += Math.log(prob);
                 }
-                int k = bn.getRowIndex(nodeIndex, parentValues.stream().mapToInt(i -> i).toArray());
-
-                // 3. Obtener probabilidad de la CPT
-                double prob = bn.getProbability(nodeIndex, k, x_i);
-
-                logLikelihood += Math.log(prob);
             }
+        }
+        catch (Exception e) {
+            System.err.println("Error calculating log-likelihood: " + e.getMessage());
         }
 
         return logLikelihood;
     }
 
     public static double getBDeuScore(Graph graph, DataSet data) {
-        Problem problem = new Problem(data);
-
-        if (graph == null){
-            return Double.NEGATIVE_INFINITY;
-        }
-        Graph dag = new EdgeListGraph(graph);
-        pdagToDag(dag);
-        HashMap<Node,Integer> hashIndices = problem.getHashIndices();
-
+        if (graph == null || data == null) return 0;
         double _score = 0;
 
-        for (Node node : problem.getVariables()) {
-            List<Node> x = dag.getParents(node);
+        try {
+            Problem problem = new Problem(data);
+            Graph dag = new EdgeListGraph(graph);
+            pdagToDag(dag);
+            HashMap<Node, Integer> hashIndices = problem.getHashIndices();
 
-            int[] parentIndices = new int[x.size()];
+            for (Node node : problem.getVariables()) {
+                List<Node> x = dag.getParents(node);
 
-            int count = 0;
-            for (Node parent : x) {
-                parentIndices[count++] = hashIndices.get(parent);
+                int[] parentIndices = new int[x.size()];
+
+                int count = 0;
+                for (Node parent : x) {
+                    parentIndices[count++] = hashIndices.get(parent);
+                }
+
+                final double nodeScore = problem.getBDeu().localScore(hashIndices.get(node), parentIndices);
+
+                _score += nodeScore;
             }
-
-            final double nodeScore = problem.getBDeu().localScore(hashIndices.get(node), parentIndices);
-
-            _score += nodeScore;
         }
+        catch (Exception e) {
+            System.err.println("Error calculating BDeu score: " + e.getMessage());
+        }
+
         return _score;
     }
 

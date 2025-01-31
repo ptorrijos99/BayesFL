@@ -80,14 +80,14 @@ public class ExperimentMinCut {
 
     public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        //String net = "alarm.0";
+        String net = "alarm.0";
 
         // Generic network (net = number of nodes)
-        String net = ""+10;
+        //String net = ""+10;
 
         verbose = true;
 
-        int nClients = 10;
+        int nClients = 30;
         int popSize = 100;
         int nIterations = 100;
         double twLimit = 2;
@@ -297,10 +297,15 @@ public class ExperimentMinCut {
                 System.err.println("UNION GRAPH: Array size too large: " + ex.getClass());
             }
 
-            if (originalBNrecalc != null) originalBNrecalcMarginals = Experiments.marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
-            if (unionBN == null) unionBNMarginals = Experiments.marginals(unionBN, randomBN.categories, randomBN.nodesDags);
-            for (BayesIm sampledBN : sampledBNs) {
-                if (sampledBN != null) sampledBNsMarginals.add(Experiments.marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+            if (probabilities) {
+                if (originalBNrecalc != null)
+                    originalBNrecalcMarginals = Experiments.marginals(originalBNrecalc, randomBN.categories, randomBN.nodesDags);
+                if (unionBN != null)
+                    unionBNMarginals = Experiments.marginals(unionBN, randomBN.categories, randomBN.nodesDags);
+                for (BayesIm sampledBN : sampledBNs) {
+                    if (sampledBN != null)
+                        sampledBNsMarginals.add(Experiments.marginals(sampledBN, randomBN.categories, randomBN.nodesDags));
+                }
             }
 
             for (int i = outputExperimentPercentages.size()-1; i >= 0; i--) {
@@ -509,41 +514,103 @@ public class ExperimentMinCut {
             times[i+3] = result.time;
         }
 
+        double llTemp = 0, bdeuTemp = 0;
+
         // Generate the metrics
         StringBuilder returnString = new StringBuilder(",");
 
         double timeTemp = System.currentTimeMillis();
-        returnString.append(Experiments.calculateLogLikelihood(originalBNrecalc, data)).append(",");
+        try {
+            llTemp = Experiments.calculateLogLikelihood(originalBNrecalc, data);
+        } catch (Exception e) {
+            System.err.println("Error calculating log likelihood of original: " + e.getMessage());
+        }
+        try {
+            bdeuTemp = getBDeuScore(originalBNrecalc.getDag(), data);
+        } catch (Exception e) {
+            System.err.println("Error calculating BDeu Score of original: " + e.getMessage());
+        }
+
         timesLL[0] = (System.currentTimeMillis() - timeTemp) / 1000.0;
         times[0] = timeRecalc;
-        returnString.append(getBDeuScore(originalBNrecalc.getDag(), data)).append(",");
+        returnString.append(llTemp).append(",");
+        returnString.append(bdeuTemp).append(",");
 
-        double sampledLogLik = 0;
-        double sampledBDeu = 0;
+        double sampledLogLik = 0, sampledBDeu = 0;
+        llTemp = 0; bdeuTemp = 0;
+        boolean errorLL = false, errorBDeu = false;
         timeTemp = System.currentTimeMillis();
         for (BayesIm sampledBN : sampledBNs) {
-            sampledLogLik += Experiments.calculateLogLikelihood(sampledBN, data);
-            sampledBDeu += getBDeuScore(sampledBN.getDag(), data);
+            try {
+                llTemp = Experiments.calculateLogLikelihood(sampledBN, data);
+                if (llTemp == 0) throw new Exception("Log likelihood is 0");
+                sampledLogLik += llTemp;
+            } catch (Exception e) {
+                errorLL = true;
+                System.err.println("Error calculating log likelihood of sampled: " + e.getMessage());
+            }
+            try {
+                bdeuTemp = getBDeuScore(sampledBN.getDag(), data);
+                if (bdeuTemp == 0) throw new Exception("BDeu Score is 0");
+                sampledBDeu += bdeuTemp;
+            } catch (Exception e) {
+                errorBDeu = true;
+                System.err.println("Error calculating BDeu Score of sampled: " + e.getMessage());
+            }
         }
-        sampledLogLik /= sampledBNs.size();
-        sampledBDeu /= sampledBNs.size();
-        timesLL[1] = ((System.currentTimeMillis() - timeTemp) / 1000.0) / sampledBNs.size();
+        if (!errorLL & !errorBDeu) timesLL[1] = ((System.currentTimeMillis() - timeTemp) / 1000.0) / sampledBNs.size();
+        else timesLL[1] = -1;
+        if (!errorLL) sampledLogLik /= sampledBNs.size(); else sampledLogLik = 0;
+        if (!errorBDeu) sampledBDeu /= sampledBNs.size(); else sampledBDeu = 0;
         times[1] = timeSampled;
         returnString.append(sampledLogLik).append(",");
         returnString.append(sampledBDeu).append(",");
 
+        llTemp = 0; bdeuTemp = 0;
+        boolean error = false;
         timeTemp = System.currentTimeMillis();
-        returnString.append(Experiments.calculateLogLikelihood(unionBN, data)).append(",");
-        timesLL[2] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+        try {
+            llTemp = Experiments.calculateLogLikelihood(unionBN, data);
+        } catch (Exception e) {
+            error = true;
+            System.err.println("Error calculating log likelihood of union: " + e.getMessage());
+        }
+        try {
+            bdeuTemp = getBDeuScore(unionBN.getDag(), data);
+        } catch (Exception e) {
+            error = true;
+            System.err.println("Error calculating BDeu Score of union: " + e.getMessage());
+        }
+
+        if (!error && llTemp!=0 && bdeuTemp!=0) timesLL[2] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+        else timesLL[2] = -1;
         times[2] = timeUnion;
-        returnString.append(getBDeuScore(unionBN.getDag(), data)).append(",");
+        returnString.append(llTemp).append(",");
+        returnString.append(bdeuTemp).append(",");
 
         int i = 3;
         for (BayesIm bayesIm : bayesIms) {
+            llTemp = 0; bdeuTemp = 0;
+            error = false;
             timeTemp = System.currentTimeMillis();
-            returnString.append(Experiments.calculateLogLikelihood(bayesIm, data)).append(",");
-            timesLL[i] = (System.currentTimeMillis() - timeTemp) / 1000.0;
-            returnString.append(getBDeuScore(bayesIm.getDag(), data)).append(",");
+
+            try {
+                llTemp = Experiments.calculateLogLikelihood(bayesIm, data);
+            } catch (Exception e) {
+                error = true;
+                System.err.println("Error calculating log likelihood of bayesIm: " + e.getMessage());
+            }
+            try {
+                bdeuTemp = getBDeuScore(bayesIm.getDag(), data);
+            } catch (Exception e) {
+                error = true;
+                System.err.println("Error calculating BDeu Score of bayesIm: " + e.getMessage());
+            }
+
+            if (!error && llTemp!=0 && bdeuTemp!=0) timesLL[i] = (System.currentTimeMillis() - timeTemp) / 1000.0;
+            else timesLL[i] = -1;
+            returnString.append(llTemp).append(",");
+            returnString.append(bdeuTemp).append(",");
             i++;
         }
 
