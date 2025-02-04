@@ -613,18 +613,22 @@ public class Experiments {
             int numInstances = data.getNumRows();
 
             for (int d = 0; d < numInstances; d++) {  // Recorrer cada instancia
-                for (Node nodeTemp : bn.getVariables()) {  // Recorrer cada nodo
-                    Node node = bn.getNode(nodeTemp.getName());
+                for (Node node : bn.getVariables()) {  // Recorrer cada nodo
+                    String nodeName = node.getName();
+                    Node nodeData = data.getVariable(nodeName);
                     int nodeIndex = bn.getNodeIndex(node);
+                    int nodeIndexData = data.getColumn(nodeData);
 
                     // 1. Obtener valor de la variable en esta instancia
-                    int x_i = (int) data.getDouble(d, data.getColumn(node));  // Asume valores discretos como enteros
+                    int x_i = (int) data.getDouble(d, nodeIndexData);
 
                     // 2. Calcular índice de configuración de los padres (k)
                     ArrayList<Integer> parentValues = new ArrayList<>();
                     for (Integer index : bn.getParents(nodeIndex)) {
-                        int indexOnData = data.getColumn(bn.getVariables().get(index));
-                        parentValues.add((int) data.getDouble(d, indexOnData));
+                        String parentName = bn.getVariables().get(index).getName();
+                        Node parentData = data.getVariable(parentName);
+                        int parentIndexData = data.getColumn(parentData);
+                        parentValues.add((int) data.getDouble(d, parentIndexData));
                     }
                     int k = bn.getRowIndex(nodeIndex, parentValues.stream().mapToInt(i -> i).toArray());
 
