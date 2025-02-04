@@ -27,6 +27,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -36,7 +37,7 @@ import java.util.*;
  * @author josephramsey
  * @version $Id: $Id
  */
-public final class Dag implements Graph {
+public final class Dag implements Graph, Serializable {
     @Serial
     private static final long serialVersionUID = 23L;
 
