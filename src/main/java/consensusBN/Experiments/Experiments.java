@@ -639,7 +639,9 @@ public class Experiments {
                 }
             }
         }
-        catch (Exception e) {
+        catch (OutOfMemoryError | Exception e) {
+            System.gc();
+            logLikelihood = 0.0;
             System.err.println("Error calculating log-likelihood: " + e.getMessage());
         }
 
@@ -671,7 +673,9 @@ public class Experiments {
                 _score += nodeScore;
             }
         }
-        catch (Exception e) {
+        catch (OutOfMemoryError | Exception e) {
+            System.gc();
+            _score = 0;
             System.err.println("Error calculating BDeu score: " + e.getMessage());
         }
 
