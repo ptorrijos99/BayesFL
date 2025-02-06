@@ -648,12 +648,11 @@ public class Experiments {
         return logLikelihood;
     }
 
-    public static double getBDeuScore(Graph graph, DataSet data) {
-        if (graph == null || data == null) return 0;
+    public static double getBDeuScore(Graph graph, Problem problem) {
+        if (graph == null || problem == null) return 0;
         double _score = 0;
 
         try {
-            Problem problem = new Problem(data);
             Graph dag = new EdgeListGraph(graph);
             pdagToDag(dag);
             HashMap<Node, Integer> hashIndices = problem.getHashIndices();
@@ -680,6 +679,11 @@ public class Experiments {
         }
 
         return _score;
+    }
+
+    public static double getBDeuScore(Graph graph, DataSet data) {
+        Problem problem = new Problem(data);
+        return getBDeuScore(graph, problem);
     }
 
 
