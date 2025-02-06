@@ -11,6 +11,8 @@ public class BESThread extends GESThread {
 
     private static int threadCounter = 1;
 
+    private boolean greedy = false;
+
     /**
      * Constructor of ThFES with an initial DAG
      *
@@ -140,7 +142,19 @@ public class BESThread extends GESThread {
             EdgeSearch[] arrScores = new EdgeSearch[edgesInGraph.size()];
             List<Edge> edges = new ArrayList<>(edgesInGraph);
 
-            Arrays.parallelSetAll(arrScores, e-> scoreEdge(graph, edges.get(e), initialScore));
+            if (this.greedy) {
+                Arrays.parallelSetAll(arrScores, e2-> scoreEdge_greedy(graph, edges.get(e2), initialScore));
+            } else {
+                try {
+                    Arrays.parallelSetAll(arrScores, e-> scoreEdge(graph, edges.get(e), initialScore));
+                } catch (OutOfMemoryError |Exception e) {
+                    System.out.println("Error in complete scoreEdge. Trying greedy option");
+                    System.gc();
+                    this.greedy = true;
+                    Arrays.parallelSetAll(arrScores, e2-> scoreEdge_greedy(graph, edges.get(e2), initialScore));
+                }
+            }
+
 
             List<EdgeSearch> list = Arrays.asList(arrScores);
             EdgeSearch max = Collections.max(list);
@@ -186,6 +200,63 @@ public class BESThread extends GESThread {
         }
         return new EdgeSearch(bestScore, bestSubSet, edge);
     }
+
+    private EdgeSearch scoreEdge_greedy(Graph graph, Edge edge, double initialScore) {
+        Node _x = edge.getNode1();
+        Node _y = edge.getNode2();
+
+        // Asumimos que la arista existe en la red
+        List<Node> tNeighbors = getSubsetOfNeighbors(_x, _y, graph);
+        HashSet<Node> tSubset = new HashSet<>();
+        double deleteScore = initialScore + deleteEval(_x, _y, new HashSet<>(), graph);
+
+        HashSet<Node> naYX = findNaYX(_x, _y, graph);
+        HashSet<Node> naYXTest = new HashSet<>(naYX);
+        naYXTest.removeAll(tSubset);
+
+        // TEST: los nodos restantes deben formar clique
+        if (!isClique(naYXTest, graph)) {
+            return new EdgeSearch(initialScore, tSubset, edge);
+        }
+
+        double greedyScore = deleteScore;
+        int bestNodeIndex;
+        Node bestNode = null;
+
+        do {
+            bestNodeIndex = -1;
+            for (int k = 0; k < tNeighbors.size(); k++) {
+                Node node = tNeighbors.get(k);
+                if (tSubset.contains(node))
+                    continue;
+
+                HashSet<Node> newT = new HashSet<>(tSubset);
+                newT.add(node);
+                double currentScore = initialScore + deleteEval(_x, _y, newT, graph);
+
+                if (currentScore <= greedyScore)
+                    continue;
+
+                HashSet<Node> candidateNaYX = new HashSet<>(naYX);
+                candidateNaYX.removeAll(newT);
+
+                // TEST: los nodos restantes deben formar clique
+                if (!isClique(candidateNaYX, graph))
+                    continue;
+
+                bestNodeIndex = k;
+                bestNode = node;
+                greedyScore = currentScore;
+            }
+            if (bestNodeIndex != -1) {
+                tSubset.add(bestNode);
+                tNeighbors.remove(bestNodeIndex);
+            }
+        } while (bestNodeIndex != -1 && tSubset.size() <= 1);
+
+        return new EdgeSearch(greedyScore, tSubset, edge);
+    }
+
 
     public static List<HashSet<Node>> generatePowerSet2(List<Node> nodes) {
         List<HashSet<Node>> subsets = new ArrayList<>();
