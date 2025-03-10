@@ -102,7 +102,18 @@ public class MinCutTreeWidthUnion {
 
 				List<Node> hNeighbors = GESThread.getHNeighbors(_x, _y, graph);
 
-				List<HashSet<Node>> hSubsets = BESThread.generatePowerSet(hNeighbors);
+				List<HashSet<Node>> hSubsets;
+				try {
+					hSubsets = BESThread.generatePowerSet(hNeighbors);
+				} catch (OutOfMemoryError | Exception e) {
+					System.out.println("Out of memory error when generating power set");
+
+					List<Node> hNeighbors2 = new ArrayList<>(5);
+					for (int i = 0; i < 5; i++) {
+						hNeighbors2.add(hNeighbors.get(i));
+					}
+					hSubsets = BESThread.generatePowerSet(hNeighbors2);
+				}
 
 				/*if (!hNeighbors.isEmpty()) {
 					System.out.println("HNeighbors: " + hNeighbors + ".  HSubsets: " + hSubsets);
@@ -139,13 +150,14 @@ public class MinCutTreeWidthUnion {
 							Map<Node, List<EdgeFordFulkerson>> adjList = fordFulkerson(aux, _y, _x);
 
 							// Obtén el conjunto mínimo de enlaces a eliminar para d-separar
-							Set<EdgeFordFulkerson> minCutEdges = findMinCut(adjList, _y); // Ajusta según sea necesario
+							Set<EdgeFordFulkerson> minCutEdges = findMinCut(adjList, _y);
 							minCut.add(minCutEdges);
 
 							// Suma el tamaño del conjunto mínimo de corte al evalScore
 							evalScore += minCutEdges.size();
 						}
 						evalScore = evalScore / (double) this.setOfInitialDAGs.size();
+						// TODO: USING THIS CACHE MAKES THE ALGORITHM FASTER BUT IT CAN BE INACCURATE
 						this.localCache.put(key, minCut);
 					} else {
 						for (Set<EdgeFordFulkerson> minCutEdges : minCut) {

@@ -84,6 +84,22 @@ public class Utils {
                     Node node1 = g.getNode(neighbor.getName());
                     Node node2 = g.getNode(x.getName());
 
+                    /*// Option 1: orient neighbor -> x
+                    int option1ParentsX = g.getParents(node1).size() + 1;
+                    int option1ParentsNeighbor = g.getParents(node2).size();
+                    int maxOption1 = Math.max(option1ParentsX, option1ParentsNeighbor);
+
+                    // Option 2: orient x -> neighbor
+                    int option2ParentsNeighbor = g.getParents(node2).size() + 1;
+                    int option2ParentsX = g.getParents(node1).size();
+                    int maxOption2 = Math.max(option2ParentsNeighbor, option2ParentsX);
+
+                    if (maxOption1 <= maxOption2) {
+                        g.addDirectedEdge(node2, node1);
+                    } else {
+                        g.addDirectedEdge(node1, node2);
+                    }*/
+
                     g.addDirectedEdge(node1, node2);
                 }
                 p.removeNode(x);
@@ -733,13 +749,30 @@ public class Utils {
                 }
             }
         }
-        return sum / data.getNumRows() / data.getNumColumns();
+        return sum;// / data.getNumRows() / data.getNumColumns();
     }
 
     public static double LL(Dag g, DataSet data) {
-        BayesPm bnaux = new BayesPm(g);
+        BayesPm bnaux = buildBayesPm(data, g);
         MlBayesIm bnOut = new MlBayesIm(bnaux, MlBayesIm.InitializationMethod.MANUAL);
         return LL(bnOut, data);
+    }
+
+    private static BayesPm buildBayesPm(DataSet data, Dag g) {
+        BayesPm bnaux = new BayesPm(g);
+        ArrayList<String>[] categories = new ArrayList[data.getNumColumns()];
+        for (Node node : data.getVariables()) {
+            categories[data.getColumn(node)] = new ArrayList<>(((DiscreteVariable) node).getCategories());
+        }
+        for (int j = 0; j < bnaux.getNumNodes(); j++) {
+            String nodeName = bnaux.getNode(j).getName();
+            Node nodeInData = data.getVariable(nodeName);
+            int indexInData = data.getColumn(nodeInData);
+
+            bnaux.setNumCategories(bnaux.getNode(nodeName), categories[indexInData].size());
+            bnaux.setCategories(bnaux.getNode(nodeName), categories[indexInData]);
+        }
+        return bnaux;
     }
 
     /**
