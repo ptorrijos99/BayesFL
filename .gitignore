@@ -46,8 +46,7 @@ nbactions.xml
 desktop.ini
 
 ### Results folder ###
-results/
-results-2/
+results*/
 
 ### Notebooks folder
 notebooks/
@@ -56,7 +55,7 @@ notebooks/
 baselines/
 
 ### Specific experiment scripts folder
-scripts/
+scripts*/
 
 res/classification/AnDE/Census-Income_(KDD).arff
 src/main/java/consensusBN/Experiments/prueba.java
@@ -64,3 +63,5 @@ src/main/java/consensusBN/Experiments/prueba.java
 res/classification/metadata nIters.csv
 /res/classification/Big
 res/regression/Year_Prediction_MSD.arff
+
+pru*.java
