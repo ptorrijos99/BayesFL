@@ -77,7 +77,7 @@ public class LocalMCTSExperiment {
         String savePath = PATH + "results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
         //if ((!LocalExperiment.checkExistentFile(savePath))) {
-            DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
+            DataSet allData = Utils.readData(PATH + "res/networks/BBDD_old/" + net + "." + bbdd + ".csv");
             ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
