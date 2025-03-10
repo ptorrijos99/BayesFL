@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LocalExperiment {
     public static String PATH = "./";
@@ -61,7 +62,7 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "child";
+        String net = "alarm";
         String algName = "GES";
         String convergence = "Multiple";  // "Multiple" "Score" "Model"
         String fusionClient = "Union";
@@ -77,8 +78,8 @@ public class LocalExperiment {
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, convergence, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
-        String bbdd = "0";
-        int nClients = 100;
+        String bbdd = "-1";
+        int nClients = 10;
 
         String limitC = "-1";
         String limitS = "0.5";
@@ -88,16 +89,29 @@ public class LocalExperiment {
 
 
     public static void launchExperiment(String net, String algName, String convergence, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations) {
-        DataSet allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "." + bbdd + ".csv");
-        int maxEdgesItInt = matchMaxEdgesIt(maxEdgesIt, allData.getNumColumns());
+        DataSet allData = null;
+        ArrayList<DataSet> divisionData = null;
+        int maxEdgesItInt;
+
+        if (!Objects.equals(bbdd, "-1")) {
+            allData = Utils.readData(PATH + "res/networks/BBDD/" + net + "/" + net + "." + bbdd + ".csv");
+            maxEdgesItInt = matchMaxEdgesIt(maxEdgesIt, allData.getNumColumns());
+            System.out.println("Nodes: " + allData.getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
+        } else {
+            divisionData = new ArrayList<>();
+            for (int i = 0; i < nClients; i++) {
+                DataSet data = Utils.readData(PATH + "res/networks/BBDD/" + net + "/" + net + "." + i + ".csv");
+                divisionData.add(data);
+            }
+            maxEdgesItInt = matchMaxEdgesIt(maxEdgesIt, divisionData.get(0).getNumColumns());
+            System.out.println("Nodes: " + divisionData.get(0).getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
+        }
 
         String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + convergence + "," + fusionS + "," + limitS;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        System.out.println("Nodes: " + allData.getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
-
         if ((!checkExistentFile(savePath))) {
-            ArrayList<DataSet> divisionData = BN_DataSet.divideDataSet(allData, nClients);
+            if (!Objects.equals(bbdd, "-1")) divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
 
