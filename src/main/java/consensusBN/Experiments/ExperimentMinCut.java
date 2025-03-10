@@ -33,7 +33,7 @@ public class ExperimentMinCut {
     public static boolean verbose = false;
 
     // TODO: UNCOMMENT THIS LINES
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         int index = Integer.parseInt(args[0]);
         String paramsFileName = args[1];
 
@@ -76,11 +76,11 @@ public class ExperimentMinCut {
 
         // Launch the experiment
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, probabilities, inference, savePath);
-    }*/
+    }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Real network (net = net.bbdd)
-        String net = "sachs.0";
+        String net = "water.0";
 
         // Generic network (net = number of nodes)
         //String net = ""+10;
@@ -104,7 +104,7 @@ public class ExperimentMinCut {
         String savePath = "./results/Server/" + net + "_MinCutTWFusion_" + nClients + "_" + popSize + "_" + nIterations + "_" + seed + "_" + twLimit + "_" + equivalenceSearch + ".csv";
 
         launchExperiment(net, nClients, popSize, nIterations, twLimit, seed, equivalenceSearch, probabilities, inference, savePath);
-    }
+    }*/
 
     public static void launchExperiment(String net, int nDags, int popSize, int nIterations, double twLimit, int seed, boolean equivalenceSearch, boolean probabilities, boolean inference, String savePath) {
         List<String> algorithms = List.of("minCutBES");
