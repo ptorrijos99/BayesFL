@@ -50,18 +50,6 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Datos
-*.csv
-*.npz
-*.pkl
-*.pt
-*.joblib
-*.parquet
-*.json
-*.xlsx
-*.tsv
-*.log
-
 # Carpeta de salidas
 outputs/
 runs/
