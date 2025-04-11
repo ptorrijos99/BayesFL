@@ -32,11 +32,12 @@
 package bayesfl.model;
 
 import bayesfl.experiments.utils.ExperimentUtils;
-import edu.cmu.tetrad.graph.Dag;
-import edu.cmu.tetrad.graph.Graph;
+import edu.cmu.tetrad.graph.*;
 
 import org.albacete.simd.utils.Utils;
 import bayesfl.data.Data;
+
+import java.util.*;
 
 public class BN implements Model {
     
@@ -54,6 +55,52 @@ public class BN implements Model {
 
     public BN(Graph graph) {
         this.dag = new Dag(Utils.removeInconsistencies(graph));
+    }
+
+    /**
+     * Anonymizes variable names in the DAG by replacing them with numerical identifiers
+     * based on lexicographical ordering. This prevents exposing sensitive variable names
+     * when exchanging graph structures between participants.
+     */
+    public void anonymizeVariables() {
+        Dag originalDag = this.dag;
+
+        // Collect all variable names and sort lexicographically
+        List<String> variableNames = new ArrayList<>();
+        for (Node node : originalDag.getNodes()) {
+            variableNames.add(node.getName());
+        }
+        Collections.sort(variableNames);
+
+        // Create mapping from original name to anonymized identifier
+        Map<String, String> nameToAnonMap = new HashMap<>();
+        for (int i = 0; i < variableNames.size(); i++) {
+            nameToAnonMap.put(variableNames.get(i), String.valueOf(i));
+        }
+
+        // Create new anonymized DAG
+        Dag anonDag = new Dag();
+
+        // Add anonymized nodes
+        for (String originalName : variableNames) {
+            Node anonNode = new GraphNode(nameToAnonMap.get(originalName));
+            anonDag.addNode(anonNode);
+        }
+
+        // Rebuild edges with anonymized nodes
+        for (Edge edge : originalDag.getEdges()) {
+            Node origNode1 = edge.getNode1();
+            Node origNode2 = edge.getNode2();
+
+            Node anonNode1 = anonDag.getNode(nameToAnonMap.get(origNode1.getName()));
+            Node anonNode2 = anonDag.getNode(nameToAnonMap.get(origNode2.getName()));
+
+            Edge anonEdge = new Edge(anonNode1, anonNode2, edge.getEndpoint1(), edge.getEndpoint2());
+            anonDag.addEdge(anonEdge);
+        }
+
+        // Update the DAG in this BN instance
+        this.dag = anonDag;
     }
 
     @Override
