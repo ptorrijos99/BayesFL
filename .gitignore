@@ -45,6 +45,36 @@ nbactions.xml
 .idea/vcs.xml
 desktop.ini
 
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Datos
+*.csv
+*.npz
+*.pkl
+*.pt
+*.joblib
+*.parquet
+*.json
+*.xlsx
+*.tsv
+*.log
+
+# Carpeta de salidas
+outputs/
+runs/
+logs/
+checkpoints/
+experiments/
+tmp/
+*.tmp
+
+# Archivos ocultos o temporales
+*.swp
+*~
+
 ### Results folder ###
 results*/
 
@@ -65,3 +95,5 @@ res/classification/metadata nIters.csv
 res/regression/Year_Prediction_MSD.arff
 
 pru*.java
+
+
