@@ -30,84 +30,89 @@ package bayesfl.algorithms;
 /**
  * Third-party imports.
  */
-
-import bayesfl.data.Data;
-import bayesfl.model.Model;
-import bayesfl.model.PT;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
-import weka.filters.AllFilter;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Discretize;
 
 /**
- * A class representing a WEKA Naive Bayes algorithm.
+ * Local application imports.
  */
-public class PT_NB implements LocalAlgorithm {
+import bayesfl.model.Bins;
+import bayesfl.data.Data;
+import bayesfl.model.Model;
+
+/**
+ * A class representing an unsupervised discretization algorithm.
+ */
+public class Bins_Unsupervised implements LocalAlgorithm {
 
     /**
-     * The classifier.
+     * The options for the discretization method.
      */
-    private final FilteredClassifier classifier;
+    private String[] options;
+
+    /**
+     * The discretization method.
+     */
+    private Discretize discretizer;
+
+    /**
+     * The name of the algorithm.
+     */
+    private String algorithmName = "Bins_Unsupervised";
+
+    /**
+     * The name of the refinement method.
+     */
+    private String refinement = "None";
 
     /**
      * Constructor.
      */
-    public PT_NB() {
-        this(null);
-    }
+    public Bins_Unsupervised(String[] options) {
+        this.options = options.clone();
+        this.discretizer = new Discretize();
 
-    /**
-     * Constructor.
-     *
-     * @param cutPoints The cut points of the discretization filter.
-     */
-    public PT_NB(double[][] cutPoints) {
-        NaiveBayes algorithm = new NaiveBayes();
-
-        Filter filter;
-        if (cutPoints != null) {
-            // Set the discretization filter if cut points are provided
-            filter = new Dummy();
-            Dummy discretizer = (Dummy) filter;
-            discretizer.setCutPoints(cutPoints);
+        try {
+            this.discretizer.setOptions(this.options);
         }
-
-        else {
-            // Set a bypass filter to skip the discretization
-            filter = new AllFilter();
+        catch (Exception e) {
+            e.printStackTrace();
         }
-
-        this.classifier = new FilteredClassifier();
-        this.classifier.setFilter(filter);
-        this.classifier.setClassifier(algorithm);
     }
 
     /**
      * Builds a local model using the provided data.
-     *
-     * @param data The data to build the model from.
+     * 
+     * @param data The data to use.
      * @return The built local model.
      */
     public Model buildLocalModel(Data data) {
         Instances instances = (Instances) data.getData();
 
         try {
-            this.classifier.buildClassifier(instances);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
+            this.discretizer.setInputFormat(instances);
+            Filter.useFilter(instances, this.discretizer);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        NaiveBayes clas = ((NaiveBayes)this.classifier.getClassifier());
+        // Substract the class attribute from the number of attributes
+        int numAttributes = instances.numAttributes() - 1;
+        double[][] cutPoints = new double[numAttributes][];
+    
+        for (int i = 0; i < numAttributes; i++) {
+            // Get the cut points for each attribute
+            cutPoints[i] = this.discretizer.getCutPoints(i);
+        }
 
-        return new PT(clas.getClassEstimator(), clas.getConditionalEstimators(), this.classifier);
+        return new Bins(cutPoints);
     }
 
     /**
-     * Builds a local model using the provided data and existing local model. Not used in this case (one-shot model).
-     *
-     * @param localModel The previous local model.
+     * Builds a local model using the provided data and existing local model.
+     * 
+     * @param localModel The existing local model.
      * @param data The data to build the model from.
      * @return The built local model.
      */
@@ -127,28 +132,26 @@ public class PT_NB implements LocalAlgorithm {
         return localModel;
     }
 
-    /**
-     * Retrieves the classifier.
-     */
-    public FilteredClassifier getClassifier() {
-        return this.classifier;
-    }
-
     /** 
      * Retrieves the name of the algorithm.
      *
      * @return The name of the algorithm.
      */
     public String getAlgorithmName() {
-        return "None";
+        // Get the discretization strategy and the number of bins
+        boolean flag = this.discretizer.getUseEqualFrequency();
+        String strategy = flag ? "F" : "W";
+        int bins = this.discretizer.getBins();
+
+        return this.algorithmName + "_" + strategy + "_" + bins;
     }
 
-    /** 
+    /**
      * Retrieves the name of the refinement.
      *
      * @return The name of the refinement.
      */
     public String getRefinementName() {
-        return "None";
+        return this.refinement;
     }
 }

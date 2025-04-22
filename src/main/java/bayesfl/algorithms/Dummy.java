@@ -23,38 +23,41 @@
  */
 
 /**
- * Package containing fusion methods models with federated Bayesian networks.
+ * Package containing algorithms related with federated Bayesian networks.
  */
-package bayesfl.fusion;
+package bayesfl.algorithms;
 
 /**
- * Local application imports.
+ * Third party imports.
  */
-import bayesfl.model.Model;
+import weka.filters.unsupervised.attribute.Discretize;
 
 /**
- * A class representing a fusion method for naive Bayes in the client.
+ * A dummy class to set the cut points of the discretization filter.
  */
-public class PT_Fusion_Client implements Fusion {
+public class Dummy extends Discretize {
 
     /**
-     * Perform the fusion of two models. This method is unused and throws an exception if called.
-     * 
-     * @param model1 The first model to fuse.
-     * @param model2 The second model to fuse.
-     * @return The global model fused.
+     * Auxiliar variable to store the cut points.
      */
-    public Model fusion(Model model1, Model model2) {
-        throw new UnsupportedOperationException("Method not implemented");
+    private double[][] cutPoints;
+
+    /**
+     * Generate the cutpoints for each attribute.
+     * In this case, it does nothing because the cut points are set manually.
+     */
+    protected void calculateCutPoints() {
+        this.m_CutPoints = this.cutPoints;
     }
 
     /**
-     * Fusion of an array of models. This method is unused and throws an exception if called.
-     * 
-     * @param models The array of models to fuse.
-     * @return The global model fused.
+     * Set the cut points.
+     *
+     * @param cutPoints The cut points to set.
      */
-    public Model fusion(Model[] models) {
-        throw new UnsupportedOperationException("Method not implemented");
+    public void setCutPoints(double[][] cutPoints) {
+        // We cannot set the cut points directly because they
+        // are somewhere reset before building the classifier
+        this.cutPoints = cutPoints;
     }
 }

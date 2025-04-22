@@ -28,36 +28,68 @@
 package bayesfl.model;
 
 /**
+ * Third-party imports.
+ */
+import DataStructure.wdBayesParametersTree;
+import EBNC.wdBayes;
+import weka.classifiers.meta.FilteredClassifier;
+import weka.core.Instances;
+
+/**
  * Local application imports.
  */
 import bayesfl.data.Data;
+import bayesfl.data.Weka_Instances;
+import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
+import static bayesfl.experiments.utils.ExperimentUtils.saveExperiment;
 
 /**
- * A class representing a discretization model.
+ * A class representing a parameters tree model.
  */
-public class Bins implements Model {
+public class WDPT implements Model {
 
     /**
-     * The cut points.
+     * The tree-based parameter storage.
      */
-    private double[][] cutPoints;
+    private wdBayesParametersTree tree;
+
+    /**
+     * The classifier.
+     */
+    private FilteredClassifier classifier;
+
+    /**
+     * The header for the file.
+     */
+    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor.
-     * 
-     * @param points The cut points.
+     *
+     * @param tree The tree-based parameter storage.
+     * @param classifier The classifier.
      */
-    public Bins(double[][] cutPoints) {
-        this.cutPoints = cutPoints;
+    public WDPT(wdBayesParametersTree tree, FilteredClassifier classifier) {
+        this.tree = tree;
+        this.classifier = classifier;
     }
 
     /**
-     * Gets the model. In this case, the model is the cut points.
+     * Gets the model. In this case, the model is the tree-based parameter storage.
      * 
      * @return The model.
      */
-    public double[][] getModel() {
-        return this.cutPoints;
+    public wdBayesParametersTree getModel() {
+        return this.tree;
+    }
+
+    /**
+     * Gets the classifier.
+     * 
+     * @return The classifier.
+     */
+    public FilteredClassifier getClassifier() {
+        return this.classifier;
     }
 
     /**
@@ -71,7 +103,7 @@ public class Bins implements Model {
     }
 
     /**
-     * Saves the statistics of the model. This method is unused and throws an exception if called.
+     * Saves the statistics of the model.
      * 
      * @param operation The operation.
      * @param epoch The epoch.
@@ -81,10 +113,33 @@ public class Bins implements Model {
      * @param data The data.
      * @param iteration The iteration.
      * @param time The time.
-     * @throws UnsupportedOperationException If the method is called.
      */
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
-        throw new UnsupportedOperationException("Method not implemented");
+        Weka_Instances weka = (Weka_Instances) data;
+        Instances train = weka.getTrain();
+        Instances test = weka.getTest();
+
+        String statistics = "";
+        String metrics;
+
+        String bbdd = data.getName();
+        int instances = train.numInstances();
+        statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + ",";
+
+        wdBayes algorithm = (wdBayes) this.classifier.getClassifier();
+        int maxIterations = algorithm.getM_MaxIterations();
+        statistics += maxIterations + ",";
+
+        metrics = getClassificationMetrics(this.classifier, train);
+        statistics += metrics;
+
+        metrics = getClassificationMetrics(this.classifier, test);
+        statistics += metrics;
+
+        statistics += time + "\n";
+
+        String output = "results/ " + epoch + "/" + path;
+        saveExperiment(output, header, statistics);
     }
 
     /**

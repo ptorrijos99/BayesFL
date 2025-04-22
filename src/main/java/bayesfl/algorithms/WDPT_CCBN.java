@@ -24,7 +24,7 @@
 
 /**
  * Package containing algorithms related with federated Bayesian networks.
-*/
+ */
 package bayesfl.algorithms;
 
 /**
@@ -39,49 +39,18 @@ import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.filters.AllFilter;
 import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Discretize;
 
 /**
  * Local application imports.
  */
 import bayesfl.data.Data;
 import bayesfl.model.Model;
-import bayesfl.model.PT;
+import bayesfl.model.WDPT;
 
 /**
- * A class representing a wdBayes Naive Bayes algorithm.
+ * A class representing a class-conditional Bayesian network algorithm.
  */
-public class PT_CCBN implements LocalAlgorithm {
-
-    /**
-     * A dummy class to set the cut points of the discretization filter.
-     */
-    protected static class Dummy extends Discretize {
-
-        /**
-         * Auxiliar variable to store the cut points.
-         */
-        private double[][] cutPoints;
-
-        /**
-         * Generate the cutpoints for each attribute.
-         * In this case, it does nothing because the cut points are set manually.
-         */
-        protected void calculateCutPoints() {
-            this.m_CutPoints = this.cutPoints;
-        }
-
-        /**
-         * Set the cut points.
-         *
-         * @param cutPoints The cut points to set.
-         */
-        public void setCutPoints(double[][] cutPoints) {
-            // We cannot set the cut points directly because they
-            // are somewhere reset before building the classifier
-            this.cutPoints = cutPoints;
-        }
-    }
+public class WDPT_CCBN implements LocalAlgorithm {
 
     /**
      * The filter method.
@@ -99,9 +68,14 @@ public class PT_CCBN implements LocalAlgorithm {
     private FilteredClassifier classifier;
 
     /**
-     * The tree.
+     * The tree-based parameter storage.
      */
-    public wdBayesParametersTree tree;
+    private wdBayesParametersTree tree;
+
+    /**
+     * The maximum number of iterations.
+     */
+	private int maxIterations;
 
     /**
      * The minimization algorithm.
@@ -114,41 +88,27 @@ public class PT_CCBN implements LocalAlgorithm {
     private ObjectiveFunction function;
 
     /**
-     * The maximum number of iterations.
-     */
-	private int maxIterations;
-
-    /**
      * The maximum gradient norm.
      */
-    private final double maxGradientNorm = 0.000000000000000000000000000000001;
+    private double maxGradientNorm = 0.00000000000000000000000000000001;
 
     /**
      * The name of the algorithm.
      */
-    private String algorithmName = "None";
+    private String algorithmName = "WDBN_CCBN";
 
     /**
      * The name of the refinement method.
      */
-    private String refinement = "None";
+    private String refinementName = "None";
 
     /**
      * Constructor.
-     * 
-     * @param options The options to set the parameters of the algorithm.
-     */
-    public PT_CCBN(String[] options) {
-        this(options, null);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param options The options to set the parameters of the algorithm.
+     *
      * @param cutPoints The cut points of the discretization filter.
+     * @param options The options to set the parameters of the algorithm.
      */
-    public PT_CCBN(String[] options, double[][] cutPoints) {
+    public WDPT_CCBN(String[] options, double[][] cutPoints) {
         // Copy the options to avoid modifying the original array
         options = options.clone();
 
@@ -157,10 +117,8 @@ public class PT_CCBN implements LocalAlgorithm {
             // since the constructor doesn't permit setting them
             this.algorithm = new wdBayes();
             this.algorithm.setOptions(options);
-        }
-
-        catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // Get the number of iterations from the algorithm
@@ -177,16 +135,15 @@ public class PT_CCBN implements LocalAlgorithm {
             this.filter = new Dummy();
             Dummy discretizer = (Dummy) this.filter;
             discretizer.setCutPoints(cutPoints);
-        }
-
-        else {
+        } else {
             // Set a bypass filter to skip the discretization
             this.filter = new AllFilter();
         }
 
+        // Set the algorithm and filter to the classifier
         this.classifier = new FilteredClassifier();
         this.classifier.setFilter(this.filter);
-        this.classifier.setClassifier(this.algorithm);   
+        this.classifier.setClassifier(this.algorithm);
     }
 
     /**
@@ -196,23 +153,22 @@ public class PT_CCBN implements LocalAlgorithm {
      * @return The built local model.
      */
     public Model buildLocalModel(Data data) {
+        // Get the instances from the data
         Instances instances = (Instances) data.getData();
 
         try {
+            // Build the classifier using the instances
             this.classifier.buildClassifier(instances);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        // Store the tree's parameters and the objective function because
+        // Save the tree-based storage and the objective function because
         // they are needed to build the local model from the global model
-        this.tree = this.algorithm.dParameters_;
+        this.tree = this.algorithm.getdParameters_();
         this.function = this.algorithm.getObjectiveFunction();
 
-        double[] parameters = this.tree.getParameters();
-
-        return new PT(parameters, this.classifier);
+        return new WDPT(this.tree, this.classifier);
     }
 
     /**
@@ -228,22 +184,19 @@ public class PT_CCBN implements LocalAlgorithm {
             return this.buildLocalModel(data);
         }
 
-        PT model = (PT) localModel;
-        double[] parameters = model.getModel();
+        WDPT model = (WDPT) localModel;
+        wdBayesParametersTree tree = model.getModel();
+        double[] parameters = tree.getParameters();
 
         try {
             // Note that the parameters provided to the optimization function are not modified,
             // they are internally copied to the tree and these are the ones that are optimized
             this.minimizer.run(this.function, parameters);
-        }
-
-        catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
 
-        parameters = this.tree.getParameters();
-
-        return new PT(parameters, this.classifier);
+        return new WDPT(this.tree, this.classifier);
     }
 
     /**
@@ -280,6 +233,6 @@ public class PT_CCBN implements LocalAlgorithm {
      * @return The name of the refinement.
      */
     public String getRefinementName() {
-        return this.refinement;
+        return this.refinementName;
     }
 }
