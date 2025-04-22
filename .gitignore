@@ -55,9 +55,14 @@ outputs/
 runs/
 logs/
 checkpoints/
-experiments/
 tmp/
 *.tmp
+
+# Ignore root-level experiments folder
+/experiments/
+
+# But don't ignore experiments folders elsewhere
+!**/experiments/
 
 # Archivos ocultos o temporales
 *.swp
