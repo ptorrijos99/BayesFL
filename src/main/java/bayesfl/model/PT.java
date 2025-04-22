@@ -30,41 +30,30 @@ package bayesfl.model;
 /**
  * Third-party imports.
  */
-import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Classifier;
-import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.estimators.Estimator;
-import EBNC.wdBayes;
 
 /**
  * Local application imports.
  */
-import bayesfl.experiments.utils.ExperimentUtils;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
-
+import static bayesfl.experiments.utils.ExperimentUtils.saveExperiment;
 
 /**
- * A class representing class-conditional Bayesian networks.
+ * A class representing naive Bayes.
  */
 public class PT implements Model {
 
     /**
-     * The model parameters. Used in wdBayes (NBw, NBb and NBe algorithms).
-     */
-    private double[] parameters;
-
-    /**
-     * The class distribution. Used in WEKA NaiveBayes.
+     * The class distribution.
      */
     private Estimator m_ClassDistribution;
 
     /**
-     * The distributions of the variables. Used in WEKA NaiveBayes.
+     * The distributions of the variables.
      */
     private Estimator[][] m_Distributions;
 
@@ -79,18 +68,7 @@ public class PT implements Model {
     private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
-     * Constructor. wdBayes.
-     *
-     * @param parameters The parameters of the model.
-     * @param classifier The classifier.
-     */
-    public PT(double[] parameters, FilteredClassifier classifier) {
-        this.parameters = parameters;
-        this.classifier = classifier;
-    }
-
-    /**
-     * Constructor. WEKA NaiveBayes.
+     * Constructor
      *
      * @param m_ClassDistribution The class distribution.
      * @param m_Distributions The distributions of the variables.
@@ -103,16 +81,17 @@ public class PT implements Model {
     }
 
     /**
-     * Gets the model.
+     * Gets the model. This method is unused and throws an exception if called.
      * 
      * @return The model.
      */
-    public double[] getModel() {
-        return this.parameters;
+    public Object getModel() {
+        throw new UnsupportedOperationException("Method not implemented");
     }
 
     /**
      * Gets the class distribution.
+     *
      * @return The class distribution.
      */
     public Estimator getM_ClassDistribution() {
@@ -121,6 +100,7 @@ public class PT implements Model {
 
     /**
      * Gets the distributions of the variables.
+     *
      * @return The distributions of the variables.
      */
     public Estimator[][] getM_Distributions() {
@@ -161,8 +141,6 @@ public class PT implements Model {
         Instances train = weka.getTrain();
         Instances test = weka.getTest();
 
-        Classifier classifier = this.classifier.getClassifier();
-
         String statistics = "";
         String metrics;
 
@@ -171,10 +149,7 @@ public class PT implements Model {
         statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + ",";
 
         int maxIterations = 0;
-        if (classifier instanceof wdBayes) {
-            maxIterations = ((wdBayes) classifier).getM_MaxIterations();
-        }
-        statistics +=  + maxIterations + ",";
+        statistics += maxIterations + ",";
 
         metrics = getClassificationMetrics(this.classifier, train);
         statistics += metrics;
@@ -184,7 +159,7 @@ public class PT implements Model {
 
         statistics += time + "\n";
 
-        ExperimentUtils.saveExperiment("results/" + epoch + "/" + path, header, statistics);
+        saveExperiment("results/" + epoch + "/" + path, header, statistics);
     }
 
 

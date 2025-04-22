@@ -28,41 +28,24 @@
 package bayesfl.fusion;
 
 /**
- * Third-party imports.
- */
-import EBNC.wdBayes;
-import weka.classifiers.meta.FilteredClassifier;
-
-/**
  * Local application imports.
  */
 import bayesfl.model.Model;
-import bayesfl.model.PT;
 
 /**
- * A class representing a fusion method for class-conditional Bayesian networks in the client.
+ * A class representing a fusion method for naive Bayes in the client.
  */
 public class PT_Fusion_Client implements Fusion {
 
     /**
-     * Perform the fusion of two models.
+     * Perform the fusion of two models. This method is unused and throws an exception if called.
      * 
      * @param model1 The first model to fuse.
      * @param model2 The second model to fuse.
      * @return The global model fused.
      */
     public Model fusion(Model model1, Model model2) {
-        // Get the classifier from the client and the parameters from the server
-        PT client = (PT) model1;
-        PT server = (PT) model2;
-        FilteredClassifier classifier = client.getClassifier();
-        double[] parameters = server.getModel();
-
-        // Copy the parameters from the server to the client before building the model
-        wdBayes algorithm = (wdBayes) classifier.getClassifier();
-        algorithm.dParameters_.copyParameters(parameters);
-
-        return new PT(parameters, classifier);
+        throw new UnsupportedOperationException("Method not implemented");
     }
 
     /**

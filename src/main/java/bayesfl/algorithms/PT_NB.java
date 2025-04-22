@@ -68,8 +68,8 @@ public class PT_NB implements LocalAlgorithm {
         Filter filter;
         if (cutPoints != null) {
             // Set the discretization filter if cut points are provided
-            filter = new PT_CCBN.Dummy();
-            PT_CCBN.Dummy discretizer = (PT_CCBN.Dummy) filter;
+            filter = new Dummy();
+            Dummy discretizer = (Dummy) filter;
             discretizer.setCutPoints(cutPoints);
         }
 

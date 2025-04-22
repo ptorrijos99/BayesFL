@@ -70,10 +70,26 @@
         <dependency>
             <groupId>com.github.alfaro96</groupId>
             <artifactId>EBNC</artifactId>
-            <version>c2a3e9e23c</version>
+            <version>d467827</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.eclipse.recommenders</groupId>
+            <artifactId>jayes</artifactId>
+            <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht</artifactId>
+            <version>1.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.unknown</groupId>
+            <artifactId>jniwrapper</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 

@@ -33,7 +33,7 @@ package bayesfl.model;
 import bayesfl.data.Data;
 
 /**
- * A class representing a discrezation model.
+ * A class representing a discretization model.
  */
 public class Bins implements Model {
 

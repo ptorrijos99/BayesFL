@@ -28,22 +28,24 @@
 package bayesfl.fusion;
 
 /**
- * Third-party imports.
+ * Standard imports.
  */
-import org.apache.commons.math3.util.MathArrays;
+import java.util.ArrayList;
 
 /**
- * Local application imports.
+ * Third-party imports.
  */
-import bayesfl.model.Model;
-import bayesfl.model.PT;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.estimators.DiscreteEstimator;
 
-import java.util.ArrayList;
+/**
+ * Local application imports.
+ */
+import bayesfl.model.Model;
+import bayesfl.model.PT;
 
 class DummyNB extends NaiveBayes {
     public void setDistributions(DiscreteEstimator[][] m_Distributions) {
@@ -66,7 +68,7 @@ class DummyNB extends NaiveBayes {
 }
 
 /**
- * A class representing a fusion method for class-conditional Bayesian networks in the server.
+ * A class representing a fusion method for naive Bayes in the server.
  */
 public class PT_Fusion_Server implements Fusion {
 
@@ -94,67 +96,46 @@ public class PT_Fusion_Server implements Fusion {
         // to avoid modifying the original first model
         PT model = (PT) models[0];
 
-        // WEKA NaiveBayes
-        if (model.getModel() == null) {
-            int numAtts = model.getM_Distributions().length;
-            int numClasses = model.getM_Distributions()[0].length;
+        int numAtts = model.getM_Distributions().length;
+        int numClasses = model.getM_Distributions()[0].length;
 
-            // Initialize the distributions
-            DiscreteEstimator m_ClassDistribution = new DiscreteEstimator(numClasses, true);
-            DiscreteEstimator[][] m_Distributions = new DiscreteEstimator[numAtts][numClasses];
+        // Initialize the distributions
+        DiscreteEstimator m_ClassDistribution = new DiscreteEstimator(numClasses, true);
+        DiscreteEstimator[][] m_Distributions = new DiscreteEstimator[numAtts][numClasses];
 
-            for (int i = 0; i < numAtts; i++) {
-                for (int j = 0; j < numClasses; j++) {
-                    int numSymbols = ((DiscreteEstimator) model.getM_Distributions()[i][j]).getNumSymbols();
-                    m_Distributions[i][j] = new DiscreteEstimator(numSymbols, true);
-                }
+        for (int i = 0; i < numAtts; i++) {
+            for (int j = 0; j < numClasses; j++) {
+                int numSymbols = ((DiscreteEstimator) model.getM_Distributions()[i][j]).getNumSymbols();
+                m_Distributions[i][j] = new DiscreteEstimator(numSymbols, true);
             }
+        }
 
-            for (Model value : models) {
-                model = (PT) value;
-                try {
-                    // Add the class distribution of all the clients
-                    DiscreteEstimator classDist = (DiscreteEstimator) model.getM_ClassDistribution();
-                    m_ClassDistribution.aggregate(classDist);
+        for (Model value : models) {
+            model = (PT) value;
+            try {
+                // Add the class distribution of all the clients
+                DiscreteEstimator classDist = (DiscreteEstimator) model.getM_ClassDistribution();
+                m_ClassDistribution.aggregate(classDist);
 
-                    // Add each var distribution of all the clients
-                    for (int j = 0; j < numAtts; j++) {
-                        for (int k = 0; k < numClasses; k++) {
-                            m_Distributions[j][k].aggregate((DiscreteEstimator) model.getM_Distributions()[j][k]);
-                        }
+                // Add each var distribution of all the clients
+                for (int j = 0; j < numAtts; j++) {
+                    for (int k = 0; k < numClasses; k++) {
+                        m_Distributions[j][k].aggregate((DiscreteEstimator) model.getM_Distributions()[j][k]);
                     }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-
-            DummyNB naiveBayes = new DummyNB();
-            naiveBayes.setDistributions(m_Distributions);
-            naiveBayes.setClassDistribution(m_ClassDistribution);
-
-            FilteredClassifier naiveBayesFC = new FilteredClassifier();
-            naiveBayesFC.setClassifier(naiveBayes);
-            naiveBayesFC.setFilter(model.getClassifier().getFilter());
-
-            return new PT(m_ClassDistribution, m_Distributions, naiveBayesFC);
         }
-        // wdBayes (NBw, NBb and NBe algorithms)
-        else {
-            int length = model.getModel().length;
-            double[] global = new double[length];
 
-            for (Model value : models) {
-                // Add the local parameters to the global parameters
-                model = (PT) value;
-                double[] local = model.getModel();
-                global = MathArrays.ebeAdd(global, local);
-            }
+        DummyNB naiveBayes = new DummyNB();
+        naiveBayes.setDistributions(m_Distributions);
+        naiveBayes.setClassDistribution(m_ClassDistribution);
 
-            // Compute the mean of the parameters
-            double val = 1.0 / models.length;
-            global = MathArrays.scale(val, global);
+        FilteredClassifier naiveBayesFC = new FilteredClassifier();
+        naiveBayesFC.setClassifier(naiveBayes);
+        naiveBayesFC.setFilter(model.getClassifier().getFilter());
 
-            return new PT(global, null);
-        }
+        return new PT(m_ClassDistribution, m_Distributions, naiveBayesFC);
     }
 }
