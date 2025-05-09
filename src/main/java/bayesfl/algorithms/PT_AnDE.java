@@ -34,53 +34,52 @@ package bayesfl.algorithms;
 import bayesfl.data.Data;
 import bayesfl.model.Model;
 import bayesfl.model.PT;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.filters.AllFilter;
 import weka.filters.Filter;
 
+import java.util.*;
+
+import static org.albacete.simd.utils.Utils.*;
+
 /**
- * A class representing a WEKA Naive Bayes algorithm.
+ * A class representing a WEKA AnDE algorithm (Naive Bayes is included as n=0).
  */
-public class PT_NB implements LocalAlgorithm {
+public class PT_AnDE implements LocalAlgorithm {
 
     /**
      * The classifier.
      */
-    private final FilteredClassifier classifier;
+    private ArrayList<AbstractClassifier> ensemble;
 
     /**
-     * Constructor.
+     * The cut points of the discretization filter.
      */
-    public PT_NB() {
-        this(null);
-    }
+    private final double[][] cutPoints;
+
+    /**
+     * The n of AnDE. 0 means Naive Bayes, 1 means A1DE, 2 means A2DE, etc
+     */
+    private final int nAnDE;
+
+    /**
+     * Global class maps for synthetic classes.
+     */
+    private final List<Map<String, Integer>> globalClassMaps;
 
     /**
      * Constructor.
      *
      * @param cutPoints The cut points of the discretization filter.
+     * @param nAnDE The n of AnDE. 0 means Naive Bayes, 1 means A1DE, 2 means A2DE, etc.
      */
-    public PT_NB(double[][] cutPoints) {
-        NaiveBayes algorithm = new NaiveBayes();
-
-        Filter filter;
-        if (cutPoints != null) {
-            // Set the discretization filter if cut points are provided
-            filter = new Dummy();
-            Dummy discretizer = (Dummy) filter;
-            discretizer.setCutPoints(cutPoints);
-        }
-
-        else {
-            // Set a bypass filter to skip the discretization
-            filter = new AllFilter();
-        }
-
-        this.classifier = new FilteredClassifier();
-        this.classifier.setFilter(filter);
-        this.classifier.setClassifier(algorithm);
+    public PT_AnDE(double[][] cutPoints, int nAnDE, List<Map<String, Integer>> globalClassMaps) {
+        this.nAnDE = nAnDE;
+        this.cutPoints = cutPoints;
+        this.globalClassMaps = globalClassMaps;
     }
 
     /**
@@ -90,18 +89,46 @@ public class PT_NB implements LocalAlgorithm {
      * @return The built local model.
      */
     public Model buildLocalModel(Data data) {
-        Instances instances = (Instances) data.getData();
+        Instances originalData = (Instances) data.getData();
+        int nAttributes = originalData.numAttributes() - 1; // excluding class
 
-        try {
-            this.classifier.buildClassifier(instances);
+        // Generate combinations of attributes
+        List<int[]> combinations = generateCombinations(nAttributes, nAnDE);
+        List<Map<String, Integer>> syntheticClassMaps = new ArrayList<>();
+        this.ensemble = new ArrayList<>();
+
+        for (int i = 0; i < combinations.size(); i++) {
+            int[] indices = combinations.get(i);
+            Map<String, Integer> classMap = globalClassMaps.get(i);
+            Instances modified = redefineClassAttribute(originalData, indices, classMap);
+
+            // Create a new classifier for the modified data
+            NaiveBayes nb = new NaiveBayes();
+            FilteredClassifier fc = new FilteredClassifier();
+            fc.setClassifier(nb);
+
+            Filter filter;
+            if (cutPoints != null) {
+                // Set the discretization filter if cut points are provided
+                filter = new Dummy();
+                ((Dummy) filter).setCutPoints(cutPoints);
+            } else {
+                // Set a bypass filter to skip the discretization
+                filter = new AllFilter();
+            }
+            fc.setFilter(filter);
+
+            try {
+                fc.buildClassifier(modified);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            this.ensemble.add(fc);
+            syntheticClassMaps.add(classMap);
         }
-        catch (Exception exception) {
-            exception.printStackTrace();
-        }
 
-        NaiveBayes clas = ((NaiveBayes)this.classifier.getClassifier());
-
-        return new PT(clas.getClassEstimator(), clas.getConditionalEstimators(), this.classifier);
+        return new PT(this.ensemble, combinations, syntheticClassMaps);
     }
 
     /**
@@ -130,8 +157,8 @@ public class PT_NB implements LocalAlgorithm {
     /**
      * Retrieves the classifier.
      */
-    public FilteredClassifier getClassifier() {
-        return this.classifier;
+    public ArrayList<AbstractClassifier> getClassifier() {
+        return this.ensemble;
     }
 
     /** 

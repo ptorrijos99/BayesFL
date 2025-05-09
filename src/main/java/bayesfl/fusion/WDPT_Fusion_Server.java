@@ -32,6 +32,8 @@ import DataStructure.wdBayesNode;
  * Third-party imports.
  */
 import DataStructure.wdBayesParametersTree;
+import objectiveFunction.ObjectiveFunction;
+import optimize.Minimizer;
 import org.apache.commons.math3.util.MathArrays;
 
 /**
@@ -39,6 +41,12 @@ import org.apache.commons.math3.util.MathArrays;
  */
 import bayesfl.model.Model;
 import bayesfl.model.WDPT;
+import weka.classifiers.AbstractClassifier;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A class representing a fusion method for class-conditional Bayesian networks in the server.
@@ -65,7 +73,7 @@ public class WDPT_Fusion_Server implements Fusion {
     /** Constructor.
      * 
      * @param fuseParameters Whether to fuse the parameters or not.
-     * @param fuseCounts Whether to fuse the probabilities or not.
+     * @param fuseProbabilities Whether to fuse the probabilities or not.
      */
     public WDPT_Fusion_Server(boolean fuseParameters, boolean fuseProbabilities) {
         this.fuseParameters = fuseParameters;
@@ -80,9 +88,7 @@ public class WDPT_Fusion_Server implements Fusion {
      * @return The global model fused.
      */
     public Model fusion(Model model1, Model model2) {
-        Model[] models = {model1, model2};
-
-        return fusion(models);
+        return fusion(new Model[]{model1, model2});
     }
 
     /**
@@ -100,19 +106,32 @@ public class WDPT_Fusion_Server implements Fusion {
     public Model fusion(Model[] models) {
         // Use the first model in the array as the starting point for fusion.
         // This assumes that all models have the same structure.
-        WDPT globalModel = (WDPT) models[0];
+        WDPT reference = (WDPT) models[0];
 
-        if (fuseParameters) {
-            // If fusing parameters, fuse flat parameter vectors
-            this.fuseParameters(globalModel, models);
+        List<wdBayesParametersTree> fusedTrees = new ArrayList<>();
+        List<AbstractClassifier> classifiers = reference.getClassifiers();
+        List<Minimizer> minimizers = reference.getMinimizers();
+        List<int[]> combinations = reference.getCombinations();
+        List<Map<String, Integer>> classMaps = reference.getSyntheticClassMaps();
+        List<ObjectiveFunction> functions = reference.getFunctions();
+
+        int nTrees = reference.getTrees().size();
+
+        for (int t = 0; t < nTrees; t++) {
+            wdBayesParametersTree fused = reference.getTrees().get(t);
+
+            if (fuseParameters) {
+                this.fuseParameters(fused, models, t);
+            }
+
+            if (fuseProbabilities) {
+                this.fuseProbabilities(fused, models, t);
+            }
+
+            fusedTrees.add(fused);
         }
 
-        if (fuseProbabilities) {
-            // If fusing probabilities, average logarithm probabilities
-            this.fuseProbabilities(globalModel, models);
-        }
-
-        return globalModel;
+        return new WDPT(fusedTrees, classifiers, minimizers, combinations, classMaps, functions);
     }
 
     /**
@@ -123,19 +142,19 @@ public class WDPT_Fusion_Server implements Fusion {
      * which represents all the logarithm probability weights used by the classifier. This method
      * aggregates them across all clients and sets the result into the global model.
      *
-     * @param globalModel The global {@link WDPT} model to store the fused parameters.
+     * @param globalTree The global {@link wdBayesParametersTree} to store the fused parameters.
      * @param models The array of {@link WDPT} local models to be fused.
+     * @param index Index of the tree to be fused (one per combination).
      */
-    private void fuseParameters(WDPT globalModel, Model[] models) {
+    private void fuseParameters(wdBayesParametersTree globalTree, Model[] models, int index) {
         // Initialize an empty vector to accumulate parameter sums
-        wdBayesParametersTree globalTree = globalModel.getModel();
         int length = globalTree.getParameters().length;
         double[] globalParameters = new double[length];
 
         // Sum all parameter vectors from local models element-wise
         for (Model model : models) {
             WDPT localModel = (WDPT) model;
-            wdBayesParametersTree localTree = localModel.getModel();
+            wdBayesParametersTree localTree = localModel.getTrees().get(index);
             double[] localParameters = localTree.getParameters();
 
             // Add local parameters to the global accumulator
@@ -160,37 +179,33 @@ public class WDPT_Fusion_Server implements Fusion {
      * the same structure and that the probabilities are in linear scale.
      * </p>
      *
-     * @param globalModel The global {@link WDPT} model that will store the fused probabilities.
+     * @param globalTree The global {@link wdBayesParametersTree} that will store the fused probabilities.
      * @param models The array of {@link WDPT} local models to be fused.
+     * @param index Index of the tree to be fused (one per combination).
      */
-    private void fuseProbabilities(WDPT globalModel, Model[] models) {
-        // Access the parameter tree of the global model
-        wdBayesParametersTree globalTree = globalModel.getModel();
-        int numAttributes = globalTree.getNAttributes(); // Number of attributes
-        int nc = globalTree.getNc(); // Number of class values
+    private void fuseProbabilities(wdBayesParametersTree  globalTree, Model[] models, int index) {
+        // Access number of attributes and classes
+        int numAttributes = globalTree.getNAttributes();
+        int nc = globalTree.getNc();
 
-        // Traverse all attributes in the model
+        // Fuse each attribute's conditional distributions
         for (int u = 0; u < numAttributes; u++) {
-            // Get the root node for attribute in the global model
             wdBayesNode globalNode = globalTree.wdBayesNode_[u];
-
-            // Collect the corresponding root nodes from each local model
             wdBayesNode[] localNodes = new wdBayesNode[models.length];
+
+            // Collect corresponding nodes from all local models
             for (int i = 0; i < models.length; i++) {
                 WDPT localModel = (WDPT) models[i];
-                wdBayesParametersTree localTree = localModel.getModel();
+                wdBayesParametersTree localTree = localModel.getTrees().get(index);
                 localNodes[i] = localTree.wdBayesNode_[u];
             }
 
-            // Get the number of values for this attribute (used for indexing)
             int paramsPerAttVal = globalNode.paramsPerAttVal;
-
-            // Recursively fuse the conditional probabilities in the trie
             fuseNodeProbabilities(globalNode, localNodes, nc, paramsPerAttVal);
         }
 
         // Fuse and normalize the class prior probabilities
-        fuseClassProbabilities(globalModel, models);
+        fuseClassProbabilities(globalTree, models, index);
     }
 
     /**
@@ -207,27 +222,24 @@ public class WDPT_Fusion_Server implements Fusion {
      * ensuring a coherent and valid global prior distribution.
      * </p>
      *
-     * @param globalModel The global {@link WDPT} model to store the fused class probabilities.
+     * @param globalTree The global {@link wdBayesParametersTree} to store the fused class probabilities.
      * @param models The array of {@link WDPT} local models to be fused.
+     * @param index Index of the tree to be fused (one per combination).
      */
-    private void fuseClassProbabilities(WDPT globalModel, Model[] models) {
-        // Access the global model's parameter tree
-        wdBayesParametersTree globalTree = globalModel.getModel();
+    private void fuseClassProbabilities(wdBayesParametersTree globalTree, Model[] models, int index) {
+        // Access the global model's classCounts array length
         int length = globalTree.getClassCounts().length;
-
-        // Initialize an array to accumulate summed class probabilities
         double[] globalClassProbs = new double[length];
 
         // Sum the class probability vectors from all models
         for (Model model : models) {
             WDPT localModel = (WDPT) model;
-            wdBayesParametersTree localTree = localModel.getModel();
+            wdBayesParametersTree localTree = localModel.getTrees().get(index);
             double[] localClassProbs = localTree.getClassCounts(); // Assumed to be probabilities
-
             globalClassProbs = MathArrays.ebeAdd(globalClassProbs, localClassProbs);
         }
 
-        // Average the probabilities
+        // Compute the average of the summed probabilities
         double val = 1.0 / models.length;
         globalClassProbs = MathArrays.scale(val, globalClassProbs);
 

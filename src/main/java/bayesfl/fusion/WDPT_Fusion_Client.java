@@ -27,15 +27,18 @@
  */
 package bayesfl.fusion;
 
-import java.io.PrintStream;
-import java.util.Arrays;
-
 /**
  * Third-party imports.
  */
 import DataStructure.wdBayesNode;
 import DataStructure.wdBayesParametersTree;
-import weka.classifiers.meta.FilteredClassifier;
+import objectiveFunction.ObjectiveFunction;
+import optimize.Minimizer;
+import weka.classifiers.AbstractClassifier;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Local application imports.
@@ -48,18 +51,20 @@ import bayesfl.model.WDPT;
  */
 public class WDPT_Fusion_Client implements Fusion {
 
-    /*
-     * 
+    /**
+     * Whether to fuse the parameters or not.
      */
-    private boolean fuseParameters;
-
-    /*
-     * 
-     */
-    private boolean fuseProbabilities;
+    private final boolean fuseParameters;
 
     /**
-     * 
+     * Whether to fuse the probabilities or not.
+     */
+    private final boolean fuseProbabilities;
+
+    /** Constructor.
+     *
+     * @param fuseParameters Whether to fuse the parameters or not.
+     * @param fuseProbabilities Whether to fuse the probabilities or not.
      */
     public WDPT_Fusion_Client(boolean fuseParameters, boolean fuseProbabilities) {
         this.fuseParameters = fuseParameters;
@@ -74,23 +79,37 @@ public class WDPT_Fusion_Client implements Fusion {
      * @return The global model fused.
      */
     public Model fusion(Model model1, Model model2) {
-        // Get the required data structures from the client and the model from the server
-        WDPT clientModel = (WDPT) model1;
-        WDPT serverModel = (WDPT) model2;
-        wdBayesParametersTree clientTree = clientModel.getModel();
-        FilteredClassifier clientClassifier = clientModel.getClassifier();
-        wdBayesParametersTree serverTree = serverModel.getModel();
-        double[] serverParameters = serverTree.getParameters();
+        WDPT local = (WDPT) model1;
+        WDPT global = (WDPT) model2;
 
-        if (fuseProbabilities) {
-            copyLogProbsFromTree(serverTree, clientTree);
+        List<wdBayesParametersTree> fusedTrees = new ArrayList<>();
+        List<AbstractClassifier> classifiers = local.getClassifiers();  // Reuse local classifiers
+        List<Minimizer> minimizers = local.getMinimizers();
+        List<int[]> combinations = local.getCombinations();
+        List<Map<String, Integer>> classMaps = local.getSyntheticClassMaps();
+        List<ObjectiveFunction> functions = local.getFunctions();
+
+        List<wdBayesParametersTree> localTrees = local.getTrees();
+        List<wdBayesParametersTree> globalTrees = global.getTrees();
+
+        for (int i = 0; i < localTrees.size(); i++) {
+            wdBayesParametersTree localTree = localTrees.get(i);
+            wdBayesParametersTree globalTree = globalTrees.get(i);
+
+            // Fuse parameters if enabled
+            if (fuseParameters) {
+                localTree.copyParameters(globalTree.getParameters());
+            }
+
+            // Fuse log-probabilities (structure and node-wise) if enabled
+            if (fuseProbabilities) {
+                copyLogProbsFromTree(globalTree, localTree);
+            }
+
+            fusedTrees.add(localTree);  // trees are now updated in place
         }
 
-        if (fuseParameters) {
-            clientTree.copyParameters(serverParameters);
-        }
-
-        return new WDPT(clientTree, clientClassifier);
+        return new WDPT(fusedTrees, classifiers, minimizers, combinations, classMaps, functions);
     }
 
     /**
@@ -119,7 +138,7 @@ public class WDPT_Fusion_Client implements Fusion {
         System.arraycopy(source.classCounts, 0, target.classCounts, 0, source.classCounts.length);
 
         // Traverse and copy each attribute's trie
-         int numAttributes = source.getNAttributes();
+        int numAttributes = source.getNAttributes();
 
         for (int u = 0; u < numAttributes; u++) {
             wdBayesNode sourceNode = source.wdBayesNode_[u];
