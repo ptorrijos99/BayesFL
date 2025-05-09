@@ -30,17 +30,19 @@ package bayesfl.model;
 /**
  * Third-party imports.
  */
-import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.AbstractClassifier;
 import weka.core.Instances;
-import weka.estimators.Estimator;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Local application imports.
  */
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
-import static bayesfl.experiments.utils.ExperimentUtils.saveExperiment;
+
+import static bayesfl.experiments.utils.ExperimentUtils.*;
 
 /**
  * A class representing naive Bayes.
@@ -48,80 +50,64 @@ import static bayesfl.experiments.utils.ExperimentUtils.saveExperiment;
 public class PT implements Model {
 
     /**
-     * The class distribution.
+     * The list of classifiers (can be only one, for example for Naive Bayes).
      */
-    private Estimator m_ClassDistribution;
+    public List<AbstractClassifier> ensemble;
 
     /**
-     * The distributions of the variables.
+     * The list of generated indexes used for AnDE with n>0.
      */
-    private Estimator[][] m_Distributions;
+    public List<int[]> combinations;
 
     /**
-     * The classifier.
+     * The list of generated classes used for AnDE with n>0.
      */
-    private FilteredClassifier classifier;
+    public final List<Map<String, Integer>> syntheticClassMaps;
+
 
     /**
      * The header for the file.
      */
-    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor
      *
-     * @param m_ClassDistribution The class distribution.
-     * @param m_Distributions The distributions of the variables.
-     * @param classifier The classifier.
+     * @param ensemble The list of classifiers (can be only one, for example for Naive Bayes).
+     * @param combinations The list of generated classes used for AnDE with n>0.
      */
-    public PT(Estimator m_ClassDistribution, Estimator[][] m_Distributions, FilteredClassifier classifier) {
-        this.m_ClassDistribution = m_ClassDistribution;
-        this.m_Distributions = m_Distributions;
-        this.classifier = classifier;
+    public PT(List<AbstractClassifier> ensemble, List<int[]> combinations, List<Map<String, Integer>> syntheticClassMaps) {
+        this.ensemble = ensemble;
+        this.combinations = combinations;
+        this.syntheticClassMaps = syntheticClassMaps;
     }
 
     /**
-     * Gets the model. This method is unused and throws an exception if called.
+     * Gets the model.
      * 
      * @return The model.
      */
     public Object getModel() {
-        throw new UnsupportedOperationException("Method not implemented");
+        return this.ensemble;
     }
 
     /**
-     * Gets the class distribution.
-     *
-     * @return The class distribution.
-     */
-    public Estimator getM_ClassDistribution() {
-        return this.m_ClassDistribution;
-    }
-
-    /**
-     * Gets the distributions of the variables.
-     *
-     * @return The distributions of the variables.
-     */
-    public Estimator[][] getM_Distributions() {
-        return this.m_Distributions;
-    }
-
-    /**
-     * Gets the classifier.
-     */
-    public FilteredClassifier getClassifier() {
-        return this.classifier;
-    }
-
-    /**
-     * Sets the model. This method is unused and throws an exception if called.
+     * Sets the model.
      * 
      * @param model The model.
-     * @throws UnsupportedOperationException If the method is called.
      */
     public void setModel(Object model) {
-        throw new UnsupportedOperationException("Method not implemented");
+        if (model instanceof List) {
+            // Check if the model is a list of classifiers
+            for (Object obj : (List<?>) model) {
+                if (!(obj instanceof AbstractClassifier)) {
+                    throw new UnsupportedOperationException("Model must be a list of classifiers");
+                }
+            }
+            this.ensemble = (List<AbstractClassifier>) model;
+        } else {
+            throw new UnsupportedOperationException("Model must be a list of classifiers");
+        }
     }
 
     /**
@@ -151,17 +137,16 @@ public class PT implements Model {
         int maxIterations = 0;
         statistics += maxIterations + ",";
 
-        metrics = getClassificationMetrics(this.classifier, train);
+        metrics = getClassificationMetricsEnsemble(ensemble, syntheticClassMaps, train);
         statistics += metrics;
 
-        metrics = getClassificationMetrics(this.classifier, test);
+        metrics = getClassificationMetricsEnsemble(ensemble, syntheticClassMaps, test);
         statistics += metrics;
 
         statistics += time + "\n";
 
         saveExperiment("results/" + epoch + "/" + path, header, statistics);
     }
-
 
     /**
      * Get the score of the model. This method is unused and throws an exception if called.

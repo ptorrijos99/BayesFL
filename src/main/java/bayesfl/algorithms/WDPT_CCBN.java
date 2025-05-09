@@ -35,10 +35,14 @@ import EBNC.wdBayes;
 import objectiveFunction.ObjectiveFunction;
 import optimize.Minimizer;
 import optimize.StopConditions;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
+import weka.core.Utils;
 import weka.filters.AllFilter;
 import weka.filters.Filter;
+
+import java.util.*;
 
 /**
  * Local application imports.
@@ -47,45 +51,13 @@ import bayesfl.data.Data;
 import bayesfl.model.Model;
 import bayesfl.model.WDPT;
 
+import static org.albacete.simd.utils.Utils.*;
+
+
 /**
  * A class representing a class-conditional Bayesian network algorithm.
  */
 public class WDPT_CCBN implements LocalAlgorithm {
-
-    /**
-     * The filter method.
-     */
-    private Filter filter;
-
-    /**
-     * The algorithm to use.
-     */
-    private wdBayes algorithm;
-
-    /**
-     * The classifier.
-     */
-    private FilteredClassifier classifier;
-
-    /**
-     * The tree-based parameter storage.
-     */
-    private wdBayesParametersTree tree;
-
-    /**
-     * The maximum number of iterations.
-     */
-	private int maxIterations;
-
-    /**
-     * The minimization algorithm.
-     */
-    private Minimizer minimizer;
-
-    /**
-     * The objective function.
-     */
-    private ObjectiveFunction function;
 
     /**
      * The maximum gradient norm.
@@ -103,47 +75,50 @@ public class WDPT_CCBN implements LocalAlgorithm {
     private String refinementName = "None";
 
     /**
+     * The n of AnDE. 0 means Naive Bayes, 1 means A1DE, 2 means A2DE, etc.
+     */
+    private int nAnDE = 0;
+
+    /**
+     * The maximum number of iterations.
+     */
+    private int maxIterations;
+
+    /**
+     * The cut points of the discretization filter.
+     */
+    private final double[][] cutPoints;
+
+    /**
+     * The options to set the parameters of the algorithm.
+     */
+    private final String[] options;
+
+    /**
+     * Global class maps for synthetic classes.
+     */
+    private final List<Map<String, Integer>> globalClassMaps;
+
+    /**
      * Constructor.
      *
-     * @param cutPoints The cut points of the discretization filter.
-     * @param options The options to set the parameters of the algorithm.
+     * @param options      The options to set the parameters of the algorithm.
+     * @param cutPoints    The cut points of the discretization filter.
      */
-    public WDPT_CCBN(String[] options, double[][] cutPoints) {
+    public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps) {
+        this.cutPoints = cutPoints;
+        this.options = Arrays.copyOf(options, options.length);
+        this.globalClassMaps = globalClassMaps;
+
         // Copy the options to avoid modifying the original array
-        options = options.clone();
-
         try {
-            // Set the algorithm's hyperparameters using options
-            // since the constructor doesn't permit setting them
-            this.algorithm = new wdBayes();
-            this.algorithm.setOptions(options);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Get the number of iterations from the algorithm
-        this.maxIterations = this.algorithm.getM_MaxIterations();
-
-        // Initialize the minimizer for the posterior parameter estimation
-        this.minimizer = new Minimizer();
-        StopConditions sc = minimizer.getStopConditions();
-        sc.setMaxGradientNorm(this.maxGradientNorm);
-        sc.setMaxIterations(this.maxIterations);
-
-        if (cutPoints != null) {
-            // Set the discretization filter if cut points are provided
-            this.filter = new Dummy();
-            Dummy discretizer = (Dummy) this.filter;
-            discretizer.setCutPoints(cutPoints);
-        } else {
-            // Set a bypass filter to skip the discretization
-            this.filter = new AllFilter();
-        }
-
-        // Set the algorithm and filter to the classifier
-        this.classifier = new FilteredClassifier();
-        this.classifier.setFilter(this.filter);
-        this.classifier.setClassifier(this.algorithm);
+            String structure = Utils.getOption("S", this.options);
+            if (structure.startsWith("A") && structure.endsWith("DE")) {
+                nAnDE = Integer.parseInt(structure.substring(1, structure.length() - 2));
+            }
+            // The internal wdBayes structure is always NB
+            setInternalStructureToNB();
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -154,21 +129,69 @@ public class WDPT_CCBN implements LocalAlgorithm {
      */
     public Model buildLocalModel(Data data) {
         // Get the instances from the data
-        Instances instances = (Instances) data.getData();
+        Instances originalData = (Instances) data.getData();
+        int nAttributes = originalData.numAttributes() - 1; // excluding class
 
-        try {
+        // Generate combinations of attributes (n-AnDE structure)
+        List<int[]> combinations = generateCombinations(nAttributes, nAnDE);
+        List<wdBayesParametersTree> trees = new ArrayList<>();
+        List<AbstractClassifier> classifiers = new ArrayList<>();
+        List<Minimizer> minimizers = new ArrayList<>();
+        List<ObjectiveFunction> functions = new ArrayList<>();
+        List<Map<String, Integer>> syntheticClassMaps = new ArrayList<>();
+
+        for (int i = 0; i < combinations.size(); i++) {
+            int[] indices = combinations.get(i);
+            Map<String, Integer> classMap = globalClassMaps.get(i);
+            Instances modified = redefineClassAttribute(originalData, indices, classMap);
+            //Instances completed = ensureAllClassValuesPresent(modified, classMap);
+
             // Build the classifier using the instances
-            this.classifier.buildClassifier(instances);
-        } catch (Exception e) {
-            e.printStackTrace();
+            wdBayes algorithm = new wdBayes();
+            try {
+                algorithm.setOptions(Arrays.copyOf(options, options.length));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Get the number of iterations from the algorithm
+            this.maxIterations = algorithm.getM_MaxIterations();
+
+            // Initialize the minimizer for the posterior parameter estimation
+            Minimizer minimizer = new Minimizer();
+            StopConditions sc = minimizer.getStopConditions();
+            sc.setMaxGradientNorm(this.maxGradientNorm);
+            sc.setMaxIterations(this.maxIterations);
+            minimizers.add(minimizer);
+
+            FilteredClassifier classifier = new FilteredClassifier();
+            classifier.setClassifier(algorithm);
+
+            // Set the discretization filter
+            Filter filter;
+            if (cutPoints != null) {
+                filter = new Dummy();
+                ((Dummy) filter).setCutPoints(cutPoints);
+            } else {
+                filter = new AllFilter(); // Bypass discretization
+            }
+            classifier.setFilter(filter);
+
+            try {
+                classifier.buildClassifier(modified);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Save the tree-based storage and the objective function because
+            // they are needed to build the local model from the global model
+            trees.add(algorithm.getdParameters_());
+            functions.add(algorithm.getObjectiveFunction());
+            classifiers.add(classifier);
+            syntheticClassMaps.add(classMap);
         }
 
-        // Save the tree-based storage and the objective function because
-        // they are needed to build the local model from the global model
-        this.tree = this.algorithm.getdParameters_();
-        this.function = this.algorithm.getObjectiveFunction();
-
-        return new WDPT(this.tree, this.classifier);
+        return new WDPT(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions);
     }
 
     /**
@@ -184,19 +207,33 @@ public class WDPT_CCBN implements LocalAlgorithm {
             return this.buildLocalModel(data);
         }
 
-        WDPT model = (WDPT) localModel;
-        wdBayesParametersTree tree = model.getModel();
-        double[] parameters = tree.getParameters();
+        // Retrieve trees, classifiers, and objective functions from the previous model
+        WDPT previous = (WDPT) localModel;
+        List<wdBayesParametersTree> oldTrees = previous.getTrees();
+        List<AbstractClassifier> classifiers = previous.getClassifiers();
+        List<Minimizer> minimizers = previous.getMinimizers();
+        List<ObjectiveFunction> functions = previous.getFunctions();
+        List<int[]> combinations = previous.getCombinations();
+        List<Map<String, Integer>> classMaps = previous.getSyntheticClassMaps();
 
-        try {
-            // Note that the parameters provided to the optimization function are not modified,
-            // they are internally copied to the tree and these are the ones that are optimized
-            this.minimizer.run(this.function, parameters);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        List<wdBayesParametersTree> newTrees = new ArrayList<>();
+
+        // Optimize each tree individually using its objective function
+        for (int i = 0; i < oldTrees.size(); i++) {
+            wdBayesParametersTree tree = oldTrees.get(i);
+            double[] parameters = tree.getParameters();
+            try {
+                minimizers.get(i).run(functions.get(i), parameters);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Reuse the tree reference, since it has been updated internally
+            newTrees.add(tree);
         }
 
-        return new WDPT(this.tree, this.classifier);
+        // Return a new model instance with updated parameters
+        return new WDPT(newTrees, classifiers, minimizers, combinations, classMaps, functions);
     }
 
     /**
@@ -212,11 +249,34 @@ public class WDPT_CCBN implements LocalAlgorithm {
     }
 
     /**
-     * Retrieves the classifier.
+     * Ensures that the structure option (-S) is set to "NB" in the options array.
+     * <p>
+     * If the -S flag is already present, replaces its associated value with "NB".
+     * If not present, inserts "-S" and "NB" into the first pair of empty positions.
+     * </p>
      */
-    public FilteredClassifier getClassifier() {
-        return this.classifier;
+    private void setInternalStructureToNB() {
+        int pos = -1;
+        for (int i = 0; i < this.options.length; i++) {
+            if ("-S".equals(this.options[i])) {
+                pos = i;
+                break;
+            }
+        }
+
+        if (pos != -1 && pos + 1 < this.options.length) {
+            this.options[pos + 1] = "NB";
+        } else {
+            for (int i = 0; i < this.options.length - 1; i++) {
+                if (this.options[i].isEmpty() && this.options[i + 1].isEmpty()) {
+                    this.options[i] = "-S";
+                    this.options[i + 1] = "NB";
+                    break;
+                }
+            }
+        }
     }
+
 
     /** 
      * Retrieves the name of the algorithm.

@@ -32,6 +32,9 @@ package bayesfl.model;
  */
 import DataStructure.wdBayesParametersTree;
 import EBNC.wdBayes;
+import objectiveFunction.ObjectiveFunction;
+import optimize.Minimizer;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 
@@ -40,56 +43,137 @@ import weka.core.Instances;
  */
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
-import static bayesfl.experiments.utils.ExperimentUtils.saveExperiment;
+
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Filter;
+
+import static bayesfl.experiments.utils.ExperimentUtils.*;
 
 /**
- * A class representing a parameters tree model.
+ * A class representing a federated AnDE-style discriminative model.
+ * This model stores a list of parameter trees and classifiers,
+ * one for each combination used in the AnDE structure (n=0 is Naive Bayes).
  */
 public class WDPT implements Model {
 
     /**
-     * The tree-based parameter storage.
+     * The list of tree-based parameter storages (one per combination).
      */
-    private wdBayesParametersTree tree;
+    private final List<wdBayesParametersTree> trees;
 
     /**
-     * The classifier.
+     * The list of classifiers (AbstractClassifier wrapping wdBayes).
      */
-    private FilteredClassifier classifier;
+    private final List<AbstractClassifier> classifiers;
+
+    /**
+     * The list of minimizers used for local parameter optimization.
+     */
+    private final List<Minimizer> minimizers;
+
+    /**
+     * The list of attribute index combinations used to generate synthetic classes.
+     */
+    private final List<int[]> combinations;
+
+    /**
+     * The list of synthetic class mappings, one per combination.
+     */
+    private final List<Map<String, Integer>> syntheticClassMaps;
+
+    /**
+     * The list of objective functions used for local parameter optimization.
+     */
+    private final List<ObjectiveFunction> functions;
 
     /**
      * The header for the file.
      */
-    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private final String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor.
      *
-     * @param tree The tree-based parameter storage.
-     * @param classifier The classifier.
+     * @param trees The list of parameter trees.
+     * @param classifiers The list of classifiers.
+     * @param minimizers The list of minimizers.
+     * @param combinations The list of attribute combinations.
+     * @param syntheticClassMaps The synthetic class mappings.
+     * @param functions The list of objective functions.
      */
-    public WDPT(wdBayesParametersTree tree, FilteredClassifier classifier) {
-        this.tree = tree;
-        this.classifier = classifier;
+    public WDPT(List<wdBayesParametersTree> trees, List<AbstractClassifier> classifiers, List<Minimizer> minimizers,
+                List<int[]> combinations, List<Map<String, Integer>> syntheticClassMaps, List<ObjectiveFunction> functions) {
+        this.trees = trees;
+        this.classifiers = classifiers;
+        this.minimizers = minimizers;
+        this.combinations = combinations;
+        this.syntheticClassMaps = syntheticClassMaps;
+        this.functions = functions;
     }
 
     /**
-     * Gets the model. In this case, the model is the tree-based parameter storage.
-     * 
+     * Gets the list of parameter trees.
+     *
+     * @return The list of parameter trees.
+     */
+    public List<wdBayesParametersTree> getTrees() {
+        return trees;
+    }
+
+    /**
+     * Gets the list of classifiers.
+     *
+     * @return The list of classifiers.
+     */
+    public List<AbstractClassifier> getClassifiers() {
+        return classifiers;
+    }
+
+    /**
+     * Gets the list of minimizers.
+     *
+     * @return The list of minimizers.
+     */
+    public List<Minimizer> getMinimizers() {
+        return minimizers;
+    }
+
+    /**
+     * Gets the list of attribute combinations.
+     *
+     * @return The list of combinations.
+     */
+    public List<int[]> getCombinations() {
+        return combinations;
+    }
+
+    /**
+     * Gets the list of synthetic class maps.
+     *
+     * @return The list of class maps.
+     */
+    public List<Map<String, Integer>> getSyntheticClassMaps() {
+        return syntheticClassMaps;
+    }
+
+    /**
+     * Gets the list of objective functions.
+     *
+     * @return The list of functions.
+     */
+    public List<ObjectiveFunction> getFunctions() {
+        return functions;
+    }
+
+    /**
+     * Gets the model. In this case, the model is the list of classifiers.
+     *
      * @return The model.
      */
-    public wdBayesParametersTree getModel() {
-        return this.tree;
-    }
-
-    /**
-     * Gets the classifier.
-     * 
-     * @return The classifier.
-     */
-    public FilteredClassifier getClassifier() {
-        return this.classifier;
+    @Override
+    public List<wdBayesParametersTree> getModel() {
+        return trees;
     }
 
     /**
@@ -104,16 +188,17 @@ public class WDPT implements Model {
 
     /**
      * Saves the statistics of the model.
-     * 
-     * @param operation The operation.
+     *
+     * @param operation The operation (e.g. "Client/Build", "Server").
      * @param epoch The epoch.
-     * @param path The path.
+     * @param path The output path.
      * @param nClients The number of clients.
-     * @param id The identifier.
-     * @param data The data.
-     * @param iteration The iteration.
-     * @param time The time.
+     * @param id The client ID (-1 if server).
+     * @param data The training and test data.
+     * @param iteration The current iteration.
+     * @param time The time taken (seconds).
      */
+    @Override
     public void saveStats(String operation, String epoch, String path, int nClients, int id, Data data, int iteration, double time) {
         Weka_Instances weka = (Weka_Instances) data;
         Instances train = weka.getTrain();
@@ -126,20 +211,20 @@ public class WDPT implements Model {
         int instances = train.numInstances();
         statistics += bbdd + "," + id + "," + operation + "," + epoch + "," + iteration + "," + instances + ",";
 
-        wdBayes algorithm = (wdBayes) this.classifier.getClassifier();
+        FilteredClassifier classifier = (FilteredClassifier) this.classifiers.get(0);
+        wdBayes algorithm = (wdBayes) classifier.getClassifier();
         int maxIterations = algorithm.getM_MaxIterations();
         statistics += maxIterations + ",";
 
-        metrics = getClassificationMetrics(this.classifier, train);
+        metrics = getClassificationMetricsEnsemble(classifiers, syntheticClassMaps, train);
         statistics += metrics;
 
-        metrics = getClassificationMetrics(this.classifier, test);
+        metrics = getClassificationMetricsEnsemble(classifiers, syntheticClassMaps, test);
         statistics += metrics;
 
         statistics += time + "\n";
 
-        String output = "results/ " + epoch + "/" + path;
-        saveExperiment(output, header, statistics);
+        saveExperiment("results/" + epoch + "/" + path, header, statistics);
     }
 
     /**

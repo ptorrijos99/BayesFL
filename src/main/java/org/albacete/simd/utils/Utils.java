@@ -13,6 +13,10 @@ import edu.pitt.dbmi.data.reader.*;
 import edu.pitt.dbmi.data.reader.tabular.*;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
 import weka.estimators.Estimator;
 
 import java.io.*;
@@ -25,7 +29,144 @@ import java.util.*;
 public class Utils {
 
     private static Random random = new Random();
-    
+
+    /**
+     * Based on pdag2dag function of pcalg package in R.
+     */
+    public static void pdagToDag2(Graph graph) {
+        Graph pdag = new EdgeListGraph(graph); // Temporary copy of the PDAG
+        List<Node> nodes = new ArrayList<>(pdag.getNodes());
+        boolean success = true;
+
+        while (!nodes.isEmpty()) {
+            List<Node> sinks = findSinks(pdag);
+            if (sinks.isEmpty()) {
+                success = false;
+                break;
+            }
+
+            boolean oriented = false;
+            for (Node sink : sinks) {
+                if (!adjCheck(pdag, sink)) {
+                    continue;
+                }
+
+                // Orient undirected edges towards the sink
+                List<Edge> undirectedEdges = getUndirectedEdgesTo(pdag, sink);
+                for (Edge edge : undirectedEdges) {
+                    Node other = edge.getNode1().equals(sink) ? edge.getNode2() : edge.getNode1();
+                    pdag.removeEdge(edge);
+                    pdag.addDirectedEdge(other, sink);
+                }
+
+                // Remove the sink node from the temporary graph
+                pdag.removeNode(sink);
+                nodes.remove(sink);
+                oriented = true;
+                break;
+            }
+
+            if (!oriented) {
+                success = false;
+                break;
+            }
+        }
+
+        if (!success) {
+            // Fallback: Generate random DAG (simplified)
+            randomDagFromSkeleton(graph);
+        } else {
+            // Copy the edges from the PDAG to the original graph
+            graph.removeEdges(graph.getEdges());
+            for (Edge edge : pdag.getEdges()) {
+                graph.addEdge(edge);
+            }
+        }
+    }
+
+    private static List<Node> findSinks(Graph graph) {
+        List<Node> sinks = new ArrayList<>();
+        for (Node node : graph.getNodes()) {
+            if (graph.getChildren(node).isEmpty()) {
+                sinks.add(node);
+            }
+        }
+        return sinks;
+    }
+
+    /**
+     * Checks if orienting edges towards node 'x' preserves the required adjacencies.
+     * Equivalent to adj.check in pcalg.
+     */
+    private static boolean adjCheck(Graph graph, Node x) {
+        Set<Node> neighbors = new HashSet<>(graph.getAdjacentNodes(x));
+        neighbors.removeAll(graph.getParents(x));
+        return neighbors.isEmpty();
+    }
+
+    /**
+     * Retrieves undirected edges connected to the node.
+     */
+    private static List<Edge> getUndirectedEdgesTo(Graph graph, Node node) {
+        List<Edge> edges = new ArrayList<>();
+        for (Edge edge : graph.getEdges(node)) {
+            if (edge.getEndpoint1() == Endpoint.TAIL && edge.getEndpoint2() == Endpoint.TAIL) {
+                edges.add(edge);
+            }
+        }
+        return edges;
+    }
+
+    /**
+     * Generates a random DAG from the skeleton (simplified).
+     */
+    private static void randomDagFromSkeleton(Graph skeleton) {
+        Graph dag = new EdgeListGraph(skeleton);
+        List<Node> nodes = dag.getNodes();
+        Collections.shuffle(nodes);
+
+        for (Node node : nodes) {
+            List<Node> adjacent = dag.getAdjacentNodes(node);
+            for (Node adj : adjacent) {
+                if (!isAncestorOf(dag, adj, node)) {
+                    dag.removeEdge(node, adj);
+                    dag.addDirectedEdge(node, adj);
+                }
+            }
+        }
+
+        // Copy the edges from the generated DAG to the original graph
+        skeleton.removeEdges(skeleton.getEdges());
+        for (Edge edge : dag.getEdges()) {
+            skeleton.addEdge(edge);
+        }
+    }
+
+    /**
+     * Checks if node 'ancestor' is an ancestor of node 'descendant'.
+     */
+    private static boolean isAncestorOf(Graph graph, Node ancestor, Node descendant) {
+        Set<Node> visited = new HashSet<>();
+        return dfs(graph, ancestor, descendant, visited);
+    }
+
+    /**
+     * Performs DFS to check if 'descendant' is reachable from 'ancestor'.
+     */
+    private static boolean dfs(Graph graph, Node current, Node target, Set<Node> visited) {
+        if (current.equals(target)) {
+            return true;
+        }
+        visited.add(current);
+        for (Node neighbor : graph.getChildren(current)) {
+            if (!visited.contains(neighbor) && dfs(graph, neighbor, target, visited)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Transforms a maximally directed pattern (PDAG) represented in graph
      * <code>g</code> into an arbitrary DAG by modifying <code>g</code> itself.
@@ -1215,6 +1356,131 @@ public class Utils {
 
         return component;
     }
+
+
+    /**
+     * Generates all combinations of k indices from 0 to n-1.
+     */
+    public static List<int[]> generateCombinations(int n, int k) {
+        List<int[]> result = new ArrayList<>();
+        if (k == 0) {
+            result.add(new int[0]);
+            return result;
+        }
+
+        int[] comb = new int[k];
+        for (int i = 0; i < k; i++) comb[i] = i;
+
+        while (comb[0] <= n - k) {
+            result.add(comb.clone());
+
+            int t = k - 1;
+            while (t != 0 && comb[t] == n - k + t) t--;
+            comb[t]++;
+            for (int i = t + 1; i < k; i++) {
+                comb[i] = comb[i - 1] + 1;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Redefines the class attribute of a dataset by combining selected attributes and the original class,
+     * using a predefined mapping to ensure consistency across distributed clients.
+     *
+     * @param original The original dataset.
+     * @param indices The indices of the attributes to combine with the original class.
+     * @param globalClassMap A predefined global map of synthetic class labels to index.
+     * @return A new Instances object with the synthetic class as its new class attribute.
+     */
+    public static Instances redefineClassAttribute(Instances original, int[] indices, Map<String, Integer> globalClassMap) {
+        // 1. Create a deep copy of the original dataset to avoid modifying it
+        Instances data = new Instances(original);
+
+        // 2. Compute the joint value of selected attributes + original class for each instance
+        int n = data.numInstances();
+        String[] syntheticLabels = new String[n];
+        for (int i = 0; i < n; i++) {
+            Instance inst = data.instance(i);
+            StringBuilder sb = new StringBuilder();
+            for (int idx : indices) {
+                sb.append(inst.stringValue(idx)).append("|||");
+            }
+            sb.append(inst.stringValue(data.classIndex()));
+            syntheticLabels[i] = sb.toString();
+        }
+
+        // 3. Remember the old class index
+        int oldClassIndex = data.classIndex();
+
+        // 4. Create the new class attribute using the globally shared list of class values
+        List<String> classValuesOrdered = new ArrayList<>(globalClassMap.keySet());
+        Attribute newClassAttr = new Attribute("AnDE_Class", classValuesOrdered);
+        data.insertAttributeAt(newClassAttr, data.numAttributes());
+        data.setClassIndex(data.numAttributes() - 1);  // Temporarily set new class index
+
+        // 5. Assign each instance its new class value
+        for (int i = 0; i < n; i++) {
+            data.instance(i).setValue(data.classIndex(), globalClassMap.get(syntheticLabels[i]));
+        }
+
+        // 6. Remove the original class attribute (no longer needed)
+        data.deleteAttributeAt(oldClassIndex);
+
+        // 7. Reset the class index to the new last attribute
+        data.setClassIndex(data.numAttributes() - 1);
+
+        return data;
+    }
+
+    /**
+     * Ensures that all class values are present in the dataset, even if they are not in the original data.
+     * @param data The dataset to check.
+     * @param classMap A map of class values to their corresponding indices.
+     * @return The modified dataset with all class values present.
+     */
+    public static Instances ensureAllClassValuesPresent(Instances data, Map<String, Integer> classMap) {
+        Instances copy = new Instances(data);
+        Set<String> existing = new HashSet<>();
+
+        for (int i = 0; i < copy.numInstances(); i++) {
+            String label = copy.instance(i).stringValue(copy.classIndex());
+            existing.add(label);
+        }
+
+        for (String expected : classMap.keySet()) {
+            if (!existing.contains(expected)) {
+                // Create dummy instance with missing attributes but correct class label
+                double[] vals = new double[copy.numAttributes()];
+                Arrays.fill(vals, weka.core.Utils.missingValue());
+                vals[copy.classIndex()] = copy.classAttribute().indexOfValue(expected);
+                copy.add(new DenseInstance(1.0, vals));
+            }
+        }
+
+        return copy;
+    }
+
+
+    /**
+     * Extracts the class map from the modified dataset.
+     *
+     * @param modified The modified dataset.
+     * @return A map of class values to their corresponding indices.
+     */
+    public static Map<String, Integer> extractClassMap(Instances modified) {
+        Map<String, Integer> classMap = new LinkedHashMap<>();
+        Attribute classAttr = modified.classAttribute();
+        Enumeration<Object> values = classAttr.enumerateValues();
+        int i = 0;
+        while (values.hasMoreElements()) {
+            classMap.put((String) values.nextElement(), i++);
+        }
+        return classMap;
+    }
+
+
 
     /**
      * Converts a graph to a Graphviz .dot file

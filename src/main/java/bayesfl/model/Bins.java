@@ -45,7 +45,7 @@ public class Bins implements Model {
     /**
      * Constructor.
      * 
-     * @param points The cut points.
+     * @param cutPoints The cut points.
      */
     public Bins(double[][] cutPoints) {
         this.cutPoints = cutPoints;

@@ -30,13 +30,18 @@ package bayesfl.experiments;
 /**
  * Standard imports.
  */
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.*;
 
 /**
  * Third-party imports.
  */
+import bayesfl.algorithms.*;
+import bayesfl.fusion.*;
+import bayesfl.model.Classes;
+import bayesfl.model.Model;
+import bayesfl.model.WDPT;
 import weka.core.Instances;
 import weka.core.Utils;
 
@@ -45,23 +50,11 @@ import weka.core.Utils;
  */
 import bayesfl.Client;
 import bayesfl.Server;
-import bayesfl.algorithms.Bins_Supervised;
-import bayesfl.algorithms.Bins_Unsupervised;
-import bayesfl.algorithms.LocalAlgorithm;
-import bayesfl.algorithms.PT_NB;
-import bayesfl.algorithms.WDPT_CCBN;
 import bayesfl.convergence.Convergence;
 import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
 import static bayesfl.data.Weka_Instances.divide;
-import bayesfl.fusion.Bins_Fusion;
-import bayesfl.fusion.Fusion;
-import bayesfl.fusion.FusionPosition;
-import bayesfl.fusion.PT_Fusion_Client;
-import bayesfl.fusion.PT_Fusion_Server;
-import bayesfl.fusion.WDPT_Fusion_Client;
-import bayesfl.fusion.WDPT_Fusion_Server;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -113,8 +106,9 @@ public class CCBNExperiment {
         Convergence convergence;
         String outputPath;
         Object[] models = new Object[nFolds];
+        Object[] modelsAnDE = new Object[nFolds];
 
-        // First step, federate the discretization to use the same cut points for all algorithms
+        // STEP 1 — Federate discretization
         buildStats = false;
         fusionStats = false;
         stats = false;
@@ -123,18 +117,31 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        models = validate(datasetName, splits, seed, models, discretizerName, discretizerOptions, discretizerName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
+        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
 
-        // Second step, federate the algorithms
+        // STEP 2 — Federate AnDE synthetic classes
+        buildStats = false;
+        fusionStats = false;
+        stats = false;
+        fusionClient = new FusionPosition(-1);
+        fusionServer = new Classes_Fusion();  // new federation logic
+        convergence = new NoneConvergence();
+        outputPath = "";
+
+        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath);
+
+
+        // STEP 3 — Real training and fusion of the algorithms
         buildStats = true;
         fusionStats = true;
         stats = false;
-        fusionClient = getClientFusion(algorithmName, clientOptions);
-        fusionServer = getServerFusion(algorithmName, serverOptions);
+        // copy the client options to avoid modifying the original array
+        fusionClient = getClientFusion(algorithmName, Arrays.copyOf(clientOptions, clientOptions.length));
+        fusionServer = getServerFusion(algorithmName, Arrays.copyOf(serverOptions, serverOptions.length));
         convergence = new NoneConvergence();
         outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
-        models = validate(datasetName, splits, seed, models, discretizerName, discretizerOptions, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
+        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
 
     /**
@@ -178,7 +185,7 @@ public class CCBNExperiment {
      * @param model A model object passed if required by the algorithm.
      * @return An instance of the selected local learning algorithm.
      */
-    private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model) {
+    private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model, Object modelAnDE) {
         switch (name) {
             // Supervised discretization wrapper
             case "Bins_Supervised" -> {
@@ -190,16 +197,36 @@ public class CCBNExperiment {
                 return new Bins_Unsupervised(options);
             }
 
+            // AnDE synthetic class discovery (structure only)
+            case "Classes_AnDE" -> {
+                return new Classes_AnDE(options);
+            }
+
             // Naive Bayes using Weka's implementation and external cut points
-            case "Weka_NB" -> {
+            case "PT_NB" -> {
                 double[][] cutPoints = (double[][]) model;
-                return new PT_NB(cutPoints);
+
+                // Check for AnDE option
+                int nAnDE = 0;
+                try {
+                    options = Arrays.copyOf(options, options.length);
+                    String structure = Utils.getOption("S", options);
+                    if (structure.startsWith("A") && structure.endsWith("DE")) {
+                        nAnDE = Integer.parseInt(structure.substring(1, structure.length() - 2));
+                    }
+                } catch (Exception ignored) {}
+
+                Classes structure = (Classes) modelAnDE;
+                return new PT_AnDE(cutPoints, nAnDE, structure.getSyntheticClassMaps());
             }
 
             // Federated class-conditional Bayesian network with cut point info
             case "WDPT_CCBN" -> {
                 double[][] cutPoints = (double[][]) model;
-                return new WDPT_CCBN(options, cutPoints);
+
+                // Retrieve combinations and class maps from modelsAnDE
+                Classes structure = (Classes) modelAnDE;
+                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps());
             }
 
             // Handle unknown algorithm names gracefully
@@ -218,9 +245,9 @@ public class CCBNExperiment {
      */
     private static Fusion getClientFusion(String algorithmName, String[] options) {
         switch (algorithmName) {
-            // Case for Weka's Naive Bayes implementation
-            case "Weka_NB" -> {
-                return new PT_Fusion_Client();
+            // Case for Weka's Naive Bayes implementation (always maintain the model obtained from the server)
+            case "PT_NB" -> {
+                return new FusionPosition(-1);
             }
 
             // Case for class-conditional Bayesian networks
@@ -249,14 +276,14 @@ public class CCBNExperiment {
     /**
      * Returns the fusion strategy used at the server side based on the algorithm name and provided options.
      *
-     * @param algorithmName The name of the learning algorithm (e.g., "Weka_NB", "dCCBN").
+     * @param algorithmName The name of the learning algorithm (e.g., "Weka", "dCCBN").
      * @param options The command-line-style flags passed to configure fusion behavior.
      * @return An instance of the corresponding {@link Fusion} strategy for the server.
      */
     private static Fusion getServerFusion(String algorithmName, String[] options) {
         switch (algorithmName) {
             // Case for Weka's Naive Bayes implementation
-            case "Weka_NB" -> {
+            case "PT_NB" -> {
                 return new PT_Fusion_Server();
             }
 
@@ -294,11 +321,13 @@ public class CCBNExperiment {
      * @param nClients The number of clients participating in federated learning.
      * @return A string encoding the current configuration for logging or output files.
      */
-    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, int seed, int nClients) {
+    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, int seed, int nClients) {
         // Default values if options were not found
         String structure = null;
         String parameterLearning = null;
         String nBins = null;
+        boolean fuseParameters = false;
+        boolean fuseProbabilities = false;
 
         try {
             // Copy arrays to avoid destructive modifications as it clears matched flags
@@ -310,23 +339,27 @@ public class CCBNExperiment {
             structure = Utils.getOption("S", algorithmOptions);
             parameterLearning = Utils.getOption("P", algorithmOptions);
 
+            // Retrieve the FP and FPR flags from the client options
+            fuseParameters = Utils.getFlag("FP", clientOptions);
+            fuseProbabilities = Utils.getFlag("FPR", clientOptions);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
+
         // The operation depends on the algorithm
         switch (algorithmName) {
             //
-            case "Bins_Supervised", "Bins_Unsupervised" -> {
+            case "Bins_Supervised", "Bins_Unsupervised", "Classes_Fusion" -> {
                 return "";
             }
-            case "Weka_NB" -> {
-                return fold + "," + algorithmName + "," + nBins + "," + seed + "," + nClients;
+            case "PT_NB" -> {
+                String combinedName = structure + "-" + parameterLearning;
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false";
             }
             case "WDPT_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients;
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities;
             }
             // Add more algorithms here
             default -> {
@@ -341,6 +374,7 @@ public class CCBNExperiment {
      * @param datasetName The name of the dataset.
      * @param splits The data splits.
      * @param models The previous models in case they are required.
+     * @param modelsAnDE The AnDE class cuts in case they are required.
      * @param algorithmName The name of the algorithm.
      * @param algorithmOptions The options for the algorithm.
      * @param buildStats Whether to build statistics.
@@ -353,19 +387,28 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The models.
      */
-    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, String discretizerName, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
         for (int i = 0; i < nFolds; i++) {
+            // Copy the options to avoid modifying the original array
+            String[] discretizerOptionsTemp = Arrays.copyOf(discretizerOptions, discretizerOptions.length);
+            String[] algorithmOptionsTemp = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
+            String[] clientOptionsTemp = Arrays.copyOf(clientOptions, clientOptions.length);
+
             // Get the partitions for the clients in the current fold 
             Instances[][] partitions = splits[i];
             int nClients = partitions.length;
 
             Object model = models[i];
-            String operation = getOperation(i, discretizerOptions, algorithmName, algorithmOptions, seed, nClients);
+            Object modelAnDE = null;
+            if (modelsAnDE != null) {
+                modelAnDE = modelsAnDE[i];
+            }
+            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, seed, nClients);
 
-            models[i] = run(datasetName, partitions, algorithmName, algorithmOptions, model, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
+            models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
         }
 
         return models;
@@ -379,6 +422,7 @@ public class CCBNExperiment {
      * @param algorithmName The name of the algorithm.
      * @param algorithmOptions The options for the algorithm.
      * @param model The previous model in case it is required.
+     * @param modelAnDE The AnDE class cuts in case it is required.
      * @param buildStats Whether to build statistics.
      * @param fusionStats Whether to build fusion statistics.
      * @param fusionClient The client fusion method.
@@ -390,7 +434,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The model.
      */
-    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, Object model, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
+    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, Object model, Object modelAnDE, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
         int nClients = partitions.length;
         ArrayList<Client> clients = new ArrayList<>(nClients);
 
@@ -399,7 +443,7 @@ public class CCBNExperiment {
             Instances test = partitions[i][1];
             Data data = new Weka_Instances(datasetName, train, test);
 
-            LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model);
+            LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE);
             Client client = new Client(fusionClient, algorithm, data);
             client.setStats(buildStats, fusionStats, outputPath);
             client.setID(i);
@@ -424,26 +468,67 @@ public class CCBNExperiment {
      * number of clients, fusion method, and folds for cross-validation. It then launches the experiment
      * using {@link #run}.
      * </p>
-     * @param Command-line arguments (not used in this setup).
+     * @param args Command-line arguments (not used in this setup).
      */
     public static void main(String[] args) {
-        // Dataset and experimental configuration
+        // Default dataset and experimental configuration
         String folder = "Discretas";
-        String datasetName = "King-rook-vs-King";
-        int nClients = 50;
+        String datasetName = "Nursey";
+        int nClients = 5;
         int seed = 42;
-        int nFolds = 5;
-        int nIterations = 10;
-    
+        int nFolds = 2;
+        int nIterations = 5;
+
         // Structure and parameter learning configurations
-        String structure = "NB";  // Possibles values: "NB"
-        String parameterLearning = "wCCBN";  // Possibles values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
-        String maxIterations = "10";
+        String structure = "A1DE";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
+        String parameterLearning = "wCCBN";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
+        String maxIterations = "5";
 
         // Fusion behaviour
         boolean fuseParameters = true;
-        boolean fuseProbabilities = false;
+        boolean fuseProbabilities = true;
         int nBins = -1;
+
+        // Check if arguments are provided
+        // If arguments are provided, read the parameters from the file and override the default values
+        if (args.length > 0) {
+            int index = Integer.parseInt(args[0]);
+            String paramsFileName = args[1];
+            //int threads = Integer.parseInt(args[2]);
+
+            // Read the parameters from args
+            String[] parameters = null;
+            try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
+                String line;
+                for (int i = 0; i < index; i++)
+                    br.readLine();
+                line = br.readLine();
+                parameters = line.split(" ");
+            }
+            catch(Exception e){ System.out.println(e); }
+
+            System.out.println("Number of hyperparams: " + parameters.length);
+            int i=0;
+            for (String string : parameters) {
+                System.out.println("Param[" + i + "]: " + string);
+                i++;
+            }
+
+            // Read the parameters from file
+            folder = parameters[0];
+            datasetName = parameters[1];
+            nClients = Integer.parseInt(parameters[2]);
+            seed = Integer.parseInt(parameters[3]);
+            nFolds = Integer.parseInt(parameters[4]);
+            nIterations = Integer.parseInt(parameters[5]);
+            structure = parameters[6];
+            parameterLearning = parameters[7];
+            maxIterations = parameters[8];
+            fuseParameters = Boolean.parseBoolean(parameters[9]);
+            fuseProbabilities = Boolean.parseBoolean(parameters[10]);
+            nBins = Integer.parseInt(parameters[11]);
+        }
+
 
         // Use supervised discretization in case the number of bins is not provided and equal-frequency otherwise
         String[] discretizerOptions = nBins == -1 ? new String[] {} : new String[] {"-F", "-B", "" + nBins};
@@ -452,7 +537,7 @@ public class CCBNExperiment {
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
 
         // Build shared fusion flags based on configuration
-        List<String> flags = new ArrayList<String>();
+        List<String> flags = new ArrayList<>();
         if (fuseParameters) flags.add("-FP"); // Fuse parameter vectors
         if (fuseProbabilities) flags.add("-FPR"); // Fuse class-conditional probabilities
 

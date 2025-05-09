@@ -30,11 +30,12 @@ package bayesfl.fusion;
 /**
  * Standard imports.
  */
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Third-party imports.
  */
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
@@ -91,51 +92,82 @@ public class PT_Fusion_Server implements Fusion {
      * @param models The array of models to fuse.
      * @return The global model fused.
      */
+    @Override
     public Model fusion(Model[] models) {
-        // Initialize the global model in a new array
-        // to avoid modifying the original first model
-        PT model = (PT) models[0];
+        PT base = (PT) models[0];
+        int numClassifiers = base.ensemble.size();
+        List<AbstractClassifier> fusedEnsemble = new ArrayList<>();
+        List<int[]> combinations = base.combinations;
+        List<Map<String, Integer>> fusedClassMaps = new ArrayList<>();
 
-        int numAtts = model.getM_Distributions().length;
-        int numClasses = model.getM_Distributions()[0].length;
-
-        // Initialize the distributions
-        DiscreteEstimator m_ClassDistribution = new DiscreteEstimator(numClasses, true);
-        DiscreteEstimator[][] m_Distributions = new DiscreteEstimator[numAtts][numClasses];
-
-        for (int i = 0; i < numAtts; i++) {
-            for (int j = 0; j < numClasses; j++) {
-                int numSymbols = ((DiscreteEstimator) model.getM_Distributions()[i][j]).getNumSymbols();
-                m_Distributions[i][j] = new DiscreteEstimator(numSymbols, true);
+        for (int i = 0; i < numClassifiers; i++) {
+            // Collect all synthetic classes
+            Set<String> allSyntheticClasses = new LinkedHashSet<>();
+            for (Model m : models) {
+                PT pt = (PT) m;
+                allSyntheticClasses.addAll(pt.syntheticClassMaps.get(i).keySet());
             }
-        }
 
-        for (Model value : models) {
-            model = (PT) value;
-            try {
-                // Add the class distribution of all the clients
-                DiscreteEstimator classDist = (DiscreteEstimator) model.getM_ClassDistribution();
-                m_ClassDistribution.aggregate(classDist);
+            List<String> classList = new ArrayList<>(allSyntheticClasses);
+            Map<String, Integer> classMap = new LinkedHashMap<>();
+            for (int idx = 0; idx < classList.size(); idx++) {
+                classMap.put(classList.get(idx), idx);
+            }
 
-                // Add each var distribution of all the clients
-                for (int j = 0; j < numAtts; j++) {
-                    for (int k = 0; k < numClasses; k++) {
-                        m_Distributions[j][k].aggregate((DiscreteEstimator) model.getM_Distributions()[j][k]);
+            int numClasses = classList.size();
+
+            // Initialize fusion structures
+            DiscreteEstimator fusedClassDist = new DiscreteEstimator(numClasses, true);
+            List<DiscreteEstimator[]> fusedDistributions = new ArrayList<>();
+            int numAtts = -1;
+
+            for (Model m : models) {
+                PT pt = (PT) m;
+                FilteredClassifier filtered = (FilteredClassifier) pt.ensemble.get(i);
+                NaiveBayes localNB = (NaiveBayes) filtered.getClassifier();
+                Map<String, Integer> localMap = pt.syntheticClassMaps.get(i);
+
+                // First time only: allocate distributions
+                if (fusedDistributions.isEmpty()) {
+                    numAtts = localNB.getConditionalEstimators().length;
+                    for (int att = 0; att < numAtts; att++) {
+                        DiscreteEstimator[] row = new DiscreteEstimator[numClasses];
+                        for (int c = 0; c < numClasses; c++) {
+                            DiscreteEstimator localEst = (DiscreteEstimator) localNB.getConditionalEstimators()[att][0];
+                            row[c] = new DiscreteEstimator(localEst.getNumSymbols(), true);
+                        }
+                        fusedDistributions.add(row);
                     }
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+
+                // Aggregate class distribution
+                for (Map.Entry<String, Integer> entry : localMap.entrySet()) {
+                    String label = entry.getKey();
+                    int localIdx = entry.getValue();
+                    int globalIdx = classMap.get(label);
+
+                    double weight = localNB.getClassEstimator().getProbability(localIdx);
+                    fusedClassDist.addValue(globalIdx, weight);
+
+                    // Aggregate per-attribute conditional estimators
+                    for (int att = 0; att < numAtts; att++) {
+                        DiscreteEstimator localEstimator = (DiscreteEstimator) localNB.getConditionalEstimators()[att][localIdx];
+                        try {
+                            fusedDistributions.get(att)[globalIdx].aggregate(localEstimator);
+                        } catch (Exception ignored) {}
+                    }
+                }
             }
+
+            // Create fused classifier
+            DummyNB fusedNB = new DummyNB();
+            fusedNB.setDistributions(fusedDistributions.toArray(new DiscreteEstimator[0][]));
+            fusedNB.setClassDistribution(fusedClassDist);
+            fusedEnsemble.add(fusedNB);
+            fusedClassMaps.add(classMap);
         }
 
-        DummyNB naiveBayes = new DummyNB();
-        naiveBayes.setDistributions(m_Distributions);
-        naiveBayes.setClassDistribution(m_ClassDistribution);
-
-        FilteredClassifier naiveBayesFC = new FilteredClassifier();
-        naiveBayesFC.setClassifier(naiveBayes);
-        naiveBayesFC.setFilter(model.getClassifier().getFilter());
-
-        return new PT(m_ClassDistribution, m_Distributions, naiveBayesFC);
+        return new PT(fusedEnsemble, combinations, fusedClassMaps);
     }
+
 }
