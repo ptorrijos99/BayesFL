@@ -125,21 +125,23 @@ public class Server {
     public void run() {
         // For each iteration of the algorithm
         for (int iteration = 1; iteration <= nIterations; iteration++) {
-            System.out.println("\n\n\nITERATION " + iteration + "\n");
-            
-            // 1. Create the local model of each client with a ParallelStream
-            clients.stream().forEach(Client::buildLocalModel);
+            System.out.println("\n\nITERATION " + iteration + "\n");
 
-            // 2. Get the local models
+            // 1. Create the local model of each client with a ParallelStream
+            clients.parallelStream().forEach(Client::buildLocalModel);
+
+            // 2 Apply the differential privacy to the local models
+            clients.parallelStream().forEach(Client::applyDifferentialPrivacy);
+
+            // 3. Get the local models
             for (Client client : clients) {
                 localModels[client.getID()] = client.getLocalModel();
             }
 
-            // 3. Check if any of the clients has changed their model
-            Model[] globalModelArray = {globalModel};
+            // 4. Check if any of the clients has changed their model
             if (convergence.checkConvergence(localModels)) break;
 
-            // 4. Fuse the local models into a global model
+            // 5. Fuse the local models into a global model
             double start = System.currentTimeMillis();
             globalModel = globalFusion.fusion(localModels);
             double time = (System.currentTimeMillis() - start) / 1000;
@@ -148,8 +150,8 @@ public class Server {
                 globalModel.saveStats(experimentName, "Server", path, clients.size(), -1, data, iteration, time);
             }
 
-            // 5. Fuse the global model with each local model on the clients
-            clients.stream().forEach(client -> client.fusion(globalModel));
+            // 6. Fuse the global model with each local model on the clients
+            clients.parallelStream().forEach(client -> client.fusion(globalModel));
         }
     }
 

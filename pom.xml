@@ -70,6 +70,7 @@
         <dependency>
             <groupId>com.github.alfaro96</groupId>
             <artifactId>EBNC</artifactId>
+            <!-- <version>d467827 / ac304ca (nueva)</version> -->
             <version>d467827</version>
         </dependency>
     
@@ -81,12 +82,12 @@
 
         <dependency>
             <groupId>org.jgrapht</groupId>
-            <artifactId>jgrapht</artifactId>
-            <version>1.0</version>
+            <artifactId>jgrapht-core</artifactId>
+            <version>1.6.0</version>
         </dependency>
 
         <dependency>
-            <groupId>org.unknown</groupId>
+            <groupId>com.teamdev.jniwrapper</groupId>
             <artifactId>jniwrapper</artifactId>
             <version>1.0</version>
         </dependency>
