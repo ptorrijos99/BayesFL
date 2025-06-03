@@ -32,6 +32,7 @@
 package bayesfl.model;
 
 import bayesfl.experiments.utils.ExperimentUtils;
+import bayesfl.privacy.Anonymizable;
 import edu.cmu.tetrad.graph.*;
 
 import org.albacete.simd.utils.Utils;
@@ -39,7 +40,7 @@ import bayesfl.data.Data;
 
 import java.util.*;
 
-public class BN implements Model {
+public class BN implements Model, Anonymizable {
     
     private Dag dag;
     
@@ -62,6 +63,7 @@ public class BN implements Model {
      * based on lexicographical ordering. This prevents exposing sensitive variable names
      * when exchanging graph structures between participants.
      */
+    @Override
     public void anonymizeVariables() {
         Dag originalDag = this.dag;
 

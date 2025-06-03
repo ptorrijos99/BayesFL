@@ -35,6 +35,8 @@ import bayesfl.algorithms.LocalAlgorithm;
 import bayesfl.data.Data;
 import bayesfl.fusion.Fusion;
 import bayesfl.model.Model;
+import bayesfl.privacy.DenoisableModel;
+import bayesfl.privacy.NoiseGenerator;
 
 public class Client {
 
@@ -60,6 +62,11 @@ public class Client {
     private Model localModel;
 
     /**
+     * The noise generator used to apply the differential privacy.
+     */
+    private NoiseGenerator noiseGenerator = null;
+
+    /**
      * The ID of the client.
      */
     private int id;
@@ -80,7 +87,7 @@ public class Client {
     private boolean fusionStats = false;
     
     private String path;
-    
+
     private int iteration;
     
     private String experimentName;
@@ -100,6 +107,19 @@ public class Client {
     }
 
     /**
+     * Constructor of the class Client with noise generator.
+     * @param localFusion The Fusion operator that will be used to perform the fusion of the global model that the server
+     * sends with the local model of the client
+     * @param localAlgorithm The local algorithm used to build the local model.
+     * @param data The data that the client will use to build the local model.
+     * @param noiseGenerator The noise generator used to apply the differential privacy.
+     */
+    public Client(Fusion localFusion, LocalAlgorithm localAlgorithm, Data data, NoiseGenerator noiseGenerator) {
+        this(localFusion, localAlgorithm, data);
+        this.noiseGenerator = noiseGenerator;
+    }
+
+    /**
      * Constructor of the class Client with starting local model.
      * @param localFusion The Fusion operator that will be used to perform the fusion of the global model that the server
      * sends with the local model of the client
@@ -110,6 +130,20 @@ public class Client {
     public Client(Fusion localFusion, Model localModel, LocalAlgorithm localAlgorithm, Data data) {
         this(localFusion, localAlgorithm, data);
         this.localModel = localModel;
+    }
+
+    /**
+     * Constructor of the class Client with starting local model and noise generator.
+     * @param localFusion The Fusion operator that will be used to perform the fusion of the global model that the server
+     * sends with the local model of the client
+     * @param localModel The local model of the client.
+     * @param localAlgorithm The local algorithm used to build the local model.
+     * @param data The data that the client will use to build the local model.
+     * @param noiseGenerator The noise generator used to apply the differential privacy.
+     */
+    public Client(Fusion localFusion, Model localModel, LocalAlgorithm localAlgorithm, Data data, NoiseGenerator noiseGenerator) {
+        this(localFusion, localModel, localAlgorithm, data);
+        this.noiseGenerator = noiseGenerator;
     }
 
     /**
@@ -125,6 +159,14 @@ public class Client {
         if (buildStats)  {
             localModel.saveStats(experimentName, "Client/Build", path, nClients, id, data, iteration, time);
         }
+    }
+
+    /**
+     * Apply the differential privacy to the local model if defined.
+     */
+    protected void applyDifferentialPrivacy() {
+        if (noiseGenerator == null || !(localModel instanceof DenoisableModel dm)) return;
+        dm.applyNoise(noiseGenerator);
     }
 
     /**

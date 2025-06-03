@@ -42,6 +42,10 @@ import bayesfl.fusion.*;
 import bayesfl.model.Classes;
 import bayesfl.model.Model;
 import bayesfl.model.WDPT;
+import bayesfl.privacy.Gaussian_Noise;
+import bayesfl.privacy.Laplace_Noise;
+import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.ZCDP_Noise;
 import weka.core.Instances;
 import weka.core.Utils;
 
@@ -90,7 +94,7 @@ public class CCBNExperiment {
      * @param seed The random seed for reproducibility of data splits.
      * @param suffix The suffix used to distinguish the output file or experiment version.
      */
-    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
+    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, String[] dpOptions, int nClients, int nIterations, int nFolds, int seed, String suffix) {
         // Get the cross-validation splits for each client
         String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
         Instances[][][] splits = divide(datasetName, datasetPath, nFolds, nClients, seed);
@@ -117,7 +121,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
+        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath);
 
         // STEP 2 — Federate AnDE synthetic classes
         buildStats = false;
@@ -128,7 +132,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath);
+        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions,  dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath);
 
 
         // STEP 3 — Real training and fusion of the algorithms
@@ -141,7 +145,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
-        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
+        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath);
     }
 
     /**
@@ -321,7 +325,7 @@ public class CCBNExperiment {
      * @param nClients The number of clients participating in federated learning.
      * @return A string encoding the current configuration for logging or output files.
      */
-    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, int seed, int nClients) {
+    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, String[] dpOptions, int seed, int nClients) {
         // Default values if options were not found
         String structure = null;
         String parameterLearning = null;
@@ -329,10 +333,17 @@ public class CCBNExperiment {
         boolean fuseParameters = false;
         boolean fuseProbabilities = false;
 
+        String dpType = null;
+        double epsilon = 0;
+        double delta = 0;
+        double rho = 0;
+        double sensitivity = 0;
+
         try {
             // Copy arrays to avoid destructive modifications as it clears matched flags
             discretizerOptions = Arrays.copyOf(discretizerOptions, discretizerOptions.length);
             algorithmOptions = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
+            dpOptions = Arrays.copyOf(dpOptions, dpOptions.length);
 
             // Retrieve discretization and algorithm options
             nBins = Utils.getOption("B", discretizerOptions);
@@ -342,6 +353,20 @@ public class CCBNExperiment {
             // Retrieve the FP and FPR flags from the client options
             fuseParameters = Utils.getFlag("FP", clientOptions);
             fuseProbabilities = Utils.getFlag("FPR", clientOptions);
+
+            // Retrieve the DP options
+            dpType = Utils.getOption("DP", dpOptions);
+            if (dpType.equalsIgnoreCase("Laplace")) {
+                epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
+                sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+            } else if (dpType.equalsIgnoreCase("Gaussian")) {
+                epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
+                delta = Double.parseDouble(Utils.getOption("D", dpOptions));
+                sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+            } else if (dpType.equalsIgnoreCase("ZCDP")) {
+                rho = Double.parseDouble(Utils.getOption("R", dpOptions));
+                sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -354,12 +379,12 @@ public class CCBNExperiment {
             }
             case "PT_NB" -> {
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false";
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity;
             }
             case "WDPT_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities;
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity;
             }
             // Add more algorithms here
             default -> {
@@ -387,7 +412,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The models.
      */
-    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, String[] dpOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
@@ -396,6 +421,7 @@ public class CCBNExperiment {
             String[] discretizerOptionsTemp = Arrays.copyOf(discretizerOptions, discretizerOptions.length);
             String[] algorithmOptionsTemp = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
             String[] clientOptionsTemp = Arrays.copyOf(clientOptions, clientOptions.length);
+            String[] dpOptionsTemp = Arrays.copyOf(dpOptions, dpOptions.length);
 
             // Get the partitions for the clients in the current fold 
             Instances[][] partitions = splits[i];
@@ -406,12 +432,65 @@ public class CCBNExperiment {
             if (modelsAnDE != null) {
                 modelAnDE = modelsAnDE[i];
             }
-            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, seed, nClients);
+            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients);
 
-            models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
+            models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, dpOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
         }
 
         return models;
+    }
+
+    /**
+     * Creates a {@link NoiseGenerator} based on Weka-style differential privacy options.
+     * <p>
+     * Accepted formats:
+     * <ul>
+     *   <li><b>Laplace:</b> {"-DP", "Laplace", "-E", "epsilon", "-S", "sensitivity"}</li>
+     *   <li><b>Gaussian:</b> {"-DP", "Gaussian", "-E", "epsilon", "-D", "delta", "-S", "sensitivity"}</li>
+     *   <li><b>ZCDP:</b> {"-DP", "ZCDP", "-R", "rho", "-S", "sensitivity"}</li>
+     * </ul>
+     * If the input is empty or invalid, the method returns {@code null}.
+     *
+     * @param dpOptions array of command-line style options
+     * @return a configured {@link NoiseGenerator} instance or {@code null} if disabled or invalid
+     */
+    private static NoiseGenerator getNoiseGenerator(String[] dpOptions) {
+        if (dpOptions == null || dpOptions.length == 0) return null;
+
+        // Copy the options to avoid modifying the original array
+        dpOptions = Arrays.copyOf(dpOptions, dpOptions.length);
+
+        try {
+            String type = Utils.getOption("DP", dpOptions);
+
+            switch (type.toLowerCase()) {
+                case "laplace" -> {
+                    double epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
+                    double sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+
+                    System.out.println(" Laplace noise generator with epsilon: " + epsilon + " and sensitivity: " + sensitivity);
+
+                    return new Laplace_Noise(epsilon, sensitivity);
+                }
+                case "gaussian" -> {
+                    double epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
+                    double delta = Double.parseDouble(Utils.getOption("D", dpOptions));
+                    double sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+                    return new Gaussian_Noise(epsilon, delta, sensitivity);
+                }
+                case "zcdp" -> {
+                    double rho = Double.parseDouble(Utils.getOption("R", dpOptions));
+                    double sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
+                    return new ZCDP_Noise(rho, sensitivity);
+                }
+                default -> {
+                    return null;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Invalid DP configuration: " + Arrays.toString(dpOptions));
+            return null;
+        }
     }
 
     /**
@@ -434,7 +513,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The model.
      */
-    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, Object model, Object modelAnDE, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
+    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, String[] dpOptions, Object model, Object modelAnDE, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
         int nClients = partitions.length;
         ArrayList<Client> clients = new ArrayList<>(nClients);
 
@@ -444,7 +523,10 @@ public class CCBNExperiment {
             Data data = new Weka_Instances(datasetName, train, test);
 
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE);
-            Client client = new Client(fusionClient, algorithm, data);
+
+            NoiseGenerator dp = getNoiseGenerator(dpOptions);
+
+            Client client = new Client(fusionClient, algorithm, data, dp);
             client.setStats(buildStats, fusionStats, outputPath);
             client.setID(i);
             client.setExperimentName(operation);
@@ -473,21 +555,28 @@ public class CCBNExperiment {
     public static void main(String[] args) {
         // Default dataset and experimental configuration
         String folder = "Discretas";
-        String datasetName = "Nursey";
-        int nClients = 5;
+        String datasetName = "Tic-Tac-Toe";
+        int nClients = 2;
         int seed = 42;
         int nFolds = 2;
-        int nIterations = 5;
+        int nIterations = 1;
 
         // Structure and parameter learning configurations
-        String structure = "A1DE";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
-        String parameterLearning = "wCCBN";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
+        String structure = "NB";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
+        String parameterLearning = "Weka";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
         String maxIterations = "5";
 
         // Fusion behaviour
         boolean fuseParameters = true;
         boolean fuseProbabilities = true;
         int nBins = -1;
+
+        // Differential privacy parameters
+        String dpType = "ZCDP";  // "Laplace", "Gaussian", "ZCDP", "None"
+        double epsilon = 1;      // for Laplace and Gaussian
+        double delta = 1e-5;     // only for Gaussian
+        double rho = 0.1;        // only for ZCDP
+        double sensitivity = 1.0;  // default for PT; smaller for WDPT
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -527,8 +616,25 @@ public class CCBNExperiment {
             fuseParameters = Boolean.parseBoolean(parameters[9]);
             fuseProbabilities = Boolean.parseBoolean(parameters[10]);
             nBins = Integer.parseInt(parameters[11]);
-        }
 
+            // Add DP parameters if passed
+            if (parameters.length >= 14) {
+                dpType = parameters[12];
+                sensitivity = Double.parseDouble(parameters[13]);
+
+                if (dpType.equalsIgnoreCase("Laplace")) {
+                    epsilon = Double.parseDouble(parameters[14]);
+                } else if (dpType.equalsIgnoreCase("Gaussian")) {
+                    epsilon = Double.parseDouble(parameters[14]);
+                } else if (dpType.equalsIgnoreCase("ZCDP")) {
+                    rho = Double.parseDouble(parameters[14]);
+                }
+
+                if (dpType.equalsIgnoreCase("Gaussian")) {
+                    delta = Double.parseDouble(parameters[15]);
+                }
+            }
+        }
 
         // Use supervised discretization in case the number of bins is not provided and equal-frequency otherwise
         String[] discretizerOptions = nBins == -1 ? new String[] {} : new String[] {"-F", "-B", "" + nBins};
@@ -546,10 +652,24 @@ public class CCBNExperiment {
         String[] clientOptions = flags.toArray(type);
         String[] serverOptions = flags.toArray(type);
 
+        // Create DP options
+        String[] dpOptions = new String[0];
+        if (dpType.equalsIgnoreCase("Laplace")) {
+            dpOptions = new String[] {"-DP", "Laplace", "-E", "" + epsilon, "-S", "" + sensitivity};
+        } else if (dpType.equalsIgnoreCase("Gaussian")) {
+            dpOptions = new String[] {"-DP", "Gaussian", "-E", "" + epsilon, "-D", "" + delta, "-S", "" + sensitivity};
+        } else if (dpType.equalsIgnoreCase("ZCDP")) {
+            dpOptions = new String[] {"-DP", "ZCDP", "-R", "" + rho, "-S", "" + sensitivity};
+        }
+
+        System.out.println("dpOptions: " + Arrays.toString(dpOptions));
+
         // Create output suffix for result identification
-        String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + ".csv";
+        String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities
+                + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity
+                + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + ".csv";
 
         // Run the experiment
-        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, nClients, nIterations, nFolds, seed, suffix);
+        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, suffix);
     }
 }
