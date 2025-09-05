@@ -73,7 +73,7 @@ public class PT implements DenoisableModel {
     /**
      * The header for the file.
      */
-    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor
@@ -88,19 +88,20 @@ public class PT implements DenoisableModel {
     }
 
     /**
-     * Applies differential privacy noise to the internal probabilistic model.
+     * Applies differential privacy noise to the internal probabilistic model by perturbing discrete counts.
      * <p>
-     * This method iterates over all {@link FilteredClassifier} instances in the ensemble.
-     * If the underlying base classifier is a {@link NaiveBayes}, it accesses both the
-     * class distribution and the attribute-conditional distributions, and applies the
-     * specified {@link NoiseGenerator} to perturb their probabilities.
+     * This method iterates over all {@link FilteredClassifier} instances in the ensemble. If the underlying
+     * base classifier is a {@link NaiveBayes}, it accesses both the class distribution and the conditional
+     * distributions for each attribute given the class. For each discrete estimator, it extracts raw counts,
+     * applies Laplace noise scaled to the desired privacy budget, clips negative values, applies smoothing,
+     * normalizes the resulting vector, and updates the estimator accordingly.
      * </p>
      * <p>
-     * The noise is added in a way that preserves the estimator structure by using the
-     * {@code addValue(i, delta)} method, ensuring Weka maintains consistency.
+     * This approach ensures that the shared parameters satisfy ε-differential privacy while preserving the
+     * structure expected by Weka classifiers.
      * </p>
      *
-     * @param noise the {@link NoiseGenerator} used to apply noise (e.g., Laplace, Gaussian, zCDP)
+     * @param noise the {@link NoiseGenerator} used to apply noise (e.g., Laplace)
      */
     @Override
     public void applyNoise(NoiseGenerator noise) {
@@ -110,18 +111,14 @@ public class PT implements DenoisableModel {
 
                     // Privatize class distribution
                     DiscreteEstimator classDist = (DiscreteEstimator) nb.getClassEstimator();
-                    int numClasses = classDist.getNumSymbols(); // Get the number of classes
-                    double[] originalClassProbs = new double[numClasses];
-                    applyNoiseToEstimator(noise, classDist, numClasses, originalClassProbs);
+                    applyNoiseToEstimator(noise, classDist);
 
                     // Privatize conditional estimators (conditional probabilities for each attribute given class)
                     Estimator[][] conds = nb.getConditionalEstimators();
                     for (Estimator[] cond : conds) {
                         for (Estimator est : cond) {
                             if (est instanceof DiscreteEstimator de) {
-                                int n = de.getNumSymbols();
-                                double[] original = new double[n];
-                                applyNoiseToEstimator(noise, de, n, original);
+                                applyNoiseToEstimator(noise, de);
                             }
                         }
                     }
@@ -131,24 +128,54 @@ public class PT implements DenoisableModel {
     }
 
     /**
-     * Applies differential privacy noise to a DiscreteEstimator (e.g., class distribution or conditional probabilities).
+     * Applies differential privacy noise to a {@link DiscreteEstimator} by perturbing raw counts.
      * <p>
-     * This method retrieves the original probabilities from the estimator, privatizes them by applying noise,
-     * and then updates the estimator with the privatized values.
+     * This method retrieves the original symbol counts from the estimator, adds Laplace noise scaled to
+     * the specified privacy budget, clips negative values, applies Laplace smoothing, and normalizes the result
+     * to obtain a valid probability distribution. The estimator is then updated to reflect the privatized distribution.
      * </p>
      *
-     * @param noise             the noise generator to apply to the probabilities
-     * @param classDist         the DiscreteEstimator containing class probabilities (or conditional probabilities)
-     * @param numClasses        the number of classes (or symbols)
-     * @param originalClassProbs an array to store the original probabilities before noise is added
+     * @param noise          the {@link NoiseGenerator} that adds Laplace noise to the counts
+     * @param estimator      the {@link DiscreteEstimator} containing the counts to privatize
      */
-    private void applyNoiseToEstimator(NoiseGenerator noise, DiscreteEstimator classDist, int numClasses, double[] originalClassProbs) {
-        for (int i = 0; i < numClasses; i++) {
-            originalClassProbs[i] = classDist.getProbability(i); // Get original probabilities
+    void applyNoiseToEstimator(NoiseGenerator noise, DiscreteEstimator estimator) {
+        int k = estimator.getNumSymbols();
+
+        /* 1. original counts */
+        double[] counts = new double[k];
+        double oldSum = 0.0;
+        for (int i = 0; i < k; i++) {
+            counts[i] = estimator.getCount(i);
+            oldSum   += counts[i];
         }
-        double[] noisyClassProbs = noise.privatize(originalClassProbs); // Add noise
-        for (int i = 0; i < numClasses; i++) {
-            classDist.addValue(i, noisyClassProbs[i] - originalClassProbs[i]);  // Update the class distribution
+
+        /* 2. Laplace noise */
+        double[] noisy = noise.privatize(counts);
+
+        /* 3. clip + smoothing */
+        double alpha = 1e-3;
+        for (int i = 0; i < k; i++) {
+            noisy[i] = Math.max(0.0, noisy[i]) + alpha;
+        }
+
+        /* 4. rescale to keep the same total mass */
+        double newSum = 0.0;
+        for (double v : noisy) newSum += v;
+        double scale = oldSum / newSum;          // preserves magnitude expected by Weka
+        for (int i = 0; i < k; i++) noisy[i] *= scale;
+
+        /* 5. overwrite internal arrays via reflection */
+        try {
+            java.lang.reflect.Field fCounts = DiscreteEstimator.class.getDeclaredField("m_Counts");
+            java.lang.reflect.Field fSum    = DiscreteEstimator.class.getDeclaredField("m_SumOfCounts");
+            fCounts.setAccessible(true);
+            fSum.setAccessible(true);
+
+            double[] mCounts = (double[]) fCounts.get(estimator);
+            System.arraycopy(noisy, 0, mCounts, 0, k);
+            fSum.setDouble(estimator, oldSum);        // = sum(noisy) after rescale
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to set privatized counts", e);
         }
     }
 

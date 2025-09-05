@@ -95,7 +95,7 @@ public class WDPT implements DenoisableModel {
     /**
      * The header for the file.
      */
-    private final String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
+    private final String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
     /**
      * Constructor.
@@ -180,6 +180,10 @@ public class WDPT implements DenoisableModel {
         }
 
         double[] noisy = noise.privatize(probs);
+        for (int i = 0; i < len; i++) {
+            noisy[i] = Math.max(noisy[i], 1e-9); // Avoid negative probabilities
+        }
+        
         double[] renormalized = normalize(noisy);
 
         for (int i = 0; i < len; i++) {

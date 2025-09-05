@@ -34,7 +34,6 @@ package bayesfl.experiments.utils;
 import bayesfl.data.BN_DataSet;
 import bayesfl.data.Data;
 import edu.cmu.tetrad.bayes.BayesPm;
-import edu.cmu.tetrad.bayes.MlBayesIm;
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.search.score.BdeuScore;
 import edu.cmu.tetrad.search.Fges;
@@ -44,7 +43,6 @@ import org.albacete.simd.utils.Utils;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.net.BIFReader;
 import weka.classifiers.evaluation.Evaluation;
-import weka.classifiers.meta.FilteredClassifier;
 import weka.core.*;
 
 import java.io.*;
@@ -324,6 +322,42 @@ public class ExperimentUtils {
             }
         }
         return dag;
+    }
+
+    /**
+     * Computes the L1/L2 sensitivity K = (d - n) * C(d - 1, n) based on dataset and algorithm options.
+     *
+     * @param data              the client data (must be Weka_Instances)
+     * @param algorithmOptions  the algorithm options containing the -S flag for structure
+     * @return the computed sensitivity value (number of affected cells)
+     */
+    public static int computeSensitivity(Data data, String[] algorithmOptions) {
+        int d = ((Instances) data.getData()).numAttributes() - 1;
+
+        algorithmOptions = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
+        String structure;
+        try {
+            structure = weka.core.Utils.getOption("S", algorithmOptions);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        int n = 0;
+        if (structure.startsWith("A") && structure.endsWith("DE")) {
+            n = Integer.parseInt(structure.substring(1, structure.length() - 2));
+        }
+
+        return (d - n) * binomial(d - 1, n);
+    }
+
+    public static int binomial(int n, int k) {
+        if (k < 0 || k > n) return 0;
+        if (k == 0 || k == n) return 1;
+        int res = 1;
+        for (int i = 1; i <= k; i++) {
+            res = res * (n - (k - i)) / i;
+        }
+        return res;
     }
 }
 
