@@ -57,4 +57,6 @@ public interface DenoisableModel extends Model {
      * @param noise the noise generator to use (e.g., Laplace, Gaussian, zCDP)
      */
     void applyNoise(NoiseGenerator noise);
+
+
 }

@@ -40,8 +40,6 @@ import java.util.*;
 import bayesfl.algorithms.*;
 import bayesfl.fusion.*;
 import bayesfl.model.Classes;
-import bayesfl.model.Model;
-import bayesfl.model.WDPT;
 import bayesfl.privacy.Gaussian_Noise;
 import bayesfl.privacy.Laplace_Noise;
 import bayesfl.privacy.NoiseGenerator;
@@ -59,6 +57,8 @@ import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
 import static bayesfl.data.Weka_Instances.divide;
+import static bayesfl.experiments.utils.ExperimentUtils.binomial;
+import static bayesfl.experiments.utils.ExperimentUtils.computeSensitivity;
 
 /**
  * A class representing an experiment with class-conditional Bayesian networks.
@@ -338,6 +338,7 @@ public class CCBNExperiment {
         double delta = 0;
         double rho = 0;
         double sensitivity = 0;
+        boolean autoSensitivity = false;
 
         try {
             // Copy arrays to avoid destructive modifications as it clears matched flags
@@ -367,6 +368,7 @@ public class CCBNExperiment {
                 rho = Double.parseDouble(Utils.getOption("R", dpOptions));
                 sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
             }
+            autoSensitivity = Utils.getFlag("AUTO", dpOptions);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -379,12 +381,12 @@ public class CCBNExperiment {
             }
             case "PT_NB" -> {
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity;
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity;
             }
             case "WDPT_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity;
+                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity;
             }
             // Add more algorithms here
             default -> {
@@ -416,6 +418,11 @@ public class CCBNExperiment {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
+        if (!outputPath.isEmpty() && done(outputPath)) {
+            System.out.println("Skip: " + outputPath);
+            return models;
+        }
+
         for (int i = 0; i < nFolds; i++) {
             // Copy the options to avoid modifying the original array
             String[] discretizerOptionsTemp = Arrays.copyOf(discretizerOptions, discretizerOptions.length);
@@ -438,6 +445,12 @@ public class CCBNExperiment {
         }
 
         return models;
+    }
+
+    private static boolean done(String path) {
+        String dir = "results/Client/";
+        return new java.io.File(dir + "Build/" + path).exists() ||
+                new java.io.File(dir + "Fusion/" + path).exists();
     }
 
     /**
@@ -467,9 +480,6 @@ public class CCBNExperiment {
                 case "laplace" -> {
                     double epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
                     double sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
-
-                    System.out.println(" Laplace noise generator with epsilon: " + epsilon + " and sensitivity: " + sensitivity);
-
                     return new Laplace_Noise(epsilon, sensitivity);
                 }
                 case "gaussian" -> {
@@ -525,6 +535,13 @@ public class CCBNExperiment {
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE);
 
             NoiseGenerator dp = getNoiseGenerator(dpOptions);
+            try {
+                // Copy the dpOptions to avoid modifying the original array
+                dpOptions = Arrays.copyOf(dpOptions, dpOptions.length);
+                if (Utils.getFlag("AUTO", dpOptions)) {
+                    dp.setSensitivity(computeSensitivity(data, algorithmOptions));
+                }
+            } catch (Exception e) {throw new RuntimeException(e);}
 
             Client client = new Client(fusionClient, algorithm, data, dp);
             client.setStats(buildStats, fusionStats, outputPath);
@@ -555,15 +572,15 @@ public class CCBNExperiment {
     public static void main(String[] args) {
         // Default dataset and experimental configuration
         String folder = "Discretas";
-        String datasetName = "Tic-Tac-Toe";
-        int nClients = 2;
+        String datasetName = "Soybean";
+        int nClients = 100;
         int seed = 42;
-        int nFolds = 2;
-        int nIterations = 1;
+        int nFolds = 5;
+        int nIterations = 10;
 
         // Structure and parameter learning configurations
-        String structure = "NB";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
-        String parameterLearning = "Weka";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
+        String structure = "A2DE";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
+        String parameterLearning = "wCCBN";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
         String maxIterations = "5";
 
         // Fusion behaviour
@@ -572,11 +589,12 @@ public class CCBNExperiment {
         int nBins = -1;
 
         // Differential privacy parameters
-        String dpType = "ZCDP";  // "Laplace", "Gaussian", "ZCDP", "None"
+        String dpType = "Laplace";  // "Laplace", "Gaussian", "ZCDP", "None"
         double epsilon = 1;      // for Laplace and Gaussian
         double delta = 1e-5;     // only for Gaussian
         double rho = 0.1;        // only for ZCDP
         double sensitivity = 1.0;  // default for PT; smaller for WDPT
+        boolean autoSensitivity  = true; // Calculate sensitivity automatically based on the data columns
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -621,17 +639,18 @@ public class CCBNExperiment {
             if (parameters.length >= 14) {
                 dpType = parameters[12];
                 sensitivity = Double.parseDouble(parameters[13]);
+                autoSensitivity = Boolean.parseBoolean(parameters[14]);
 
                 if (dpType.equalsIgnoreCase("Laplace")) {
-                    epsilon = Double.parseDouble(parameters[14]);
+                    epsilon = Double.parseDouble(parameters[15]);
                 } else if (dpType.equalsIgnoreCase("Gaussian")) {
-                    epsilon = Double.parseDouble(parameters[14]);
+                    epsilon = Double.parseDouble(parameters[15]);
                 } else if (dpType.equalsIgnoreCase("ZCDP")) {
-                    rho = Double.parseDouble(parameters[14]);
+                    rho = Double.parseDouble(parameters[15]);
                 }
 
                 if (dpType.equalsIgnoreCase("Gaussian")) {
-                    delta = Double.parseDouble(parameters[15]);
+                    delta = Double.parseDouble(parameters[16]);
                 }
             }
         }
@@ -653,20 +672,18 @@ public class CCBNExperiment {
         String[] serverOptions = flags.toArray(type);
 
         // Create DP options
-        String[] dpOptions = new String[0];
-        if (dpType.equalsIgnoreCase("Laplace")) {
-            dpOptions = new String[] {"-DP", "Laplace", "-E", "" + epsilon, "-S", "" + sensitivity};
-        } else if (dpType.equalsIgnoreCase("Gaussian")) {
-            dpOptions = new String[] {"-DP", "Gaussian", "-E", "" + epsilon, "-D", "" + delta, "-S", "" + sensitivity};
-        } else if (dpType.equalsIgnoreCase("ZCDP")) {
-            dpOptions = new String[] {"-DP", "ZCDP", "-R", "" + rho, "-S", "" + sensitivity};
+        List<String> dpList = new ArrayList<>();
+        switch (dpType.toLowerCase()) {
+            case "laplace" -> dpList.addAll(List.of("-DP", "Laplace", "-E", "" + epsilon, "-S", "" + sensitivity));
+            case "gaussian" -> dpList.addAll(List.of("-DP", "Gaussian", "-E", "" + epsilon, "-D", "" + delta, "-S", "" + sensitivity));
+            case "zcdp" -> dpList.addAll(List.of("-DP", "ZCDP", "-R", "" + rho, "-S", "" + sensitivity));
         }
-
-        System.out.println("dpOptions: " + Arrays.toString(dpOptions));
+        if (autoSensitivity) dpList.add("-AUTO");
+        String[] dpOptions = dpList.toArray(new String[0]);
 
         // Create output suffix for result identification
         String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities
-                + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity
+                + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity + "_" + autoSensitivity
                 + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + ".csv";
 
         // Run the experiment

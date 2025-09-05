@@ -43,7 +43,10 @@ import java.util.Random;
  */
 public class Gaussian_Noise implements NoiseGenerator {
 
-    private final double sigma;
+    private double sigma;
+    private double epsilon;
+    private double delta;
+    private double sensitivity;
 
     /**
      * Constructs a Gaussian noise generator.
@@ -55,7 +58,22 @@ public class Gaussian_Noise implements NoiseGenerator {
     public Gaussian_Noise(double epsilon, double delta, double sensitivity) {
         if (epsilon <= 0) throw new IllegalArgumentException("Epsilon must be positive.");
         if (delta <= 0 || delta >= 1) throw new IllegalArgumentException("Delta must be in (0, 1).");
+
+        this.epsilon = epsilon;
+        this.delta = delta;
+        this.sensitivity = sensitivity;
         this.sigma = computeGaussianScale(sensitivity, epsilon, delta);
+    }
+
+    /**
+     * Sets the sensitivity of the noise generator.
+     *
+     * @param newSensitivity the new sensitivity value
+     */
+    @Override
+    public void setSensitivity(double newSensitivity) {
+        this.sensitivity = newSensitivity;
+        this.sigma = computeGaussianScale(newSensitivity, this.epsilon, this.delta);
     }
 
     /**

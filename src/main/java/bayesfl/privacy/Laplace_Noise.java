@@ -43,7 +43,9 @@ import java.util.Random;
  */
 public class Laplace_Noise implements NoiseGenerator {
 
-    private final double scale;
+    private double scale;
+    private double epsilon;
+    private double sensitivity;
 
     /**
      * Constructs a Laplace noise generator.
@@ -53,7 +55,20 @@ public class Laplace_Noise implements NoiseGenerator {
      */
     public Laplace_Noise(double epsilon, double sensitivity) {
         if (epsilon <= 0) throw new IllegalArgumentException("Epsilon must be positive.");
+        this.epsilon = epsilon;
+        this.sensitivity = sensitivity;
         this.scale = sensitivity / epsilon;
+    }
+
+    /**
+     * Sets the sensitivity of the noise generator.
+     *
+     * @param newSensitivity the new sensitivity value
+     */
+    @Override
+    public void setSensitivity(double newSensitivity) {
+        this.sensitivity = newSensitivity;
+        this.scale = newSensitivity / this.epsilon;
     }
 
     /**

@@ -28,7 +28,7 @@ public class MinCutTreeWidthUnion {
 	public List<List<Dag>> outputExperimentDAGsList = new ArrayList<>();
 	public List<Double> outputExperimentPercentages = new ArrayList<>();
 
-	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW){
+	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW) {
 		this.setOfInitialDAGs = new ArrayList<>();
 		for (Dag d : dags) {
 			this.setOfInitialDAGs.add(new Dag(d));
@@ -44,7 +44,7 @@ public class MinCutTreeWidthUnion {
 		this.maxTW = maxTW;
 	}
 
-	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW, double percentage){
+	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW, double percentage) {
 		this(dags, maxSize, maxTW);
 		this.percentage = percentage;
 	}
@@ -104,36 +104,22 @@ public class MinCutTreeWidthUnion {
 
 				List<HashSet<Node>> hSubsets;
 				try {
-					hSubsets = BESThread.generatePowerSet(hNeighbors);
+					hSubsets = generateRandomSubsets(hNeighbors, this.maxSize);
 				} catch (OutOfMemoryError | Exception e) {
 					System.out.println("Out of memory error when generating power set");
-
-					List<Node> hNeighbors2 = new ArrayList<>(5);
-					for (int i = 0; i < 5; i++) {
-						hNeighbors2.add(hNeighbors.get(i));
-					}
-					hSubsets = BESThread.generatePowerSet(hNeighbors2);
+					hSubsets = new ArrayList<>();
 				}
 
-				/*if (!hNeighbors.isEmpty()) {
-					System.out.println("HNeighbors: " + hNeighbors + ".  HSubsets: " + hSubsets);
-				}*/
-
 				for (HashSet<Node> hSubset : hSubsets) {
-					if(hSubset.size() > maxSize) continue;  // TODO: Meter también un random para comprobar solo algunos
-
-					// TODO_: Hacer test al principio
 					Set<Node> naYXH = GESThread.findNaYX(_x, _y, graph);
 					naYXH.removeAll(hSubset);
 					if (!GraphUtils.isClique(naYXH, graph)) continue;
 
-					// deleteEval(_x, _y, hSubset, graph);
 					Set<Node> set = new HashSet<>(GESThread.findNaYX(_x, _y, graph));
 					set.removeAll(hSubset);
 					set.addAll(graph.getParents(_y));
 					set.remove(_x);
 
-					// scoreGraphChangeDelete(_y, _x, set)
 					String key = _y.getName() + _x.getName() + set;
 					List<Set<EdgeFordFulkerson>> minCut = this.localCache.get(key);
 					double evalScore = 0.0;
@@ -143,17 +129,13 @@ public class MinCutTreeWidthUnion {
 						LinkedList<Node> conditioning = new LinkedList<>(set);
 
 						for (Dag g : this.setOfInitialDAGs) {
-							// TODO_: minCut. Cambiar por el mínimo número de enlaces que hay que borrar para que estén d-separados
 							Graph aux = constructConditionedGraph(g, _y, _x, conditioning);
 
-							// Ejecuta el algoritmo de Ford-Fulkerson para encontrar el flujo máximo
 							Map<Node, List<EdgeFordFulkerson>> adjList = fordFulkerson(aux, _y, _x);
 
-							// Obtén el conjunto mínimo de enlaces a eliminar para d-separar
 							Set<EdgeFordFulkerson> minCutEdges = findMinCut(adjList, _y);
 							minCut.add(minCutEdges);
 
-							// Suma el tamaño del conjunto mínimo de corte al evalScore
 							evalScore += minCutEdges.size();
 						}
 						evalScore = evalScore / (double) this.setOfInitialDAGs.size();
@@ -166,7 +148,6 @@ public class MinCutTreeWidthUnion {
 						evalScore = evalScore / (double) this.setOfInitialDAGs.size();
 					}
 
-					// TODO_: en nuestro caso queremos que sea lo menor posible, porque aquí mide d-separaciones
 					if (evalScore < bestScore) {
 						bestScore = evalScore;
 						bestSubSet = hSubset;
@@ -398,13 +379,76 @@ public class MinCutTreeWidthUnion {
 		return reachable;  // Conjunto de nodos alcanzables desde la fuente
 	}
 
+	Graph constructConditionedGraph(Dag g, Node x, Node y, LinkedList<Node> cond) {
+		// 1. Obtain the set of ancestors of {x, y, cond}
+		HashSet<Node> ancestorSet = new HashSet<>();
+		LinkedList<Node> queue = new LinkedList<>();
+		queue.add(x);
+		queue.add(y);
+		queue.addAll(cond);
 
-	Graph constructConditionedGraph(Dag g, Node x, Node y, LinkedList<Node> cond){
+		while (!queue.isEmpty()) {
+			Node current = queue.poll();
+			if (!ancestorSet.contains(current)) {
+				ancestorSet.add(current);
+				List<Node> parents = g.getParents(current);
+				queue.addAll(parents);
+			}
+		}
+
+		// 2. Create an auxiliary graph with only the ancestral nodes
+		Graph aux = new EdgeListGraph();
+		for (Node node : ancestorSet) {
+			aux.addNode(node);
+		}
+
+		// 3. Add only the edges connecting ancestral nodes
+		for (Edge e : g.getEdges()) {
+			Node tail = e.getNode1();
+			Node head = e.getNode2();
+			if (ancestorSet.contains(tail) && ancestorSet.contains(head)) {
+				if (e.isDirected()) {
+					aux.addEdge(new Edge(tail, head, Endpoint.TAIL, Endpoint.ARROW));
+				}
+			}
+		}
+
+		// 4. Moralize the graph: connect parents that are not already connected
+		for (Node node : aux.getNodes()) {
+			List<Node> parents = aux.getParents(node);
+			for (int i = 0; i < parents.size(); i++) {
+				for (int j = i + 1; j < parents.size(); j++) {
+					Node p1 = parents.get(i);
+					Node p2 = parents.get(j);
+					if (!aux.isAdjacentTo(p1, p2)) {
+						aux.addUndirectedEdge(p1, p2);
+					}
+				}
+			}
+		}
+
+		// 5. Convert all edges to undirected
+		for (Edge e : aux.getEdges()) {
+			if (e.isDirected()) {
+				e.setEndpoint1(Endpoint.TAIL);
+				e.setEndpoint2(Endpoint.TAIL);
+			}
+		}
+
+		// 6. Remove the conditioning nodes from the auxiliary graph
+		aux.removeNodes(cond);
+
+		return aux;
+	}
+
+
+
+	Graph constructConditionedGraph_old(Dag g, Node x, Node y, LinkedList<Node> cond){
 		// 1. Inicialización: Listas abiertas (nodos a explorar) y cerradas (nodos ya visitados)
 		LinkedList<Node> open = new LinkedList<>();
 		HashMap<String,Node> close = new HashMap<>();
 
-		// Se añaden x, y y los nodos del conjunto condicional a la lista de exploración
+		// Se añaden x, e y los nodos del conjunto condicional a la lista de exploración
 		open.add(x);
 		open.add(y);
 		open.addAll(cond);
@@ -500,5 +544,26 @@ public class MinCutTreeWidthUnion {
 	public void setMaxTW(int maxTW) {
 		this.maxTW = maxTW;
 	}
+
+	// Generate random subsets with a size limit, always including the empty subset
+	private List<HashSet<Node>> generateRandomSubsets(List<Node> nodes, int maxSize) {
+		// Make a random copy of the nodes to ensure randomness
+		List<Node> shuffledNodes = new ArrayList<>(nodes);
+		Collections.shuffle(shuffledNodes);
+
+		// Limit the number of nodes to maxSize
+		List<Node> filteredNodes = shuffledNodes.subList(0, Math.min(shuffledNodes.size(), maxSize));
+
+		// Generate the power set of the filtered nodes
+		List<HashSet<Node>> powerSet = BESThread.generatePowerSet(filteredNodes);
+
+		// Ensure the empty set is included
+		if (!powerSet.contains(new HashSet<Node>())) {
+			powerSet.add(new HashSet<Node>());
+		}
+
+		return powerSet;
+	}
+
 
 }

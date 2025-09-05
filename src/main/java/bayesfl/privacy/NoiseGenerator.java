@@ -70,5 +70,15 @@ public interface NoiseGenerator {
      * @return a new array where each element has DP noise added
      */
     double[] privatize(double[] values);
+
+    /**
+     * Sets the sensitivity of the function being privatized.
+     * <p>
+     * This is used to adjust the scale of the noise based on the sensitivity of the data.
+     * </p>
+     *
+     * @param newSensitivity the new sensitivity value
+     */
+    void setSensitivity(double newSensitivity);
 }
 

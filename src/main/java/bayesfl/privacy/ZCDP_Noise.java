@@ -43,7 +43,9 @@ import java.util.Random;
  */
 public class ZCDP_Noise implements NoiseGenerator {
 
-    private final double sigma;
+    private double sigma;
+    private double rho;
+    private double sensitivity;
 
     /**
      * Constructs a zCDP noise generator.
@@ -53,7 +55,21 @@ public class ZCDP_Noise implements NoiseGenerator {
      */
     public ZCDP_Noise(double rho, double sensitivity) {
         if (rho <= 0) throw new IllegalArgumentException("zCDP parameter rho must be > 0.");
+
+        this.rho = rho;
+        this.sensitivity = sensitivity;
         this.sigma = computeZCDPScale(sensitivity, rho);
+    }
+
+    /**
+     * Sets the sensitivity of the noise generator.
+     *
+     * @param newSensitivity the new sensitivity value
+     */
+    @Override
+    public void setSensitivity(double newSensitivity) {
+        this.sensitivity = newSensitivity;
+        this.sigma = computeZCDPScale(newSensitivity, this.rho);
     }
 
     /**
