@@ -72,11 +72,12 @@ public class BNClusterExperiment {
         int nClients = Integer.parseInt(parameters[8]);
         String maxEdgesIt = parameters[9];
         int nIterations = Integer.parseInt(parameters[10]);
+        double alpha = Double.parseDouble(parameters[11]);
         
         LocalExperiment.PATH = "./";
         
         // Launch the experiment
-        launchExperiment(net, algorithm, convergence, fusionC, limitC, fusionS, limitS, bbdd, nClients, maxEdgesIt, nIterations);
+        launchExperiment(net, algorithm, convergence, fusionC, limitC, fusionS, limitS, bbdd, nClients, maxEdgesIt, nIterations, alpha);
     }
 
 }
