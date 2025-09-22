@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 /**
- *    DenoisableModel.java
+ *    NumericNoiseGenerator.java
  *    Copyright (C) 2025 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
@@ -31,22 +31,44 @@
 
 package bayesfl.privacy;
 
-import bayesfl.model.Model;
-
 /**
- * General interface for models that support the injection of differential privacy noise.
+ * Interface for injecting Differential Privacy (DP) noise into numerical values.
+ * <p>
+ * Implementations of this interface define how to add noise to individual values or arrays of values
+ * according to a specific DP mechanism (e.g., Laplace, Gaussian). This abstraction allows models
+ * to apply DP without depending on the underlying privacy mechanism.
+ * </p>
+ * <p>
+ * Typical use cases include privatizing counts, probabilities, or parameters in federated or
+ * distributed learning settings.
+ * </p>
  */
-public interface DenoisableModel extends Model {
+public interface NumericNoiseGenerator extends NoiseGenerator {
 
     /**
-     * Applies differential privacy noise to the internal representation of the model.
+     * Adds differential privacy noise to a single scalar value.
+     *
+     * @param value the original (non-private) value
+     * @return the privatized value with noise added
+     */
+    double privatize(double value);
+
+    /**
+     * Adds differential privacy noise independently to each element of a vector.
+     *
+     * @param values the original (non-private) array of values
+     * @return a new array where each element has DP noise added
+     */
+    double[] privatize(double[] values);
+
+    /**
+     * Sets the sensitivity of the function being privatized.
      * <p>
-     * The model is responsible for identifying which internal values require protection
-     * and applying the noise appropriately using the provided {@link NoiseGenerator}.
+     * This is used to adjust the scale of the noise based on the sensitivity of the data.
      * </p>
      *
-     * @param noise the noise generator to use (e.g., Laplace, Gaussian, zCDP)
+     * @param newSensitivity the new sensitivity value
      */
-    void applyNoise(NoiseGenerator noise);
-
+    void setSensitivity(double newSensitivity);
 }
+

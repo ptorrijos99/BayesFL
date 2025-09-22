@@ -22,7 +22,7 @@
  *  SOFTWARE.
  */
 /**
- *    NoiseGenerator.java
+ *    NumericDenoisableModel.java
  *    Copyright (C) 2025 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
@@ -31,14 +31,19 @@
 
 package bayesfl.privacy;
 
-import java.util.Random;
+/**
+ * Interface for models that support the injection of differential privacy noise to numeric values.
+ * <p>
+ * Implementing classes are expected to apply a given {@link NumericNoiseGenerator}
+ * to their internal structures (e.g., class counts, conditional probabilities, parameters)
+ * in order to ensure privacy-preserving learning.
+ * </p>
+ * <p>
+ * This interface is intended to be used with models such as {@code PT} or {@code WDPT}
+ * that contain numerical components which may leak information and therefore require noise injection.
+ * </p>
+ */
+public interface NumericDenoisableModel extends DenoisableModel {
 
-public interface NoiseGenerator {
-    /**
-     * The random number generator used for generating noise.
-     * <p>
-     * It can be replaced with a more secure or reproducible generator if needed.
-     * </p>
-     */
-    Random rng = new Random();
+
 }

@@ -41,7 +41,7 @@ import java.util.Random;
  * the scale parameter {@code b = sensitivity / ε}.
  * </p>
  */
-public class Laplace_Noise implements NoiseGenerator {
+public class Laplace_Noise implements NumericNoiseGenerator {
 
     private double scale;
     private double epsilon;

@@ -80,6 +80,8 @@ baselines/
 ### Specific experiment scripts folder
 scripts*/
 
+logos/
+
 res/classification/AnDE/Census-Income_(KDD).arff
 src/main/java/consensusBN/Experiments/prueba.java
 /scripts-slurm
@@ -90,3 +92,4 @@ res/regression/Year_Prediction_MSD.arff
 pru*.java
 
 
+BBDD_noIID/

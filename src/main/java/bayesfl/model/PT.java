@@ -30,6 +30,7 @@ package bayesfl.model;
 /**
  * Third-party imports.
  */
+import bayesfl.privacy.NoiseGenerator;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.meta.FilteredClassifier;
@@ -44,8 +45,8 @@ import java.util.Map;
  */
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import bayesfl.privacy.DenoisableModel;
-import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.NumericDenoisableModel;
+import bayesfl.privacy.NumericNoiseGenerator;
 import weka.estimators.Estimator;
 
 import static bayesfl.experiments.utils.ExperimentUtils.*;
@@ -53,7 +54,7 @@ import static bayesfl.experiments.utils.ExperimentUtils.*;
 /**
  * A class representing naive Bayes.
  */
-public class PT implements DenoisableModel {
+public class PT implements NumericDenoisableModel {
 
     /**
      * The list of classifiers (can be only one, for example for Naive Bayes).
@@ -105,20 +106,24 @@ public class PT implements DenoisableModel {
      */
     @Override
     public void applyNoise(NoiseGenerator noise) {
+        if (!(noise instanceof NumericNoiseGenerator numericNoise)) {
+            throw new IllegalArgumentException("Noise generator must be a NumericNoiseGenerator");
+        }
+
         for (AbstractClassifier classifier : ensemble) {
             if (classifier instanceof FilteredClassifier fc) {
                 if (fc.getClassifier() instanceof NaiveBayes nb) {
 
                     // Privatize class distribution
                     DiscreteEstimator classDist = (DiscreteEstimator) nb.getClassEstimator();
-                    applyNoiseToEstimator(noise, classDist);
+                    applyNoiseToEstimator(numericNoise, classDist);
 
                     // Privatize conditional estimators (conditional probabilities for each attribute given class)
                     Estimator[][] conds = nb.getConditionalEstimators();
                     for (Estimator[] cond : conds) {
                         for (Estimator est : cond) {
                             if (est instanceof DiscreteEstimator de) {
-                                applyNoiseToEstimator(noise, de);
+                                applyNoiseToEstimator(numericNoise, de);
                             }
                         }
                     }
@@ -135,10 +140,10 @@ public class PT implements DenoisableModel {
      * to obtain a valid probability distribution. The estimator is then updated to reflect the privatized distribution.
      * </p>
      *
-     * @param noise          the {@link NoiseGenerator} that adds Laplace noise to the counts
+     * @param noise          the {@link NumericNoiseGenerator} that adds Laplace noise to the counts
      * @param estimator      the {@link DiscreteEstimator} containing the counts to privatize
      */
-    void applyNoiseToEstimator(NoiseGenerator noise, DiscreteEstimator estimator) {
+    void applyNoiseToEstimator(NumericNoiseGenerator noise, DiscreteEstimator estimator) {
         int k = estimator.getNumSymbols();
 
         /* 1. original counts */
