@@ -40,6 +40,8 @@ import bayesfl.data.BN_DataSet;
 import bayesfl.fusion.BN_FusionIntersection;
 import bayesfl.fusion.BN_FusionUnion;
 import bayesfl.fusion.Fusion;
+import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.RandomizedResponse_Noise;
 import edu.cmu.tetrad.data.DataSet;
 import bayesfl.Client;
 import bayesfl.Server;
@@ -62,7 +64,7 @@ public class LocalExperiment {
     }
     
     public static void simpleExperiment() {
-        String net = "andes";
+        String net = "child";
         String algName = "GES";
         String convergence = "Multiple";  // "Multiple" "Score" "Model"
         String fusionClient = "Union";
@@ -78,7 +80,7 @@ public class LocalExperiment {
         //String[] bbdd_paths = new String[]{"0", "1", "2", "3"};
         //launchExperiment(net, algName, convergence, fusionClient, fusionServer, bbdd_paths, maxEdgesIt, nIterations);
         
-        String bbdd = "-1";
+        String bbdd = "0";
         int nClients = 10;
 
         String limitC = "-1";
@@ -86,11 +88,13 @@ public class LocalExperiment {
 
         double alpha = 0;  // Controls the no-IID level of the data distribution
 
-        launchExperiment(net, algName, convergence, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations, alpha);
+        double epsilon = 8.0; // Privacy level for DP-FL. 0 means no privacy
+
+        launchExperiment(net, algName, convergence, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations, alpha, epsilon);
     }
 
 
-    public static void launchExperiment(String net, String algName, String convergence, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations, double alpha) {
+    public static void launchExperiment(String net, String algName, String convergence, String fusionC, String limitC, String fusionS, String limitS, String bbdd, int nClients, String maxEdgesIt, int nIterations, double alpha, double epsilon) {
         DataSet allData = null;
         ArrayList<DataSet> divisionData = null;
         int maxEdgesItInt;
@@ -113,10 +117,10 @@ public class LocalExperiment {
             System.out.println("Nodes: " + divisionData.get(0).getNumColumns() + ", Limit: " + maxEdgesIt + ", Max Edges: " + maxEdgesItInt + "\n");
         }
 
-        String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + convergence + "," + fusionS + "," + limitS + "," + alpha;
+        String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + convergence + "," + fusionS + "," + limitS + "," + alpha + "," + epsilon;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        if (!checkExistentFile(savePath)) {
+        //if (!checkExistentFile(savePath)) {
             if (!Objects.equals(bbdd, "-1")) divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
@@ -136,7 +140,13 @@ public class LocalExperiment {
                 data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
                 LocalAlgorithm algorithm = new BN_GES(algName, "None", maxEdgesItInt);
 
-                Client client = new Client(fusionClient, algorithm, data);
+                Client client;
+                if (epsilon > 0.0) {
+                    NoiseGenerator noiseGenerator = new RandomizedResponse_Noise(epsilon);
+                    client = new Client(fusionClient, algorithm, data, noiseGenerator);
+                } else {
+                    client = new Client(fusionClient, algorithm, data);
+                }
                 client.setStats(true, true, PATH);
                 client.setExperimentName(operation);
                 clients.add(client);
@@ -176,9 +186,9 @@ public class LocalExperiment {
             server.run();
             
             writeExistentFile(savePath);
-        } else {
-            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        }
+        //} else {
+        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        //}
     }
 
     public static int matchMaxEdgesIt(String maxEdgesIt, int nNodes) {

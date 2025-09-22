@@ -33,6 +33,8 @@ package bayesfl.model;
 import java.util.List;
 import java.util.Map;
 
+import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.NumericNoiseGenerator;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
@@ -49,8 +51,8 @@ import optimize.Minimizer;
  */
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import bayesfl.privacy.DenoisableModel;
-import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.NumericDenoisableModel;
+import bayesfl.privacy.NumericNoiseGenerator;
 
 
 import static bayesfl.experiments.utils.ExperimentUtils.*;
@@ -60,7 +62,7 @@ import static bayesfl.experiments.utils.ExperimentUtils.*;
  * This model stores a list of parameter trees and classifiers,
  * one for each combination used in the AnDE structure (n=0 is Naive Bayes).
  */
-public class WDPT implements DenoisableModel {
+public class WDPT implements NumericDenoisableModel {
 
     /**
      * The list of tree-based parameter storages (one per combination).
@@ -118,7 +120,7 @@ public class WDPT implements DenoisableModel {
     }
 
     /**
-     * Applies noise to the internal probabilistic parameters of the model using a {@link NoiseGenerator}.
+     * Applies noise to the internal probabilistic parameters of the model using a {@link NumericNoiseGenerator}.
      * <p>
      * This method perturbs the class prior probabilities and conditional distributions in each
      * {@link wdBayesParametersTree}. Since the model stores these values in probability space
@@ -134,17 +136,21 @@ public class WDPT implements DenoisableModel {
      */
     @Override
     public void applyNoise(NoiseGenerator noise) {
+        if (!(noise instanceof NumericNoiseGenerator numericNoise)) {
+            throw new IllegalArgumentException("Noise generator must be a NumericNoiseGenerator");
+        }
+
         for (wdBayesParametersTree tree : trees) {
             // Privatize classCounts[] (linear scale)
             double[] original = tree.getClassCounts();
-            double[] noisy = noise.privatize(original);
+            double[] noisy = numericNoise.privatize(original);
             double[] renorm = normalize(noisy);
             System.arraycopy(renorm, 0, tree.classCounts, 0, renorm.length);
 
             // Privatize xyCount[] in log-space
             if (tree.wdBayesNode_ != null) {
                 for (int i = 0; i < tree.wdBayesNode_.length; i++) {
-                    applyNoiseToNode(tree.wdBayesNode_[i], noise);
+                    applyNoiseToNode(tree.wdBayesNode_[i], numericNoise);
                 }
             }
         }
@@ -156,7 +162,7 @@ public class WDPT implements DenoisableModel {
      * The {@code xyCount[]} array contains log-probabilities of P(x | parents). This method:
      * <ul>
      *     <li>Exponentiates the values to retrieve probabilities</li>
-     *     <li>Adds noise using the given {@link NoiseGenerator}</li>
+     *     <li>Adds noise using the given {@link NumericNoiseGenerator}</li>
      *     <li>Renormalizes the result to form a valid probability distribution</li>
      *     <li>Converts the values back to log-space and overwrites {@code xyCount[]}</li>
      * </ul>
@@ -169,7 +175,7 @@ public class WDPT implements DenoisableModel {
      * @param node  the node whose conditional probabilities will be perturbed
      * @param noise the {@link NoiseGenerator} to apply
      */
-    private void applyNoiseToNode(wdBayesNode node, NoiseGenerator noise) {
+    private void applyNoiseToNode(wdBayesNode node, NumericNoiseGenerator noise) {
         if (node == null || node.xyCount == null) return;
 
         int len = node.xyCount.length;

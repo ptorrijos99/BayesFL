@@ -23,7 +23,7 @@
  */
 /**
  *    BN.java
- *    Copyright (C) 2024 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2025 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
@@ -32,7 +32,8 @@
 package bayesfl.model;
 
 import bayesfl.experiments.utils.ExperimentUtils;
-import bayesfl.privacy.Anonymizable;
+import bayesfl.privacy.*;
+import edu.cmu.tetrad.data.DiscreteVariable;
 import edu.cmu.tetrad.graph.*;
 
 import org.albacete.simd.utils.Utils;
@@ -40,7 +41,7 @@ import bayesfl.data.Data;
 
 import java.util.*;
 
-public class BN implements Model, Anonymizable {
+public class BN implements Model, Anonymizable, DenoisableModel {
     
     private Dag dag;
     
@@ -129,7 +130,7 @@ public class BN implements Model, Anonymizable {
         int tw = Utils.getTreeWidth(this.dag);
 
         String completePath = path + "results/" + epoch + "/" + data.getName() + "_" + operation + "_" + nClients + "_" + id + ".csv";
-        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,convergence,fusionS,limitS,alpha,nClients,id,iteration,instances,threads,bdeu,SMHD,SHD,fusSim,edges,tw,time(s)\n";
+        String header = "bbdd,algorithm,maxEdges,fusionC,limitC,convergence,fusionS,limitS,alpha,epsilon,nClients,id,iteration,instances,threads,bdeu,SMHD,SHD,fusSim,edges,tw,time(s)\n";
         String results = data.getName() + "," +
                         operation + "," +
                         nClients + "," +
@@ -148,6 +149,60 @@ public class BN implements Model, Anonymizable {
         System.out.println(results);
 
         ExperimentUtils.saveExperiment(completePath, header, results);
+    }
+
+    /**
+     * Applies structural noise to the DAG using the Randomized Response mechanism
+     * to provide ε-differential privacy at the edge level.
+     * <p>
+     * This method iterates over every possible edge in the graph. For each potential edge,
+     * it flips its existence (present to absent, or absent to present) with a small
+     * probability determined by the privacy budget ε. This ensures that the shared DAG
+     * structure is a noisy version of the original, protecting client-specific data.
+     * The process also ensures that no cycles are introduced into the DAG.
+     * </p>
+     *
+     * @param noise The noise generator, expected to be a {@link RandomizedResponse_Noise} instance.
+     */
+    @Override
+    public void applyNoise(NoiseGenerator noise) {
+        if (!(noise instanceof RandomizedResponse_Noise rrNoise)) {
+            // Optional: throw an exception or do nothing if the noise generator is not of the expected type.
+            System.err.println("Warning: applyNoise called on BN model without a RandomizedResponse_Noise generator. No noise applied.");
+            return;
+        }
+
+        List<Node> nodes = this.dag.getNodes();
+
+        // Iterate over all pairs of nodes to consider every possible edge.
+        // This is crucial: we don't just remove existing edges, but also add edges that were not present.
+        for (int i = 0; i < nodes.size(); i++) {
+            for (int j = 0; j < nodes.size(); j++) {
+                if (i == j) continue;
+
+                Node node1 = nodes.get(i);
+                Node node2 = nodes.get(j);
+
+                // 1. Determine the actual state of the edge (present or absent).
+                boolean edgeExists = this.dag.getEdge(node1, node2) != null;
+
+                // 2. Apply Randomized Response to decide the final (noisy) state of the edge.
+                boolean finalEdgeState = rrNoise.flip(edgeExists);
+
+                // 3. If the final state is 'present', add the edge to the new DAG, ensuring it does not create a cycle.
+                if (finalEdgeState) {
+                    // Map the original nodes to their counterparts in the new noisy DAG.
+                    Node noisyNode1 = this.dag.getNode(node1.getName());
+                    Node noisyNode2 = this.dag.getNode(node2.getName());
+
+                    // Crucial: Check for cycles BEFORE adding the edge.
+                    // An edge from node1 to node2 creates a cycle if a path already exists from node2 to node1.
+                    if (!this.dag.paths().existsDirectedPath(noisyNode2, noisyNode1)) {
+                        this.dag.addDirectedEdge(noisyNode1, noisyNode2);
+                    }
+                }
+            }
+        }
     }
     
     @Override

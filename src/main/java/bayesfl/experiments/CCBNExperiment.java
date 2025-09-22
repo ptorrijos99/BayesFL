@@ -42,7 +42,7 @@ import bayesfl.fusion.*;
 import bayesfl.model.Classes;
 import bayesfl.privacy.Gaussian_Noise;
 import bayesfl.privacy.Laplace_Noise;
-import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.NumericNoiseGenerator;
 import bayesfl.privacy.ZCDP_Noise;
 import weka.core.Instances;
 import weka.core.Utils;
@@ -57,7 +57,6 @@ import bayesfl.convergence.NoneConvergence;
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
 import static bayesfl.data.Weka_Instances.divide;
-import static bayesfl.experiments.utils.ExperimentUtils.binomial;
 import static bayesfl.experiments.utils.ExperimentUtils.computeSensitivity;
 
 /**
@@ -454,7 +453,7 @@ public class CCBNExperiment {
     }
 
     /**
-     * Creates a {@link NoiseGenerator} based on Weka-style differential privacy options.
+     * Creates a {@link NumericNoiseGenerator} based on Weka-style differential privacy options.
      * <p>
      * Accepted formats:
      * <ul>
@@ -465,9 +464,9 @@ public class CCBNExperiment {
      * If the input is empty or invalid, the method returns {@code null}.
      *
      * @param dpOptions array of command-line style options
-     * @return a configured {@link NoiseGenerator} instance or {@code null} if disabled or invalid
+     * @return a configured {@link NumericNoiseGenerator} instance or {@code null} if disabled or invalid
      */
-    private static NoiseGenerator getNoiseGenerator(String[] dpOptions) {
+    private static NumericNoiseGenerator getNoiseGenerator(String[] dpOptions) {
         if (dpOptions == null || dpOptions.length == 0) return null;
 
         // Copy the options to avoid modifying the original array
@@ -534,7 +533,7 @@ public class CCBNExperiment {
 
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE);
 
-            NoiseGenerator dp = getNoiseGenerator(dpOptions);
+            NumericNoiseGenerator dp = getNoiseGenerator(dpOptions);
             try {
                 // Copy the dpOptions to avoid modifying the original array
                 dpOptions = Arrays.copyOf(dpOptions, dpOptions.length);

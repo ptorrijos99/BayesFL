@@ -33,20 +33,7 @@ package bayesfl.privacy;
 
 import java.util.Random;
 
-/**
- * Interface for injecting Differential Privacy (DP) noise into numerical values.
- * <p>
- * Implementations of this interface define how to add noise to individual values or arrays of values
- * according to a specific DP mechanism (e.g., Laplace, Gaussian). This abstraction allows models
- * to apply DP without depending on the underlying privacy mechanism.
- * </p>
- * <p>
- * Typical use cases include privatizing counts, probabilities, or parameters in federated or
- * distributed learning settings.
- * </p>
- */
 public interface NoiseGenerator {
-
     /**
      * The random number generator used for generating noise.
      * <p>
@@ -54,31 +41,4 @@ public interface NoiseGenerator {
      * </p>
      */
     Random rng = new Random();
-
-    /**
-     * Adds differential privacy noise to a single scalar value.
-     *
-     * @param value the original (non-private) value
-     * @return the privatized value with noise added
-     */
-    double privatize(double value);
-
-    /**
-     * Adds differential privacy noise independently to each element of a vector.
-     *
-     * @param values the original (non-private) array of values
-     * @return a new array where each element has DP noise added
-     */
-    double[] privatize(double[] values);
-
-    /**
-     * Sets the sensitivity of the function being privatized.
-     * <p>
-     * This is used to adjust the scale of the noise based on the sensitivity of the data.
-     * </p>
-     *
-     * @param newSensitivity the new sensitivity value
-     */
-    void setSensitivity(double newSensitivity);
 }
-

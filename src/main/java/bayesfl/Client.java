@@ -37,6 +37,7 @@ import bayesfl.fusion.Fusion;
 import bayesfl.model.Model;
 import bayesfl.privacy.DenoisableModel;
 import bayesfl.privacy.NoiseGenerator;
+import bayesfl.privacy.NumericNoiseGenerator;
 
 public class Client {
 
@@ -141,7 +142,7 @@ public class Client {
      * @param data The data that the client will use to build the local model.
      * @param noiseGenerator The noise generator used to apply the differential privacy.
      */
-    public Client(Fusion localFusion, Model localModel, LocalAlgorithm localAlgorithm, Data data, NoiseGenerator noiseGenerator) {
+    public Client(Fusion localFusion, Model localModel, LocalAlgorithm localAlgorithm, Data data, NumericNoiseGenerator noiseGenerator) {
         this(localFusion, localModel, localAlgorithm, data);
         this.noiseGenerator = noiseGenerator;
     }

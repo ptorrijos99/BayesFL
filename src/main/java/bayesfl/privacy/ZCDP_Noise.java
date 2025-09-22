@@ -31,8 +31,6 @@
 
 package bayesfl.privacy;
 
-import java.util.Random;
-
 /**
  * Adds Gaussian noise for zero-Concentrated Differential Privacy (zCDP).
  * <p>
@@ -41,7 +39,7 @@ import java.util.Random;
  * where σ is computed as {@code Δ / sqrt(2ρ)}.
  * </p>
  */
-public class ZCDP_Noise implements NoiseGenerator {
+public class ZCDP_Noise implements NumericNoiseGenerator {
 
     private double sigma;
     private double rho;

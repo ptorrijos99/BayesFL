@@ -34,16 +34,7 @@ package bayesfl.privacy;
 import bayesfl.model.Model;
 
 /**
- * Interface for models that support the injection of differential privacy noise.
- * <p>
- * Implementing classes are expected to apply a given {@link NoiseGenerator}
- * to their internal structures (e.g., class counts, conditional probabilities, parameters)
- * in order to ensure privacy-preserving learning.
- * </p>
- * <p>
- * This interface is intended to be used with models such as {@code PT} or {@code WDPT}
- * that contain numerical components which may leak information and therefore require noise injection.
- * </p>
+ * General interface for models that support the injection of differential privacy noise.
  */
 public interface DenoisableModel extends Model {
 
@@ -57,6 +48,5 @@ public interface DenoisableModel extends Model {
      * @param noise the noise generator to use (e.g., Laplace, Gaussian, zCDP)
      */
     void applyNoise(NoiseGenerator noise);
-
 
 }
