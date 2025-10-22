@@ -651,6 +651,8 @@ public class CCBNExperiment {
                 if (dpType.equalsIgnoreCase("Gaussian")) {
                     delta = Double.parseDouble(parameters[16]);
                 }
+            } else {
+                dpType = "None";
             }
         }
 
