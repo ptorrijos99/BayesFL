@@ -128,7 +128,7 @@ public class PT_AnDE implements LocalAlgorithm {
             syntheticClassMaps.add(classMap);
         }
 
-        return new PT(this.ensemble, combinations, syntheticClassMaps);
+        return new PT(this.ensemble, combinations, syntheticClassMaps, originalData.numInstances());
     }
 
     /**

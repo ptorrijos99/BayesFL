@@ -48,6 +48,9 @@ import weka.estimators.DiscreteEstimator;
 import bayesfl.model.Model;
 import bayesfl.model.PT;
 
+/**
+ * A dummy NaiveBayes class to set distributions directly.
+ */
 class DummyNB extends NaiveBayes {
     public void setDistributions(DiscreteEstimator[][] m_Distributions) {
         this.m_Distributions = m_Distributions;
@@ -75,7 +78,7 @@ public class PT_Fusion_Server implements Fusion {
 
     /**
      * Perform the fusion of two models.
-     * 
+     *
      * @param model1 The first model to fuse.
      * @param model2 The second model to fuse.
      * @return The global model fused.
@@ -88,7 +91,7 @@ public class PT_Fusion_Server implements Fusion {
 
     /**
      * Fusion several models.
-     * 
+     *
      * @param models The array of models to fuse.
      * @return The global model fused.
      */
@@ -119,42 +122,64 @@ public class PT_Fusion_Server implements Fusion {
             // Initialize fusion structures
             DiscreteEstimator fusedClassDist = new DiscreteEstimator(numClasses, true);
             List<DiscreteEstimator[]> fusedDistributions = new ArrayList<>();
-            int numAtts = -1;
 
+            // First pass to initialize structure based on the first model
+            // Note: We assume all models have the same attribute structure
+            PT firstPt = (PT) models[0];
+            FilteredClassifier firstFiltered = (FilteredClassifier) firstPt.ensemble.get(i);
+            NaiveBayes firstNB = (NaiveBayes) firstFiltered.getClassifier();
+            int numAtts = firstNB.getConditionalEstimators().length;
+
+            for (int att = 0; att < numAtts; att++) {
+                DiscreteEstimator[] row = new DiscreteEstimator[numClasses];
+                for (int c = 0; c < numClasses; c++) {
+                    // Initialize with the number of symbols from the first model
+                    // (Assumes all clients share the same schema/dictionary)
+                    DiscreteEstimator localEst = (DiscreteEstimator) firstNB.getConditionalEstimators()[att][0];
+                    row[c] = new DiscreteEstimator(localEst.getNumSymbols(), true);
+                }
+                fusedDistributions.add(row);
+            }
+
+            // Aggregation Loop
             for (Model m : models) {
                 PT pt = (PT) m;
                 FilteredClassifier filtered = (FilteredClassifier) pt.ensemble.get(i);
                 NaiveBayes localNB = (NaiveBayes) filtered.getClassifier();
                 Map<String, Integer> localMap = pt.syntheticClassMaps.get(i);
 
-                // First time only: allocate distributions
-                if (fusedDistributions.isEmpty()) {
-                    numAtts = localNB.getConditionalEstimators().length;
-                    for (int att = 0; att < numAtts; att++) {
-                        DiscreteEstimator[] row = new DiscreteEstimator[numClasses];
-                        for (int c = 0; c < numClasses; c++) {
-                            DiscreteEstimator localEst = (DiscreteEstimator) localNB.getConditionalEstimators()[att][0];
-                            row[c] = new DiscreteEstimator(localEst.getNumSymbols(), true);
-                        }
-                        fusedDistributions.add(row);
-                    }
-                }
+                // --- Weighted Aggregation Logic ---
 
-                // Aggregate class distribution
                 for (Map.Entry<String, Integer> entry : localMap.entrySet()) {
                     String label = entry.getKey();
                     int localIdx = entry.getValue();
                     int globalIdx = classMap.get(label);
 
-                    double weight = localNB.getClassEstimator().getProbability(localIdx);
-                    fusedClassDist.addValue(globalIdx, weight);
+                    // 1. Reconstruct Class Count (Weight)
+                    // We use the probability from the estimator * Total Instances of the client
+                    double localClassProb = localNB.getClassEstimator().getProbability(localIdx);
+                    double localClassWeight = localClassProb * pt.getNumInstances();
 
-                    // Aggregate per-attribute conditional estimators
+                    // Add to Global Class Estimator
+                    fusedClassDist.addValue(globalIdx, localClassWeight);
+
+                    // 2. Reconstruct Conditional Counts
                     for (int att = 0; att < numAtts; att++) {
-                        DiscreteEstimator localEstimator = (DiscreteEstimator) localNB.getConditionalEstimators()[att][localIdx];
-                        try {
-                            fusedDistributions.get(att)[globalIdx].aggregate(localEstimator);
-                        } catch (Exception ignored) {}
+                        DiscreteEstimator localEst = (DiscreteEstimator) localNB.getConditionalEstimators()[att][localIdx];
+                        DiscreteEstimator globalEst = fusedDistributions.get(att)[globalIdx];
+
+                        // Iterate over all values of the attribute to reconstruct weights
+                        // instead of using .aggregate() which might rely on internal counts
+                        int nSymbols = localEst.getNumSymbols();
+                        for (int valIdx = 0; valIdx < nSymbols; valIdx++) {
+                            double condProb = localEst.getProbability(valIdx);
+
+                            // The 'mass' of this attribute value is P(x|y) * Count(y)
+                            double valueWeight = condProb * localClassWeight;
+
+                            // Accumulate into global estimator
+                            globalEst.addValue(valIdx, valueWeight);
+                        }
                     }
                 }
             }

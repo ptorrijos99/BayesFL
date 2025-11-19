@@ -72,6 +72,11 @@ public class PT implements NumericDenoisableModel {
     public final List<Map<String, Integer>> syntheticClassMaps;
 
     /**
+     * Number of instances used to train this model.
+     */
+    private int numInstances = 0;
+
+    /**
      * The header for the file.
      */
     private String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
@@ -86,6 +91,14 @@ public class PT implements NumericDenoisableModel {
         this.ensemble = ensemble;
         this.combinations = combinations;
         this.syntheticClassMaps = syntheticClassMaps;
+    }
+
+    /**
+     * Constructor with numInstances
+     */
+    public PT(List<AbstractClassifier> ensemble, List<int[]> combinations, List<Map<String, Integer>> syntheticClassMaps, int numInstances) {
+        this(ensemble, combinations, syntheticClassMaps);
+        this.numInstances = numInstances;
     }
 
     /**
@@ -270,4 +283,11 @@ public class PT implements NumericDenoisableModel {
         throw new UnsupportedOperationException("Method not implemented");
     }
 
+    /**
+     * Gets the number of instances.
+     * * @return The number of instances.
+     */
+    public int getNumInstances() {
+        return this.numInstances;
+    }
 }
