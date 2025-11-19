@@ -191,7 +191,7 @@ public class WDPT_CCBN implements LocalAlgorithm {
             syntheticClassMaps.add(classMap);
         }
 
-        return new WDPT(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions);
+        return new WDPT(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions, data.getNInstances());
     }
 
     /**
@@ -233,7 +233,7 @@ public class WDPT_CCBN implements LocalAlgorithm {
         }
 
         // Return a new model instance with updated parameters
-        return new WDPT(newTrees, classifiers, minimizers, combinations, classMaps, functions);
+        return new WDPT(newTrees, classifiers, minimizers, combinations, classMaps, functions, data.getNInstances());
     }
 
     /**

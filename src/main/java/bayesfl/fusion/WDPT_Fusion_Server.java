@@ -136,7 +136,7 @@ public class WDPT_Fusion_Server implements Fusion {
 
     /**
      * Fuses the parameters from all input models into the global model
-     * by computing the element-wise average of the flattened parameter vectors.
+     * by computing the weighted average of the flattened parameter vectors.
      * <p>
      * Each {@link WDPT} model contains a flattened parameter array via {@link wdBayesParametersTree},
      * which represents all the logarithm probability weights used by the classifier. This method
@@ -151,19 +151,28 @@ public class WDPT_Fusion_Server implements Fusion {
         int length = globalTree.getParameters().length;
         double[] globalParameters = new double[length];
 
-        // Sum all parameter vectors from local models element-wise
+        // Calculate total instances for weighted average
+        double totalInstances = 0;
+        for (Model m : models) {
+            totalInstances += ((WDPT) m).getNumInstances();
+        }
+        if (totalInstances == 0) totalInstances = 1; // Avoid division by zero
+
+        // Sum all parameter vectors from local models element-wise (Weighted)
         for (Model model : models) {
             WDPT localModel = (WDPT) model;
             wdBayesParametersTree localTree = localModel.getTrees().get(index);
             double[] localParameters = localTree.getParameters();
 
-            // Add local parameters to the global accumulator
-            globalParameters = MathArrays.ebeAdd(globalParameters, localParameters);
-        }
+            // Calculate client weight
+            double weight = localModel.getNumInstances() / totalInstances;
 
-        // Compute the average by scaling the sum
-        double val = 1.0 / models.length;
-        globalParameters = MathArrays.scale(val, globalParameters);
+            // Scale local parameters by weight
+            double[] weightedParams = MathArrays.scale(weight, localParameters);
+
+            // Add local parameters to the global accumulator
+            globalParameters = MathArrays.ebeAdd(globalParameters, weightedParams);
+        }
 
         // Inject the averaged parameters into the global model
         globalTree.copyParameters(globalParameters);
@@ -188,6 +197,16 @@ public class WDPT_Fusion_Server implements Fusion {
         int numAttributes = globalTree.getNAttributes();
         int nc = globalTree.getNc();
 
+        // Calculate weights for all models based on instances
+        double totalInstances = 0;
+        for (Model m : models) totalInstances += ((WDPT) m).getNumInstances();
+        if (totalInstances == 0) totalInstances = 1;
+
+        double[] weights = new double[models.length];
+        for(int i=0; i<models.length; i++) {
+            weights[i] = ((WDPT)models[i]).getNumInstances() / totalInstances;
+        }
+
         // Fuse each attribute's conditional distributions
         for (int u = 0; u < numAttributes; u++) {
             wdBayesNode globalNode = globalTree.wdBayesNode_[u];
@@ -201,7 +220,8 @@ public class WDPT_Fusion_Server implements Fusion {
             }
 
             int paramsPerAttVal = globalNode.paramsPerAttVal;
-            fuseNodeProbabilities(globalNode, localNodes, nc, paramsPerAttVal);
+            // Pass weights to the helper method
+            fuseNodeProbabilities(globalNode, localNodes, nc, paramsPerAttVal, weights);
         }
 
         // Fuse and normalize the class prior probabilities
@@ -210,7 +230,7 @@ public class WDPT_Fusion_Server implements Fusion {
 
     /**
      * Fuses the class probabilities from all input models
-     * into the global model by averaging and normalizing them.
+     * into the global model by computing the weighted average.
      * <p>
      * The {@code classCounts} field in each {@link wdBayesParametersTree} is assumed
      * to store normalized class probabilities (i.e., they sum to 1). This method computes
@@ -231,17 +251,21 @@ public class WDPT_Fusion_Server implements Fusion {
         int length = globalTree.getClassCounts().length;
         double[] globalClassProbs = new double[length];
 
-        // Sum the class probability vectors from all models
+        double totalInstances = 0;
+        for (Model m : models) totalInstances += ((WDPT) m).getNumInstances();
+        if (totalInstances == 0) totalInstances = 1;
+
+        // Sum the class probability vectors from all models (Weighted)
         for (Model model : models) {
             WDPT localModel = (WDPT) model;
             wdBayesParametersTree localTree = localModel.getTrees().get(index);
-            double[] localClassProbs = localTree.getClassCounts(); // Assumed to be probabilities
-            globalClassProbs = MathArrays.ebeAdd(globalClassProbs, localClassProbs);
-        }
+            double[] localClassProbs = localTree.getClassCounts();
 
-        // Compute the average of the summed probabilities
-        double val = 1.0 / models.length;
-        globalClassProbs = MathArrays.scale(val, globalClassProbs);
+            double weight = ((WDPT) model).getNumInstances() / totalInstances;
+            double[] weightedProbs = MathArrays.scale(weight, localClassProbs);
+
+            globalClassProbs = MathArrays.ebeAdd(globalClassProbs, weightedProbs);
+        }
 
         // Normalize to ensure the probabilities sum to one and store them in the global model
         globalTree.classCounts = MathArrays.normalizeArray(globalClassProbs, 1);
@@ -265,7 +289,7 @@ public class WDPT_Fusion_Server implements Fusion {
      * @param nc The number of class values.
      * @param paramsPerAttVal The number of values for the attribute represented by this node.
      */
-    private void fuseNodeProbabilities(wdBayesNode globalNode, wdBayesNode[] localNodes, int nc, int paramsPerAttVal) {
+    private void fuseNodeProbabilities(wdBayesNode globalNode, wdBayesNode[] localNodes, int nc, int paramsPerAttVal, double[] weights) {
         // Safety check: skip if node is null or has no data to fuse
         if (globalNode == null || localNodes[0] == null || globalNode.xyCount == null)  {
             return;
@@ -274,16 +298,14 @@ public class WDPT_Fusion_Server implements Fusion {
         int blockSize = nc * paramsPerAttVal;
         double[] globalProbabilities = new double[blockSize];
 
-        // Step 1: Convert logarithm probabilities to linear space and average
+        // Step 1: Convert logarithm probabilities to linear space and average (Weighted)
         for (int i = 0; i < blockSize; i++) {
-            for (wdBayesNode localNode : localNodes) {
-                // Accumulate in linear space
+            for (int m = 0; m < localNodes.length; m++) {
+                wdBayesNode localNode = localNodes[m];
+                // Accumulate in linear space applying client weight
                 double probability = localNode.xyCount[i];
-                globalProbabilities[i] += Math.exp(probability);
+                globalProbabilities[i] += Math.exp(probability) * weights[m];
             }
-
-            // Average
-            globalProbabilities[i] /= localNodes.length;
         }
 
         // Step 2: Normalize each class block
@@ -319,7 +341,6 @@ public class WDPT_Fusion_Server implements Fusion {
 
                 // Collect the corresponding children from all local nodes
                 wdBayesNode[] nextLocals = new wdBayesNode[localNodes.length];
-
                 for (int j = 0; j < localNodes.length; j++) {
                     // Get the i-th child of each local node, if it exists
                     nextLocals[j] = (localNodes[j] != null && localNodes[j].children != null) ? localNodes[j].children[i] : null;
@@ -330,7 +351,8 @@ public class WDPT_Fusion_Server implements Fusion {
                     globalNode.children[i],
                     nextLocals,
                     nc,
-                    globalNode.children[i].paramsPerAttVal
+                    globalNode.children[i].paramsPerAttVal,
+                    weights
                 );
             }
         }

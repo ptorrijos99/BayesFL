@@ -95,6 +95,11 @@ public class WDPT implements NumericDenoisableModel {
     private final List<ObjectiveFunction> functions;
 
     /**
+     * Number of instances used to train this model.
+     */
+    private int numInstances = 0;
+
+    /**
      * The header for the file.
      */
     private final String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
@@ -117,6 +122,16 @@ public class WDPT implements NumericDenoisableModel {
         this.combinations = combinations;
         this.syntheticClassMaps = syntheticClassMaps;
         this.functions = functions;
+    }
+
+    /**
+     * Constructor with numInstances.
+     */
+    public WDPT(List<wdBayesParametersTree> trees, List<AbstractClassifier> classifiers, List<Minimizer> minimizers,
+                List<int[]> combinations, List<Map<String, Integer>> syntheticClassMaps, List<ObjectiveFunction> functions,
+                int numInstances) {
+        this(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions);
+        this.numInstances = numInstances;
     }
 
     /**
@@ -359,5 +374,13 @@ public class WDPT implements NumericDenoisableModel {
      */
     public double getScore(Data data) {
         throw new UnsupportedOperationException("Method not implemented");
+    }
+
+    /**
+     * Gets the number of instances.
+     * * @return The number of instances.
+     */
+    public int getNumInstances() {
+        return this.numInstances;
     }
 }
