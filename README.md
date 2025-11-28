@@ -108,16 +108,43 @@ BayesFL relies principally on Tetrad for working with the structure of BNs and W
 - **Pablo Torrijos, Juan C. Alfaro, José A. Gámez, José M. Puerta**  
   *Federated Learning with Discriminative Naive Bayes Classifier*  
   *25th International Conference on Intelligent Data Engineering and Automated Learning (IDEAL 2024)*  
-  [DOI: 10.1007/978-3-031-77738-7_27](https://doi.org/10.1007/978-3-031-77738-7_27)
+  [DOI: 10.1007/978-3-031-77738-7_27](https://doi.org/10.1007/978-3-031-77738-7_27) | [arXiv:2502.01532](https://arxiv.org/abs/2502.01532)
 
 - **Pablo Torrijos, José A. Gámez, José M. Puerta**  
   *FedGES: A Federated Learning Approach for Bayesian Network Structure Learning*  
-  *27th International Conference on Discovery Science (DS 2024)*  
-  [DOI: 10.1007/978-3-031-78980-9_6](https://doi.org/10.1007/978-3-031-78980-9_6)
+  *Machine Learning (2025)* (Accepted for publication, extended version)*  
+
+  - *Conference version:* **Pablo Torrijos, José A. Gámez, José M. Puerta**  
+    *FedGES: A Federated Learning Approach for Bayesian Network Structure Learning*  
+    *27th International Conference on Discovery Science (DS 2024)*  
+    [DOI: 10.1007/978-3-031-78980-9_6](https://doi.org/10.1007/978-3-031-78980-9_6) | [arXiv:2502.01538](https://arxiv.org/abs/2502.01538)
 
 
 
 ---
+
+#### 🧬 Bayesian Network Fusion (`consensusBN`)
+
+- **Pablo Torrijos, José M. Puerta, José A. Gámez, Juan A. Aledo**  
+  *Bayesian Network Structural Consensus via Greedy Min-Cut Analysis*  
+  *40th AAAI Conference on Artificial Intelligence (AAAI 2026) (Accepted)*  
+  [arXiv:2504.00467](https://arxiv.org/abs/2504.00467)
+
+- **Pablo Torrijos, José A. Gámez, José M. Puerta, Juan A. Aledo**  
+  *Genetic Algorithms for Tractable Bayesian Network Fusion via Pre-Fusion Edge Pruning*  
+  *Proceedings of the Genetic and Evolutionary Computation Conference 2025 (GECCO 2025)*  
+  [DOI: 10.1145/3712256.3726333](https://doi.org/10.1145/3712256.3726333)
+
+- **Pablo Torrijos, José A. Gámez, José M. Puerta**  
+  *Structural Fusion of Bayesian Networks with Limited Treewidth Using Genetic Algorithms*  
+  *IEEE Congress on Evolutionary Computation (CEC 2024)*  
+  [DOI: 10.1109/CEC60901.2024.10611976](https://doi.org/10.1109/CEC60901.2024.10611976)
+
+- **José M. Puerta, Juan A. Aledo, José A. Gámez, Jorge D. Laborda**  
+  *Efficient and Accurate Structural Fusion of Bayesian Networks*  
+  *Information Fusion, Vol. 66, 2021*  
+  [DOI: 10.1016/j.inffus.2020.09.003](https://doi.org/10.1016/j.inffus.2020.09.003)
+
 
 #### ⚙️ Parallel and Distributed BN Structural Learning (`org.albacete.simd`)
 
@@ -130,39 +157,26 @@ BayesFL relies principally on Tetrad for working with the structure of BNs and W
   *Distributed Fusion-based Algorithms for Learning High-Dimensional Bayesian Networks: Testing Ring and Star Topologies*  
   *International Journal of Approximate Reasoning, Vol. 175, 2024*  
   [DOI: 10.1016/j.ijar.2024.109302](https://doi.org/10.1016/j.ijar.2024.109302)
+  - *Conference version:* **Jorge D. Laborda, Pablo Torrijos, José M. Puerta, José A. Gámez**  
+    *A Ring-Based Distributed Algorithm for Learning High-Dimensional Bayesian Networks*  
+    *17th European Conference on Symbolic and Quantitative Approaches to Reasoning with Uncertainty (ECSQARU 2023)*  
+    [DOI: 10.1007/978-3-031-45608-4_10](https://doi.org/10.1007/978-3-031-45608-4_10) | [arXiv:2409.13314](https://arxiv.org/abs/2409.13314)
 
 #### 🔍 MCTS BN Structural Learning (`org.albacete.simd.mctsbn`)
 
 - **Jorge D. Laborda, Pablo Torrijos, José M. Puerta, José A. Gámez**  
   *Enhancing Bayesian Network Structural Learning with Monte Carlo Tree Search*  
   *20th International Conference on Information Processing and Management of Uncertainty in Knowledge-Based Systems (IPMU 2024)*  
-  [DOI: 10.1007/978-3-031-74003-9_32](https://doi.org/10.1007/978-3-031-74003-9_32)
+  [DOI: 10.1007/978-3-031-74003-9_32](https://doi.org/10.1007/978-3-031-74003-9_32) | [arXiv:2502.01527](https://arxiv.org/abs/2502.01527)
 
 #### 📊 Bayesian Classification (`org.albacete.simd.mAnDE`)
 
 - **Pablo Torrijos, José A. Gámez, José M. Puerta**  
   *MiniAnDE: A Reduced AnDE Ensemble to Deal with Microarray Data*  
   *24th International Conference on Engineering Applications of Neural Networks (EANN / EAAAI 2023)*  
-  [DOI: 10.1007/978-3-031-34204-2_12](https://doi.org/10.1007/978-3-031-34204-2_12)
+  [DOI: 10.1007/978-3-031-34204-2_12](https://doi.org/10.1007/978-3-031-34204-2_12) | [arXiv:2311.12879](https://arxiv.org/abs/2311.12879)
 
-#### 🧬 Bayesian Network Fusion (`consensusBN`)
 
-- **Pablo Torrijos, José M. Puerta, José A. Gámez, Juan A. Aledo**  
-  *Informed Greedy Algorithm for Scalable Bayesian Network Fusion via Minimum Cut Analysis*  
-  *arXiv preprint, 2025*  
-  [arXiv:2504.00467](https://arxiv.org/abs/2504.00467)
-
-- **Pablo Torrijos, José A. Gámez, José M. Puerta**  
-  *Structural Fusion of Bayesian Networks with Limited Treewidth Using Genetic Algorithms*  
-  *IEEE Congress on Evolutionary Computation (CEC 2024)*  
-  [DOI: 10.1109/CEC60901.2024.10611976](https://doi.org/10.1109/CEC60901.2024.10611976)
-
-- **José M. Puerta, Juan A. Aledo, José A. Gámez, Jorge D. Laborda**  
-  *Efficient and Accurate Structural Fusion of Bayesian Networks*  
-  *Information Fusion, Vol. 66, 2021*  
-  [DOI: 10.1016/j.inffus.2020.09.003](https://doi.org/10.1016/j.inffus.2020.09.003)
-
-  
 
 ---
 
