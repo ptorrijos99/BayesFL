@@ -102,13 +102,26 @@ public class Weka_Instances implements Data {
     public static Instances[][][] divide(String name, String path, int nFolds, int nClients, int seed) {
         Data data = new Weka_Instances(name, path);
         Instances instances = (Instances) data.getData();
+        Random random = new Random(seed);
+        Instances[][][] splits = new Instances[nFolds][nClients][2];
+
+        if (nClients == 1) {
+            // If there is only one client, we do CV directly
+            instances.randomize(random); // Randomize for CV
+            instances.stratify(nFolds);  // Stratify for CV
+
+            for (int j = 0; j < nFolds; j++) {
+                Instances train = instances.trainCV(nFolds, j, random);
+                Instances test = instances.testCV(nFolds, j);
+                splits[j][0][0] = train;
+                splits[j][0][1] = test;
+            }
+            return splits;
+        }
 
         // Stratify the data for the clients
-        Random random = new Random(seed);
         instances.randomize(random);
         instances.stratify(nClients);
-
-        Instances[][][] splits = new Instances[nFolds][nClients][2];
 
         for (int i = 0; i < nClients; i++) {
             // Get the data for the client, which corresponds
