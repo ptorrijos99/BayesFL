@@ -417,13 +417,24 @@ public class CCBNExperiment {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
-        if (!outputPath.isEmpty() && done(outputPath)) {
-            System.out.println("Skip: " + outputPath);
-            return models;
-        }
-
         for (int i = 0; i < nFolds; i++) {
-            // Copy the options to avoid modifying the original array
+            /// --- 1. SUPERSET CHECK (Skip logic) ---
+            // Check if ANY file (current or larger) already has this fold COMPLETED in BOTH Build and Fusion.
+            // If we want 50 iters, and a file with 100 iters exists and is valid -> SKIP.
+            if (!outputPath.isEmpty() && isFoldCompleteInSuperset(outputPath, i, nIterations)) {
+                // Log message is printed inside the helper
+                continue;
+            }
+
+            // --- 2. SANITIZATION (Clean logic) ---
+            // If we are here, it means we DO NOT have a valid complete fold.
+            // We must ensure the target file is clean. If it contains partial data (e.g. iter 30 of 100)
+            // or inconsistent data (only in Build but not Fusion), we DELETE that fold's rows.
+            if (!outputPath.isEmpty()) {
+                cleanCorruptOrPartialFold(outputPath, i, nIterations);
+            }
+
+            // --- 3. PREPARE EXECUTION ---
             String[] discretizerOptionsTemp = Arrays.copyOf(discretizerOptions, discretizerOptions.length);
             String[] algorithmOptionsTemp = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
             String[] clientOptionsTemp = Arrays.copyOf(clientOptions, clientOptions.length);
@@ -439,6 +450,8 @@ public class CCBNExperiment {
                 modelAnDE = modelsAnDE[i];
             }
             String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients);
+
+            System.out.println(">>> RUNNING: Dataset " + datasetName + " | Fold " + i);
 
             models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, dpOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
         }
@@ -571,29 +584,29 @@ public class CCBNExperiment {
     public static void main(String[] args) {
         // Default dataset and experimental configuration
         String folder = "Discretas";
-        String datasetName = "Soybean";
-        int nClients = 100;
+        String datasetName = "Nursey";
+        int nClients = 2;
         int seed = 42;
-        int nFolds = 5;
-        int nIterations = 10;
+        int nFolds = 2;
+        int nIterations = 5;
 
         // Structure and parameter learning configurations
-        String structure = "A2DE";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
+        String structure = "NB";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
         String parameterLearning = "wCCBN";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
-        String maxIterations = "5";
+        String maxIterations = "100";
 
         // Fusion behaviour
         boolean fuseParameters = true;
-        boolean fuseProbabilities = true;
+        boolean fuseProbabilities = false;
         int nBins = -1;
 
         // Differential privacy parameters
-        String dpType = "Laplace";  // "Laplace", "Gaussian", "ZCDP", "None"
+        String dpType = "None";  // "Laplace", "Gaussian", "ZCDP", "None"
         double epsilon = 1;      // for Laplace and Gaussian
         double delta = 1e-5;     // only for Gaussian
         double rho = 0.1;        // only for ZCDP
         double sensitivity = 1.0;  // default for PT; smaller for WDPT
-        boolean autoSensitivity  = true; // Calculate sensitivity automatically based on the data columns
+        boolean autoSensitivity  = false; // Calculate sensitivity automatically based on the data columns
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -689,5 +702,193 @@ public class CCBNExperiment {
 
         // Run the experiment
         CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, suffix);
+    }
+
+    /**
+     * Scans for any result file that matches the experiment configuration.
+     * Returns TRUE if and only if a file exists that:
+     * 1. Has equal or more iterations than required.
+     * 2. Contains the specific 'foldToCheck' fully completed (reached target iterations).
+     * 3. Exists and is valid in BOTH 'Build' and 'Fusion' directories.
+     */
+    private static boolean isFoldCompleteInSuperset(String targetFilename, int foldToCheck, int targetIterations) {
+        String[] subDirs = {"results/Client/Build/", "results/Client/Fusion/"};
+
+        if (!targetFilename.endsWith(".csv")) return false;
+
+        // Parse the filename to find "siblings" (files with different iteration counts)
+        String rawName = targetFilename.substring(0, targetFilename.length() - 4);
+        String[] parts = rawName.split("_");
+        if (parts.length < 2) return false;
+
+        // Reconstruct Prefix and Suffix to search for files like "..._100_5.csv", "..._200_5.csv"
+        StringBuilder prefixBuilder = new StringBuilder();
+        for(int i=0; i < parts.length - 2; i++) prefixBuilder.append(parts[i]).append("_");
+        String searchPrefix = prefixBuilder.toString();
+        String searchSuffix = "_" + parts[parts.length - 1] + ".csv";
+
+        // Scan Build directory for candidates
+        java.io.File buildDir = new java.io.File(subDirs[0]);
+        if (!buildDir.exists()) return false;
+
+        java.io.File[] candidates = buildDir.listFiles((d, name) -> name.startsWith(searchPrefix) && name.endsWith(searchSuffix));
+        if (candidates == null) return false;
+
+        for (java.io.File candidate : candidates) {
+            try {
+                // Check 1: Does the file config have enough iterations?
+                String name = candidate.getName();
+                String iterStr = name.substring(searchPrefix.length(), name.length() - searchSuffix.length());
+                int fileConfigIters = Integer.parseInt(iterStr);
+
+                if (fileConfigIters < targetIterations) continue; // File is too short for our needs
+
+                // Check 2: Deep inspection of CONTENT in both directories
+                // We need to verify that THIS specific fold actually reached 'targetIterations' inside the CSV.
+                // (e.g. The file might say _100_ in name, but Fold 1 might have crashed at iter 30).
+
+                boolean validInBuild = isFileValidForFold(subDirs[0] + name, foldToCheck, targetIterations);
+                boolean validInFusion = isFileValidForFold(subDirs[1] + name, foldToCheck, targetIterations);
+
+                if (validInBuild && validInFusion) {
+                    System.out.println(">>> SKIP: Dataset Fold " + foldToCheck + " already complete in " + name + " (Found " + fileConfigIters + " iters)");
+                    return true;
+                }
+
+            } catch (Exception e) {
+                // Ignore parse errors
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a specific CSV file contains the fold and if that fold reached the target iterations.
+     */
+    private static boolean isFileValidForFold(String path, int foldToCheck, int targetIterations) {
+        java.io.File file = new java.io.File(path);
+        if (!file.exists()) return false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line = br.readLine(); // Header
+            if (line == null) return false;
+
+            // Dynamic header parsing
+            String[] headers = line.split(",");
+            int cvIndex = -1;
+            int iterIndex = -1;
+
+            for (int i = 0; i < headers.length; i++) {
+                if (headers[i].trim().equalsIgnoreCase("cv")) cvIndex = i;
+                if (headers[i].trim().equalsIgnoreCase("iteration")) iterIndex = i;
+            }
+
+            if (cvIndex == -1 || iterIndex == -1) return false;
+
+            int maxIterFound = -1;
+
+            while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty()) continue;
+                String[] values = line.split(",");
+                if (values.length <= Math.max(cvIndex, iterIndex)) continue;
+
+                try {
+                    int currentCV = Integer.parseInt(values[cvIndex].trim());
+                    if (currentCV == foldToCheck) {
+                        int currentIter = Integer.parseInt(values[iterIndex].trim());
+                        if (currentIter > maxIterFound) maxIterFound = currentIter;
+                    }
+                } catch (NumberFormatException ignored) {}
+            }
+
+            // It is valid ONLY if we found enough iterations
+            return maxIterFound >= targetIterations;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Ensures strict consistency. If the superset check failed, we assume the data currently
+     * in the files is either incomplete (iter 3 of 5) or inconsistent (exists in Build but not Fusion).
+     * * Action: It WIPES all rows belonging to 'foldToCheck' from both Build and Fusion files.
+     * This forces a clean restart for that specific fold.
+     */
+    private static void cleanCorruptOrPartialFold(String targetFilename, int foldToCheck, int targetIterations) {
+        String[] subDirs = {"results/Client/Build/", "results/Client/Fusion/"};
+
+        for (String dir : subDirs) {
+            String fullPath = dir + targetFilename;
+            java.io.File file = new java.io.File(fullPath);
+
+            if (!file.exists()) continue; // Nothing to clean
+
+            // We check if this specific file is actually valid.
+            // If isFileValidForFold returns TRUE, it means this specific file is fine.
+            // HOWEVER, since we are in this method, it means the GLOBAL check failed (maybe the other folder is missing).
+            // So we perform a "consistency wipe".
+
+            try {
+                // Read entire file to memory (safe for results CSVs which are usually < 100MB)
+                List<String> lines = new ArrayList<>();
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = br.readLine()) != null) lines.add(line);
+                }
+
+                if (lines.isEmpty()) continue;
+
+                // Parse Header
+                String header = lines.get(0);
+                String[] headers = header.split(",");
+                int cvIndex = -1;
+                for (int i = 0; i < headers.length; i++) {
+                    if (headers[i].trim().equalsIgnoreCase("cv")) {
+                        cvIndex = i;
+                        break;
+                    }
+                }
+
+                if (cvIndex == -1) continue;
+
+                // Rewrite file filtering out the dirty fold
+                List<String> cleanLines = new ArrayList<>();
+                cleanLines.add(header);
+
+                boolean dirtyFound = false;
+
+                for (int i = 1; i < lines.size(); i++) {
+                    String line = lines.get(i);
+                    if (line.trim().isEmpty()) continue;
+
+                    try {
+                        String[] values = line.split(",");
+                        int cv = Integer.parseInt(values[cvIndex].trim());
+
+                        if (cv == foldToCheck) {
+                            dirtyFound = true; // Found row for this fold -> DROP IT
+                        } else {
+                            cleanLines.add(line); // Keep rows for other folds
+                        }
+                    } catch (Exception e) {
+                        cleanLines.add(line); // Keep malformed/other lines
+                    }
+                }
+
+                // Write back ONLY if we removed something
+                if (dirtyFound) {
+                    System.out.println(">>> CLEANING: Wiping incomplete/inconsistent data for Fold " + foldToCheck + " in " + fullPath);
+                    try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(file))) {
+                        for (String l : cleanLines) {
+                            pw.println(l);
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                System.err.println("Warning: Failed to clean file " + fullPath + ": " + e.getMessage());
+            }
+        }
     }
 }
