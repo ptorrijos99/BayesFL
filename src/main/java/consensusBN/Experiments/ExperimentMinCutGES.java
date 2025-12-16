@@ -820,8 +820,8 @@ public class ExperimentMinCutGES {
         Map<Integer, Dag> cachedDags = new HashMap<>();
         if (!cacheFile.exists()) return cachedDags;
         try (RandomAccessFile raf = new RandomAccessFile(cacheFile, "r");
-             FileChannel channel = raf.getChannel();
-             FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
+            FileChannel channel = raf.getChannel();
+            FileLock lock = channel.lock(0L, Long.MAX_VALUE, true)) {
             ByteBuffer buffer = ByteBuffer.allocate((int) channel.size());
             channel.read(buffer);
             buffer.flip();
@@ -840,8 +840,8 @@ public class ExperimentMinCutGES {
         Map<Integer, Dag> mergedCache = readCache(cacheFile);
         newEntries.forEach(mergedCache::putIfAbsent);
         try (RandomAccessFile raf = new RandomAccessFile(cacheFile, "rw");
-             FileChannel channel = raf.getChannel();
-             FileLock lock = channel.lock()) {
+            FileChannel channel = raf.getChannel();
+            FileLock lock = channel.lock()) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(mergedCache);
