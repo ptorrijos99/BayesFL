@@ -26,37 +26,7 @@ public class Experiments {
 
     // TODO: DESCOMENTAR ESTAS LÍNEAS
     /*public static void main(String[] args) {
-        int index = Integer.parseInt(args[0]);
-        String paramsFileName = args[1];
 
-        // Read the parameters from args
-        String[] parameters = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
-            String line;
-            for (int i = 0; i < index; i++)
-                br.readLine();
-            line = br.readLine();
-            parameters = line.split(" ");
-        }
-        catch(Exception e){ System.out.println(e); }
-        //String[] parameters = new String[]{"andes", "0", "10", "1000", "1000", "1"};
-
-        System.out.println("Number of hyperparams: " + parameters.length);
-        int i=0;
-        for (String string : parameters) {
-            System.out.println("Param[" + i + "]: " + string);
-            i++;
-        }
-
-        // Read the parameters from file
-        String net = parameters[0];
-        int nClients = Integer.parseInt(parameters[1]);
-        int popSize = Integer.parseInt(parameters[2]);
-        int nIterations = Integer.parseInt(parameters[3]);
-        double twLimit = Double.parseDouble(parameters[4]);
-        int seed = Integer.parseInt(parameters[5]);
-        boolean againstOriginalDAGs = Boolean.parseBoolean(parameters[6]);
-        boolean mectricIsSMHD = Boolean.parseBoolean(parameters[7]);
 
         ConsensusUnion.metricAgainstOriginalDAGs = againstOriginalDAGs;
         ConsensusUnion.metricSMHD = mectricIsSMHD;
@@ -68,22 +38,65 @@ public class Experiments {
     }*/
 
     public static void main(String[] args) {
-        // Real network (net = net.bbdd)
-        //String net = "child.0";
+        String net;
+        int nClients;
+        int popSize;
+        int nIterations;
+        double twLimit;
+        int seed;
+        boolean againstOriginalDAGs;
+        boolean mectricIsSMHD;
 
-        // Generic network (net = number of nodes)
-        String net = ""+30;
+        if (args.length < 2) {  // Local execution
+            // Real network (net = net.bbdd)
+            //String net = "child.0";
 
-        verbose = true;
+            // Generic network (net = number of nodes)
+            net = "" + 30;
 
-        int nClients = 50;
-        int popSize = 100;
-        int nIterations = 100;
-        double twLimit = 2;
-        int seed = 1;
+            verbose = true;
 
-        boolean againstOriginalDAGs = true;
-        boolean mectricIsSMHD = true;
+            nClients = 50;
+            popSize = 100;
+            nIterations = 100;
+            twLimit = 2;
+            seed = 1;
+            againstOriginalDAGs = true;
+            mectricIsSMHD = true;
+
+        } else{
+            int index = Integer.parseInt(args[0]);
+            String paramsFileName = args[1];
+
+            // Read the parameters from args
+            String[] parameters = null;
+            try (BufferedReader br = new BufferedReader(new FileReader(paramsFileName))) {
+                String line;
+                for (int i = 0; i < index; i++)
+                    br.readLine();
+                line = br.readLine();
+                parameters = line.split(" ");
+            }
+            catch(Exception e){ System.out.println(e); }
+            //String[] parameters = new String[]{"andes", "0", "10", "1000", "1000", "1"};
+
+            System.out.println("Number of hyperparams: " + parameters.length);
+            int i=0;
+            for (String string : parameters) {
+                System.out.println("Param[" + i + "]: " + string);
+                i++;
+            }
+
+            // Read the parameters from file
+            net = parameters[0];
+            nClients = Integer.parseInt(parameters[1]);
+            popSize = Integer.parseInt(parameters[2]);
+            nIterations = Integer.parseInt(parameters[3]);
+            twLimit = Double.parseDouble(parameters[4]);
+            seed = Integer.parseInt(parameters[5]);
+            againstOriginalDAGs = Boolean.parseBoolean(parameters[6]);
+            mectricIsSMHD = Boolean.parseBoolean(parameters[7]);
+        }
 
         ConsensusUnion.metricAgainstOriginalDAGs = againstOriginalDAGs;
         ConsensusUnion.metricSMHD = mectricIsSMHD;
