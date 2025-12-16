@@ -234,21 +234,47 @@ public class ExperimentUtils {
             throw new RuntimeException(e);
         }
 
-        // Initialize the start time of the evaluation
         double startTime = System.currentTimeMillis();
+
+        // New variables for probabilistic metrics
+        double sumLogLoss = 0.0;
+        double sumBrier = 0.0;
+        int N = instances.numInstances();
+        int numClasses = instances.numClasses();
 
         try {
             EnsembleClassifier ensembleClassifier = new EnsembleClassifier(ensemble, syntheticClassMaps);
             ensembleClassifier.buildClassifier(instances);
+
+            // Standard Weka evaluation
             evaluation.evaluateModel(ensembleClassifier, instances);
+
+            // Manual calculation for LogLoss and Brier to match Python
+            for (int i = 0; i < N; i++) {
+                Instance inst = instances.instance(i);
+                double[] probs = ensembleClassifier.distributionForInstance(inst);
+                int trueClass = (int) inst.classValue();
+
+                // LogLoss with epsilon clipping
+                double epsilon = 1e-15;
+                double p = Math.max(Math.min(probs[trueClass], 1 - epsilon), epsilon);
+                sumLogLoss -= Math.log(p);
+
+                // Multiclass Brier Score (Sum of Squared Errors)
+                double instanceBrier = 0.0;
+                for (int k = 0; k < numClasses; k++) {
+                    double target = (k == trueClass) ? 1.0 : 0.0;
+                    instanceBrier += Math.pow(probs[k] - target, 2);
+                }
+                sumBrier += instanceBrier;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Get the time of the evaluation and convert it to seconds
         double time = (System.currentTimeMillis() - startTime) / 1000.0;
 
-        int numClasses = instances.numClasses();
         double accuracy = evaluation.pctCorrect() / 100.0;
         double precision = 0.0;
         double recall = 0.0;
@@ -268,7 +294,11 @@ public class ExperimentUtils {
         recall /= numClasses;
         f1 /= numClasses;
 
-        return accuracy + "," + precision + "," + recall + "," + f1 + "," + time + ",";
+        double finalLogLoss = sumLogLoss / N;
+        double finalBrier = sumBrier / N;
+
+        // Return matched format: Acc, Pr, Rc, F1, LogLoss, Brier, Time
+        return accuracy + "," + precision + "," + recall + "," + f1 + "," + finalLogLoss + "," + finalBrier + "," + time + ",";
     }
 
 
