@@ -1,6 +1,7 @@
 package consensusBN;
 
 import consensusBN.Method.*;
+import consensusBN.MinCutTreeWidthUnion;
 import edu.cmu.tetrad.graph.*;
 import edu.cmu.tetrad.graph.Dag;
 import org.albacete.simd.utils.Utils;
@@ -23,6 +24,19 @@ public class GeneticTreeWidthUnion {
     public Boolean useSuperGreedy = false;
     public Boolean addEmptySuperGreedy = false;
     public Boolean useMinCutBES = false;
+    public boolean useGreedyWarmstart = true;
+
+    /** Pre-run MinCutTreeWidthUnion to reuse as warmstart (avoids redundant computation). */
+    public MinCutTreeWidthUnion precomputedMinCut = null;
+    /** Index into precomputedMinCut.outputExperiment* for the best snapshot to use. */
+    public int precomputedMinCutBestIdx = -1;
+
+    /** Pre-computed per-client DAGs for this TW (injected from ExperimentsJournal pre-run). */
+    public List<Dag> cachedGreedyDags = null;
+    /** Pre-computed per-client DAGs for TW-1 (avoids second greedy call in initializePopulation). */
+    public List<Dag> cachedGreedyDagsM1 = null;
+    /** Wall-clock time of the pre-computation (seconds). */
+    public double cachedGreedyTime = -1;
 
     // Best values and stats
     private boolean[] bestIndividual;
@@ -31,6 +45,9 @@ public class GeneticTreeWidthUnion {
     public double executionTime;
     public double executionTimeUnion;
     public double executionTimeGreedy;
+
+    /** Best fitness recorded after each iteration, for convergence analysis. */
+    public List<Double> convergenceCurve = new ArrayList<>();
 
     // "Final" variables
     private final Random random;
@@ -73,11 +90,18 @@ public class GeneticTreeWidthUnion {
         this.maxTreewidth = maxTreewidth;
     }
 
+    public List<Node> getAlpha() { return alpha; }
+
     /**
      * Complete union of the DAGs limiting the tree-width of the fused DAG.
      * @return The union of the DAGs.
      */
     public Dag fusionUnion() {
+        // Reset per-call state so repeated calls on the same instance are independent
+        bestFitness = Double.MAX_VALUE;
+        bestDag = null;
+        convergenceCurve = new ArrayList<>();
+
         double startTime = System.currentTimeMillis();
         treeWidths = new int[populationSize];
 
@@ -90,13 +114,30 @@ public class GeneticTreeWidthUnion {
 
         if (candidatesFromInitialDAGs) {
             if (!repeatCandidates) {
-                method = new InitialDAGsWoRepeat_Method();
+                InitialDAGsWoRepeat_Method idag = new InitialDAGsWoRepeat_Method();
+                if (cachedGreedyDags != null) {
+                    idag.cachedGreedyDags   = cachedGreedyDags;
+                    idag.cachedGreedyDagsM1 = cachedGreedyDagsM1;
+                    idag.cachedGreedyTime   = cachedGreedyTime;
+                }
+                method = idag;
             }
             else {
                 if (useMinCutBES) {
-                    method = new InitialDAGs_Method(true);
+                    InitialDAGs_Method idag = new InitialDAGs_Method(true);
+                    if (precomputedMinCut != null && precomputedMinCutBestIdx >= 0) {
+                        idag.precomputedMinCut = precomputedMinCut;
+                        idag.precomputedBestIdx = precomputedMinCutBestIdx;
+                    }
+                    method = idag;
                 } else {
-                    method = new InitialDAGs_Method();
+                    InitialDAGs_Method idag = new InitialDAGs_Method();
+                    if (cachedGreedyDags != null) {
+                        idag.cachedGreedyDags   = cachedGreedyDags;
+                        idag.cachedGreedyDagsM1 = cachedGreedyDagsM1;
+                        idag.cachedGreedyTime   = cachedGreedyTime;
+                    }
+                    method = idag;
                 }
             }
         }
@@ -104,23 +145,37 @@ public class GeneticTreeWidthUnion {
             method = new Fusion_Method(useSuperGreedy, addEmptySuperGreedy);
         }
 
+        method.setUseGreedyWarmstart(useGreedyWarmstart);
         method.initialize(originalDags, alpha, alphaDags, maxTreewidth, random);
         population = method.initializePopulation(populationSize);
         totalEdges = population[0].length;
         bestIndividual = population[0].clone();
 
         for (int i = 0; i < numIterations; i++) {
-            //System.out.println("Iteration " + j);
             evaluate();
             crossover();
             evaluate();
             mutate();
+            convergenceCurve.add(bestFitness);
         }
 
         executionTime = (System.currentTimeMillis() - startTime) / 1000;
 
         greedyDag = method.getGreedyDag();
         executionTimeGreedy = method.getExecutionTimeGreedy();
+
+        // Fallback: if no individual satisfied the TW constraint.
+        // When useGreedyWarmstart=true, use the greedy solution (natural fallback).
+        // When useGreedyWarmstart=false (ablation), use an empty DAG: it trivially
+        // satisfies any TW constraint, is identical for all algorithms, and honestly
+        // reflects that without warmstart the GA found no valid solution.
+        if (bestDag == null) {
+            if (useGreedyWarmstart) {
+                bestDag = greedyDag;
+            } else {
+                bestDag = new Dag(alpha);
+            }
+        }
 
         return bestDag;
     }

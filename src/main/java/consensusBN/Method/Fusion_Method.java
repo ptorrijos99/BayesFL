@@ -33,6 +33,10 @@ public class Fusion_Method implements Population {
 
     private final boolean useSuperGreedy;
     private final boolean addEmptySuperGreedy;
+    private boolean useGreedyWarmstart = true;
+
+    @Override
+    public void setUseGreedyWarmstart(boolean use) { this.useGreedyWarmstart = use; }
 
     public Fusion_Method(boolean useSuperGreedy, boolean addEmptySuperGreedy) {
         this.useSuperGreedy = useSuperGreedy;
@@ -84,18 +88,19 @@ public class Fusion_Method implements Population {
         boolean[][] population = new boolean[populationSize][totalEdges];
         boolean uniform = minFreq == maxFreq;
 
-        // Add the greedy solution to the population
-        for (int i = 0; i < totalEdges; i++) {
-            population[0][i] = greedyDag.containsEdge(edgesAlpha.get(i));
+        int i = 0;
+        if (useGreedyWarmstart) {
+            // Add the greedy solution to the population
+            for (int j = 0; j < totalEdges; j++) {
+                population[0][j] = greedyDag.containsEdge(edgesAlpha.get(j));
+            }
+            // Add the greedy solution with maxTreewidth-1 to the population
+            Dag greedy = applyGreedyMaxTreewidth(alpha, edgesAlpha, ""+(maxTreewidth-1));
+            for (int j = 0; j < totalEdges; j++) {
+                population[1][j] = greedy.containsEdge(edgesAlpha.get(j));
+            }
+            i = 2;
         }
-
-        // Add the greedy solutions with maxTreewidth-1 to the population
-        Dag greedy = applyGreedyMaxTreewidth(alpha, edgesAlpha, ""+(maxTreewidth-1));
-        for (int i = 0; i < totalEdges; i++) {
-            population[1][i] = greedy.containsEdge(edgesAlpha.get(i));
-        }
-
-        int i = 2;
         if (useSuperGreedy) {
             // Add the superGreedy solutions with maxTreewidth to the population, starting from the greedy DAG
             ConsensusUnion.allPossibleArcs = false;

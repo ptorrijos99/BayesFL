@@ -17,4 +17,8 @@ public interface Population {
     public Dag getGreedyDag();
 
     public double getExecutionTimeGreedy();
+
+    /** Controls whether the greedy solution is injected into population[0]/[1] as warmstart.
+     *  Default no-op — implementing classes override this to set their internal flag. */
+    default void setUseGreedyWarmstart(boolean use) { }
 }
