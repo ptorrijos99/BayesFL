@@ -8,6 +8,7 @@ import java.util.*;
 
 import static consensusBN.BetaToAlpha.transformToAlpha;
 import static consensusBN.ConsensusUnion.*;
+import static org.albacete.simd.utils.Utils.getTreeWidth;
 
 public class InitialDAGsWoRepeat_Method implements Population {
 
@@ -24,6 +25,17 @@ public class InitialDAGsWoRepeat_Method implements Population {
     private Dag greedyDag;
     private List<Dag> greedyDags;
     private double executionTimeGreedy;
+
+    /** Pre-computed per-client DAGs for maxTreewidth (skips expensive greedy re-run). */
+    public List<Dag> cachedGreedyDags = null;
+    /** Pre-computed per-client DAGs for maxTreewidth-1 (skips second greedy call in initializePopulation). */
+    public List<Dag> cachedGreedyDagsM1 = null;
+    /** Wall-clock time of the pre-computation for cachedGreedyDags (seconds). */
+    public double cachedGreedyTime = -1;
+    private boolean useGreedyWarmstart = true;
+
+    @Override
+    public void setUseGreedyWarmstart(boolean use) { this.useGreedyWarmstart = use; }
 
     @Override
     public void initialize(List<Dag> dags, List<Node> alpha, List<Dag> alphaDags, int maxTreewidth, Random random) {
@@ -47,10 +59,23 @@ public class InitialDAGsWoRepeat_Method implements Population {
         }
         edges = new ArrayList<>(edgeFrequency.keySet());
 
-        double startTime = System.currentTimeMillis();
-        greedyDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, alpha, ""+maxTreewidth);
-        greedyDag = fusionUnion(greedyDags);
-        executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
+        if (cachedGreedyDags != null) {
+            greedyDags = cachedGreedyDags;
+            greedyDag = fusionUnion(greedyDags);
+            if (getTreeWidth(greedyDag) > maxTreewidth) {
+                greedyDag = applyGreedyMaxTreewidth(alpha, new ArrayList<>(greedyDag.getEdges()), "" + maxTreewidth);
+            }
+            executionTimeGreedy = cachedGreedyTime >= 0 ? cachedGreedyTime : 0;
+        } else {
+            double startTime = System.currentTimeMillis();
+            greedyDags = originalDAGsGreedyTreewidthBeforeWoRepeat(dags, alpha, ""+maxTreewidth);
+            greedyDag = fusionUnion(greedyDags);
+            // The union of individually-trimmed DAGs can exceed maxTreewidth — trim again if needed
+            if (getTreeWidth(greedyDag) > maxTreewidth) {
+                greedyDag = applyGreedyMaxTreewidth(alpha, new ArrayList<>(greedyDag.getEdges()), "" + maxTreewidth);
+            }
+            executionTimeGreedy = (System.currentTimeMillis() - startTime) / 1000;
+        }
 
         totalEdges = edgeFrequency.size();
     }
@@ -68,23 +93,28 @@ public class InitialDAGsWoRepeat_Method implements Population {
         boolean[][] population = new boolean[populationSize][totalEdges];
         boolean uniform = minFreq == maxFreq;
 
-        // Add the greedy solution to the population
-        for (int i = 0; i < totalEdges; i++) {
-            for (Dag greedy : greedyDags) {
-                population[0][i] = greedy.containsEdge(edges.get(i)) || population[0][i];
+        int startRandom = 0;
+        if (useGreedyWarmstart) {
+            // Add the greedy solution to the population
+            for (int i = 0; i < totalEdges; i++) {
+                for (Dag g : greedyDags) {
+                    population[0][i] = g.containsEdge(edges.get(i)) || population[0][i];
+                }
             }
-        }
-
-        // Add the greedy solutions with maxTreewidth-1 to the population
-        List<Dag> greedy = originalDAGsGreedyTreewidthBeforeWoRepeat(originalDags, alpha, ""+(maxTreewidth-1));
-        for (int i = 0; i < totalEdges; i++) {
-            for (Dag g : greedy) {
-                population[1][i] = g.containsEdge(edges.get(i)) || population[1][i];
+            // Add the greedy solutions with maxTreewidth-1 to the population
+            List<Dag> greedyM1 = (cachedGreedyDagsM1 != null)
+                    ? cachedGreedyDagsM1
+                    : originalDAGsGreedyTreewidthBeforeWoRepeat(originalDags, alpha, ""+(maxTreewidth-1));
+            for (int i = 0; i < totalEdges; i++) {
+                for (Dag g : greedyM1) {
+                    population[1][i] = g.containsEdge(edges.get(i)) || population[1][i];
+                }
             }
+            startRandom = 2;
         }
 
         // Initialize the rest of the population with random individuals based on the frequency of the edges
-        for (int i = 2; i < populationSize; i++) {
+        for (int i = startRandom; i < populationSize; i++) {
             for (int j = 0; j < totalEdges; j++) {
                 if (uniform) {
                     population[i][j] = random.nextBoolean();

@@ -93,6 +93,13 @@ public class AlphaOrder {
             Node child;
             boolean seguir;
             do {
+                if (i >= children.size()) {
+                    // All children have alternative directed paths; fall back to the first child
+                    child = children.get(0);
+                    g.removeEdge(node_alpha_g, child);
+                    seguir = false;
+                    break;
+                }
                 child = children.get(i++);
                 g.removeEdge(node_alpha_g, child);
                 seguir = false;
