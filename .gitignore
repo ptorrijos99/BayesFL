@@ -88,8 +88,14 @@ src/main/java/consensusBN/Experiments/prueba.java
 res/classification/metadata nIters.csv
 /res/classification/Big
 res/regression/Year_Prediction_MSD.arff
+res/classification/Microarray
 
 pru*.java
 
-
 BBDD_noIID/
+
+.claude/
+*CLAUDE*
+articulos/
+docs/
+*lbfgsb_wrapper*
