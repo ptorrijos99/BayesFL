@@ -34,15 +34,15 @@ It contains `Client.java` and `Server.java`, general components for federated ex
 
 | Algorithm    | Model | Fusion Type   | Fusion Method(s)                     | Notes                                                              |
 |--------------|--------|----------------|---------------------------------------|--------------------------------------------------------------------|
-| `PT_NB`      | `PT`   | Parametric     | `FusionPosition`                      | WEKA Naive Bayes; parameters averaged across clients               |
-| `PT_CCBN`    | `PT`   | Parametric     | `PT_Fusion_Client`, `PT_Fusion_Server`| Discriminative NB (wdBayes) with federated gradient updates        |
-| `MiniAnDE`    | `mAnDETree`  | Structural     | `mAnDETree_Fusion`                    | Ensemble of reduced AnDE classifiers; fuses trees learned locally    |
+| `PT_AnDE`         | `PT`       | Parametric | `FusionPosition`                            | WEKA AnDE classifier (n=0: NB); parameters averaged across clients  |
+| `WDPT_CCBN`       | `WDPT`     | Parametric | `WDPT_Fusion_Client`, `WDPT_Fusion_Server`  | Discriminative NB (wdBayes) with federated gradient updates         |
+| `mAnDETree_mAnDE` | `mAnDETree`| Structural | `mAnDETree_Fusion`                          | MiniAnDE ensemble of reduced AnDE classifiers; fuses trees locally  |
 
 #### Federated Discretization
 
 | Algorithm    | Model | Fusion Type   | Fusion Method     | Notes                                                       |
 |--------------|--------|----------------|-------------------|--------------------------------------------------------------|
-| `Bins_MDLP`  | `Bins` | Parametric     | `Bins_Fusion`     | Supervised discretization with global cut-point aggregation |
+| `Bins_Supervised` | `Bins` | Parametric | `Bins_Fusion` | Supervised discretization (MDLP) with global cut-point aggregation |
 
 
 ### Additional Modules
@@ -110,9 +110,15 @@ BayesFL relies principally on Tetrad for working with the structure of BNs and W
   *25th International Conference on Intelligent Data Engineering and Automated Learning (IDEAL 2024)*  
   [DOI: 10.1007/978-3-031-77738-7_27](https://doi.org/10.1007/978-3-031-77738-7_27) | [arXiv:2502.01532](https://arxiv.org/abs/2502.01532)
 
+- **Pablo Torrijos, Juan C. Alfaro, José A. Gámez, José M. Puerta**  
+  *Federated Learning of AnDE Classifiers*  
+  *3rd Workshop on Advancements in Federated Learning (WAFL), ECML PKDD 2025*  
+  [DOI: 10.1007/978-3-032-19102-1_28](https://doi.org/10.1007/978-3-032-19102-1_28)
+
 - **Pablo Torrijos, José A. Gámez, José M. Puerta**  
   *FedGES: A Federated Learning Approach for Bayesian Network Structure Learning*  
-  *Machine Learning (2025)* (Accepted for publication, extended version)*  
+  *Machine Learning, Vol. 115, No. 1 (2026)*  
+  [DOI: 10.1007/s10994-025-06939-2](https://doi.org/10.1007/s10994-025-06939-2)
 
   - *Conference version:* **Pablo Torrijos, José A. Gámez, José M. Puerta**  
     *FedGES: A Federated Learning Approach for Bayesian Network Structure Learning*  
@@ -123,7 +129,7 @@ BayesFL relies principally on Tetrad for working with the structure of BNs and W
 
 ---
 
-#### 🧬 Bayesian Network Fusion (`consensusBN`)
+### 🧬 Bayesian Network Fusion (`consensusBN`)
 
 - **Pablo Torrijos, José M. Puerta, José A. Gámez, Juan A. Aledo**  
   *Bayesian Network Structural Consensus via Greedy Min-Cut Analysis*  
