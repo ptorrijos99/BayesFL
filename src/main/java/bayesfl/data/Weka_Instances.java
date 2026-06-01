@@ -83,9 +83,9 @@ public class Weka_Instances implements Data {
     /**
      * Constructs a dataset.
      *
-     * @param name The name of the dataset.
+     * @param name  The name of the dataset.
      * @param train The training data.
-     * @param test The testing data.
+     * @param test  The testing data.
      */
     public Weka_Instances(String name, Instances train, Instances test) {
         this.name = name;
@@ -110,18 +110,23 @@ public class Weka_Instances implements Data {
      * </li>
      * </ul>
      *
-     * @param name The name of the dataset.
-     * @param path The path of the dataset.
-     * @param nFolds The number of folds.
+     * @param name     The name of the dataset.
+     * @param path     The path of the dataset.
+     * @param nFolds   The number of folds.
      * @param nClients The number of clients.
-     * @param seed The seed.
-     * @param alpha The Dirichlet concentration parameter. If <= 0, standard IID partitioning is used.
+     * @param seed     The seed.
+     * @param alpha    The Dirichlet concentration parameter. If <= 0, standard IID  partitioning is used.
      * @return The divided data in format [Fold][Client][0=Train, 1=Test].
      */
     public static Instances[][][] divide(String name, String path, int nFolds, int nClients, int seed, double alpha) {
         Data data = new Weka_Instances(name, path);
         Instances instances = (Instances) data.getData();
         Random random = new Random(seed);
+
+        // LOO sentinel: nFolds=-1 means leave-one-out, i.e. nFolds=numInstances.
+        if (nFolds == -1) {
+            nFolds = instances.numInstances();
+        }
 
         // Structure: [Fold][Client][0=Train, 1=Test]
         Instances[][][] splits = new Instances[nFolds][nClients][2];
@@ -133,7 +138,7 @@ public class Weka_Instances implements Data {
 
         for (int fold = 0; fold < nFolds; fold++) {
             // A. Extract Global Train and Global Test for this fold
-            Instances globalTrain = instances.trainCV(nFolds, fold, random);
+            Instances globalTrain = instances.trainCV(nFolds, fold, new Random(seed));
             Instances globalTest = instances.testCV(nFolds, fold);
 
             // B. Partition the Global Train among clients
@@ -141,7 +146,10 @@ public class Weka_Instances implements Data {
             Random foldRand = new Random(seed + fold);
             List<Instances> clientPartitions;
 
-            if (alpha > 0) {
+            if (nClients <= 1) {
+                // Baseline centralizado
+                clientPartitions = Collections.singletonList(new Instances(globalTrain));
+            } else if (alpha > 0) {
                 // Non-IID: Partition using Dirichlet Distribution
                 clientPartitions = dirichletSplit(globalTrain, nClients, alpha, foldRand);
             } else {
@@ -164,11 +172,11 @@ public class Weka_Instances implements Data {
     /**
      * Unified data partitioning method with default alpha (-1.0, IID).
      *
-     * @param name The name of the dataset.
-     * @param path The path of the dataset.
-     * @param nFolds The number of folds.
+     * @param name     The name of the dataset.
+     * @param path     The path of the dataset.
+     * @param nFolds   The number of folds.
      * @param nClients The number of clients.
-     * @param seed The seed.
+     * @param seed     The seed.
      * @return The divided data in format [Fold][Client][0=Train, 1=Test].
      */
     public static Instances[][][] divide(String name, String path, int nFolds, int nClients, int seed) {
@@ -179,9 +187,9 @@ public class Weka_Instances implements Data {
      * Standard IID Stratified split of a training set among N clients.
      * This ensures every client gets a representative subset of the training data.
      *
-     * @param data The global training data to split.
+     * @param data     The global training data to split.
      * @param nClients The number of clients.
-     * @param rand Random number generator.
+     * @param rand     Random number generator.
      * @return A list of Instances partitions (IID).
      */
     private static List<Instances> stratifiedSplit(Instances data, int nClients, Random rand) {
@@ -201,10 +209,10 @@ public class Weka_Instances implements Data {
      * Core logic to split a dataset into N clients using Dirichlet distribution (Non-IID).
      * Includes "Robin Hood" logic to prevent empty clients.
      *
-     * @param data The dataset to split.
+     * @param data     The dataset to split.
      * @param nClients The number of clients.
-     * @param alpha The heterogeneity parameter.
-     * @param rand The random number generator.
+     * @param alpha    The heterogeneity parameter.
+     * @param rand     The random number generator.
      * @return A list of Instances, one for each client.
      */
     private static List<Instances> dirichletSplit(Instances data, int nClients, double alpha, Random rand) {
@@ -270,7 +278,7 @@ public class Weka_Instances implements Data {
             }
         }
 
-        // --- STEP 4: FIX EMPTY CLIENTS ("Robin Hood" Strategy) ---
+        // 4. Fix empty clients
         // This prevents Weka crashes by ensuring every client has at least 1 instance.
         for (int c = 0; c < nClients; c++) {
             if (clients.get(c).isEmpty()) {
@@ -311,9 +319,9 @@ public class Weka_Instances implements Data {
      * Generates a sample from Gamma(k, theta) using Marsaglia and Tsang's method.
      * Necessary to simulate Dirichlet distribution in Java.
      *
-     * @param k The shape parameter.
+     * @param k     The shape parameter.
      * @param theta The scale parameter.
-     * @param rand The random number generator.
+     * @param rand  The random number generator.
      * @return A random sample from the Gamma distribution.
      */
     private static double sampleGamma(double k, double theta, Random rand) {
@@ -351,7 +359,7 @@ public class Weka_Instances implements Data {
      * Retrieves the data.
      * 
      * @return The data.
-    */
+     */
     @Override
     public Object getData() {
         return this.train;

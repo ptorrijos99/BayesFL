@@ -79,7 +79,7 @@ public class PT implements NumericDenoisableModel {
     /**
      * The header for the file.
      */
-    private final String header = "bbdd,id,cv,algorithm,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,alpha,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trLogLoss,trBrier,trTime,teAcc,tePr,teRc,teF1,teLogLoss,teBrier,teTime,time\n";
+    private final String header = "bbdd,id,cv,algorithm,node,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,alpha,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trLogLoss,trBrier,trTime,teAcc,tePr,teRc,teF1,teLogLoss,teBrier,teTime,time\n";
 
     /**
      * Constructor
@@ -148,9 +148,12 @@ public class PT implements NumericDenoisableModel {
     /**
      * Applies differential privacy noise to a {@link DiscreteEstimator} by perturbing raw counts.
      * <p>
-     * This method retrieves the original symbol counts from the estimator, adds Laplace noise scaled to
-     * the specified privacy budget, clips negative values, applies Laplace smoothing, and normalizes the result
-     * to obtain a valid probability distribution. The estimator is then updated to reflect the privatized distribution.
+     * The client perturbs only the raw counts (the +1 Weka adds at construction is stripped
+     * before noising and re-added after, so {@link PT_Fusion_Server} can keep its existing
+     * {@code getCount(i) - 1.0} convention to recover noisy raw counts). Per-client Laplace
+     * smoothing (extra α) and total-mass rescaling are intentionally NOT applied here:
+     * smoothing must happen only once, at the server, after aggregation — otherwise each
+     * client biases the local estimate toward uniform and the bias accumulates with K.
      * </p>
      *
      * @param noise          the {@link NumericNoiseGenerator} that adds Laplace noise to the counts
@@ -159,28 +162,19 @@ public class PT implements NumericDenoisableModel {
     void applyNoiseToEstimator(NumericNoiseGenerator noise, DiscreteEstimator estimator) {
         int k = estimator.getNumSymbols();
 
-        /* 1. original counts */
-        double[] counts = new double[k];
-        double oldSum = 0.0;
-        for (int i = 0; i < k; i++) {
-            counts[i] = estimator.getCount(i);
-            oldSum   += counts[i];
-        }
+        /* 1. raw counts (undo Weka's built-in +1 init) */
+        double[] raw = new double[k];
+        for (int i = 0; i < k; i++) raw[i] = estimator.getCount(i) - 1.0;
 
-        /* 2. Laplace noise */
-        double[] noisy = noise.privatize(counts);
+        /* 2. Laplace noise on raw counts */
+        double[] noisy = noise.privatize(raw);
 
-        /* 3. clip + smoothing */
-        double alpha = 1e-3;
-        for (int i = 0; i < k; i++) {
-            noisy[i] = Math.max(0.0, noisy[i]) + alpha;
-        }
+        /* 3. clip negatives (consistency only — no smoothing α here) */
+        for (int i = 0; i < k; i++) noisy[i] = Math.max(0.0, noisy[i]);
 
-        /* 4. rescale to keep the same total mass */
+        /* 4. re-add Weka's +1 so the server's getCount(i)-1.0 still recovers the noisy count */
         double newSum = 0.0;
-        for (double v : noisy) newSum += v;
-        double scale = oldSum / newSum;          // preserves magnitude expected by Weka
-        for (int i = 0; i < k; i++) noisy[i] *= scale;
+        for (int i = 0; i < k; i++) { noisy[i] += 1.0; newSum += noisy[i]; }
 
         /* 5. overwrite internal arrays via reflection */
         try {
@@ -191,7 +185,7 @@ public class PT implements NumericDenoisableModel {
 
             double[] mCounts = (double[]) fCounts.get(estimator);
             System.arraycopy(noisy, 0, mCounts, 0, k);
-            fSum.setDouble(estimator, oldSum);        // = sum(noisy) after rescale
+            fSum.setDouble(estimator, newSum);
         } catch (Exception e) {
             throw new RuntimeException("Unable to set privatized counts", e);
         }
@@ -260,6 +254,7 @@ public class PT implements NumericDenoisableModel {
         statistics += metrics;
 
         statistics += time + "\n";
+        System.out.println(statistics);
 
         saveExperiment("results/" + epoch + "/" + path, header, statistics);
     }

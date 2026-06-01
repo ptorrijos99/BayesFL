@@ -59,16 +59,16 @@ public class LocalExperiment {
     public static String PATH = "./";
     
     public static void main(String[] args) {
-        simpleExperiment();
-        //multipleExperiment();
+        //simpleExperiment();
+        multipleExperiment();
     }
     
     public static void simpleExperiment() {
-        String net = "child";
+        String net = "alarm";
         String algName = "GES";
         String convergence = "Multiple";  // "Multiple" "Score" "Model"
         String fusionClient = "Union";
-        String fusionServer = "MinCut";  //"Union" "Consensus" "GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
+        String fusionServer = "Consensus";  //"Union" "Consensus" "GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
         
         String maxEdgesIt = "5";  // "10" "0.15" "log2" "log10" "sqrt2" "sqrt3"...
 
@@ -84,13 +84,46 @@ public class LocalExperiment {
         int nClients = 10;
 
         String limitC = "-1";
-        String limitS = "0.0";
+        String limitS = "50";
 
         double alpha = 0;  // Controls the no-IID level of the data distribution
 
-        double epsilon = 8.0; // Privacy level for DP-FL. 0 means no privacy
+        double epsilon = 0; // Privacy level for DP-FL. 0 means no privacy
 
         launchExperiment(net, algName, convergence, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations, alpha, epsilon);
+    }
+
+    public static void multipleExperiment() {
+        String[] nets = new String[]{"child", "alarm", "hepar2", "andes"};
+        String algName = "GES";
+        String convergence = "Multiple";  // "Multiple" "Score" "Model"
+        String fusionClient = "Union";
+        String fusionServer = "Consensus";  //"Union" "Consensus" "GeneticTW" "MaxTreewidth" "MaxFrequency" "MinCut"
+
+        String maxEdgesIt = "5";  // "10" "0.15" "log2" "log10" "sqrt2" "sqrt3"...
+
+        int nIterations = 150;
+
+        //int maxEdgesIt = 10000000;
+        //int nIterations = 1;
+
+        String[] bbdd_paths = new String[]{"0", "1", "2", "3", "4"};
+        int[] nClientsArr = new int[]{5, 10, 20, 50, 100};
+
+        String limitC = "-1";
+        String limitS = "50";
+
+        double alpha = 0;  // Controls the no-IID level of the data distribution
+
+        double epsilon = 0; // Privacy level for DP-FL. 0 means no privacy
+
+        for (String bbdd : bbdd_paths) {
+            for (String net : nets) {
+                for (int nClients : nClientsArr) {
+                    launchExperiment(net, algName, convergence, fusionClient, limitC, fusionServer, limitS, bbdd, nClients, maxEdgesIt, nIterations, alpha, epsilon);
+                }
+            }
+        }
     }
 
 
@@ -120,7 +153,7 @@ public class LocalExperiment {
         String operation = algName + "," + maxEdgesIt+"="+maxEdgesItInt + "," + fusionC + "," + limitC + "," + convergence + "," + fusionS + "," + limitS + "," + alpha + "," + epsilon;
         String savePath = "./results/Server/" + net + "." + bbdd + "_" + operation + "_" + nClients + "_-1.csv";
 
-        //if (!checkExistentFile(savePath)) {
+        if (!checkExistentFile(savePath)) {
             if (!Objects.equals(bbdd, "-1")) divisionData = BN_DataSet.divideDataSet(allData, nClients);
 
             ArrayList<Client> clients = new ArrayList<>();
@@ -186,9 +219,9 @@ public class LocalExperiment {
             server.run();
             
             writeExistentFile(savePath);
-        //} else {
-        //    System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
-        //}
+        } else {
+            System.out.println("\n EXISTENT EXPERIMENT: " + savePath + "\n");
+        }
     }
 
     public static int matchMaxEdgesIt(String maxEdgesIt, int nNodes) {

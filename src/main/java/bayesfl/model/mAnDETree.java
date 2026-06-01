@@ -36,10 +36,14 @@ import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
 import bayesfl.experiments.utils.ExperimentUtils;
 import org.albacete.simd.mAnDE.mAnDE;
+import org.albacete.simd.mAnDE.mSP1DE;
+import org.albacete.simd.mAnDE.mSP2DE;
 import org.albacete.simd.mAnDE.mSPnDE;
 import weka.classifiers.evaluation.Evaluation;
 import weka.core.Instances;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
@@ -95,13 +99,16 @@ public class mAnDETree implements Model {
         }
 
         mAnDE.mSPnDEs = this.models;
+
+        // Always build NB so any γ > 0 can use it
+        double[] gammas = algorithm.getAddNBValues();
+        if (gammas != null) {
+            mAnDE.setAddNB(1.0);
+        }
         mAnDE.calculateTables_mSPnDEs();
         double timeTables = (System.currentTimeMillis() - start) / 1000;
 
-        String trainMetrics = getClassificationMetrics(mAnDE, train);
-        String testMetrics = getClassificationMetrics(mAnDE, test);
-
-        // Calculate data of mSPnDEs created
+        // SPODE stats (γ-independent)
         double var = 0;
         double max = 0;
         double min = Double.POSITIVE_INFINITY;
@@ -113,33 +120,45 @@ public class mAnDETree implements Model {
             var += a.getNChildren();
         }
 
-        // Get only the name of the dataset
         String nameExceptIdCv = data.getName();
-        nameExceptIdCv = nameExceptIdCv.substring(0, nameExceptIdCv.indexOf(","));
+        int commaIdx = nameExceptIdCv.indexOf(",");
+        nameExceptIdCv = commaIdx >= 0 ? nameExceptIdCv.substring(0, commaIdx) : nameExceptIdCv;
 
-        String completePath = path + "results/" + epoch + "/" + nameExceptIdCv + "_" + operation + "_" + nClients + ".csv";
-        String header = "bbdd,id,cv,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time,timeTables\n";
-        String results = data.getName() + "," +
-                operation + "," +
-                nClients + "," +
-                iteration + "," +
-                data.getNInstances() + "," +
-                threads + "," +
+        if (gammas == null) {
+            gammas = new double[]{algorithm.getAddNB()};
+        }
 
-                mAnDE.mSPnDEs.size() + "," +
-                (var/mAnDE.mSPnDEs.size()) + "," +
-                max + "," +
-                min + "," +
+        String header = "bbdd,id,cv,node,algorithm,seed,nTrees,bagSize,ensemble,addNB,nClients,iteration,instances,threads,spodes,varPerSpode,maxSpode,minSpode,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time,timeTables\n";
 
-                trainMetrics +
-                testMetrics +
+        for (double gamma : gammas) {
+            mAnDE.setAddNB(gamma);
 
-                time + "," +
-                timeTables + "\n";
+            String trainMetrics = getClassificationMetrics(mAnDE, train);
+            String testMetrics = getClassificationMetrics(mAnDE, test);
 
-        System.out.println(results);
+            // Replace addNB (last field) in operation string with this γ
+            int lastComma = operation.lastIndexOf(',');
+            String gammaOp = operation.substring(0, lastComma + 1) + gamma;
 
-        ExperimentUtils.saveExperiment(completePath, header, results);
+            String completePath = path + "results/" + epoch + "/" + nameExceptIdCv + "_" + gammaOp + "_" + nClients + ".csv";
+            String results = data.getName() + "," +
+                    gammaOp + "," +
+                    nClients + "," +
+                    iteration + "," +
+                    data.getNInstances() + "," +
+                    threads + "," +
+                    mAnDE.mSPnDEs.size() + "," +
+                    (var / mAnDE.mSPnDEs.size()) + "," +
+                    max + "," +
+                    min + "," +
+                    trainMetrics +
+                    testMetrics +
+                    time + "," +
+                    timeTables + "\n";
+
+            System.out.println(results);
+            ExperimentUtils.saveExperiment(completePath, header, results);
+        }
     }
 
     @Override
@@ -176,5 +195,45 @@ public class mAnDETree implements Model {
 
     public mAnDETree_mAnDE getAlgorithm() {
         return algorithm;
+    }
+
+    /**
+     * Converts the mSPnDE structure map to a list of super-parent index arrays
+     * compatible with PT_AnDE. Each entry corresponds to one SPODE:
+     * - For mSP1DE: int[]{xi} (single super-parent)
+     * - For mSP2DE: int[]{xi1, xi2} (pair of super-parents, canonically ordered)
+     *
+     * @return List of super-parent index arrays for use with PT_AnDE.
+     */
+    public List<int[]> toCombinations() {
+        List<int[]> combinations = new ArrayList<>();
+
+        for (mSPnDE spode : models.values()) {
+            if (spode instanceof mSP1DE sp1) {
+                // For mSP1DE, the key in the map IS the xi index (Integer)
+                // We need to extract it from the map
+                for (Object key : models.keySet()) {
+                    if (models.get(key) == spode) {
+                        combinations.add(new int[]{((Integer) key)});
+                        break;
+                    }
+                }
+            } else if (spode instanceof mSP2DE sp2) {
+                // For mSP2DE, the key is a long encoding: (xi1 << 32) | xi2
+                for (Object key : models.keySet()) {
+                    if (models.get(key) == spode) {
+                        long k = (Long) key;
+                        int xi1 = (int) (k >> 32);
+                        int xi2 = (int) k;
+                        // Ensure canonical order (xi1 < xi2)
+                        if (xi1 > xi2) { int tmp = xi1; xi1 = xi2; xi2 = tmp; }
+                        combinations.add(new int[]{xi1, xi2});
+                        break;
+                    }
+                }
+            }
+        }
+
+        return combinations;
     }
 }

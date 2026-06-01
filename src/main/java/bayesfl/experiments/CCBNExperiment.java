@@ -93,7 +93,7 @@ public class CCBNExperiment {
      * @param seed The random seed for reproducibility of data splits.
      * @param suffix The suffix used to distinguish the output file or experiment version.
      */
-    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, String[] dpOptions, int nClients, int nIterations, int nFolds, int seed, double alpha, String suffix) {
+    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, String[] dpOptions, int nClients, int nIterations, int nFolds, int seed, double alpha, String suffix, String nodeName) {
         // Get the cross-validation splits for each client
         String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
         Instances[][][] splits = Weka_Instances.divide(datasetName, datasetPath, nFolds, nClients, seed, alpha);
@@ -120,7 +120,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath, alpha);
+        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath, alpha, nodeName);
 
         // STEP 2 — Federate AnDE synthetic classes
         buildStats = false;
@@ -131,7 +131,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions,  dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath, alpha);
+        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions,  dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath, alpha, nodeName);
 
 
         // STEP 3 — Real training and fusion of the algorithms
@@ -144,7 +144,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
-        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath, alpha);
+        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath, alpha, nodeName);
     }
 
     /**
@@ -323,9 +323,10 @@ public class CCBNExperiment {
      * @param seed The random seed for reproducibility.
      * @param nClients The number of clients participating in federated learning.
      * @param alpha The alpha parameter for non-IID data distribution.
+     * @param nodeName The name of the node executing the experiment.
      * @return A string encoding the current configuration for logging or output files.
      */
-    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, String[] dpOptions, int seed, int nClients, double alpha) {
+    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, String[] dpOptions, int seed, int nClients, double alpha, String nodeName) {
         // Default values if options were not found
         String structure = null;
         String parameterLearning = null;
@@ -381,12 +382,12 @@ public class CCBNExperiment {
             }
             case "PT_NB" -> {
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
+                return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
             }
             case "WDPT_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
+                return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
             }
             // Add more algorithms here
             default -> {
@@ -414,7 +415,7 @@ public class CCBNExperiment {
      * @param outputPath The output path.
      * @return The models.
      */
-    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, String[] dpOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath, double alpha) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, String[] dpOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath, double alpha, String nodeName) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
@@ -444,7 +445,7 @@ public class CCBNExperiment {
             if (modelsAnDE != null) {
                 modelAnDE = modelsAnDE[i];
             }
-            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients, alpha);
+            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients, alpha, nodeName);
 
             System.out.println(">>> RUNNING: Dataset " + datasetName + " | Fold " + i);
 
@@ -578,33 +579,35 @@ public class CCBNExperiment {
      */
     public static void main(String[] args) {
         // Default dataset and experimental configuration
+        String nodeName = "localhost";
+
         String folder = "Discretas";
         String datasetName = "Car_Evaluation";
-        int nClients = 2;
+        int nClients = 20;
         int seed = 42;
-        int nFolds = 5;
-        int nIterations = 5;
+        int nFolds = 2;
+        int nIterations = 1;
 
         // Structure and parameter learning configurations
         String structure = "NB";  // Possible values: "NB", "A1DE", "A2DE", ..., "AnDE"
         String parameterLearning = "wCCBN";  // Possible values: "dCCBN", "wCCBN", "eCCBN", and "Weka"
-        String maxIterations = "10";
+        String maxIterations = "1";
 
         // Fusion behaviour
         boolean fuseParameters = true;
-        boolean fuseProbabilities = false;
+        boolean fuseProbabilities = true;
         int nBins = -1;
 
         // IID or no-IID
-        double alpha = 10; // IID if <=0
+        double alpha = 0; // IID if <=0
 
         // Differential privacy parameters
-        String dpType = "None";  // "Laplace", "Gaussian", "ZCDP", "None"
-        double epsilon = 1;      // for Laplace and Gaussian
+        String dpType = "Laplace";  // "Laplace", "Gaussian", "ZCDP", "None"
+        double epsilon = 1000000;      // for Laplace and Gaussian
         double delta = 1e-5;     // only for Gaussian
         double rho = 0.1;        // only for ZCDP
         double sensitivity = 1.0;  // default for PT; smaller for WDPT
-        boolean autoSensitivity  = false; // Calculate sensitivity automatically based on the data columns
+        boolean autoSensitivity  = true; // Calculate sensitivity automatically based on the data columns
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -612,6 +615,7 @@ public class CCBNExperiment {
             int index = Integer.parseInt(args[0]);
             String paramsFileName = args[1];
             //int threads = Integer.parseInt(args[2]);
+            nodeName = args[2];
 
             // Read the parameters from args
             String[] parameters = null;
@@ -708,7 +712,7 @@ public class CCBNExperiment {
                 + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + "_a" + alpha + ".csv";
 
         // Run the experiment
-        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, alpha, suffix);
+        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, alpha, suffix, nodeName);
     }
 
     /**

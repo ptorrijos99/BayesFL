@@ -1,7 +1,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2024 Universidad de Castilla-La Mancha, España
+ *  Copyright (c) 2026 Universidad de Castilla-La Mancha, España
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
  */
 /**
  *    mAnDETree_mAnDE.java
- *    Copyright (C) 2024 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2026 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
@@ -37,6 +37,8 @@ import bayesfl.model.Model;
 import bayesfl.model.mAnDETree;
 import org.albacete.simd.mAnDE.mAnDE;
 import weka.core.Instances;
+import weka.filters.Filter;
+import bayesfl.algorithms.Dummy;
 
 public class mAnDETree_mAnDE implements LocalAlgorithm {
 
@@ -46,8 +48,11 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
     private double bagSize = 100;
     private String ensemble = "RandomForest";
     private double addNB = 0;
+    private double[] addNBValues = null;
+    private double[][] cutPoints = null;
 
-    public mAnDETree_mAnDE() {}
+    public mAnDETree_mAnDE() {
+    }
 
     public mAnDETree_mAnDE(int n) {
         this.n = n;
@@ -59,6 +64,15 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
         this.bagSize = bagSize;
         this.ensemble = ensemble;
         this.addNB = addNB;
+    }
+
+    public mAnDETree_mAnDE(int n, int nTrees, double bagSize, String ensemble, double addNB, double[][] cutPoints) {
+        this(n);
+        this.nTrees = nTrees;
+        this.bagSize = bagSize;
+        this.ensemble = ensemble;
+        this.addNB = addNB;
+        this.cutPoints = cutPoints;
     }
 
     @Override
@@ -74,12 +88,25 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
 
         Instances instances = (Instances) data.getData();
 
+        if (this.cutPoints != null) {
+            Dummy filter = new Dummy();
+            filter.setCutPoints(this.cutPoints);
+            try {
+                filter.setInputFormat(instances);
+                instances = Filter.useFilter(instances, filter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         mAnDE algorithm = getAlgorithm();
 
         try {
             algorithm.checkData(instances);
             algorithm.buildTrees();
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return new mAnDETree(algorithm.mSPnDEs, this);
     }
@@ -98,6 +125,10 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
     public String getRefinementName() {
         return "None";
     }
+
+    public void setAddNBValues(double[] values) { this.addNBValues = values; }
+    public double[] getAddNBValues() { return addNBValues; }
+    public double getAddNB() { return addNB; }
 
     public mAnDE getAlgorithm() {
         mAnDE algorithm = new mAnDE();

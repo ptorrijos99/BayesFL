@@ -73,8 +73,10 @@ public class PT_AnDE implements LocalAlgorithm {
     /**
      * Constructor.
      *
-     * @param cutPoints The cut points of the discretization filter.
-     * @param nAnDE The n of AnDE. 0 means Naive Bayes, 1 means A1DE, 2 means A2DE, etc.
+     * @param cutPoints       The cut points of the discretization filter.
+     * @param nAnDE           The n of AnDE. 0 means Naive Bayes, 1 means A1DE, 2
+     *                        means A2DE, etc.
+     * @param globalClassMaps The global class maps for synthetic classes.
      */
     public PT_AnDE(double[][] cutPoints, int nAnDE, List<Map<String, Integer>> globalClassMaps) {
         this.nAnDE = nAnDE;
@@ -132,10 +134,11 @@ public class PT_AnDE implements LocalAlgorithm {
     }
 
     /**
-     * Builds a local model using the provided data and existing local model. Not used in this case (one-shot model).
+     * Builds a local model using the provided data and existing local model. Not
+     * used in this case (one-shot model).
      *
      * @param localModel The previous local model.
-     * @param data The data to build the model from.
+     * @param data       The data to build the model from.
      * @return The built local model.
      */
     public Model buildLocalModel(Model localModel, Data data) {
@@ -143,11 +146,12 @@ public class PT_AnDE implements LocalAlgorithm {
     }
 
     /**
-     * Refines the existing local model using the provided data. In this case, the model is not refined.
+     * Refines the existing local model using the provided data. In this case, the
+     * model is not refined.
      *
-     * @param oldModel The existing local model.
+     * @param oldModel   The existing local model.
      * @param localModel The current local model.
-     * @param data The data to refine the model with.
+     * @param data       The data to refine the model with.
      * @return The refined local model.
      */
     public Model refinateLocalModel(Model oldModel, Model localModel, Data data) {
@@ -161,7 +165,7 @@ public class PT_AnDE implements LocalAlgorithm {
         return this.ensemble;
     }
 
-    /** 
+    /**
      * Retrieves the name of the algorithm.
      *
      * @return The name of the algorithm.
@@ -170,7 +174,7 @@ public class PT_AnDE implements LocalAlgorithm {
         return "None";
     }
 
-    /** 
+    /**
      * Retrieves the name of the refinement.
      *
      * @return The name of the refinement.

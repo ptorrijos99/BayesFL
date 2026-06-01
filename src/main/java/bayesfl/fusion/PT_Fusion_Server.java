@@ -55,7 +55,8 @@ class DummyNB extends NaiveBayes {
     public void setDistributions(DiscreteEstimator[][] m_Distributions) {
         this.m_Distributions = m_Distributions;
 
-        // Initialize this.m_Instances because it is used in the method distributionForInstance() to obtain weights
+        // Initialize this.m_Instances because it is used in the method
+        // distributionForInstance() to obtain weights
         ArrayList<Attribute> attInfo = new ArrayList<>();
         for (int i = 0; i < m_Distributions.length; i++) {
             attInfo.add(new Attribute("att" + i));
@@ -66,7 +67,8 @@ class DummyNB extends NaiveBayes {
     public void setClassDistribution(DiscreteEstimator m_ClassDistribution) {
         this.m_ClassDistribution = m_ClassDistribution;
 
-        // Initialize this.m_NumClasses because it is used in the method distributionForInstance()
+        // Initialize this.m_NumClasses because it is used in the method
+        // distributionForInstance()
         this.m_NumClasses = m_ClassDistribution.getNumSymbols();
     }
 }
@@ -84,7 +86,7 @@ public class PT_Fusion_Server implements Fusion {
      * @return The global model fused.
      */
     public Model fusion(Model model1, Model model2) {
-        Model[] models = {model1, model2};
+        Model[] models = { model1, model2 };
 
         return fusion(models);
     }
@@ -155,30 +157,29 @@ public class PT_Fusion_Server implements Fusion {
                     int localIdx = entry.getValue();
                     int globalIdx = classMap.get(label);
 
-                    // 1. Reconstruct Class Count (Weight)
-                    // We use the probability from the estimator * Total Instances of the client
-                    double localClassProb = localNB.getClassEstimator().getProbability(localIdx);
-                    double localClassWeight = localClassProb * pt.getNumInstances();
+                    // 1. Get Raw Class Count (NOT smoothed probability)
+                    // Use getCount() instead of getProbability() to avoid Laplace smoothing
+                    // contamination during aggregation
+                    // We also subtract 1.0 because Weka initializes counts with 1 (Laplace)
+                    double localClassCount = ((DiscreteEstimator) localNB.getClassEstimator()).getCount(localIdx) - 1.0;
 
                     // Add to Global Class Estimator
-                    fusedClassDist.addValue(globalIdx, localClassWeight);
+                    fusedClassDist.addValue(globalIdx, localClassCount);
 
-                    // 2. Reconstruct Conditional Counts
+                    // 2. Get Raw Conditional Counts
                     for (int att = 0; att < numAtts; att++) {
-                        DiscreteEstimator localEst = (DiscreteEstimator) localNB.getConditionalEstimators()[att][localIdx];
+                        DiscreteEstimator localEst = (DiscreteEstimator) localNB
+                                .getConditionalEstimators()[att][localIdx];
                         DiscreteEstimator globalEst = fusedDistributions.get(att)[globalIdx];
 
-                        // Iterate over all values of the attribute to reconstruct weights
-                        // instead of using .aggregate() which might rely on internal counts
+                        // Iterate over all values of the attribute to get raw counts
                         int nSymbols = localEst.getNumSymbols();
                         for (int valIdx = 0; valIdx < nSymbols; valIdx++) {
-                            double condProb = localEst.getProbability(valIdx);
+                            // We subtract 1.0 because Weka initializes counts with 1 (Laplace)
+                            double rawCount = localEst.getCount(valIdx) - 1.0;
 
-                            // The 'mass' of this attribute value is P(x|y) * Count(y)
-                            double valueWeight = condProb * localClassWeight;
-
-                            // Accumulate into global estimator
-                            globalEst.addValue(valIdx, valueWeight);
+                            // Accumulate raw counts into global estimator
+                            globalEst.addValue(valIdx, rawCount);
                         }
                     }
                 }

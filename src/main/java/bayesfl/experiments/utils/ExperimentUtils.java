@@ -57,13 +57,12 @@ public class ExperimentUtils {
     private static final Object fileLock = new Object();
 
     public static void saveExperiment(String path, String header, String data) {
-        // Create the directory if it does not exist
-        File directory = new File(path.substring(0, path.lastIndexOf("/")));
-        if (!directory.exists()){
+        File file = new File(path);
+        File directory = file.getParentFile();
+        if (directory != null && !directory.exists()){
             directory.mkdirs();
         }
 
-        File file = new File(path);
         synchronized (fileLock) {
             try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(file, true))) {
                 if (file.length() == 0) {
