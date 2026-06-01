@@ -99,3 +99,4 @@ BBDD_noIID/
 articulos/
 docs/
 *lbfgsb_wrapper*
+.bat

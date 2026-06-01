@@ -1,7 +1,7 @@
 /*
  *  The MIT License (MIT)
  *  
- *  Copyright (c) 2022 Universidad de Castilla-La Mancha, España
+ *  Copyright (c) 2026 Universidad de Castilla-La Mancha, España
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,24 +23,19 @@
  */
 /**
  *    mAnDETree.java
- *    Copyright (C) 2022 Universidad de Castilla-La Mancha, España
+ *    Copyright (C) 2026 Universidad de Castilla-La Mancha, España
  *
  * @author Pablo Torrijos Arenas
  *
  */
 package org.albacete.simd.mAnDE;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -50,10 +45,9 @@ import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.LMT;
-import static weka.classifiers.AbstractClassifier.runClassifier;
+import weka.classifiers.trees.RandomTree2;
 
 import weka.core.Capabilities;
-import weka.core.Drawable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionHandler;
@@ -72,7 +66,7 @@ public class mAnDE extends AbstractClassifier implements
     /**
      * Instances.
      */
-    protected static Instances data;
+    protected Instances data;
 
     /**
      * The discretisation filter.
@@ -87,27 +81,27 @@ public class mAnDE extends AbstractClassifier implements
     /**
      * Number of values per variable.
      */
-    public static int[] varNumValues;
+    public int[] varNumValues;
 
     /**
      * Number of values of the class.
      */
-    public static int classNumValues;
+    public int classNumValues;
 
     /**
      * Index of the class.
      */
-    public static int y;
+    public int y;
 
     /**
      * Number of instances.
      */
-    public static int numInstances;
+    public int numInstances;
 
     /**
      * Naive Bayes for NB mode.
      */
-    private static NaiveBayes nb;
+    private NaiveBayes nb;
 
     /**
      * Indicates whether Naive Bayes mode is enabled.
@@ -124,7 +118,7 @@ public class mAnDE extends AbstractClassifier implements
      * If desired, configure the ensemble classifier
      */
     private String ensemble = "Bagging";
-    
+
     /**
      * Prune decision trees.
      */
@@ -134,7 +128,7 @@ public class mAnDE extends AbstractClassifier implements
      * Percentage of instances to be used to make each tree in the assembly.
      */
     private double bagSize = 100;
-    
+
     /**
      * Number of trees that the algorithm make in the structural learning.
      */
@@ -144,9 +138,9 @@ public class mAnDE extends AbstractClassifier implements
      * n of the mAnDETree.
      */
     private int n = 1;
-    
+
     private double addNB = 0.4;
-    
+
     /**
      * Minimum number of Instances to create a tree.
      */
@@ -186,10 +180,10 @@ public class mAnDE extends AbstractClassifier implements
         if (modeNB) {
             return nb.distributionForInstance(instance_d);
         }
-        
+
         // Add up all the probabilities of the mSPnDEs
-        mSPnDEs.values().parallelStream().forEach((spode) -> {
-            double[] temp = spode.probsForInstance(instance_d);
+        mSPnDEs.values().forEach((spode) -> {
+            double[] temp = spode.probsForInstance(instance_d, this);
 
             for (int i = 0; i < res.length; i++) {
                 res[i] += temp[i];
@@ -204,8 +198,9 @@ public class mAnDE extends AbstractClassifier implements
             }
         }
 
-        /* Normalize the result. If the sum is 0 (Utils.normalize will return 
-         * an IllegalArgumentException), we set the same value in each 
+        /*
+         * Normalize the result. If the sum is 0 (Utils.normalize will return
+         * an IllegalArgumentException), we set the same value in each
          * possible value of the class.
          */
         try {
@@ -213,8 +208,17 @@ public class mAnDE extends AbstractClassifier implements
         } catch (IllegalArgumentException ex) {
             Arrays.fill(res, 1.0 / classNumValues);
         }
-        
+
         return res;
+    }
+
+    public void initMetadata() {
+        y = data.classIndex();
+        classNumValues = data.classAttribute().numValues();
+        varNumValues = new int[data.numAttributes()];
+        for (int i = 0; i < varNumValues.length; i++) {
+            varNumValues[i] = data.attribute(i).numValues();
+        }
     }
 
     public void checkData(Instances instances) throws Exception {
@@ -235,7 +239,7 @@ public class mAnDE extends AbstractClassifier implements
         // We check that with this bagSize, we will have more than
         // minimumInstances instances (default 3)
         if (bagSize > 0) {
-            while ((numInstances * (bagSize/100)) < minimumInstances) {
+            while ((numInstances * (bagSize / 100)) < minimumInstances) {
                 bagSize = 2 * bagSize;
             }
         }
@@ -257,17 +261,17 @@ public class mAnDE extends AbstractClassifier implements
             case "REPTree":
                 base = new REPTree();
                 if (!pruning) {
-                    ((REPTree)base).setNoPruning(true);
+                    ((REPTree) base).setNoPruning(true);
                 }
                 break;
             case "LMT":
                 base = new LMT();
-                ((LMT)base).setNumBoostingIterations(nTrees);
+                ((LMT) base).setNumBoostingIterations(nTrees);
                 break;
             default:
                 base = new J48();
                 if (!pruning) {
-                    ((J48)base).setUnpruned(true);
+                    ((J48) base).setUnpruned(true);
                 }
                 break;
         }
@@ -278,11 +282,23 @@ public class mAnDE extends AbstractClassifier implements
                 case "Bagging":
                     Bagging2 bagging = new Bagging2();
                     bagging.setNumExecutionSlots(0);
-                    bagging.setClassifier(base);
+                    RandomTree2 rtBase = new RandomTree2();
+                    rtBase.setDoNotCheckCapabilities(true);
+                    rtBase.setKValue(data.numAttributes() - 1);  // all features, no random subsets
+                    bagging.setClassifier(rtBase);
                     bagging.setNumIterations(nTrees);
                     bagging.setBagSizePercentDouble(bagSize);
                     bagging.buildClassifier(data);
-                    trees = Arrays.asList(bagging.getClassifiers());
+                    if (n == 1) {
+                        for (Classifier c : bagging.getClassifiers()) {
+                            ((RandomTree2) c).toSP1DE(mSPnDEs);
+                        }
+                        return;
+                    } else {
+                        for (Classifier c : bagging.getClassifiers()) {
+                            graphToSP2DE(((RandomTree2) c).toSP2DE());
+                        }
+                    }
                     break;
                 case "AdaBoost":
                     AdaBoostM1_2 ab = new AdaBoostM1_2();
@@ -318,24 +334,29 @@ public class mAnDE extends AbstractClassifier implements
                 default:
                     throw new Exception("Ensemble type not supported");
             }
-            
-            /*trees.stream().forEach((tree) -> {
-                graphToSPnDE(treeParser(tree));
-            });*/
-            
+
+            /*
+             * trees.stream().forEach((tree) -> {
+             * graphToSPnDE(treeParser(tree));
+             * });
+             */
+
         } else {
             base.buildClassifier(data);
-            //graphToSPnDE(treeParser(base));
+            // graphToSPnDE(treeParser(base));
         }
     }
 
     /**
-     * Executes in parallel the 'buildTables()' functions of each mSPnDE, and
-     * terminates when all have executed it.
+     * Prepares this mAnDE instance for prediction. Builds Naive Bayes when
+     * {@code addNB != 0}, sets class/variable metadata, and builds each SPODE's
+     * probability tables from local data — only if those tables are not already
+     * populated. SPODEs whose tables come from a federated fusion (i.e. already
+     * normalised) are left untouched so that local data does not overwrite the
+     * federated parameters.
      */
     public void calculateTables_mSPnDEs() {
-        if (getAddNB() != 0 || mSPnDEs.isEmpty())
-        {
+        if (getAddNB() != 0 || mSPnDEs.isEmpty()) {
             nb = new NaiveBayes();
             try {
                 nb.buildClassifier(data);
@@ -357,25 +378,34 @@ public class mAnDE extends AbstractClassifier implements
                 varNumValues[i] = data.attribute(i).numValues();
             }
 
-            //Calls the mSPnDE function that creates the table for each mSPnDE
-            mSPnDEs.values().parallelStream().forEach(mSPnDE::buildTables);
+            // Skip rebuild when every SPODE already carries probability tables —
+            // i.e. when this mAnDE is wrapping a model produced by federated
+            // parameter fusion (mAnDETree_Fusion_Params). Otherwise rebuild
+            // from local data as before.
+            boolean alreadyBuilt = mSPnDEs.values().stream().allMatch(mSPnDE::hasProbTables);
+            if (!alreadyBuilt) {
+                mSPnDEs.values().parallelStream().forEach(spode -> spode.buildTables(this));
+            }
         }
 
         // We free up the discretized data space
         data.delete();
 
         // Print data of mSPnDEs created
-        /*double var = 0;
-        double max = 0;
-        double min = Double.POSITIVE_INFINITY;
-        for (mSPnDE a : mSPnDEs.values()) {
-            if (a.getNChildren() > max)
-                max = a.getNChildren();
-            if (a.getNChildren() < min)
-                min = a.getNChildren();
-            var += a.getNChildren();
-        }
-        System.out.println("mSPnDEs," + mSPnDEs.size() + "," + (var/mSPnDEs.size()) + "," + max + "," + min);*/
+        /*
+         * double var = 0;
+         * double max = 0;
+         * double min = Double.POSITIVE_INFINITY;
+         * for (mSPnDE a : mSPnDEs.values()) {
+         * if (a.getNChildren() > max)
+         * max = a.getNChildren();
+         * if (a.getNChildren() < min)
+         * min = a.getNChildren();
+         * var += a.getNChildren();
+         * }
+         * System.out.println("mSPnDEs," + mSPnDEs.size() + "," + (var/mSPnDEs.size()) +
+         * "," + max + "," + min);
+         */
     }
 
     /**
@@ -395,17 +425,19 @@ public class mAnDE extends AbstractClassifier implements
      * tree parser) if it doesn't already exist, and add the variables
      * 'grandparent', 'brothers' and 'grandchildren' as a dependency.
      *
-     * @param parent Name of the parent in the mSP2DE.
-     * @param child Name of the child in the mSP2DE.
-     * @param grandparent Name of the parent of the parent in the mSP2DE.
-     * @param brothers Name of the other children of the father in the mSP2DE.
+     * @param parent        Name of the parent in the mSP2DE.
+     * @param child         Name of the child in the mSP2DE.
+     * @param grandparent   Name of the parent of the parent in the mSP2DE.
+     * @param brothers      Name of the other children of the father in the mSP2DE.
      * @param grandchildren Name of the children of the child in the mSP2DE.
      */
     private void toSP2DE(Integer parent, Integer child, Integer grandparent,
-                         ArrayList<Integer> brothers, ArrayList<Integer> grandchildren) {
+            ArrayList<Integer> brothers, ArrayList<Integer> grandchildren) {
         long key;
-        if (parent < child) key = (((long)parent) << 32) | (child & 0xffffffffL);
-        else key = (((long)child) << 32) | (parent & 0xffffffffL);
+        if (parent < child)
+            key = (((long) parent) << 32) | (child & 0xffffffffL);
+        else
+            key = (((long) child) << 32) | (parent & 0xffffffffL);
 
         if (!mSPnDEs.containsKey(key)) {
             mSPnDEs.put(key, new mSP2DE(parent, child));
@@ -417,7 +449,8 @@ public class mAnDE extends AbstractClassifier implements
             }
             elem.moreChildren(brothers);
             elem.moreChildren(grandchildren);
-        } catch (NullPointerException ex) {}
+        } catch (NullPointerException ex) {
+        }
     }
 
     /**
@@ -449,21 +482,21 @@ public class mAnDE extends AbstractClassifier implements
     public void setBaseClass(String baseClass) {
         this.baseClass = baseClass;
     }
-    
+
     /**
      * @param nTrees The nTrees to be set
      */
     public void setnTrees(int nTrees) {
         this.nTrees = nTrees;
     }
-    
+
     /**
      * @param ensemble The ensemble to set
      */
     public void setEnsemble(String ensemble) {
         this.ensemble = ensemble;
     }
-    
+
     /**
      * @param addNB The addNB to set
      */
@@ -491,28 +524,28 @@ public class mAnDE extends AbstractClassifier implements
     public int getN() {
         return n;
     }
-    
+
     /**
      * @return The baseClass
      */
     public String getBaseClass() {
         return baseClass;
     }
-    
+
     /**
      * @return The nTrees
      */
     public int getnTrees() {
         return nTrees;
     }
-    
+
     /**
      * @return The ensemble
      */
     public String getEnsemble() {
         return ensemble;
     }
-    
+
     /**
      * @return The addNB
      */
@@ -555,8 +588,11 @@ public class mAnDE extends AbstractClassifier implements
         newVector.addElement(new Option("\tUse REPTree trees instead of J48 trees", "REP", 0, "-REP"));
         newVector.addElement(new Option("\tNOT performs pruning of decision trees", "P", 0, "-P"));
         newVector.addElement(new Option("\tRealise an ensemble of decision trees", "E", 0, "-E"));
-        newVector.addElement(new Option("\tRealise the ensemble of decision trees using Random Forest", "RF", 0, "-RF"));
-        newVector.addElement(new Option("\tSet the number of instances used to create each tree when using ensembles (0, 100]\n", "B", 100, "-B <double>"));
+        newVector
+                .addElement(new Option("\tRealise the ensemble of decision trees using Random Forest", "RF", 0, "-RF"));
+        newVector.addElement(
+                new Option("\tSet the number of instances used to create each tree when using ensembles (0, 100]\n",
+                        "B", 100, "-B <double>"));
 
         return newVector.elements();
     }

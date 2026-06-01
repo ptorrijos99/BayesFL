@@ -19,48 +19,25 @@ import weka.filters.Filter;
 
 import static bayesfl.data.Weka_Instances.divide;
 import static bayesfl.experiments.utils.ExperimentUtils.getClassificationMetrics;
+import static bayesfl.experiments.utils.ExperimentUtils.readParametersFromArgs;
 
 
 public class ClassificationExperiment {
     public static String PATH = "./";
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         String[] parameters = readParametersFromArgs(args);
 
-        // Read the parameters from file
-        String folder = parameters[0];
-        String bbdd = parameters[1];
-        int nClients = Integer.parseInt(parameters[2]);
-        int seed = Integer.parseInt(parameters[3]);
-        int folds = Integer.parseInt(parameters[4]);
-        String algorithm = parameters[5];
-        int nTrees = Integer.parseInt(parameters[6]);
+        String folder    = parameters[0];
+        String bbdd      = parameters[1];
+        int nClients     = Integer.parseInt(parameters[2]);
+        int seed         = Integer.parseInt(parameters[3]);
+        int folds        = Integer.parseInt(parameters[4]);
+        int nBins        = Integer.parseInt(parameters[5]);
+        String algorithm = parameters[6];
+        int nTrees       = Integer.parseInt(parameters[7]);
 
         try {
-            experimentBaseline(folder, bbdd, nClients, seed, folds, algorithm, nTrees);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
-    public static void main(String[] args) {
-        String folder = "AnDE";
-        String bbdd = "Vowel";
-        int nClients = 5;
-        String algorithm = "NB";
-        int seed = 42;
-        int folds = 5;
-        int nBins = -1;
-        int nTrees = 100;
-
-
-        try {
-            /*int[] nClientss = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
-            for (int nClients : nClientss) {
-                System.out.println("Running with " + nClients + " clients");
-                experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
-            }*/
-
             experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -81,8 +58,10 @@ public class ClassificationExperiment {
         options[2] = "-S";
         options[3] = ""+seed;
 
-        // Read the data and stratify it to the number of clients
+        // Read the data and stratify it to the number of clients.
+        // divide() expands nFolds=-1 into numInstances (LOO).
         Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed);
+        int actualFolds = splits.length;
 
         // Initialize the filter
         Filter filter = null;
@@ -118,6 +97,17 @@ public class ClassificationExperiment {
             case "GaussianNB" -> classifier = new NaiveBayes();
             case "A1DE" -> classifier = new A1DE();
             case "A2DE" -> classifier = new A2DE();
+            // A1DE/A2DE wrapped with the configured Discretize filter (for continuous data).
+            case "A1DE-Dis" -> {
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(filter);
+                ((FilteredClassifier) classifier).setClassifier(new A1DE());
+            }
+            case "A2DE-Dis" -> {
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(filter);
+                ((FilteredClassifier) classifier).setClassifier(new A2DE());
+            }
             case "TAN" -> {
                 classifier = new BayesNet();
                 TAN alg = new TAN();
@@ -184,7 +174,7 @@ public class ClassificationExperiment {
         }
 
         // Repetitions of cross-validation
-        for (int cv = 0; cv < nFolds; cv++) {
+        for (int cv = 0; cv < actualFolds; cv++) {
             for (int i = 0; i < nClients; i++) {
                 // Divide data in train and test
                 Instances train = splits[cv][i][0];

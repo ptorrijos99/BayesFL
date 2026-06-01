@@ -136,6 +136,9 @@ public class RandomTree2 extends RandomTree {
                         nodes.put(id2, new NodeInt(id2, nodes.get(id1)));
                     }
                     nodes.get(id1).addChild(nodes.get(id2));
+
+                    // Add node to tbExplored
+                    tbExplored.add(m_Successor);
                 }
             }
         }
