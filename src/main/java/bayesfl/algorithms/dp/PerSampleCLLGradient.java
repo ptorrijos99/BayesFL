@@ -52,7 +52,7 @@ import weka.core.Instances;
  * {@code ObjectiveFunctionCLL_d#getValues(double[])} computes when
  * {@code wdBayes#getRegularization()} is {@code false}.</p>
  */
-public final class PerSampleCLLGradient {
+public final class PerSampleCLLGradient implements SampleGradient {
 
     /**
      * The wdBayes model whose parameter tree and training instances this
