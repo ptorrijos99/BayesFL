@@ -48,6 +48,10 @@ import java.util.*;
 /**
  * Local application imports.
  */
+import bayesfl.algorithms.dp.DPSGDConfig;
+import bayesfl.algorithms.dp.DPSGDOptimizer;
+import bayesfl.algorithms.dp.PerSampleCLLGradient;
+import bayesfl.algorithms.dp.SampleGradient;
 import bayesfl.data.Data;
 import bayesfl.model.Model;
 import bayesfl.model.WDPT;
@@ -111,6 +115,15 @@ public class WDPT_CCBN implements LocalAlgorithm {
     private final NumericNoiseGenerator noiseGenerator;
 
     /**
+     * Optional discriminative-channel DP-SGD configuration for the per-round
+     * parameter refinement ({@link #buildLocalModel(Model, Data)}). When
+     * {@code null} or {@link DPSGDConfig#enabled()} is {@code false} (infinite
+     * epsilon), the existing per-tree quasi-Newton minimizer loop is used
+     * unchanged.
+     */
+    private DPSGDConfig paramDp;
+
+    /**
      * Constructor.
      *
      * @param options      The options to set the parameters of the algorithm.
@@ -134,6 +147,7 @@ public class WDPT_CCBN implements LocalAlgorithm {
         this.options = Arrays.copyOf(options, options.length);
         this.globalClassMaps = globalClassMaps;
         this.noiseGenerator = noiseGenerator;
+        this.paramDp = null;
 
         // Copy the options to avoid modifying the original array
         try {
@@ -144,6 +158,22 @@ public class WDPT_CCBN implements LocalAlgorithm {
             // The internal wdBayes structure is always NB
             setInternalStructureToNB();
         } catch (Exception ignored) {}
+    }
+
+    /**
+     * Constructor with an optional discriminative-channel DP-SGD configuration
+     * for the per-round parameter refinement.
+     *
+     * @param options        The options to set the parameters of the algorithm.
+     * @param cutPoints      The cut points of the discretization filter.
+     * @param globalClassMaps Global class maps for synthetic classes.
+     * @param noiseGenerator The DP noise generator applied to the raw counts (null disables count-space DP).
+     * @param paramDp        The DP-SGD configuration for the parameter channel (null disables param-space DP).
+     */
+    public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
+                     NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp) {
+        this(options, cutPoints, globalClassMaps, noiseGenerator);
+        this.paramDp = paramDp;
     }
 
     /**
@@ -263,18 +293,45 @@ public class WDPT_CCBN implements LocalAlgorithm {
 
         List<wdBayesParametersTree> newTrees = new ArrayList<>();
 
-        // Optimize each tree individually using its objective function
-        for (int i = 0; i < oldTrees.size(); i++) {
-            wdBayesParametersTree tree = oldTrees.get(i);
-            double[] parameters = tree.getParameters();
-            try {
-                minimizers.get(i).run(functions.get(i), parameters);
-            } catch (Exception e) {
-                e.printStackTrace();
+        if (paramDp != null && paramDp.enabled()) {
+            // Joint multi-tree DP-SGD refinement (Task 4's optimizer) over the
+            // discriminative CLL data-loss gradient of every tree at once, so
+            // the per-record clipping sensitivity is bounded across the whole
+            // ensemble rather than per tree.
+            int nTrees = oldTrees.size();
+            double[][] treeParams = new double[nTrees][];
+            SampleGradient[] grads = new SampleGradient[nTrees];
+            double[] lambdas = new double[nTrees];
+            for (int i = 0; i < nTrees; i++) {
+                treeParams[i] = oldTrees.get(i).getParameters();
+                wdBayes alg = (wdBayes) ((FilteredClassifier) classifiers.get(i)).getClassifier();
+                grads[i] = new PerSampleCLLGradient(alg);
+                lambdas[i] = alg.getRegularization() ? alg.getLambda() : 0.0;
             }
+            new DPSGDOptimizer(paramDp).runRound(treeParams, grads, lambdas, data.getNInstances());
 
-            // Reuse the tree reference, since it has been updated internally
-            newTrees.add(tree);
+            // Re-sync each tree's trie with the final parameters: the gradient
+            // calls above leave it in a stale "probe" state (PerSampleCLLGradient
+            // re-syncs the trie from whichever params it was last called with),
+            // so this write-back must run before the tree is reused for inference.
+            for (int i = 0; i < nTrees; i++) {
+                oldTrees.get(i).copyParameters(treeParams[i]);
+                newTrees.add(oldTrees.get(i));
+            }
+        } else {
+            // Optimize each tree individually using its objective function
+            for (int i = 0; i < oldTrees.size(); i++) {
+                wdBayesParametersTree tree = oldTrees.get(i);
+                double[] parameters = tree.getParameters();
+                try {
+                    minimizers.get(i).run(functions.get(i), parameters);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Reuse the tree reference, since it has been updated internally
+                newTrees.add(tree);
+            }
         }
 
         // Return a new model instance with updated parameters
