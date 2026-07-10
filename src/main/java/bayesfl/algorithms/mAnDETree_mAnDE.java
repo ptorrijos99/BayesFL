@@ -51,6 +51,13 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
     private double[] addNBValues = null;
     private double[][] cutPoints = null;
 
+    /** Conditional-Gaussian (HAODE-style) parameterisation for continuous data. */
+    private boolean continuous = false;
+    /** Empirical-Bayes prior dof for the CG variance shrinkage (only if continuous). */
+    private double cgPriorVarDof = 3.0;
+    /** Build the blended NB on the DISCRETIZED data (categorical NB) in continuous mode. */
+    private boolean cgNBDiscretized = false;
+
     public mAnDETree_mAnDE() {
     }
 
@@ -64,6 +71,13 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
         this.bagSize = bagSize;
         this.ensemble = ensemble;
         this.addNB = addNB;
+    }
+
+    public mAnDETree_mAnDE(int n, int nTrees, double bagSize, String ensemble, double addNB,
+                           boolean continuous, double cgPriorVarDof) {
+        this(n, nTrees, bagSize, ensemble, addNB);
+        this.continuous = continuous;
+        this.cgPriorVarDof = cgPriorVarDof;
     }
 
     public mAnDETree_mAnDE(int n, int nTrees, double bagSize, String ensemble, double addNB, double[][] cutPoints) {
@@ -130,6 +144,13 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
     public double[] getAddNBValues() { return addNBValues; }
     public double getAddNB() { return addNB; }
 
+    public void setContinuous(boolean continuous) { this.continuous = continuous; }
+    public boolean isContinuous() { return continuous; }
+    public void setCgPriorVarDof(double d0) { this.cgPriorVarDof = d0; }
+    public double getCgPriorVarDof() { return cgPriorVarDof; }
+    public void setCgNBDiscretized(boolean v) { this.cgNBDiscretized = v; }
+    public boolean isCgNBDiscretized() { return cgNBDiscretized; }
+
     public mAnDE getAlgorithm() {
         mAnDE algorithm = new mAnDE();
         algorithm.setN(this.n);
@@ -137,6 +158,9 @@ public class mAnDETree_mAnDE implements LocalAlgorithm {
         algorithm.setBagSize(this.bagSize);
         algorithm.setEnsemble(this.ensemble);
         algorithm.setAddNB(this.addNB);
+        algorithm.setContinuous(this.continuous);
+        algorithm.setCgPriorVarDof(this.cgPriorVarDof);
+        algorithm.setCgNBDiscretized(this.cgNBDiscretized);
         return algorithm;
     }
 }

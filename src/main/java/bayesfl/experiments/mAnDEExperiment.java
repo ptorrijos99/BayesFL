@@ -39,8 +39,14 @@ public class mAnDEExperiment {
         double bagSize = Double.parseDouble(args[7]);
         String ensemble = args[8];
         double addNB = Double.parseDouble(args[9]);
+        // Optional trailing parameters (backward compatible with 10-field lines):
+        //   args[10] = continuous (true/1 for the conditional-Gaussian model)
+        //   args[11] = cgPriorVarDof (empirical-Bayes shrinkage dof, default 3)
+        boolean continuous = args.length > 10 && (args[10].equalsIgnoreCase("true") || args[10].equals("1"));
+        double cgPriorVarDof = args.length > 11 ? Double.parseDouble(args[11]) : 3.0;
 
-        experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB);
+        experimentmAnDE(true, folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble, addNB,
+                continuous, cgPriorVarDof);
     }
 
     /*public static void main(String[] args) {
@@ -61,9 +67,17 @@ public class mAnDEExperiment {
     }*/
 
     public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int nFolds, int n, int nTrees, double bagSize, String ensemble, double addNB) {
+        experimentmAnDE(federated, folder, bbdd, nClients, seed, nFolds, n, nTrees, bagSize, ensemble, addNB, false, 3.0);
+    }
+
+    public static void experimentmAnDE(boolean federated, String folder, String bbdd, int nClients, int seed, int nFolds, int n, int nTrees, double bagSize, String ensemble, double addNB, boolean continuous, double cgPriorVarDof) {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
 
+        // Tag the algorithm token (the CSV's "algorithm" column) so CG and discrete
+        // runs are distinguishable without changing the column layout; encode the
+        // shrinkage dof too so a d0 sweep does not collide in the output files.
         String operation = "mA" + n + "DE";
+        if (continuous) operation += "-CGd" + cgPriorVarDof;
         if (federated) operation += "-FED";
         operation += "," + seed + "," + nTrees + "," + bagSize + "," + ensemble + "," + addNB;
 
@@ -80,7 +94,7 @@ public class mAnDEExperiment {
                 Instances test = splits[cv][i][1];
 
                 Weka_Instances data = new Weka_Instances((bbdd + "," + i + "," + cv), train, test);
-                LocalAlgorithm algorithm = new mAnDETree_mAnDE(n, nTrees, bagSize, ensemble, addNB);
+                LocalAlgorithm algorithm = new mAnDETree_mAnDE(n, nTrees, bagSize, ensemble, addNB, continuous, cgPriorVarDof);
 
                 int position = 0;
                 if (federated) position = -1;

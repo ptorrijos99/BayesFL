@@ -64,9 +64,95 @@ public class mAnDE extends AbstractClassifier implements
 
     // Auxiliary variables //
     /**
-     * Instances.
+     * Instances (discretized).
      */
     protected Instances data;
+
+    /**
+     * Original (non-discretized) instances. Only kept when {@link #continuous}
+     * is enabled, so that the conditional-Gaussian SPnDEs can read the numeric
+     * values of their children.
+     */
+    protected Instances dataOriginal;
+
+    /**
+     * The DISCRETIZED test instance currently being classified, exposed so that
+     * conditional-Gaussian SPnDEs can read the original numeric values of their
+     * children during {@link #distributionForInstance}. Transient: prediction is
+     * single-threaded per classifier instance.
+     */
+    public transient Instance currentNumericInstance;
+
+    /**
+     * When {@code true}, children are modelled with conditional-Gaussian
+     * densities (HAODE-style: the super-parent stays discretized). When
+     * {@code false}, the classic fully-discrete model is used (default).
+     */
+    private boolean continuous = false;
+
+    /**
+     * Empirical-Bayes prior degrees of freedom for the conditional-Gaussian
+     * variance shrinkage (limma/regularized-DDA style). Each per-cell variance
+     * is shrunk toward the child's pooled within-cell variance with weight
+     * {@code d0}. {@code d0 = 0} disables shrinkage (per-cell MLE variance);
+     * larger values shrink more aggressively, which helps the small-N /
+     * high-dimensional regime (microarray). Only used when {@link #continuous}.
+     */
+    private double cgPriorVarDof = 3.0;
+
+    /**
+     * When {@code true} (and {@link #continuous}), the blended Naive Bayes
+     * ({@link #addNB}) is built on the DISCRETIZED data instead of the original
+     * numeric data. Avoids the overconfidence of a full-dimensional Gaussian NB
+     * in high-dimensional (microarray) settings, and makes the NB term identical
+     * across discrete/CG modes so a CG-vs-discrete comparison isolates the SPnDE
+     * parameterisation. Ignored when {@link #continuous} is {@code false}.
+     */
+    private boolean cgNBDiscretized = false;
+
+    /**
+     * When {@code true} (and {@link #continuous}), numeric children are modelled
+     * with a Student-t conditional density (heavy tails) instead of a Gaussian.
+     * Used to test empirically whether heavy tails help; the location/scale are
+     * the same per-cell mean / shrunk variance as the Gaussian.
+     */
+    private boolean cgStudentT = false;
+
+    /** Degrees of freedom of the Student-t child density (when {@link #cgStudentT}). */
+    private double cgStudentDof = 3.0;
+
+    /**
+     * Exponent applied to the class prior P(y) in the CG SPnDEs. {@code 1.0}
+     * keeps the empirical prior (default); {@code 0.0} yields a uniform class
+     * prior, which mitigates the majority-class collapse on imbalanced data.
+     * Only used when {@link #continuous}.
+     */
+    private double cgPriorWeight = 1.0;
+
+    /**
+     * Per-child parameterisation strategy for numeric children in the
+     * conditional-Gaussian model ("hybrid"). Each numeric child is modelled
+     * either with a Gaussian density or, like the discrete model, with a
+     * supervised-discretized contingency table:
+     * <ul>
+     *   <li>{@code "none"}    – all numeric children Gaussian (default).</li>
+     *   <li>{@code "alldisc"} – all numeric children discretized (≈ discrete model; sanity check).</li>
+     *   <li>{@code "manybins"} – discretized iff the supervised discretizer produced ≥3 bins (multimodal), Gaussian if exactly 2 (single threshold). All tree-selected children already have ≥2 bins.</li>
+     *   <li>{@code "ll"}      – per child, whichever gives lower single-child training class-posterior log-loss.</li>
+     * </ul>
+     * Only used when {@link #continuous}.
+     */
+    private String cgHybrid = "none";
+
+    /**
+     * Temperature applied to the summed child log-densities (likelihood) of each
+     * CG SPnDE before the per-class softmax: {@code total = logP(y,Xi) +
+     * (sum log density)/T}. {@code T=1} is the plain model; {@code T>1} flattens
+     * the over-confident likelihood (the product over correlated genes
+     * over-counts evidence and saturates the softmax). Only used when
+     * {@link #continuous}.
+     */
+    private double cgTemperature = 1.0;
 
     /**
      * The discretisation filter.
@@ -177,8 +263,16 @@ public class mAnDE extends AbstractClassifier implements
         discretizer.input(instance);
         instance_d = discretizer.output();
 
+        // In continuous mode the CG SPnDEs read the original numeric values from
+        // this field. The blended NB is fed the raw numeric instance only when it
+        // is a Gaussian NB (continuous and not built on discretized data).
+        if (continuous) {
+            currentNumericInstance = instance;
+        }
+        boolean gaussNB = continuous && !cgNBDiscretized;
+
         if (modeNB) {
-            return nb.distributionForInstance(instance_d);
+            return nb.distributionForInstance(gaussNB ? instance : instance_d);
         }
 
         // Add up all the probabilities of the mSPnDEs
@@ -192,7 +286,7 @@ public class mAnDE extends AbstractClassifier implements
 
         if (getAddNB() != 0) {
             double percentaje = getAddNB() * mSPnDEs.size();
-            double[] temp = nb.distributionForInstance(instance_d);
+            double[] temp = nb.distributionForInstance(gaussNB ? instance : instance_d);
             for (int i = 0; i < res.length; i++) {
                 res[i] += percentaje * temp[i];
             }
@@ -227,6 +321,13 @@ public class mAnDE extends AbstractClassifier implements
 
         // Delete instances with no class
         instances.deleteWithMissingClass();
+
+        // Keep a copy of the original (numeric) data for the conditional-Gaussian
+        // path. Row order is preserved by the discretization filter, so dataOriginal
+        // and data stay aligned instance-by-instance.
+        if (continuous) {
+            dataOriginal = new Instances(instances);
+        }
 
         // Discretize instances
         discretizer = new weka.filters.supervised.attribute.Discretize();
@@ -359,7 +460,11 @@ public class mAnDE extends AbstractClassifier implements
         if (getAddNB() != 0 || mSPnDEs.isEmpty()) {
             nb = new NaiveBayes();
             try {
-                nb.buildClassifier(data);
+                // Continuous mode: build a Gaussian NB on the original numeric data
+                // (consistent with the CG SPnDEs) UNLESS cgNBDiscretized is set, in
+                // which case use the discretized data (more robust in high-dim).
+                boolean gaussNB = continuous && !cgNBDiscretized;
+                nb.buildClassifier(gaussNB ? dataOriginal : data);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -378,6 +483,20 @@ public class mAnDE extends AbstractClassifier implements
                 varNumValues[i] = data.attribute(i).numValues();
             }
 
+            // Conditional-Gaussian path: replace each (n=1) discrete mSP1DE by an
+            // mSP1DE_CG that keeps the same structure (super-parent + children) but
+            // models numeric children with Gaussian densities. The map key of an
+            // SP1DE is its super-parent id, so no access to private state is needed.
+            if (continuous && n == 1) {
+                ConcurrentHashMap<Object, mSPnDE> converted = new ConcurrentHashMap<>();
+                mSPnDEs.forEach((key, spode) -> {
+                    mSP1DE_CG cg = new mSP1DE_CG((Integer) key);
+                    cg.moreChildren(spode.getChildren());
+                    converted.put(key, cg);
+                });
+                mSPnDEs = converted;
+            }
+
             // Skip rebuild when every SPODE already carries probability tables —
             // i.e. when this mAnDE is wrapping a model produced by federated
             // parameter fusion (mAnDETree_Fusion_Params). Otherwise rebuild
@@ -390,6 +509,9 @@ public class mAnDE extends AbstractClassifier implements
 
         // We free up the discretized data space
         data.delete();
+        if (dataOriginal != null) {
+            dataOriginal.delete();
+        }
 
         // Print data of mSPnDEs created
         /*
@@ -502,6 +624,96 @@ public class mAnDE extends AbstractClassifier implements
      */
     public void setAddNB(double addNB) {
         this.addNB = addNB;
+    }
+
+    /**
+     * Enables/disables the conditional-Gaussian (HAODE-style) parameterisation.
+     *
+     * @param continuous {@code true} for conditional-Gaussian children,
+     *                   {@code false} for the classic fully-discrete model.
+     */
+    public void setContinuous(boolean continuous) {
+        this.continuous = continuous;
+    }
+
+    /**
+     * @return whether the conditional-Gaussian parameterisation is enabled.
+     */
+    public boolean isContinuous() {
+        return continuous;
+    }
+
+    /**
+     * Sets the empirical-Bayes prior degrees of freedom for the
+     * conditional-Gaussian variance shrinkage.
+     *
+     * @param d0 prior weight ({@code 0} = no shrinkage / per-cell MLE).
+     */
+    public void setCgPriorVarDof(double d0) {
+        this.cgPriorVarDof = d0;
+    }
+
+    /**
+     * @return the empirical-Bayes prior degrees of freedom used by the
+     *         conditional-Gaussian variance shrinkage.
+     */
+    public double getCgPriorVarDof() {
+        return cgPriorVarDof;
+    }
+
+    /** @param v build the blended NB on discretized data in continuous mode. */
+    public void setCgNBDiscretized(boolean v) {
+        this.cgNBDiscretized = v;
+    }
+
+    /** @param v use a Student-t conditional density for numeric children. */
+    public void setCgStudentT(boolean v) {
+        this.cgStudentT = v;
+    }
+
+    /** @return whether numeric children use a Student-t density. */
+    public boolean isCgStudentT() {
+        return cgStudentT;
+    }
+
+    /** @param dof degrees of freedom of the Student-t child density. */
+    public void setCgStudentDof(double dof) {
+        this.cgStudentDof = dof;
+    }
+
+    /** @return degrees of freedom of the Student-t child density. */
+    public double getCgStudentDof() {
+        return cgStudentDof;
+    }
+
+    /** @param w exponent on the class prior (1=empirical, 0=uniform/balanced). */
+    public void setCgPriorWeight(double w) {
+        this.cgPriorWeight = w;
+    }
+
+    /** @return the exponent applied to the class prior in CG SPnDEs. */
+    public double getCgPriorWeight() {
+        return cgPriorWeight;
+    }
+
+    /** @param s hybrid per-child strategy: none|alldisc|nbins|ll. */
+    public void setCgHybrid(String s) {
+        this.cgHybrid = s;
+    }
+
+    /** @return the hybrid per-child parameterisation strategy. */
+    public String getCgHybrid() {
+        return cgHybrid;
+    }
+
+    /** @param t temperature on the CG likelihood (1=plain, >1 flattens overconfidence). */
+    public void setCgTemperature(double t) {
+        this.cgTemperature = t;
+    }
+
+    /** @return the CG likelihood temperature. */
+    public double getCgTemperature() {
+        return cgTemperature;
     }
 
     /**
