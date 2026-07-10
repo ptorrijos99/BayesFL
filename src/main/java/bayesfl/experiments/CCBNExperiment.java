@@ -186,9 +186,12 @@ public class CCBNExperiment {
      * @param name The name of the algorithm.
      * @param options The options used to configure the algorithm.
      * @param model A model object passed if required by the algorithm.
+     * @param modelAnDE The AnDE class cuts in case it is required.
+     * @param noiseGenerator The DP noise generator to apply inside the algorithm (null disables DP).
      * @return An instance of the selected local learning algorithm.
      */
-    private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model, Object modelAnDE) {
+    private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model, Object modelAnDE,
+                                               NumericNoiseGenerator noiseGenerator) {
         switch (name) {
             // Supervised discretization wrapper
             case "Bins_Supervised" -> {
@@ -229,7 +232,7 @@ public class CCBNExperiment {
 
                 // Retrieve combinations and class maps from modelsAnDE
                 Classes structure = (Classes) modelAnDE;
-                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps());
+                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator);
             }
 
             // Handle unknown algorithm names gracefully
@@ -540,18 +543,24 @@ public class CCBNExperiment {
             Instances test = partitions[i][1];
             Data data = new Weka_Instances(datasetName, train, test);
 
-            LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE);
-
             NumericNoiseGenerator dp = getNoiseGenerator(dpOptions);
             try {
-                // Copy the dpOptions to avoid modifying the original array
-                dpOptions = Arrays.copyOf(dpOptions, dpOptions.length);
-                if (Utils.getFlag("AUTO", dpOptions)) {
+                // Local copy: weka's getFlag blanks the matched entry, and dpOptions
+                // must stay intact for the next client's iteration
+                String[] dpOptionsCopy = Arrays.copyOf(dpOptions, dpOptions.length);
+                if (dp != null && Utils.getFlag("AUTO", dpOptionsCopy)) {
                     dp.setSensitivity(computeSensitivity(data, algorithmOptions));
                 }
             } catch (Exception e) {throw new RuntimeException(e);}
 
-            Client client = new Client(fusionClient, algorithm, data, dp);
+            // WDPT applies the noise itself on raw counts during the round-1 build
+            // (one-shot release); every other algorithm is noised at the model level
+            // by the client after each build.
+            boolean noiseInsideAlgorithm = algorithmName.equals("WDPT_CCBN");
+            LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE,
+                    noiseInsideAlgorithm ? dp : null);
+
+            Client client = new Client(fusionClient, algorithm, data, noiseInsideAlgorithm ? null : dp);
             client.setStats(buildStats, fusionStats, outputPath);
             client.setID(i);
             client.setExperimentName(operation);

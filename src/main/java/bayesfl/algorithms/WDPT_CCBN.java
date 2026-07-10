@@ -30,6 +30,7 @@ package bayesfl.algorithms;
 /**
  * Third-party imports.
  */
+import DataStructure.wdBayesNode;
 import DataStructure.wdBayesParametersTree;
 import EBNC.wdBayes;
 import objectiveFunction.ObjectiveFunction;
@@ -50,6 +51,7 @@ import java.util.*;
 import bayesfl.data.Data;
 import bayesfl.model.Model;
 import bayesfl.model.WDPT;
+import bayesfl.privacy.NumericNoiseGenerator;
 
 import static org.albacete.simd.utils.Utils.*;
 
@@ -100,15 +102,38 @@ public class WDPT_CCBN implements LocalAlgorithm {
     private final List<Map<String, Integer>> globalClassMaps;
 
     /**
+     * Optional client-side DP noise generator. When non-null, the raw count
+     * tables of the round-1 build are Laplace-perturbed BEFORE being converted
+     * to the probability tables that the fusion step shares (one-shot release,
+     * formal epsilon-DP for the generative tables via the Laplace mechanism;
+     * the later weight rounds never touch local counts again).
+     */
+    private final NumericNoiseGenerator noiseGenerator;
+
+    /**
      * Constructor.
      *
      * @param options      The options to set the parameters of the algorithm.
      * @param cutPoints    The cut points of the discretization filter.
      */
     public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps) {
+        this(options, cutPoints, globalClassMaps, null);
+    }
+
+    /**
+     * Constructor with an optional DP noise generator for count-space privatization.
+     *
+     * @param options        The options to set the parameters of the algorithm.
+     * @param cutPoints      The cut points of the discretization filter.
+     * @param globalClassMaps Global class maps for synthetic classes.
+     * @param noiseGenerator The DP noise generator applied to the raw counts (null disables DP).
+     */
+    public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
+                     NumericNoiseGenerator noiseGenerator) {
         this.cutPoints = cutPoints;
         this.options = Arrays.copyOf(options, options.length);
         this.globalClassMaps = globalClassMaps;
+        this.noiseGenerator = noiseGenerator;
 
         // Copy the options to avoid modifying the original array
         try {
@@ -128,6 +153,11 @@ public class WDPT_CCBN implements LocalAlgorithm {
      * @return The built local model.
      */
     public Model buildLocalModel(Data data) {
+        if (noiseGenerator != null && cutPoints != null) {
+            throw new UnsupportedOperationException(
+                    "Count-space DP requires pre-discretized categorical data (cutPoints must be null)");
+        }
+
         // Get the instances from the data
         Instances originalData = (Instances) data.getData();
         int nAttributes = originalData.numAttributes() - 1; // excluding class
@@ -185,7 +215,21 @@ public class WDPT_CCBN implements LocalAlgorithm {
 
             // Save the tree-based storage and the objective function because
             // they are needed to build the local model from the global model
-            trees.add(algorithm.getdParameters_());
+            wdBayesParametersTree tree = algorithm.getdParameters_();
+
+            if (noiseGenerator != null) {
+                privatizeTree(tree, modified, indices, originalData.classIndex(), classMap);
+
+                // Refit the round-1 weights against the noisy tables so the shared
+                // parameters are consistent with the tables used at prediction time
+                try {
+                    minimizer.run(algorithm.getObjectiveFunction(), tree.getParameters());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            trees.add(tree);
             functions.add(algorithm.getObjectiveFunction());
             classifiers.add(classifier);
             syntheticClassMaps.add(classMap);
@@ -278,7 +322,110 @@ public class WDPT_CCBN implements LocalAlgorithm {
     }
 
 
-    /** 
+    /**
+     * Replaces the tree's probability tables with tables derived from
+     * Laplace-perturbed raw counts (the formal DP release).
+     * <p>
+     * The released statistics per SPnDE are the synthetic-class prior counts
+     * and the conditional counts of NON-parent attributes (per-record L1
+     * sensitivity C(a,n)*(1+a-n), Proposition 1). Parent-attribute tables are
+     * deterministic given the synthetic class and are reconstructed from the
+     * noisy prior (post-processing). Probability conversion replicates
+     * wdBayesParametersTree.countsToProbability: linear-scale m-estimates for
+     * the class prior, log-scale m-estimates clamped at 1e-75 for conditionals.
+     */
+    private void privatizeTree(wdBayesParametersTree tree, Instances modified, int[] parentOriginalIdx,
+                               int origClassIdx, Map<String, Integer> classMap) {
+        int nc = modified.classAttribute().numValues();
+        int a = modified.numAttributes() - 1; // predictive attributes; synthetic class is last
+
+        // Parent positions in the relabelled data and their index inside the combination
+        Map<Integer, Integer> parentPos = new HashMap<>();
+        for (int p = 0; p < parentOriginalIdx.length; p++) {
+            int mod = parentOriginalIdx[p] < origClassIdx ? parentOriginalIdx[p] : parentOriginalIdx[p] - 1;
+            parentPos.put(mod, p);
+        }
+
+        // 1. Recount raw sufficient statistics (the tree already holds probabilities)
+        double[] classCounts = new double[nc];
+        double[][][] xyCounts = new double[a][][];
+        for (int u = 0; u < a; u++) {
+            xyCounts[u] = new double[modified.attribute(u).numValues()][nc];
+        }
+        for (int r = 0; r < modified.numInstances(); r++) {
+            weka.core.Instance inst = modified.instance(r);
+            int y = (int) inst.classValue();
+            classCounts[y]++;
+            for (int u = 0; u < a; u++) {
+                if (parentPos.containsKey(u)) continue; // not released
+                xyCounts[u][(int) inst.value(u)][y]++;
+            }
+        }
+
+        // 2. Laplace-perturb the released counts and clip at zero
+        double[] noisyClass = noiseGenerator.privatize(classCounts);
+        double noisyN = 0.0;
+        for (int c = 0; c < nc; c++) {
+            noisyClass[c] = Math.max(0.0, noisyClass[c]);
+            noisyN += noisyClass[c];
+        }
+        for (int u = 0; u < a; u++) {
+            if (parentPos.containsKey(u)) continue;
+            for (int v = 0; v < xyCounts[u].length; v++) {
+                xyCounts[u][v] = noiseGenerator.privatize(xyCounts[u][v]);
+                for (int c = 0; c < nc; c++) {
+                    xyCounts[u][v][c] = Math.max(0.0, xyCounts[u][v][c]);
+                }
+            }
+        }
+
+        // 3. Overwrite the tree tables with probabilities from the noisy counts
+        double[] treeClass = tree.getClassCounts();
+        for (int c = 0; c < nc; c++) {
+            treeClass[c] = mEsti(noisyClass[c], noisyN, nc);
+        }
+
+        int[] order = tree.getOrder();
+        for (int pos = 0; pos < a; pos++) {
+            int u = order[pos];
+            wdBayesNode node = tree.wdBayesNode_[pos];
+            int k = modified.attribute(u).numValues();
+
+            if (parentPos.containsKey(u)) {
+                // Deterministic reconstruction: all mass on the parent value
+                // encoded in each synthetic-class label (noisy prior as denominator)
+                int p = parentPos.get(u);
+                for (Map.Entry<String, Integer> e : classMap.entrySet()) {
+                    int y = e.getValue();
+                    String[] parts = e.getKey().split("\\|\\|\\|");
+                    int vStar = modified.attribute(u).indexOfValue(parts[p]);
+                    if (vStar < 0) {
+                        throw new IllegalStateException("Parent value '" + parts[p]
+                                + "' not found in attribute " + modified.attribute(u).name());
+                    }
+                    for (int v = 0; v < k; v++) {
+                        double count = (v == vStar) ? noisyClass[y] : 0.0;
+                        node.setXYCount(v, y, Math.log(Math.max(mEsti(count, noisyClass[y], k), 1e-75)));
+                    }
+                }
+            } else {
+                for (int y = 0; y < nc; y++) {
+                    double denom = 0.0;
+                    for (int v = 0; v < k; v++) denom += xyCounts[u][v][y];
+                    for (int v = 0; v < k; v++) {
+                        node.setXYCount(v, y, Math.log(Math.max(mEsti(xyCounts[u][v][y], denom, k), 1e-75)));
+                    }
+                }
+            }
+        }
+    }
+
+    /** Replicates EBNC SUtils.MEsti with m = 1. */
+    private static double mEsti(double freq, double total, double numValues) {
+        return (freq + 1.0 / numValues) / (total + 1.0);
+    }
+
+    /**
      * Retrieves the name of the algorithm.
      *
      * @return The name of the algorithm.

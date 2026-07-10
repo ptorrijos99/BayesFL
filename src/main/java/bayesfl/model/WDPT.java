@@ -33,13 +33,10 @@ package bayesfl.model;
 import java.util.List;
 import java.util.Map;
 
-import bayesfl.privacy.NoiseGenerator;
-import bayesfl.privacy.NumericNoiseGenerator;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 
-import DataStructure.wdBayesNode;
 import DataStructure.wdBayesParametersTree;
 import EBNC.wdBayes;
 
@@ -51,8 +48,6 @@ import optimize.Minimizer;
  */
 import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
-import bayesfl.privacy.NumericDenoisableModel;
-import bayesfl.privacy.NumericNoiseGenerator;
 
 
 import static bayesfl.experiments.utils.ExperimentUtils.*;
@@ -61,8 +56,13 @@ import static bayesfl.experiments.utils.ExperimentUtils.*;
  * A class representing a federated AnDE-style discriminative model.
  * This model stores a list of parameter trees and classifiers,
  * one for each combination used in the AnDE structure (n=0 is Naive Bayes).
+ *
+ * <p>Differential privacy for the shared generative tables is applied in
+ * count space, one-shot, during the round-1 build (see
+ * {@code WDPT_CCBN#privatizeTree}); this class holds the resulting noisy
+ * tables and the (unprotected, by the selective-DP design) weight vectors.</p>
  */
-public class WDPT implements NumericDenoisableModel {
+public class WDPT implements Model {
 
     /**
      * The list of tree-based parameter storages (one per combination).
@@ -133,114 +133,6 @@ public class WDPT implements NumericDenoisableModel {
         this(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions);
         this.numInstances = numInstances;
     }
-
-    /**
-     * Applies noise to the internal probabilistic parameters of the model using a {@link NumericNoiseGenerator}.
-     * <p>
-     * This method perturbs the class prior probabilities and conditional distributions in each
-     * {@link wdBayesParametersTree}. Since the model stores these values in probability space
-     * (including log-probabilities), noise is added in linear space, then the results are renormalized
-     * and converted back to log-space when needed.
-     * </p>
-     * <p>This method does not guarantee formal (ε, δ)-differential privacy,
-     * as the original counts are not accessible and the sensitivity of probabilities is not bounded.
-     * Instead, this noise injection serves as a heuristic privacy-preserving mechanism that introduces
-     * uncertainty and impairs exact model reconstruction.</p>
-     *
-     * @param noise the {@link NoiseGenerator} used to sample perturbation noise
-     */
-    @Override
-    public void applyNoise(NoiseGenerator noise) {
-        if (!(noise instanceof NumericNoiseGenerator numericNoise)) {
-            throw new IllegalArgumentException("Noise generator must be a NumericNoiseGenerator");
-        }
-
-        for (wdBayesParametersTree tree : trees) {
-            // Privatize classCounts[] (linear scale)
-            double[] original = tree.getClassCounts();
-            double[] noisy = numericNoise.privatize(original);
-            double[] renorm = normalize(noisy);
-            System.arraycopy(renorm, 0, tree.classCounts, 0, renorm.length);
-
-            // Privatize xyCount[] in log-space
-            if (tree.wdBayesNode_ != null) {
-                for (int i = 0; i < tree.wdBayesNode_.length; i++) {
-                    applyNoiseToNode(tree.wdBayesNode_[i], numericNoise);
-                }
-            }
-        }
-    }
-
-    /**
-     * Applies noise to a {@link wdBayesNode}'s conditional distribution stored in {@code xyCount[]}.
-     * <p>
-     * The {@code xyCount[]} array contains log-probabilities of P(x | parents). This method:
-     * <ul>
-     *     <li>Exponentiates the values to retrieve probabilities</li>
-     *     <li>Adds noise using the given {@link NumericNoiseGenerator}</li>
-     *     <li>Renormalizes the result to form a valid probability distribution</li>
-     *     <li>Converts the values back to log-space and overwrites {@code xyCount[]}</li>
-     * </ul>
-     * This process is applied recursively to all children in the trie.
-     * </p>
-     * <p>Since noise is applied to normalized probabilities, the resulting privacy
-     * protection is heuristic and does not satisfy formal differential privacy without
-     * additional assumptions on sensitivity.</p>
-     *
-     * @param node  the node whose conditional probabilities will be perturbed
-     * @param noise the {@link NoiseGenerator} to apply
-     */
-    private void applyNoiseToNode(wdBayesNode node, NumericNoiseGenerator noise) {
-        if (node == null || node.xyCount == null) return;
-
-        int len = node.xyCount.length;
-        double[] probs = new double[len];
-
-        for (int i = 0; i < len; i++) {
-            probs[i] = Math.exp(node.xyCount[i]); // Transform from log-space to probability
-        }
-
-        double[] noisy = noise.privatize(probs);
-        for (int i = 0; i < len; i++) {
-            noisy[i] = Math.max(noisy[i], 1e-9); // Avoid negative probabilities
-        }
-        
-        double[] renormalized = normalize(noisy);
-
-        for (int i = 0; i < len; i++) {
-            node.xyCount[i] = Math.log(renormalized[i]); // Back to log-space
-        }
-
-        if (node.children != null) {
-            for (DataStructure.wdBayesNode child : node.children) {
-                applyNoiseToNode(child, noise);
-            }
-        }
-    }
-
-    /**
-     * Renormalizes a probability vector to ensure it sums to 1.
-     * <p>
-     * This method adds lower bounds to avoid numerical instability from near-zero or negative values
-     * introduced by the noise. It then performs standard normalization.
-     * </p>
-     *
-     * @param values the noisy probability values (non-negative, not necessarily summing to 1)
-     * @return a new normalized array representing a valid probability distribution
-     */
-    private double[] normalize(double[] values) {
-        double sum = 0.0;
-        for (double v : values) {
-            sum += Math.max(v, 1e-12); // Avoid division by zero
-        }
-
-        double[] result = new double[values.length];
-        for (int i = 0; i < values.length; i++) {
-            result[i] = Math.max(values[i], 1e-12) / sum;
-        }
-        return result;
-    }
-
 
     /**
      * Gets the list of parameter trees.
