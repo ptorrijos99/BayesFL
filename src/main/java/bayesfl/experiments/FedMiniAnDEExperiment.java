@@ -113,27 +113,64 @@ public class FedMiniAnDEExperiment {
             }
         }
 
+        // Optional CG (conditional-Gaussian) trailing parameters (backward
+        // compatible with 13-field lines): args[13]=continuous, args[14]=cgPriorVarDof.
+        boolean continuous = false;
+        double cgPriorVarDof = 3.0;
+        boolean cgNBDiscretized = false;
+        if (args.length > 13) continuous = args[13].equalsIgnoreCase("true") || args[13].equals("1");
+        if (args.length > 14) cgPriorVarDof = Double.parseDouble(args[14]);
+        // args[15] = cgNBDiscretized: build the blended NB on discretized (categorical)
+        // data instead of a full-dimensional Gaussian NB, so smoothing (γ > 0) is usable
+        // in continuous mode.
+        if (args.length > 15) cgNBDiscretized = args[15].equalsIgnoreCase("true") || args[15].equals("1");
+
         if (epsilon > 0) {
             noiseGenerator = new Laplace_Noise(epsilon, 2.0);
         }
 
         experimentFedMiniAnDE(folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble,
-                epsilon, discMode, alpha, noiseGenerator, nodeName);
+                epsilon, discMode, alpha, noiseGenerator, nodeName, continuous, cgPriorVarDof, cgNBDiscretized);
     }
 
     public static void experimentFedMiniAnDE(String folder, String bbdd, int nClients, int seed, int nFolds,
                                              int n, int nTrees, double bagSize, String ensemble,
                                              double epsilon, String discMode, double alpha,
                                              NumericNoiseGenerator noiseGenerator, String nodeName) {
+        experimentFedMiniAnDE(folder, bbdd, nClients, seed, nFolds, n, nTrees, bagSize, ensemble,
+                epsilon, discMode, alpha, noiseGenerator, nodeName, false, 3.0, false);
+    }
 
-        boolean localOnly = epsilon < 0;
+    public static void experimentFedMiniAnDE(String folder, String bbdd, int nClients, int seed, int nFolds,
+                                             int n, int nTrees, double bagSize, String ensemble,
+                                             double epsilon, String discMode, double alpha,
+                                             NumericNoiseGenerator noiseGenerator, String nodeName,
+                                             boolean continuous, double cgPriorVarDof) {
+        experimentFedMiniAnDE(folder, bbdd, nClients, seed, nFolds, n, nTrees, bagSize, ensemble,
+                epsilon, discMode, alpha, noiseGenerator, nodeName, continuous, cgPriorVarDof, false);
+    }
+
+    public static void experimentFedMiniAnDE(String folder, String bbdd, int nClients, int seed, int nFolds,
+                                             int n, int nTrees, double bagSize, String ensemble,
+                                             double epsilon, String discMode, double alpha,
+                                             NumericNoiseGenerator noiseGenerator, String nodeName,
+                                             boolean continuous, double cgPriorVarDof, boolean cgNBDiscretized) {
+
+        // CG (conditional-Gaussian) is centralized-only: the federated parameter
+        // fusion (Round 2) is not implemented for CG SPnDEs, so force local-only.
+        // CG also requires NON-discretized children (discMode should be "None"):
+        // mAnDE discretizes the super-parent internally and keeps children numeric.
+        boolean localOnly = epsilon < 0 || continuous;
         String epTag = localOnly ? "" : (epsilon > 0 ? "_ep" + epsilon : "");
         String variantTag = discMode + epTag + (alpha > 0 ? "_a" + alpha : "");
 
+        // "nbd" marks a categorical (discretized) blended NB, distinguishing these
+        // runs from the default Gaussian-NB CG runs in the results.
+        String cgTag = continuous ? "-CGd" + cgPriorVarDof + (cgNBDiscretized ? "nbd" : "") : "";
         String r1AlgoTag = localOnly
-                ? "mA" + n + "DE-Local_" + variantTag
-                : "mA" + n + "DE-FedAnDE_" + variantTag;
-        String r2AlgoTag = "mA" + n + "DE-FedParams_" + variantTag;
+                ? "mA" + n + "DE" + cgTag + "-Local_" + variantTag
+                : "mA" + n + "DE" + cgTag + "-FedAnDE_" + variantTag;
+        String r2AlgoTag = "mA" + n + "DE" + cgTag + "-FedParams_" + variantTag;
 
         // Operation template: algorithm,seed,nTrees,bagSize,ensemble,{γ}
         // The addNB (γ) field is replaced per-γ in mAnDETree.saveStats
@@ -210,6 +247,9 @@ public class FedMiniAnDEExperiment {
 
                 mAnDETree_mAnDE alg = new mAnDETree_mAnDE(n, nTrees, bagSize, ensemble, 0.0, cutPoints);
                 alg.setAddNBValues(GAMMA_VALUES);
+                alg.setContinuous(continuous);
+                alg.setCgPriorVarDof(cgPriorVarDof);
+                alg.setCgNBDiscretized(cgNBDiscretized);
 
                 long start = System.currentTimeMillis();
                 mAnDETree localModel = (mAnDETree) alg.buildLocalModel(null, data);
