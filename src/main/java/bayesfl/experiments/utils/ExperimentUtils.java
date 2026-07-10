@@ -354,14 +354,21 @@ public class ExperimentUtils {
     }
 
     /**
-     * Computes the L1/L2 sensitivity K = (d - n) * C(d - 1, n) based on dataset and algorithm options.
+     * Computes the per-record L1 sensitivity of the AnDE generative release
+     * (Proposition 1 of the paper): Delta = C(a, n) * (1 + a - n).
+     * <p>
+     * Each record touches, for every parent set P (|P_n| = C(a, n)): one
+     * synthetic-class prior cell and (a - n) non-parent conditional cells.
+     * The n parent-attribute tables are NOT part of the release: they are
+     * deterministic given the synthetic class and are reconstructed from the
+     * noisy class prior (see {@code PT.applyNoise}).
      *
      * @param data              the client data (must be Weka_Instances)
      * @param algorithmOptions  the algorithm options containing the -S flag for structure
-     * @return the computed sensitivity value (number of affected cells)
+     * @return the L1 sensitivity of the released count vector
      */
     public static int computeSensitivity(Data data, String[] algorithmOptions) {
-        int d = ((Instances) data.getData()).numAttributes() - 1;
+        int a = ((Instances) data.getData()).numAttributes() - 1;
 
         algorithmOptions = Arrays.copyOf(algorithmOptions, algorithmOptions.length);
         String structure;
@@ -376,7 +383,7 @@ public class ExperimentUtils {
             n = Integer.parseInt(structure.substring(1, structure.length() - 2));
         }
 
-        return (d - n) * binomial(d - 1, n);
+        return binomial(a, n) * (1 + a - n);
     }
 
     public static int binomial(int n, int k) {

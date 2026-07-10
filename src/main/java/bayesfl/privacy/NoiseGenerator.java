@@ -31,14 +31,16 @@
 
 package bayesfl.privacy;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public interface NoiseGenerator {
     /**
      * The random number generator used for generating noise.
      * <p>
-     * It can be replaced with a more secure or reproducible generator if needed.
+     * A cryptographically strong generator is required for the noise to
+     * provide meaningful differential-privacy guarantees.
      * </p>
      */
-    Random rng = new Random();
+    Random rng = new SecureRandom();
 }

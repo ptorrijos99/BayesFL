@@ -37,8 +37,10 @@ import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.estimators.DiscreteEstimator;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Local application imports.
@@ -77,6 +79,33 @@ public class PT implements NumericDenoisableModel {
     private int numInstances = 0;
 
     /**
+     * Header (0-row Instances) of the relabelled dataset of each ensemble member,
+     * used to map parent-attribute value strings to value indices during the
+     * deterministic reconstruction of parent estimators under DP.
+     * Only set on client-built models (see PT_AnDE); fusion-built models keep null.
+     */
+    private List<Instances> headers = null;
+
+    /**
+     * Class index of the ORIGINAL dataset (before relabelling), needed to map
+     * original parent-attribute indices to positions in the relabelled data.
+     */
+    private int classIndex = -1;
+
+    /**
+     * Whether this model's attributes are discretized on-the-fly by the
+     * classifier's filter (cutPoints != null in PT_AnDE) rather than being
+     * pre-discretized categorical data. Count-space DP requires the latter.
+     */
+    private boolean onTheFlyDiscretization = false;
+
+    public void setPrivacyMetadata(List<Instances> headers, int classIndex, boolean onTheFlyDiscretization) {
+        this.headers = headers;
+        this.classIndex = classIndex;
+        this.onTheFlyDiscretization = onTheFlyDiscretization;
+    }
+
+    /**
      * The header for the file.
      */
     private final String header = "bbdd,id,cv,algorithm,node,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,alpha,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trLogLoss,trBrier,trTime,teAcc,tePr,teRc,teF1,teLogLoss,teBrier,teTime,time\n";
@@ -102,17 +131,19 @@ public class PT implements NumericDenoisableModel {
     }
 
     /**
-     * Applies differential privacy noise to the internal probabilistic model by perturbing discrete counts.
+     * Applies the Laplace mechanism to the generative release of the model.
      * <p>
-     * This method iterates over all {@link FilteredClassifier} instances in the ensemble. If the underlying
-     * base classifier is a {@link NaiveBayes}, it accesses both the class distribution and the conditional
-     * distributions for each attribute given the class. For each discrete estimator, it extracts raw counts,
-     * applies Laplace noise scaled to the desired privacy budget, clips negative values, applies smoothing,
-     * normalizes the resulting vector, and updates the estimator accordingly.
-     * </p>
-     * <p>
-     * This approach ensures that the shared parameters satisfy ε-differential privacy while preserving the
-     * structure expected by Weka classifiers.
+     * For each SPnDE (a relabelled NB with synthetic class (y, x_P)), the
+     * released statistics are the synthetic-class prior counts and the
+     * conditional counts of the (a - n) NON-parent attributes; their joint
+     * per-record L1 sensitivity is C(a,n)*(1+a-n) (Proposition 1). The n
+     * parent-attribute tables are deterministic given the synthetic class, so
+     * they are NOT noised nor released: they are rebuilt from the noisy class
+     * prior (post-processing, no additional privacy cost), preserving the
+     * near-indicator structure that the ensemble prediction relies on.
+     * Each invocation consumes a fresh privacy budget: with nIterations > 1
+     * the client re-counts and re-releases, so the total cost composes to
+     * epsilon*T (the paper's generative runs use nIterations = 1).
      * </p>
      *
      * @param noise the {@link NoiseGenerator} used to apply noise (e.g., Laplace)
@@ -123,25 +154,102 @@ public class PT implements NumericDenoisableModel {
             throw new IllegalArgumentException("Noise generator must be a NumericNoiseGenerator");
         }
 
-        for (AbstractClassifier classifier : ensemble) {
-            if (classifier instanceof FilteredClassifier fc) {
-                if (fc.getClassifier() instanceof NaiveBayes nb) {
+        if (onTheFlyDiscretization) {
+            throw new UnsupportedOperationException(
+                    "Count-space DP requires pre-discretized categorical data (cutPoints must be null)");
+        }
 
-                    // Privatize class distribution
-                    DiscreteEstimator classDist = (DiscreteEstimator) nb.getClassEstimator();
-                    applyNoiseToEstimator(numericNoise, classDist);
+        for (int i = 0; i < ensemble.size(); i++) {
+            if (!(ensemble.get(i) instanceof FilteredClassifier fc)
+                    || !(fc.getClassifier() instanceof NaiveBayes nb)) {
+                continue;
+            }
 
-                    // Privatize conditional estimators (conditional probabilities for each attribute given class)
-                    Estimator[][] conds = nb.getConditionalEstimators();
-                    for (Estimator[] cond : conds) {
-                        for (Estimator est : cond) {
-                            if (est instanceof DiscreteEstimator de) {
-                                applyNoiseToEstimator(numericNoise, de);
-                            }
-                        }
+            int[] parents = combinations.get(i);
+            if (parents.length > 0 && (headers == null || classIndex < 0)) {
+                throw new IllegalStateException(
+                        "DP on AnDE (n>=1) requires privacy metadata; call setPrivacyMetadata at build time");
+            }
+
+            // 1. Privatize the synthetic-class prior counts
+            DiscreteEstimator classDist = (DiscreteEstimator) nb.getClassEstimator();
+            applyNoiseToEstimator(numericNoise, classDist);
+
+            // 2. Privatize the conditional counts of NON-parent attributes only
+            Set<Integer> parentAtts = new HashSet<>();
+            for (int p : parents) {
+                parentAtts.add(p < classIndex ? p : p - 1);
+            }
+
+            Estimator[][] conds = nb.getConditionalEstimators();
+            for (int att = 0; att < conds.length; att++) {
+                if (parentAtts.contains(att)) continue;
+                for (Estimator est : conds[att]) {
+                    if (est instanceof DiscreteEstimator de) {
+                        applyNoiseToEstimator(numericNoise, de);
                     }
                 }
             }
+
+            // 3. Rebuild parent estimators from the noisy class prior
+            if (parents.length > 0) {
+                reconstructParentEstimators(nb, i);
+            }
+        }
+    }
+
+    /**
+     * Rebuilds the parent-attribute estimators of ensemble member {@code i}
+     * as deterministic functions of the NOISY class prior: for each synthetic
+     * class value, all mass goes to the parent value encoded in its label.
+     */
+    private void reconstructParentEstimators(NaiveBayes nb, int i) {
+        Instances header = headers.get(i);
+        Map<String, Integer> classMap = syntheticClassMaps.get(i);
+        int[] parents = combinations.get(i);
+        DiscreteEstimator classDist = (DiscreteEstimator) nb.getClassEstimator();
+        Estimator[][] conds = nb.getConditionalEstimators();
+
+        for (Map.Entry<String, Integer> entry : classMap.entrySet()) {
+            String[] parts = entry.getKey().split("\\|\\|\\|");
+            int yIdx = entry.getValue();
+            double noisyCount = Math.max(0.0, classDist.getCount(yIdx) - 1.0);
+
+            for (int p = 0; p < parents.length; p++) {
+                int att = parents[p] < classIndex ? parents[p] : parents[p] - 1;
+                int vStar = header.attribute(att).indexOfValue(parts[p]);
+                if (vStar < 0) {
+                    throw new IllegalStateException("Parent value '" + parts[p]
+                            + "' not found in attribute " + header.attribute(att).name()
+                            + " — DP requires pre-discretized categorical data");
+                }
+                setDeterministicCounts((DiscreteEstimator) conds[att][yIdx], vStar, noisyCount);
+            }
+        }
+    }
+
+    /**
+     * Overwrites a {@link DiscreteEstimator} so that value {@code vStar} carries
+     * {@code mass} raw counts and every other value carries zero, keeping Weka's
+     * +1 initialization convention (server recovers raw counts as getCount-1).
+     */
+    private void setDeterministicCounts(DiscreteEstimator estimator, int vStar, double mass) {
+        int k = estimator.getNumSymbols();
+        double[] counts = new double[k];
+        double sum = 0.0;
+        for (int v = 0; v < k; v++) {
+            counts[v] = (v == vStar ? mass : 0.0) + 1.0;
+            sum += counts[v];
+        }
+        try {
+            java.lang.reflect.Field fCounts = DiscreteEstimator.class.getDeclaredField("m_Counts");
+            java.lang.reflect.Field fSum = DiscreteEstimator.class.getDeclaredField("m_SumOfCounts");
+            fCounts.setAccessible(true);
+            fSum.setAccessible(true);
+            System.arraycopy(counts, 0, (double[]) fCounts.get(estimator), 0, k);
+            fSum.setDouble(estimator, sum);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to set deterministic counts", e);
         }
     }
 

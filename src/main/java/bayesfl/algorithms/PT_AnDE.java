@@ -97,6 +97,7 @@ public class PT_AnDE implements LocalAlgorithm {
         // Generate combinations of attributes
         List<int[]> combinations = generateCombinations(nAttributes, nAnDE);
         List<Map<String, Integer>> syntheticClassMaps = new ArrayList<>();
+        List<Instances> headers = new ArrayList<>();
         this.ensemble = new ArrayList<>();
 
         for (int i = 0; i < combinations.size(); i++) {
@@ -128,9 +129,12 @@ public class PT_AnDE implements LocalAlgorithm {
 
             this.ensemble.add(fc);
             syntheticClassMaps.add(classMap);
+            headers.add(new Instances(modified, 0));
         }
 
-        return new PT(this.ensemble, combinations, syntheticClassMaps, originalData.numInstances());
+        PT pt = new PT(this.ensemble, combinations, syntheticClassMaps, originalData.numInstances());
+        pt.setPrivacyMetadata(headers, originalData.classIndex(), this.cutPoints != null);
+        return pt;
     }
 
     /**
