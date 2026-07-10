@@ -73,7 +73,14 @@
             <!-- <version>d467827 / ac304ca (nueva)</version> -->
             <version>d467827</version>
         </dependency>
-    
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.eclipse.recommenders</groupId>
             <artifactId>jayes</artifactId>
@@ -127,7 +134,13 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-            
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
         </plugins>
     </build>
 
