@@ -101,8 +101,19 @@ public class WDPT implements Model {
 
     /**
      * The header for the file.
+     * <p>
+     * {@code epsilon} is the table (count-space) DP budget; the
+     * {@code epsilonParam,clipC,sigma,localSteps,rounds} group describes the
+     * discriminative-channel DP-SGD configuration (see
+     * {@link bayesfl.algorithms.dp.DPSGDConfig}), and {@code epsilonTotal} is
+     * the sum of both channels' contributions (a disabled channel contributes
+     * {@code 0}).
      */
-    private String header = "bbdd,id,cv,algorithm,node,bins,seed,nClients,fusParams,fusProbs,dptype,epsilon,delta,rho,sensitivity,autoSens,alpha,epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trLogLoss,trBrier,trTime,teAcc,tePr,teRc,teF1,teLogLoss,teBrier,teTime,time\n";
+    public static final String HEADER = "bbdd,id,cv,algorithm,node,bins,seed,nClients,fusParams,fusProbs,dptype,"
+            + "epsilon,delta,rho,sensitivity,autoSens,alpha,"
+            + "epsilonParam,clipC,sigma,localSteps,rounds,epsilonTotal,"
+            + "epoch,iteration,instances,maxIterations,trAcc,trPr,trRc,trF1,trLogLoss,trBrier,trTime,"
+            + "teAcc,tePr,teRc,teF1,teLogLoss,teBrier,teTime,time\n";
 
     /**
      * Constructor.
@@ -246,7 +257,7 @@ public class WDPT implements Model {
 
         statistics += time + "\n";
 
-        saveExperiment("results/" + epoch + "/" + path, header, statistics);
+        saveExperiment("results/" + epoch + "/" + path, HEADER, statistics);
     }
 
     /**

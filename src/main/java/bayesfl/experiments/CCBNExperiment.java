@@ -38,6 +38,7 @@ import java.util.*;
  * Third-party imports.
  */
 import bayesfl.algorithms.*;
+import bayesfl.algorithms.dp.DPSGDConfig;
 import bayesfl.fusion.*;
 import bayesfl.model.Classes;
 import bayesfl.privacy.Gaussian_Noise;
@@ -92,8 +93,9 @@ public class CCBNExperiment {
      * @param nFolds The number of cross-validation folds to use in the experiment.
      * @param seed The random seed for reproducibility of data splits.
      * @param suffix The suffix used to distinguish the output file or experiment version.
+     * @param paramDp The discriminative-channel DP-SGD configuration for the parameter refinement (null/disabled when the channel is off).
      */
-    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, String[] dpOptions, int nClients, int nIterations, int nFolds, int seed, double alpha, String suffix, String nodeName) {
+    public static void run(String folder, String datasetName, String[] discretizerOptions, String[] algorithmOptions, String[] clientOptions, String[] serverOptions, String[] dpOptions, int nClients, int nIterations, int nFolds, int seed, double alpha, String suffix, String nodeName, DPSGDConfig paramDp) {
         // Get the cross-validation splits for each client
         String datasetPath = baseDatasetPath + folder + "/" + datasetName + ".arff";
         Instances[][][] splits = Weka_Instances.divide(datasetName, datasetPath, nFolds, nClients, seed, alpha);
@@ -120,7 +122,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath, alpha, nodeName);
+        models = validate(datasetName, splits, seed, models, null, discretizerName, discretizerOptions, clientOptions, discretizerName, discretizerOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, 1, outputPath, alpha, nodeName, paramDp);
 
         // STEP 2 — Federate AnDE synthetic classes
         buildStats = false;
@@ -131,7 +133,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = "";
 
-        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions,  dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath, alpha, nodeName);
+        modelsAnDE = validate(datasetName, splits, seed, modelsAnDE, null, discretizerName, discretizerOptions, clientOptions, "Classes_AnDE", algorithmOptions,  dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence,1, outputPath, alpha, nodeName, paramDp);
 
 
         // STEP 3 — Real training and fusion of the algorithms
@@ -144,7 +146,7 @@ public class CCBNExperiment {
         convergence = new NoneConvergence();
         outputPath = baseOutputPath + algorithmName + "_" + suffix;
 
-        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath, alpha, nodeName);
+        validate(datasetName, splits, seed, models, modelsAnDE, discretizerName, discretizerOptions, clientOptions, algorithmName, algorithmOptions, dpOptions, buildStats, fusionStats, stats, fusionClient, fusionServer, convergence, nIterations, outputPath, alpha, nodeName, paramDp);
     }
 
     /**
@@ -188,10 +190,11 @@ public class CCBNExperiment {
      * @param model A model object passed if required by the algorithm.
      * @param modelAnDE The AnDE class cuts in case it is required.
      * @param noiseGenerator The DP noise generator to apply inside the algorithm (null disables DP).
+     * @param paramDp The discriminative-channel DP-SGD configuration for the parameter refinement (null disables it).
      * @return An instance of the selected local learning algorithm.
      */
     private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model, Object modelAnDE,
-                                               NumericNoiseGenerator noiseGenerator) {
+                                               NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp) {
         switch (name) {
             // Supervised discretization wrapper
             case "Bins_Supervised" -> {
@@ -232,7 +235,7 @@ public class CCBNExperiment {
 
                 // Retrieve combinations and class maps from modelsAnDE
                 Classes structure = (Classes) modelAnDE;
-                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator);
+                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator, paramDp);
             }
 
             // Handle unknown algorithm names gracefully
@@ -327,9 +330,10 @@ public class CCBNExperiment {
      * @param nClients The number of clients participating in federated learning.
      * @param alpha The alpha parameter for non-IID data distribution.
      * @param nodeName The name of the node executing the experiment.
+     * @param paramDp The discriminative-channel DP-SGD configuration for the parameter refinement (null disables it).
      * @return A string encoding the current configuration for logging or output files.
      */
-    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, String[] dpOptions, int seed, int nClients, double alpha, String nodeName) {
+    private static String getOperation(int fold, String[] discretizerOptions, String algorithmName, String[] algorithmOptions, String[] clientOptions, String[] dpOptions, int seed, int nClients, double alpha, String nodeName, DPSGDConfig paramDp) {
         // Default values if options were not found
         String structure = null;
         String parameterLearning = null;
@@ -390,7 +394,23 @@ public class CCBNExperiment {
             case "WDPT_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
-                return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
+
+                // Param-space (DP-SGD) channel: a disabled/absent channel contributes
+                // defaults consistent with WDPT_CCBN(..., paramDp=null) (no DP-SGD applied)
+                // and reports 0 towards epsilonTotal, matching the "off = 0" convention.
+                double epsilonParamVal = paramDp != null ? paramDp.epsilonParam() : Double.POSITIVE_INFINITY;
+                double clipCVal = paramDp != null ? paramDp.clipC() : 0.0;
+                double sigmaVal = paramDp != null ? paramDp.sigma() : 0.0;
+                int localStepsVal = paramDp != null ? paramDp.localSteps() : 0;
+                int roundsVal = paramDp != null ? paramDp.rounds() : 0;
+
+                // epsilonTotal sums both DP channels; an off channel contributes 0
+                double epsilonTab = epsilon > 0 ? epsilon : 0.0;
+                double epParam = (paramDp == null || Double.isInfinite(epsilonParamVal)) ? 0.0 : epsilonParamVal;
+                double epsilonTotal = epsilonTab + epParam;
+
+                return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + "," + fuseParameters + "," + fuseProbabilities + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha
+                        + "," + epsilonParamVal + "," + clipCVal + "," + sigmaVal + "," + localStepsVal + "," + roundsVal + "," + epsilonTotal;
             }
             // Add more algorithms here
             default -> {
@@ -416,9 +436,10 @@ public class CCBNExperiment {
      * @param convergence The convergence method.
      * @param nIterations The number of iterations.
      * @param outputPath The output path.
+     * @param paramDp The discriminative-channel DP-SGD configuration for the parameter refinement (null disables it).
      * @return The models.
      */
-    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, String[] dpOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath, double alpha, String nodeName) {
+    protected static Object[] validate(String datasetName, Instances[][][] splits, int seed, Object[] models, Object[] modelsAnDE, String discretizerName, String[] discretizerOptions, String[] clientOptions, String algorithmName, String[] algorithmOptions, String[] dpOptions, boolean buildStats, boolean fusionStats, boolean stats, Fusion fusionClient, Fusion fusionServer, Convergence convergence, int nIterations, String outputPath, double alpha, String nodeName, DPSGDConfig paramDp) {
         // The first level of the splits corresponds to the folds
         int nFolds = splits.length;
 
@@ -448,11 +469,11 @@ public class CCBNExperiment {
             if (modelsAnDE != null) {
                 modelAnDE = modelsAnDE[i];
             }
-            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients, alpha, nodeName);
+            String operation = getOperation(i, discretizerOptionsTemp, algorithmName, algorithmOptionsTemp, clientOptionsTemp, dpOptionsTemp, seed, nClients, alpha, nodeName, paramDp);
 
             System.out.println(">>> RUNNING: Dataset " + datasetName + " | Fold " + i);
 
-            models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, dpOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath);
+            models[i] = run(datasetName, partitions, algorithmName, algorithmOptionsTemp, dpOptionsTemp, model, modelAnDE, buildStats, fusionStats, fusionClient, stats, fusionServer, convergence, nIterations, operation, outputPath, paramDp);
         }
 
         return models;
@@ -532,9 +553,10 @@ public class CCBNExperiment {
      * @param nIterations The number of iterations.
      * @param operation The operation.
      * @param outputPath The output path.
+     * @param paramDp The discriminative-channel DP-SGD configuration for the parameter refinement (null disables it).
      * @return The model.
      */
-    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, String[] dpOptions, Object model, Object modelAnDE, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath) {
+    private static Object run(String datasetName, Instances[][] partitions, String algorithmName, String[] algorithmOptions, String[] dpOptions, Object model, Object modelAnDE, boolean buildStats, boolean fusionStats, Fusion fusionClient, boolean stats, Fusion fusionServer, Convergence convergence, int nIterations, String operation, String outputPath, DPSGDConfig paramDp) {
         int nClients = partitions.length;
         ArrayList<Client> clients = new ArrayList<>(nClients);
 
@@ -558,7 +580,7 @@ public class CCBNExperiment {
             // by the client after each build.
             boolean noiseInsideAlgorithm = algorithmName.equals("WDPT_CCBN");
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE,
-                    noiseInsideAlgorithm ? dp : null);
+                    noiseInsideAlgorithm ? dp : null, noiseInsideAlgorithm ? paramDp : null);
 
             Client client = new Client(fusionClient, algorithm, data, noiseInsideAlgorithm ? null : dp);
             client.setStats(buildStats, fusionStats, outputPath);
@@ -617,6 +639,13 @@ public class CCBNExperiment {
         double rho = 0.1;        // only for ZCDP
         double sensitivity = 1.0;  // default for PT; smaller for WDPT
         boolean autoSensitivity  = true; // Calculate sensitivity automatically based on the data columns
+
+        // Discriminative-channel (DP-SGD) parameters. epsilonParam = infinity disables the channel
+        // (matches WDPT_CCBN(..., paramDp=null) behaviour: the existing quasi-Newton loop is used).
+        double epsilonParam = Double.POSITIVE_INFINITY;
+        double clipC = 1.0;
+        int localSteps = 1;
+        double paramLr = 0.1;
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -687,6 +716,42 @@ public class CCBNExperiment {
             } else {
                 dpType = "None";
             }
+
+            // Add discriminative-channel (DP-SGD) parameters if passed; appended after the
+            // existing DP fields so pre-existing launch scripts keep working unchanged
+            // (missing/short arrays fall back to the "channel off" defaults above).
+            if (parameters.length > 18) {
+                try {
+                    epsilonParam = Double.parseDouble(parameters[18]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Warning: Could not parse epsilonParam at index 18. Defaulting to Infinity.");
+                    epsilonParam = Double.POSITIVE_INFINITY;
+                }
+            }
+            if (parameters.length > 19) {
+                try {
+                    clipC = Double.parseDouble(parameters[19]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Warning: Could not parse clipC at index 19. Defaulting to 1.0.");
+                    clipC = 1.0;
+                }
+            }
+            if (parameters.length > 20) {
+                try {
+                    localSteps = Integer.parseInt(parameters[20]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Warning: Could not parse localSteps at index 20. Defaulting to 1.");
+                    localSteps = 1;
+                }
+            }
+            if (parameters.length > 21) {
+                try {
+                    paramLr = Double.parseDouble(parameters[21]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Warning: Could not parse paramLr at index 21. Defaulting to 0.1.");
+                    paramLr = 0.1;
+                }
+            }
         }
 
         // Use supervised discretization in case the number of bins is not provided and equal-frequency otherwise
@@ -715,13 +780,18 @@ public class CCBNExperiment {
         if (autoSensitivity) dpList.add("-AUTO");
         String[] dpOptions = dpList.toArray(new String[0]);
 
+        // Build the discriminative-channel (DP-SGD) configuration. rounds is the number of
+        // federated communication rounds already configured for this run (nIterations); a
+        // disabled channel (epsilonParam = infinity) calibrates sigma to 0.
+        DPSGDConfig paramDp = new DPSGDConfig(epsilonParam, delta, clipC, nIterations, localSteps, paramLr, seed);
+
         // Create output suffix for result identification
         String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities
                 + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity + "_" + autoSensitivity
                 + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + "_a" + alpha + ".csv";
 
         // Run the experiment
-        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, alpha, suffix, nodeName);
+        CCBNExperiment.run(folder, datasetName, discretizerOptions, algorithmOptions, clientOptions, serverOptions, dpOptions, nClients, nIterations, nFolds, seed, alpha, suffix, nodeName, paramDp);
     }
 
     /**
