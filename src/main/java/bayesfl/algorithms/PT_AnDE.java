@@ -133,7 +133,7 @@ public class PT_AnDE implements LocalAlgorithm {
         }
 
         PT pt = new PT(this.ensemble, combinations, syntheticClassMaps, originalData.numInstances());
-        pt.setPrivacyMetadata(headers, originalData.classIndex(), this.cutPoints != null);
+        pt.setPrivacyMetadata(headers, originalData.classIndex(), hasActiveCutPoints(this.cutPoints));
         return pt;
     }
 

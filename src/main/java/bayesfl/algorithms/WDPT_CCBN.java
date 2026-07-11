@@ -153,9 +153,10 @@ public class WDPT_CCBN implements LocalAlgorithm {
      * @return The built local model.
      */
     public Model buildLocalModel(Data data) {
-        if (noiseGenerator != null && cutPoints != null) {
+        if (noiseGenerator != null && hasActiveCutPoints(cutPoints)) {
             throw new UnsupportedOperationException(
-                    "Count-space DP requires pre-discretized categorical data (cutPoints must be null)");
+                    "Count-space DP requires categorical data; on-the-fly numeric discretization "
+                    + "is unsupported (its data-dependent cut points would be released unprotected)");
         }
 
         // Get the instances from the data
