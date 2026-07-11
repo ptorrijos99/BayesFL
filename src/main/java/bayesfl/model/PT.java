@@ -156,7 +156,9 @@ public class PT implements NumericDenoisableModel {
 
         if (onTheFlyDiscretization) {
             throw new UnsupportedOperationException(
-                    "Count-space DP requires pre-discretized categorical data (cutPoints must be null)");
+                    "DP requires categorical data; on-the-fly numeric discretization is unsupported "
+                    + "(its data-dependent cut points would be released unprotected and would break "
+                    + "parent-table reconstruction)");
         }
 
         for (int i = 0; i < ensemble.size(); i++) {

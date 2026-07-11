@@ -1582,4 +1582,28 @@ public class Utils {
 
         return builder.toString();
     }
+
+    /**
+     * Returns true iff the cut-point matrix actually discretizes some attribute,
+     * i.e. it has at least one non-null, non-empty row.
+     * <p>
+     * The federated discretization phase always produces a non-null cut-point
+     * matrix, even for already-categorical data: in that case every row is null
+     * or empty and the {@link bayesfl.algorithms.Dummy} filter acts as the
+     * identity. A non-null matrix therefore does not by itself imply on-the-fly
+     * discretization; only an active (numeric) cut point does. This distinction
+     * matters under differential privacy, where the count-space mechanism and
+     * the parent-table reconstruction assume the model is trained on the
+     * categorical data as-is.
+     *
+     * @param cutPoints the per-attribute cut-point matrix (may be null)
+     * @return true if some attribute is genuinely discretized
+     */
+    public static boolean hasActiveCutPoints(double[][] cutPoints) {
+        if (cutPoints == null) return false;
+        for (double[] row : cutPoints) {
+            if (row != null && row.length > 0) return true;
+        }
+        return false;
+    }
 }
