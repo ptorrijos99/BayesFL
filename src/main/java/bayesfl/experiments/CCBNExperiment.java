@@ -785,9 +785,18 @@ public class CCBNExperiment {
         // disabled channel (epsilonParam = infinity) calibrates sigma to 0.
         DPSGDConfig paramDp = new DPSGDConfig(epsilonParam, delta, clipC, nIterations, localSteps, paramLr, seed);
 
+        // When the DP-SGD weight channel is active, tag the filename so these runs do
+        // not collide with the same-config non-private runs (epsilonParam is otherwise
+        // absent from the name). A disabled channel adds no tag, so existing non-DP
+        // result files keep the same name and are still matched by the resume logic.
+        // The tag sits before the "_nClients_seed_nIterations_nFolds_aAlpha" tail, so
+        // isFoldCompleteInSuperset (which parses those fields from the end) is unaffected.
+        String dpsgdTag = Double.isInfinite(epsilonParam) ? ""
+                : "_dpsgdE" + epsilonParam + "_c" + clipC + "_s" + localSteps + "_lr" + paramLr;
+
         // Create output suffix for result identification
         String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities
-                + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity + "_" + autoSensitivity
+                + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity + "_" + autoSensitivity + dpsgdTag
                 + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + "_a" + alpha + ".csv";
 
         // Run the experiment
