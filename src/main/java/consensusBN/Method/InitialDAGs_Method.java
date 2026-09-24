@@ -129,8 +129,12 @@ public class InitialDAGs_Method implements Population {
             // Add the greedy solution with maxTreewidth-1 to the population
             List<Dag> greedyDagsMaxTreewidthMinusOne;
             if (useMinCut && maxTreewidth > 2) {
-                int size = minCutTreeWidthUnion.outputExperimentDAGsList.size();
-                greedyDagsMaxTreewidthMinusOne = minCutTreeWidthUnion.outputExperimentDAGsList.get(size-1);
+                // The second seed must be a solution for maxTreewidth-1. Taking the
+                // last snapshot only did that when the MinCut run had been launched
+                // with maxTreewidth-1 as its own bound. With a shared pre-run, whose
+                // bound is 1, the last snapshot is always the empty graph, so pick
+                // the least-pruned snapshot that meets maxTreewidth-1 instead.
+                greedyDagsMaxTreewidthMinusOne = snapshotForTreewidth(maxTreewidth - 1);
             } else if (cachedGreedyDagsM1 != null) {
                 greedyDagsMaxTreewidthMinusOne = cachedGreedyDagsM1;
             } else {
@@ -153,6 +157,17 @@ public class InitialDAGs_Method implements Population {
         return population;
     }
     
+    /** Least-pruned pre-run snapshot whose fusion meets the given treewidth bound. */
+    private List<Dag> snapshotForTreewidth(int tw) {
+        List<Dag> snaps = minCutTreeWidthUnion.outputExperimentDAGs;
+        for (int i = 0; i < snaps.size(); i++) {
+            if (getTreeWidth(snaps.get(i)) <= tw) {
+                return minCutTreeWidthUnion.outputExperimentDAGsList.get(i);
+            }
+        }
+        return minCutTreeWidthUnion.outputExperimentDAGsList.get(snaps.size() - 1);
+    }
+
     @Override
     public Dag getUnionFromChromosome(boolean[] chromosome) {
         // Create the DAG that corresponds to each individual

@@ -176,6 +176,16 @@ public class GeneticTreeWidthUnion {
                 bestDag = new Dag(alpha);
             }
         }
+        // A warm-started run must never return worse than the solution it started
+        // from. For Ea/Eb/Ec the greedy solution is itself a chromosome, so this
+        // never triggers. For EbMinCut it can: MCBNC reports the pruned fusion
+        // graph, while the chromosome encodes the pruned input networks, and
+        // re-fusing those restores covering arcs that MCBNC had already deleted.
+        else if (useGreedyWarmstart && greedyDag != null
+                 && Utils.getTreeWidth(greedyDag) <= maxTreewidth
+                 && scoreOf(greedyDag) < scoreOf(bestDag)) {
+            bestDag = greedyDag;
+        }
 
         return bestDag;
     }
@@ -184,10 +194,28 @@ public class GeneticTreeWidthUnion {
 
     private void evaluate() {
         fitness = new double[populationSize];
+        Dag[] decoded = new Dag[populationSize];
 
+        // Scoring is parallel, but it only writes to its own slot. Updating the
+        // incumbent inside the parallel block would race: two threads can both
+        // pass the improvement test and the later write wins, silently discarding
+        // the better solution and making a run irreproducible from its seed.
         IntStream.range(0, populationSize)
                 .parallel()
-                .forEach(i -> fitness[i] = calculateFitness(i));
+                .forEach(i -> {
+                    decoded[i] = method.getUnionFromChromosome(population[i]);
+                    fitness[i] = calculateFitness(i, decoded[i]);
+                });
+
+        // Incumbent update, sequential and in index order, so the outcome depends
+        // only on the seed.
+        for (int i = 0; i < populationSize; i++) {
+            if (fitness[i] < bestFitness && treeWidths[i] <= maxTreewidth && decoded[i] != null) {
+                bestIndividual = population[i].clone();
+                bestDag = decoded[i];
+                bestFitness = fitness[i];
+            }
+        }
 
         /*System.out.println("Fitness: ");
         for (int i = 0; i < populationSize; i++) {
@@ -339,9 +367,21 @@ public class GeneticTreeWidthUnion {
         }
     }
 
-    private double calculateFitness(int index) {
-        Dag individualDag = method.getUnionFromChromosome(population[index]);
+    /** Objective value of a DAG under the configured metric, ignoring the treewidth penalty. */
+    private double scoreOf(Dag dag) {
+        if (metricAgainstOriginalDAGs) {
+            if (metricSMHD) {
+                return Utils.SMHDwithoutMoralize(Utils.moralize(dag), originalMoralGraphs);
+            }
+            return Utils.fusionSimilarity(dag, originalDags);
+        }
+        return Utils.SMHDwithoutMoralize(Utils.moralize(dag), moralGraphUnion);
+    }
+
+    /** Pure: scores one individual and records its treewidth. No shared state. */
+    private double calculateFitness(int index, Dag individualDag) {
         if (individualDag == null) {
+            treeWidths[index] = Integer.MAX_VALUE;
             return Double.MAX_VALUE;
         }
 
@@ -363,12 +403,6 @@ public class GeneticTreeWidthUnion {
 
         if (treeWidths[index] > maxTreewidth) {
             fitness = fitness * ((double)  treeWidths[index] / maxTreewidth);
-        }
-
-        if (fitness < bestFitness && treeWidths[index] <= maxTreewidth) {
-            bestIndividual = population[index].clone();
-            bestDag = individualDag;
-            bestFitness = fitness;
         }
 
         return fitness;
