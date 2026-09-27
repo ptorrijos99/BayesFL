@@ -93,6 +93,7 @@ public class JournalRun {
                 case "variants2" -> runVariants2(dags, w, row, wTime);
                 case "budget" -> runBudget(dags, w, row, wTime);
                 case "classvariants" -> runClassVariants(dags, w, row, wTime);
+                case "tw1" -> runTw1(dags, w, row, wTime);
                 case "mcbnc" -> runMcbnc(dags, w, row);
                 case "greedyEa" -> runGreedyEa(dags, w, row);
                 default -> throw new IllegalArgumentException("unknown group " + group);
@@ -306,6 +307,78 @@ public class JournalRun {
                 row.emit("C-" + start + "-" + names[k], "-", g, wTime + iTime + (System.currentTimeMillis() - t) / 1000.0);
             }
         }
+    }
+
+    /**
+     * Treewidth one, where the optimum is known exactly (a minimum-weight
+     * spanning forest on the negative moral weights, oriented as a branching),
+     * against the heuristics run under the same bound (max clique size 2).
+     */
+    static void runTw1(List<Dag> dags, PairWeights w, Row row, double wTime) {
+        long t = System.currentTimeMillis();
+        Dag opt = kruskalForest(w);
+        row.emit("Kruskal", "b2", opt, wTime + (System.currentTimeMillis() - t) / 1000.0);
+
+        TreewidthBudget tb = new TreewidthBudget(2);
+        StructuralHillClimb s = new StructuralHillClimb(w);
+        s.skelWeight = 1.0 / (2 * w.r());
+        t = System.currentTimeMillis();
+        Dag g = s.search(new Dag(w.nodes()), tb);
+        row.emit("HC-empty", "b2", g, wTime + (System.currentTimeMillis() - t) / 1000.0);
+
+        MajorityGreedy m = new MajorityGreedy(dags);
+        m.fastCandidateUpdate = true;
+        t = System.currentTimeMillis();
+        g = m.search(tb);
+        row.emit("MMG", "b2", g, wTime + (System.currentTimeMillis() - t) / 1000.0);
+
+        t = System.currentTimeMillis();
+        g = ConsensusUnion.fusionUnion(dags, "MaxTreewidth", "2");
+        row.emit("Greedy-Ea", "b2", g, (System.currentTimeMillis() - t) / 1000.0);
+    }
+
+    /** Kruskal on the pairs of negative moral weight, each tree oriented away from a root. */
+    static Dag kruskalForest(PairWeights w) {
+        int n = w.n();
+        List<int[]> cand = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                if (w.wMoral(i, j) < 0) cand.add(new int[]{i, j});
+        cand.sort(Comparator.comparingDouble(p -> w.wMoral(p[0], p[1])));
+        int[] parent = new int[n];
+        for (int i = 0; i < n; i++) parent[i] = i;
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+        for (int[] p : cand) {
+            int a = find(parent, p[0]), b = find(parent, p[1]);
+            if (a == b) continue;
+            parent[a] = b;
+            adj.get(p[0]).add(p[1]);
+            adj.get(p[1]).add(p[0]);
+        }
+        Dag out = new Dag(w.nodes());
+        boolean[] seen = new boolean[n];
+        for (int root = 0; root < n; root++) {
+            if (seen[root]) continue;
+            Deque<Integer> queue = new ArrayDeque<>();
+            queue.add(root);
+            seen[root] = true;
+            while (!queue.isEmpty()) {
+                int v = queue.poll();
+                for (int u : adj.get(v)) {
+                    if (seen[u]) continue;
+                    seen[u] = true;
+                    out.addEdge(Edges.directedEdge(w.nodes().get(v), w.nodes().get(u)));
+                    queue.add(u);
+                }
+            }
+        }
+        return out;
+    }
+
+    static int find(int[] parent, int x) {
+        while (parent[x] != x) { parent[x] = parent[parent[x]]; x = parent[x]; }
+        return x;
     }
 
     static void runMcbnc(List<Dag> dags, PairWeights w, Row row) {
