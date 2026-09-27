@@ -108,6 +108,29 @@ public class MoralGraphTracker {
         return delta;
     }
 
+    /**
+     * Change in the objective from reversing x->y into y->x, without touching
+     * the graph. The pair {x,y} keeps its reason. The pairs {x,p}, p in Pa(y),
+     * lose one; the pairs {y,q}, q in Pa(x), gain one. The two families are
+     * disjoint (one contains x and not y, the other y and not x), so the terms
+     * add up exactly. Equivalent to removeArc + gainAddArc + addArc, but the
+     * graph mutations it avoids dominated the cost of descending from G+.
+     */
+    public double gainReverseArc(Node x, Node y) {
+        int xi = w.idx(x), yi = w.idx(y);
+        double delta = 0;
+        for (Node p : dag.getParents(y)) {
+            if (p.equals(x)) continue;
+            int pi = w.idx(p);
+            if (reasons[xi][pi] == 1) delta -= w.wMoral(xi, pi);
+        }
+        for (Node q : dag.getParents(x)) {
+            int qi = w.idx(q);
+            if (reasons[yi][qi] == 0) delta += w.wMoral(yi, qi);
+        }
+        return delta;
+    }
+
     public void removeArc(Node x, Node y) {
         int xi = w.idx(x);
         List<Node> pa = new ArrayList<>(dag.getParents(y));   // snapshot BEFORE removal

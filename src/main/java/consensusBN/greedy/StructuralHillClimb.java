@@ -32,6 +32,54 @@ public class StructuralHillClimb {
     /** Number of moves applied by the last search(), by kind. */
     public int addsApplied, removesApplied, reversalsApplied;
 
+    /**
+     * Weight of the skeleton objective added to the moral one. The moral
+     * objective cannot see an arc between two nodes that are already co-parents:
+     * the pair is a moral edge either way, so adding or deleting that arc has
+     * zero moral gain. Descending from G+ therefore keeps every such arc, which
+     * costs nothing on SMHD and a great deal on SHD. Both objectives decompose
+     * over pairs, so any positive combination keeps every gain exact and local.
+     * Moral gains are integers, so any weight below 1/r makes the skeleton a
+     * pure tie-breaker (lexicographic); 0 reproduces the original search.
+     */
+    public double skelWeight = 0.0;
+
+    /** Only reversals: the skeleton is kept and only the orientation is searched. */
+    public boolean fixedSkeleton = false;
+
+    /**
+     * Optional immorality term. With it, the search can target the distance
+     * between equivalence classes (skeleton + immoralities), which is what the
+     * CPDAG-SHD rewards and what the moral objective only sees through married
+     * pairs. Null or weight 0 reproduces the original search.
+     */
+    public ImmoralityWeights imm = null;
+    public double immWeight = 0.0;
+
+    /** Weight of the moral term; 0 turns the search into a pure class-distance search. */
+    public double moralWeight = 1.0;
+
+    /** True if a directed path from x to y exists that does not use the arc x->y itself. */
+    private static boolean otherDirectedPath(Dag g, Node x, Node y) {
+        Deque<Node> stack = new ArrayDeque<>();
+        Set<Node> seen = new HashSet<>();
+        for (Node c : g.getChildren(x)) if (!c.equals(y)) { stack.push(c); seen.add(c); }
+        while (!stack.isEmpty()) {
+            Node v = stack.pop();
+            if (v.equals(y)) return true;
+            for (Node c : g.getChildren(v)) if (seen.add(c)) stack.push(c);
+        }
+        return false;
+    }
+
+    private double immAdd(Dag g, Node x, Node y) {
+        return imm == null || immWeight == 0 ? 0 : immWeight * imm.gainAdd(g, x, y);
+    }
+
+    private double immRemove(Dag g, Node x, Node y) {
+        return imm == null || immWeight == 0 ? 0 : immWeight * imm.gainRemove(g, x, y);
+    }
+
     private final PairWeights w;
 
     public StructuralHillClimb(List<Dag> inputs) {
@@ -68,10 +116,11 @@ public class StructuralHillClimb {
             // Additions: any supported pair not currently adjacent, both orientations.
             for (int[] p : pairs) {
                 Node a = w.nodes().get(p[0]), b = w.nodes().get(p[1]);
-                if (r.isAdjacentTo(a, b)) continue;
-                double ga = t.gainAddArc(a, b);
+                if (fixedSkeleton || r.isAdjacentTo(a, b)) continue;
+                double gs = skelWeight * w.wSkel(p[0], p[1]);
+                double ga = moralWeight * t.gainAddArc(a, b) + gs + immAdd(r, a, b);
                 if (ga < 0) moves.add(new Move(Kind.ADD, a, b, ga));
-                double gb = t.gainAddArc(b, a);
+                double gb = moralWeight * t.gainAddArc(b, a) + gs + immAdd(r, b, a);
                 if (gb < 0) moves.add(new Move(Kind.ADD, b, a, gb));
             }
 
@@ -80,16 +129,24 @@ public class StructuralHillClimb {
                 Node x = e.getNode1(), y = e.getNode2();
                 if (!r.isParentOf(x, y)) { Node tmp = x; x = y; y = tmp; }
 
-                double gr = t.gainRemoveArc(x, y);
-                if (gr < 0) moves.add(new Move(Kind.REMOVE, x, y, gr));
+                double gr = moralWeight * t.gainRemoveArc(x, y) + immRemove(r, x, y);
+                double grTotal = gr - skelWeight * w.wSkel(w.idx(x), w.idx(y));
+                if (!fixedSkeleton && grTotal < 0) moves.add(new Move(Kind.REMOVE, x, y, grTotal));
 
                 // Reversal = removal then insertion the other way, evaluated exactly
                 // by applying the removal and undoing it.
-                t.removeArc(x, y);
-                double gAdd = t.gainAddArc(y, x);
-                boolean acyclic = !r.paths().existsDirectedPath(x, y);
-                t.addArc(x, y);
-                if (acyclic && gr + gAdd < 0) moves.add(new Move(Kind.REVERSE, x, y, gr + gAdd));
+                // The acyclicity test is the expensive part (a graph traversal per
+                // arc per iteration), so it is only paid for improving reversals.
+                double gRev;
+                if (imm == null || immWeight == 0) {
+                    gRev = moralWeight * t.gainReverseArc(x, y);
+                } else {
+                    t.removeArc(x, y);
+                    gRev = gr + moralWeight * t.gainAddArc(y, x) + immAdd(r, y, x);
+                    t.addArc(x, y);
+                }
+                // Reversing x->y creates a cycle iff another directed path x ~> y exists.
+                if (gRev < 0 && !otherDirectedPath(r, x, y)) moves.add(new Move(Kind.REVERSE, x, y, gRev));
             }
 
             if (moves.isEmpty()) break;
