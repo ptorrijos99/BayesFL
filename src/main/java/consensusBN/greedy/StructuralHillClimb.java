@@ -1,0 +1,145 @@
+package consensusBN.greedy;
+
+import edu.cmu.tetrad.graph.*;
+
+import java.util.*;
+
+/**
+ * Full local search on the decomposable consensus objective: add, remove and
+ * reverse arcs, from any starting DAG, under a treewidth budget.
+ *
+ * This exists because forward-only search demonstrably stalls. On alarm with 10
+ * federated clients at budget 5, MMG stops at SMHD 12.7 while MCBNC, which
+ * prunes down from G+, reaches 5.5. The forward greedy is not wrong about the
+ * objective, it is simply unable to undo an early commitment: an arc that paid
+ * for itself when it was added can become dead weight once later arcs supply the
+ * same moral edges. Removal and reversal are what let it recover.
+ *
+ * Every gain is exact and local, from MoralGraphTracker. Reversal is evaluated
+ * compositionally: apply the removal, evaluate the insertion in the resulting
+ * graph, then undo. That is exact because the tracker counts reasons, so an
+ * undo restores the objective bit for bit.
+ *
+ * Note this is the rescued "super-greedy" of the earlier work, but scored on the
+ * decomposable objective rather than by recomputing SMHD against every input at
+ * every candidate, which is what made the original too slow to use standalone.
+ */
+public class StructuralHillClimb {
+
+    /** Wall-clock seconds of the last search(). */
+    public double executionTime;
+
+    /** Number of moves applied by the last search(), by kind. */
+    public int addsApplied, removesApplied, reversalsApplied;
+
+    private final PairWeights w;
+
+    public StructuralHillClimb(List<Dag> inputs) {
+        this.w = new PairWeights(inputs);
+    }
+
+    public StructuralHillClimb(PairWeights weights) {
+        this.w = weights;
+    }
+
+    public PairWeights weights() { return w; }
+
+    /** Starts from the empty graph. */
+    public Dag search(TreewidthBudget budget) {
+        return search(new Dag(w.nodes()), budget);
+    }
+
+    /**
+     * Hill-climbs from the given DAG, which is mutated in place and returned.
+     * The caller is responsible for the initial graph respecting the budget; the
+     * search preserves feasibility but does not repair it.
+     */
+    public Dag search(Dag initial, TreewidthBudget budget) {
+        long t0 = System.currentTimeMillis();
+        addsApplied = removesApplied = reversalsApplied = 0;
+
+        Dag r = initial;
+        MoralGraphTracker t = new MoralGraphTracker(w, r);
+        List<int[]> pairs = w.supportedPairs();
+
+        while (true) {
+            List<Move> moves = new ArrayList<>();
+
+            // Additions: any supported pair not currently adjacent, both orientations.
+            for (int[] p : pairs) {
+                Node a = w.nodes().get(p[0]), b = w.nodes().get(p[1]);
+                if (r.isAdjacentTo(a, b)) continue;
+                double ga = t.gainAddArc(a, b);
+                if (ga < 0) moves.add(new Move(Kind.ADD, a, b, ga));
+                double gb = t.gainAddArc(b, a);
+                if (gb < 0) moves.add(new Move(Kind.ADD, b, a, gb));
+            }
+
+            // Removals and reversals over the current arcs.
+            for (Edge e : new ArrayList<>(r.getEdges())) {
+                Node x = e.getNode1(), y = e.getNode2();
+                if (!r.isParentOf(x, y)) { Node tmp = x; x = y; y = tmp; }
+
+                double gr = t.gainRemoveArc(x, y);
+                if (gr < 0) moves.add(new Move(Kind.REMOVE, x, y, gr));
+
+                // Reversal = removal then insertion the other way, evaluated exactly
+                // by applying the removal and undoing it.
+                t.removeArc(x, y);
+                double gAdd = t.gainAddArc(y, x);
+                boolean acyclic = !r.paths().existsDirectedPath(x, y);
+                t.addArc(x, y);
+                if (acyclic && gr + gAdd < 0) moves.add(new Move(Kind.REVERSE, x, y, gr + gAdd));
+            }
+
+            if (moves.isEmpty()) break;
+            moves.sort(Comparator.comparingDouble(m -> m.gain));
+
+            boolean applied = false;
+            for (Move m : moves) {
+                switch (m.kind) {
+                    case ADD -> {
+                        if (r.paths().existsDirectedPath(m.y, m.x)) continue;
+                        t.addArc(m.x, m.y);
+                        if (!budget.fits(r)) { t.removeArc(m.x, m.y); continue; }
+                        addsApplied++;
+                        applied = true;
+                    }
+                    case REMOVE -> {
+                        t.removeArc(m.x, m.y);
+                        removesApplied++;
+                        applied = true;   // removal can never break the budget
+                    }
+                    case REVERSE -> {
+                        t.removeArc(m.x, m.y);
+                        if (r.paths().existsDirectedPath(m.x, m.y)) { t.addArc(m.x, m.y); continue; }
+                        t.addArc(m.y, m.x);
+                        if (!budget.fits(r)) {
+                            t.removeArc(m.y, m.x);
+                            t.addArc(m.x, m.y);
+                            continue;
+                        }
+                        reversalsApplied++;
+                        applied = true;
+                    }
+                }
+                if (applied) break;
+            }
+            if (!applied) break;
+        }
+
+        executionTime = (System.currentTimeMillis() - t0) / 1000.0;
+        return r;
+    }
+
+    private enum Kind { ADD, REMOVE, REVERSE }
+
+    private static class Move {
+        final Kind kind;
+        final Node x, y;
+        final double gain;
+        Move(Kind kind, Node x, Node y, double gain) {
+            this.kind = kind; this.x = x; this.y = y; this.gain = gain;
+        }
+    }
+}
