@@ -33,7 +33,9 @@ package bayesfl;
 
 import bayesfl.convergence.Convergence;
 import bayesfl.data.Data;
+import bayesfl.convergence.NoneConvergence;
 import bayesfl.fusion.Fusion;
+import bayesfl.fusion.StreamingFusion;
 import bayesfl.model.Model;
 
 import java.util.Collection;
@@ -126,6 +128,27 @@ public class Server {
         // For each iteration of the algorithm
         for (int iteration = 1; iteration <= nIterations; iteration++) {
             System.out.println("\n\nITERATION " + iteration + "\n");
+
+            // Streaming aggregation: clients train one after another (each one in parallel
+            // inside) and their models are added to the aggregate and released at once, so
+            // the server never holds every local model. Clients are summed in a fixed order.
+            if (globalFusion instanceof StreamingFusion streaming && convergence instanceof NoneConvergence) {
+                streaming.begin();
+                for (Client client : clients) {
+                    client.buildLocalModel();
+                    client.applyDifferentialPrivacy();
+                    streaming.accumulate(client.getLocalModel());
+                    client.releaseLocalModel();
+                }
+                double start = System.currentTimeMillis();
+                globalModel = streaming.finish();
+                double time = (System.currentTimeMillis() - start) / 1000;
+                if (stats) {
+                    globalModel.saveStats(experimentName, "Server", path, clients.size(), -1, data, iteration, time);
+                }
+                for (Client client : clients) client.fusion(globalModel);
+                continue;
+            }
 
             // 1. Create the local model of each client with a ParallelStream
             clients.parallelStream().forEach(Client::buildLocalModel);

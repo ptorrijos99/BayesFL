@@ -233,6 +233,13 @@ public class Client {
     }
 
     /**
+     * Drop the local model once the server has aggregated it (streaming fusion).
+     */
+    public void releaseLocalModel() {
+        localModel = null;
+    }
+
+    /**
      * Get the local algorithm used to build the local model.
      * 
      * @return The local algorithm used to build the local model.

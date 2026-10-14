@@ -174,7 +174,9 @@ public class CCBNExperiment {
             String parameterLearning = Utils.getOption("P", options);
 
             // Return appropriate internal algorithm name based on parameter learning type
-            return parameterLearning.contains("Weka") ? "PT_NB" : "WDPT_CCBN";
+            if (parameterLearning.contains("Weka")) return "PT_NB";
+            // dCCBNr / wCCBNr: restricted-softmax SPODEs (SPODE_CCBN) instead of wdBayes
+            return parameterLearning.endsWith("r") ? "SPODE_CCBN" : "WDPT_CCBN";
 
         } catch (Exception e) {
             // If option parsing fails, return null
@@ -238,6 +240,14 @@ public class CCBNExperiment {
                 return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator, paramDp);
             }
 
+            // Class-conditional SPODEs with the restricted softmax (categorical data)
+            case "SPODE_CCBN" -> {
+                if (noiseGenerator != null || (paramDp != null && paramDp.enabled())) {
+                    throw new UnsupportedOperationException("SPODE_CCBN does not implement DP");
+                }
+                return new SPODE_CCBN(options, (double[][]) model, (Classes) modelAnDE);
+            }
+
             // Handle unknown algorithm names gracefully
             default -> {
                 return null;
@@ -275,6 +285,10 @@ public class CCBNExperiment {
                 }
             }
 
+            case "SPODE_CCBN" -> {
+                return new SPODE_Fusion_Client();
+            }
+
             // Catch-all for unsupported or unknown algorithm names
             default -> {
                 return null;
@@ -308,6 +322,17 @@ public class CCBNExperiment {
 
                 } catch (Exception e) {
                     // In case of any parsing or casting errors, return null
+                    return null;
+                }
+            }
+
+            case "SPODE_CCBN" -> {
+                try {
+                    String[] flags = Arrays.copyOf(options, options.length);
+                    boolean fuseParameters = Utils.getFlag("FP", flags);
+                    boolean fuseProbabilities = Utils.getFlag("FPR", flags);
+                    return new SPODE_Fusion_Server(fuseParameters, fuseProbabilities);
+                } catch (Exception e) {
                     return null;
                 }
             }
@@ -391,7 +416,7 @@ public class CCBNExperiment {
                 String combinedName = structure + "-" + parameterLearning;
                 return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
             }
-            case "WDPT_CCBN" -> {
+            case "WDPT_CCBN", "SPODE_CCBN" -> {
                 // Construct a composite name
                 String combinedName = structure + "-" + parameterLearning;
 
@@ -759,6 +784,10 @@ public class CCBNExperiment {
 
         // Options for local learning algorithm
         String[] algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations};
+        // SPODE_CCBN wCCBNr against global tables releases its round-1 counts
+        if (parameterLearning.endsWith("r") && fuseProbabilities) {
+            algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations, "-GT"};
+        }
 
         // Build shared fusion flags based on configuration
         List<String> flags = new ArrayList<>();
