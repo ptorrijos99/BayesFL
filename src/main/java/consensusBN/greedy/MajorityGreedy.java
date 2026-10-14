@@ -26,10 +26,9 @@ public class MajorityGreedy {
 
     /**
      * Re-evaluate only the candidates a move can actually have changed, instead
-     * of the whole pool every iteration. Exact, not approximate: verified to
-     * reproduce the full-recomputation search edge for edge by
-     * CheckFastCandidates. Off by default so the reference path stays the one
-     * the earlier harnesses validated; the pilots turn it on.
+     * of the whole pool every iteration. Exact, not approximate: it reproduces
+     * the full-recomputation search edge for edge. Off by default so the
+     * reference path is the plain one.
      */
     public boolean fastCandidateUpdate = false;
 
