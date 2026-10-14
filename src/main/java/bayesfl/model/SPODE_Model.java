@@ -31,6 +31,9 @@ import bayesfl.data.Data;
 import bayesfl.data.Weka_Instances;
 import weka.core.Instances;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.IntStream;
 
@@ -275,6 +278,50 @@ public class SPODE_Model implements Model {
      * @return The comma-terminated metrics.
      */
     public String metrics(Instances data, Instances train) {
+        // A model that does not depend on the client's data (dCCBN, or wCCBN with global tables)
+        // gives the same metrics on every client's copy of the global test set: compute them once.
+        boolean global = !weighted || logTables != null;
+        if (!global) return computeMetrics(data, train);
+        long key = fingerprint(data);
+        Map<Long, String> byData;
+        synchronized (METRICS_CACHE) {
+            byData = METRICS_CACHE.computeIfAbsent(params, k -> new HashMap<>());
+        }
+        synchronized (byData) {
+            String cached = byData.get(key);
+            if (cached == null) {
+                cached = computeMetrics(data, train);
+                byData.put(key, cached);
+            }
+            return cached;
+        }
+    }
+
+    /** Metrics already computed per parameter set (weak keys) and data fingerprint. */
+    private static final Map<double[][], Map<Long, String>> METRICS_CACHE = new WeakHashMap<>();
+
+    /** Content fingerprint of a dataset (values and classes), cached per Instances object. */
+    private static final Map<Instances, Long> FINGERPRINTS = new WeakHashMap<>();
+
+    /** @return a 64-bit hash of every value of {@code data}. */
+    private static long fingerprint(Instances data) {
+        synchronized (FINGERPRINTS) {
+            Long cached = FINGERPRINTS.get(data);
+            if (cached != null) return cached;
+        }
+        long h = 1125899906842597L + data.numInstances();
+        for (int i = 0; i < data.numInstances(); i++) {
+            double[] row = data.instance(i).toDoubleArray();
+            for (double v : row) h = 31 * h + Double.doubleToLongBits(v);
+        }
+        synchronized (FINGERPRINTS) {
+            FINGERPRINTS.put(data, h);
+        }
+        return h;
+    }
+
+    /** Metrics of this model on {@code data}; see {@link #metrics(Instances, Instances)}. */
+    private String computeMetrics(Instances data, Instances train) {
         long start = System.currentTimeMillis();
         int nY = structure.nClasses;
         int n = data.numInstances();
