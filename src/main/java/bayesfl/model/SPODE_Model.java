@@ -65,6 +65,12 @@ public class SPODE_Model implements Model {
     /** Raw counts released in round 1 to build global tables (null otherwise). */
     public final double[][] counts;
 
+    /**
+     * Support of every parameter on the client's data (instances whose score uses it), sent so
+     * the server averages each parameter over the clients that trained it (null: plain average).
+     */
+    public final double[][] support;
+
     /** Whether the parameters are wCCBN weights (true) or dCCBN parameters (false). */
     public final boolean weighted;
 
@@ -91,10 +97,29 @@ public class SPODE_Model implements Model {
      */
     public SPODE_Model(SpodeStructure structure, double[][] params, double[][] logTables, double[][] counts,
                        boolean weighted, boolean logPrior, int numInstances, int maxIterations) {
+        this(structure, params, logTables, counts, null, weighted, logPrior, numInstances, maxIterations);
+    }
+
+    /**
+     * Constructor of a local model that also sends the support of its parameters.
+     *
+     * @param structure     The global layout of the SPODEs.
+     * @param params        The parameters of each SPODE.
+     * @param logTables     The feature tables of each SPODE (null: local tables or dCCBN).
+     * @param counts        The raw counts released for global tables (null otherwise).
+     * @param support       The support of every parameter on the client's data (null: none).
+     * @param weighted      Whether the parameters are wCCBN weights.
+     * @param logPrior      Whether the wCCBN class feature is log P(c).
+     * @param numInstances  The number of training instances behind the model.
+     * @param maxIterations The L-BFGS iterations per round.
+     */
+    public SPODE_Model(SpodeStructure structure, double[][] params, double[][] logTables, double[][] counts,
+                       double[][] support, boolean weighted, boolean logPrior, int numInstances, int maxIterations) {
         this.structure = structure;
         this.params = params;
         this.logTables = logTables;
         this.counts = counts;
+        this.support = support;
         this.weighted = weighted;
         this.logPrior = logPrior;
         this.numInstances = numInstances;

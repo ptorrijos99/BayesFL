@@ -32,8 +32,9 @@ import bayesfl.model.SPODE_Model;
 import bayesfl.model.SpodeStructure;
 
 /**
- * Server fusion of {@link SPODE_Model}s: FedAvg of the parameters weighted by the
- * clients' instances and, for wCCBN against global tables, global tables written from
+ * Server fusion of {@link SPODE_Model}s: FedAvg of the parameters, each one weighted by
+ * its support on every client when the clients send it (only the clients whose data
+ * give it gradient move it) or by the clients' instances otherwise, and, for wCCBN against global tables, global tables written from
  * the sum of the clients' round-1 counts (the centralized m-estimates). The global
  * tables are kept and sent again in every later round.
  */
@@ -50,6 +51,9 @@ public class SPODE_Fusion_Server implements StreamingFusion {
 
     /** Running sum of the round-1 counts. */
     private double[][] sumCounts;
+
+    /** Support-weighted sums of the parameters and total support (null: plain average only). */
+    private double[][] sumSupported, sumSupport;
 
     /** Running number of instances. */
     private double total;
@@ -78,6 +82,8 @@ public class SPODE_Fusion_Server implements StreamingFusion {
     public void begin() {
         sumParams = null;
         sumCounts = null;
+        sumSupported = null;
+        sumSupport = null;
         total = 0;
         last = null;
     }
@@ -95,6 +101,24 @@ public class SPODE_Fusion_Server implements StreamingFusion {
             double[] acc = sumParams[s];
             double[] p = local.params[s];
             for (int q = 0; q < acc.length; q++) acc[q] += w * p[q];
+        }
+        if (local.support != null) {
+            if (sumSupport == null) {
+                sumSupported = new double[m][];
+                sumSupport = new double[m][];
+                for (int s = 0; s < m; s++) {
+                    sumSupported[s] = new double[local.params[s].length];
+                    sumSupport[s] = new double[local.params[s].length];
+                }
+            }
+            for (int s = 0; s < m; s++) {
+                double[] acc = sumSupported[s], sup = sumSupport[s];
+                double[] p = local.params[s], a = local.support[s];
+                for (int q = 0; q < acc.length; q++) {
+                    acc[q] += a[q] * p[q];
+                    sup[q] += a[q];
+                }
+            }
         }
         if (fuseProbabilities && local.counts != null) {
             if (sumCounts == null) {
@@ -115,8 +139,17 @@ public class SPODE_Fusion_Server implements StreamingFusion {
     public Model finish() {
         SpodeStructure st = last.structure;
         double scale = total > 0 ? 1.0 / total : 0;
-        for (double[] acc : sumParams) {
-            for (int q = 0; q < acc.length; q++) acc[q] *= scale;
+        for (int s = 0; s < sumParams.length; s++) {
+            double[] acc = sumParams[s];
+            for (int q = 0; q < acc.length; q++) {
+                // Average over the clients that trained the parameter, plain average if none did
+                acc[q] = sumSupport != null && sumSupport[s][q] > 0 ? sumSupported[s][q] / sumSupport[s][q]
+                        : acc[q] * scale;
+            }
+            if (sumSupport != null) {
+                sumSupported[s] = null;
+                sumSupport[s] = null;
+            }
         }
         if (sumCounts != null) {
             for (int s = 0; s < sumCounts.length; s++) SPODE_Model.toTables(st, s, sumCounts[s], last.logPrior);
@@ -127,6 +160,8 @@ public class SPODE_Fusion_Server implements StreamingFusion {
                 (int) total, last.getMaxIterations());
         sumParams = null;
         sumCounts = null;
+        sumSupported = null;
+        sumSupport = null;
         last = null;
         return global;
     }

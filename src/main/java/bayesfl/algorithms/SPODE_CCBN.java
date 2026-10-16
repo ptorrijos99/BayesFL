@@ -60,9 +60,19 @@ import static org.albacete.simd.utils.Utils.hasActiveCutPoints;
  * </p>
  * Options: {@code -S AnDE}, {@code -P dCCBNr|wCCBNr}, {@code -I} L-BFGS iterations per
  * round, {@code -GT} (wCCBN against global tables, round-1 counts released),
- * {@code -INIT zero|gen} (start at 0, as wdBayes, or at the generative solution),
+ * {@code -INIT zero|gen} (start at 0, as wdBayes, or at the generative solution; by default
+ * dCCBN and wCCBN against global tables start at the generative solution, Zaidi's "(I)"
+ * variants, and wCCBN against local tables at 0, since w = 1 on tables built from a few
+ * instances is a poor start),
  * {@code -LAMBDA} (L2 towards the generative solution, Zaidi 2017 Sec. 5.2; default 0)
- * and {@code -LINPRIOR} (wCCBN class feature P(c) as wdBayes instead of log P(c)).
+ * and {@code -LOGPRIOR} (wCCBN class feature log P(c) instead of P(c)). The default class
+ * feature is P(c), as in wdBayes: with a free weight per class both give the same model
+ * family, but log P(c) of local tables built from a few instances is a large, noisy feature
+ * ({@code -LINPRIOR} is accepted as a no-op).
+ * With the restricted softmax a parameter only gets gradient on the clients whose data use it,
+ * so each local model sends the support of its parameters and the server averages every
+ * parameter over the clients that trained it; {@code -NOSUPPORT} falls back to the plain
+ * average weighted by the number of instances.
  */
 public class SPODE_CCBN implements LocalAlgorithm {
 
@@ -92,6 +102,9 @@ public class SPODE_CCBN implements LocalAlgorithm {
 
     /** Whether the wCCBN class feature is log P(c). */
     private final boolean logPrior;
+
+    /** Whether local models send the support of their parameters. */
+    private final boolean sendSupport;
 
     /** L-BFGS iterations per round. */
     private final int maxIterations;
@@ -126,10 +139,13 @@ public class SPODE_CCBN implements LocalAlgorithm {
             String iters = Utils.getOption("I", opts);
             this.maxIterations = iters.isEmpty() ? 10 : Integer.parseInt(iters);
             this.globalTables = Utils.getFlag("GT", opts);
-            this.generativeInit = Utils.getOption("INIT", opts).equalsIgnoreCase("gen");
+            String init = Utils.getOption("INIT", opts);
+            this.generativeInit = init.isEmpty() ? !weighted || globalTables : init.equalsIgnoreCase("gen");
             String lam = Utils.getOption("LAMBDA", opts);
             this.lambda = lam.isEmpty() ? 0 : Double.parseDouble(lam);
-            this.logPrior = !Utils.getFlag("LINPRIOR", opts);
+            this.logPrior = Utils.getFlag("LOGPRIOR", opts);
+            Utils.getFlag("LINPRIOR", opts);
+            this.sendSupport = !Utils.getFlag("NOSUPPORT", opts);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid SPODE_CCBN options: " + Arrays.toString(options), e);
         }
@@ -197,23 +213,27 @@ public class SPODE_CCBN implements LocalAlgorithm {
         double[][] params = new double[m][];
         double[][] tables = weighted ? new double[m][] : null;
         double[][] counts = releaseCounts ? new double[m][] : null;
+        double[][] support = sendSupport ? new double[m][] : null;
+        // The generative solution is the start of round 1 and the centre of the L2 penalty
+        boolean needGen = previous == null && generativeInit || lambda > 0;
 
         try {
             SpodeStructure.pool().submit(() -> IntStream.range(0, m).parallel().forEach(s -> {
                 double[] given = previous != null && previous.logTables != null ? previous.logTables[s] : null;
                 double[] local = null;
-                if (given == null && (weighted || generativeInit || lambda > 0)) {
+                if (given == null && (weighted || needGen)) {
                     double[] cnt = SPODE_Model.counts(st, s, X, yS[s]);
                     if (releaseCounts) counts[s] = cnt.clone();
                     local = SPODE_Model.toTables(st, s, cnt, logPrior);
                 }
                 double[] f = weighted ? (given != null ? given : local) : null;
-                double[] gen = generativeInit || lambda > 0 ? generative(s, f, local) : null;
+                double[] gen = needGen ? generative(s, f, local) : null;
 
                 double[] start = previous != null ? previous.params[s].clone()
                         : generativeInit ? gen.clone() : new double[st.np[s]];
                 params[s] = optimize(s, f, start, gen);
                 if (weighted) tables[s] = f;
+                if (sendSupport) support[s] = support(s);
             })).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
@@ -221,7 +241,25 @@ public class SPODE_CCBN implements LocalAlgorithm {
 
         // Clients keep only the global tables between rounds; local ones are recomputed
         double[][] kept = weighted && previous != null && previous.logTables != null ? previous.logTables : tables;
-        return new SPODE_Model(st, params, kept, counts, weighted, logPrior, X.length, maxIterations);
+        return new SPODE_Model(st, params, kept, counts, support, weighted, logPrior, X.length, maxIterations);
+    }
+
+    /**
+     * Support of every parameter of SPODE {@code s} on the client's data: the number of instances
+     * whose restricted softmax uses it, that is, the only ones that give it gradient.
+     */
+    private double[] support(int s) {
+        SpodeStructure st = structure;
+        double[] sup = new double[st.np[s]];
+        int[][] cs = compat[s];
+        for (int i = 0; i < X.length; i++) {
+            int[] x = X[i];
+            for (int c : cs[i]) {
+                sup[c]++;
+                for (int u = 0; u < st.nAttributes; u++) sup[st.index(s, c, u, SpodeStructure.feature(x, u))]++;
+            }
+        }
+        return sup;
     }
 
     /**
