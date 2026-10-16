@@ -788,6 +788,13 @@ public class CCBNExperiment {
         if (parameterLearning.endsWith("r") && fuseProbabilities) {
             algorithmOptions = new String[] {"-S", structure, "-P", parameterLearning, "-I", maxIterations, "-GT"};
         }
+        // Extra SPODE_CCBN options for ablations (e.g. -Dbayesfl.spode.options="-INIT zero -NOSUPPORT")
+        String extra = System.getProperty("bayesfl.spode.options", "").trim();
+        if (parameterLearning.endsWith("r") && !extra.isEmpty()) {
+            List<String> all = new ArrayList<>(List.of(algorithmOptions));
+            all.addAll(List.of(extra.split("\\s+")));
+            algorithmOptions = all.toArray(new String[0]);
+        }
 
         // Build shared fusion flags based on configuration
         List<String> flags = new ArrayList<>();
