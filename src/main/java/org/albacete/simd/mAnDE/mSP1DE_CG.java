@@ -160,6 +160,9 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
             for (int xj : listChildren) {
                 if (numericCandidates.contains(xj)) {
                     double v = instO.value(xj);
+                    // A missing value (NaN in Weka) carries no information about this
+                    // child: leaving it in would turn the cell's mean and variance into NaN.
+                    if (Double.isNaN(v)) continue;
                     cnt.get(xj)[y][xiVal] += 1.0;
                     sum.get(xj)[y][xiVal] += v;
                     sumSq.get(xj)[y][xiVal] += v * v;
@@ -299,6 +302,7 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
             int yTrue = (int) instD.value(model.y);
             int xiVal = (int) instD.value(xi);
             double v = instO.value(xj);
+            if (Double.isNaN(v)) continue;
             int bin = (int) instD.value(xj);
             for (int y = 0; y < nClass; y++) {
                 double base = Math.log(globalProb[y][xiVal]);
@@ -392,6 +396,8 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
         for (int xj : listChildren) {
             if (numericChildren.contains(xj)) {
                 double v = instO.value(xj);
+                // Missing child: marginalised out (same factor for every class).
+                if (Double.isNaN(v)) continue;
                 double[][] m = mean.get(xj);
                 double[][] s2 = var.get(xj);
                 for (int y = 0; y < nClass; y++) {
