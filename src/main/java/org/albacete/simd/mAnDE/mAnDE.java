@@ -155,6 +155,30 @@ public class mAnDE extends AbstractClassifier implements
     private double cgTemperature = 1.0;
 
     /**
+     * Discriminative combination of the components ("stacking"). {@code "none"}
+     * averages the component posteriors (default). {@code "l1"} / {@code "l2"}
+     * fit a regularised logistic regression on the log-posteriors that the
+     * components and the Naive Bayes give to held-out training instances
+     * (internal cross-validation over the tables; the structure is kept), and
+     * use it to combine them at prediction time.
+     */
+    private String stack = "none";
+
+    /** Regularisation constant of the stacking model. */
+    private double stackC = 1.0;
+
+    /** Folds of the internal cross-validation of the stacking. */
+    private static final int STACK_FOLDS = 5;
+
+    /** Floor of a component posterior before taking its logarithm. */
+    private static final double STACK_FLOOR = 1e-4;
+
+    private transient de.bwaldvogel.liblinear.Model stackModel;
+
+    /** Components in the order of the stacking features. */
+    private transient List<mSPnDE> stackOrder;
+
+    /**
      * The discretisation filter.
      */
     protected weka.filters.supervised.attribute.Discretize discretizer = null;
@@ -273,6 +297,17 @@ public class mAnDE extends AbstractClassifier implements
 
         if (modeNB) {
             return nb.distributionForInstance(gaussNB ? instance : instance_d);
+        }
+
+        if (stackModel != null) {
+            double[] estimates = new double[stackModel.getNrClass()];
+            de.bwaldvogel.liblinear.Linear.predictProbability(stackModel,
+                    stackFeatures(stackOrder, nb, instance_d, gaussNB ? instance : instance_d), estimates);
+            int[] labels = stackModel.getLabels();
+            for (int k = 0; k < labels.length; k++) {
+                res[labels[k]] = estimates[k];
+            }
+            return res;
         }
 
         // Add up all the probabilities of the mSPnDEs
@@ -457,7 +492,8 @@ public class mAnDE extends AbstractClassifier implements
      * federated parameters.
      */
     public void calculateTables_mSPnDEs() {
-        if (getAddNB() != 0 || mSPnDEs.isEmpty()) {
+        boolean stacking = !stack.equals("none") && !mSPnDEs.isEmpty();
+        if (getAddNB() != 0 || mSPnDEs.isEmpty() || stacking) {
             nb = new NaiveBayes();
             try {
                 // Continuous mode: build a Gaussian NB on the original numeric data
@@ -502,6 +538,13 @@ public class mAnDE extends AbstractClassifier implements
             // parameter fusion (mAnDETree_Fusion_Params). Otherwise rebuild
             // from local data as before.
             boolean alreadyBuilt = mSPnDEs.values().stream().allMatch(mSPnDE::hasProbTables);
+            if (stacking && !alreadyBuilt) {
+                try {
+                    fitStack();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
             if (!alreadyBuilt) {
                 mSPnDEs.values().parallelStream().forEach(spode -> spode.buildTables(this));
             }
@@ -528,6 +571,138 @@ public class mAnDE extends AbstractClassifier implements
          * System.out.println("mSPnDEs," + mSPnDEs.size() + "," + (var/mSPnDEs.size()) +
          * "," + max + "," + min);
          */
+    }
+
+    /**
+     * Learns the stacking model. The tables of every component and of the Naive
+     * Bayes are estimated on STACK_FOLDS - 1 folds of the training data and
+     * evaluated on the remaining one, so that the logistic regression is fitted
+     * on posteriors of instances the tables have not seen.
+     */
+    private void fitStack() throws Exception {
+        Instances full = data;
+        Instances fullOriginal = dataOriginal;
+        int m = full.numInstances();
+        boolean gaussNB = continuous && !cgNBDiscretized;
+        stackOrder = new ArrayList<>(mSPnDEs.values());
+
+        // Stratified folds: instances of each class are dealt out in turn.
+        int[] fold = new int[m];
+        int[] dealt = new int[classNumValues];
+        List<Integer> order = new ArrayList<>();
+        for (int i = 0; i < m; i++) order.add(i);
+        java.util.Collections.shuffle(order, new java.util.Random(1));
+        for (int i : order) {
+            int c = (int) full.get(i).classValue();
+            fold[i] = dealt[c]++ % STACK_FOLDS;
+        }
+
+        de.bwaldvogel.liblinear.Feature[][] x = new de.bwaldvogel.liblinear.Feature[m][];
+        double[] labels = new double[m];
+        try {
+            for (int f = 0; f < STACK_FOLDS; f++) {
+                Instances train = new Instances(full, m);
+                Instances trainOriginal = fullOriginal == null ? null : new Instances(fullOriginal, m);
+                for (int i = 0; i < m; i++) {
+                    if (fold[i] != f) {
+                        train.add(full.get(i));
+                        if (trainOriginal != null) trainOriginal.add(fullOriginal.get(i));
+                    }
+                }
+                data = train;
+                dataOriginal = trainOriginal;
+                numInstances = train.numInstances();
+
+                List<mSPnDE> experts = new ArrayList<>();
+                for (mSPnDE spode : stackOrder) experts.add(spode.copyDeep());
+                experts.parallelStream().forEach(spode -> spode.buildTables(this));
+                NaiveBayes foldNB = new NaiveBayes();
+                foldNB.buildClassifier(gaussNB ? trainOriginal : train);
+
+                for (int i = 0; i < m; i++) {
+                    if (fold[i] != f) continue;
+                    if (continuous) currentNumericInstance = fullOriginal.get(i);
+                    x[i] = stackFeatures(experts, foldNB, full.get(i), gaussNB ? fullOriginal.get(i) : full.get(i));
+                    labels[i] = full.get(i).classValue();
+                }
+            }
+        } finally {
+            data = full;
+            dataOriginal = fullOriginal;
+            numInstances = m;
+        }
+
+        de.bwaldvogel.liblinear.Problem problem = new de.bwaldvogel.liblinear.Problem();
+        problem.l = m;
+        problem.n = (stackOrder.size() + 1) * classNumValues + 1;
+        problem.bias = 1;
+        problem.x = x;
+        problem.y = labels;
+        de.bwaldvogel.liblinear.Linear.disableDebugOutput();
+        de.bwaldvogel.liblinear.SolverType solver = stack.startsWith("l1")
+                ? de.bwaldvogel.liblinear.SolverType.L1R_LR : de.bwaldvogel.liblinear.SolverType.L2R_LR;
+        de.bwaldvogel.liblinear.Parameter parameter = new de.bwaldvogel.liblinear.Parameter(solver, stackC, 0.01);
+
+        // "auto": keep the plain average unless the logistic regression, cross-validated on
+        // the held-out posteriors, classifies more training instances than the average does.
+        if (stack.endsWith("auto")) {
+            int nExperts = stackOrder.size();
+            int averageHits = 0;
+            for (int i = 0; i < m; i++) {
+                double[] average = new double[classNumValues];
+                for (int e = 0; e <= nExperts; e++) {
+                    double weight = e < nExperts ? 1.0 : getAddNB() * nExperts;
+                    for (int c = 0; c < classNumValues; c++) {
+                        average[c] += weight * Math.exp(x[i][e * classNumValues + c].getValue());
+                    }
+                }
+                if (Utils.maxIndex(average) == (int) labels[i]) averageHits++;
+            }
+            double[] predicted = new double[m];
+            de.bwaldvogel.liblinear.Linear.resetRandom();
+            de.bwaldvogel.liblinear.Linear.crossValidation(problem, parameter, STACK_FOLDS, predicted);
+            int stackHits = 0;
+            for (int i = 0; i < m; i++) {
+                if (predicted[i] == labels[i]) stackHits++;
+            }
+            if (stackHits <= averageHits) {
+                stackModel = null;
+                return;
+            }
+        }
+        stackModel = de.bwaldvogel.liblinear.Linear.train(problem, parameter);
+    }
+
+    /**
+     * Log-posteriors of every component and of the Naive Bayes for an instance,
+     * followed by the bias feature.
+     */
+    private de.bwaldvogel.liblinear.Feature[] stackFeatures(List<mSPnDE> experts, NaiveBayes naive,
+            Instance discretized, Instance forNB) throws Exception {
+        int nFeatures = (experts.size() + 1) * classNumValues;
+        de.bwaldvogel.liblinear.Feature[] features = new de.bwaldvogel.liblinear.Feature[nFeatures + 1];
+        int index = 0;
+        for (int e = 0; e <= experts.size(); e++) {
+            double[] p = e < experts.size() ? experts.get(e).probsForInstance(discretized, this)
+                    : naive.distributionForInstance(forNB);
+            for (int c = 0; c < classNumValues; c++) {
+                double v = Double.isNaN(p[c]) ? STACK_FLOOR : Math.max(p[c], STACK_FLOOR);
+                features[index] = new de.bwaldvogel.liblinear.FeatureNode(index + 1, Math.log(v));
+                index++;
+            }
+        }
+        features[nFeatures] = new de.bwaldvogel.liblinear.FeatureNode(nFeatures + 1, 1);
+        return features;
+    }
+
+    /** @param stack "none", "l1" or "l2"; see {@link #stack}. */
+    public void setStack(String stack) {
+        this.stack = stack;
+    }
+
+    /** @param c regularisation constant of the stacking model. */
+    public void setStackC(double c) {
+        this.stackC = c;
     }
 
     /**

@@ -173,9 +173,81 @@ public class ClassificationExperiment {
             }
         }
 
+        // Linear SVM (SMO, standardized inputs) and L1 logistic regression, on the original
+        // attributes or, with "-Dis", on the discretized ones.
+        if (algorithm.equals("SMO") || algorithm.equals("SMO-Dis") || algorithm.equals("L1LR") || algorithm.equals("L1LR-Dis")) {
+            AbstractClassifier linear;
+            if (algorithm.startsWith("SMO")) {
+                weka.classifiers.functions.SMO smo = new weka.classifiers.functions.SMO();
+                smo.setFilterType(new weka.core.SelectedTag(weka.classifiers.functions.SMO.FILTER_STANDARDIZE, weka.classifiers.functions.SMO.TAGS_FILTER));
+                linear = smo;
+            } else {
+                linear = new bayesfl.experiments.utils.L1Logistic(1.0);
+            }
+            if (algorithm.endsWith("-Dis")) {
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(filter);
+                ((FilteredClassifier) classifier).setClassifier(linear);
+            } else {
+                classifier = linear;
+            }
+        }
+
+        // "Mini<n>[-G][-S1|-S2|-A1|-A2][-C<c>]": MiniAnDE with the default configuration of the paper
+        // (gamma = 0.2), Gaussian children with "-G", and the components combined by an
+        // L1 ("-S1") or L2 ("-S2") logistic regression instead of averaged ("-A1", "-A2": only when that
+        // regression beats the average in an internal cross-validation).
+        java.util.regex.Matcher mini = java.util.regex.Pattern.compile("Mini([12])(-G)?(-[SA][12])?(-C[0-9.]+)?").matcher(algorithm);
+        if (mini.matches()) {
+            org.albacete.simd.mAnDE.mAnDE m = new org.albacete.simd.mAnDE.mAnDE();
+            m.setN(Integer.parseInt(mini.group(1)));
+            m.setnTrees(nTrees);
+            m.setEnsemble("Bagging");
+            m.setBagSize(100);
+            m.setAddNB(0.2);
+            if (mini.group(2) != null) {
+                m.setContinuous(true);
+                m.setCgPriorVarDof(3.0);
+                m.setCgNBDiscretized(true);
+            }
+            if (mini.group(3) != null) m.setStack((mini.group(3).endsWith("1") ? "l1" : "l2") + (mini.group(3).startsWith("-A") ? "auto" : ""));
+            if (mini.group(4) != null) m.setStackC(Double.parseDouble(mini.group(4).substring(2)));
+            classifier = m;
+        }
+
+        // "FS<k>-NB", "FS<k>-A1DE", "FS<k>-A2DE", "FS<k>-TAN": discretize, keep the k attributes with the
+        // highest information gain, and learn the classifier on them. Both filters are
+        // fitted on the training fold only.
+        java.util.regex.Matcher fs = java.util.regex.Pattern.compile("FS(\\d+)-(NB|A1DE|A2DE|TAN)").matcher(algorithm);
+        if (fs.matches()) {
+            weka.filters.supervised.attribute.AttributeSelection selection = new weka.filters.supervised.attribute.AttributeSelection();
+            selection.setEvaluator(new weka.attributeSelection.InfoGainAttributeEval());
+            weka.attributeSelection.Ranker ranker = new weka.attributeSelection.Ranker();
+            ranker.setNumToSelect(Integer.parseInt(fs.group(1)));
+            selection.setSearch(ranker);
+            weka.filters.MultiFilter pipeline = new weka.filters.MultiFilter();
+            pipeline.setFilters(new Filter[] {filter, selection});
+            classifier = new FilteredClassifier();
+            ((FilteredClassifier) classifier).setFilter(pipeline);
+            ((FilteredClassifier) classifier).setClassifier(switch (fs.group(2)) {
+                case "NB" -> new NaiveBayes();
+                case "A1DE" -> new A1DE();
+                case "A2DE" -> new A2DE();
+                default -> {
+                    BayesNet tan = new BayesNet();
+                    tan.setSearchAlgorithm(new TAN());
+                    yield tan;
+                }
+            });
+        }
+
+        // Resume: skip (fold, client) pairs already written by a previous run
+        java.util.Set<String> done = completedPairs(completePath);
+
         // Repetitions of cross-validation
         for (int cv = 0; cv < actualFolds; cv++) {
             for (int i = 0; i < nClients; i++) {
+                if (done.contains(cv + ":" + i)) continue;
                 // Divide data in train and test
                 Instances train = splits[cv][i][0];
                 Instances test = splits[cv][i][1];
@@ -209,5 +281,37 @@ public class ClassificationExperiment {
                 ExperimentUtils.saveExperiment(completePath, header, results);
             }
         }
+    }
+
+    /**
+     * Returns the "cv:client" pairs already present in a result file and rewrites it
+     * without the truncated line a killed job may leave behind.
+     */
+    private static java.util.Set<String> completedPairs(String path) {
+        java.util.Set<String> done = new java.util.HashSet<>();
+        java.io.File f = new java.io.File(path);
+        if (!f.isFile()) return done;
+        java.util.List<String> kept = new java.util.ArrayList<>();
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(f))) {
+            String header = br.readLine();
+            if (header == null) return done;
+            kept.add(header);
+            int nCols = header.split(",", -1).length;
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] cols = line.split(",", -1);
+                if (cols.length != nCols) continue;
+                String key = cols[2].trim() + ":" + cols[1].trim();
+                if (done.add(key)) kept.add(line);
+            }
+        } catch (java.io.IOException e) {
+            return new java.util.HashSet<>();
+        }
+        try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(f, false))) {
+            for (String l : kept) pw.println(l);
+        } catch (java.io.IOException e) {
+            System.err.println("WARNING: could not rewrite " + f + " for resume: " + e.getMessage());
+        }
+        return done;
     }
 }
