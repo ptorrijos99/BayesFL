@@ -19,7 +19,7 @@ public class MainMCTSBN {
         String networkFolder = "./res/networks/";
         String net_name = "alarm";
         String bbdd_path = networkFolder + "BBDD/" + net_name + ".0.csv";
-        String netPath = networkFolder + net_name + ".xbif";
+        String netPath = networkFolder + "xbif/" + net_name + ".xbif";
 
 
         Problem problem = new Problem(bbdd_path);

@@ -52,7 +52,7 @@ public class ExperimentMCTSLauncher {
             // Calculate scores
             MlBayesIm controlBayesianNetwork;
             try {
-                controlBayesianNetwork = readOriginalBayesianNetwork(PATH + "res/networks/" + net + ".xbif");
+                controlBayesianNetwork = readOriginalBayesianNetwork(PATH + "res/networks/xbif/" + net + ".xbif");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

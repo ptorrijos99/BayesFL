@@ -154,7 +154,7 @@ public class Experiments {
             String netName = net.split("\\.")[0];
             BIFReader bayesianReader = new BIFReader();
             try {
-                bayesianReader.processFile(PATH + "res/networks/" + netName + ".xbif");
+                bayesianReader.processFile(PATH + "res/networks/xbif/" + netName + ".xbif");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

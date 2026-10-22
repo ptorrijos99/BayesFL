@@ -121,7 +121,7 @@ public class ExperimentMinCut {
             // Read the .xbif
             BIFReader bayesianReader = new BIFReader();
             try {
-                bayesianReader.processFile(PATH + "res/networks/" + netName + ".xbif");
+                bayesianReader.processFile(PATH + "res/networks/xbif/" + netName + ".xbif");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

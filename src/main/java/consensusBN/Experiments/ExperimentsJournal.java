@@ -273,7 +273,7 @@ public class ExperimentsJournal {
             String netName = net.split("\\.")[0];
             seedData = readData(PATH + "res/networks/BBDD/" + netName + "/" + net + ".csv");
             BIFReader reader = new BIFReader();
-            try { reader.processFile(PATH + "res/networks/" + netName + ".xbif"); }
+            try { reader.processFile(PATH + "res/networks/xbif/" + netName + ".xbif"); }
             catch (Exception e) { throw new RuntimeException(e); }
 
             // Gold standard from the xbif (always needed regardless of DAG source)

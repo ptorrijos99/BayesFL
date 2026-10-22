@@ -349,12 +349,50 @@ public class Utils {
     }
 
     /**
+     * The path a data file is stored at: the path itself if it exists, otherwise its
+     * gzipped copy (path + ".gz") if that exists. The datasets in res/ are kept gzipped,
+     * and Weka reads ".arff.gz" directly.
+     */
+    public static String dataPath(String path) {
+        if (!new File(path).exists() && new File(path + ".gz").exists()) return path + ".gz";
+        return path;
+    }
+
+    /**
+     * Opens a text data file that may be stored gzipped (see {@link #dataPath}).
+     */
+    public static InputStream openData(String path) throws IOException {
+        String stored = dataPath(path);
+        InputStream in = new BufferedInputStream(new FileInputStream(stored), 1 << 16);
+        return stored.endsWith(".gz") ? new java.util.zip.GZIPInputStream(in, 1 << 16) : in;
+    }
+
+    /**
      * Stores the data from a csv as a DataSet object.
      * @param path
-     * Path to the csv file.
+     * Path to the csv file. If only its gzipped copy exists, that copy is decompressed
+     * to a temporary file, because tetrad's readers need a file on disk.
      * @return DataSet containing the data from the csv file.
      */
     public static DataSet readData(String path){
+        String stored = dataPath(path);
+        if (!stored.endsWith(".gz")) return readPlainData(stored);
+
+        Path tmp = null;
+        try {
+            tmp = Files.createTempFile("data-", ".csv");
+            try (InputStream in = openData(path)) {
+                Files.copy(in, tmp, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
+            return readPlainData(tmp.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (tmp != null) tmp.toFile().delete();
+        }
+    }
+
+    private static DataSet readPlainData(String path){
         Path dataFile = Path.of(path);
 
         // Reading the header of the columns

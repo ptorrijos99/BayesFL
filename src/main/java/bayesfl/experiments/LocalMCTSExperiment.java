@@ -85,7 +85,7 @@ public class LocalMCTSExperiment {
                 Fusion fusionClient = new FusionPosition(-1);
 
                 BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
-                data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+                data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
                 LocalAlgorithm algorithm = new MCT_MCTS(limitIteration, exploitation, probability_swap, number_swaps, intitialAlgorithm);
 
                 Client client = new Client(fusionClient, algorithm, data);
@@ -100,7 +100,7 @@ public class LocalMCTSExperiment {
 
             server.setStats(true, PATH);
             BN_DataSet data = new BN_DataSet(net + "." + bbdd);
-            data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+            data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
             server.setData(data);
 
             server.setExperimentName(operation);
@@ -128,7 +128,7 @@ public class LocalMCTSExperiment {
             Fusion fusionClient = new FusionPosition(0);
 
             BN_DataSet data = new BN_DataSet(divisionData.get(i), (net + "." + bbdd + "." + i));
-            data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+            data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
             LocalAlgorithm algorithm = new MCT_MCTS(limitIteration, exploitation, probability_swap, number_swaps, intitialAlgorithm);
 
             Client client = new Client(fusionClient, algorithm, data);
@@ -143,7 +143,7 @@ public class LocalMCTSExperiment {
 
         server.setStats(true, PATH);
         BN_DataSet data = new BN_DataSet(net + "." + bbdd);
-        data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+        data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
         server.setData(data);
 
         server.setExperimentName(operation);

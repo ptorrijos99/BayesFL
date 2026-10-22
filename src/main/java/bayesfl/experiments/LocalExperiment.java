@@ -170,7 +170,7 @@ public class LocalExperiment {
                     ((BN_FusionUnion) fusionClient).setLimit(limitC);
                 }
 
-                data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+                data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
                 LocalAlgorithm algorithm = new BN_GES(algName, "None", maxEdgesItInt);
 
                 Client client;
@@ -210,7 +210,7 @@ public class LocalExperiment {
 
             server.setStats(true, PATH);
             BN_DataSet data = new BN_DataSet(net + "." + bbdd);
-            data.setOriginalBNPath(PATH + "res/networks/" + net + ".xbif");
+            data.setOriginalBNPath(PATH + "res/networks/xbif/" + net + ".xbif");
             server.setData(data);
 
             server.setExperimentName(operation);

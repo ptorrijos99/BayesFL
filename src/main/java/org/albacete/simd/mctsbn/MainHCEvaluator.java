@@ -16,7 +16,7 @@ public class MainHCEvaluator {
         String networkFolder = "./res/networks/";
         String net_name = "pigs";
         String bbdd_path = networkFolder + "BBDD/" + net_name + ".3.csv";
-        String net_path = networkFolder + net_name + ".xbif";
+        String net_path = networkFolder + "xbif/" + net_name + ".xbif";
 
         int seed = 11231231;
         Problem problem = new Problem(bbdd_path);

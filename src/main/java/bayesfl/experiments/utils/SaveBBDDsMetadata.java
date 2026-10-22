@@ -20,7 +20,7 @@ public class SaveBBDDsMetadata {
 
         // Leer los archivos .arff en cada subcarpeta y calcular los metadatos
         for (File subfolder : subfolders) {
-            File[] arffFiles = subfolder.listFiles((dir, name) -> name.endsWith(".arff"));
+            File[] arffFiles = subfolder.listFiles((dir, name) -> name.endsWith(".arff") || name.endsWith(".arff.gz"));
             for (File arffFile : arffFiles) {
                 System.out.println("Processing file: " + subfolder.getName() + "/" + arffFile.getName());
 

@@ -16,7 +16,7 @@ public class SimpleBNExperiment {
         // 1. Configuration
         String networkFolder = "./res/networks/";
         String net_name = "hailfinder";
-        String net_path = networkFolder + net_name + ".xbif";
+        String net_path = networkFolder + "xbif/" + net_name + ".xbif";
 
         String bbdd_path = networkFolder + "BBDD/" + net_name + "/" + net_name + ".0.csv";
         //String bbdd_path = networkFolder + "BBDD_old/" + net_name + ".0.csv";

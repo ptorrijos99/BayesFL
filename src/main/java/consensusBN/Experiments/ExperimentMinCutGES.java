@@ -116,7 +116,7 @@ public class ExperimentMinCutGES {
 
         // Read the .xbif
         BIFReader bayesianReader = new BIFReader();
-        String pathXBIF = PATH + "res/networks/" + netName + ".xbif";
+        String pathXBIF = PATH + "res/networks/xbif/" + netName + ".xbif";
         try {
             bayesianReader.processFile(pathXBIF);
         } catch (Exception e) {

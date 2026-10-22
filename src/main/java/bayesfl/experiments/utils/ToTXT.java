@@ -12,8 +12,8 @@ public class ToTXT {
     public static void main(String[] args) throws Exception {
         String PATH = "./res/networks/";
 
-        // For each .xbif file in PATH
-        for (File file : new File(PATH).listFiles()) {
+        // For each .xbif file in PATH + "xbif"
+        for (File file : new File(PATH + "xbif/").listFiles()) {
             if (file.isFile() && file.getName().endsWith(".xbif")) {
                 // Read the network
                 MlBayesIm originalBN = readOriginalBayesianNetwork(file.getAbsolutePath());

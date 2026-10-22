@@ -70,7 +70,7 @@ public class Weka_Instances implements Data {
 
         try {
             // Assume the last attribute is the class variable
-            DataSource source = new DataSource(path);
+            DataSource source = new DataSource(org.albacete.simd.utils.Utils.dataPath(path));
             this.train = source.getDataSet();
             this.train.setClassIndex(this.train.numAttributes() - 1);
         }

@@ -68,7 +68,7 @@ public class GoldStandard {
     }
 
     private static Dag parse(String net) {
-        File f = new File("./res/networks/" + net + ".xbif");
+        File f = new File("./res/networks/xbif/" + net + ".xbif");
         if (!f.exists()) throw new IllegalArgumentException("no xbif for " + net + ": " + f.getPath());
         try (FileInputStream in = new FileInputStream(f)) {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

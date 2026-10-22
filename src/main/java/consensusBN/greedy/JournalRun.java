@@ -1020,7 +1020,7 @@ public class JournalRun {
         tmp.deleteOnExit();
         try (PrintWriter pw = new PrintWriter(new FileWriter(tmp))) {
             for (int i = rep * r; i < (rep + 1) * r; i++) {
-                try (Scanner sc = new Scanner(new File("./res/networks/BBDD/" + net + "/" + net + "." + i + ".csv"))) {
+                try (Scanner sc = new Scanner(Utils.openData("./res/networks/BBDD/" + net + "/" + net + "." + i + ".csv"))) {
                     String header = sc.nextLine();
                     if (i == rep * r) pw.println(header);
                     for (int k = 0; k < sampleSize && sc.hasNextLine(); k++) pw.println(sc.nextLine());
