@@ -1,0 +1,174 @@
+network unknown {
+}
+variable A1 {
+  type discrete [ 2 ] { T, F };
+}
+variable A2 {
+  type discrete [ 2 ] { T, F };
+}
+variable A3 {
+  type discrete [ 2 ] { T, F };
+}
+variable B1 {
+  type discrete [ 2 ] { T, F };
+}
+variable B10 {
+  type discrete [ 2 ] { T, F };
+}
+variable B11 {
+  type discrete [ 2 ] { T, F };
+}
+variable B12 {
+  type discrete [ 2 ] { T, F };
+}
+variable B13 {
+  type discrete [ 2 ] { T, F };
+}
+variable B14 {
+  type discrete [ 2 ] { T, F };
+}
+variable B2 {
+  type discrete [ 2 ] { T, F };
+}
+variable B3 {
+  type discrete [ 2 ] { T, F };
+}
+variable B4 {
+  type discrete [ 2 ] { T, F };
+}
+variable B5 {
+  type discrete [ 2 ] { T, F };
+}
+variable B6 {
+  type discrete [ 2 ] { T, F };
+}
+variable B7 {
+  type discrete [ 2 ] { T, F };
+}
+variable B8 {
+  type discrete [ 2 ] { T, F };
+}
+variable B9 {
+  type discrete [ 2 ] { T, F };
+}
+variable C1 {
+  type discrete [ 2 ] { T, F };
+}
+variable C2 {
+  type discrete [ 2 ] { T, F };
+}
+variable C3 {
+  type discrete [ 2 ] { T, F };
+}
+variable C4 {
+  type discrete [ 2 ] { T, F };
+}
+variable C5 {
+  type discrete [ 2 ] { T, F };
+}
+variable C6 {
+  type discrete [ 2 ] { T, F };
+}
+probability ( A1 ) {
+  table 0.5, 0.5;
+}
+probability ( A2 ) {
+  table 0.5, 0.5;
+}
+probability ( A3 ) {
+  table 0.5, 0.5;
+}
+probability ( B1 | A1 ) {
+  (T) 0.7, 0.3;
+  (F) 0.1, 0.9;
+}
+probability ( B10 | A2 ) {
+  (T) 0.7, 0.3;
+  (F) 0.2, 0.8;
+}
+probability ( B11 | B10, B7 ) {
+  (T, T) 0.99, 0.01;
+  (F, T) 0.9, 0.1;
+  (T, F) 0.9, 0.1;
+  (F, F) 0.01, 0.99;
+}
+probability ( B12 | A3 ) {
+  (T) 0.7, 0.3;
+  (F) 0.25, 0.75;
+}
+probability ( B13 | B12 ) {
+  (T) 0.6, 0.4;
+  (F) 0.25, 0.75;
+}
+probability ( B14 | B12 ) {
+  (T) 0.7, 0.3;
+  (F) 0.3, 0.7;
+}
+probability ( B2 | B1 ) {
+  (T) 0.7, 0.3;
+  (F) 0.3, 0.7;
+}
+probability ( B3 | B2 ) {
+  (T) 0.9, 0.1;
+  (F) 0.01, 0.99;
+}
+probability ( B4 | A1, A2 ) {
+  (T, T) 0.9, 0.1;
+  (F, T) 0.85, 0.15;
+  (T, F) 0.85, 0.15;
+  (F, F) 0.05, 0.95;
+}
+probability ( B5 | B2, B4 ) {
+  (T, T) 0.95, 0.05;
+  (F, T) 0.9, 0.1;
+  (T, F) 0.9, 0.1;
+  (F, F) 0.01, 0.99;
+}
+probability ( B6 | B5 ) {
+  (T) 0.95, 0.05;
+  (F) 0.01, 0.99;
+}
+probability ( B7 | B6 ) {
+  (T) 0.99, 0.01;
+  (F) 0.01, 0.99;
+}
+probability ( B8 | B7 ) {
+  (T) 0.98, 0.02;
+  (F) 0.01, 0.99;
+}
+probability ( B9 | B8 ) {
+  (T) 0.85, 0.15;
+  (F) 0.01, 0.99;
+}
+probability ( C1 | B3, B8 ) {
+  (T, T) 0.99, 0.01;
+  (F, T) 0.7, 0.3;
+  (T, F) 0.9, 0.1;
+  (F, F) 0.01, 0.99;
+}
+probability ( C2 | B8 ) {
+  (T) 0.97, 0.03;
+  (F) 0.02, 0.98;
+}
+probability ( C3 | B11, B13, B9 ) {
+  (T, T, T) 0.99, 0.01;
+  (F, T, T) 0.9, 0.1;
+  (T, F, T) 0.9, 0.1;
+  (F, F, T) 0.9, 0.1;
+  (T, T, F) 0.8, 0.2;
+  (F, T, F) 0.8, 0.2;
+  (T, F, F) 0.8, 0.2;
+  (F, F, F) 0.001, 0.999;
+}
+probability ( C4 | B14 ) {
+  (T) 0.5, 0.5;
+  (F) 0.5, 0.5;
+}
+probability ( C5 | B14 ) {
+  (T) 0.4, 0.6;
+  (F) 0.2, 0.8;
+}
+probability ( C6 | B12 ) {
+  (T) 0.65, 0.35;
+  (F) 0.2, 0.8;
+}

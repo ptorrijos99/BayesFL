@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AdverseSeaSwell</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AdverseWind</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CommercialPressure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExcessiveEnvironmentFactors</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExcessiveMotionVessel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExcessiveShipSpeed</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureHandholds</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeavyRain</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HumanFailures</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImproperShipHandling</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InappropriateAngle</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IncorrectHeigth</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IncorrectRigging</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IndividualFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackOfSafetyCulture</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackOfSupervision</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeouveringFailures</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NonCertifiedPilotLadder</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NonComplyTrapdoor</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OperationalFailures</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OrganizationalFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PTAEquipmentFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PTAFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PTAPreparedWindward</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PilotLadder</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PilotTransferAccident</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorCombinationLadder</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorCommunicationWithPilotBoat</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorConditionPTA</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorISMSystem</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorIllumination</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorPilotLadder</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RestrictedVisibility</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RetrievalLine</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiggingFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SecuringFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SecuringFailurePTA</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SecuringFailurePilot</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShipSideObstructed</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StructuralFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SubstandardActs</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SubstandardConditions</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AdverseSeaSwell</FOR>
+      <TABLE>0.01172 0.98828 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AdverseWind</FOR>
+      <TABLE>0.00147 0.99853 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CommercialPressure</FOR>
+      <TABLE>0.00148 0.99852 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExcessiveEnvironmentFactors</FOR>
+      <GIVEN>ExcessiveMotionVessel</GIVEN>
+      <GIVEN>HeavyRain</GIVEN>
+      <GIVEN>RestrictedVisibility</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExcessiveMotionVessel</FOR>
+      <GIVEN>AdverseSeaSwell</GIVEN>
+      <GIVEN>AdverseWind</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExcessiveShipSpeed</FOR>
+      <TABLE>0.00054 0.99946 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureHandholds</FOR>
+      <TABLE>0.00373 0.99627 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeavyRain</FOR>
+      <TABLE>3e-05 0.99997 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HumanFailures</FOR>
+      <GIVEN>IndividualFailure</GIVEN>
+      <GIVEN>OrganizationalFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImproperShipHandling</FOR>
+      <TABLE>0.00037 0.99963 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InappropriateAngle</FOR>
+      <TABLE>3e-05 0.99997 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IncorrectHeigth</FOR>
+      <TABLE>0.00091 0.99909 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IncorrectRigging</FOR>
+      <TABLE>0.00025 0.99975 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IndividualFailure</FOR>
+      <GIVEN>CommercialPressure</GIVEN>
+      <GIVEN>LackOfSupervision</GIVEN>
+      <GIVEN>PoorCommunicationWithPilotBoat</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackOfSafetyCulture</FOR>
+      <TABLE>0.02227 0.97773 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackOfSupervision</FOR>
+      <TABLE>0.00416 0.99584 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeouveringFailures</FOR>
+      <GIVEN>ExcessiveShipSpeed</GIVEN>
+      <GIVEN>ImproperShipHandling</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NonCertifiedPilotLadder</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NonComplyTrapdoor</FOR>
+      <TABLE>0.00106 0.99894 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OperationalFailures</FOR>
+      <GIVEN>IncorrectHeigth</GIVEN>
+      <GIVEN>PoorIllumination</GIVEN>
+      <GIVEN>PTAPreparedWindward</GIVEN>
+      <GIVEN>RiggingFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OrganizationalFailure</FOR>
+      <GIVEN>LackOfSafetyCulture</GIVEN>
+      <GIVEN>PoorISMSystem</GIVEN>
+      <TABLE>1.0 0.0 0.96 0.04 0.92 0.08 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PTAEquipmentFailure</FOR>
+      <GIVEN>FailureHandholds</GIVEN>
+      <GIVEN>NonCertifiedPilotLadder</GIVEN>
+      <GIVEN>PoorConditionPTA</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PTAFailure</FOR>
+      <GIVEN>PTAEquipmentFailure</GIVEN>
+      <GIVEN>StructuralFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PTAPreparedWindward</FOR>
+      <TABLE>0.00025 0.99975 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PilotLadder</FOR>
+      <TABLE>0.00036 0.99964 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PilotTransferAccident</FOR>
+      <GIVEN>SubstandardActs</GIVEN>
+      <GIVEN>SubstandardConditions</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorCombinationLadder</FOR>
+      <TABLE>0.00036 0.99964 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorCommunicationWithPilotBoat</FOR>
+      <TABLE>0.00048 0.99952 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorConditionPTA</FOR>
+      <GIVEN>PoorCombinationLadder</GIVEN>
+      <GIVEN>PoorPilotLadder</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorISMSystem</FOR>
+      <TABLE>0.00096 0.99904 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorIllumination</FOR>
+      <TABLE>0.00078 0.99922 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorPilotLadder</FOR>
+      <TABLE>0.02562 0.97438 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RestrictedVisibility</FOR>
+      <TABLE>1e-05 0.99999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RetrievalLine</FOR>
+      <TABLE>6e-05 0.99994 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiggingFailure</FOR>
+      <GIVEN>InappropriateAngle</GIVEN>
+      <GIVEN>IncorrectRigging</GIVEN>
+      <GIVEN>RetrievalLine</GIVEN>
+      <GIVEN>SecuringFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SecuringFailure</FOR>
+      <GIVEN>SecuringFailurePilot</GIVEN>
+      <GIVEN>SecuringFailurePTA</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SecuringFailurePTA</FOR>
+      <TABLE>0.00151 0.99849 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SecuringFailurePilot</FOR>
+      <TABLE>0.0098 0.9902 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShipSideObstructed</FOR>
+      <TABLE>0.00078 0.99922 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StructuralFailure</FOR>
+      <GIVEN>NonComplyTrapdoor</GIVEN>
+      <GIVEN>PilotLadder</GIVEN>
+      <GIVEN>ShipSideObstructed</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SubstandardActs</FOR>
+      <GIVEN>HumanFailures</GIVEN>
+      <GIVEN>ManeouveringFailures</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SubstandardConditions</FOR>
+      <GIVEN>ExcessiveEnvironmentFactors</GIVEN>
+      <GIVEN>OperationalFailures</GIVEN>
+      <GIVEN>PTAFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ARHGAP6</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ARHGEF19</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CD44</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CDC42-IT1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CDH1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CFL2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DAGLB</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DGKZ</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DLC1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECM1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ERMAP</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ERMP1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GNA11</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GNG11</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GPRC5A</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ITGB2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LACTB</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LIMK2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PAAF1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PAK1</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PAK2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PIP</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PIP4K2A</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PIP5K1B</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RAC2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RHOJ</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ROCK2</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RTKN</NAME>
+      <OUTCOME>Below</OUTCOME>
+      <OUTCOME>Above</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ARHGAP6</FOR>
+      <TABLE>0.0621762 0.9378238 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ARHGEF19</FOR>
+      <GIVEN>CDH1</GIVEN>
+      <GIVEN>DLC1</GIVEN>
+      <GIVEN>GNA11</GIVEN>
+      <GIVEN>GNG11</GIVEN>
+      <GIVEN>ITGB2</GIVEN>
+      <GIVEN>RTKN</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 1.0 0.0 0.5 0.5 1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 1.0 0.0 0.5 0.5 1.0 0.0 0.5 0.5 0.96969697 0.03030303 1.0 0.0 0.94871795 0.05128205 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.6666667 0.3333333 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CD44</FOR>
+      <TABLE>0.0880829 0.9119171 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CDC42-IT1</FOR>
+      <GIVEN>RHOJ</GIVEN>
+      <TABLE>0.5 0.5 0.4972376 0.5027624 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CDH1</FOR>
+      <TABLE>0.854922 0.145078 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CFL2</FOR>
+      <GIVEN>LIMK2</GIVEN>
+      <TABLE>0.1363636 0.8636364 0.03809524 0.96190476 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DAGLB</FOR>
+      <TABLE>0.595855 0.404145 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DGKZ</FOR>
+      <GIVEN>DAGLB</GIVEN>
+      <GIVEN>RHOJ</GIVEN>
+      <TABLE>0.5714286 0.4285714 0.6574074 0.3425926 0.4 0.6 0.3561644 0.6438356 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DLC1</FOR>
+      <GIVEN>ARHGAP6</GIVEN>
+      <GIVEN>ERMP1</GIVEN>
+      <GIVEN>PAK2</GIVEN>
+      <TABLE>0.2857143 0.7142857 0.6666667 0.3333333 0.5 0.5 0.0 1.0 0.0 1.0 0.0 1.0 0.04761905 0.95238095 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECM1</FOR>
+      <TABLE>0.813472 0.186528 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ERMAP</FOR>
+      <GIVEN>CD44</GIVEN>
+      <GIVEN>PIP4K2A</GIVEN>
+      <GIVEN>RHOJ</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 1.0 0.0 0.375 0.625 1.0 0.0 0.25 0.75 0.7142857 0.2857143 0.2384106 0.7615894 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ERMP1</FOR>
+      <TABLE>0.435233 0.564767 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GNA11</FOR>
+      <GIVEN>GPRC5A</GIVEN>
+      <TABLE>0.5 0.5 0.1587302 0.8412698 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GNG11</FOR>
+      <GIVEN>GPRC5A</GIVEN>
+      <TABLE>0.5 0.5 0.02645503 0.97354497 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GPRC5A</FOR>
+      <TABLE>0.02072539 0.97927461 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ITGB2</FOR>
+      <GIVEN>ECM1</GIVEN>
+      <TABLE>0.3057325 0.6942675 0.1388889 0.8611111 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LACTB</FOR>
+      <GIVEN>ERMAP</GIVEN>
+      <TABLE>0.3928571 0.6071429 0.3065693 0.6934307 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LIMK2</FOR>
+      <GIVEN>PAK1</GIVEN>
+      <GIVEN>ROCK2</GIVEN>
+      <TABLE>0.72 0.28 0.4012739 0.5987261 0.8 0.2 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PAAF1</FOR>
+      <GIVEN>DGKZ</GIVEN>
+      <TABLE>0.7378641 0.2621359 0.8777778 0.1222222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PAK1</FOR>
+      <GIVEN>CDC42-IT1</GIVEN>
+      <GIVEN>RAC2</GIVEN>
+      <TABLE>1.0 0.0 0.91566265 0.08433735 0.96153846 0.03846154 0.95774648 0.04225352 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PAK2</FOR>
+      <TABLE>0.331606 0.668394 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PIP</FOR>
+      <TABLE>0.606218 0.393782 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PIP4K2A</FOR>
+      <GIVEN>PIP5K1B</GIVEN>
+      <TABLE>0.375 0.625 0.1243243 0.8756757 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PIP5K1B</FOR>
+      <GIVEN>PAAF1</GIVEN>
+      <GIVEN>PIP</GIVEN>
+      <TABLE>0.04255319 0.95744681 0.04918033 0.95081967 0.04347826 0.95652174 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RAC2</FOR>
+      <GIVEN>RHOJ</GIVEN>
+      <TABLE>0.1666667 0.8333333 0.2044199 0.7955801 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RHOJ</FOR>
+      <GIVEN>ARHGEF19</GIVEN>
+      <TABLE>0.05464481 0.94535519 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ROCK2</FOR>
+      <GIVEN>RHOJ</GIVEN>
+      <TABLE>0.8333333 0.1666667 0.1104972 0.8895028 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RTKN</FOR>
+      <TABLE>0.865285 0.134715 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

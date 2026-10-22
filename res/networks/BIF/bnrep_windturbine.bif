@@ -1,0 +1,1132 @@
+network unknown {
+}
+variable A01 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A02 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A03 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A04 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A05 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A06 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A07 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A08 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A09 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A10 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A11 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A12 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A13 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A14 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A15 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A16 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A17 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A18 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A19 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A20 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A21 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A22 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A23 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A24 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A25 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A26 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A27 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A28 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A29 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A30 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A31 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A32 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A33 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A34 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A35 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable A36 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B01 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B02 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B03 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B04 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B05 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B06 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B07 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B08 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B09 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B10 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B11 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B12 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B13 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B14 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B15 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B16 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B17 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B18 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B19 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B20 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B21 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B22 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B23 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B24 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B25 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B26 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B27 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B28 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B29 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B30 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B31 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B32 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B33 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B34 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B35 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B36 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B37 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B38 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B39 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B40 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B41 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B42 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B43 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B44 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B45 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B46 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B47 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B48 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B49 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B50 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B51 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B52 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B53 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B54 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B55 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B56 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B57 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B58 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B59 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B60 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B61 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B62 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B63 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B64 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B65 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B66 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B67 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B68 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B69 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B70 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B71 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B72 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B73 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B74 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B75 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B76 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B77 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B78 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B79 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable B80 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FOWTMalfunctions {
+  type discrete [ 2 ] { Yes, No };
+}
+variable S1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable S2 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable S3 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable S4 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable S5 {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( A01 | A04, A05, B01 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A02 | A06, B02, B03, B04 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( A03 | A07, A08, B05, B06 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( A04 | A09, B07 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A05 | B08, B09 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A06 | B10, B11, B12 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A07 | B13, B14, B15 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A08 | A10, B16 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A09 | A11, A12 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A10 | B17, B18, B19 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes) 0.0, 1.0;
+  (No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, No) 0.0, 1.0;
+  (No, Yes, No) 0.0, 1.0;
+  (Yes, No, No) 0.0, 1.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A11 | B20, B21 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A12 | A13, B22, B23, B24, B25, B26 ) {
+  (Yes, Yes, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes, Yes, Yes) 1.0, 0.0;
+  (No, No, No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, No, Yes, Yes) 1.0, 0.0;
+  (No, Yes, No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, No, No, Yes, Yes) 1.0, 0.0;
+  (No, No, No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No, No, Yes) 1.0, 0.0;
+  (No, Yes, Yes, No, No, Yes) 1.0, 0.0;
+  (Yes, No, Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, Yes, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No, No, No, Yes) 1.0, 0.0;
+  (No, Yes, No, No, No, Yes) 1.0, 0.0;
+  (Yes, No, No, No, No, Yes) 1.0, 0.0;
+  (No, No, No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, No, Yes, Yes, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, No, Yes, Yes, No) 1.0, 0.0;
+  (No, No, No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, Yes, Yes, No, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No, Yes, No) 1.0, 0.0;
+  (No, Yes, No, No, Yes, No) 1.0, 0.0;
+  (Yes, No, No, No, Yes, No) 1.0, 0.0;
+  (No, No, No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, Yes, Yes, No, No) 1.0, 0.0;
+  (Yes, No, Yes, Yes, No, No) 1.0, 0.0;
+  (No, No, Yes, Yes, No, No) 1.0, 0.0;
+  (Yes, Yes, No, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, Yes, No, No) 1.0, 0.0;
+  (No, No, No, Yes, No, No) 1.0, 0.0;
+  (Yes, Yes, Yes, No, No, No) 1.0, 0.0;
+  (No, Yes, Yes, No, No, No) 1.0, 0.0;
+  (Yes, No, Yes, No, No, No) 1.0, 0.0;
+  (No, No, Yes, No, No, No) 1.0, 0.0;
+  (Yes, Yes, No, No, No, No) 1.0, 0.0;
+  (No, Yes, No, No, No, No) 1.0, 0.0;
+  (Yes, No, No, No, No, No) 1.0, 0.0;
+  (No, No, No, No, No, No) 0.0, 1.0;
+}
+probability ( A13 | A14, B27 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A14 | A15, B28 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A15 | B29, B30, B31 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes) 0.0, 1.0;
+  (No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, No) 0.0, 1.0;
+  (No, Yes, No) 0.0, 1.0;
+  (Yes, No, No) 0.0, 1.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A16 | A19, B32, B33, B34 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( A17 | A20, B35, B36 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A18 | A21, B37 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A19 | B38, B39 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A20 | B40, B41 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A21 | B42, B43 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A22 | B44, B45, B46 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A23 | A25, A26, B47, B48, B49 ) {
+  (Yes, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes, Yes) 1.0, 0.0;
+  (No, No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No, No, Yes) 1.0, 0.0;
+  (No, Yes, No, No, Yes) 1.0, 0.0;
+  (Yes, No, No, No, Yes) 1.0, 0.0;
+  (No, No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, Yes, No) 1.0, 0.0;
+  (No, No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, Yes, No) 1.0, 0.0;
+  (No, Yes, No, Yes, No) 1.0, 0.0;
+  (Yes, No, No, Yes, No) 1.0, 0.0;
+  (No, No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, Yes, No, No) 1.0, 0.0;
+  (Yes, No, Yes, No, No) 1.0, 0.0;
+  (No, No, Yes, No, No) 1.0, 0.0;
+  (Yes, Yes, No, No, No) 1.0, 0.0;
+  (No, Yes, No, No, No) 1.0, 0.0;
+  (Yes, No, No, No, No) 1.0, 0.0;
+  (No, No, No, No, No) 0.0, 1.0;
+}
+probability ( A24 | B47, B50, B51, B52 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( A25 | A27, B53 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A26 | B54, B55, B56 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A27 | B57, B58 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A28 | A30, A31 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A29 | B62, B63, B64 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A30 | A32, B64, B65 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A31 | B66, B67, B68 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( A32 | B69, B70 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A33 | B72, B73 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A34 | B74, B75, B76, B77 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( A35 | A36, B78 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( A36 | B79, B80 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( B01 ) {
+  table 0.000006, 0.999994;
+}
+probability ( B02 ) {
+  table 0.000005, 0.999995;
+}
+probability ( B03 ) {
+  table 7.000044e-07, 9.999993e-01;
+}
+probability ( B04 ) {
+  table 0.000011, 0.999989;
+}
+probability ( B05 ) {
+  table 0.000005, 0.999995;
+}
+probability ( B06 ) {
+  table 0.000001, 0.999999;
+}
+probability ( B07 ) {
+  table 0.000018, 0.999982;
+}
+probability ( B08 ) {
+  table 0.000078, 0.999922;
+}
+probability ( B09 ) {
+  table 0.000001, 0.999999;
+}
+probability ( B10 ) {
+  table 0.00005, 0.99995;
+}
+probability ( B11 ) {
+  table 0.000007, 0.999993;
+}
+probability ( B12 ) {
+  table 0.000055, 0.999945;
+}
+probability ( B13 ) {
+  table 0.0001, 0.9999;
+}
+probability ( B14 ) {
+  table 0.000001, 0.999999;
+}
+probability ( B15 ) {
+  table 0.000005, 0.999995;
+}
+probability ( B16 ) {
+  table 0.00000865, 0.99999135;
+}
+probability ( B17 ) {
+  table 0.000013, 0.999987;
+}
+probability ( B18 ) {
+  table 0.000003, 0.999997;
+}
+probability ( B19 ) {
+  table 0.000003, 0.999997;
+}
+probability ( B20 ) {
+  table 0.00001, 0.99999;
+}
+probability ( B21 ) {
+  table 0.000017, 0.999983;
+}
+probability ( B22 ) {
+  table 0.0000101, 0.9999899;
+}
+probability ( B23 ) {
+  table 0.00000693, 0.99999307;
+}
+probability ( B24 ) {
+  table 0.000008, 0.999992;
+}
+probability ( B25 ) {
+  table 4.190006e-06, 9.999958e-01;
+}
+probability ( B26 ) {
+  table 0.00000556, 0.99999444;
+}
+probability ( B27 ) {
+  table 0.0000407, 0.9999593;
+}
+probability ( B28 ) {
+  table 0.0000378, 0.9999622;
+}
+probability ( B29 ) {
+  table 0.000016, 0.999984;
+}
+probability ( B30 ) {
+  table 0.000017, 0.999983;
+}
+probability ( B31 ) {
+  table 0.00000538, 0.99999462;
+}
+probability ( B32 ) {
+  table 0.00001, 0.99999;
+}
+probability ( B33 ) {
+  table 0.00003, 0.99997;
+}
+probability ( B34 ) {
+  table 0.0000068, 0.9999932;
+}
+probability ( B35 ) {
+  table 0.00001, 0.99999;
+}
+probability ( B36 ) {
+  table 0.00001, 0.99999;
+}
+probability ( B37 ) {
+  table 0.00000214, 0.99999786;
+}
+probability ( B38 ) {
+  table 0.000048, 0.999952;
+}
+probability ( B39 ) {
+  table 0.00000079, 0.99999921;
+}
+probability ( B40 ) {
+  table 0.000057, 0.999943;
+}
+probability ( B41 ) {
+  table 0.000057, 0.999943;
+}
+probability ( B42 ) {
+  table 0.000007, 0.999993;
+}
+probability ( B43 ) {
+  table 0.000018, 0.999982;
+}
+probability ( B44 ) {
+  table 0.0000018, 0.9999982;
+}
+probability ( B45 ) {
+  table 0.0000018, 0.9999982;
+}
+probability ( B46 ) {
+  table 0.00000144, 0.99999856;
+}
+probability ( B47 ) {
+  table 0.00000214, 0.99999786;
+}
+probability ( B48 ) {
+  table 0.00000024, 0.99999976;
+}
+probability ( B49 ) {
+  table 0.0000013, 0.9999987;
+}
+probability ( B50 ) {
+  table 0.000012, 0.999988;
+}
+probability ( B51 ) {
+  table 0.00001, 0.99999;
+}
+probability ( B52 ) {
+  table 0.000003, 0.999997;
+}
+probability ( B53 ) {
+  table 0.0000003, 0.9999997;
+}
+probability ( B54 ) {
+  table 0.000001, 0.999999;
+}
+probability ( B55 ) {
+  table 0.00000024, 0.99999976;
+}
+probability ( B56 ) {
+  table 0.0000003, 0.9999997;
+}
+probability ( B57 ) {
+  table 0.000001, 0.999999;
+}
+probability ( B58 ) {
+  table 0.0000003, 0.9999997;
+}
+probability ( B59 ) {
+  table 0.0000163, 0.9999837;
+}
+probability ( B60 ) {
+  table 0.0000001, 0.9999999;
+}
+probability ( B61 ) {
+  table 0.000084, 0.999916;
+}
+probability ( B62 ) {
+  table 0.00000585, 0.99999415;
+}
+probability ( B63 ) {
+  table 0.00000117, 0.99999883;
+}
+probability ( B64 ) {
+  table 0.00000214, 0.99999786;
+}
+probability ( B65 ) {
+  table 0.00000217, 0.99999783;
+}
+probability ( B66 ) {
+  table 0.00000361, 0.99999639;
+}
+probability ( B67 ) {
+  table 0.00000021, 0.99999979;
+}
+probability ( B68 ) {
+  table 0.00000289, 0.99999711;
+}
+probability ( B69 ) {
+  table 0.00000708, 0.99999292;
+}
+probability ( B70 ) {
+  table 0.00000072, 0.99999928;
+}
+probability ( B71 ) {
+  table 0.0000216, 0.9999784;
+}
+probability ( B72 ) {
+  table 0.00000571, 0.99999429;
+}
+probability ( B73 ) {
+  table 0.0000018, 0.9999982;
+}
+probability ( B74 ) {
+  table 0.0000491, 0.9999509;
+}
+probability ( B75 ) {
+  table 0.00000799, 0.99999201;
+}
+probability ( B76 ) {
+  table 0.0000377, 0.9999623;
+}
+probability ( B77 ) {
+  table 0.0000205, 0.9999795;
+}
+probability ( B78 ) {
+  table 0.0000126, 0.9999874;
+}
+probability ( B79 ) {
+  table 0.0000274, 0.9999726;
+}
+probability ( B80 ) {
+  table 0.00000525, 0.99999475;
+}
+probability ( FOWTMalfunctions | S1, S2, S3, S4, S5 ) {
+  (Yes, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes, Yes) 1.0, 0.0;
+  (No, No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No, No, Yes) 1.0, 0.0;
+  (No, Yes, No, No, Yes) 1.0, 0.0;
+  (Yes, No, No, No, Yes) 1.0, 0.0;
+  (No, No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, Yes, No) 1.0, 0.0;
+  (No, No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, Yes, No) 1.0, 0.0;
+  (No, Yes, No, Yes, No) 1.0, 0.0;
+  (Yes, No, No, Yes, No) 1.0, 0.0;
+  (No, No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, Yes, No, No) 1.0, 0.0;
+  (Yes, No, Yes, No, No) 1.0, 0.0;
+  (No, No, Yes, No, No) 1.0, 0.0;
+  (Yes, Yes, No, No, No) 1.0, 0.0;
+  (No, Yes, No, No, No) 1.0, 0.0;
+  (Yes, No, No, No, No) 1.0, 0.0;
+  (No, No, No, No, No) 0.0, 1.0;
+}
+probability ( S1 | A01, A02, A03 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( S2 | A16, A17, A18 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( S3 | A22, A23, A24 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( S4 | A28, A29, B59, B60, B61 ) {
+  (Yes, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes, Yes) 1.0, 0.0;
+  (No, No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No, No, Yes) 1.0, 0.0;
+  (No, Yes, No, No, Yes) 1.0, 0.0;
+  (Yes, No, No, No, Yes) 1.0, 0.0;
+  (No, No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, Yes, No) 1.0, 0.0;
+  (No, No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, Yes, No) 1.0, 0.0;
+  (No, Yes, No, Yes, No) 1.0, 0.0;
+  (Yes, No, No, Yes, No) 1.0, 0.0;
+  (No, No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, Yes, No, No) 1.0, 0.0;
+  (Yes, No, Yes, No, No) 1.0, 0.0;
+  (No, No, Yes, No, No) 1.0, 0.0;
+  (Yes, Yes, No, No, No) 1.0, 0.0;
+  (No, Yes, No, No, No) 1.0, 0.0;
+  (Yes, No, No, No, No) 1.0, 0.0;
+  (No, No, No, No, No) 0.0, 1.0;
+}
+probability ( S5 | A33, A34, A35, B71 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}

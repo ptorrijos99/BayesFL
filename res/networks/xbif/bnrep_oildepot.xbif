@@ -1,0 +1,456 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>M1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M10</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M11</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M12</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M13</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M14</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M15</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M3</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M4</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M5</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M6</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M7</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M8</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>M9</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TankLeakage</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X10</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X11</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X12</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X13</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X14</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X15</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X16</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X17</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X18</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X19</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X20</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X21</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X22</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X23</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X24</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X25</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X3</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X4</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X5</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X6</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X7</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X8</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X9</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>M1</FOR>
+      <GIVEN>X1</GIVEN>
+      <GIVEN>X2</GIVEN>
+      <GIVEN>X3</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M10</FOR>
+      <GIVEN>X17</GIVEN>
+      <GIVEN>X18</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M11</FOR>
+      <GIVEN>X19</GIVEN>
+      <GIVEN>X20</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M12</FOR>
+      <GIVEN>M10</GIVEN>
+      <GIVEN>M11</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M13</FOR>
+      <GIVEN>X21</GIVEN>
+      <GIVEN>X22</GIVEN>
+      <GIVEN>X23</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M14</FOR>
+      <GIVEN>X24</GIVEN>
+      <GIVEN>X25</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M15</FOR>
+      <GIVEN>M13</GIVEN>
+      <GIVEN>M14</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M2</FOR>
+      <GIVEN>X4</GIVEN>
+      <GIVEN>X5</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M3</FOR>
+      <GIVEN>X6</GIVEN>
+      <GIVEN>X7</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M4</FOR>
+      <GIVEN>X10</GIVEN>
+      <GIVEN>X8</GIVEN>
+      <GIVEN>X9</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M5</FOR>
+      <GIVEN>X11</GIVEN>
+      <GIVEN>X12</GIVEN>
+      <GIVEN>X13</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M6</FOR>
+      <GIVEN>M4</GIVEN>
+      <GIVEN>M5</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M7</FOR>
+      <GIVEN>M1</GIVEN>
+      <GIVEN>M2</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M8</FOR>
+      <GIVEN>M3</GIVEN>
+      <GIVEN>M6</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>M9</FOR>
+      <GIVEN>X14</GIVEN>
+      <GIVEN>X15</GIVEN>
+      <GIVEN>X16</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TankLeakage</FOR>
+      <GIVEN>M12</GIVEN>
+      <GIVEN>M15</GIVEN>
+      <GIVEN>M7</GIVEN>
+      <GIVEN>M8</GIVEN>
+      <GIVEN>M9</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X1</FOR>
+      <TABLE>0.00502 0.99498 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X10</FOR>
+      <TABLE>0.00279 0.99721 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X11</FOR>
+      <TABLE>0.00548 0.99452 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X12</FOR>
+      <TABLE>0.00347 0.99653 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X13</FOR>
+      <TABLE>0.0033 0.9967 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X14</FOR>
+      <TABLE>0.00191 0.99809 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X15</FOR>
+      <TABLE>0.000602 0.999398 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X16</FOR>
+      <TABLE>0.000509 0.999491 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X17</FOR>
+      <TABLE>0.0029 0.9971 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X18</FOR>
+      <TABLE>0.00338 0.99662 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X19</FOR>
+      <TABLE>0.0105 0.9895 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X2</FOR>
+      <TABLE>0.00382 0.99618 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X20</FOR>
+      <TABLE>0.0077 0.9923 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X21</FOR>
+      <TABLE>0.00127 0.99873 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X22</FOR>
+      <TABLE>0.00217 0.99783 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X23</FOR>
+      <TABLE>0.0024 0.9976 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X24</FOR>
+      <TABLE>0.00303 0.99697 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X25</FOR>
+      <TABLE>0.00184 0.99816 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X3</FOR>
+      <TABLE>0.00452 0.99548 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X4</FOR>
+      <TABLE>0.00819 0.99181 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X5</FOR>
+      <TABLE>0.00539 0.99461 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X6</FOR>
+      <TABLE>0.00648 0.99352 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X7</FOR>
+      <TABLE>0.00647 0.99353 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X8</FOR>
+      <TABLE>0.00702 0.99298 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X9</FOR>
+      <TABLE>0.00306 0.99694 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

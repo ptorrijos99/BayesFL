@@ -1,0 +1,495 @@
+network unknown {
+}
+variable AidNavigationFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable AirTemperature {
+  type discrete [ 2 ] { _0, _0_1 };
+}
+variable C_BesettingInIce {
+  type discrete [ 3 ] { Significant, Severe, Catastrophic };
+}
+variable C_Collision {
+  type discrete [ 3 ] { Significant, Severe, Catastrophic };
+}
+variable C_Grounding {
+  type discrete [ 3 ] { Significant, Severe, Catastrophic };
+}
+variable C_ShipIceCollision {
+  type discrete [ 3 ] { Significant, Severe, Catastrophic };
+}
+variable ChannelDepth {
+  type discrete [ 2 ] { Inadequate, Adequate };
+}
+variable ChartUpdating {
+  type discrete [ 2 ] { No, Yes };
+}
+variable CommunicationEquipmentFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable DriftIce {
+  type discrete [ 2 ] { No, Yes };
+}
+variable EnvironmentalObstacles {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Fatigue {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Fog {
+  type discrete [ 2 ] { No, Yes };
+}
+variable GrossTonnage {
+  type discrete [ 4 ] { _0_500_, _500_3000_, _3000_10000_, __10000 };
+}
+variable IceConcentration {
+  type discrete [ 3 ] { _3_10, 4_10_6_10, _7_10 };
+}
+variable IceCondition {
+  type discrete [ 2 ] { Poor, Good };
+}
+variable IceStrength {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable IceThickness {
+  type discrete [ 2 ] { __0_5m, __0_5_m };
+}
+variable IceType {
+  type discrete [ 3 ] { Thin_Ice, Medium_Ice, Old_Ice };
+}
+variable InadequateKnowledge {
+  type discrete [ 2 ] { No, Yes };
+}
+variable JudgmentFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable LackCommunication {
+  type discrete [ 2 ] { No, Yes };
+}
+variable LackSafetyMeasures {
+  type discrete [ 2 ] { No, Yes };
+}
+variable LackSituationalAwareness {
+  type discrete [ 2 ] { No, Yes };
+}
+variable MechanicalEquipmentFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable NavigatorFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Negligence {
+  type discrete [ 2 ] { No, Yes };
+}
+variable P_BesettingInIce {
+  type discrete [ 2 ] { No, Yes };
+}
+variable P_Collision {
+  type discrete [ 2 ] { No, Yes };
+}
+variable P_Grounding {
+  type discrete [ 2 ] { No, Yes };
+}
+variable P_ShipIceCollision {
+  type discrete [ 2 ] { No, Yes };
+}
+variable PowerFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable PropellerFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable RadarFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Rain {
+  type discrete [ 2 ] { No, Yes };
+}
+variable SeaCurrent {
+  type discrete [ 2 ] { No, Yes };
+}
+variable SeaTemperature {
+  type discrete [ 2 ] { _0, _0_1 };
+}
+variable ShipType {
+  type discrete [ 5 ] { Oil_Tanker, General_Cargo_Ship, Passenger_Ship, Icebreaker, Others };
+}
+variable SteeringFailure {
+  type discrete [ 2 ] { No, Yes };
+}
+variable StrongWind {
+  type discrete [ 2 ] { No, Yes };
+}
+variable UnsafeAct {
+  type discrete [ 2 ] { No, Yes };
+}
+variable UnsafeCondition {
+  type discrete [ 2 ] { No, Yes };
+}
+variable UnsafeSpeed {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Visibility {
+  type discrete [ 2 ] { Poor, Good };
+}
+variable WaterwayCondition {
+  type discrete [ 2 ] { Poor, Good };
+}
+variable WeatherCondition {
+  type discrete [ 2 ] { Poor, Good };
+}
+probability ( AidNavigationFailure | NavigatorFailure, RadarFailure ) {
+  (No, No) 1.0, 0.0;
+  (Yes, No) 0.1, 0.9;
+  (No, Yes) 0.1, 0.9;
+  (Yes, Yes) 0.0, 1.0;
+}
+probability ( AirTemperature ) {
+  table 0.29, 0.71;
+}
+probability ( C_BesettingInIce | GrossTonnage, ShipType ) {
+  (_0_500_, Oil_Tanker) 0.835, 0.150, 0.015;
+  (_500_3000_, Oil_Tanker) 0.857, 0.130, 0.013;
+  (_3000_10000_, Oil_Tanker) 0.889, 0.100, 0.011;
+  (__10000, Oil_Tanker) 0.91, 0.08, 0.01;
+  (_0_500_, General_Cargo_Ship) 0.89, 0.10, 0.01;
+  (_500_3000_, General_Cargo_Ship) 0.92, 0.07, 0.01;
+  (_3000_10000_, General_Cargo_Ship) 0.95, 0.04, 0.01;
+  (__10000, General_Cargo_Ship) 0.98, 0.01, 0.01;
+  (_0_500_, Passenger_Ship) 0.97, 0.02, 0.01;
+  (_500_3000_, Passenger_Ship) 0.975, 0.015, 0.010;
+  (_3000_10000_, Passenger_Ship) 0.977, 0.013, 0.010;
+  (__10000, Passenger_Ship) 0.98, 0.01, 0.01;
+  (_0_500_, Icebreaker) 0.98, 0.02, 0.00;
+  (_500_3000_, Icebreaker) 0.985, 0.015, 0.000;
+  (_3000_10000_, Icebreaker) 0.99, 0.01, 0.00;
+  (__10000, Icebreaker) 0.995, 0.005, 0.000;
+  (_0_500_, Others) 0.89, 0.10, 0.01;
+  (_500_3000_, Others) 0.92, 0.07, 0.01;
+  (_3000_10000_, Others) 0.95, 0.04, 0.01;
+  (__10000, Others) 0.98, 0.01, 0.01;
+}
+probability ( C_Collision | GrossTonnage, ShipType ) {
+  (_0_500_, Oil_Tanker) 0.835, 0.150, 0.015;
+  (_500_3000_, Oil_Tanker) 0.857, 0.130, 0.013;
+  (_3000_10000_, Oil_Tanker) 0.889, 0.100, 0.011;
+  (__10000, Oil_Tanker) 0.982, 0.008, 0.010;
+  (_0_500_, General_Cargo_Ship) 0.82, 0.15, 0.03;
+  (_500_3000_, General_Cargo_Ship) 0.845, 0.130, 0.025;
+  (_3000_10000_, General_Cargo_Ship) 0.87, 0.11, 0.02;
+  (__10000, General_Cargo_Ship) 0.905, 0.080, 0.015;
+  (_0_500_, Passenger_Ship) 0.966, 0.020, 0.014;
+  (_500_3000_, Passenger_Ship) 0.973, 0.015, 0.012;
+  (_3000_10000_, Passenger_Ship) 0.977, 0.013, 0.010;
+  (__10000, Passenger_Ship) 0.982, 0.010, 0.008;
+  (_0_500_, Icebreaker) 0.79, 0.20, 0.01;
+  (_500_3000_, Icebreaker) 0.842, 0.150, 0.008;
+  (_3000_10000_, Icebreaker) 0.894, 0.100, 0.006;
+  (__10000, Icebreaker) 0.946, 0.050, 0.004;
+  (_0_500_, Others) 0.79, 0.20, 0.01;
+  (_500_3000_, Others) 0.842, 0.150, 0.008;
+  (_3000_10000_, Others) 0.894, 0.100, 0.006;
+  (__10000, Others) 0.946, 0.050, 0.004;
+}
+probability ( C_Grounding | GrossTonnage, ShipType ) {
+  (_0_500_, Oil_Tanker) 0.835, 0.150, 0.015;
+  (_500_3000_, Oil_Tanker) 0.857, 0.130, 0.013;
+  (_3000_10000_, Oil_Tanker) 0.889, 0.100, 0.011;
+  (__10000, Oil_Tanker) 0.91, 0.08, 0.01;
+  (_0_500_, General_Cargo_Ship) 0.3053435, 0.4580153, 0.2366412;
+  (_500_3000_, General_Cargo_Ship) 0.4174120, 0.3577818, 0.2248062;
+  (_3000_10000_, General_Cargo_Ship) 0.2624672, 0.5249344, 0.2125984;
+  (__10000, General_Cargo_Ship) 0.25, 0.50, 0.25;
+  (_0_500_, Passenger_Ship) 0.667, 0.333, 0.000;
+  (_500_3000_, Passenger_Ship) 0.4285714, 0.5714286, 0.0000000;
+  (_3000_10000_, Passenger_Ship) 0.5, 0.5, 0.0;
+  (__10000, Passenger_Ship) 0.667, 0.333, 0.000;
+  (_0_500_, Icebreaker) 0.8, 0.2, 0.0;
+  (_500_3000_, Icebreaker) 0.85, 0.15, 0.00;
+  (_3000_10000_, Icebreaker) 0.9, 0.1, 0.0;
+  (__10000, Icebreaker) 0.95, 0.05, 0.00;
+  (_0_500_, Others) 0.64, 0.35, 0.01;
+  (_500_3000_, Others) 0.7062857, 0.2857143, 0.0080000;
+  (_3000_10000_, Others) 0.744, 0.250, 0.006;
+  (__10000, Others) 0.796, 0.200, 0.004;
+}
+probability ( C_ShipIceCollision | GrossTonnage, ShipType ) {
+  (_0_500_, Oil_Tanker) 0.835, 0.150, 0.015;
+  (_500_3000_, Oil_Tanker) 0.857, 0.130, 0.013;
+  (_3000_10000_, Oil_Tanker) 0.889, 0.100, 0.011;
+  (__10000, Oil_Tanker) 0.91, 0.08, 0.01;
+  (_0_500_, General_Cargo_Ship) 0.82, 0.15, 0.03;
+  (_500_3000_, General_Cargo_Ship) 0.845, 0.130, 0.025;
+  (_3000_10000_, General_Cargo_Ship) 0.87, 0.11, 0.02;
+  (__10000, General_Cargo_Ship) 0.905, 0.080, 0.015;
+  (_0_500_, Passenger_Ship) 0.966, 0.020, 0.014;
+  (_500_3000_, Passenger_Ship) 0.973, 0.015, 0.012;
+  (_3000_10000_, Passenger_Ship) 0.977, 0.013, 0.010;
+  (__10000, Passenger_Ship) 0.982, 0.010, 0.008;
+  (_0_500_, Icebreaker) 0.98, 0.02, 0.00;
+  (_500_3000_, Icebreaker) 0.985, 0.015, 0.000;
+  (_3000_10000_, Icebreaker) 0.99, 0.01, 0.00;
+  (__10000, Icebreaker) 0.995, 0.005, 0.000;
+  (_0_500_, Others) 0.886, 0.100, 0.014;
+  (_500_3000_, Others) 0.917, 0.070, 0.013;
+  (_3000_10000_, Others) 0.948, 0.040, 0.012;
+  (__10000, Others) 0.979, 0.010, 0.011;
+}
+probability ( ChannelDepth ) {
+  table 0.02837, 0.97163;
+}
+probability ( ChartUpdating ) {
+  table 0.82, 0.18;
+}
+probability ( CommunicationEquipmentFailure ) {
+  table 0.99934, 0.00066;
+}
+probability ( DriftIce | SeaCurrent, StrongWind ) {
+  (No, No) 0.99738, 0.00262;
+  (Yes, No) 0.8, 0.2;
+  (No, Yes) 0.9, 0.1;
+  (Yes, Yes) 0.6, 0.4;
+}
+probability ( EnvironmentalObstacles ) {
+  table 0.96, 0.04;
+}
+probability ( Fatigue ) {
+  table 0.96, 0.04;
+}
+probability ( Fog ) {
+  table 0.96, 0.04;
+}
+probability ( GrossTonnage ) {
+  table 0.17, 0.41, 0.23, 0.19;
+}
+probability ( IceConcentration | SeaTemperature ) {
+  (_0) 0.87, 0.09, 0.04;
+  (_0_1) 1.0, 0.0, 0.0;
+}
+probability ( IceCondition | DriftIce, IceConcentration, IceStrength ) {
+  (No, _3_10, Low) 0.05, 0.95;
+  (Yes, _3_10, Low) 0.15, 0.85;
+  (No, 4_10_6_10, Low) 0.3, 0.7;
+  (Yes, 4_10_6_10, Low) 0.4, 0.6;
+  (No, _7_10, Low) 0.7, 0.3;
+  (Yes, _7_10, Low) 0.85, 0.15;
+  (No, _3_10, Medium) 0.1, 0.9;
+  (Yes, _3_10, Medium) 0.25, 0.75;
+  (No, 4_10_6_10, Medium) 0.5, 0.5;
+  (Yes, 4_10_6_10, Medium) 0.6, 0.4;
+  (No, _7_10, Medium) 0.8, 0.2;
+  (Yes, _7_10, Medium) 0.9, 0.1;
+  (No, _3_10, High) 0.3, 0.7;
+  (Yes, _3_10, High) 0.4, 0.6;
+  (No, 4_10_6_10, High) 0.7, 0.3;
+  (Yes, 4_10_6_10, High) 0.75, 0.25;
+  (No, _7_10, High) 0.95, 0.05;
+  (Yes, _7_10, High) 1.0, 0.0;
+}
+probability ( IceStrength | IceThickness, IceType ) {
+  (__0_5m, Thin_Ice) 0.9, 0.1, 0.0;
+  (__0_5_m, Thin_Ice) 0.6, 0.3, 0.1;
+  (__0_5m, Medium_Ice) 0.6, 0.3, 0.1;
+  (__0_5_m, Medium_Ice) 0.1, 0.3, 0.6;
+  (__0_5m, Old_Ice) 0.1, 0.3, 0.6;
+  (__0_5_m, Old_Ice) 0.0, 0.1, 0.9;
+}
+probability ( IceThickness | SeaTemperature ) {
+  (_0) 0.74, 0.26;
+  (_0_1) 0.95, 0.05;
+}
+probability ( IceType ) {
+  table 0.1, 0.8, 0.1;
+}
+probability ( InadequateKnowledge ) {
+  table 0.86, 0.14;
+}
+probability ( JudgmentFailure | InadequateKnowledge, LackCommunication, LackSituationalAwareness ) {
+  (No, No, No) 0.875, 0.125;
+  (Yes, No, No) 0.6, 0.4;
+  (No, Yes, No) 0.8, 0.2;
+  (Yes, Yes, No) 0.1, 0.9;
+  (No, No, Yes) 0.75, 0.25;
+  (Yes, No, Yes) 0.2, 0.8;
+  (No, Yes, Yes) 0.67, 0.33;
+  (Yes, Yes, Yes) 0.05, 0.95;
+}
+probability ( LackCommunication | CommunicationEquipmentFailure ) {
+  (No) 0.82, 0.18;
+  (Yes) 0.1, 0.9;
+}
+probability ( LackSafetyMeasures ) {
+  table 0.75, 0.25;
+}
+probability ( LackSituationalAwareness | Fatigue ) {
+  (No) 0.7, 0.3;
+  (Yes) 0.1, 0.9;
+}
+probability ( MechanicalEquipmentFailure | AidNavigationFailure, CommunicationEquipmentFailure, PowerFailure ) {
+  (No, No, No) 1.0, 0.0;
+  (Yes, No, No) 0.1, 0.9;
+  (No, Yes, No) 0.1, 0.9;
+  (Yes, Yes, No) 0.05, 0.95;
+  (No, No, Yes) 0.1, 0.9;
+  (Yes, No, Yes) 0.05, 0.95;
+  (No, Yes, Yes) 0.05, 0.95;
+  (Yes, Yes, Yes) 0.0, 1.0;
+}
+probability ( NavigatorFailure ) {
+  table 0.99995604, 0.00004396;
+}
+probability ( Negligence ) {
+  table 0.96, 0.04;
+}
+probability ( P_BesettingInIce | IceCondition, UnsafeAct, UnsafeCondition, WeatherCondition ) {
+  (Poor, No, No, Poor) 0.95, 0.05;
+  (Good, No, No, Poor) 0.999, 0.001;
+  (Poor, Yes, No, Poor) 0.9, 0.1;
+  (Good, Yes, No, Poor) 0.99, 0.01;
+  (Poor, No, Yes, Poor) 0.85, 0.15;
+  (Good, No, Yes, Poor) 0.96, 0.04;
+  (Poor, Yes, Yes, Poor) 0.8, 0.2;
+  (Good, Yes, Yes, Poor) 0.95, 0.05;
+  (Poor, No, No, Good) 0.97, 0.03;
+  (Good, No, No, Good) 1.0, 0.0;
+  (Poor, Yes, No, Good) 0.95, 0.05;
+  (Good, Yes, No, Good) 0.995, 0.005;
+  (Poor, No, Yes, Good) 0.9, 0.1;
+  (Good, No, Yes, Good) 0.98, 0.02;
+  (Poor, Yes, Yes, Good) 0.82, 0.18;
+  (Good, Yes, Yes, Good) 0.97, 0.03;
+}
+probability ( P_Collision | IceCondition, UnsafeAct, UnsafeCondition, WeatherCondition ) {
+  (Poor, No, No, Poor) 0.975, 0.025;
+  (Good, No, No, Poor) 0.99, 0.01;
+  (Poor, Yes, No, Poor) 0.963, 0.037;
+  (Good, Yes, No, Poor) 0.973, 0.027;
+  (Poor, No, Yes, Poor) 0.965, 0.035;
+  (Good, No, Yes, Poor) 0.975, 0.025;
+  (Poor, Yes, Yes, Poor) 0.95027624, 0.04972376;
+  (Good, Yes, Yes, Poor) 0.96, 0.04;
+  (Poor, No, No, Good) 0.986, 0.014;
+  (Good, No, No, Good) 1.0, 0.0;
+  (Poor, Yes, No, Good) 0.973, 0.027;
+  (Good, Yes, No, Good) 0.983, 0.017;
+  (Poor, No, Yes, Good) 0.975, 0.025;
+  (Good, No, Yes, Good) 0.985, 0.015;
+  (Poor, Yes, Yes, Good) 0.96, 0.04;
+  (Good, Yes, Yes, Good) 0.97, 0.03;
+}
+probability ( P_Grounding | UnsafeAct, UnsafeCondition, WaterwayCondition, WeatherCondition ) {
+  (No, No, Poor, Poor) 0.85, 0.15;
+  (Yes, No, Poor, Poor) 0.81, 0.19;
+  (No, Yes, Poor, Poor) 0.82, 0.18;
+  (Yes, Yes, Poor, Poor) 0.7734807, 0.2265193;
+  (No, No, Good, Poor) 0.88, 0.12;
+  (Yes, No, Good, Poor) 0.845, 0.155;
+  (No, Yes, Good, Poor) 0.855, 0.145;
+  (Yes, Yes, Good, Poor) 0.84, 0.16;
+  (No, No, Poor, Good) 0.91, 0.09;
+  (Yes, No, Poor, Good) 0.85, 0.15;
+  (No, Yes, Poor, Good) 0.86, 0.14;
+  (Yes, Yes, Poor, Good) 0.83, 0.17;
+  (No, No, Good, Good) 1.0, 0.0;
+  (Yes, No, Good, Good) 0.885, 0.115;
+  (No, Yes, Good, Good) 0.895, 0.105;
+  (Yes, Yes, Good, Good) 0.9, 0.1;
+}
+probability ( P_ShipIceCollision | IceCondition, UnsafeAct, UnsafeCondition, WeatherCondition ) {
+  (Poor, No, No, Poor) 0.95, 0.05;
+  (Good, No, No, Poor) 0.999, 0.001;
+  (Poor, Yes, No, Poor) 0.94, 0.06;
+  (Good, Yes, No, Poor) 0.996, 0.004;
+  (Poor, No, Yes, Poor) 0.92, 0.08;
+  (Good, No, Yes, Poor) 0.992, 0.008;
+  (Poor, Yes, Yes, Poor) 0.9, 0.1;
+  (Good, Yes, Yes, Poor) 0.99, 0.01;
+  (Poor, No, No, Good) 0.98, 0.02;
+  (Good, No, No, Good) 1.0, 0.0;
+  (Poor, Yes, No, Good) 0.94, 0.06;
+  (Good, Yes, No, Good) 0.998, 0.002;
+  (Poor, No, Yes, Good) 0.93, 0.07;
+  (Good, No, Yes, Good) 0.995, 0.005;
+  (Poor, Yes, Yes, Good) 0.91, 0.09;
+  (Good, Yes, Yes, Good) 0.994, 0.006;
+}
+probability ( PowerFailure | PropellerFailure, SteeringFailure ) {
+  (No, No) 1.0, 0.0;
+  (Yes, No) 0.1, 0.9;
+  (No, Yes) 0.1, 0.9;
+  (Yes, Yes) 0.0, 1.0;
+}
+probability ( PropellerFailure ) {
+  table 0.9997128, 0.0002872;
+}
+probability ( RadarFailure ) {
+  table 0.9996632, 0.0003368;
+}
+probability ( Rain ) {
+  table 0.93, 0.07;
+}
+probability ( SeaCurrent ) {
+  table 0.96, 0.04;
+}
+probability ( SeaTemperature ) {
+  table 0.42, 0.58;
+}
+probability ( ShipType ) {
+  table 0.06, 0.28, 0.38, 0.03, 0.25;
+}
+probability ( SteeringFailure ) {
+  table 0.99986, 0.00014;
+}
+probability ( StrongWind ) {
+  table 0.79, 0.21;
+}
+probability ( UnsafeAct | ChartUpdating, JudgmentFailure, LackSafetyMeasures, Negligence ) {
+  (No, No, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 0.3, 0.7;
+  (No, Yes, No, No) 0.3, 0.7;
+  (Yes, Yes, No, No) 0.2, 0.8;
+  (No, No, Yes, No) 0.3, 0.7;
+  (Yes, No, Yes, No) 0.2, 0.8;
+  (No, Yes, Yes, No) 0.2, 0.8;
+  (Yes, Yes, Yes, No) 0.1, 0.9;
+  (No, No, No, Yes) 0.3, 0.7;
+  (Yes, No, No, Yes) 0.2, 0.8;
+  (No, Yes, No, Yes) 0.2, 0.8;
+  (Yes, Yes, No, Yes) 0.1, 0.9;
+  (No, No, Yes, Yes) 0.2, 0.8;
+  (Yes, No, Yes, Yes) 0.1, 0.9;
+  (No, Yes, Yes, Yes) 0.01, 0.99;
+  (Yes, Yes, Yes, Yes) 0.0, 1.0;
+}
+probability ( UnsafeCondition | MechanicalEquipmentFailure, UnsafeSpeed ) {
+  (No, No) 0.9, 0.1;
+  (Yes, No) 0.2, 0.8;
+  (No, Yes) 0.2, 0.8;
+  (Yes, Yes) 0.1, 0.9;
+}
+probability ( UnsafeSpeed | PowerFailure ) {
+  (No) 0.6, 0.4;
+  (Yes) 0.1, 0.9;
+}
+probability ( Visibility | Fog, Rain ) {
+  (No, No) 0.08, 0.92;
+  (Yes, No) 0.8, 0.2;
+  (No, Yes) 0.7, 0.3;
+  (Yes, Yes) 0.95, 0.05;
+}
+probability ( WaterwayCondition | ChannelDepth, EnvironmentalObstacles ) {
+  (Inadequate, No) 0.9, 0.1;
+  (Adequate, No) 0.0, 1.0;
+  (Inadequate, Yes) 1.0, 0.0;
+  (Adequate, Yes) 0.7, 0.3;
+}
+probability ( WeatherCondition | AirTemperature, StrongWind, Visibility ) {
+  (_0, No, Poor) 0.75, 0.25;
+  (_0_1, No, Poor) 0.6, 0.4;
+  (_0, Yes, Poor) 0.8, 0.2;
+  (_0_1, Yes, Poor) 0.7, 0.3;
+  (_0, No, Good) 0.2, 0.8;
+  (_0_1, No, Good) 0.05, 0.95;
+  (_0, Yes, Good) 0.15, 0.85;
+  (_0_1, Yes, Good) 0.1, 0.9;
+}

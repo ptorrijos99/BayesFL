@@ -1,0 +1,210 @@
+network unknown {
+}
+variable Body {
+  type discrete [ 2 ] { f, t };
+}
+variable ComplicityMurder {
+  type discrete [ 2 ] { f, t };
+}
+variable DebtFightFK {
+  type discrete [ 2 ] { f, t };
+}
+variable FBarn {
+  type discrete [ 2 ] { f, t };
+}
+variable FightBarn {
+  type discrete [ 2 ] { f, t };
+}
+variable FStenGun {
+  type discrete [ 2 ] { f, t };
+}
+variable Help {
+  type discrete [ 2 ] { f, t };
+}
+variable Intent {
+  type discrete [ 2 ] { f, t };
+}
+variable KBarn {
+  type discrete [ 2 ] { f, t };
+}
+variable Killed {
+  type discrete [ 2 ] { f, t };
+}
+variable KKilled {
+  type discrete [ 2 ] { f, t };
+}
+variable Murder {
+  type discrete [ 2 ] { f, t };
+}
+variable Murdered {
+  type discrete [ 2 ] { f, t };
+}
+variable PlanBarnF {
+  type discrete [ 2 ] { f, t };
+}
+variable Premed {
+  type discrete [ 2 ] { f, t };
+}
+variable Prov {
+  type discrete [ 2 ] { f, t };
+}
+variable SBarn {
+  type discrete [ 2 ] { f, t };
+}
+variable ShootStenGun {
+  type discrete [ 3 ] { none, F, Not_F };
+}
+variable TMathus {
+  type discrete [ 2 ] { f, t };
+}
+variable TSF1 {
+  type discrete [ 2 ] { f, t };
+}
+variable TSF2 {
+  type discrete [ 2 ] { f, t };
+}
+variable TSLocation {
+  type discrete [ 2 ] { f, t };
+}
+variable TStenGun {
+  type discrete [ 2 ] { f, t };
+}
+probability ( Body | KKilled ) {
+  (f) 1.0, 0.0;
+  (t) 0.0, 1.0;
+}
+probability ( ComplicityMurder | Help, Murdered, Prov ) {
+  (f, f, f) 1.0, 0.0;
+  (t, f, f) 1.0, 0.0;
+  (f, t, f) 1.0, 0.0;
+  (t, t, f) 0.0, 1.0;
+  (f, f, t) 1.0, 0.0;
+  (t, f, t) 1.0, 0.0;
+  (f, t, t) 0.0, 1.0;
+  (t, t, t) 0.0, 1.0;
+}
+probability ( DebtFightFK ) {
+  table 0.5, 0.5;
+}
+probability ( FBarn | PlanBarnF ) {
+  (f) 1.0, 0.0;
+  (t) 0.5, 0.5;
+}
+probability ( FightBarn | DebtFightFK, FBarn, KBarn ) {
+  (f, f, f) 1.0, 0.0;
+  (t, f, f) 1.0, 0.0;
+  (f, t, f) 1.0, 0.0;
+  (t, t, f) 1.0, 0.0;
+  (f, f, t) 1.0, 0.0;
+  (t, f, t) 1.0, 0.0;
+  (f, t, t) 1.0, 0.0;
+  (t, t, t) 0.1, 0.9;
+}
+probability ( FStenGun ) {
+  table 0.5, 0.5;
+}
+probability ( Help ) {
+  table 0.999, 0.001;
+}
+probability ( Intent | ShootStenGun ) {
+  (none) 1.0, 0.0;
+  (F) 0.0, 1.0;
+  (Not_F) 1.0, 0.0;
+}
+probability ( KBarn | PlanBarnF ) {
+  (f) 1.0, 0.0;
+  (t) 0.1, 0.9;
+}
+probability ( Killed | KKilled, ShootStenGun ) {
+  (f, none) 1.0, 0.0;
+  (t, none) 1.0, 0.0;
+  (f, F) 1.0, 0.0;
+  (t, F) 0.0, 1.0;
+  (f, Not_F) 1.0, 0.0;
+  (t, Not_F) 1.0, 0.0;
+}
+probability ( KKilled | ShootStenGun ) {
+  (none) 1.0, 0.0;
+  (F) 0.0, 1.0;
+  (Not_F) 0.0, 1.0;
+}
+probability ( Murder | Intent, Killed, Premed ) {
+  (f, f, f) 1.0, 0.0;
+  (t, f, f) 1.0, 0.0;
+  (f, t, f) 1.0, 0.0;
+  (t, t, f) 1.0, 0.0;
+  (f, f, t) 1.0, 0.0;
+  (t, f, t) 1.0, 0.0;
+  (f, t, t) 1.0, 0.0;
+  (t, t, t) 0.0, 1.0;
+}
+probability ( Murdered | KKilled, ShootStenGun ) {
+  (f, none) 1.0, 0.0;
+  (t, none) 1.0, 0.0;
+  (f, F) 1.0, 0.0;
+  (t, F) 1.0, 0.0;
+  (f, Not_F) 1.0, 0.0;
+  (t, Not_F) 0.0, 1.0;
+}
+probability ( PlanBarnF | DebtFightFK ) {
+  (f) 0.9999, 0.0001;
+  (t) 0.3333333, 0.6666667;
+}
+probability ( Premed | FightBarn, PlanBarnF ) {
+  (f, f) 1.0, 0.0;
+  (t, f) 1.0, 0.0;
+  (f, t) 1.0, 0.0;
+  (t, t) 0.0, 1.0;
+}
+probability ( Prov | PlanBarnF ) {
+  (f) 1.0, 0.0;
+  (t) 0.0, 1.0;
+}
+probability ( SBarn | PlanBarnF ) {
+  (f) 1.0, 0.0;
+  (t) 0.1, 0.9;
+}
+probability ( ShootStenGun | FBarn, FightBarn, FStenGun, KBarn ) {
+  (f, f, f, f) 1.0, 0.0, 0.0;
+  (t, f, f, f) 1.0, 0.0, 0.0;
+  (f, t, f, f) 1.0, 0.0, 0.0;
+  (t, t, f, f) 1.0, 0.0, 0.0;
+  (f, f, t, f) 1.0, 0.0, 0.0;
+  (t, f, t, f) 1.0, 0.0, 0.0;
+  (f, t, t, f) 1.0, 0.0, 0.0;
+  (t, t, t, f) 1.0, 0.0, 0.0;
+  (f, f, f, t) 0.5, 0.0, 0.5;
+  (t, f, f, t) 0.5, 0.0, 0.5;
+  (f, t, f, t) 0.5, 0.0, 0.5;
+  (t, t, f, t) 0.9995, 0.0001, 0.0004;
+  (f, f, t, t) 0.5, 0.0, 0.5;
+  (t, f, t, t) 0.9950199244, 0.0039840597, 0.0009960159;
+  (f, t, t, t) 0.5, 0.0, 0.5;
+  (t, t, t, t) 0.00000000, 0.90909091, 0.09090909;
+}
+probability ( TMathus | DebtFightFK, PlanBarnF ) {
+  (f, f) 1.0, 0.0;
+  (t, f) 1.0, 0.0;
+  (f, t) 1.0, 0.0;
+  (t, t) 0.0, 1.0;
+}
+probability ( TSF1 | FBarn ) {
+  (f) 0.999, 0.001;
+  (t) 0.1, 0.9;
+}
+probability ( TSF2 | FBarn, TSF1 ) {
+  (f, f) 0.5, 0.5;
+  (t, f) 0.9, 0.1;
+  (f, t) 0.5, 0.5;
+  (t, t) 0.999, 0.001;
+}
+probability ( TSLocation | KBarn, SBarn ) {
+  (f, f) 1.0, 0.0;
+  (t, f) 1.0, 0.0;
+  (f, t) 1.0, 0.0;
+  (t, t) 0.0, 1.0;
+}
+probability ( TStenGun | FStenGun ) {
+  (f) 0.5, 0.5;
+  (t) 0.2, 0.8;
+}

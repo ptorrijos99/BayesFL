@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BW</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DAM</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DE</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GRO</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ICC</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IER</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ILC</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>INE</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IO</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IPS</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IRP</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IRR</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IS</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ISL</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ISS</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IWP</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LID</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LNE</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LSM</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LT</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MIJ</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OD</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PC</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PEC</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PF</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PFC</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PSA</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PSM</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PSQ</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SMS</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCD</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UDL</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UPA</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UR</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>US</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WD</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BW</FOR>
+      <TABLE>0.7257525 0.2742475 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DAM</FOR>
+      <GIVEN>BW</GIVEN>
+      <GIVEN>GRO</GIVEN>
+      <GIVEN>LNE</GIVEN>
+      <GIVEN>MIJ</GIVEN>
+      <GIVEN>US</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.6140351 0.3859649 0.7368421 0.2631579 0.5833333 0.4166667 0.6666667 0.3333333 0.7 0.3 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.6451613 0.3548387 1.0 0.0 0.25 0.75 1.0 0.0 0.4285714 0.5714286 0.5 0.5 0.5 0.5 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DE</FOR>
+      <GIVEN>LNE</GIVEN>
+      <TABLE>0.92920354 0.07079646 0.94520548 0.05479452 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GRO</FOR>
+      <GIVEN>PFC</GIVEN>
+      <TABLE>0.9375 0.0625 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ICC</FOR>
+      <TABLE>0.8561873 0.1438127 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IER</FOR>
+      <GIVEN>PEC</GIVEN>
+      <TABLE>0.890411 0.109589 0.8571429 0.1428571 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ILC</FOR>
+      <GIVEN>LSM</GIVEN>
+      <TABLE>0.88 0.12 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>INE</FOR>
+      <GIVEN>IPS</GIVEN>
+      <TABLE>0.94880546 0.05119454 0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IO</FOR>
+      <GIVEN>DE</GIVEN>
+      <TABLE>0.8213058 0.1786942 0.875 0.125 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IPS</FOR>
+      <GIVEN>IRP</GIVEN>
+      <GIVEN>IRR</GIVEN>
+      <GIVEN>IS</GIVEN>
+      <GIVEN>UCD</GIVEN>
+      <GIVEN>UR</GIVEN>
+      <TABLE>0.98757764 0.01242236 1.0 0.0 1.0 0.0 0.5 0.5 1.0 0.0 1.0 0.0 0.5 0.5 0.5 0.5 1.0 0.0 1.0 0.0 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.9375 0.0625 1.0 0.0 0.6666667 0.3333333 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IRP</FOR>
+      <GIVEN>SMS</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IRR</FOR>
+      <GIVEN>LT</GIVEN>
+      <GIVEN>UDL</GIVEN>
+      <TABLE>0.7666667 0.2333333 1.0 0.0 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IS</FOR>
+      <TABLE>0.8929766 0.1070234 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ISL</FOR>
+      <GIVEN>PSQ</GIVEN>
+      <TABLE>0.7894737 0.2105263 0.7777778 0.2222222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ISS</FOR>
+      <GIVEN>LID</GIVEN>
+      <TABLE>0.75 0.25 0.875 0.125 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IWP</FOR>
+      <GIVEN>UPA</GIVEN>
+      <TABLE>0.8823529 0.1176471 0.3636364 0.6363636 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LID</FOR>
+      <GIVEN>LSM</GIVEN>
+      <TABLE>0.44 0.56 0.333 0.667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LNE</FOR>
+      <GIVEN>IRR</GIVEN>
+      <TABLE>0.97491039 0.02508961 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LSM</FOR>
+      <TABLE>0.892857 0.107143 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LT</FOR>
+      <TABLE>0.819398 0.180602 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MIJ</FOR>
+      <GIVEN>ICC</GIVEN>
+      <TABLE>0.921875 0.078125 0.97674419 0.02325581 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OD</FOR>
+      <GIVEN>ILC</GIVEN>
+      <GIVEN>IWP</GIVEN>
+      <GIVEN>LID</GIVEN>
+      <TABLE>0.625 0.375 0.4285714 0.5714286 1.0 0.0 0.2 0.8 1.0 0.0 0.0 1.0 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PC</FOR>
+      <TABLE>0.892857 0.107143 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PEC</FOR>
+      <TABLE>0.97658863 0.02341137 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PF</FOR>
+      <TABLE>0.8928571 0.1071429 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PFC</FOR>
+      <GIVEN>PSA</GIVEN>
+      <TABLE>0.8308271 0.1691729 0.6060606 0.3939394 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PSA</FOR>
+      <GIVEN>DE</GIVEN>
+      <GIVEN>INE</GIVEN>
+      <GIVEN>IO</GIVEN>
+      <GIVEN>LNE</GIVEN>
+      <GIVEN>MIJ</GIVEN>
+      <GIVEN>UCD</GIVEN>
+      <TABLE>0.8743456 0.1256544 1.0 0.0 0.8666667 0.1333333 0.5 0.5 1.0 0.0 1.0 0.0 0.5 0.5 0.5 0.5 0.93333333 0.06666667 0.5 0.5 1.0 0.0 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.8461538 0.1538462 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 0.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PSM</FOR>
+      <GIVEN>LT</GIVEN>
+      <TABLE>0.8979592 0.1020408 0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PSQ</FOR>
+      <TABLE>0.6785714 0.3214286 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SMS</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCD</FOR>
+      <GIVEN>OD</GIVEN>
+      <TABLE>0.95454545 0.04545454 0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UDL</FOR>
+      <TABLE>0.96989967 0.03010033 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UPA</FOR>
+      <GIVEN>LID</GIVEN>
+      <TABLE>0.8333333 0.1666667 0.4375 0.5625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UR</FOR>
+      <GIVEN>ISL</GIVEN>
+      <GIVEN>ISS</GIVEN>
+      <GIVEN>OD</GIVEN>
+      <GIVEN>PC</GIVEN>
+      <TABLE>0.75 0.25 0.5 0.5 0.90909091 0.09090909 1.0 0.0 1.0 0.0 0.5 0.5 0.5 0.5 1.0 0.0 0.6666667 0.3333333 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>US</FOR>
+      <GIVEN>PSM</GIVEN>
+      <GIVEN>WD</GIVEN>
+      <TABLE>0.95982143 0.04017857 0.8536585 0.1463415 0.93103448 0.06896552 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WD</FOR>
+      <GIVEN>PF</GIVEN>
+      <TABLE>0.8556338 0.1443662 0.6666667 0.3333333 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

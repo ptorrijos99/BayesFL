@@ -1,0 +1,159 @@
+network unknown {
+}
+variable P1 {
+  type discrete [ 2 ] { F, T };
+}
+variable P10 {
+  type discrete [ 2 ] { F, T };
+}
+variable P11 {
+  type discrete [ 2 ] { F, T };
+}
+variable P12 {
+  type discrete [ 2 ] { F, T };
+}
+variable P13 {
+  type discrete [ 2 ] { F, T };
+}
+variable P14 {
+  type discrete [ 2 ] { F, T };
+}
+variable P15 {
+  type discrete [ 2 ] { F, T };
+}
+variable P16 {
+  type discrete [ 2 ] { F, T };
+}
+variable P17 {
+  type discrete [ 2 ] { F, T };
+}
+variable P18 {
+  type discrete [ 2 ] { F, T };
+}
+variable P19 {
+  type discrete [ 2 ] { F, T };
+}
+variable P2 {
+  type discrete [ 2 ] { F, T };
+}
+variable P20 {
+  type discrete [ 2 ] { F, T };
+}
+variable P21 {
+  type discrete [ 2 ] { F, T };
+}
+variable P3 {
+  type discrete [ 2 ] { F, T };
+}
+variable P4 {
+  type discrete [ 2 ] { F, T };
+}
+variable P5 {
+  type discrete [ 2 ] { F, T };
+}
+variable P6 {
+  type discrete [ 2 ] { F, T };
+}
+variable P7 {
+  type discrete [ 2 ] { F, T };
+}
+variable P8 {
+  type discrete [ 2 ] { F, T };
+}
+variable P9 {
+  type discrete [ 2 ] { F, T };
+}
+probability ( P1 ) {
+  table 0.3, 0.7;
+}
+probability ( P10 ) {
+  table 0.8, 0.2;
+}
+probability ( P11 ) {
+  table 0.9, 0.1;
+}
+probability ( P12 | P10, P11 ) {
+  (F, F) 0.95, 0.05;
+  (T, F) 0.6, 0.4;
+  (F, T) 0.4, 0.6;
+  (T, T) 0.15, 0.85;
+}
+probability ( P13 ) {
+  table 0.5, 0.5;
+}
+probability ( P14 | P12, P13 ) {
+  (F, F) 0.9, 0.1;
+  (T, F) 0.25, 0.75;
+  (F, T) 0.2, 0.8;
+  (T, T) 0.02, 0.98;
+}
+probability ( P15 ) {
+  table 0.7, 0.3;
+}
+probability ( P16 ) {
+  table 0.7, 0.3;
+}
+probability ( P17 | P15, P16 ) {
+  (F, F) 0.9, 0.1;
+  (T, F) 0.2, 0.8;
+  (F, T) 0.4, 0.6;
+  (T, T) 0.05, 0.95;
+}
+probability ( P18 | P17 ) {
+  (F) 0.7, 0.3;
+  (T) 0.05, 0.95;
+}
+probability ( P19 | P21 ) {
+  (F) 0.8, 0.2;
+  (T) 0.05, 0.95;
+}
+probability ( P2 | P1 ) {
+  (F) 0.85, 0.15;
+  (T) 0.05, 0.95;
+}
+probability ( P20 | P19 ) {
+  (F) 0.2, 0.8;
+  (T) 0.05, 0.95;
+}
+probability ( P21 ) {
+  table 0.8, 0.2;
+}
+probability ( P3 | P1 ) {
+  (F) 0.95, 0.05;
+  (T) 0.15, 0.85;
+}
+probability ( P4 | P2, P3 ) {
+  (F, F) 1.0, 0.0;
+  (T, F) 0.5, 0.5;
+  (F, T) 0.95, 0.05;
+  (T, T) 0.1, 0.9;
+}
+probability ( P5 | P1, P4 ) {
+  (F, F) 1.0, 0.0;
+  (T, F) 0.85, 0.15;
+  (F, T) 0.9, 0.1;
+  (T, T) 0.25, 0.75;
+}
+probability ( P6 | P1, P4 ) {
+  (F, F) 1.0, 0.0;
+  (T, F) 0.75, 0.25;
+  (F, T) 0.9, 0.1;
+  (T, T) 0.3, 0.7;
+}
+probability ( P7 | P5, P6, P9 ) {
+  (F, F, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, T, F) 0.5, 0.5;
+  (F, F, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, T, T) 0.4, 0.6;
+}
+probability ( P8 ) {
+  table 0.1, 0.9;
+}
+probability ( P9 | P8 ) {
+  (F) 1.0, 0.0;
+  (T) 0.2, 0.8;
+}

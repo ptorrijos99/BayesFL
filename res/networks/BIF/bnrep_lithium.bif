@@ -1,0 +1,426 @@
+network unknown {
+}
+variable BindingFailure {
+  type discrete [ 2 ] { True, False };
+}
+variable ExternalShortCircuit {
+  type discrete [ 2 ] { True, False };
+}
+variable HighTemperature {
+  type discrete [ 2 ] { True, False };
+}
+variable Impact {
+  type discrete [ 2 ] { True, False };
+}
+variable ImproperOperation {
+  type discrete [ 2 ] { True, False };
+}
+variable InsufficientFirefightingCapacity {
+  type discrete [ 2 ] { True, False };
+}
+variable InsufficientFireMonitoring {
+  type discrete [ 2 ] { True, False };
+}
+variable InternalShortCircuit {
+  type discrete [ 2 ] { True, False };
+}
+variable LBESSCatchFire {
+  type discrete [ 2 ] { True, False };
+}
+variable LBESSFireAccident {
+  type discrete [ 2 ] { True, False };
+}
+variable PoorShipStability {
+  type discrete [ 2 ] { True, False };
+}
+variable ShortCircuit {
+  type discrete [ 2 ] { True, False };
+}
+variable UnableToPutOutFire {
+  type discrete [ 2 ] { True, False };
+}
+variable ViolentRolling {
+  type discrete [ 2 ] { True, False };
+}
+variable X1 {
+  type discrete [ 2 ] { True, False };
+}
+variable X10 {
+  type discrete [ 2 ] { True, False };
+}
+variable X11 {
+  type discrete [ 2 ] { True, False };
+}
+variable X12 {
+  type discrete [ 2 ] { True, False };
+}
+variable X13 {
+  type discrete [ 2 ] { True, False };
+}
+variable X14 {
+  type discrete [ 2 ] { True, False };
+}
+variable X15 {
+  type discrete [ 2 ] { True, False };
+}
+variable X16 {
+  type discrete [ 2 ] { True, False };
+}
+variable X17 {
+  type discrete [ 2 ] { True, False };
+}
+variable X18 {
+  type discrete [ 2 ] { True, False };
+}
+variable X19 {
+  type discrete [ 2 ] { True, False };
+}
+variable X2 {
+  type discrete [ 2 ] { True, False };
+}
+variable X20 {
+  type discrete [ 2 ] { True, False };
+}
+variable X21 {
+  type discrete [ 2 ] { True, False };
+}
+variable X22 {
+  type discrete [ 2 ] { True, False };
+}
+variable X23 {
+  type discrete [ 2 ] { True, False };
+}
+variable X24 {
+  type discrete [ 2 ] { True, False };
+}
+variable X25 {
+  type discrete [ 2 ] { True, False };
+}
+variable X26 {
+  type discrete [ 2 ] { True, False };
+}
+variable X27 {
+  type discrete [ 2 ] { True, False };
+}
+variable X28 {
+  type discrete [ 2 ] { True, False };
+}
+variable X29 {
+  type discrete [ 2 ] { True, False };
+}
+variable X3 {
+  type discrete [ 2 ] { True, False };
+}
+variable X30 {
+  type discrete [ 2 ] { True, False };
+}
+variable X31 {
+  type discrete [ 2 ] { True, False };
+}
+variable X4 {
+  type discrete [ 2 ] { True, False };
+}
+variable X5 {
+  type discrete [ 2 ] { True, False };
+}
+variable X6 {
+  type discrete [ 2 ] { True, False };
+}
+variable X7 {
+  type discrete [ 2 ] { True, False };
+}
+variable X8 {
+  type discrete [ 2 ] { True, False };
+}
+variable X9 {
+  type discrete [ 2 ] { True, False };
+}
+probability ( BindingFailure | X5, X6, X7 ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 1.0, 0.0;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 1.0, 0.0;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 1.0, 0.0;
+  (True, False, False) 1.0, 0.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( ExternalShortCircuit | X14, X15, X16, X17 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( HighTemperature | X10, X11, X12, X13 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( Impact | BindingFailure, ViolentRolling, X8, X9 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( ImproperOperation | PoorShipStability, X4 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( InsufficientFirefightingCapacity | X27, X28, X29, X30, X31 ) {
+  (True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False) 0.0, 1.0;
+}
+probability ( InsufficientFireMonitoring | X22, X23, X24, X25, X26 ) {
+  (True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False) 0.0, 1.0;
+}
+probability ( InternalShortCircuit | X18, X19, X20, X21 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( LBESSCatchFire | HighTemperature, Impact, ShortCircuit ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 1.0, 0.0;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 1.0, 0.0;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 1.0, 0.0;
+  (True, False, False) 1.0, 0.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( LBESSFireAccident | LBESSCatchFire, UnableToPutOutFire ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( PoorShipStability | X2, X3 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( ShortCircuit | ExternalShortCircuit, InternalShortCircuit ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( UnableToPutOutFire | InsufficientFirefightingCapacity, InsufficientFireMonitoring ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( ViolentRolling | ImproperOperation, X1 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.0008, 0.9992;
+}
+probability ( X10 ) {
+  table 0.0134, 0.9866;
+}
+probability ( X11 ) {
+  table 0.0094, 0.9906;
+}
+probability ( X12 ) {
+  table 0.007, 0.993;
+}
+probability ( X13 ) {
+  table 0.0256, 0.9744;
+}
+probability ( X14 ) {
+  table 0.0005, 0.9995;
+}
+probability ( X15 ) {
+  table 0.0, 1.0;
+}
+probability ( X16 ) {
+  table 0.047, 0.953;
+}
+probability ( X17 ) {
+  table 0.0009, 0.9991;
+}
+probability ( X18 ) {
+  table 0.0, 1.0;
+}
+probability ( X19 ) {
+  table 0.0001, 0.9999;
+}
+probability ( X2 ) {
+  table 0.0094, 0.9906;
+}
+probability ( X20 ) {
+  table 0.0001, 0.9999;
+}
+probability ( X21 ) {
+  table 0.0005, 0.9995;
+}
+probability ( X22 ) {
+  table 0.0003, 0.9997;
+}
+probability ( X23 ) {
+  table 0.0115, 0.9885;
+}
+probability ( X24 ) {
+  table 0.0001, 0.9999;
+}
+probability ( X25 ) {
+  table 0.047, 0.953;
+}
+probability ( X26 ) {
+  table 0.0005, 0.9995;
+}
+probability ( X27 ) {
+  table 0.0094, 0.9906;
+}
+probability ( X28 ) {
+  table 0.0005, 0.9995;
+}
+probability ( X29 ) {
+  table 0.0663, 0.9337;
+}
+probability ( X3 ) {
+  table 0.0008, 0.9992;
+}
+probability ( X30 ) {
+  table 0.0256, 0.9744;
+}
+probability ( X31 ) {
+  table 0.0192, 0.9808;
+}
+probability ( X4 ) {
+  table 0.0008, 0.9992;
+}
+probability ( X5 ) {
+  table 0.0094, 0.9906;
+}
+probability ( X6 ) {
+  table 0.0005, 0.9995;
+}
+probability ( X7 ) {
+  table 0.0001, 0.9999;
+}
+probability ( X8 ) {
+  table 0.0099, 0.9901;
+}
+probability ( X9 ) {
+  table 0.0015, 0.9985;
+}

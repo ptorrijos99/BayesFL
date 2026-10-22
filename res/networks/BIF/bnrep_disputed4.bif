@@ -1,0 +1,185 @@
+network unknown {
+}
+variable BGfibersYtop {
+  type discrete [ 2 ] { false, true };
+}
+variable BGM {
+  type discrete [ 2 ] { false, true };
+}
+variable BGnotM {
+  type discrete [ 2 ] { false, true };
+}
+variable BGYonS {
+  type discrete [ 2 ] { false, true };
+}
+variable Casefind {
+  type discrete [ 2 ] { false, true };
+}
+variable DNAfind {
+  type discrete [ 4 ] { DNA_X, DNA_U, DNA_X___U, No_DNA };
+}
+variable DNAX {
+  type discrete [ 2 ] { false, true };
+}
+variable FiberfindSweater {
+  type discrete [ 2 ] { false, true };
+}
+variable FiberfindYtop {
+  type discrete [ 4 ] { matching, non_matching, both_matching_and_not_matching, no_fibers };
+}
+variable FibersMSonY {
+  type discrete [ 2 ] { false, true };
+}
+variable FibersnotMSonY {
+  type discrete [ 2 ] { false, true };
+}
+variable FibersYonS {
+  type discrete [ 2 ] { false, true };
+}
+variable Prop {
+  type discrete [ 2 ] { H1, H2 };
+}
+variable Sweater {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRaltactX {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRStoYtop {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRUtoYtop {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRXstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRYtoptoS {
+  type discrete [ 2 ] { false, true };
+}
+variable Unknown {
+  type discrete [ 2 ] { false, true };
+}
+variable WhichGarment {
+  type discrete [ 2 ] { sweater, unknown_garment };
+}
+variable Xaltact {
+  type discrete [ 2 ] { false, true };
+}
+variable XstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+probability ( BGfibersYtop ) {
+  table 0.4, 0.6;
+}
+probability ( BGM | BGfibersYtop, BGnotM ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 1.0, 0.0;
+  (true, true) 0.05, 0.95;
+}
+probability ( BGnotM | BGfibersYtop ) {
+  (false) 1.0, 0.0;
+  (true) 0.1, 0.9;
+}
+probability ( BGYonS ) {
+  table 0.05, 0.95;
+}
+probability ( Casefind | DNAfind, FiberfindSweater ) {
+  (DNA_X, false) 0.0, 1.0;
+  (DNA_U, false) 0.0, 1.0;
+  (DNA_X___U, false) 0.0, 1.0;
+  (No_DNA, false) 0.0, 1.0;
+  (DNA_X, true) 1.0, 0.0;
+  (DNA_U, true) 0.0, 1.0;
+  (DNA_X___U, true) 0.0, 1.0;
+  (No_DNA, true) 0.0, 1.0;
+}
+probability ( DNAfind | DNAX ) {
+  (false) 0.0, 0.0, 0.0, 1.0;
+  (true) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( DNAX | TPRaltactX, TPRXstrangledY ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 0.0, 1.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( FiberfindSweater | FibersYonS ) {
+  (false) 1.0, 0.0;
+  (true) 0.0, 1.0;
+}
+probability ( FiberfindYtop | FibersMSonY, FibersnotMSonY ) {
+  (false, false) 0.0, 0.0, 0.0, 1.0;
+  (true, false) 1.0, 0.0, 0.0, 0.0;
+  (false, true) 0.0, 1.0, 0.0, 0.0;
+  (true, true) 0.0, 0.0, 1.0, 0.0;
+}
+probability ( FibersMSonY | BGM, TPRStoYtop, TPRUtoYtop ) {
+  (false, false, false) 1.0, 0.0;
+  (true, false, false) 0.0, 1.0;
+  (false, true, false) 0.0, 1.0;
+  (true, true, false) 0.0, 1.0;
+  (false, false, true) 0.0, 1.0;
+  (true, false, true) 0.0, 1.0;
+  (false, true, true) 0.0, 1.0;
+  (true, true, true) 0.0, 1.0;
+}
+probability ( FibersnotMSonY | BGnotM, TPRUtoYtop ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 0.0, 1.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( FibersYonS | BGYonS, TPRYtoptoS ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 0.0, 1.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( Prop ) {
+  table 0.5, 0.5;
+}
+probability ( Sweater | WhichGarment ) {
+  (sweater) 0.0, 1.0;
+  (unknown_garment) 1.0, 0.0;
+}
+probability ( TPRaltactX | Xaltact ) {
+  (false) 1.0, 0.0;
+  (true) 0.4, 0.6;
+}
+probability ( TPRStoYtop | Sweater, TPRYtoptoS ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.2, 0.8;
+  (false, true) 1.0, 0.0;
+  (true, true) 0.1, 0.9;
+}
+probability ( TPRUtoYtop | Unknown ) {
+  (false) 1.0, 0.0;
+  (true) 0.2, 0.8;
+}
+probability ( TPRXstrangledY | Sweater, XstrangledY ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 1.0, 0.0;
+  (false, true) 1.0, 0.0;
+  (true, true) 0.2, 0.8;
+}
+probability ( TPRYtoptoS | Sweater ) {
+  (false) 1.0, 0.0;
+  (true) 0.2, 0.8;
+}
+probability ( Unknown | WhichGarment ) {
+  (sweater) 1.0, 0.0;
+  (unknown_garment) 0.0, 1.0;
+}
+probability ( WhichGarment | Prop ) {
+  (H1) 0.5, 0.5;
+  (H2) 0.0, 1.0;
+}
+probability ( Xaltact ) {
+  table 0.0, 1.0;
+}
+probability ( XstrangledY | Prop ) {
+  (H1) 0.0, 1.0;
+  (H2) 1.0, 0.0;
+}

@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BurstPressure</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Chloride</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectDepth</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectLength</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FlowVelocity</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InorganicDeposits</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MEG</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MixedDeposits</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OD</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OperatingPressure</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OperatingTemperature</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OrganicDeposits</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PartialPressureCO2</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PipeFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShearingForce</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SolidDeposits</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SteelGrade</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspendedDeposits</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UDCCorrRate</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnderDepositGalvanicCell</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Fair</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Excellent</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WallThicknessLoss</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>pH</NAME>
+      <OUTCOME>Acidic</OUTCOME>
+      <OUTCOME>Neutral</OUTCOME>
+      <OUTCOME>Basic</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BurstPressure</FOR>
+      <GIVEN>DefectDepth</GIVEN>
+      <GIVEN>DefectLength</GIVEN>
+      <GIVEN>OD</GIVEN>
+      <GIVEN>SteelGrade</GIVEN>
+      <TABLE>0.0 1.0 0.27 0.73 0.12 0.88 0.58 0.42 0.1 0.9 0.18 0.82 0.01 0.99 0.22 0.78 0.1 0.9 0.45 0.55 0.02 0.98 0.39 0.61 0.12 0.88 0.81 0.19 0.44 0.56 0.34 0.66 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Chloride</FOR>
+      <TABLE>0.456 0.1 0.444 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectDepth</FOR>
+      <GIVEN>WallThicknessLoss</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectLength</FOR>
+      <GIVEN>UDCCorrRate</GIVEN>
+      <TABLE>0.88 0.12 0.56 0.44 0.02 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FlowVelocity</FOR>
+      <TABLE>1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InorganicDeposits</FOR>
+      <TABLE>0.56 0.44 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MEG</FOR>
+      <TABLE>0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MixedDeposits</FOR>
+      <TABLE>0.57 0.43 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OD</FOR>
+      <TABLE>0.92 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OperatingPressure</FOR>
+      <TABLE>0.99 0.01 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OperatingTemperature</FOR>
+      <TABLE>0.1582576 0.6747927 0.1669497 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OrganicDeposits</FOR>
+      <TABLE>0.6667 0.3333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PartialPressureCO2</FOR>
+      <TABLE>0.578 0.1 0.322 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PipeFailure</FOR>
+      <GIVEN>BurstPressure</GIVEN>
+      <GIVEN>OperatingPressure</GIVEN>
+      <TABLE>0.44 0.56 0.88 0.12 0.78 0.22 0.77 0.23 0.324 0.676 0.12 0.88 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShearingForce</FOR>
+      <GIVEN>FlowVelocity</GIVEN>
+      <GIVEN>OperatingPressure</GIVEN>
+      <TABLE>0.4 0.4 0.2 0.1 0.2 0.7 0.05 0.1 0.85 0.15 0.65 0.2 0.05 0.05 0.9 0.01 0.05 0.94 1.11e-16 0.2 0.8 0.05 0.05 0.9 0.03 0.01 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SolidDeposits</FOR>
+      <GIVEN>FlowVelocity</GIVEN>
+      <GIVEN>SuspendedDeposits</GIVEN>
+      <TABLE>0.4 0.3 0.3 0.5 0.3 0.2 0.01 0.05 0.94 0.6 0.2 0.2 0.4 0.3 0.3 0.1 0.5 0.4 0.7 0.2 0.1 0.5 0.2 0.3 0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SteelGrade</FOR>
+      <TABLE>0.78 0.22 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspendedDeposits</FOR>
+      <GIVEN>InorganicDeposits</GIVEN>
+      <GIVEN>MixedDeposits</GIVEN>
+      <GIVEN>OrganicDeposits</GIVEN>
+      <TABLE>0.1 0.1 0.8 0.1 0.2 0.7 0.85 0.1 0.05 0.7 0.05 0.25 0.4 0.2 0.4 0.6 0.2 0.2 0.75 0.01 0.24 0.95 0.005 0.045 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UDCCorrRate</FOR>
+      <GIVEN>ShearingForce</GIVEN>
+      <GIVEN>SolidDeposits</GIVEN>
+      <GIVEN>UnderDepositGalvanicCell</GIVEN>
+      <TABLE>0.91 0.08 0.01 0.88 0.1 0.02 0.43 0.47 0.1 0.43 0.47 0.1 0.88 0.07 0.05 0.78 0.22 0.0 0.34 0.66 0.0 0.34 0.66 0.0 0.78 0.22 0.0 0.88 0.09 0.03 0.45 0.32 0.23 0.45 0.32 0.23 0.98 0.0 0.02 0.98 0.01 0.01 0.43 0.37 0.2 0.43 0.37 0.2 0.43 0.52 0.05 0.99 0.0 0.01 0.88 0.0 0.12 0.88 0.0 0.12 0.78 0.22 0.0 0.56 0.4 0.04 0.88 0.0 0.12 0.88 0.0 0.12 0.12 0.78 0.1 0.88 0.12 0.0 0.56 0.1 0.34 0.56 0.1 0.34 0.55 0.4 0.05 0.89 0.09 0.02 0.22 0.56 0.22 0.22 0.56 0.22 0.78 0.2 0.02 0.45 0.5 0.05 0.73 0.16 0.11 0.73 0.16 0.11 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnderDepositGalvanicCell</FOR>
+      <GIVEN>Chloride</GIVEN>
+      <GIVEN>MEG</GIVEN>
+      <GIVEN>pH</GIVEN>
+      <TABLE>0.5 0.35 0.1 0.05 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.5 0.35 0.1 0.05 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.2 0.2 0.35 0.25 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.2 0.2 0.35 0.25 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.7 0.2 0.08 0.02 0.0001 0.001 0.01 0.9889 0.7 0.2 0.08 0.02 0.7 0.2 0.08 0.02 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WallThicknessLoss</FOR>
+      <GIVEN>UDCCorrRate</GIVEN>
+      <TABLE>0.88 0.12 0.02 0.98 0.19 0.81 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>pH</FOR>
+      <GIVEN>OperatingTemperature</GIVEN>
+      <GIVEN>PartialPressureCO2</GIVEN>
+      <TABLE>0.7 0.2 0.1 0.6 0.2 0.2 0.0 0.2 0.8 0.4 0.3 0.3 0.35 0.15 0.5 0.2 0.2 0.6 0.45 0.25 0.3 0.2 0.1 0.7 0.03 0.01 0.96 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

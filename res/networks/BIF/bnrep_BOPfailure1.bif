@@ -1,0 +1,284 @@
+network unknown {
+}
+variable BOP_System_Failure {
+  type discrete [ 2 ] { F, S };
+}
+variable X1 {
+  type discrete [ 2 ] { F, S };
+}
+variable X10 {
+  type discrete [ 2 ] { F, S };
+}
+variable X11 {
+  type discrete [ 2 ] { F, S };
+}
+variable X12 {
+  type discrete [ 2 ] { F, S };
+}
+variable X13 {
+  type discrete [ 2 ] { F, S };
+}
+variable X14 {
+  type discrete [ 2 ] { F, S };
+}
+variable X15 {
+  type discrete [ 2 ] { F, S };
+}
+variable X16 {
+  type discrete [ 2 ] { F, S };
+}
+variable X17 {
+  type discrete [ 2 ] { F, S };
+}
+variable X18 {
+  type discrete [ 2 ] { F, S };
+}
+variable X19 {
+  type discrete [ 2 ] { F, S };
+}
+variable X2 {
+  type discrete [ 2 ] { F, S };
+}
+variable X20 {
+  type discrete [ 2 ] { F, S };
+}
+variable X21 {
+  type discrete [ 2 ] { F, S };
+}
+variable X22 {
+  type discrete [ 2 ] { F, S };
+}
+variable X23 {
+  type discrete [ 2 ] { F, S };
+}
+variable X24 {
+  type discrete [ 2 ] { F, S };
+}
+variable X25 {
+  type discrete [ 2 ] { F, S };
+}
+variable X26 {
+  type discrete [ 2 ] { F, S };
+}
+variable X27 {
+  type discrete [ 2 ] { F, S };
+}
+variable X28 {
+  type discrete [ 2 ] { F, S };
+}
+variable X29 {
+  type discrete [ 2 ] { F, S };
+}
+variable X3 {
+  type discrete [ 2 ] { F, S };
+}
+variable X4 {
+  type discrete [ 2 ] { F, S };
+}
+variable X5 {
+  type discrete [ 2 ] { F, S };
+}
+variable X6 {
+  type discrete [ 2 ] { F, S };
+}
+variable X7 {
+  type discrete [ 2 ] { F, S };
+}
+variable X8 {
+  type discrete [ 2 ] { F, S };
+}
+variable X9 {
+  type discrete [ 2 ] { F, S };
+}
+probability ( BOP_System_Failure | X1, X2, X3, X4, X5 ) {
+  (F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F) 0.0, 1.0;
+  (F, S, F, F, F) 0.0, 1.0;
+  (S, S, F, F, F) 0.0, 1.0;
+  (F, F, S, F, F) 0.0, 1.0;
+  (S, F, S, F, F) 0.0, 1.0;
+  (F, S, S, F, F) 0.0, 1.0;
+  (S, S, S, F, F) 0.0, 1.0;
+  (F, F, F, S, F) 0.0, 1.0;
+  (S, F, F, S, F) 0.0, 1.0;
+  (F, S, F, S, F) 0.0, 1.0;
+  (S, S, F, S, F) 0.0, 1.0;
+  (F, F, S, S, F) 0.0, 1.0;
+  (S, F, S, S, F) 0.0, 1.0;
+  (F, S, S, S, F) 0.0, 1.0;
+  (S, S, S, S, F) 0.0, 1.0;
+  (F, F, F, F, S) 0.0, 1.0;
+  (S, F, F, F, S) 0.0, 1.0;
+  (F, S, F, F, S) 0.0, 1.0;
+  (S, S, F, F, S) 0.0, 1.0;
+  (F, F, S, F, S) 0.0, 1.0;
+  (S, F, S, F, S) 0.0, 1.0;
+  (F, S, S, F, S) 0.0, 1.0;
+  (S, S, S, F, S) 0.0, 1.0;
+  (F, F, F, S, S) 0.0, 1.0;
+  (S, F, F, S, S) 0.0, 1.0;
+  (F, S, F, S, S) 0.0, 1.0;
+  (S, S, F, S, S) 0.0, 1.0;
+  (F, F, S, S, S) 0.0, 1.0;
+  (S, F, S, S, S) 0.0, 1.0;
+  (F, S, S, S, S) 0.0, 1.0;
+  (S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X1 | X6, X7 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 1.0, 0.0;
+  (F, S) 1.0, 0.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X10 ) {
+  table 0.346, 0.654;
+}
+probability ( X11 ) {
+  table 0.346, 0.654;
+}
+probability ( X12 ) {
+  table 0.0245, 0.9755;
+}
+probability ( X13 ) {
+  table 0.0245, 0.9755;
+}
+probability ( X14 ) {
+  table 0.0245, 0.9755;
+}
+probability ( X15 ) {
+  table 0.0245, 0.9755;
+}
+probability ( X16 ) {
+  table 0.0245, 0.9755;
+}
+probability ( X17 ) {
+  table 0.014, 0.986;
+}
+probability ( X18 | X23, X24 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X19 ) {
+  table 0.01280268, 0.98719731;
+}
+probability ( X2 | X8, X9 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X20 ) {
+  table 0.01482326, 0.98517674;
+}
+probability ( X21 ) {
+  table 0.01482, 0.98518;
+}
+probability ( X22 ) {
+  table 0.0148, 0.9852;
+}
+probability ( X23 ) {
+  table 0.002521597, 0.997478403;
+}
+probability ( X24 ) {
+  table 0.003209155, 0.996790845;
+}
+probability ( X25 ) {
+  table 0.000242, 0.999758;
+}
+probability ( X26 | X28, X29 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 1.0, 0.0;
+  (F, S) 1.0, 0.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X27 ) {
+  table 0.010516, 0.989484;
+}
+probability ( X28 ) {
+  table 0.009769928, 0.990230072;
+}
+probability ( X29 ) {
+  table 0.009769928, 0.990230072;
+}
+probability ( X3 | X18, X19, X20, X21, X22 ) {
+  (F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F) 0.0, 1.0;
+  (F, S, F, F, F) 0.0, 1.0;
+  (S, S, F, F, F) 0.0, 1.0;
+  (F, F, S, F, F) 0.0, 1.0;
+  (S, F, S, F, F) 0.0, 1.0;
+  (F, S, S, F, F) 0.0, 1.0;
+  (S, S, S, F, F) 0.0, 1.0;
+  (F, F, F, S, F) 0.0, 1.0;
+  (S, F, F, S, F) 0.0, 1.0;
+  (F, S, F, S, F) 0.0, 1.0;
+  (S, S, F, S, F) 0.0, 1.0;
+  (F, F, S, S, F) 0.0, 1.0;
+  (S, F, S, S, F) 0.0, 1.0;
+  (F, S, S, S, F) 0.0, 1.0;
+  (S, S, S, S, F) 0.0, 1.0;
+  (F, F, F, F, S) 0.0, 1.0;
+  (S, F, F, F, S) 0.0, 1.0;
+  (F, S, F, F, S) 0.0, 1.0;
+  (S, S, F, F, S) 0.0, 1.0;
+  (F, F, S, F, S) 0.0, 1.0;
+  (S, F, S, F, S) 0.0, 1.0;
+  (F, S, S, F, S) 0.0, 1.0;
+  (S, S, S, F, S) 0.0, 1.0;
+  (F, F, F, S, S) 0.0, 1.0;
+  (S, F, F, S, S) 0.0, 1.0;
+  (F, S, F, S, S) 0.0, 1.0;
+  (S, S, F, S, S) 0.0, 1.0;
+  (F, F, S, S, S) 0.0, 1.0;
+  (S, F, S, S, S) 0.0, 1.0;
+  (F, S, S, S, S) 0.0, 1.0;
+  (S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X4 | X10, X11 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X5 | X25, X26, X27 ) {
+  (F, F, F) 1.0, 0.0;
+  (S, F, F) 1.0, 0.0;
+  (F, S, F) 1.0, 0.0;
+  (S, S, F) 1.0, 0.0;
+  (F, F, S) 1.0, 0.0;
+  (S, F, S) 1.0, 0.0;
+  (F, S, S) 1.0, 0.0;
+  (S, S, S) 0.0, 1.0;
+}
+probability ( X6 | X12, X13 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X7 | X14, X15, X16, X17 ) {
+  (F, F, F, F) 1.0, 0.0;
+  (S, F, F, F) 0.0, 1.0;
+  (F, S, F, F) 0.0, 1.0;
+  (S, S, F, F) 0.0, 1.0;
+  (F, F, S, F) 0.0, 1.0;
+  (S, F, S, F) 0.0, 1.0;
+  (F, S, S, F) 0.0, 1.0;
+  (S, S, S, F) 0.0, 1.0;
+  (F, F, F, S) 0.0, 1.0;
+  (S, F, F, S) 0.0, 1.0;
+  (F, S, F, S) 0.0, 1.0;
+  (S, S, F, S) 0.0, 1.0;
+  (F, F, S, S) 0.0, 1.0;
+  (S, F, S, S) 0.0, 1.0;
+  (F, S, S, S) 0.0, 1.0;
+  (S, S, S, S) 0.0, 1.0;
+}
+probability ( X8 ) {
+  table 0.242, 0.758;
+}
+probability ( X9 ) {
+  table 0.000242, 0.999758;
+}

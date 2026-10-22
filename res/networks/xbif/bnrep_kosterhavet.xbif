@@ -1,0 +1,480 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AgriculturalLand</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AnchorDamageRisk</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BottomSubstrate</NAME>
+      <OUTCOME>Soft</OUTCOME>
+      <OUTCOME>Hard</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Cod</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DIN</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DIP</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DevelopedLand</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Discharge</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Eelgrass</NAME>
+      <OUTCOME>Decrease</OUTCOME>
+      <OUTCOME>No_change</OUTCOME>
+      <OUTCOME>Increase</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FilamentousAlgae</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HabitatQuality</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IntermediateFishPredators</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LeisureBoating</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Mesograzers</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MusselCultivation</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Very_high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Noise</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NorthernShrimp</NAME>
+      <OUTCOME>Decrease</OUTCOME>
+      <OUTCOME>No_change</OUTCOME>
+      <OUTCOME>Increase</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NutrientEnrichmentRisk</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OxygenDeep</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OxygenShallow</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>POM</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Phytoplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Precipitation</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prey</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RadiativeForcing</NAME>
+      <OUTCOME>Current</OUTCOME>
+      <OUTCOME>RF45</OUTCOME>
+      <OUTCOME>RF85</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SeafloorDisturbance</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SedimentLoad</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TNExchange</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TNLoad</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPExchange</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPLoad</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Transparency</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TrawlingFrequency</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Turbidity</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterTemperatureDeep</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterTemperatureShallow</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Wind</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Zooplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AgriculturalLand</FOR>
+      <TABLE>0.45 0.3 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AnchorDamageRisk</FOR>
+      <GIVEN>LeisureBoating</GIVEN>
+      <TABLE>0.99 0.01 0.5 0.5 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BottomSubstrate</FOR>
+      <TABLE>0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Cod</FOR>
+      <GIVEN>HabitatQuality</GIVEN>
+      <GIVEN>Noise</GIVEN>
+      <TABLE>0.625 0.27 0.105 0.625 0.27 0.105 0.675 0.27 0.055 0.45 0.325 0.225 0.45 0.325 0.225 0.52 0.315 0.165 0.2 0.4 0.4 0.2 0.4 0.4 0.26 0.4 0.34 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DIN</FOR>
+      <GIVEN>TNLoad</GIVEN>
+      <TABLE>0.55 0.4 0.05 0.5 0.4 0.1 0.2 0.3 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DIP</FOR>
+      <GIVEN>TPLoad</GIVEN>
+      <TABLE>0.8 0.15 0.05 0.45 0.45 0.1 0.4 0.35 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DevelopedLand</FOR>
+      <TABLE>0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Discharge</FOR>
+      <GIVEN>Precipitation</GIVEN>
+      <TABLE>0.9 0.09 0.01 0.45 0.4 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Eelgrass</FOR>
+      <GIVEN>AnchorDamageRisk</GIVEN>
+      <GIVEN>FilamentousAlgae</GIVEN>
+      <GIVEN>Transparency</GIVEN>
+      <TABLE>0.85 0.1 0.05 0.8 0.1 0.1 0.3 0.5 0.2 0.9 0.08 0.02 0.85 0.1 0.05 0.35 0.5 0.15 0.9 0.08 0.02 0.9 0.08 0.02 0.6 0.35 0.05 0.9 0.05 0.05 0.75 0.15 0.1 0.35 0.45 0.2 0.9 0.08 0.02 0.8 0.15 0.05 0.45 0.45 0.1 0.9 0.08 0.02 0.9 0.08 0.02 0.7 0.25 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FilamentousAlgae</FOR>
+      <GIVEN>Mesograzers</GIVEN>
+      <GIVEN>NutrientEnrichmentRisk</GIVEN>
+      <GIVEN>WaterTemperatureShallow</GIVEN>
+      <TABLE>0.85 0.1 0.05 0.8 0.125 0.075 0.7 0.175 0.125 0.325 0.2 0.475 0.225 0.275 0.5 0.11 0.29 0.6 0.015 0.34 0.645 0.015 0.285 0.7 0.015 0.045 0.94 0.9 0.09 0.01 0.85 0.1 0.05 0.75 0.2 0.05 0.5 0.275 0.225 0.375 0.4 0.225 0.225 0.45 0.325 0.15 0.45 0.4 0.1 0.4 0.5 0.075 0.125 0.8 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.7 0.175 0.125 0.5 0.375 0.125 0.3 0.5 0.2 0.2 0.4 0.4 0.2 0.375 0.425 0.175 0.2 0.625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HabitatQuality</FOR>
+      <GIVEN>OxygenDeep</GIVEN>
+      <GIVEN>SeafloorDisturbance</GIVEN>
+      <GIVEN>Turbidity</GIVEN>
+      <TABLE>0.3 0.3 0.4 0.55 0.15 0.3 0.7 0.1 0.2 0.5 0.25 0.25 0.75 0.2 0.05 0.4 0.3 0.3 0.2 0.25 0.55 0.4 0.25 0.35 0.5 0.2 0.3 0.45 0.3 0.25 0.75 0.2 0.05 0.9 0.09 0.01 0.05 0.15 0.8 0.25 0.2 0.55 0.3 0.2 0.5 0.2 0.3 0.5 0.55 0.35 0.1 0.75 0.2 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IntermediateFishPredators</FOR>
+      <GIVEN>Cod</GIVEN>
+      <GIVEN>Noise</GIVEN>
+      <TABLE>0.1 0.25 0.65 0.1 0.25 0.65 0.125 0.25 0.625 0.2875 0.45 0.2625 0.2875 0.45 0.2625 0.3125 0.45 0.2375 0.7 0.2 0.1 0.7 0.2 0.1 0.74 0.18 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LeisureBoating</FOR>
+      <TABLE>0.1 0.25 0.65 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Mesograzers</FOR>
+      <GIVEN>IntermediateFishPredators</GIVEN>
+      <TABLE>0.05 0.15 0.8 0.2 0.5 0.3 0.8 0.15 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MusselCultivation</FOR>
+      <TABLE>0.6 0.25 0.1 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Noise</FOR>
+      <GIVEN>LeisureBoating</GIVEN>
+      <TABLE>0.3 0.3 0.4 0.2 0.3 0.5 0.1 0.3 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NorthernShrimp</FOR>
+      <GIVEN>Cod</GIVEN>
+      <GIVEN>Prey</GIVEN>
+      <GIVEN>TrawlingFrequency</GIVEN>
+      <GIVEN>WaterTemperatureDeep</GIVEN>
+      <TABLE>0.2 0.2 0.6 0.05 0.2 0.75 0.2 0.65 0.15 0.25 0.55 0.2 0.15 0.25 0.6 0.1 0.15 0.75 0.3 0.55 0.15 0.3 0.5 0.2 0.2 0.2 0.6 0.05 0.2 0.75 0.2 0.65 0.15 0.25 0.55 0.2 0.2 0.25 0.55 0.1 0.2 0.7 0.5 0.35 0.15 0.4 0.4 0.2 0.2 0.25 0.55 0.15 0.2 0.65 0.55 0.3 0.15 0.45 0.4 0.15 0.2 0.25 0.55 0.1 0.2 0.7 0.5 0.35 0.15 0.4 0.4 0.2 0.3 0.2 0.5 0.15 0.2 0.65 0.95 0.04 0.01 0.85 0.1 0.05 0.2 0.2 0.6 0.25 0.15 0.6 0.9 0.09 0.01 0.75 0.2 0.05 0.3 0.2 0.5 0.15 0.2 0.65 0.95 0.04 0.01 0.85 0.1 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NutrientEnrichmentRisk</FOR>
+      <GIVEN>DIN</GIVEN>
+      <GIVEN>DIP</GIVEN>
+      <GIVEN>POM</GIVEN>
+      <TABLE>0.8 0.15 0.05 0.75 0.15 0.1 0.7 0.2 0.1 0.65 0.25 0.1 0.6 0.3 0.1 0.6 0.3 0.1 0.35 0.5 0.15 0.3 0.5 0.2 0.25 0.6 0.15 0.2 0.6 0.2 0.2 0.65 0.15 0.1 0.7 0.2 0.25 0.55 0.2 0.2 0.6 0.2 0.15 0.625 0.225 0.1 0.65 0.25 0.075 0.7 0.225 0.05 0.7 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OxygenDeep</FOR>
+      <GIVEN>Phytoplankton</GIVEN>
+      <GIVEN>POM</GIVEN>
+      <TABLE>0.1 0.6 0.3 0.25 0.6 0.15 0.1 0.7 0.2 0.25 0.7 0.05 0.3 0.55 0.15 0.45 0.5 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OxygenShallow</FOR>
+      <GIVEN>Phytoplankton</GIVEN>
+      <GIVEN>WaterTemperatureShallow</GIVEN>
+      <TABLE>0.05 0.05 0.9 0.05 0.05 0.9 0.4 0.45 0.15 0.05 0.05 0.9 0.2 0.05 0.75 0.4 0.45 0.15 0.1 0.3 0.6 0.05 0.55 0.4 0.15 0.75 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>POM</FOR>
+      <GIVEN>MusselCultivation</GIVEN>
+      <GIVEN>SedimentLoad</GIVEN>
+      <TABLE>0.6 0.4 0.55 0.45 0.5 0.5 0.6 0.4 0.55 0.45 0.5 0.5 0.65 0.35 0.625 0.375 0.6 0.4 0.7 0.3 0.675 0.325 0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Phytoplankton</FOR>
+      <GIVEN>MusselCultivation</GIVEN>
+      <GIVEN>NutrientEnrichmentRisk</GIVEN>
+      <GIVEN>WaterTemperatureShallow</GIVEN>
+      <TABLE>0.8 0.1 0.1 0.8 0.1 0.1 0.8 0.1 0.1 0.65 0.25 0.1 0.65 0.25 0.1 0.6 0.25 0.15 0.5 0.4 0.1 0.45 0.4 0.15 0.4 0.4 0.2 0.8 0.1 0.1 0.8 0.1 0.1 0.8 0.1 0.1 0.65 0.25 0.1 0.65 0.25 0.1 0.6 0.25 0.15 0.5 0.4 0.1 0.45 0.4 0.15 0.4 0.4 0.2 0.8 0.1 0.1 0.8 0.1 0.1 0.8 0.1 0.1 0.65 0.25 0.1 0.65 0.25 0.1 0.6 0.25 0.15 0.5 0.4 0.1 0.45 0.4 0.15 0.4 0.4 0.2 0.8 0.1 0.1 0.8 0.1 0.1 0.8 0.1 0.1 0.7 0.29 0.01 0.65 0.34 0.01 0.65 0.34 0.01 0.75 0.15 0.1 0.75 0.15 0.1 0.55 0.4 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Precipitation</FOR>
+      <GIVEN>RadiativeForcing</GIVEN>
+      <TABLE>0.75 0.25 0.65 0.35 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prey</FOR>
+      <GIVEN>SeafloorDisturbance</GIVEN>
+      <GIVEN>Zooplankton</GIVEN>
+      <TABLE>0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RadiativeForcing</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SeafloorDisturbance</FOR>
+      <GIVEN>BottomSubstrate</GIVEN>
+      <GIVEN>TrawlingFrequency</GIVEN>
+      <TABLE>0.4 0.6 0.05 0.95 0.95 0.05 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SedimentLoad</FOR>
+      <GIVEN>AgriculturalLand</GIVEN>
+      <GIVEN>DevelopedLand</GIVEN>
+      <GIVEN>Discharge</GIVEN>
+      <TABLE>0.98 0.01 0.01 0.1 0.55 0.35 0.03 0.03 0.94 0.94 0.05 0.01 0.44991 0.525095 0.024995 0.5 0.15 0.35 0.8 0.19 0.01 0.1 0.5 0.4 0.01 0.05 0.94 0.65 0.3 0.05 0.19 0.8 0.01 0.2 0.35 0.45 0.1 0.7 0.2 0.1 0.7 0.2 0.01 0.01 0.98 0.6 0.15 0.25 0.5 0.3 0.2 0.35 0.2 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TNExchange</FOR>
+      <TABLE>0.45 0.15 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TNLoad</FOR>
+      <GIVEN>AgriculturalLand</GIVEN>
+      <GIVEN>DevelopedLand</GIVEN>
+      <GIVEN>Discharge</GIVEN>
+      <GIVEN>TNExchange</GIVEN>
+      <TABLE>0.95 0.025 0.025 0.01 0.98 0.01 0.1 0.1 0.8 0.98 0.01 0.01 0.01 0.79 0.2 0.04 0.04 0.92 0.95 0.025 0.025 0.1 0.45 0.45 0.04 0.04 0.92 0.94 0.05 0.01 0.025 0.95 0.025 0.1 0.1 0.8 0.98 0.01 0.01 0.01 0.79 0.2 0.04 0.04 0.92 0.95 0.025 0.025 0.01 0.79 0.2 0.04 0.04 0.92 0.94 0.03 0.03 0.01 0.98 0.01 0.15 0.15 0.7 0.95 0.025 0.025 0.01 0.79 0.2 0.025 0.025 0.95 0.98 0.01 0.01 0.1 0.45 0.45 0.05 0.05 0.9 0.94 0.03 0.03 0.025 0.95 0.025 0.15 0.15 0.7 0.94 0.03 0.03 0.01 0.79 0.2 0.025 0.025 0.95 0.98 0.01 0.01 0.01 0.79 0.2 0.05 0.05 0.9 0.95 0.025 0.025 0.01 0.98 0.01 0.025 0.025 0.95 0.95 0.025 0.025 0.01 0.79 0.2 0.025 0.025 0.95 0.98 0.01 0.01 0.1 0.45 0.45 0.025 0.025 0.95 0.95 0.025 0.025 0.025 0.95 0.025 0.025 0.025 0.95 0.95 0.025 0.025 0.01 0.79 0.2 0.025 0.025 0.95 0.98 0.01 0.01 0.01 0.79 0.2 0.025 0.025 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPExchange</FOR>
+      <TABLE>0.6 0.15 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPLoad</FOR>
+      <GIVEN>AgriculturalLand</GIVEN>
+      <GIVEN>DevelopedLand</GIVEN>
+      <GIVEN>Discharge</GIVEN>
+      <GIVEN>TPExchange</GIVEN>
+      <TABLE>0.96 0.02 0.02 0.05 0.9 0.05 0.1 0.1 0.8 0.98 0.01 0.01 0.15 0.7 0.15 0.1 0.1 0.8 0.95 0.025 0.025 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.15 0.7 0.15 0.1 0.1 0.8 0.95 0.025 0.025 0.05 0.9 0.05 0.05 0.05 0.9 0.95 0.025 0.025 0.15 0.7 0.15 0.1 0.1 0.8 0.96 0.02 0.02 0.15 0.7 0.15 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.95 0.025 0.025 0.15 0.7 0.15 0.05 0.05 0.9 0.95 0.025 0.025 0.15 0.7 0.15 0.05 0.05 0.9 0.95 0.025 0.025 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.8 0.1 0.1 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 0.98 0.01 0.01 0.05 0.9 0.05 0.05 0.05 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Transparency</FOR>
+      <GIVEN>LeisureBoating</GIVEN>
+      <GIVEN>Phytoplankton</GIVEN>
+      <GIVEN>POM</GIVEN>
+      <GIVEN>Wind</GIVEN>
+      <TABLE>0.01 0.5 0.49 0.1 0.5 0.4 0.15 0.5 0.35 0.15 0.45 0.4 0.3 0.4 0.3 0.3 0.4 0.3 0.15 0.4 0.45 0.25 0.35 0.4 0.3 0.4 0.3 0.25 0.35 0.4 0.4 0.325 0.275 0.4 0.325 0.275 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.1 0.5 0.4 0.2 0.45 0.35 0.2 0.5 0.3 0.2 0.45 0.35 0.3 0.4 0.3 0.35 0.4 0.25 0.2 0.4 0.4 0.3 0.35 0.35 0.3 0.4 0.3 0.2 0.4 0.4 0.425 0.3 0.275 0.45 0.3 0.25 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.15 0.5 0.35 0.25 0.45 0.3 0.25 0.5 0.25 0.25 0.45 0.3 0.4 0.4 0.2 0.4 0.425 0.175 0.25 0.4 0.35 0.35 0.35 0.3 0.3775 0.3725 0.25 0.35 0.35 0.3 0.5 0.3 0.2 0.5 0.325 0.175 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 0.75 0.24 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TrawlingFrequency</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Turbidity</FOR>
+      <GIVEN>BottomSubstrate</GIVEN>
+      <GIVEN>TrawlingFrequency</GIVEN>
+      <TABLE>0.35 0.4 0.25 0.25 0.4 0.35 0.74 0.25 0.01 0.69 0.3 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterTemperatureDeep</FOR>
+      <GIVEN>RadiativeForcing</GIVEN>
+      <TABLE>0.55 0.45 0.25 0.75 0.15 0.85 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterTemperatureShallow</FOR>
+      <GIVEN>RadiativeForcing</GIVEN>
+      <TABLE>0.45 0.45 0.1 0.25 0.45 0.3 0.1 0.6 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Wind</FOR>
+      <GIVEN>RadiativeForcing</GIVEN>
+      <TABLE>0.35 0.35 0.3 0.2 0.5 0.3 0.1 0.4 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Zooplankton</FOR>
+      <GIVEN>OxygenShallow</GIVEN>
+      <GIVEN>Phytoplankton</GIVEN>
+      <GIVEN>WaterTemperatureShallow</GIVEN>
+      <TABLE>0.875 0.09 0.035 0.875 0.09 0.035 0.9 0.065 0.035 0.875 0.09 0.035 0.875 0.09 0.035 0.9 0.065 0.035 0.875 0.09 0.035 0.875 0.09 0.035 0.9 0.065 0.035 0.7 0.24 0.06 0.7 0.24 0.06 0.75 0.19 0.06 0.35 0.4 0.25 0.3 0.3 0.4 0.3 0.25 0.45 0.2 0.35 0.45 0.15 0.25 0.6 0.155 0.205 0.64 0.65 0.24 0.11 0.65 0.24 0.11 0.7 0.24 0.06 0.25 0.4 0.35 0.2 0.3 0.5 0.2 0.25 0.55 0.105 0.295 0.6 0.055 0.195 0.75 0.055 0.155 0.79 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

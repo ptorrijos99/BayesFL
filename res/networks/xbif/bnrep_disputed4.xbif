@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BGM</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BGYonS</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BGfibersYtop</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BGnotM</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Casefind</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAfind</NAME>
+      <OUTCOME>DNA_X</OUTCOME>
+      <OUTCOME>DNA_U</OUTCOME>
+      <OUTCOME>DNA_X___U</OUTCOME>
+      <OUTCOME>No_DNA</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FiberfindSweater</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FiberfindYtop</NAME>
+      <OUTCOME>matching</OUTCOME>
+      <OUTCOME>non_matching</OUTCOME>
+      <OUTCOME>both_matching_and_not_matching</OUTCOME>
+      <OUTCOME>no_fibers</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FibersMSonY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FibersYonS</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FibersnotMSonY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prop</NAME>
+      <OUTCOME>H1</OUTCOME>
+      <OUTCOME>H2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sweater</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRStoYtop</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRUtoYtop</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRXstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRYtoptoS</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRaltactX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Unknown</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WhichGarment</NAME>
+      <OUTCOME>sweater</OUTCOME>
+      <OUTCOME>unknown_garment</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Xaltact</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>XstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BGM</FOR>
+      <GIVEN>BGfibersYtop</GIVEN>
+      <GIVEN>BGnotM</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BGYonS</FOR>
+      <TABLE>0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BGfibersYtop</FOR>
+      <TABLE>0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BGnotM</FOR>
+      <GIVEN>BGfibersYtop</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Casefind</FOR>
+      <GIVEN>DNAfind</GIVEN>
+      <GIVEN>FiberfindSweater</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAX</FOR>
+      <GIVEN>TPRaltactX</GIVEN>
+      <GIVEN>TPRXstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAfind</FOR>
+      <GIVEN>DNAX</GIVEN>
+      <TABLE>0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FiberfindSweater</FOR>
+      <GIVEN>FibersYonS</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FiberfindYtop</FOR>
+      <GIVEN>FibersMSonY</GIVEN>
+      <GIVEN>FibersnotMSonY</GIVEN>
+      <TABLE>0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FibersMSonY</FOR>
+      <GIVEN>BGM</GIVEN>
+      <GIVEN>TPRStoYtop</GIVEN>
+      <GIVEN>TPRUtoYtop</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FibersYonS</FOR>
+      <GIVEN>BGYonS</GIVEN>
+      <GIVEN>TPRYtoptoS</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FibersnotMSonY</FOR>
+      <GIVEN>BGnotM</GIVEN>
+      <GIVEN>TPRUtoYtop</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prop</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sweater</FOR>
+      <GIVEN>WhichGarment</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRStoYtop</FOR>
+      <GIVEN>Sweater</GIVEN>
+      <GIVEN>TPRYtoptoS</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.2 0.8 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRUtoYtop</FOR>
+      <GIVEN>Unknown</GIVEN>
+      <TABLE>1.0 0.0 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRXstrangledY</FOR>
+      <GIVEN>Sweater</GIVEN>
+      <GIVEN>XstrangledY</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRYtoptoS</FOR>
+      <GIVEN>Sweater</GIVEN>
+      <TABLE>1.0 0.0 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRaltactX</FOR>
+      <GIVEN>Xaltact</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Unknown</FOR>
+      <GIVEN>WhichGarment</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WhichGarment</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Xaltact</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>XstrangledY</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

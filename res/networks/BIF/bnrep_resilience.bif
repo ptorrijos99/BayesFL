@@ -1,0 +1,697 @@
+network unknown {
+}
+variable Absorption {
+  type discrete [ 2 ] { false, true };
+}
+variable Absorption1 {
+  type discrete [ 2 ] { false, true };
+}
+variable Absorption2 {
+  type discrete [ 2 ] { false, true };
+}
+variable Adaptation {
+  type discrete [ 2 ] { false, true };
+}
+variable Adaptation1 {
+  type discrete [ 2 ] { false, true };
+}
+variable Adaptation2 {
+  type discrete [ 2 ] { false, true };
+}
+variable Autonomy {
+  type discrete [ 2 ] { deficient, low };
+}
+variable Autonomy1 {
+  type discrete [ 2 ] { deficient, low };
+}
+variable Autonomy2 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Connectivity {
+  type discrete [ 2 ] { deficient, low };
+}
+variable Connectivity1 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Connectivity2 {
+  type discrete [ 2 ] { high, moderate };
+}
+variable Density {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Density1 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Density2 {
+  type discrete [ 2 ] { high, moderate };
+}
+variable Diversity {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Diversity1 {
+  type discrete [ 3 ] { high, low, moderate };
+}
+variable Diversity2 {
+  type discrete [ 2 ] { high, moderate };
+}
+variable Fcover {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Fcover1 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Fcover2 {
+  type discrete [ 3 ] { high, low, moderate };
+}
+variable Fires {
+  type discrete [ 2 ] { high, moderate };
+}
+variable Fires1 {
+  type discrete [ 3 ] { high, low, moderate };
+}
+variable Fires2 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Function {
+  type discrete [ 2 ] { false, true };
+}
+variable Function1 {
+  type discrete [ 2 ] { false, true };
+}
+variable Function2 {
+  type discrete [ 2 ] { false, true };
+}
+variable Organization {
+  type discrete [ 2 ] { deficient, low };
+}
+variable Organization1 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Organization2 {
+  type discrete [ 2 ] { high, moderate };
+}
+variable Precipitation {
+  type discrete [ 3 ] { high, low, moderate };
+}
+variable Precipitation1 {
+  type discrete [ 2 ] { low, moderate };
+}
+variable Precipitation2 {
+  type discrete [ 3 ] { high, low, moderate };
+}
+variable Transformation {
+  type discrete [ 2 ] { false, true };
+}
+variable Transformation1 {
+  type discrete [ 2 ] { false, true };
+}
+variable Transformation2 {
+  type discrete [ 2 ] { false, true };
+}
+probability ( Absorption | Autonomy, Diversity, Fcover ) {
+  (deficient, low, low) 0.75, 0.25;
+  (low, low, low) 0.75, 0.25;
+  (deficient, moderate, low) 0.75, 0.25;
+  (low, moderate, low) 0.5, 0.5;
+  (deficient, low, moderate) 0.75, 0.25;
+  (low, low, moderate) 0.5, 0.5;
+  (deficient, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate) 0.5, 0.5;
+}
+probability ( Absorption1 | Autonomy1, Diversity1, Fcover1 ) {
+  (deficient, high, low) 0.5, 0.5;
+  (low, high, low) 0.5, 0.5;
+  (deficient, low, low) 0.5, 0.5;
+  (low, low, low) 0.5, 0.5;
+  (deficient, moderate, low) 0.5, 0.5;
+  (low, moderate, low) 0.75, 0.25;
+  (deficient, high, moderate) 0.5, 0.5;
+  (low, high, moderate) 0.25, 0.75;
+  (deficient, low, moderate) 0.75, 0.25;
+  (low, low, moderate) 0.75, 0.25;
+  (deficient, moderate, moderate) 0.625, 0.375;
+  (low, moderate, moderate) 0.75, 0.25;
+}
+probability ( Absorption2 | Autonomy2, Diversity2, Fcover2 ) {
+  (low, high, high) 0.25, 0.75;
+  (moderate, high, high) 0.5, 0.5;
+  (low, moderate, high) 0.25, 0.75;
+  (moderate, moderate, high) 0.25, 0.75;
+  (low, high, low) 0.1666667, 0.8333333;
+  (moderate, high, low) 0.25, 0.75;
+  (low, moderate, low) 0.5, 0.5;
+  (moderate, moderate, low) 0.5, 0.5;
+  (low, high, moderate) 0.5, 0.5;
+  (moderate, high, moderate) 0.5, 0.5;
+  (low, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate) 0.5, 0.5;
+}
+probability ( Adaptation | Autonomy, Connectivity, Diversity, Fcover, Organization, Precipitation ) {
+  (deficient, deficient, low, low, deficient, high) 0.5, 0.5;
+  (low, deficient, low, low, deficient, high) 0.5, 0.5;
+  (deficient, low, low, low, deficient, high) 0.5, 0.5;
+  (low, low, low, low, deficient, high) 0.75, 0.25;
+  (deficient, deficient, moderate, low, deficient, high) 0.5, 0.5;
+  (low, deficient, moderate, low, deficient, high) 0.5, 0.5;
+  (deficient, low, moderate, low, deficient, high) 0.5, 0.5;
+  (low, low, moderate, low, deficient, high) 0.5, 0.5;
+  (deficient, deficient, low, moderate, deficient, high) 0.5, 0.5;
+  (low, deficient, low, moderate, deficient, high) 0.5, 0.5;
+  (deficient, low, low, moderate, deficient, high) 0.5, 0.5;
+  (low, low, low, moderate, deficient, high) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, deficient, high) 0.5, 0.5;
+  (low, deficient, moderate, moderate, deficient, high) 0.5, 0.5;
+  (deficient, low, moderate, moderate, deficient, high) 0.5, 0.5;
+  (low, low, moderate, moderate, deficient, high) 0.5, 0.5;
+  (deficient, deficient, low, low, low, high) 0.5, 0.5;
+  (low, deficient, low, low, low, high) 0.5, 0.5;
+  (deficient, low, low, low, low, high) 0.5, 0.5;
+  (low, low, low, low, low, high) 0.5, 0.5;
+  (deficient, deficient, moderate, low, low, high) 0.5, 0.5;
+  (low, deficient, moderate, low, low, high) 0.5, 0.5;
+  (deficient, low, moderate, low, low, high) 0.5, 0.5;
+  (low, low, moderate, low, low, high) 0.5, 0.5;
+  (deficient, deficient, low, moderate, low, high) 0.5, 0.5;
+  (low, deficient, low, moderate, low, high) 0.5, 0.5;
+  (deficient, low, low, moderate, low, high) 0.5, 0.5;
+  (low, low, low, moderate, low, high) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, low, high) 0.5, 0.5;
+  (low, deficient, moderate, moderate, low, high) 0.5, 0.5;
+  (deficient, low, moderate, moderate, low, high) 0.5, 0.5;
+  (low, low, moderate, moderate, low, high) 0.5, 0.5;
+  (deficient, deficient, low, low, deficient, low) 0.5, 0.5;
+  (low, deficient, low, low, deficient, low) 0.5, 0.5;
+  (deficient, low, low, low, deficient, low) 0.5, 0.5;
+  (low, low, low, low, deficient, low) 0.5, 0.5;
+  (deficient, deficient, moderate, low, deficient, low) 0.5, 0.5;
+  (low, deficient, moderate, low, deficient, low) 0.5, 0.5;
+  (deficient, low, moderate, low, deficient, low) 0.5, 0.5;
+  (low, low, moderate, low, deficient, low) 0.5, 0.5;
+  (deficient, deficient, low, moderate, deficient, low) 0.5, 0.5;
+  (low, deficient, low, moderate, deficient, low) 0.5, 0.5;
+  (deficient, low, low, moderate, deficient, low) 0.5, 0.5;
+  (low, low, low, moderate, deficient, low) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, deficient, low) 0.5, 0.5;
+  (low, deficient, moderate, moderate, deficient, low) 0.5, 0.5;
+  (deficient, low, moderate, moderate, deficient, low) 0.5, 0.5;
+  (low, low, moderate, moderate, deficient, low) 0.5, 0.5;
+  (deficient, deficient, low, low, low, low) 0.5, 0.5;
+  (low, deficient, low, low, low, low) 0.5, 0.5;
+  (deficient, low, low, low, low, low) 0.5, 0.5;
+  (low, low, low, low, low, low) 0.5, 0.5;
+  (deficient, deficient, moderate, low, low, low) 0.5, 0.5;
+  (low, deficient, moderate, low, low, low) 0.5, 0.5;
+  (deficient, low, moderate, low, low, low) 0.5, 0.5;
+  (low, low, moderate, low, low, low) 0.5, 0.5;
+  (deficient, deficient, low, moderate, low, low) 0.5, 0.5;
+  (low, deficient, low, moderate, low, low) 0.625, 0.375;
+  (deficient, low, low, moderate, low, low) 0.5, 0.5;
+  (low, low, low, moderate, low, low) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, low, low) 0.75, 0.25;
+  (low, deficient, moderate, moderate, low, low) 0.75, 0.25;
+  (deficient, low, moderate, moderate, low, low) 0.5, 0.5;
+  (low, low, moderate, moderate, low, low) 0.5, 0.5;
+  (deficient, deficient, low, low, deficient, moderate) 0.5, 0.5;
+  (low, deficient, low, low, deficient, moderate) 0.5, 0.5;
+  (deficient, low, low, low, deficient, moderate) 0.5, 0.5;
+  (low, low, low, low, deficient, moderate) 0.5, 0.5;
+  (deficient, deficient, moderate, low, deficient, moderate) 0.5, 0.5;
+  (low, deficient, moderate, low, deficient, moderate) 0.5, 0.5;
+  (deficient, low, moderate, low, deficient, moderate) 0.75, 0.25;
+  (low, low, moderate, low, deficient, moderate) 0.5, 0.5;
+  (deficient, deficient, low, moderate, deficient, moderate) 0.5, 0.5;
+  (low, deficient, low, moderate, deficient, moderate) 0.5, 0.5;
+  (deficient, low, low, moderate, deficient, moderate) 0.5, 0.5;
+  (low, low, low, moderate, deficient, moderate) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, deficient, moderate) 0.5, 0.5;
+  (low, deficient, moderate, moderate, deficient, moderate) 0.5, 0.5;
+  (deficient, low, moderate, moderate, deficient, moderate) 0.5, 0.5;
+  (low, low, moderate, moderate, deficient, moderate) 0.5, 0.5;
+  (deficient, deficient, low, low, low, moderate) 0.5, 0.5;
+  (low, deficient, low, low, low, moderate) 0.5, 0.5;
+  (deficient, low, low, low, low, moderate) 0.5, 0.5;
+  (low, low, low, low, low, moderate) 0.5, 0.5;
+  (deficient, deficient, moderate, low, low, moderate) 0.5, 0.5;
+  (low, deficient, moderate, low, low, moderate) 0.5, 0.5;
+  (deficient, low, moderate, low, low, moderate) 0.5, 0.5;
+  (low, low, moderate, low, low, moderate) 0.5, 0.5;
+  (deficient, deficient, low, moderate, low, moderate) 0.5, 0.5;
+  (low, deficient, low, moderate, low, moderate) 0.5, 0.5;
+  (deficient, low, low, moderate, low, moderate) 0.5, 0.5;
+  (low, low, low, moderate, low, moderate) 0.5, 0.5;
+  (deficient, deficient, moderate, moderate, low, moderate) 0.5, 0.5;
+  (low, deficient, moderate, moderate, low, moderate) 0.75, 0.25;
+  (deficient, low, moderate, moderate, low, moderate) 0.5, 0.5;
+  (low, low, moderate, moderate, low, moderate) 0.5, 0.5;
+}
+probability ( Adaptation1 | Autonomy1, Connectivity1, Diversity1, Fcover1, Organization1, Precipitation1 ) {
+  (deficient, low, high, low, low, low) 0.5, 0.5;
+  (low, low, high, low, low, low) 0.5, 0.5;
+  (deficient, moderate, high, low, low, low) 0.5, 0.5;
+  (low, moderate, high, low, low, low) 0.5, 0.5;
+  (deficient, low, low, low, low, low) 0.5, 0.5;
+  (low, low, low, low, low, low) 0.5, 0.5;
+  (deficient, moderate, low, low, low, low) 0.5, 0.5;
+  (low, moderate, low, low, low, low) 0.5, 0.5;
+  (deficient, low, moderate, low, low, low) 0.5, 0.5;
+  (low, low, moderate, low, low, low) 0.5, 0.5;
+  (deficient, moderate, moderate, low, low, low) 0.5, 0.5;
+  (low, moderate, moderate, low, low, low) 0.5, 0.5;
+  (deficient, low, high, moderate, low, low) 0.5, 0.5;
+  (low, low, high, moderate, low, low) 0.5, 0.5;
+  (deficient, moderate, high, moderate, low, low) 0.5, 0.5;
+  (low, moderate, high, moderate, low, low) 0.5, 0.5;
+  (deficient, low, low, moderate, low, low) 0.5, 0.5;
+  (low, low, low, moderate, low, low) 0.5, 0.5;
+  (deficient, moderate, low, moderate, low, low) 0.5, 0.5;
+  (low, moderate, low, moderate, low, low) 0.5, 0.5;
+  (deficient, low, moderate, moderate, low, low) 0.5, 0.5;
+  (low, low, moderate, moderate, low, low) 0.5, 0.5;
+  (deficient, moderate, moderate, moderate, low, low) 0.5, 0.5;
+  (low, moderate, moderate, moderate, low, low) 0.5, 0.5;
+  (deficient, low, high, low, moderate, low) 0.5, 0.5;
+  (low, low, high, low, moderate, low) 0.5, 0.5;
+  (deficient, moderate, high, low, moderate, low) 0.5, 0.5;
+  (low, moderate, high, low, moderate, low) 0.5, 0.5;
+  (deficient, low, low, low, moderate, low) 0.5, 0.5;
+  (low, low, low, low, moderate, low) 0.5, 0.5;
+  (deficient, moderate, low, low, moderate, low) 0.5, 0.5;
+  (low, moderate, low, low, moderate, low) 0.75, 0.25;
+  (deficient, low, moderate, low, moderate, low) 0.5, 0.5;
+  (low, low, moderate, low, moderate, low) 0.5, 0.5;
+  (deficient, moderate, moderate, low, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, low, moderate, low) 0.5, 0.5;
+  (deficient, low, high, moderate, moderate, low) 0.5, 0.5;
+  (low, low, high, moderate, moderate, low) 0.5, 0.5;
+  (deficient, moderate, high, moderate, moderate, low) 0.5, 0.5;
+  (low, moderate, high, moderate, moderate, low) 0.5, 0.5;
+  (deficient, low, low, moderate, moderate, low) 0.5, 0.5;
+  (low, low, low, moderate, moderate, low) 0.5, 0.5;
+  (deficient, moderate, low, moderate, moderate, low) 0.5, 0.5;
+  (low, moderate, low, moderate, moderate, low) 0.5, 0.5;
+  (deficient, low, moderate, moderate, moderate, low) 0.5, 0.5;
+  (low, low, moderate, moderate, moderate, low) 0.5, 0.5;
+  (deficient, moderate, moderate, moderate, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, moderate, moderate, low) 0.5, 0.5;
+  (deficient, low, high, low, low, moderate) 0.5, 0.5;
+  (low, low, high, low, low, moderate) 0.5, 0.5;
+  (deficient, moderate, high, low, low, moderate) 0.5, 0.5;
+  (low, moderate, high, low, low, moderate) 0.5, 0.5;
+  (deficient, low, low, low, low, moderate) 0.5, 0.5;
+  (low, low, low, low, low, moderate) 0.5, 0.5;
+  (deficient, moderate, low, low, low, moderate) 0.5, 0.5;
+  (low, moderate, low, low, low, moderate) 0.5, 0.5;
+  (deficient, low, moderate, low, low, moderate) 0.75, 0.25;
+  (low, low, moderate, low, low, moderate) 0.5, 0.5;
+  (deficient, moderate, moderate, low, low, moderate) 0.5, 0.5;
+  (low, moderate, moderate, low, low, moderate) 0.5, 0.5;
+  (deficient, low, high, moderate, low, moderate) 0.5, 0.5;
+  (low, low, high, moderate, low, moderate) 0.5, 0.5;
+  (deficient, moderate, high, moderate, low, moderate) 0.5, 0.5;
+  (low, moderate, high, moderate, low, moderate) 0.5, 0.5;
+  (deficient, low, low, moderate, low, moderate) 0.5, 0.5;
+  (low, low, low, moderate, low, moderate) 0.5, 0.5;
+  (deficient, moderate, low, moderate, low, moderate) 0.5, 0.5;
+  (low, moderate, low, moderate, low, moderate) 0.25, 0.75;
+  (deficient, low, moderate, moderate, low, moderate) 0.5, 0.5;
+  (low, low, moderate, moderate, low, moderate) 0.5, 0.5;
+  (deficient, moderate, moderate, moderate, low, moderate) 0.5, 0.5;
+  (low, moderate, moderate, moderate, low, moderate) 0.5, 0.5;
+  (deficient, low, high, low, moderate, moderate) 0.5, 0.5;
+  (low, low, high, low, moderate, moderate) 0.5, 0.5;
+  (deficient, moderate, high, low, moderate, moderate) 0.5, 0.5;
+  (low, moderate, high, low, moderate, moderate) 0.5, 0.5;
+  (deficient, low, low, low, moderate, moderate) 0.5, 0.5;
+  (low, low, low, low, moderate, moderate) 0.75, 0.25;
+  (deficient, moderate, low, low, moderate, moderate) 0.5, 0.5;
+  (low, moderate, low, low, moderate, moderate) 0.75, 0.25;
+  (deficient, low, moderate, low, moderate, moderate) 0.5, 0.5;
+  (low, low, moderate, low, moderate, moderate) 0.5, 0.5;
+  (deficient, moderate, moderate, low, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate, low, moderate, moderate) 0.5, 0.5;
+  (deficient, low, high, moderate, moderate, moderate) 0.5, 0.5;
+  (low, low, high, moderate, moderate, moderate) 0.5, 0.5;
+  (deficient, moderate, high, moderate, moderate, moderate) 0.25, 0.75;
+  (low, moderate, high, moderate, moderate, moderate) 0.5, 0.5;
+  (deficient, low, low, moderate, moderate, moderate) 0.5, 0.5;
+  (low, low, low, moderate, moderate, moderate) 0.5, 0.5;
+  (deficient, moderate, low, moderate, moderate, moderate) 0.5, 0.5;
+  (low, moderate, low, moderate, moderate, moderate) 0.5, 0.5;
+  (deficient, low, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (low, low, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (deficient, moderate, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate, moderate, moderate, moderate) 0.5, 0.5;
+}
+probability ( Adaptation2 | Autonomy2, Connectivity2, Diversity2, Fcover2, Organization2, Precipitation2 ) {
+  (low, high, high, high, high, high) 0.5, 0.5;
+  (moderate, high, high, high, high, high) 0.5, 0.5;
+  (low, moderate, high, high, high, high) 0.5, 0.5;
+  (moderate, moderate, high, high, high, high) 0.5, 0.5;
+  (low, high, moderate, high, high, high) 0.5, 0.5;
+  (moderate, high, moderate, high, high, high) 0.5, 0.5;
+  (low, moderate, moderate, high, high, high) 0.5, 0.5;
+  (moderate, moderate, moderate, high, high, high) 0.5, 0.5;
+  (low, high, high, low, high, high) 0.5, 0.5;
+  (moderate, high, high, low, high, high) 0.5, 0.5;
+  (low, moderate, high, low, high, high) 0.5, 0.5;
+  (moderate, moderate, high, low, high, high) 0.5, 0.5;
+  (low, high, moderate, low, high, high) 0.5, 0.5;
+  (moderate, high, moderate, low, high, high) 0.5, 0.5;
+  (low, moderate, moderate, low, high, high) 0.25, 0.75;
+  (moderate, moderate, moderate, low, high, high) 0.5, 0.5;
+  (low, high, high, moderate, high, high) 0.5, 0.5;
+  (moderate, high, high, moderate, high, high) 0.5, 0.5;
+  (low, moderate, high, moderate, high, high) 0.5, 0.5;
+  (moderate, moderate, high, moderate, high, high) 0.5, 0.5;
+  (low, high, moderate, moderate, high, high) 0.5, 0.5;
+  (moderate, high, moderate, moderate, high, high) 0.5, 0.5;
+  (low, moderate, moderate, moderate, high, high) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, high, high) 0.5, 0.5;
+  (low, high, high, high, moderate, high) 0.5, 0.5;
+  (moderate, high, high, high, moderate, high) 0.5, 0.5;
+  (low, moderate, high, high, moderate, high) 0.5, 0.5;
+  (moderate, moderate, high, high, moderate, high) 0.5, 0.5;
+  (low, high, moderate, high, moderate, high) 0.5, 0.5;
+  (moderate, high, moderate, high, moderate, high) 0.5, 0.5;
+  (low, moderate, moderate, high, moderate, high) 0.5, 0.5;
+  (moderate, moderate, moderate, high, moderate, high) 0.5, 0.5;
+  (low, high, high, low, moderate, high) 0.5, 0.5;
+  (moderate, high, high, low, moderate, high) 0.5, 0.5;
+  (low, moderate, high, low, moderate, high) 0.25, 0.75;
+  (moderate, moderate, high, low, moderate, high) 0.25, 0.75;
+  (low, high, moderate, low, moderate, high) 0.5, 0.5;
+  (moderate, high, moderate, low, moderate, high) 0.5, 0.5;
+  (low, moderate, moderate, low, moderate, high) 0.5, 0.5;
+  (moderate, moderate, moderate, low, moderate, high) 0.5, 0.5;
+  (low, high, high, moderate, moderate, high) 0.5, 0.5;
+  (moderate, high, high, moderate, moderate, high) 0.5, 0.5;
+  (low, moderate, high, moderate, moderate, high) 0.5, 0.5;
+  (moderate, moderate, high, moderate, moderate, high) 0.5, 0.5;
+  (low, high, moderate, moderate, moderate, high) 0.5, 0.5;
+  (moderate, high, moderate, moderate, moderate, high) 0.5, 0.5;
+  (low, moderate, moderate, moderate, moderate, high) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, moderate, high) 0.5, 0.5;
+  (low, high, high, high, high, low) 0.5, 0.5;
+  (moderate, high, high, high, high, low) 0.5, 0.5;
+  (low, moderate, high, high, high, low) 0.5, 0.5;
+  (moderate, moderate, high, high, high, low) 0.5, 0.5;
+  (low, high, moderate, high, high, low) 0.5, 0.5;
+  (moderate, high, moderate, high, high, low) 0.5, 0.5;
+  (low, moderate, moderate, high, high, low) 0.5, 0.5;
+  (moderate, moderate, moderate, high, high, low) 0.5, 0.5;
+  (low, high, high, low, high, low) 0.5, 0.5;
+  (moderate, high, high, low, high, low) 0.5, 0.5;
+  (low, moderate, high, low, high, low) 0.5, 0.5;
+  (moderate, moderate, high, low, high, low) 0.5, 0.5;
+  (low, high, moderate, low, high, low) 0.5, 0.5;
+  (moderate, high, moderate, low, high, low) 0.5, 0.5;
+  (low, moderate, moderate, low, high, low) 0.25, 0.75;
+  (moderate, moderate, moderate, low, high, low) 0.5, 0.5;
+  (low, high, high, moderate, high, low) 0.5, 0.5;
+  (moderate, high, high, moderate, high, low) 0.5, 0.5;
+  (low, moderate, high, moderate, high, low) 0.5, 0.5;
+  (moderate, moderate, high, moderate, high, low) 0.5, 0.5;
+  (low, high, moderate, moderate, high, low) 0.5, 0.5;
+  (moderate, high, moderate, moderate, high, low) 0.5, 0.5;
+  (low, moderate, moderate, moderate, high, low) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, high, low) 0.5, 0.5;
+  (low, high, high, high, moderate, low) 0.5, 0.5;
+  (moderate, high, high, high, moderate, low) 0.5, 0.5;
+  (low, moderate, high, high, moderate, low) 0.5, 0.5;
+  (moderate, moderate, high, high, moderate, low) 0.5, 0.5;
+  (low, high, moderate, high, moderate, low) 0.5, 0.5;
+  (moderate, high, moderate, high, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, high, moderate, low) 0.5, 0.5;
+  (moderate, moderate, moderate, high, moderate, low) 0.5, 0.5;
+  (low, high, high, low, moderate, low) 0.5, 0.5;
+  (moderate, high, high, low, moderate, low) 0.5, 0.5;
+  (low, moderate, high, low, moderate, low) 0.5, 0.5;
+  (moderate, moderate, high, low, moderate, low) 0.5, 0.5;
+  (low, high, moderate, low, moderate, low) 0.5, 0.5;
+  (moderate, high, moderate, low, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, low, moderate, low) 0.5, 0.5;
+  (moderate, moderate, moderate, low, moderate, low) 0.5, 0.5;
+  (low, high, high, moderate, moderate, low) 0.25, 0.75;
+  (moderate, high, high, moderate, moderate, low) 0.25, 0.75;
+  (low, moderate, high, moderate, moderate, low) 0.5, 0.5;
+  (moderate, moderate, high, moderate, moderate, low) 0.5, 0.5;
+  (low, high, moderate, moderate, moderate, low) 0.5, 0.5;
+  (moderate, high, moderate, moderate, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, moderate, moderate, low) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, moderate, low) 0.5, 0.5;
+  (low, high, high, high, high, moderate) 0.5, 0.5;
+  (moderate, high, high, high, high, moderate) 0.5, 0.5;
+  (low, moderate, high, high, high, moderate) 0.5, 0.5;
+  (moderate, moderate, high, high, high, moderate) 0.25, 0.75;
+  (low, high, moderate, high, high, moderate) 0.5, 0.5;
+  (moderate, high, moderate, high, high, moderate) 0.5, 0.5;
+  (low, moderate, moderate, high, high, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, high, high, moderate) 0.5, 0.5;
+  (low, high, high, low, high, moderate) 0.5, 0.5;
+  (moderate, high, high, low, high, moderate) 0.5, 0.5;
+  (low, moderate, high, low, high, moderate) 0.5, 0.5;
+  (moderate, moderate, high, low, high, moderate) 0.5, 0.5;
+  (low, high, moderate, low, high, moderate) 0.5, 0.5;
+  (moderate, high, moderate, low, high, moderate) 0.5, 0.5;
+  (low, moderate, moderate, low, high, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, low, high, moderate) 0.5, 0.5;
+  (low, high, high, moderate, high, moderate) 0.5, 0.5;
+  (moderate, high, high, moderate, high, moderate) 0.5, 0.5;
+  (low, moderate, high, moderate, high, moderate) 0.5, 0.5;
+  (moderate, moderate, high, moderate, high, moderate) 0.5, 0.5;
+  (low, high, moderate, moderate, high, moderate) 0.5, 0.5;
+  (moderate, high, moderate, moderate, high, moderate) 0.5, 0.5;
+  (low, moderate, moderate, moderate, high, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, high, moderate) 0.5, 0.5;
+  (low, high, high, high, moderate, moderate) 0.5, 0.5;
+  (moderate, high, high, high, moderate, moderate) 0.5, 0.5;
+  (low, moderate, high, high, moderate, moderate) 0.75, 0.25;
+  (moderate, moderate, high, high, moderate, moderate) 0.5, 0.5;
+  (low, high, moderate, high, moderate, moderate) 0.5, 0.5;
+  (moderate, high, moderate, high, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate, high, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, high, moderate, moderate) 0.5, 0.5;
+  (low, high, high, low, moderate, moderate) 0.5, 0.5;
+  (moderate, high, high, low, moderate, moderate) 0.5, 0.5;
+  (low, moderate, high, low, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, high, low, moderate, moderate) 0.5, 0.5;
+  (low, high, moderate, low, moderate, moderate) 0.5, 0.5;
+  (moderate, high, moderate, low, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate, low, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, low, moderate, moderate) 0.5, 0.5;
+  (low, high, high, moderate, moderate, moderate) 0.5, 0.5;
+  (moderate, high, high, moderate, moderate, moderate) 0.5, 0.5;
+  (low, moderate, high, moderate, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, high, moderate, moderate, moderate) 0.5, 0.5;
+  (low, high, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (moderate, high, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (low, moderate, moderate, moderate, moderate, moderate) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, moderate, moderate) 0.5, 0.5;
+}
+probability ( Autonomy ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Autonomy1 ) {
+  table 0.1666667, 0.8333333;
+}
+probability ( Autonomy2 ) {
+  table 0.3888889, 0.6111111;
+}
+probability ( Connectivity ) {
+  table 0.6111111, 0.3888889;
+}
+probability ( Connectivity1 ) {
+  table 0.5, 0.5;
+}
+probability ( Connectivity2 ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Density ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Density1 ) {
+  table 0.5, 0.5;
+}
+probability ( Density2 ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Diversity ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Diversity1 ) {
+  table 0.1481481, 0.2592593, 0.5925926;
+}
+probability ( Diversity2 ) {
+  table 0.5, 0.5;
+}
+probability ( Fcover ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Fcover1 ) {
+  table 0.5, 0.5;
+}
+probability ( Fcover2 ) {
+  table 0.7037037, 0.1481481, 0.1481481;
+}
+probability ( Fires ) {
+  table 0.2777778, 0.7222222;
+}
+probability ( Fires1 | Fires ) {
+  (high) 0.7777778, 0.1111111, 0.1111111;
+  (moderate) 0.1904762, 0.1904762, 0.6190476;
+}
+probability ( Fires2 | Fires1 ) {
+  (high) 0.875, 0.125;
+  (low) 0.75, 0.25;
+  (moderate) 0.7, 0.3;
+}
+probability ( Function | Absorption, Adaptation, Transformation ) {
+  (false, false, false) 0.6875, 0.3125;
+  (true, false, false) 0.5, 0.5;
+  (false, true, false) 0.5, 0.5;
+  (true, true, false) 0.5, 0.5;
+  (false, false, true) 0.5, 0.5;
+  (true, false, true) 0.5, 0.5;
+  (false, true, true) 0.5, 0.5;
+  (true, true, true) 0.75, 0.25;
+}
+probability ( Function1 | Absorption1, Adaptation1, Transformation1 ) {
+  (false, false, false) 0.7, 0.3;
+  (true, false, false) 0.75, 0.25;
+  (false, true, false) 0.75, 0.25;
+  (true, true, false) 0.5, 0.5;
+  (false, false, true) 0.5, 0.5;
+  (true, false, true) 0.5, 0.5;
+  (false, true, true) 0.5, 0.5;
+  (true, true, true) 0.1666667, 0.8333333;
+}
+probability ( Function2 | Absorption2, Adaptation2, Transformation2 ) {
+  (false, false, false) 0.75, 0.25;
+  (true, false, false) 0.5, 0.5;
+  (false, true, false) 0.5, 0.5;
+  (true, true, false) 0.5, 0.5;
+  (false, false, true) 0.5, 0.5;
+  (true, false, true) 0.5, 0.5;
+  (false, true, true) 0.25, 0.75;
+  (true, true, true) 0.07142857, 0.92857143;
+}
+probability ( Organization ) {
+  table 0.6111111, 0.3888889;
+}
+probability ( Organization1 ) {
+  table 0.5, 0.5;
+}
+probability ( Organization2 ) {
+  table 0.8333333, 0.1666667;
+}
+probability ( Precipitation ) {
+  table 0.1481481, 0.1481481, 0.7037037;
+}
+probability ( Precipitation1 ) {
+  table 0.2777778, 0.7222222;
+}
+probability ( Precipitation2 ) {
+  table 0.1481481, 0.4814815, 0.3703704;
+}
+probability ( Transformation | Connectivity, Density, Fires, Organization ) {
+  (deficient, low, high, deficient) 0.5, 0.5;
+  (low, low, high, deficient) 0.8333333, 0.1666667;
+  (deficient, moderate, high, deficient) 0.5, 0.5;
+  (low, moderate, high, deficient) 0.5, 0.5;
+  (deficient, low, moderate, deficient) 0.5, 0.5;
+  (low, low, moderate, deficient) 0.5, 0.5;
+  (deficient, moderate, moderate, deficient) 0.5, 0.5;
+  (low, moderate, moderate, deficient) 0.875, 0.125;
+  (deficient, low, high, low) 0.5, 0.5;
+  (low, low, high, low) 0.75, 0.25;
+  (deficient, moderate, high, low) 0.5, 0.5;
+  (low, moderate, high, low) 0.5, 0.5;
+  (deficient, low, moderate, low) 0.5, 0.5;
+  (low, low, moderate, low) 0.5, 0.5;
+  (deficient, moderate, moderate, low) 0.5, 0.5;
+  (low, moderate, moderate, low) 0.5, 0.5;
+}
+probability ( Transformation1 | Connectivity1, Density1, Fires1, Organization1, Transformation ) {
+  (low, low, high, low, false) 0.5, 0.5;
+  (moderate, low, high, low, false) 0.5, 0.5;
+  (low, moderate, high, low, false) 0.5, 0.5;
+  (moderate, moderate, high, low, false) 0.5, 0.5;
+  (low, low, low, low, false) 0.75, 0.25;
+  (moderate, low, low, low, false) 0.5, 0.5;
+  (low, moderate, low, low, false) 0.5, 0.5;
+  (moderate, moderate, low, low, false) 0.5, 0.5;
+  (low, low, moderate, low, false) 0.5, 0.5;
+  (moderate, low, moderate, low, false) 0.5, 0.5;
+  (low, moderate, moderate, low, false) 0.5, 0.5;
+  (moderate, moderate, moderate, low, false) 0.5, 0.5;
+  (low, low, high, moderate, false) 0.5, 0.5;
+  (moderate, low, high, moderate, false) 0.5, 0.5;
+  (low, moderate, high, moderate, false) 0.5, 0.5;
+  (moderate, moderate, high, moderate, false) 0.5, 0.5;
+  (low, low, low, moderate, false) 0.5, 0.5;
+  (moderate, low, low, moderate, false) 0.5, 0.5;
+  (low, moderate, low, moderate, false) 0.5, 0.5;
+  (moderate, moderate, low, moderate, false) 0.5, 0.5;
+  (low, low, moderate, moderate, false) 0.5, 0.5;
+  (moderate, low, moderate, moderate, false) 0.5, 0.5;
+  (low, moderate, moderate, moderate, false) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, false) 0.5, 0.5;
+  (low, low, high, low, true) 0.5, 0.5;
+  (moderate, low, high, low, true) 0.5, 0.5;
+  (low, moderate, high, low, true) 0.5, 0.5;
+  (moderate, moderate, high, low, true) 0.5, 0.5;
+  (low, low, low, low, true) 0.5, 0.5;
+  (moderate, low, low, low, true) 0.5, 0.5;
+  (low, moderate, low, low, true) 0.5, 0.5;
+  (moderate, moderate, low, low, true) 0.5, 0.5;
+  (low, low, moderate, low, true) 0.5, 0.5;
+  (moderate, low, moderate, low, true) 0.5, 0.5;
+  (low, moderate, moderate, low, true) 0.5, 0.5;
+  (moderate, moderate, moderate, low, true) 0.5, 0.5;
+  (low, low, high, moderate, true) 0.25, 0.75;
+  (moderate, low, high, moderate, true) 0.5, 0.5;
+  (low, moderate, high, moderate, true) 0.5, 0.5;
+  (moderate, moderate, high, moderate, true) 0.5, 0.5;
+  (low, low, low, moderate, true) 0.5, 0.5;
+  (moderate, low, low, moderate, true) 0.5, 0.5;
+  (low, moderate, low, moderate, true) 0.5, 0.5;
+  (moderate, moderate, low, moderate, true) 0.25, 0.75;
+  (low, low, moderate, moderate, true) 0.875, 0.125;
+  (moderate, low, moderate, moderate, true) 0.5, 0.5;
+  (low, moderate, moderate, moderate, true) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, true) 0.5, 0.5;
+}
+probability ( Transformation2 | Connectivity2, Density2, Fires2, Organization2, Transformation1 ) {
+  (high, high, low, high, false) 0.375, 0.625;
+  (moderate, high, low, high, false) 0.5, 0.5;
+  (high, moderate, low, high, false) 0.5, 0.5;
+  (moderate, moderate, low, high, false) 0.5, 0.5;
+  (high, high, moderate, high, false) 0.125, 0.875;
+  (moderate, high, moderate, high, false) 0.5, 0.5;
+  (high, moderate, moderate, high, false) 0.5, 0.5;
+  (moderate, moderate, moderate, high, false) 0.5, 0.5;
+  (high, high, low, moderate, false) 0.5, 0.5;
+  (moderate, high, low, moderate, false) 0.5, 0.5;
+  (high, moderate, low, moderate, false) 0.5, 0.5;
+  (moderate, moderate, low, moderate, false) 0.25, 0.75;
+  (high, high, moderate, moderate, false) 0.5, 0.5;
+  (moderate, high, moderate, moderate, false) 0.5, 0.5;
+  (high, moderate, moderate, moderate, false) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, false) 0.5, 0.5;
+  (high, high, low, high, true) 0.75, 0.25;
+  (moderate, high, low, high, true) 0.5, 0.5;
+  (high, moderate, low, high, true) 0.5, 0.5;
+  (moderate, moderate, low, high, true) 0.5, 0.5;
+  (high, high, moderate, high, true) 0.5, 0.5;
+  (moderate, high, moderate, high, true) 0.5, 0.5;
+  (high, moderate, moderate, high, true) 0.5, 0.5;
+  (moderate, moderate, moderate, high, true) 0.5, 0.5;
+  (high, high, low, moderate, true) 0.5, 0.5;
+  (moderate, high, low, moderate, true) 0.5, 0.5;
+  (high, moderate, low, moderate, true) 0.5, 0.5;
+  (moderate, moderate, low, moderate, true) 0.5, 0.5;
+  (high, high, moderate, moderate, true) 0.5, 0.5;
+  (moderate, high, moderate, moderate, true) 0.5, 0.5;
+  (high, moderate, moderate, moderate, true) 0.5, 0.5;
+  (moderate, moderate, moderate, moderate, true) 0.5, 0.5;
+}

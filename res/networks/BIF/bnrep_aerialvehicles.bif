@@ -1,0 +1,452 @@
+network unknown {
+}
+variable A1 {
+  type discrete [ 2 ] { yes, no };
+}
+variable A2 {
+  type discrete [ 2 ] { yes, no };
+}
+variable A3 {
+  type discrete [ 2 ] { yes, no };
+}
+variable A4 {
+  type discrete [ 2 ] { yes, no };
+}
+variable A5 {
+  type discrete [ 2 ] { yes, no };
+}
+variable M1 {
+  type discrete [ 2 ] { yes, no };
+}
+variable M2 {
+  type discrete [ 2 ] { yes, no };
+}
+variable M3 {
+  type discrete [ 2 ] { yes, no };
+}
+variable M4 {
+  type discrete [ 2 ] { yes, no };
+}
+variable P {
+  type discrete [ 2 ] { yes, no };
+}
+variable P1 {
+  type discrete [ 2 ] { yes, no };
+}
+variable P2 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X1 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X10 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X11 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X12 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X13 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X14 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X15 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X16 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X17 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X18 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X19 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X2 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X20 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X21 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X22 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X23 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X24 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X25 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X26 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X27 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X3 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X4 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X5 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X6 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X7 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X8 {
+  type discrete [ 2 ] { yes, no };
+}
+variable X9 {
+  type discrete [ 2 ] { yes, no };
+}
+probability ( A1 | X1, X2, X3 ) {
+  (yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes) 1.0, 0.0;
+  (yes, no, yes) 1.0, 0.0;
+  (no, no, yes) 1.0, 0.0;
+  (yes, yes, no) 1.0, 0.0;
+  (no, yes, no) 1.0, 0.0;
+  (yes, no, no) 1.0, 0.0;
+  (no, no, no) 0.0, 1.0;
+}
+probability ( A2 | M1, M2, X10, X8, X9 ) {
+  (yes, yes, yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, no, yes, yes) 1.0, 0.0;
+  (no, yes, no, yes, yes) 1.0, 0.0;
+  (yes, no, no, yes, yes) 1.0, 0.0;
+  (no, no, no, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, no, yes) 1.0, 0.0;
+  (no, yes, yes, no, yes) 1.0, 0.0;
+  (yes, no, yes, no, yes) 1.0, 0.0;
+  (no, no, yes, no, yes) 1.0, 0.0;
+  (yes, yes, no, no, yes) 1.0, 0.0;
+  (no, yes, no, no, yes) 1.0, 0.0;
+  (yes, no, no, no, yes) 1.0, 0.0;
+  (no, no, no, no, yes) 1.0, 0.0;
+  (yes, yes, yes, yes, no) 1.0, 0.0;
+  (no, yes, yes, yes, no) 1.0, 0.0;
+  (yes, no, yes, yes, no) 1.0, 0.0;
+  (no, no, yes, yes, no) 1.0, 0.0;
+  (yes, yes, no, yes, no) 1.0, 0.0;
+  (no, yes, no, yes, no) 1.0, 0.0;
+  (yes, no, no, yes, no) 1.0, 0.0;
+  (no, no, no, yes, no) 1.0, 0.0;
+  (yes, yes, yes, no, no) 1.0, 0.0;
+  (no, yes, yes, no, no) 1.0, 0.0;
+  (yes, no, yes, no, no) 1.0, 0.0;
+  (no, no, yes, no, no) 1.0, 0.0;
+  (yes, yes, no, no, no) 1.0, 0.0;
+  (no, yes, no, no, no) 1.0, 0.0;
+  (yes, no, no, no, no) 1.0, 0.0;
+  (no, no, no, no, no) 0.0, 1.0;
+}
+probability ( A3 | X13, X14, X15, X16, X17, X18 ) {
+  (yes, yes, yes, yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, no, yes, yes, yes) 1.0, 0.0;
+  (no, yes, no, yes, yes, yes) 1.0, 0.0;
+  (yes, no, no, yes, yes, yes) 1.0, 0.0;
+  (no, no, no, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, no, yes, yes) 1.0, 0.0;
+  (no, yes, yes, no, yes, yes) 1.0, 0.0;
+  (yes, no, yes, no, yes, yes) 1.0, 0.0;
+  (no, no, yes, no, yes, yes) 1.0, 0.0;
+  (yes, yes, no, no, yes, yes) 1.0, 0.0;
+  (no, yes, no, no, yes, yes) 1.0, 0.0;
+  (yes, no, no, no, yes, yes) 1.0, 0.0;
+  (no, no, no, no, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, yes, no, yes) 1.0, 0.0;
+  (no, yes, yes, yes, no, yes) 1.0, 0.0;
+  (yes, no, yes, yes, no, yes) 1.0, 0.0;
+  (no, no, yes, yes, no, yes) 1.0, 0.0;
+  (yes, yes, no, yes, no, yes) 1.0, 0.0;
+  (no, yes, no, yes, no, yes) 1.0, 0.0;
+  (yes, no, no, yes, no, yes) 1.0, 0.0;
+  (no, no, no, yes, no, yes) 1.0, 0.0;
+  (yes, yes, yes, no, no, yes) 1.0, 0.0;
+  (no, yes, yes, no, no, yes) 1.0, 0.0;
+  (yes, no, yes, no, no, yes) 1.0, 0.0;
+  (no, no, yes, no, no, yes) 1.0, 0.0;
+  (yes, yes, no, no, no, yes) 1.0, 0.0;
+  (no, yes, no, no, no, yes) 1.0, 0.0;
+  (yes, no, no, no, no, yes) 1.0, 0.0;
+  (no, no, no, no, no, yes) 1.0, 0.0;
+  (yes, yes, yes, yes, yes, no) 1.0, 0.0;
+  (no, yes, yes, yes, yes, no) 1.0, 0.0;
+  (yes, no, yes, yes, yes, no) 1.0, 0.0;
+  (no, no, yes, yes, yes, no) 1.0, 0.0;
+  (yes, yes, no, yes, yes, no) 1.0, 0.0;
+  (no, yes, no, yes, yes, no) 1.0, 0.0;
+  (yes, no, no, yes, yes, no) 1.0, 0.0;
+  (no, no, no, yes, yes, no) 1.0, 0.0;
+  (yes, yes, yes, no, yes, no) 1.0, 0.0;
+  (no, yes, yes, no, yes, no) 1.0, 0.0;
+  (yes, no, yes, no, yes, no) 1.0, 0.0;
+  (no, no, yes, no, yes, no) 1.0, 0.0;
+  (yes, yes, no, no, yes, no) 1.0, 0.0;
+  (no, yes, no, no, yes, no) 1.0, 0.0;
+  (yes, no, no, no, yes, no) 1.0, 0.0;
+  (no, no, no, no, yes, no) 1.0, 0.0;
+  (yes, yes, yes, yes, no, no) 1.0, 0.0;
+  (no, yes, yes, yes, no, no) 1.0, 0.0;
+  (yes, no, yes, yes, no, no) 1.0, 0.0;
+  (no, no, yes, yes, no, no) 1.0, 0.0;
+  (yes, yes, no, yes, no, no) 1.0, 0.0;
+  (no, yes, no, yes, no, no) 1.0, 0.0;
+  (yes, no, no, yes, no, no) 1.0, 0.0;
+  (no, no, no, yes, no, no) 1.0, 0.0;
+  (yes, yes, yes, no, no, no) 1.0, 0.0;
+  (no, yes, yes, no, no, no) 1.0, 0.0;
+  (yes, no, yes, no, no, no) 1.0, 0.0;
+  (no, no, yes, no, no, no) 1.0, 0.0;
+  (yes, yes, no, no, no, no) 1.0, 0.0;
+  (no, yes, no, no, no, no) 1.0, 0.0;
+  (yes, no, no, no, no, no) 1.0, 0.0;
+  (no, no, no, no, no, no) 0.0, 1.0;
+}
+probability ( A4 | M3, X18, X19, X20 ) {
+  (yes, yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes) 1.0, 0.0;
+  (yes, yes, no, yes) 1.0, 0.0;
+  (no, yes, no, yes) 1.0, 0.0;
+  (yes, no, no, yes) 1.0, 0.0;
+  (no, no, no, yes) 1.0, 0.0;
+  (yes, yes, yes, no) 1.0, 0.0;
+  (no, yes, yes, no) 1.0, 0.0;
+  (yes, no, yes, no) 1.0, 0.0;
+  (no, no, yes, no) 1.0, 0.0;
+  (yes, yes, no, no) 1.0, 0.0;
+  (no, yes, no, no) 1.0, 0.0;
+  (yes, no, no, no) 1.0, 0.0;
+  (no, no, no, no) 0.0, 1.0;
+}
+probability ( A5 | M4, X21, X22, X25, X26, X27 ) {
+  (yes, yes, yes, yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, no, yes, yes, yes) 1.0, 0.0;
+  (no, yes, no, yes, yes, yes) 1.0, 0.0;
+  (yes, no, no, yes, yes, yes) 1.0, 0.0;
+  (no, no, no, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, no, yes, yes) 1.0, 0.0;
+  (no, yes, yes, no, yes, yes) 1.0, 0.0;
+  (yes, no, yes, no, yes, yes) 1.0, 0.0;
+  (no, no, yes, no, yes, yes) 1.0, 0.0;
+  (yes, yes, no, no, yes, yes) 1.0, 0.0;
+  (no, yes, no, no, yes, yes) 1.0, 0.0;
+  (yes, no, no, no, yes, yes) 1.0, 0.0;
+  (no, no, no, no, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, yes, no, yes) 1.0, 0.0;
+  (no, yes, yes, yes, no, yes) 1.0, 0.0;
+  (yes, no, yes, yes, no, yes) 1.0, 0.0;
+  (no, no, yes, yes, no, yes) 1.0, 0.0;
+  (yes, yes, no, yes, no, yes) 1.0, 0.0;
+  (no, yes, no, yes, no, yes) 1.0, 0.0;
+  (yes, no, no, yes, no, yes) 1.0, 0.0;
+  (no, no, no, yes, no, yes) 1.0, 0.0;
+  (yes, yes, yes, no, no, yes) 1.0, 0.0;
+  (no, yes, yes, no, no, yes) 1.0, 0.0;
+  (yes, no, yes, no, no, yes) 1.0, 0.0;
+  (no, no, yes, no, no, yes) 1.0, 0.0;
+  (yes, yes, no, no, no, yes) 1.0, 0.0;
+  (no, yes, no, no, no, yes) 1.0, 0.0;
+  (yes, no, no, no, no, yes) 1.0, 0.0;
+  (no, no, no, no, no, yes) 1.0, 0.0;
+  (yes, yes, yes, yes, yes, no) 1.0, 0.0;
+  (no, yes, yes, yes, yes, no) 1.0, 0.0;
+  (yes, no, yes, yes, yes, no) 1.0, 0.0;
+  (no, no, yes, yes, yes, no) 1.0, 0.0;
+  (yes, yes, no, yes, yes, no) 1.0, 0.0;
+  (no, yes, no, yes, yes, no) 1.0, 0.0;
+  (yes, no, no, yes, yes, no) 1.0, 0.0;
+  (no, no, no, yes, yes, no) 1.0, 0.0;
+  (yes, yes, yes, no, yes, no) 1.0, 0.0;
+  (no, yes, yes, no, yes, no) 1.0, 0.0;
+  (yes, no, yes, no, yes, no) 1.0, 0.0;
+  (no, no, yes, no, yes, no) 1.0, 0.0;
+  (yes, yes, no, no, yes, no) 1.0, 0.0;
+  (no, yes, no, no, yes, no) 1.0, 0.0;
+  (yes, no, no, no, yes, no) 1.0, 0.0;
+  (no, no, no, no, yes, no) 1.0, 0.0;
+  (yes, yes, yes, yes, no, no) 1.0, 0.0;
+  (no, yes, yes, yes, no, no) 1.0, 0.0;
+  (yes, no, yes, yes, no, no) 1.0, 0.0;
+  (no, no, yes, yes, no, no) 1.0, 0.0;
+  (yes, yes, no, yes, no, no) 1.0, 0.0;
+  (no, yes, no, yes, no, no) 1.0, 0.0;
+  (yes, no, no, yes, no, no) 1.0, 0.0;
+  (no, no, no, yes, no, no) 1.0, 0.0;
+  (yes, yes, yes, no, no, no) 1.0, 0.0;
+  (no, yes, yes, no, no, no) 1.0, 0.0;
+  (yes, no, yes, no, no, no) 1.0, 0.0;
+  (no, no, yes, no, no, no) 1.0, 0.0;
+  (yes, yes, no, no, no, no) 1.0, 0.0;
+  (no, yes, no, no, no, no) 1.0, 0.0;
+  (yes, no, no, no, no, no) 1.0, 0.0;
+  (no, no, no, no, no, no) 0.0, 1.0;
+}
+probability ( M1 | X4, X5, X6, X7 ) {
+  (yes, yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes) 1.0, 0.0;
+  (yes, yes, no, yes) 1.0, 0.0;
+  (no, yes, no, yes) 1.0, 0.0;
+  (yes, no, no, yes) 1.0, 0.0;
+  (no, no, no, yes) 1.0, 0.0;
+  (yes, yes, yes, no) 1.0, 0.0;
+  (no, yes, yes, no) 1.0, 0.0;
+  (yes, no, yes, no) 1.0, 0.0;
+  (no, no, yes, no) 1.0, 0.0;
+  (yes, yes, no, no) 1.0, 0.0;
+  (no, yes, no, no) 1.0, 0.0;
+  (yes, no, no, no) 1.0, 0.0;
+  (no, no, no, no) 0.0, 1.0;
+}
+probability ( M2 | X11, X12 ) {
+  (yes, yes) 1.0, 0.0;
+  (no, yes) 1.0, 0.0;
+  (yes, no) 1.0, 0.0;
+  (no, no) 0.0, 1.0;
+}
+probability ( M3 | X19, X20 ) {
+  (yes, yes) 1.0, 0.0;
+  (no, yes) 1.0, 0.0;
+  (yes, no) 1.0, 0.0;
+  (no, no) 0.0, 1.0;
+}
+probability ( M4 | X23, X24 ) {
+  (yes, yes) 1.0, 0.0;
+  (no, yes) 1.0, 0.0;
+  (yes, no) 1.0, 0.0;
+  (no, no) 0.0, 1.0;
+}
+probability ( P | P1, P2 ) {
+  (yes, yes) 1.0, 0.0;
+  (no, yes) 1.0, 0.0;
+  (yes, no) 1.0, 0.0;
+  (no, no) 0.0, 1.0;
+}
+probability ( P1 | A1, A2, A3 ) {
+  (yes, yes, yes) 1.0, 0.0;
+  (no, yes, yes) 1.0, 0.0;
+  (yes, no, yes) 1.0, 0.0;
+  (no, no, yes) 1.0, 0.0;
+  (yes, yes, no) 1.0, 0.0;
+  (no, yes, no) 1.0, 0.0;
+  (yes, no, no) 1.0, 0.0;
+  (no, no, no) 0.0, 1.0;
+}
+probability ( P2 | A4, A5 ) {
+  (yes, yes) 1.0, 0.0;
+  (no, yes) 1.0, 0.0;
+  (yes, no) 1.0, 0.0;
+  (no, no) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.0064, 0.9936;
+}
+probability ( X10 ) {
+  table 0.0128, 0.9872;
+}
+probability ( X11 ) {
+  table 0.0051, 0.9949;
+}
+probability ( X12 ) {
+  table 0.0026, 0.9974;
+}
+probability ( X13 ) {
+  table 0.0204, 0.9796;
+}
+probability ( X14 ) {
+  table 0.0281, 0.9719;
+}
+probability ( X15 ) {
+  table 0.0064, 0.9936;
+}
+probability ( X16 ) {
+  table 0.0077, 0.9923;
+}
+probability ( X17 ) {
+  table 0.0013, 0.9987;
+}
+probability ( X18 ) {
+  table 0.0843, 0.9157;
+}
+probability ( X19 ) {
+  table 0.0268, 0.9732;
+}
+probability ( X2 ) {
+  table 0.0077, 0.9923;
+}
+probability ( X20 ) {
+  table 0.0051, 0.9949;
+}
+probability ( X21 ) {
+  table 0.0166, 0.9834;
+}
+probability ( X22 ) {
+  table 0.0013, 0.9987;
+}
+probability ( X23 ) {
+  table 0.0051, 0.9949;
+}
+probability ( X24 ) {
+  table 0.0123, 0.9877;
+}
+probability ( X25 ) {
+  table 0.014, 0.986;
+}
+probability ( X26 ) {
+  table 0.0089, 0.9911;
+}
+probability ( X27 ) {
+  table 0.0268, 0.9732;
+}
+probability ( X3 ) {
+  table 0.0026, 0.9974;
+}
+probability ( X4 ) {
+  table 0.0038, 0.9962;
+}
+probability ( X5 ) {
+  table 0.0013, 0.9987;
+}
+probability ( X6 ) {
+  table 0.0013, 0.9987;
+}
+probability ( X7 ) {
+  table 0.0013, 0.9987;
+}
+probability ( X8 ) {
+  table 0.0051, 0.9949;
+}
+probability ( X9 ) {
+  table 0.0013, 0.9987;
+}

@@ -1,0 +1,346 @@
+network unknown {
+}
+variable AdverseSeaSwell {
+  type discrete [ 2 ] { Yes, No };
+}
+variable AdverseWind {
+  type discrete [ 2 ] { Yes, No };
+}
+variable CommercialPressure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ExcessiveEnvironmentFactors {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ExcessiveMotionVessel {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ExcessiveShipSpeed {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FailureHandholds {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HeavyRain {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HumanFailures {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ImproperShipHandling {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InappropriateAngle {
+  type discrete [ 2 ] { Yes, No };
+}
+variable IncorrectHeigth {
+  type discrete [ 2 ] { Yes, No };
+}
+variable IncorrectRigging {
+  type discrete [ 2 ] { Yes, No };
+}
+variable IndividualFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LackOfSafetyCulture {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LackOfSupervision {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ManeouveringFailures {
+  type discrete [ 2 ] { Yes, No };
+}
+variable NonCertifiedPilotLadder {
+  type discrete [ 2 ] { Yes, No };
+}
+variable NonComplyTrapdoor {
+  type discrete [ 2 ] { Yes, No };
+}
+variable OperationalFailures {
+  type discrete [ 2 ] { Yes, No };
+}
+variable OrganizationalFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PilotLadder {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PilotTransferAccident {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorCombinationLadder {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorCommunicationWithPilotBoat {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorConditionPTA {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorIllumination {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorISMSystem {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorPilotLadder {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PTAEquipmentFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PTAFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PTAPreparedWindward {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RestrictedVisibility {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RetrievalLine {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RiggingFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SecuringFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SecuringFailurePilot {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SecuringFailurePTA {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ShipSideObstructed {
+  type discrete [ 2 ] { Yes, No };
+}
+variable StructuralFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SubstandardActs {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SubstandardConditions {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( AdverseSeaSwell ) {
+  table 0.01172, 0.98828;
+}
+probability ( AdverseWind ) {
+  table 0.00147, 0.99853;
+}
+probability ( CommercialPressure ) {
+  table 0.00148, 0.99852;
+}
+probability ( ExcessiveEnvironmentFactors | ExcessiveMotionVessel, HeavyRain, RestrictedVisibility ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( ExcessiveMotionVessel | AdverseSeaSwell, AdverseWind ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( ExcessiveShipSpeed ) {
+  table 0.00054, 0.99946;
+}
+probability ( FailureHandholds ) {
+  table 0.00373, 0.99627;
+}
+probability ( HeavyRain ) {
+  table 0.00003, 0.99997;
+}
+probability ( HumanFailures | IndividualFailure, OrganizationalFailure ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( ImproperShipHandling ) {
+  table 0.00037, 0.99963;
+}
+probability ( InappropriateAngle ) {
+  table 0.00003, 0.99997;
+}
+probability ( IncorrectHeigth ) {
+  table 0.00091, 0.99909;
+}
+probability ( IncorrectRigging ) {
+  table 0.00025, 0.99975;
+}
+probability ( IndividualFailure | CommercialPressure, LackOfSupervision, PoorCommunicationWithPilotBoat ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( LackOfSafetyCulture ) {
+  table 0.02227, 0.97773;
+}
+probability ( LackOfSupervision ) {
+  table 0.00416, 0.99584;
+}
+probability ( ManeouveringFailures | ExcessiveShipSpeed, ImproperShipHandling ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( NonCertifiedPilotLadder ) {
+  table 0.0005, 0.9995;
+}
+probability ( NonComplyTrapdoor ) {
+  table 0.00106, 0.99894;
+}
+probability ( OperationalFailures | IncorrectHeigth, PoorIllumination, PTAPreparedWindward, RiggingFailure ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( OrganizationalFailure | LackOfSafetyCulture, PoorISMSystem ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.92, 0.08;
+  (Yes, No) 0.96, 0.04;
+  (No, No) 0.0, 1.0;
+}
+probability ( PilotLadder ) {
+  table 0.00036, 0.99964;
+}
+probability ( PilotTransferAccident | SubstandardActs, SubstandardConditions ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( PoorCombinationLadder ) {
+  table 0.00036, 0.99964;
+}
+probability ( PoorCommunicationWithPilotBoat ) {
+  table 0.00048, 0.99952;
+}
+probability ( PoorConditionPTA | PoorCombinationLadder, PoorPilotLadder ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( PoorIllumination ) {
+  table 0.00078, 0.99922;
+}
+probability ( PoorISMSystem ) {
+  table 0.00096, 0.99904;
+}
+probability ( PoorPilotLadder ) {
+  table 0.02562, 0.97438;
+}
+probability ( PTAEquipmentFailure | FailureHandholds, NonCertifiedPilotLadder, PoorConditionPTA ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( PTAFailure | PTAEquipmentFailure, StructuralFailure ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( PTAPreparedWindward ) {
+  table 0.00025, 0.99975;
+}
+probability ( RestrictedVisibility ) {
+  table 0.00001, 0.99999;
+}
+probability ( RetrievalLine ) {
+  table 0.00006, 0.99994;
+}
+probability ( RiggingFailure | InappropriateAngle, IncorrectRigging, RetrievalLine, SecuringFailure ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( SecuringFailure | SecuringFailurePilot, SecuringFailurePTA ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( SecuringFailurePilot ) {
+  table 0.0098, 0.9902;
+}
+probability ( SecuringFailurePTA ) {
+  table 0.00151, 0.99849;
+}
+probability ( ShipSideObstructed ) {
+  table 0.00078, 0.99922;
+}
+probability ( StructuralFailure | NonComplyTrapdoor, PilotLadder, ShipSideObstructed ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( SubstandardActs | HumanFailures, ManeouveringFailures ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( SubstandardConditions | ExcessiveEnvironmentFactors, OperationalFailures, PTAFailure ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}

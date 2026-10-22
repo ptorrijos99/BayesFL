@@ -1,0 +1,1298 @@
+network unknown {
+}
+variable BasalArea {
+  type discrete [ 2 ] { 0_to_20, 20_to_90_3 };
+}
+variable BirdBiophonyPerDay {
+  type discrete [ 3 ] { Silence_prevails, Intermediate, Biophony_prevails };
+}
+variable BirdSpeciesDiversity {
+  type discrete [ 3 ] { 4_to_7, 7_to_9, 9_to_12 };
+}
+variable CanopyRoughness {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Condition {
+  type discrete [ 2 ] { low, high };
+}
+variable CoolingCapacity {
+  type discrete [ 4 ] { __10, _10_to__5, _5_to_0, ___0 };
+}
+variable DecidousProportion {
+  type discrete [ 2 ] { EvergreenOrMixed, DecidousDominated };
+}
+variable DeerAbundance {
+  type discrete [ 3 ] { 0_to_2, 2_to_4, 4_to_8 };
+}
+variable DeltaAnxControl {
+  type discrete [ 3 ] { _4_to_0, 0_to_3, 3_to_8 };
+}
+variable DeltaAnxietyA1 {
+  type discrete [ 3 ] { Large_decrease, Small_decrease, Increase };
+}
+variable DeltaAttentionA1 {
+  type discrete [ 3 ] { Decrease, Small_increase, Large_increase };
+}
+variable DeltaAttentionA2 {
+  type discrete [ 3 ] { Decrease, Small_increase, Large_increase };
+}
+variable DeltaNegAffControl {
+  type discrete [ 3 ] { _10_to_0, 0_to_2, 2_to_14 };
+}
+variable DeltaNegativeAffectA1 {
+  type discrete [ 3 ] { Large_decrease, Small_decrease, Increase };
+}
+variable DeltaNegativeAffectA2 {
+  type discrete [ 3 ] { Large_decrease, Small_decrease, Increase };
+}
+variable DeltaPhysiologicalStress {
+  type discrete [ 3 ] { Increase, Small_decrease, Large_decrease };
+}
+variable DeltaPhysStressControl {
+  type discrete [ 3 ] { _2_735_to_0, 0_to_0_6, 0_6_to_1_5 };
+}
+variable DeltaPosAffControl {
+  type discrete [ 3 ] { _35_to__8, _8_to_0, 0_to_8 };
+}
+variable DeltaPositiveAffectA1 {
+  type discrete [ 3 ] { Decrease, Small_increase, Large_increase };
+}
+variable DeltaPositiveAffectA2 {
+  type discrete [ 3 ] { Decrease, Small_increase, Large_increase };
+}
+variable DeltaStressA1 {
+  type discrete [ 3 ] { Large_decrease, Small_decrease, Increase };
+}
+variable DeltaStressA2 {
+  type discrete [ 3 ] { Large_decrease, Small_decrease, Increase };
+}
+variable DIN {
+  type discrete [ 4 ] { 0, 0_to_0_25, 0_25_to_1, __1 };
+}
+variable DominantCanopyHeight {
+  type discrete [ 2 ] { 0_to_20, 20_to_39 };
+}
+variable DON {
+  type discrete [ 4 ] { 0, 0_to_1, 1_to_3, 3_to_14_3 };
+}
+variable DONCorrection {
+  type discrete [ 5 ] { _1_to__0_5, _0_5_to_0, 0_to_0_5, 0_5_to_1, 1_to_2 };
+}
+variable EdibleMushroomProductivity {
+  type discrete [ 3 ] { 0_to_4, 4_to_40, 40_to_270 };
+}
+variable ForestStandType {
+  type discrete [ 2 ] { Mature_Natural, Young_Planted };
+}
+variable HeatMortalityForest {
+  type discrete [ 4 ] { _5_to_0, 0_to_5, 5_to_10, ___10 };
+}
+variable HeatMortalityMacro {
+  type discrete [ 4 ] { _5_to_0, 0_to_5, 5_to_10, ___10 };
+}
+variable HeatStressForest {
+  type discrete [ 5 ] { None, Slight, Moderate, Strong, Extreme };
+}
+variable HeatStressMacro {
+  type discrete [ 4 ] { Slight, Moderate, Strong, Extreme };
+}
+variable ImprovementAnxiety {
+  type discrete [ 3 ] { Decline, Small, Large };
+}
+variable ImprovementNegativeAffect {
+  type discrete [ 3 ] { Decline, Small, Large };
+}
+variable ImprovementPhysiologicalStress {
+  type discrete [ 3 ] { Large, Small, Decline };
+}
+variable ImprovementPositiveAffect {
+  type discrete [ 3 ] { Large, Small, Decline };
+}
+variable LeafAreaIndex {
+  type discrete [ 3 ] { 0_to_1, 1_to_3, 3_to_7_2 };
+}
+variable LymeBorreliosisRisk {
+  type discrete [ 4 ] { No_risk, Low, Medium, High };
+}
+variable MeanLeafSize {
+  type discrete [ 3 ] { 0_to_1500, 1500_to_3000, 3000_to_10500 };
+}
+variable MedicinalPlantDiversity {
+  type discrete [ 3 ] { 0_to_0_1, 0_1_to_0_24, 0_24_to_0_8 };
+}
+variable MedicinalPlantProductivity {
+  type discrete [ 3 ] { 0_to_3_8, 3_8_to_15, 15_to_102 };
+}
+variable MidFrequencyCoverBiophony {
+  type discrete [ 3 ] { Little_diverse, Intermediate, Highly_diverse };
+}
+variable MortalityReduction {
+  type discrete [ 4 ] { _5_to_0, 0_to_5, 5_to_10, ___10 };
+}
+variable MouseAbundance {
+  type discrete [ 3 ] { 0_to_10, 10_to_20, 20_to_30 };
+}
+variable MushroomProductivity {
+  type discrete [ 3 ] { 0_to_10, 10_to_80, 80_to_400 };
+}
+variable MushroomRelatedHealthBenefits {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable MushroomSpeciesDiversity {
+  type discrete [ 3 ] { 0_to_15, 15_to_30, 30_to_72 };
+}
+variable NIP {
+  type discrete [ 3 ] { 0, 0_to_0_5, 0_5_to_1 };
+}
+variable NIPCorrection {
+  type discrete [ 5 ] { _1_to__0_75, _0_75_to__0_25, _0_25_to_0_25, 0_25_to_0_75, 0_75_to_1_05 };
+}
+variable PerceivedAcousticDiversity {
+  type discrete [ 3 ] { 1_to_2, 2, 2_to_5 };
+}
+variable PerceivedArtificialness {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable PerceivedBiodiversity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable PerceivedDensity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable PlotLevelPolyphenolContent {
+  type discrete [ 3 ] { 0_to_34, 34_to_600, 600_to_6000 };
+}
+variable PM100Deposition {
+  type discrete [ 3 ] { 0_to_0_05, 0_05_to_0_15, 0_15_to_0_95 };
+}
+variable PM10Deposition {
+  type discrete [ 3 ] { 0_to_0_035, 0_035_to_0_1, 0_1_to_0_35 };
+}
+variable PM10InsideForest {
+  type discrete [ 3 ] { 4_77137_to_15, 15_to_20, 20_to_30 };
+}
+variable PM10OutsideForest {
+  type discrete [ 3 ] { 10_to_15, 15_to_20, 20_to_30 };
+}
+variable PM2.5Deposition {
+  type discrete [ 3 ] { 0_to_0_02, 0_02_to_0_07, 0_07_to_0_25 };
+}
+variable PM2.5InsideForest {
+  type discrete [ 3 ] { 1_24706_to_7_5, 7_5_to_10, 10_to_15 };
+}
+variable PM2.5OutsideForest {
+  type discrete [ 3 ] { 5_to_7_5, 7_5_to_10, 10_to_15 };
+}
+variable PolyphenolRelatedHealthBenefits {
+  type discrete [ 3 ] { Negligible, LowToMedium, High };
+}
+variable RelativeHumidity {
+  type discrete [ 2 ] { 0_to_80, 80_to_100 };
+}
+variable RestorativenessA1 {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable RestorativenessA2 {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable RiskInsideForestPM10 {
+  type discrete [ 3 ] { 1_to_1_05, 1_05__to_1_1, 1_1_to_1_15 };
+}
+variable RiskInsideForestPM2.5 {
+  type discrete [ 3 ] { 1_to_1_1, 1_1_to_1_15, 1_15_to_1_2 };
+}
+variable RiskMitigationPM10 {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable RiskMitigationPM2.5 {
+  type discrete [ 3 ] { 1_to_1_05, 1_05__to_1_1, 1_1_to_1_15 };
+}
+variable RiskOutsideForestPM10 {
+  type discrete [ 3 ] { 1_to_1_05, 1_05_to_1_1, 1_1_to_1_15 };
+}
+variable RiskOutsideForestPM2.5 {
+  type discrete [ 3 ] { 1_to_1_1, 1_1_to_1_15, 1_15_to_1_2 };
+}
+variable SoilFertility {
+  type discrete [ 3 ] { Mull___fertile, Rich_moder, Poor_model_or_mor___infertile };
+}
+variable StemDensity {
+  type discrete [ 3 ] { 50_to_500, 500_to_2500, 2500_to_12200 };
+}
+variable ThermalComfortForest {
+  type discrete [ 6 ] { Cold, Cool, sCool, Neutral, sWarm, Warm };
+}
+variable ThermalComfortMacro {
+  type discrete [ 6 ] { Cool, sCool, Neutral, sWarm, Warm, Hot };
+}
+variable ThermalPreferenceForest {
+  type discrete [ 3 ] { Warmer, No_Change, Colder };
+}
+variable ThermalPreferenceMacro {
+  type discrete [ 3 ] { Warmer, No_Change, Colder };
+}
+variable TreeSpeciesDiversity {
+  type discrete [ 2 ] { Monospecific, Polyspecific };
+}
+variable UnderstoryProductivity {
+  type discrete [ 3 ] { 0_to_25, 25_to_75, 75_to_100 };
+}
+variable VocalizingBirdSpeciesDiversity {
+  type discrete [ 3 ] { 4_to_10, 10_to_15, 15_to_25 };
+}
+probability ( BasalArea | StemDensity, TreeSpeciesDiversity ) {
+  (50_to_500, Monospecific) 0.2093, 0.7907;
+  (500_to_2500, Monospecific) 0.42029, 0.57971;
+  (2500_to_12200, Monospecific) 0.61017, 0.38983;
+  (50_to_500, Polyspecific) 0.10526, 0.89474;
+  (500_to_2500, Polyspecific) 0.25439, 0.74561;
+  (2500_to_12200, Polyspecific) 0.34694, 0.65306;
+}
+probability ( BirdBiophonyPerDay | VocalizingBirdSpeciesDiversity ) {
+  (4_to_10) 0.37736, 0.37736, 0.24528;
+  (10_to_15) 0.3278667, 0.3114769, 0.3606564;
+  (15_to_25) 0.4008016, 0.1315932, 0.4676052;
+}
+probability ( BirdSpeciesDiversity | VocalizingBirdSpeciesDiversity ) {
+  (4_to_10) 1.0, 0.0, 0.0;
+  (10_to_15) 0.029, 0.971, 0.000;
+  (15_to_25) 0.000, 0.169, 0.831;
+}
+probability ( CanopyRoughness | TreeSpeciesDiversity ) {
+  (Monospecific) 0.4285743, 0.2857129, 0.2857129;
+  (Polyspecific) 0.30303, 0.36364, 0.33333;
+}
+probability ( Condition | MidFrequencyCoverBiophony ) {
+  (Little_diverse) 1.0, 0.0;
+  (Intermediate) 0.163, 0.837;
+  (Highly_diverse) 0.0, 1.0;
+}
+probability ( CoolingCapacity | BasalArea, DominantCanopyHeight, HeatStressMacro, LeafAreaIndex ) {
+  (0_to_20, 0_to_20, Slight, 0_to_1) 0.02106, 0.28783, 0.47894, 0.21217;
+  (20_to_90_3, 0_to_20, Slight, 0_to_1) 0.03030030, 0.57576576, 0.34848348, 0.04545045;
+  (0_to_20, 20_to_39, Slight, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Slight, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (0_to_20, 0_to_20, Moderate, 0_to_1) 0.06230, 0.40300, 0.38565, 0.14905;
+  (20_to_90_3, 0_to_20, Moderate, 0_to_1) 0.11940, 0.74627, 0.11940, 0.01493;
+  (0_to_20, 20_to_39, Moderate, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Moderate, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (0_to_20, 0_to_20, Strong, 0_to_1) 0.2193078, 0.3691763, 0.3073669, 0.1041490;
+  (20_to_90_3, 0_to_20, Strong, 0_to_1) 0.41428586, 0.44285557, 0.11428886, 0.02856971;
+  (0_to_20, 20_to_39, Strong, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Strong, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (0_to_20, 0_to_20, Extreme, 0_to_1) 0.22017220, 0.39062391, 0.34517345, 0.04403044;
+  (20_to_90_3, 0_to_20, Extreme, 0_to_1) 0.39062, 0.40625, 0.17188, 0.03125;
+  (0_to_20, 20_to_39, Extreme, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Extreme, 0_to_1) 0.25, 0.25, 0.25, 0.25;
+  (0_to_20, 0_to_20, Slight, 1_to_3) 0.11843118, 0.47837478, 0.31617316, 0.08702087;
+  (20_to_90_3, 0_to_20, Slight, 1_to_3) 0.22559, 0.64478, 0.12542, 0.00421;
+  (0_to_20, 20_to_39, Slight, 1_to_3) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Slight, 1_to_3) 0.09426943, 0.58743874, 0.30377038, 0.01452145;
+  (0_to_20, 0_to_20, Moderate, 1_to_3) 0.29021710, 0.49087509, 0.15975840, 0.05914941;
+  (20_to_90_3, 0_to_20, Moderate, 1_to_3) 0.51510, 0.44515, 0.03816, 0.00159;
+  (0_to_20, 20_to_39, Moderate, 1_to_3) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Moderate, 1_to_3) 0.34840, 0.58206, 0.06676, 0.00278;
+  (0_to_20, 0_to_20, Strong, 1_to_3) 0.60416396, 0.29166708, 0.08870911, 0.01545985;
+  (20_to_90_3, 0_to_20, Strong, 1_to_3) 0.75412, 0.21295, 0.02854, 0.00439;
+  (0_to_20, 20_to_39, Strong, 1_to_3) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Strong, 1_to_3) 0.763997640, 0.220192202, 0.013380134, 0.002430024;
+  (0_to_20, 0_to_20, Extreme, 1_to_3) 0.70751, 0.20356, 0.07905, 0.00988;
+  (20_to_90_3, 0_to_20, Extreme, 1_to_3) 0.756692433, 0.196428036, 0.040179598, 0.006699933;
+  (0_to_20, 20_to_39, Extreme, 1_to_3) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Extreme, 1_to_3) 0.96410, 0.02564, 0.00513, 0.00513;
+  (0_to_20, 0_to_20, Slight, 3_to_7_2) 0.13895, 0.61053, 0.22105, 0.02947;
+  (20_to_90_3, 0_to_20, Slight, 3_to_7_2) 0.29193, 0.60337, 0.10204, 0.00266;
+  (0_to_20, 20_to_39, Slight, 3_to_7_2) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Slight, 3_to_7_2) 0.09611904, 0.56931431, 0.31792682, 0.01663983;
+  (0_to_20, 0_to_20, Moderate, 3_to_7_2) 0.44210558, 0.48420516, 0.05894941, 0.01473985;
+  (20_to_90_3, 0_to_20, Moderate, 3_to_7_2) 0.56996, 0.41373, 0.01459, 0.00172;
+  (0_to_20, 20_to_39, Moderate, 3_to_7_2) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Moderate, 3_to_7_2) 0.342593426, 0.587965880, 0.067130671, 0.002310023;
+  (0_to_20, 0_to_20, Strong, 3_to_7_2) 0.78000, 0.18333, 0.03000, 0.00667;
+  (20_to_90_3, 0_to_20, Strong, 3_to_7_2) 0.822888229, 0.166141661, 0.007840078, 0.003130031;
+  (0_to_20, 20_to_39, Strong, 3_to_7_2) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Strong, 3_to_7_2) 0.76724, 0.21121, 0.01724, 0.00431;
+  (0_to_20, 0_to_20, Extreme, 3_to_7_2) 0.66666333, 0.24999750, 0.04166958, 0.04166958;
+  (20_to_90_3, 0_to_20, Extreme, 3_to_7_2) 0.86111, 0.08333, 0.02778, 0.02778;
+  (0_to_20, 20_to_39, Extreme, 3_to_7_2) 0.25, 0.25, 0.25, 0.25;
+  (20_to_90_3, 20_to_39, Extreme, 3_to_7_2) 0.94231, 0.01923, 0.01923, 0.01923;
+}
+probability ( DecidousProportion ) {
+  table 0.15815, 0.84185;
+}
+probability ( DeerAbundance | LeafAreaIndex, UnderstoryProductivity ) {
+  (0_to_1, 0_to_25) 0.80, 0.15, 0.05;
+  (1_to_3, 0_to_25) 0.24, 0.54, 0.22;
+  (3_to_7_2, 0_to_25) 0.2, 0.6, 0.2;
+  (0_to_1, 25_to_75) 0.2, 0.7, 0.1;
+  (1_to_3, 25_to_75) 0.30, 0.65, 0.05;
+  (3_to_7_2, 25_to_75) 0.1, 0.7, 0.2;
+  (0_to_1, 75_to_100) 0.44, 0.52, 0.04;
+  (1_to_3, 75_to_100) 0.2625, 0.4625, 0.2750;
+  (3_to_7_2, 75_to_100) 0.05, 0.15, 0.80;
+}
+probability ( DeltaAnxControl ) {
+  table 0.22034, 0.44068, 0.33898;
+}
+probability ( DeltaAnxietyA1 | DeltaAttentionA1, DeltaStressA1, RestorativenessA1 ) {
+  (Decrease, Large_decrease, Low) 0.2, 0.4, 0.4;
+  (Small_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Small_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Small_decrease, Low) 0.2, 0.6, 0.2;
+  (Large_increase, Small_decrease, Low) 0.2, 0.6, 0.2;
+  (Decrease, Increase, Low) 0.1666683, 0.1666683, 0.6666633;
+  (Small_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Large_decrease, Medium) 0.4285743, 0.2857129, 0.2857129;
+  (Small_increase, Large_decrease, Medium) 0.18182, 0.63636, 0.18182;
+  (Large_increase, Large_decrease, Medium) 0.65, 0.25, 0.10;
+  (Decrease, Small_decrease, Medium) 0.375, 0.375, 0.250;
+  (Small_increase, Small_decrease, Medium) 0.3846162, 0.2307677, 0.3846162;
+  (Large_increase, Small_decrease, Medium) 0.66667, 0.22222, 0.11111;
+  (Decrease, Increase, Medium) 0.14286, 0.28571, 0.57143;
+  (Small_increase, Increase, Medium) 0.14286, 0.28571, 0.57143;
+  (Large_increase, Increase, Medium) 0.2, 0.4, 0.4;
+  (Decrease, Large_decrease, High) 0.50, 0.25, 0.25;
+  (Small_increase, Large_decrease, High) 0.72727727, 0.22727227, 0.04545045;
+  (Large_increase, Large_decrease, High) 0.7333373, 0.1333313, 0.1333313;
+  (Decrease, Small_decrease, High) 0.375, 0.375, 0.250;
+  (Small_increase, Small_decrease, High) 0.47059, 0.41176, 0.11765;
+  (Large_increase, Small_decrease, High) 0.4375, 0.4375, 0.1250;
+  (Decrease, Increase, High) 0.25, 0.25, 0.50;
+  (Small_increase, Increase, High) 0.5, 0.3, 0.2;
+  (Large_increase, Increase, High) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( DeltaAttentionA1 | PerceivedBiodiversity, RestorativenessA1 ) {
+  (Low, Low) 0.65517, 0.24138, 0.10345;
+  (Medium, Low) 0.4285743, 0.2857129, 0.2857129;
+  (High, Low) 0.25, 0.25, 0.50;
+  (Low, Medium) 0.20000, 0.33333, 0.46667;
+  (Medium, Medium) 0.23333, 0.40000, 0.36667;
+  (High, Medium) 0.23077, 0.30769, 0.46154;
+  (Low, High) 0.18519, 0.44444, 0.37037;
+  (Medium, High) 0.1794882, 0.3846162, 0.4358956;
+  (High, High) 0.14286, 0.40476, 0.45238;
+}
+probability ( DeltaAttentionA2 | PerceivedAcousticDiversity, RestorativenessA2 ) {
+  (1_to_2, Low) 0.5000, 0.1875, 0.3125;
+  (2, Low) 0.33333, 0.42857, 0.23810;
+  (2_to_5, Low) 0.35294, 0.35294, 0.29412;
+  (1_to_2, Medium) 0.5714243, 0.1904781, 0.2380976;
+  (2, Medium) 0.33333, 0.29167, 0.37500;
+  (2_to_5, Medium) 0.35484, 0.35484, 0.29032;
+  (1_to_2, High) 0.35294, 0.29412, 0.35294;
+  (2, High) 0.40000, 0.34286, 0.25714;
+  (2_to_5, High) 0.27907, 0.27907, 0.44186;
+}
+probability ( DeltaNegAffControl ) {
+  table 0.30508, 0.40678, 0.28814;
+}
+probability ( DeltaNegativeAffectA1 | DeltaAttentionA1, DeltaStressA1, RestorativenessA1 ) {
+  (Decrease, Large_decrease, Low) 0.6, 0.2, 0.2;
+  (Small_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Small_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Small_decrease, Low) 0.4, 0.2, 0.4;
+  (Large_increase, Small_decrease, Low) 0.2, 0.4, 0.4;
+  (Decrease, Increase, Low) 0.1666683, 0.1666683, 0.6666633;
+  (Small_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Large_decrease, Medium) 0.28571, 0.57143, 0.14286;
+  (Small_increase, Large_decrease, Medium) 0.1818182, 0.4545455, 0.3636364;
+  (Large_increase, Large_decrease, Medium) 0.25, 0.45, 0.30;
+  (Decrease, Small_decrease, Medium) 0.25, 0.25, 0.50;
+  (Small_increase, Small_decrease, Medium) 0.1538485, 0.3846162, 0.4615354;
+  (Large_increase, Small_decrease, Medium) 0.2222222, 0.4444444, 0.3333333;
+  (Decrease, Increase, Medium) 0.14286, 0.28571, 0.57143;
+  (Small_increase, Increase, Medium) 0.14286, 0.28571, 0.57143;
+  (Large_increase, Increase, Medium) 0.4, 0.2, 0.4;
+  (Decrease, Large_decrease, High) 0.375, 0.500, 0.125;
+  (Small_increase, Large_decrease, High) 0.22727, 0.59091, 0.18182;
+  (Large_increase, Large_decrease, High) 0.60000, 0.26667, 0.13333;
+  (Decrease, Small_decrease, High) 0.375, 0.250, 0.375;
+  (Small_increase, Small_decrease, High) 0.3529435, 0.2352924, 0.4117641;
+  (Large_increase, Small_decrease, High) 0.25, 0.50, 0.25;
+  (Decrease, Increase, High) 0.250, 0.125, 0.625;
+  (Small_increase, Increase, High) 0.4, 0.3, 0.3;
+  (Large_increase, Increase, High) 0.33333, 0.16667, 0.50000;
+}
+probability ( DeltaNegativeAffectA2 | DeltaAttentionA2, DeltaStressA2, RestorativenessA2 ) {
+  (Decrease, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Large_decrease, Low) 0.55556, 0.33333, 0.11111;
+  (Decrease, Small_decrease, Low) 0.375, 0.375, 0.250;
+  (Small_increase, Small_decrease, Low) 0.28571, 0.14286, 0.57143;
+  (Large_increase, Small_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Increase, Low) 0.1538515, 0.2307723, 0.6153762;
+  (Small_increase, Increase, Low) 0.18182, 0.09091, 0.72727;
+  (Large_increase, Increase, Low) 0.1666683, 0.1666683, 0.6666633;
+  (Decrease, Large_decrease, Medium) 0.5, 0.3, 0.2;
+  (Small_increase, Large_decrease, Medium) 0.625, 0.250, 0.125;
+  (Large_increase, Large_decrease, Medium) 0.6923031, 0.1538485, 0.1538485;
+  (Decrease, Small_decrease, Medium) 0.4166658, 0.4166658, 0.1666683;
+  (Small_increase, Small_decrease, Medium) 0.28571, 0.57143, 0.14286;
+  (Large_increase, Small_decrease, Medium) 0.3636364, 0.3636364, 0.2727273;
+  (Decrease, Increase, Medium) 0.13333, 0.26667, 0.60000;
+  (Small_increase, Increase, Medium) 0.50000, 0.16667, 0.33333;
+  (Large_increase, Increase, Medium) 0.2, 0.4, 0.4;
+  (Decrease, Large_decrease, High) 0.5, 0.2, 0.3;
+  (Small_increase, Large_decrease, High) 0.27273, 0.54545, 0.18182;
+  (Large_increase, Large_decrease, High) 0.31579, 0.52632, 0.15789;
+  (Decrease, Small_decrease, High) 0.1176488, 0.5882341, 0.2941171;
+  (Small_increase, Small_decrease, High) 0.375, 0.375, 0.250;
+  (Large_increase, Small_decrease, High) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Increase, High) 0.18182, 0.27273, 0.54545;
+  (Small_increase, Increase, High) 0.375, 0.250, 0.375;
+  (Large_increase, Increase, High) 0.16667, 0.33333, 0.50000;
+}
+probability ( DeltaPhysiologicalStress | PerceivedBiodiversity ) {
+  (Low) 0.3333333, 0.3333333, 0.3333333;
+  (Medium) 0.1860481, 0.4651153, 0.3488365;
+  (High) 0.16, 0.56, 0.28;
+}
+probability ( DeltaPhysStressControl ) {
+  table 0.30337, 0.39326, 0.30337;
+}
+probability ( DeltaPosAffControl ) {
+  table 0.35593, 0.42373, 0.22034;
+}
+probability ( DeltaPositiveAffectA1 | DeltaAttentionA1, DeltaStressA1, RestorativenessA1 ) {
+  (Decrease, Large_decrease, Low) 0.4, 0.4, 0.2;
+  (Small_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Small_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Small_decrease, Low) 0.6, 0.2, 0.2;
+  (Large_increase, Small_decrease, Low) 0.4, 0.4, 0.2;
+  (Decrease, Increase, Low) 0.50000, 0.33333, 0.16667;
+  (Small_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Large_increase, Increase, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Large_decrease, Medium) 0.2857129, 0.4285743, 0.2857129;
+  (Small_increase, Large_decrease, Medium) 0.3636364, 0.2727273, 0.3636364;
+  (Large_increase, Large_decrease, Medium) 0.5, 0.2, 0.3;
+  (Decrease, Small_decrease, Medium) 0.500, 0.375, 0.125;
+  (Small_increase, Small_decrease, Medium) 0.46154, 0.07692, 0.46154;
+  (Large_increase, Small_decrease, Medium) 0.3333333, 0.3333333, 0.3333333;
+  (Decrease, Increase, Medium) 0.57143, 0.14286, 0.28571;
+  (Small_increase, Increase, Medium) 0.2857129, 0.4285743, 0.2857129;
+  (Large_increase, Increase, Medium) 0.4, 0.2, 0.4;
+  (Decrease, Large_decrease, High) 0.625, 0.250, 0.125;
+  (Small_increase, Large_decrease, High) 0.22727, 0.31818, 0.45455;
+  (Large_increase, Large_decrease, High) 0.20000, 0.36667, 0.43333;
+  (Decrease, Small_decrease, High) 0.375, 0.375, 0.250;
+  (Small_increase, Small_decrease, High) 0.41176, 0.47059, 0.11765;
+  (Large_increase, Small_decrease, High) 0.1875, 0.3750, 0.4375;
+  (Decrease, Increase, High) 0.625, 0.250, 0.125;
+  (Small_increase, Increase, High) 0.2, 0.5, 0.3;
+  (Large_increase, Increase, High) 0.33333, 0.16667, 0.50000;
+}
+probability ( DeltaPositiveAffectA2 | DeltaAttentionA2, DeltaStressA2, RestorativenessA2 ) {
+  (Decrease, Large_decrease, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Large_decrease, Low) 0.16667, 0.33333, 0.50000;
+  (Large_increase, Large_decrease, Low) 0.2222222, 0.4444444, 0.3333333;
+  (Decrease, Small_decrease, Low) 0.250, 0.625, 0.125;
+  (Small_increase, Small_decrease, Low) 0.1428586, 0.7142829, 0.1428586;
+  (Large_increase, Small_decrease, Low) 0.1666683, 0.6666633, 0.1666683;
+  (Decrease, Increase, Low) 0.4614915, 0.2307908, 0.3077177;
+  (Small_increase, Increase, Low) 0.2727273, 0.2727273, 0.4545455;
+  (Large_increase, Increase, Low) 0.33333, 0.50000, 0.16667;
+  (Decrease, Large_decrease, Medium) 0.1, 0.4, 0.5;
+  (Small_increase, Large_decrease, Medium) 0.500, 0.375, 0.125;
+  (Large_increase, Large_decrease, Medium) 0.23077, 0.46154, 0.30769;
+  (Decrease, Small_decrease, Medium) 0.25000, 0.58333, 0.16667;
+  (Small_increase, Small_decrease, Medium) 0.14286, 0.57143, 0.28571;
+  (Large_increase, Small_decrease, Medium) 0.18182, 0.54545, 0.27273;
+  (Decrease, Increase, Medium) 0.3333333, 0.3333333, 0.3333333;
+  (Small_increase, Increase, Medium) 0.1666683, 0.6666633, 0.1666683;
+  (Large_increase, Increase, Medium) 0.2, 0.2, 0.6;
+  (Decrease, Large_decrease, High) 0.1, 0.6, 0.3;
+  (Small_increase, Large_decrease, High) 0.091001, 0.363003, 0.545996;
+  (Large_increase, Large_decrease, High) 0.1052621, 0.4210584, 0.4736795;
+  (Decrease, Small_decrease, High) 0.05882059, 0.52941529, 0.41176412;
+  (Small_increase, Small_decrease, High) 0.125, 0.625, 0.250;
+  (Large_increase, Small_decrease, High) 0.13333, 0.40000, 0.46667;
+  (Decrease, Increase, High) 0.2727273, 0.2727273, 0.4545455;
+  (Small_increase, Increase, High) 0.250, 0.375, 0.375;
+  (Large_increase, Increase, High) 0.16667, 0.33333, 0.50000;
+}
+probability ( DeltaStressA1 | PerceivedBiodiversity ) {
+  (Low) 0.34532, 0.23022, 0.42446;
+  (Medium) 0.44538, 0.35294, 0.20168;
+  (High) 0.4230758, 0.3974360, 0.1794882;
+}
+probability ( DeltaStressA2 | PerceivedAcousticDiversity ) {
+  (1_to_2) 0.31250, 0.33333, 0.35417;
+  (2) 0.31081, 0.40541, 0.28378;
+  (2_to_5) 0.35294, 0.42353, 0.22353;
+}
+probability ( DIN | DON, DONCorrection, NIP, NIPCorrection ) {
+  (0, _1_to__0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, _0_5_to_0, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _0_5_to_0, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_to_0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_to_0_5, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_5_to_1, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_5_to_1, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 1_to_2, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 1_to_2, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 1_to_2, 0, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, _1_to__0_5, 0_to_0_5, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_to_0_5, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0_to_0_5, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0_to_0_5, _1_to__0_75) 0.0000, 0.9488, 0.0512, 0.0000;
+  (0, _0_5_to_0, 0_to_0_5, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_to_0_5, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0_to_0_5, _1_to__0_75) 0.0000, 0.9968, 0.0032, 0.0000;
+  (3_to_14_3, _0_5_to_0, 0_to_0_5, _1_to__0_75) 0.0000, 0.7095, 0.2829, 0.0076;
+  (0, 0_to_0_5, 0_to_0_5, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_to_0_5, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0_to_0_5, _1_to__0_75) 0.0000, 0.9591, 0.0409, 0.0000;
+  (3_to_14_3, 0_to_0_5, 0_to_0_5, _1_to__0_75) 0.0000, 0.5327, 0.4070, 0.0603;
+  (0, 0_5_to_1, 0_to_0_5, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_to_0_5, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0_to_0_5, _1_to__0_75) 0.0000, 0.8907, 0.1093, 0.0000;
+  (3_to_14_3, 0_5_to_1, 0_to_0_5, _1_to__0_75) 0.0000, 0.4340, 0.4274, 0.1386;
+  (0, 1_to_2, 0_to_0_5, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_to_0_5, _1_to__0_75) 0.0000, 0.9979, 0.0021, 0.0000;
+  (1_to_3, 1_to_2, 0_to_0_5, _1_to__0_75) 0.0000, 0.7828, 0.2171, 0.0001;
+  (3_to_14_3, 1_to_2, 0_to_0_5, _1_to__0_75) 0.0000, 0.3466, 0.4137, 0.2397;
+  (0, _1_to__0_5, 0_5_to_1, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_5_to_1, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0_5_to_1, _1_to__0_75) 0.0000, 0.9978, 0.0022, 0.0000;
+  (3_to_14_3, _1_to__0_5, 0_5_to_1, _1_to__0_75) 0.0000, 0.7006, 0.2913, 0.0081;
+  (0, _0_5_to_0, 0_5_to_1, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_5_to_1, _1_to__0_75) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0_5_to_1, _1_to__0_75) 0.0000, 0.8441, 0.1559, 0.0000;
+  (3_to_14_3, _0_5_to_0, 0_5_to_1, _1_to__0_75) 0.0000, 0.2611, 0.5467, 0.1922;
+  (0, 0_to_0_5, 0_5_to_1, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_5_to_1, _1_to__0_75) 0.0000, 0.9946, 0.0054, 0.0000;
+  (1_to_3, 0_to_0_5, 0_5_to_1, _1_to__0_75) 0.0000, 0.6012, 0.3984, 0.0004;
+  (3_to_14_3, 0_to_0_5, 0_5_to_1, _1_to__0_75) 0.0000, 0.1547, 0.4309, 0.4144;
+  (0, 0_5_to_1, 0_5_to_1, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_5_to_1, _1_to__0_75) 0.0000, 0.9587, 0.0413, 0.0000;
+  (1_to_3, 0_5_to_1, 0_5_to_1, _1_to__0_75) 0.0000, 0.4440, 0.5464, 0.0096;
+  (3_to_14_3, 0_5_to_1, 0_5_to_1, _1_to__0_75) 0.0000, 0.1080, 0.3242, 0.5678;
+  (0, 1_to_2, 0_5_to_1, _1_to__0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_5_to_1, _1_to__0_75) 0.0000, 0.8734, 0.1266, 0.0000;
+  (1_to_3, 1_to_2, 0_5_to_1, _1_to__0_75) 0.0000, 0.3155, 0.6047, 0.0798;
+  (3_to_14_3, 1_to_2, 0_5_to_1, _1_to__0_75) 0.0000, 0.0809, 0.2338, 0.6853;
+  (0, _1_to__0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, _0_5_to_0, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _0_5_to_0, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_to_0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_to_0_5, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_5_to_1, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_5_to_1, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 1_to_2, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 1_to_2, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 1_to_2, 0, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, _1_to__0_5, 0_to_0_5, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_to_0_5, _0_75_to__0_25) 0.0, 1.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.9756, 0.0244, 0.0000;
+  (3_to_14_3, _1_to__0_5, 0_to_0_5, _0_75_to__0_25) 0.000, 0.627, 0.339, 0.034;
+  (0, _0_5_to_0, 0_to_0_5, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.9972, 0.0028, 0.0000;
+  (1_to_3, _0_5_to_0, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.7247, 0.2753, 0.0000;
+  (3_to_14_3, _0_5_to_0, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.2141, 0.4777, 0.3082;
+  (0, 0_to_0_5, 0_to_0_5, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_to_0_5, _0_75_to__0_25) 0.000, 0.961, 0.039, 0.000;
+  (1_to_3, 0_to_0_5, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.4815, 0.5050, 0.0135;
+  (3_to_14_3, 0_to_0_5, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.1265, 0.3539, 0.5196;
+  (0, 0_5_to_1, 0_to_0_5, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.8882, 0.1118, 0.0000;
+  (1_to_3, 0_5_to_1, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.3431, 0.5841, 0.0728;
+  (3_to_14_3, 0_5_to_1, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.0843, 0.2604, 0.6553;
+  (0, 1_to_2, 0_to_0_5, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.7793, 0.2206, 0.0001;
+  (1_to_3, 1_to_2, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.2434, 0.5609, 0.1957;
+  (3_to_14_3, 1_to_2, 0_to_0_5, _0_75_to__0_25) 0.0000, 0.0639, 0.1815, 0.7546;
+  (0, _1_to__0_5, 0_5_to_1, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.9978, 0.0022, 0.0000;
+  (1_to_3, _1_to__0_5, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.7276, 0.2724, 0.0000;
+  (3_to_14_3, _1_to__0_5, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.2056, 0.4884, 0.3060;
+  (0, _0_5_to_0, 0_5_to_1, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.8475, 0.1525, 0.0000;
+  (1_to_3, _0_5_to_0, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.1047, 0.8095, 0.0858;
+  (3_to_14_3, _0_5_to_0, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.0000, 0.1211, 0.8789;
+  (0, 0_to_0_5, 0_5_to_1, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.6034, 0.3966, 0.0000;
+  (1_to_3, 0_to_0_5, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.0078, 0.6130, 0.3792;
+  (3_to_14_3, 0_to_0_5, 0_5_to_1, _0_75_to__0_25) 0.000, 0.000, 0.019, 0.981;
+  (0, 0_5_to_1, 0_5_to_1, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.4325, 0.5563, 0.0112;
+  (1_to_3, 0_5_to_1, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.0006, 0.3707, 0.6287;
+  (3_to_14_3, 0_5_to_1, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.0000, 0.0034, 0.9966;
+  (0, 1_to_2, 0_5_to_1, _0_75_to__0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.3115, 0.6114, 0.0771;
+  (1_to_3, 1_to_2, 0_5_to_1, _0_75_to__0_25) 0.0000, 0.0000, 0.1584, 0.8416;
+  (3_to_14_3, 1_to_2, 0_5_to_1, _0_75_to__0_25) 0.0, 0.0, 0.0, 1.0;
+  (0, _1_to__0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, _0_5_to_0, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _0_5_to_0, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_to_0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_to_0_5, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_5_to_1, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_5_to_1, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, 1_to_2, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 1_to_2, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 1_to_2, 0, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0, _1_to__0_5, 0_to_0_5, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.9998, 0.0002, 0.0000;
+  (1_to_3, _1_to__0_5, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.8517, 0.1483, 0.0000;
+  (3_to_14_3, _1_to__0_5, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.3993, 0.4255, 0.1752;
+  (0, _0_5_to_0, 0_to_0_5, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.9318, 0.0682, 0.0000;
+  (1_to_3, _0_5_to_0, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.3898, 0.5789, 0.0313;
+  (3_to_14_3, _0_5_to_0, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.0989, 0.2856, 0.6155;
+  (0, 0_to_0_5, 0_to_0_5, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_to_0_5, _0_25_to_0_25) 0.000, 0.771, 0.229, 0.000;
+  (1_to_3, 0_to_0_5, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.2286, 0.5774, 0.1940;
+  (3_to_14_3, 0_to_0_5, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.0592, 0.1697, 0.7711;
+  (0, 0_5_to_1, 0_to_0_5, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.6413, 0.3581, 0.0006;
+  (1_to_3, 0_5_to_1, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.1620, 0.4649, 0.3731;
+  (3_to_14_3, 0_5_to_1, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.0422, 0.1222, 0.8356;
+  (0, 1_to_2, 0_to_0_5, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.5271, 0.4444, 0.0285;
+  (1_to_3, 1_to_2, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.1154, 0.3446, 0.5400;
+  (3_to_14_3, 1_to_2, 0_to_0_5, _0_25_to_0_25) 0.0000, 0.0265, 0.0865, 0.8870;
+  (0, _1_to__0_5, 0_5_to_1, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.9332, 0.0668, 0.0000;
+  (1_to_3, _1_to__0_5, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.3935, 0.5758, 0.0307;
+  (3_to_14_3, _1_to__0_5, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0946, 0.2926, 0.6128;
+  (0, _0_5_to_0, 0_5_to_1, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.4861, 0.5130, 0.0009;
+  (1_to_3, _0_5_to_0, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0004, 0.4538, 0.5458;
+  (3_to_14_3, _0_5_to_0, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0000, 0.0041, 0.9959;
+  (0, 0_to_0_5, 0_5_to_1, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.2903, 0.6505, 0.0592;
+  (1_to_3, 0_to_0_5, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0000, 0.1071, 0.8929;
+  (3_to_14_3, 0_to_0_5, 0_5_to_1, _0_25_to_0_25) 0.0, 0.0, 0.0, 1.0;
+  (0, 0_5_to_1, 0_5_to_1, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.1991, 0.5830, 0.2179;
+  (1_to_3, 0_5_to_1, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0000, 0.0134, 0.9866;
+  (3_to_14_3, 0_5_to_1, 0_5_to_1, _0_25_to_0_25) 0.0, 0.0, 0.0, 1.0;
+  (0, 1_to_2, 0_5_to_1, _0_25_to_0_25) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.1445, 0.4313, 0.4242;
+  (1_to_3, 1_to_2, 0_5_to_1, _0_25_to_0_25) 0.0000, 0.0000, 0.0003, 0.9997;
+  (3_to_14_3, 1_to_2, 0_5_to_1, _0_25_to_0_25) 0.0, 0.0, 0.0, 1.0;
+  (0, _1_to__0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, _0_5_to_0, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _0_5_to_0, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_to_0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_to_0_5, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_5_to_1, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_5_to_1, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, 1_to_2, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 1_to_2, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 1_to_2, 0, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0, _1_to__0_5, 0_to_0_5, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.9923, 0.0077, 0.0000;
+  (1_to_3, _1_to__0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.7209, 0.2777, 0.0014;
+  (3_to_14_3, _1_to__0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.3092, 0.3953, 0.2955;
+  (0, _0_5_to_0, 0_to_0_5, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.8132, 0.1868, 0.0000;
+  (1_to_3, _0_5_to_0, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.2593, 0.5881, 0.1526;
+  (3_to_14_3, _0_5_to_0, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.0647, 0.1886, 0.7467;
+  (0, 0_to_0_5, 0_to_0_5, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.6228, 0.3752, 0.0020;
+  (1_to_3, 0_to_0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.1501, 0.4439, 0.4060;
+  (3_to_14_3, 0_to_0_5, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.0374, 0.1143, 0.8483;
+  (0, 0_5_to_1, 0_to_0_5, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.5177, 0.4511, 0.0312;
+  (1_to_3, 0_5_to_1, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.1109, 0.3145, 0.5746;
+  (3_to_14_3, 0_5_to_1, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.0313, 0.0794, 0.8893;
+  (0, 1_to_2, 0_to_0_5, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.4132, 0.4587, 0.1281;
+  (1_to_3, 1_to_2, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.0786, 0.2230, 0.6984;
+  (3_to_14_3, 1_to_2, 0_to_0_5, 0_25_to_0_75) 0.0000, 0.0196, 0.0576, 0.9228;
+  (0, _1_to__0_5, 0_5_to_1, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.8123, 0.1877, 0.0000;
+  (1_to_3, _1_to__0_5, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.2550, 0.6013, 0.1437;
+  (3_to_14_3, _1_to__0_5, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.0610, 0.1962, 0.7428;
+  (0, _0_5_to_0, 0_5_to_1, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.3225, 0.6411, 0.0364;
+  (1_to_3, _0_5_to_0, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.0000, 0.1654, 0.8346;
+  (3_to_14_3, _0_5_to_0, 0_5_to_1, 0_25_to_0_75) 0.0, 0.0, 0.0, 1.0;
+  (0, 0_to_0_5, 0_5_to_1, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.1993, 0.5487, 0.2520;
+  (1_to_3, 0_to_0_5, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.0000, 0.0085, 0.9915;
+  (3_to_14_3, 0_to_0_5, 0_5_to_1, 0_25_to_0_75) 0.0, 0.0, 0.0, 1.0;
+  (0, 0_5_to_1, 0_5_to_1, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.1349, 0.4061, 0.4590;
+  (1_to_3, 0_5_to_1, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.0000, 0.0001, 0.9999;
+  (3_to_14_3, 0_5_to_1, 0_5_to_1, 0_25_to_0_75) 0.0, 0.0, 0.0, 1.0;
+  (0, 1_to_2, 0_5_to_1, 0_25_to_0_75) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_5_to_1, 0_25_to_0_75) 0.0000, 0.0971, 0.2884, 0.6145;
+  (1_to_3, 1_to_2, 0_5_to_1, 0_25_to_0_75) 0.0, 0.0, 0.0, 1.0;
+  (3_to_14_3, 1_to_2, 0_5_to_1, 0_25_to_0_75) 0.0, 0.0, 0.0, 1.0;
+  (0, _1_to__0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _1_to__0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _1_to__0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0, _0_5_to_0, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, _0_5_to_0, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, _0_5_to_0, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_to_0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_to_0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_to_0_5, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0, 0_5_to_1, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 0_5_to_1, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 0_5_to_1, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0, 1_to_2, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (1_to_3, 1_to_2, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (3_to_14_3, 1_to_2, 0, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0, _1_to__0_5, 0_to_0_5, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.9703, 0.0297, 0.0000;
+  (1_to_3, _1_to__0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.6322, 0.3599, 0.0079;
+  (3_to_14_3, _1_to__0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.2577, 0.3619, 0.3804;
+  (0, _0_5_to_0, 0_to_0_5, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.7304, 0.2696, 0.0000;
+  (1_to_3, _0_5_to_0, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.1988, 0.5324, 0.2688;
+  (3_to_14_3, _0_5_to_0, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.0523, 0.1486, 0.7991;
+  (0, 0_to_0_5, 0_to_0_5, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.5353, 0.4461, 0.0186;
+  (1_to_3, 0_to_0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.1196, 0.3550, 0.5254;
+  (3_to_14_3, 0_to_0_5, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.0295, 0.0846, 0.8859;
+  (0, 0_5_to_1, 0_to_0_5, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.4335, 0.4768, 0.0897;
+  (1_to_3, 0_5_to_1, 0_to_0_5, 0_75_to_1_05) 0.000, 0.080, 0.246, 0.674;
+  (3_to_14_3, 0_5_to_1, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.0233, 0.0615, 0.9152;
+  (0, 1_to_2, 0_to_0_5, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.3408, 0.4408, 0.2184;
+  (1_to_3, 1_to_2, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.0610, 0.1709, 0.7681;
+  (3_to_14_3, 1_to_2, 0_to_0_5, 0_75_to_1_05) 0.0000, 0.0167, 0.0472, 0.9361;
+  (0, _1_to__0_5, 0_5_to_1, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _1_to__0_5, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.7246, 0.2754, 0.0000;
+  (1_to_3, _1_to__0_5, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.1967, 0.5467, 0.2566;
+  (3_to_14_3, _1_to__0_5, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.0492, 0.1480, 0.8028;
+  (0, _0_5_to_0, 0_5_to_1, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, _0_5_to_0, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.2589, 0.6326, 0.1085;
+  (1_to_3, _0_5_to_0, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.0000, 0.0649, 0.9351;
+  (3_to_14_3, _0_5_to_0, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+  (0, 0_to_0_5, 0_5_to_1, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_to_0_5, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.1436, 0.4369, 0.4195;
+  (1_to_3, 0_to_0_5, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.0000, 0.0001, 0.9999;
+  (3_to_14_3, 0_to_0_5, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+  (0, 0_5_to_1, 0_5_to_1, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 0_5_to_1, 0_5_to_1, 0_75_to_1_05) 0.0000, 0.1088, 0.3070, 0.5842;
+  (1_to_3, 0_5_to_1, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+  (3_to_14_3, 0_5_to_1, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+  (0, 1_to_2, 0_5_to_1, 0_75_to_1_05) 1.0, 0.0, 0.0, 0.0;
+  (0_to_1, 1_to_2, 0_5_to_1, 0_75_to_1_05) 0.000, 0.073, 0.223, 0.704;
+  (1_to_3, 1_to_2, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+  (3_to_14_3, 1_to_2, 0_5_to_1, 0_75_to_1_05) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( DominantCanopyHeight | BasalArea, ForestStandType ) {
+  (0_to_20, Mature_Natural) 0.4, 0.6;
+  (20_to_90_3, Mature_Natural) 0.14876, 0.85124;
+  (0_to_20, Young_Planted) 0.98276, 0.01724;
+  (20_to_90_3, Young_Planted) 0.97222, 0.02778;
+}
+probability ( DON | RelativeHumidity, UnderstoryProductivity ) {
+  (0_to_80, 0_to_25) 0.2, 0.4, 0.2, 0.2;
+  (80_to_100, 0_to_25) 0.03333033, 0.13333133, 0.50000500, 0.33333333;
+  (0_to_80, 25_to_75) 0.26667, 0.33333, 0.26667, 0.13333;
+  (80_to_100, 25_to_75) 0.09091, 0.31818, 0.22727, 0.36364;
+  (0_to_80, 75_to_100) 0.18181818, 0.36363636, 0.36363636, 0.09090909;
+  (80_to_100, 75_to_100) 0.09090909, 0.18181818, 0.45454545, 0.27272727;
+}
+probability ( DONCorrection | DeerAbundance ) {
+  (0_to_2) 0.67857679, 0.03571036, 0.28571286, 0.00000000, 0.00000000;
+  (2_to_4) 0.30, 0.12, 0.36, 0.22, 0.00;
+  (4_to_8) 0.0000, 0.0000, 0.2750, 0.0625, 0.6625;
+}
+probability ( EdibleMushroomProductivity | MushroomProductivity ) {
+  (0_to_10) 0.84746, 0.13559, 0.01695;
+  (10_to_80) 0.11864, 0.69492, 0.18644;
+  (80_to_400) 0.03333, 0.10000, 0.86667;
+}
+probability ( ForestStandType ) {
+  table 0.77616, 0.22384;
+}
+probability ( HeatMortalityForest | HeatStressForest ) {
+  (None) 1.0, 0.0, 0.0, 0.0;
+  (Slight) 1.0, 0.0, 0.0, 0.0;
+  (Moderate) 0.06680524, 0.93319476, 0.00000000, 0.00000000;
+  (Strong) 0.00000, 0.15432, 0.84568, 0.00000;
+  (Extreme) 0.00000, 0.00000, 0.05147, 0.94853;
+}
+probability ( HeatMortalityMacro | HeatStressMacro ) {
+  (Slight) 1.0, 0.0, 0.0, 0.0;
+  (Moderate) 0.0581, 0.9419, 0.0000, 0.0000;
+  (Strong) 0.0000, 0.1589, 0.8411, 0.0000;
+  (Extreme) 0.00000000, 0.00000000, 0.05092051, 0.94907949;
+}
+probability ( HeatStressForest | CoolingCapacity, HeatStressMacro ) {
+  (__10, Slight) 1.0, 0.0, 0.0, 0.0, 0.0;
+  (_10_to__5, Slight) 0.9824, 0.0176, 0.0000, 0.0000, 0.0000;
+  (_5_to_0, Slight) 0.417, 0.583, 0.000, 0.000, 0.000;
+  (___0, Slight) 0.0000, 0.4191, 0.4065, 0.1209, 0.0535;
+  (__10, Moderate) 0.9405, 0.0595, 0.0000, 0.0000, 0.0000;
+  (_10_to__5, Moderate) 0.2634, 0.7207, 0.0159, 0.0000, 0.0000;
+  (_5_to_0, Moderate) 0.0000, 0.4111, 0.5889, 0.0000, 0.0000;
+  (___0, Moderate) 0.0000, 0.0000, 0.4082, 0.4120, 0.1798;
+  (__10, Strong) 0.3886, 0.5532, 0.0582, 0.0000, 0.0000;
+  (_10_to__5, Strong) 0.0000, 0.2685, 0.7161, 0.0154, 0.0000;
+  (_5_to_0, Strong) 0.0000, 0.0000, 0.4193, 0.5807, 0.0000;
+  (___0, Strong) 0.000, 0.000, 0.000, 0.398, 0.602;
+  (__10, Extreme) 0.0921, 0.2166, 0.4093, 0.1788, 0.1032;
+  (_10_to__5, Extreme) 0.0000, 0.0000, 0.2104, 0.5033, 0.2863;
+  (_5_to_0, Extreme) 0.0000, 0.0000, 0.0000, 0.3203, 0.6797;
+  (___0, Extreme) 0.0, 0.0, 0.0, 0.0, 1.0;
+}
+probability ( HeatStressMacro ) {
+  table 0.350, 0.329, 0.237, 0.084;
+}
+probability ( ImprovementAnxiety | DeltaAnxControl, DeltaAnxietyA1 ) {
+  (_4_to_0, Large_decrease) 0.077, 0.758, 0.165;
+  (0_to_3, Large_decrease) 0.00, 0.28, 0.72;
+  (3_to_8, Large_decrease) 0.0, 0.0, 1.0;
+  (_4_to_0, Small_decrease) 0.747, 0.253, 0.000;
+  (0_to_3, Small_decrease) 0.0, 1.0, 0.0;
+  (3_to_8, Small_decrease) 0.000, 0.193, 0.807;
+  (_4_to_0, Increase) 1.0, 0.0, 0.0;
+  (0_to_3, Increase) 0.722, 0.278, 0.000;
+  (3_to_8, Increase) 0.080, 0.741, 0.179;
+}
+probability ( ImprovementNegativeAffect | DeltaNegAffControl, DeltaNegativeAffectA1 ) {
+  (_10_to_0, Large_decrease) 0.286, 0.451, 0.263;
+  (0_to_2, Large_decrease) 0.000, 0.204, 0.796;
+  (2_to_14, Large_decrease) 0.000, 0.006, 0.994;
+  (_10_to_0, Small_decrease) 0.918, 0.082, 0.000;
+  (0_to_2, Small_decrease) 0.0, 1.0, 0.0;
+  (2_to_14, Small_decrease) 0.000, 0.175, 0.825;
+  (_10_to_0, Increase) 1.0, 0.0, 0.0;
+  (0_to_2, Increase) 0.943, 0.057, 0.000;
+  (2_to_14, Increase) 0.441, 0.342, 0.217;
+}
+probability ( ImprovementPhysiologicalStress | DeltaPhysiologicalStress, DeltaPhysStressControl ) {
+  (Increase, _2_735_to_0) 0.367, 0.364, 0.269;
+  (Small_decrease, _2_735_to_0) 0.822, 0.178, 0.000;
+  (Large_decrease, _2_735_to_0) 1.0, 0.0, 0.0;
+  (Increase, 0_to_0_6) 0.0, 0.0, 1.0;
+  (Small_decrease, 0_to_0_6) 0.000, 0.701, 0.299;
+  (Large_decrease, 0_to_0_6) 0.764, 0.236, 0.000;
+  (Increase, 0_6_to_1_5) 0.0, 0.0, 1.0;
+  (Small_decrease, 0_6_to_1_5) 0.000, 0.101, 0.899;
+  (Large_decrease, 0_6_to_1_5) 0.202, 0.692, 0.106;
+}
+probability ( ImprovementPositiveAffect | DeltaPosAffControl, DeltaPositiveAffectA1 ) {
+  (_35_to__8, Decrease) 0.606, 0.311, 0.083;
+  (_8_to_0, Decrease) 0.000, 0.236, 0.764;
+  (0_to_8, Decrease) 0.0, 0.0, 1.0;
+  (_35_to__8, Small_increase) 0.978, 0.022, 0.000;
+  (_8_to_0, Small_increase) 0.065, 0.935, 0.000;
+  (0_to_8, Small_increase) 0.000, 0.274, 0.726;
+  (_35_to__8, Large_increase) 1.0, 0.0, 0.0;
+  (_8_to_0, Large_increase) 0.8, 0.2, 0.0;
+  (0_to_8, Large_increase) 0.146, 0.777, 0.077;
+}
+probability ( LeafAreaIndex | BasalArea, DominantCanopyHeight, MeanLeafSize, TreeSpeciesDiversity ) {
+  (0_to_20, 0_to_20, 0_to_1500, Monospecific) 0.46666533, 0.46666533, 0.06666933;
+  (20_to_90_3, 0_to_20, 0_to_1500, Monospecific) 0.11111, 0.61111, 0.27778;
+  (0_to_20, 20_to_39, 0_to_1500, Monospecific) 0.3333333, 0.3333333, 0.3333333;
+  (20_to_90_3, 20_to_39, 0_to_1500, Monospecific) 0.3333333, 0.3333333, 0.3333333;
+  (0_to_20, 0_to_20, 1500_to_3000, Monospecific) 0.36842, 0.52632, 0.10526;
+  (20_to_90_3, 0_to_20, 1500_to_3000, Monospecific) 0.11111, 0.33333, 0.55556;
+  (0_to_20, 20_to_39, 1500_to_3000, Monospecific) 0.16667, 0.33333, 0.50000;
+  (20_to_90_3, 20_to_39, 1500_to_3000, Monospecific) 0.03703963, 0.40740593, 0.55555444;
+  (0_to_20, 0_to_20, 3000_to_10500, Monospecific) 0.17391, 0.26087, 0.56522;
+  (20_to_90_3, 0_to_20, 3000_to_10500, Monospecific) 0.11111, 0.11111, 0.77778;
+  (0_to_20, 20_to_39, 3000_to_10500, Monospecific) 0.1052611, 0.1578916, 0.7368474;
+  (20_to_90_3, 20_to_39, 3000_to_10500, Monospecific) 0.06519653, 0.45635571, 0.47844776;
+  (0_to_20, 0_to_20, 0_to_1500, Polyspecific) 0.15385, 0.76923, 0.07692;
+  (20_to_90_3, 0_to_20, 0_to_1500, Polyspecific) 0.125, 0.500, 0.375;
+  (0_to_20, 20_to_39, 0_to_1500, Polyspecific) 0.3333333, 0.3333333, 0.3333333;
+  (20_to_90_3, 20_to_39, 0_to_1500, Polyspecific) 0.3333333, 0.3333333, 0.3333333;
+  (0_to_20, 0_to_20, 1500_to_3000, Polyspecific) 0.30769, 0.42308, 0.26923;
+  (20_to_90_3, 0_to_20, 1500_to_3000, Polyspecific) 0.04, 0.24, 0.72;
+  (0_to_20, 20_to_39, 1500_to_3000, Polyspecific) 0.09091, 0.36364, 0.54545;
+  (20_to_90_3, 20_to_39, 1500_to_3000, Polyspecific) 0.01538015, 0.33846338, 0.64615646;
+  (0_to_20, 0_to_20, 3000_to_10500, Polyspecific) 0.125, 0.250, 0.625;
+  (20_to_90_3, 0_to_20, 3000_to_10500, Polyspecific) 0.05555944, 0.16666833, 0.77777222;
+  (0_to_20, 20_to_39, 3000_to_10500, Polyspecific) 0.05, 0.25, 0.70;
+  (20_to_90_3, 20_to_39, 3000_to_10500, Polyspecific) 0.01299, 0.35065, 0.63636;
+}
+probability ( LymeBorreliosisRisk | DIN ) {
+  (0) 1.0, 0.0, 0.0, 0.0;
+  (0_to_0_25) 0.0, 1.0, 0.0, 0.0;
+  (0_25_to_1) 0.0, 0.0, 1.0, 0.0;
+  (__1) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( MeanLeafSize | DecidousProportion ) {
+  (EvergreenOrMixed) 0.73134307, 0.19403002, 0.07462691;
+  (DecidousDominated) 0.105263, 0.549708, 0.345029;
+}
+probability ( MedicinalPlantDiversity | LeafAreaIndex, SoilFertility ) {
+  (0_to_1, Mull___fertile) 0.4545455, 0.1818182, 0.3636364;
+  (1_to_3, Mull___fertile) 0.28205, 0.20513, 0.51282;
+  (3_to_7_2, Mull___fertile) 0.3142869, 0.3714263, 0.3142869;
+  (0_to_1, Rich_moder) 0.06667, 0.53333, 0.40000;
+  (1_to_3, Rich_moder) 0.29688, 0.39062, 0.31250;
+  (3_to_7_2, Rich_moder) 0.50000, 0.27778, 0.22222;
+  (0_to_1, Poor_model_or_mor___infertile) 0.2142879, 0.6428536, 0.1428586;
+  (1_to_3, Poor_model_or_mor___infertile) 0.36, 0.44, 0.20;
+  (3_to_7_2, Poor_model_or_mor___infertile) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( MedicinalPlantProductivity | LeafAreaIndex, SoilFertility ) {
+  (0_to_1, Mull___fertile) 0.18182, 0.40909, 0.40909;
+  (1_to_3, Mull___fertile) 0.2649574, 0.4102559, 0.3247868;
+  (3_to_7_2, Mull___fertile) 0.52857, 0.25714, 0.21429;
+  (0_to_1, Rich_moder) 0.06666933, 0.26666733, 0.66666333;
+  (1_to_3, Rich_moder) 0.21875, 0.37500, 0.40625;
+  (3_to_7_2, Rich_moder) 0.4444444, 0.2222222, 0.3333333;
+  (0_to_1, Poor_model_or_mor___infertile) 0.07143, 0.07143, 0.85714;
+  (1_to_3, Poor_model_or_mor___infertile) 0.12, 0.32, 0.56;
+  (3_to_7_2, Poor_model_or_mor___infertile) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( MidFrequencyCoverBiophony | BirdBiophonyPerDay, VocalizingBirdSpeciesDiversity ) {
+  (Silence_prevails, 4_to_10) 0.81818818, 0.13636136, 0.04545045;
+  (Intermediate, 4_to_10) 0.40909, 0.36364, 0.22727;
+  (Biophony_prevails, 4_to_10) 0.13333, 0.20000, 0.66667;
+  (Silence_prevails, 10_to_15) 0.54545545, 0.40909409, 0.04545045;
+  (Intermediate, 10_to_15) 0.33333, 0.57143, 0.09524;
+  (Biophony_prevails, 10_to_15) 0.125, 0.375, 0.500;
+  (Silence_prevails, 15_to_25) 0.375, 0.500, 0.125;
+  (Intermediate, 15_to_25) 0.25, 0.25, 0.50;
+  (Biophony_prevails, 15_to_25) 0.11111, 0.11111, 0.77778;
+}
+probability ( MortalityReduction | HeatMortalityForest, HeatMortalityMacro ) {
+  (_5_to_0, _5_to_0) 0.4972, 0.5028, 0.0000, 0.0000;
+  (0_to_5, _5_to_0) 1.0, 0.0, 0.0, 0.0;
+  (5_to_10, _5_to_0) 1.0, 0.0, 0.0, 0.0;
+  (___10, _5_to_0) 1.0, 0.0, 0.0, 0.0;
+  (_5_to_0, 0_to_5) 0.0000, 0.5075, 0.4925, 0.0000;
+  (0_to_5, 0_to_5) 0.4995, 0.5005, 0.0000, 0.0000;
+  (5_to_10, 0_to_5) 1.0, 0.0, 0.0, 0.0;
+  (___10, 0_to_5) 1.0, 0.0, 0.0, 0.0;
+  (_5_to_0, 5_to_10) 0.0000, 0.0000, 0.4973, 0.5027;
+  (0_to_5, 5_to_10) 0.0, 0.5, 0.5, 0.0;
+  (5_to_10, 5_to_10) 0.4992, 0.5008, 0.0000, 0.0000;
+  (___10, 5_to_10) 1.0, 0.0, 0.0, 0.0;
+  (_5_to_0, ___10) 0.0, 0.0, 0.0, 1.0;
+  (0_to_5, ___10) 0.000, 0.000, 0.375, 0.625;
+  (5_to_10, ___10) 0.0000, 0.3679, 0.3967, 0.2354;
+  (___10, ___10) 0.4956, 0.3271, 0.1116, 0.0657;
+}
+probability ( MouseAbundance | UnderstoryProductivity ) {
+  (0_to_25) 0.12, 0.66, 0.22;
+  (25_to_75) 0.3, 0.4, 0.3;
+  (75_to_100) 0.25833, 0.27500, 0.46667;
+}
+probability ( MushroomProductivity | MushroomSpeciesDiversity, SoilFertility ) {
+  (0_to_15, Mull___fertile) 0.32558, 0.34884, 0.32558;
+  (15_to_30, Mull___fertile) 0.50000, 0.30769, 0.19231;
+  (30_to_72, Mull___fertile) 0.1538485, 0.3846162, 0.4615354;
+  (0_to_15, Rich_moder) 0.18182, 0.27273, 0.54545;
+  (15_to_30, Rich_moder) 0.42308, 0.26923, 0.30769;
+  (30_to_72, Rich_moder) 0.27083, 0.41667, 0.31250;
+  (0_to_15, Poor_model_or_mor___infertile) 0.3333333, 0.3333333, 0.3333333;
+  (15_to_30, Poor_model_or_mor___infertile) 0.3333333, 0.3333333, 0.3333333;
+  (30_to_72, Poor_model_or_mor___infertile) 0.375, 0.250, 0.375;
+}
+probability ( MushroomRelatedHealthBenefits | EdibleMushroomProductivity ) {
+  (0_to_4) 9.029681e-01, 9.703087e-02, 1.000009e-06;
+  (4_to_40) 9.025881e-01, 9.741088e-02, 1.000009e-06;
+  (40_to_270) 0.12335, 0.46235, 0.41430;
+}
+probability ( MushroomSpeciesDiversity | BasalArea, SoilFertility, TreeSpeciesDiversity ) {
+  (0_to_20, Mull___fertile, Monospecific) 0.96667, 0.02222, 0.01111;
+  (20_to_90_3, Mull___fertile, Monospecific) 0.3800, 0.3625, 0.2575;
+  (0_to_20, Rich_moder, Monospecific) 0.40, 0.35, 0.25;
+  (20_to_90_3, Rich_moder, Monospecific) 0.88333, 0.06667, 0.05000;
+  (0_to_20, Poor_model_or_mor___infertile, Monospecific) 0.2, 0.3, 0.5;
+  (20_to_90_3, Poor_model_or_mor___infertile, Monospecific) 0.15, 0.25, 0.60;
+  (0_to_20, Mull___fertile, Polyspecific) 0.94286, 0.03571, 0.02143;
+  (20_to_90_3, Mull___fertile, Polyspecific) 0.4625, 0.4075, 0.1300;
+  (0_to_20, Rich_moder, Polyspecific) 0.3, 0.4, 0.3;
+  (20_to_90_3, Rich_moder, Polyspecific) 0.04514, 0.32430, 0.63056;
+  (0_to_20, Poor_model_or_mor___infertile, Polyspecific) 0.15, 0.25, 0.60;
+  (20_to_90_3, Poor_model_or_mor___infertile, Polyspecific) 0.01667, 0.03333, 0.95000;
+}
+probability ( NIP ) {
+  table 0.594, 0.343, 0.063;
+}
+probability ( NIPCorrection | BirdSpeciesDiversity, MouseAbundance ) {
+  (4_to_7, 0_to_10) 0.66667, 0.05000, 0.08333, 0.15000, 0.05000;
+  (7_to_9, 0_to_10) 0.15, 0.45, 0.25, 0.15, 0.00;
+  (9_to_12, 0_to_10) 0.48333483, 0.43333433, 0.05000050, 0.03333033, 0.00000000;
+  (4_to_7, 10_to_20) 0.00000000, 0.01666983, 0.06666933, 0.09999900, 0.81666183;
+  (7_to_9, 10_to_20) 0.2625, 0.2875, 0.3250, 0.1000, 0.0250;
+  (9_to_12, 10_to_20) 0.08333083, 0.18333183, 0.05000050, 0.68333683, 0.00000000;
+  (4_to_7, 20_to_30) 0.00000, 0.01667, 0.40000, 0.43333, 0.15000;
+  (7_to_9, 20_to_30) 0.41, 0.23, 0.26, 0.08, 0.02;
+  (9_to_12, 20_to_30) 0.125, 0.275, 0.075, 0.525, 0.000;
+}
+probability ( PerceivedAcousticDiversity | Condition ) {
+  (low) 0.37255, 0.39216, 0.23529;
+  (high) 0.08823912, 0.32352676, 0.58823412;
+}
+probability ( PerceivedArtificialness | TreeSpeciesDiversity ) {
+  (Monospecific) 0.25191, 0.35114, 0.39695;
+  (Polyspecific) 0.42069, 0.33793, 0.24138;
+}
+probability ( PerceivedBiodiversity | PerceivedArtificialness, PerceivedDensity, TreeSpeciesDiversity ) {
+  (Low, Low, Monospecific) 0.30769, 0.53846, 0.15385;
+  (Medium, Low, Monospecific) 0.50000, 0.36364, 0.13636;
+  (High, Low, Monospecific) 0.68959104, 0.27593241, 0.03447655;
+  (Low, Medium, Monospecific) 0.3, 0.3, 0.4;
+  (Medium, Medium, Monospecific) 0.23529, 0.64706, 0.11765;
+  (High, Medium, Monospecific) 0.41176412, 0.52941529, 0.05882059;
+  (Low, High, Monospecific) 0.2222222, 0.3333333, 0.4444444;
+  (Medium, High, Monospecific) 0.26667, 0.20000, 0.53333;
+  (High, High, Monospecific) 0.35714, 0.42857, 0.21429;
+  (Low, Low, Polyspecific) 0.3333333, 0.3333333, 0.3333333;
+  (Medium, Low, Polyspecific) 0.50000, 0.35714, 0.14286;
+  (High, Low, Polyspecific) 0.5333353, 0.3333333, 0.1333313;
+  (Low, Medium, Polyspecific) 0.15, 0.45, 0.40;
+  (Medium, Medium, Polyspecific) 0.1875, 0.6250, 0.1875;
+  (High, Medium, Polyspecific) 0.2352924, 0.4117641, 0.3529435;
+  (Low, High, Polyspecific) 0.05556, 0.36111, 0.58333;
+  (Medium, High, Polyspecific) 0.15385, 0.34615, 0.50000;
+  (High, High, Polyspecific) 0.27273, 0.63636, 0.09091;
+}
+probability ( PerceivedDensity | TreeSpeciesDiversity, UnderstoryProductivity ) {
+  (Monospecific, 0_to_25) 0.3333333, 0.3333333, 0.3333333;
+  (Polyspecific, 0_to_25) 0.42857, 0.35714, 0.21429;
+  (Monospecific, 25_to_75) 0.33333, 0.27778, 0.38889;
+  (Polyspecific, 25_to_75) 0.28846, 0.30769, 0.40385;
+  (Monospecific, 75_to_100) 0.32308, 0.30769, 0.36923;
+  (Polyspecific, 75_to_100) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( PlotLevelPolyphenolContent | MedicinalPlantDiversity, MedicinalPlantProductivity ) {
+  (0_to_0_1, 0_to_3_8) 0.6150, 0.1825, 0.2025;
+  (0_1_to_0_24, 0_to_3_8) 0.32812, 0.41875, 0.25313;
+  (0_24_to_0_8, 0_to_3_8) 0.40000, 0.51538, 0.08462;
+  (0_to_0_1, 3_8_to_15) 0.52, 0.17, 0.31;
+  (0_1_to_0_24, 3_8_to_15) 0.366, 0.268, 0.366;
+  (0_24_to_0_8, 3_8_to_15) 0.25313, 0.42812, 0.31875;
+  (0_to_0_1, 15_to_102) 0.46363536, 0.06363936, 0.47272527;
+  (0_1_to_0_24, 15_to_102) 0.22955, 0.35000, 0.42045;
+  (0_24_to_0_8, 15_to_102) 0.09242092, 0.47424474, 0.43333433;
+}
+probability ( PM100Deposition | CanopyRoughness, LeafAreaIndex ) {
+  (Low, 0_to_1) 0.50, 0.25, 0.25;
+  (Medium, 0_to_1) 0.6, 0.2, 0.2;
+  (High, 0_to_1) 0.6, 0.2, 0.2;
+  (Low, 1_to_3) 0.50000, 0.42857, 0.07143;
+  (Medium, 1_to_3) 0.4, 0.4, 0.2;
+  (High, 1_to_3) 0.3333333, 0.3333333, 0.3333333;
+  (Low, 3_to_7_2) 0.11111, 0.33333, 0.55556;
+  (Medium, 3_to_7_2) 0.22222, 0.38889, 0.38889;
+  (High, 3_to_7_2) 0.17241, 0.72414, 0.10345;
+}
+probability ( PM10Deposition | CanopyRoughness, LeafAreaIndex ) {
+  (Low, 0_to_1) 0.6, 0.2, 0.2;
+  (Medium, 0_to_1) 0.6, 0.2, 0.2;
+  (High, 0_to_1) 0.6, 0.2, 0.2;
+  (Low, 1_to_3) 0.71428286, 0.21428786, 0.07142929;
+  (Medium, 1_to_3) 0.6, 0.2, 0.2;
+  (High, 1_to_3) 0.3333333, 0.3333333, 0.3333333;
+  (Low, 3_to_7_2) 0.05556, 0.33333, 0.61111;
+  (Medium, 3_to_7_2) 0.20000, 0.46667, 0.33333;
+  (High, 3_to_7_2) 0.14286, 0.75000, 0.10714;
+}
+probability ( PM10InsideForest | PM10Deposition, PM10OutsideForest ) {
+  (0_to_0_035, 10_to_15) 1.0, 0.0, 0.0;
+  (0_035_to_0_1, 10_to_15) 1.0, 0.0, 0.0;
+  (0_1_to_0_35, 10_to_15) 1.0, 0.0, 0.0;
+  (0_to_0_035, 15_to_20) 0.0502, 0.9498, 0.0000;
+  (0_035_to_0_1, 15_to_20) 0.199, 0.801, 0.000;
+  (0_1_to_0_35, 15_to_20) 0.6824, 0.3176, 0.0000;
+  (0_to_0_035, 20_to_30) 0.0000, 0.0258, 0.9742;
+  (0_035_to_0_1, 20_to_30) 0.0000, 0.1005, 0.8995;
+  (0_1_to_0_35, 20_to_30) 0.0018, 0.3385, 0.6597;
+}
+probability ( PM10OutsideForest ) {
+  table 0.01219988, 0.43902561, 0.54877451;
+}
+probability ( PM2.5Deposition | CanopyRoughness, LeafAreaIndex ) {
+  (Low, 0_to_1) 0.6, 0.2, 0.2;
+  (Medium, 0_to_1) 0.80000, 0.13333, 0.06667;
+  (High, 0_to_1) 0.11111, 0.22222, 0.66667;
+  (Low, 1_to_3) 0.6, 0.2, 0.2;
+  (Medium, 1_to_3) 0.4, 0.4, 0.2;
+  (High, 1_to_3) 0.22222, 0.38889, 0.38889;
+  (Low, 3_to_7_2) 0.6, 0.2, 0.2;
+  (Medium, 3_to_7_2) 0.3333333, 0.3333333, 0.3333333;
+  (High, 3_to_7_2) 0.23333, 0.70000, 0.06667;
+}
+probability ( PM2.5InsideForest | PM2.5Deposition, PM2.5OutsideForest ) {
+  (0_to_0_02, 5_to_7_5) 1.0, 0.0, 0.0;
+  (0_02_to_0_07, 5_to_7_5) 1.0, 0.0, 0.0;
+  (0_07_to_0_25, 5_to_7_5) 1.0, 0.0, 0.0;
+  (0_to_0_02, 7_5_to_10) 0.0598, 0.9402, 0.0000;
+  (0_02_to_0_07, 7_5_to_10) 0.2723, 0.7277, 0.0000;
+  (0_07_to_0_25, 7_5_to_10) 0.8543, 0.1457, 0.0000;
+  (0_to_0_02, 10_to_15) 0.0000, 0.0327, 0.9673;
+  (0_02_to_0_07, 10_to_15) 0.0000, 0.1364, 0.8636;
+  (0_07_to_0_25, 10_to_15) 0.0636, 0.4327, 0.5037;
+}
+probability ( PM2.5OutsideForest ) {
+  table 0.0122, 0.7439, 0.2439;
+}
+probability ( PolyphenolRelatedHealthBenefits | PlotLevelPolyphenolContent ) {
+  (0_to_34) 9.999999e-01, 1.000001e-07, 0.000000e+00;
+  (34_to_600) 9.999999e-01, 1.000001e-07, 0.000000e+00;
+  (600_to_6000) 0.0485661, 0.4567450, 0.4946890;
+}
+probability ( RelativeHumidity | LeafAreaIndex ) {
+  (0_to_1) 0.86667, 0.13333;
+  (1_to_3) 0.53125, 0.46875;
+  (3_to_7_2) 0.2, 0.8;
+}
+probability ( RestorativenessA1 | PerceivedBiodiversity ) {
+  (Low) 0.5107951, 0.2949629, 0.1942419;
+  (Medium) 0.22689, 0.35294, 0.42017;
+  (High) 0.10256, 0.25641, 0.64103;
+}
+probability ( RestorativenessA2 | PerceivedAcousticDiversity ) {
+  (1_to_2) 0.29167, 0.39583, 0.31250;
+  (2) 0.2567574, 0.2972970, 0.4459455;
+  (2_to_5) 0.17647, 0.34118, 0.48235;
+}
+probability ( RiskInsideForestPM10 | PM10InsideForest ) {
+  (4_77137_to_15) 0.43057, 0.42929, 0.14014;
+  (15_to_20) 0.2918729, 0.4657947, 0.2423324;
+  (20_to_30) 0.1284213, 0.4209842, 0.4505945;
+}
+probability ( RiskInsideForestPM2.5 | PM2.5InsideForest ) {
+  (1_24706_to_7_5) 9.770290e-01, 2.296998e-02, 9.999990e-07;
+  (7_5_to_10) 0.46417, 0.53531, 0.00052;
+  (10_to_15) 0.00001, 0.14528, 0.85471;
+}
+probability ( RiskMitigationPM10 | RiskInsideForestPM10, RiskOutsideForestPM10 ) {
+  (1_to_1_05, 1_to_1_05) 0.879, 0.121, 0.000;
+  (1_05__to_1_1, 1_to_1_05) 1.0, 0.0, 0.0;
+  (1_1_to_1_15, 1_to_1_05) 1.0, 0.0, 0.0;
+  (1_to_1_05, 1_05_to_1_1) 0.1296, 0.3751, 0.4953;
+  (1_05__to_1_1, 1_05_to_1_1) 0.8791879, 0.1208121, 0.0000000;
+  (1_1_to_1_15, 1_05_to_1_1) 1.0, 0.0, 0.0;
+  (1_to_1_05, 1_1_to_1_15) 0.0, 0.0, 1.0;
+  (1_05__to_1_1, 1_1_to_1_15) 0.1253, 0.3761, 0.4986;
+  (1_1_to_1_15, 1_1_to_1_15) 0.8742, 0.1258, 0.0000;
+}
+probability ( RiskMitigationPM2.5 | RiskInsideForestPM2.5, RiskOutsideForestPM2.5 ) {
+  (1_to_1_1, 1_to_1_1) 0.7173, 0.2827, 0.0000;
+  (1_1_to_1_15, 1_to_1_1) 1.0, 0.0, 0.0;
+  (1_15_to_1_2, 1_to_1_1) 1.0, 0.0, 0.0;
+  (1_to_1_1, 1_1_to_1_15) 0.0606, 0.6940, 0.2454;
+  (1_1_to_1_15, 1_1_to_1_15) 0.875, 0.125, 0.000;
+  (1_15_to_1_2, 1_1_to_1_15) 1.0, 0.0, 0.0;
+  (1_to_1_1, 1_15_to_1_2) 0.0000, 0.2548, 0.7452;
+  (1_1_to_1_15, 1_15_to_1_2) 0.1273, 0.8727, 0.0000;
+  (1_15_to_1_2, 1_15_to_1_2) 0.8768, 0.1232, 0.0000;
+}
+probability ( RiskOutsideForestPM10 | PM10OutsideForest ) {
+  (10_to_15) 0.4300157, 0.4292757, 0.1407086;
+  (15_to_20) 0.29139, 0.46543, 0.24318;
+  (20_to_30) 0.1295313, 0.4195242, 0.4509445;
+}
+probability ( RiskOutsideForestPM2.5 | PM2.5OutsideForest ) {
+  (5_to_7_5) 9.775699e-01, 2.243000e-02, 9.999999e-08;
+  (7_5_to_10) 0.4752404752, 0.5242305242, 0.0005290005;
+  (10_to_15) 1.000009e-06, 1.428813e-01, 8.571177e-01;
+}
+probability ( SoilFertility | DecidousProportion ) {
+  (EvergreenOrMixed) 0.2500075, 0.5833175, 0.1666750;
+  (DecidousDominated) 0.43015, 0.50735, 0.06250;
+}
+probability ( StemDensity | ForestStandType ) {
+  (Mature_Natural) 0.2429908, 0.4641745, 0.2928347;
+  (Young_Planted) 0.01063831, 0.34042524, 0.64893645;
+}
+probability ( ThermalComfortForest | HeatStressForest ) {
+  (None) 0.03365034, 0.13942139, 0.42788428, 0.28365284, 0.08654087, 0.02885029;
+  (Slight) 0.01351, 0.02703, 0.25676, 0.36486, 0.25676, 0.08108;
+  (Moderate) 0.04761952, 0.04761952, 0.09523905, 0.14285857, 0.47618524, 0.19047810;
+  (Strong) 0.01562, 0.01562, 0.04688, 0.15625, 0.29688, 0.46875;
+  (Extreme) 0.03703963, 0.03703963, 0.03703963, 0.07406926, 0.29629704, 0.51851481;
+}
+probability ( ThermalComfortMacro | HeatStressMacro ) {
+  (Slight) 0.05084949, 0.03389966, 0.22033780, 0.49152508, 0.18643814, 0.01694983;
+  (Moderate) 0.03030030, 0.09091091, 0.12121121, 0.51515515, 0.21212212, 0.03030030;
+  (Strong) 0.00763, 0.03817, 0.10687, 0.25191, 0.38931, 0.20611;
+  (Extreme) 0.01923, 0.01923, 0.05769, 0.19231, 0.48077, 0.23077;
+}
+probability ( ThermalPreferenceForest | HeatStressForest ) {
+  (None) 0.58252583, 0.40291403, 0.01456015;
+  (Slight) 0.15493, 0.83099, 0.01408;
+  (Moderate) 0.05556, 0.83333, 0.11111;
+  (Strong) 0.05263, 0.64474, 0.30263;
+  (Extreme) 0.03333, 0.56667, 0.40000;
+}
+probability ( ThermalPreferenceMacro | HeatStressMacro ) {
+  (Slight) 0.10714, 0.87500, 0.01786;
+  (Moderate) 0.03333, 0.86667, 0.10000;
+  (Strong) 0.05469, 0.64062, 0.30469;
+  (Extreme) 0.02041, 0.57143, 0.40816;
+}
+probability ( TreeSpeciesDiversity ) {
+  table 0.40389, 0.59611;
+}
+probability ( UnderstoryProductivity | LeafAreaIndex, SoilFertility ) {
+  (0_to_1, Mull___fertile) 0.16667, 0.50000, 0.33333;
+  (1_to_3, Mull___fertile) 0.21739, 0.52174, 0.26087;
+  (3_to_7_2, Mull___fertile) 0.2773488, 0.6053143, 0.1173368;
+  (0_to_1, Rich_moder) 0.14286, 0.28571, 0.57143;
+  (1_to_3, Rich_moder) 0.15385, 0.59615, 0.25000;
+  (3_to_7_2, Rich_moder) 0.30769, 0.43956, 0.25275;
+  (0_to_1, Poor_model_or_mor___infertile) 0.3333333, 0.3333333, 0.3333333;
+  (1_to_3, Poor_model_or_mor___infertile) 0.33333, 0.50000, 0.16667;
+  (3_to_7_2, Poor_model_or_mor___infertile) 0.47059, 0.29412, 0.23529;
+}
+probability ( VocalizingBirdSpeciesDiversity | BasalArea, DominantCanopyHeight, TreeSpeciesDiversity ) {
+  (0_to_20, 0_to_20, Monospecific) 0.50000, 0.46429, 0.03571;
+  (20_to_90_3, 0_to_20, Monospecific) 0.38889, 0.33333, 0.27778;
+  (0_to_20, 20_to_39, Monospecific) 0.3333333, 0.3333333, 0.3333333;
+  (20_to_90_3, 20_to_39, Monospecific) 0.2857129, 0.2857129, 0.4285743;
+  (0_to_20, 0_to_20, Polyspecific) 0.50000, 0.38462, 0.11538;
+  (20_to_90_3, 0_to_20, Polyspecific) 0.1578916, 0.1578916, 0.6842168;
+  (0_to_20, 20_to_39, Polyspecific) 0.3333333, 0.3333333, 0.3333333;
+  (20_to_90_3, 20_to_39, Polyspecific) 0.21569, 0.33333, 0.45098;
+}

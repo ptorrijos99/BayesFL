@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Absorption</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Absorption1</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Absorption2</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Adaptation</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Adaptation1</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Adaptation2</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Autonomy</NAME>
+      <OUTCOME>deficient</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Autonomy1</NAME>
+      <OUTCOME>deficient</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Autonomy2</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Connectivity</NAME>
+      <OUTCOME>deficient</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Connectivity1</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Connectivity2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Density</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Density1</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Density2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Diversity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Diversity1</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Diversity2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fcover</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fcover1</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fcover2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fires</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fires1</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fires2</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Function</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Function1</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Function2</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Organization</NAME>
+      <OUTCOME>deficient</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Organization1</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Organization2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Precipitation</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Precipitation1</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Precipitation2</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Transformation</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Transformation1</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Transformation2</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Absorption</FOR>
+      <GIVEN>Autonomy</GIVEN>
+      <GIVEN>Diversity</GIVEN>
+      <GIVEN>Fcover</GIVEN>
+      <TABLE>0.75 0.25 0.75 0.25 0.75 0.25 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Absorption1</FOR>
+      <GIVEN>Autonomy1</GIVEN>
+      <GIVEN>Diversity1</GIVEN>
+      <GIVEN>Fcover1</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.625 0.375 0.5 0.5 0.25 0.75 0.5 0.5 0.75 0.25 0.75 0.25 0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Absorption2</FOR>
+      <GIVEN>Autonomy2</GIVEN>
+      <GIVEN>Diversity2</GIVEN>
+      <GIVEN>Fcover2</GIVEN>
+      <TABLE>0.25 0.75 0.1666667 0.8333333 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Adaptation</FOR>
+      <GIVEN>Autonomy</GIVEN>
+      <GIVEN>Connectivity</GIVEN>
+      <GIVEN>Diversity</GIVEN>
+      <GIVEN>Fcover</GIVEN>
+      <GIVEN>Organization</GIVEN>
+      <GIVEN>Precipitation</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.625 0.375 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.75 0.25 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Adaptation1</FOR>
+      <GIVEN>Autonomy1</GIVEN>
+      <GIVEN>Connectivity1</GIVEN>
+      <GIVEN>Diversity1</GIVEN>
+      <GIVEN>Fcover1</GIVEN>
+      <GIVEN>Organization1</GIVEN>
+      <GIVEN>Precipitation1</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.75 0.25 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Adaptation2</FOR>
+      <GIVEN>Autonomy2</GIVEN>
+      <GIVEN>Connectivity2</GIVEN>
+      <GIVEN>Diversity2</GIVEN>
+      <GIVEN>Fcover2</GIVEN>
+      <GIVEN>Organization2</GIVEN>
+      <GIVEN>Precipitation2</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Autonomy</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Autonomy1</FOR>
+      <TABLE>0.1666667 0.8333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Autonomy2</FOR>
+      <TABLE>0.3888889 0.6111111 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Connectivity</FOR>
+      <TABLE>0.6111111 0.3888889 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Connectivity1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Connectivity2</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Density</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Density1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Density2</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Diversity</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Diversity1</FOR>
+      <TABLE>0.1481481 0.2592593 0.5925926 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Diversity2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fcover</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fcover1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fcover2</FOR>
+      <TABLE>0.7037037 0.1481481 0.1481481 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fires</FOR>
+      <TABLE>0.2777778 0.7222222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fires1</FOR>
+      <GIVEN>Fires</GIVEN>
+      <TABLE>0.7777778 0.1111111 0.1111111 0.1904762 0.1904762 0.6190476 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fires2</FOR>
+      <GIVEN>Fires1</GIVEN>
+      <TABLE>0.875 0.125 0.75 0.25 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Function</FOR>
+      <GIVEN>Absorption</GIVEN>
+      <GIVEN>Adaptation</GIVEN>
+      <GIVEN>Transformation</GIVEN>
+      <TABLE>0.6875 0.3125 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Function1</FOR>
+      <GIVEN>Absorption1</GIVEN>
+      <GIVEN>Adaptation1</GIVEN>
+      <GIVEN>Transformation1</GIVEN>
+      <TABLE>0.7 0.3 0.5 0.5 0.75 0.25 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.1666667 0.8333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Function2</FOR>
+      <GIVEN>Absorption2</GIVEN>
+      <GIVEN>Adaptation2</GIVEN>
+      <GIVEN>Transformation2</GIVEN>
+      <TABLE>0.75 0.25 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.07142857 0.92857143 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Organization</FOR>
+      <TABLE>0.6111111 0.3888889 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Organization1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Organization2</FOR>
+      <TABLE>0.8333333 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Precipitation</FOR>
+      <TABLE>0.1481481 0.1481481 0.7037037 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Precipitation1</FOR>
+      <TABLE>0.2777778 0.7222222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Precipitation2</FOR>
+      <TABLE>0.1481481 0.4814815 0.3703704 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Transformation</FOR>
+      <GIVEN>Connectivity</GIVEN>
+      <GIVEN>Density</GIVEN>
+      <GIVEN>Fires</GIVEN>
+      <GIVEN>Organization</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.8333333 0.1666667 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.875 0.125 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Transformation1</FOR>
+      <GIVEN>Connectivity1</GIVEN>
+      <GIVEN>Density1</GIVEN>
+      <GIVEN>Fires1</GIVEN>
+      <GIVEN>Organization1</GIVEN>
+      <GIVEN>Transformation</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.75 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.875 0.125 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Transformation2</FOR>
+      <GIVEN>Connectivity2</GIVEN>
+      <GIVEN>Density2</GIVEN>
+      <GIVEN>Fires2</GIVEN>
+      <GIVEN>Organization2</GIVEN>
+      <GIVEN>Transformation1</GIVEN>
+      <TABLE>0.375 0.625 0.75 0.25 0.5 0.5 0.5 0.5 0.125 0.875 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

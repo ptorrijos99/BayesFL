@@ -1,0 +1,470 @@
+network unknown {
+}
+variable AssessmentFailure {
+  type discrete [ 2 ] { YES, NO };
+}
+variable AvoidanceRules {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable CautiousDriving {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable Collision {
+  type discrete [ 2 ] { YES, NO };
+}
+variable CompetentCrew {
+  type discrete [ 2 ] { YES, NO };
+}
+variable ConsequenceCollision {
+  type discrete [ 3 ] { Serious, Moderate, Minor };
+}
+variable ConsequenceContact {
+  type discrete [ 3 ] { Serious, Moderate, Minor };
+}
+variable ConsequenceSinking {
+  type discrete [ 3 ] { Serious, Moderate, Minor };
+}
+variable Contact {
+  type discrete [ 2 ] { YES, NO };
+}
+variable CrewTraining {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable EarlyMeasures {
+  type discrete [ 2 ] { YES, NO };
+}
+variable EquipmentFailure {
+  type discrete [ 2 ] { YES, NO };
+}
+variable GrossTonnage {
+  type discrete [ 3 ] { __3000_tons, 3000_10000_tons, __10000_tons };
+}
+variable HardwareMaintenance {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable ImproperStowage {
+  type discrete [ 2 ] { YES, NO };
+}
+variable InadequateCommunication {
+  type discrete [ 2 ] { YES, NO };
+}
+variable NegligentLookout {
+  type discrete [ 2 ] { YES, NO };
+}
+variable NoGiveWay {
+  type discrete [ 2 ] { YES, NO };
+}
+variable QualifiedCrew {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable ResourceManagement {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable SafetyTraining {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable ShipAge {
+  type discrete [ 3 ] { _10_years, 10_20_years, __20_years };
+}
+variable ShipTracking {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable ShipType {
+  type discrete [ 3 ] { Carrier_Container, Tanker, Other_ship };
+}
+variable Sinking {
+  type discrete [ 2 ] { YES, NO };
+}
+variable SupervisingCompanies {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable SupervisionVessel {
+  type discrete [ 2 ] { Adopted, Unadopted };
+}
+variable TrafficFlow {
+  type discrete [ 2 ] { Heavy, NormalOrLow };
+}
+variable UnsafeSpeed {
+  type discrete [ 2 ] { YES, NO };
+}
+variable Visibility {
+  type discrete [ 2 ] { Poor, Good };
+}
+variable Wind {
+  type discrete [ 2 ] { ___Category_5, __Category_5 };
+}
+probability ( AssessmentFailure | AvoidanceRules, CrewTraining, NegligentLookout, TrafficFlow ) {
+  (Adopted, Adopted, YES, Heavy) 0.04335, 0.95665;
+  (Unadopted, Adopted, YES, Heavy) 0.17, 0.83;
+  (Adopted, Unadopted, YES, Heavy) 0.17, 0.83;
+  (Unadopted, Unadopted, YES, Heavy) 0.6666667, 0.3333333;
+  (Adopted, Adopted, NO, Heavy) 0.06177375, 0.93822625;
+  (Unadopted, Adopted, NO, Heavy) 0.24225, 0.75775;
+  (Adopted, Unadopted, NO, Heavy) 0.24225, 0.75775;
+  (Unadopted, Unadopted, NO, Heavy) 0.95, 0.05;
+  (Adopted, Adopted, YES, NormalOrLow) 0.04501731, 0.95498269;
+  (Unadopted, Adopted, YES, NormalOrLow) 0.1765385, 0.8234615;
+  (Adopted, Unadopted, YES, NormalOrLow) 0.1765385, 0.8234615;
+  (Unadopted, Unadopted, YES, NormalOrLow) 0.6923077, 0.3076923;
+  (Adopted, Adopted, NO, NormalOrLow) 0.021675, 0.978325;
+  (Unadopted, Adopted, NO, NormalOrLow) 0.085, 0.915;
+  (Adopted, Unadopted, NO, NormalOrLow) 0.085, 0.915;
+  (Unadopted, Unadopted, NO, NormalOrLow) 0.3333333, 0.6666667;
+}
+probability ( AvoidanceRules ) {
+  table 0.3636364, 0.6363636;
+}
+probability ( CautiousDriving ) {
+  table 0.1272727, 0.8727273;
+}
+probability ( Collision | EarlyMeasures, NoGiveWay, UnsafeSpeed ) {
+  (YES, YES, YES) 0.95, 0.05;
+  (NO, YES, YES) 0.95, 0.05;
+  (YES, NO, YES) 0.95, 0.05;
+  (NO, NO, YES) 0.95, 0.05;
+  (YES, YES, NO) 0.95, 0.05;
+  (NO, YES, NO) 0.95, 0.05;
+  (YES, NO, NO) 0.33333, 0.66667;
+  (NO, NO, NO) 0.05, 0.95;
+}
+probability ( CompetentCrew | QualifiedCrew, SupervisingCompanies, SupervisionVessel ) {
+  (Adopted, Adopted, Adopted) 0.01423813, 0.98576188;
+  (Unadopted, Adopted, Adopted) 0.01742428, 0.98257572;
+  (Adopted, Unadopted, Adopted) 0.05225, 0.94775;
+  (Unadopted, Unadopted, Adopted) 0.06394231, 0.93605769;
+  (Adopted, Adopted, Unadopted) 0.01614039, 0.98385961;
+  (Unadopted, Adopted, Unadopted) 0.07336539, 0.92663461;
+  (Adopted, Unadopted, Unadopted) 0.05923077, 0.94076923;
+  (Unadopted, Unadopted, Unadopted) 0.2692308, 0.7307692;
+}
+probability ( ConsequenceCollision | GrossTonnage, ShipAge, ShipType ) {
+  (__3000_tons, _10_years, Carrier_Container) 0.19, 0.02, 0.79;
+  (3000_10000_tons, _10_years, Carrier_Container) 0.2627273, 0.0200000, 0.7172727;
+  (__10000_tons, _10_years, Carrier_Container) 0.29, 0.02, 0.69;
+  (__3000_tons, 10_20_years, Carrier_Container) 0.07142857, 0.21428571, 0.71428571;
+  (3000_10000_tons, 10_20_years, Carrier_Container) 0.02, 0.49, 0.49;
+  (__10000_tons, 10_20_years, Carrier_Container) 0.19, 0.02, 0.79;
+  (__3000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Tanker) 0.323333, 0.020000, 0.656667;
+  (__10000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Tanker) 0.98, 0.01, 0.01;
+  (__10000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Tanker) 0.01, 0.98, 0.01;
+  (3000_10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Other_ship) 0.49, 0.02, 0.49;
+  (3000_10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+}
+probability ( ConsequenceContact | GrossTonnage, ShipAge, ShipType ) {
+  (__3000_tons, _10_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Other_ship) 0.02, 0.02, 0.96;
+}
+probability ( ConsequenceSinking | GrossTonnage, ShipAge, ShipType ) {
+  (__3000_tons, _10_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Carrier_Container) 0.01, 0.98, 0.01;
+  (__10000_tons, _10_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Carrier_Container) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Tanker) 0.01, 0.01, 0.98;
+  (__3000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, _10_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, 10_20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__3000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (3000_10000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+  (__10000_tons, __20_years, Other_ship) 0.01, 0.01, 0.98;
+}
+probability ( Contact | AssessmentFailure, NegligentLookout ) {
+  (YES, YES) 0.2, 0.8;
+  (NO, YES) 0.1, 0.9;
+  (YES, NO) 0.11111, 0.88889;
+  (NO, NO) 0.05, 0.95;
+}
+probability ( CrewTraining ) {
+  table 0.1636364, 0.8363636;
+}
+probability ( EarlyMeasures | AssessmentFailure, AvoidanceRules, CrewTraining, InadequateCommunication ) {
+  (YES, Adopted, Adopted, YES) 0.06284531, 0.93715469;
+  (NO, Adopted, Adopted, YES) 0.04189688, 0.95810313;
+  (YES, Unadopted, Adopted, YES) 0.204375, 0.795625;
+  (NO, Unadopted, Adopted, YES) 0.13625, 0.86375;
+  (YES, Adopted, Unadopted, YES) 0.230625, 0.769375;
+  (NO, Adopted, Unadopted, YES) 0.15375, 0.84625;
+  (YES, Unadopted, Unadopted, YES) 0.75, 0.25;
+  (NO, Unadopted, Unadopted, YES) 0.5, 0.5;
+  (YES, Adopted, Adopted, NO) 0.03258646, 0.96741354;
+  (NO, Adopted, Adopted, NO) 0.02094844, 0.97905156;
+  (YES, Unadopted, Adopted, NO) 0.1059722, 0.8940278;
+  (NO, Unadopted, Adopted, NO) 0.068125, 0.931875;
+  (YES, Adopted, Unadopted, NO) 0.1195833, 0.8804167;
+  (NO, Adopted, Unadopted, NO) 0.076875, 0.923125;
+  (YES, Unadopted, Unadopted, NO) 0.3888889, 0.6111111;
+  (NO, Unadopted, Unadopted, NO) 0.25, 0.75;
+}
+probability ( EquipmentFailure | HardwareMaintenance, ShipAge, SupervisingCompanies ) {
+  (Adopted, _10_years, Adopted) 0.009428066, 0.990571934;
+  (Unadopted, _10_years, Adopted) 0.02900943, 0.97099057;
+  (Adopted, 10_20_years, Adopted) 0.05, 0.95;
+  (Unadopted, 10_20_years, Adopted) 0.05, 0.95;
+  (Adopted, __20_years, Adopted) 0.05, 0.95;
+  (Unadopted, __20_years, Adopted) 0.05, 0.95;
+  (Adopted, _10_years, Unadopted) 0.03066038, 0.96933962;
+  (Unadopted, _10_years, Unadopted) 0.09433962, 0.90566038;
+  (Adopted, 10_20_years, Unadopted) 0.05, 0.95;
+  (Unadopted, 10_20_years, Unadopted) 0.05, 0.95;
+  (Adopted, __20_years, Unadopted) 0.05, 0.95;
+  (Unadopted, __20_years, Unadopted) 0.05, 0.95;
+}
+probability ( GrossTonnage ) {
+  table 0.5054945, 0.2527473, 0.2417582;
+}
+probability ( HardwareMaintenance ) {
+  table 0.05454545, 0.94545455;
+}
+probability ( ImproperStowage | HardwareMaintenance, ShipTracking, ShipType, SupervisingCompanies, SupervisionVessel ) {
+  (Adopted, Adopted, Carrier_Container, Adopted, Adopted) 0.000954451, 0.999045549;
+  (Unadopted, Adopted, Carrier_Container, Adopted, Adopted) 0.002936773, 0.997063227;
+  (Adopted, Unadopted, Carrier_Container, Adopted, Adopted) 0.002786719, 0.997213281;
+  (Unadopted, Unadopted, Carrier_Container, Adopted, Adopted) 0.008574519, 0.991425481;
+  (Adopted, Adopted, Tanker, Adopted, Adopted) 0.05, 0.95;
+  (Unadopted, Adopted, Tanker, Adopted, Adopted) 0.05, 0.95;
+  (Adopted, Unadopted, Tanker, Adopted, Adopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Tanker, Adopted, Adopted) 0.05, 0.95;
+  (Adopted, Adopted, Other_ship, Adopted, Adopted) 0.05, 0.95;
+  (Unadopted, Adopted, Other_ship, Adopted, Adopted) 0.05, 0.95;
+  (Adopted, Unadopted, Other_ship, Adopted, Adopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Other_ship, Adopted, Adopted) 0.05, 0.95;
+  (Adopted, Adopted, Carrier_Container, Unadopted, Adopted) 0.003291211, 0.996708789;
+  (Unadopted, Adopted, Carrier_Container, Unadopted, Adopted) 0.0101268, 0.9898732;
+  (Adopted, Unadopted, Carrier_Container, Unadopted, Adopted) 0.009609375, 0.990390625;
+  (Unadopted, Unadopted, Carrier_Container, Unadopted, Adopted) 0.02956731, 0.97043269;
+  (Adopted, Adopted, Tanker, Unadopted, Adopted) 0.05, 0.95;
+  (Unadopted, Adopted, Tanker, Unadopted, Adopted) 0.05, 0.95;
+  (Adopted, Unadopted, Tanker, Unadopted, Adopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Tanker, Unadopted, Adopted) 0.05, 0.95;
+  (Adopted, Adopted, Other_ship, Unadopted, Adopted) 0.05, 0.95;
+  (Unadopted, Adopted, Other_ship, Unadopted, Adopted) 0.05, 0.95;
+  (Adopted, Unadopted, Other_ship, Unadopted, Adopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Other_ship, Unadopted, Adopted) 0.05, 0.95;
+  (Adopted, Adopted, Carrier_Container, Adopted, Unadopted) 0.003103906, 0.996896094;
+  (Unadopted, Adopted, Carrier_Container, Adopted, Unadopted) 0.009550481, 0.990449519;
+  (Adopted, Unadopted, Carrier_Container, Adopted, Unadopted) 0.0090625, 0.9909375;
+  (Unadopted, Unadopted, Carrier_Container, Adopted, Unadopted) 0.02788462, 0.97211538;
+  (Adopted, Adopted, Tanker, Adopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Adopted, Tanker, Adopted, Unadopted) 0.05, 0.95;
+  (Adopted, Unadopted, Tanker, Adopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Tanker, Adopted, Unadopted) 0.05, 0.95;
+  (Adopted, Adopted, Other_ship, Adopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Adopted, Other_ship, Adopted, Unadopted) 0.05, 0.95;
+  (Adopted, Unadopted, Other_ship, Adopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Other_ship, Adopted, Unadopted) 0.05, 0.95;
+  (Adopted, Adopted, Carrier_Container, Unadopted, Unadopted) 0.01070313, 0.98929687;
+  (Unadopted, Adopted, Carrier_Container, Unadopted, Unadopted) 0.03293269, 0.96706731;
+  (Adopted, Unadopted, Carrier_Container, Unadopted, Unadopted) 0.03125, 0.96875;
+  (Unadopted, Unadopted, Carrier_Container, Unadopted, Unadopted) 0.09615385, 0.90384615;
+  (Adopted, Adopted, Tanker, Unadopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Adopted, Tanker, Unadopted, Unadopted) 0.05, 0.95;
+  (Adopted, Unadopted, Tanker, Unadopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Tanker, Unadopted, Unadopted) 0.05, 0.95;
+  (Adopted, Adopted, Other_ship, Unadopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Adopted, Other_ship, Unadopted, Unadopted) 0.05, 0.95;
+  (Adopted, Unadopted, Other_ship, Unadopted, Unadopted) 0.05, 0.95;
+  (Unadopted, Unadopted, Other_ship, Unadopted, Unadopted) 0.05, 0.95;
+}
+probability ( InadequateCommunication | AvoidanceRules, CompetentCrew, NegligentLookout, ResourceManagement, SafetyTraining ) {
+  (Adopted, YES, YES, Adopted, Adopted) 0.00470475, 0.99529525;
+  (Unadopted, YES, YES, Adopted, Adopted) 0.01306875, 0.98693125;
+  (Adopted, NO, YES, Adopted, Adopted) 0.01467882, 0.98532118;
+  (Unadopted, NO, YES, Adopted, Adopted) 0.0407745, 0.9592255;
+  (Adopted, YES, NO, Adopted, Adopted) 0.003528563, 0.996471437;
+  (Unadopted, YES, NO, Adopted, Adopted) 0.009801563, 0.990198437;
+  (Adopted, NO, NO, Adopted, Adopted) 0.006514269, 0.993485731;
+  (Unadopted, NO, NO, Adopted, Adopted) 0.01809519, 0.98190481;
+  (Adopted, YES, YES, Unadopted, Adopted) 0.01845, 0.98155;
+  (Unadopted, YES, YES, Unadopted, Adopted) 0.05125, 0.94875;
+  (Adopted, NO, YES, Unadopted, Adopted) 0.057564, 0.942436;
+  (Unadopted, NO, YES, Unadopted, Adopted) 0.1599, 0.8401;
+  (Adopted, YES, NO, Unadopted, Adopted) 0.0138375, 0.9861625;
+  (Unadopted, YES, NO, Unadopted, Adopted) 0.0384375, 0.9615625;
+  (Adopted, NO, NO, Unadopted, Adopted) 0.02554615, 0.97445385;
+  (Unadopted, NO, NO, Unadopted, Adopted) 0.07096154, 0.92903846;
+  (Adopted, YES, YES, Adopted, Unadopted) 0.0153, 0.9847;
+  (Unadopted, YES, YES, Adopted, Unadopted) 0.0425, 0.9575;
+  (Adopted, NO, YES, Adopted, Unadopted) 0.047736, 0.952264;
+  (Unadopted, NO, YES, Adopted, Unadopted) 0.1326, 0.8674;
+  (Adopted, YES, NO, Adopted, Unadopted) 0.011475, 0.988525;
+  (Unadopted, YES, NO, Adopted, Unadopted) 0.031875, 0.968125;
+  (Adopted, NO, NO, Adopted, Unadopted) 0.02118462, 0.97881538;
+  (Unadopted, NO, NO, Adopted, Unadopted) 0.05884615, 0.94115385;
+  (Adopted, YES, YES, Unadopted, Unadopted) 0.06, 0.94;
+  (Unadopted, YES, YES, Unadopted, Unadopted) 0.1666667, 0.8333333;
+  (Adopted, NO, YES, Unadopted, Unadopted) 0.1872, 0.8128;
+  (Unadopted, NO, YES, Unadopted, Unadopted) 0.52, 0.48;
+  (Adopted, YES, NO, Unadopted, Unadopted) 0.045, 0.955;
+  (Unadopted, YES, NO, Unadopted, Unadopted) 0.125, 0.875;
+  (Adopted, NO, NO, Unadopted, Unadopted) 0.08307692, 0.91692308;
+  (Unadopted, NO, NO, Unadopted, Unadopted) 0.2307692, 0.7692308;
+}
+probability ( NegligentLookout | CautiousDriving, CrewTraining, TrafficFlow, Wind ) {
+  (Adopted, Adopted, Heavy, ___Category_5) 0.04253333, 0.95746667;
+  (Unadopted, Adopted, Heavy, ___Category_5) 0.1466667, 0.8533333;
+  (Adopted, Unadopted, Heavy, ___Category_5) 0.1933333, 0.8066667;
+  (Unadopted, Unadopted, Heavy, ___Category_5) 0.6666667, 0.3333333;
+  (Adopted, Adopted, NormalOrLow, ___Category_5) 0.009114286, 0.990885714;
+  (Unadopted, Adopted, NormalOrLow, ___Category_5) 0.03142857, 0.96857143;
+  (Adopted, Unadopted, NormalOrLow, ___Category_5) 0.04142857, 0.95857143;
+  (Unadopted, Unadopted, NormalOrLow, ___Category_5) 0.1428571, 0.8571429;
+  (Adopted, Adopted, Heavy, __Category_5) 0.05671111, 0.94328889;
+  (Unadopted, Adopted, Heavy, __Category_5) 0.1955556, 0.8044444;
+  (Adopted, Unadopted, Heavy, __Category_5) 0.2577778, 0.7422222;
+  (Unadopted, Unadopted, Heavy, __Category_5) 0.8888889, 0.1111111;
+  (Adopted, Adopted, NormalOrLow, __Category_5) 0.0319, 0.9681;
+  (Unadopted, Adopted, NormalOrLow, __Category_5) 0.11, 0.89;
+  (Adopted, Unadopted, NormalOrLow, __Category_5) 0.145, 0.855;
+  (Unadopted, Unadopted, NormalOrLow, __Category_5) 0.5, 0.5;
+}
+probability ( NoGiveWay | AvoidanceRules, SafetyTraining, TrafficFlow, Visibility ) {
+  (Adopted, Adopted, Heavy, Poor) 0.01975625, 0.98024375;
+  (Unadopted, Adopted, Heavy, Poor) 0.0725, 0.9275;
+  (Adopted, Unadopted, Heavy, Poor) 0.068125, 0.931875;
+  (Unadopted, Unadopted, Heavy, Poor) 0.25, 0.75;
+  (Adopted, Adopted, NormalOrLow, Poor) 0.05, 0.95;
+  (Unadopted, Adopted, NormalOrLow, Poor) 0.05, 0.95;
+  (Adopted, Unadopted, NormalOrLow, Poor) 0.05, 0.95;
+  (Unadopted, Unadopted, NormalOrLow, Poor) 0.05, 0.95;
+  (Adopted, Adopted, Heavy, Good) 0.03718824, 0.96281176;
+  (Unadopted, Adopted, Heavy, Good) 0.1364706, 0.8635294;
+  (Adopted, Unadopted, Heavy, Good) 0.1282353, 0.8717647;
+  (Unadopted, Unadopted, Heavy, Good) 0.4705882, 0.5294118;
+  (Adopted, Adopted, NormalOrLow, Good) 0.02155227, 0.97844773;
+  (Unadopted, Adopted, NormalOrLow, Good) 0.07909091, 0.92090909;
+  (Adopted, Unadopted, NormalOrLow, Good) 0.07431818, 0.92568182;
+  (Unadopted, Unadopted, NormalOrLow, Good) 0.2727273, 0.7272727;
+}
+probability ( QualifiedCrew ) {
+  table 0.2909091, 0.7090909;
+}
+probability ( ResourceManagement ) {
+  table 0.1090909, 0.8909091;
+}
+probability ( SafetyTraining ) {
+  table 0.1090909, 0.8909091;
+}
+probability ( ShipAge ) {
+  table 0.78021978, 0.14285714, 0.07692308;
+}
+probability ( ShipTracking ) {
+  table 0.07272727, 0.92727273;
+}
+probability ( ShipType ) {
+  table 0.78021978, 0.14285714, 0.07692308;
+}
+probability ( Sinking | CompetentCrew, ImproperStowage, Wind ) {
+  (YES, YES, ___Category_5) 0.95, 0.05;
+  (NO, YES, ___Category_5) 0.95, 0.05;
+  (YES, NO, ___Category_5) 0.95, 0.05;
+  (NO, NO, ___Category_5) 0.2, 0.8;
+  (YES, YES, __Category_5) 0.95, 0.05;
+  (NO, YES, __Category_5) 0.95, 0.05;
+  (YES, NO, __Category_5) 0.05, 0.95;
+  (NO, NO, __Category_5) 0.05, 0.95;
+}
+probability ( SupervisingCompanies ) {
+  table 0.1818182, 0.8181818;
+}
+probability ( SupervisionVessel ) {
+  table 0.7802198, 0.2197802;
+}
+probability ( TrafficFlow ) {
+  table 0.4038, 0.5962;
+}
+probability ( UnsafeSpeed | AssessmentFailure, AvoidanceRules, EquipmentFailure, QualifiedCrew, Wind ) {
+  (YES, Adopted, YES, Adopted, ___Category_5) 0.05, 0.95;
+  (NO, Adopted, YES, Adopted, ___Category_5) 0.05, 0.95;
+  (YES, Unadopted, YES, Adopted, ___Category_5) 0.05, 0.95;
+  (NO, Unadopted, YES, Adopted, ___Category_5) 0.05, 0.95;
+  (YES, Adopted, NO, Adopted, ___Category_5) 0.01126592, 0.98873408;
+  (NO, Adopted, NO, Adopted, ___Category_5) 0.05, 0.95;
+  (YES, Unadopted, NO, Adopted, ___Category_5) 0.03663712, 0.96336288;
+  (NO, Unadopted, NO, Adopted, ___Category_5) 0.05, 0.95;
+  (YES, Adopted, YES, Unadopted, ___Category_5) 0.05, 0.95;
+  (NO, Adopted, YES, Unadopted, ___Category_5) 0.05, 0.95;
+  (YES, Unadopted, YES, Unadopted, ___Category_5) 0.05, 0.95;
+  (NO, Unadopted, YES, Unadopted, ___Category_5) 0.05, 0.95;
+  (YES, Adopted, NO, Unadopted, ___Category_5) 0.04418006, 0.95581994;
+  (NO, Adopted, NO, Unadopted, ___Category_5) 0.05, 0.95;
+  (YES, Unadopted, NO, Unadopted, ___Category_5) 0.143675, 0.856325;
+  (NO, Unadopted, NO, Unadopted, ___Category_5) 0.05, 0.95;
+  (YES, Adopted, YES, Adopted, __Category_5) 0.05, 0.95;
+  (NO, Adopted, YES, Adopted, __Category_5) 0.05, 0.95;
+  (YES, Unadopted, YES, Adopted, __Category_5) 0.05, 0.95;
+  (NO, Unadopted, YES, Adopted, __Category_5) 0.05, 0.95;
+  (YES, Adopted, NO, Adopted, __Category_5) 0.052275, 0.947725;
+  (NO, Adopted, NO, Adopted, __Category_5) 0.02940469, 0.97059531;
+  (YES, Unadopted, NO, Adopted, __Category_5) 0.17, 0.83;
+  (NO, Unadopted, NO, Adopted, __Category_5) 0.095625, 0.904375;
+  (YES, Adopted, YES, Unadopted, __Category_5) 0.05, 0.95;
+  (NO, Adopted, YES, Unadopted, __Category_5) 0.05, 0.95;
+  (YES, Unadopted, YES, Unadopted, __Category_5) 0.05, 0.95;
+  (NO, Unadopted, YES, Unadopted, __Category_5) 0.05, 0.95;
+  (YES, Adopted, NO, Unadopted, __Category_5) 0.205, 0.795;
+  (NO, Adopted, NO, Unadopted, __Category_5) 0.1153125, 0.8846875;
+  (YES, Unadopted, NO, Unadopted, __Category_5) 0.6666667, 0.3333333;
+  (NO, Unadopted, NO, Unadopted, __Category_5) 0.375, 0.625;
+}
+probability ( Visibility ) {
+  table 0.25, 0.75;
+}
+probability ( Wind ) {
+  table 0.1923077, 0.8076923;
+}

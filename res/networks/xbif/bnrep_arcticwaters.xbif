@@ -1,0 +1,537 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AidNavigationFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AirTemperature</NAME>
+      <OUTCOME>_0</OUTCOME>
+      <OUTCOME>_0_1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C_BesettingInIce</NAME>
+      <OUTCOME>Significant</OUTCOME>
+      <OUTCOME>Severe</OUTCOME>
+      <OUTCOME>Catastrophic</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C_Collision</NAME>
+      <OUTCOME>Significant</OUTCOME>
+      <OUTCOME>Severe</OUTCOME>
+      <OUTCOME>Catastrophic</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C_Grounding</NAME>
+      <OUTCOME>Significant</OUTCOME>
+      <OUTCOME>Severe</OUTCOME>
+      <OUTCOME>Catastrophic</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C_ShipIceCollision</NAME>
+      <OUTCOME>Significant</OUTCOME>
+      <OUTCOME>Severe</OUTCOME>
+      <OUTCOME>Catastrophic</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChannelDepth</NAME>
+      <OUTCOME>Inadequate</OUTCOME>
+      <OUTCOME>Adequate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChartUpdating</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CommunicationEquipmentFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DriftIce</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EnvironmentalObstacles</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fatigue</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fog</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GrossTonnage</NAME>
+      <OUTCOME>_0_500_</OUTCOME>
+      <OUTCOME>_500_3000_</OUTCOME>
+      <OUTCOME>_3000_10000_</OUTCOME>
+      <OUTCOME>__10000</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IceConcentration</NAME>
+      <OUTCOME>_3_10</OUTCOME>
+      <OUTCOME>4_10_6_10</OUTCOME>
+      <OUTCOME>_7_10</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IceCondition</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IceStrength</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IceThickness</NAME>
+      <OUTCOME>__0_5m</OUTCOME>
+      <OUTCOME>__0_5_m</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IceType</NAME>
+      <OUTCOME>Thin_Ice</OUTCOME>
+      <OUTCOME>Medium_Ice</OUTCOME>
+      <OUTCOME>Old_Ice</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InadequateKnowledge</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>JudgmentFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackCommunication</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackSafetyMeasures</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackSituationalAwareness</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MechanicalEquipmentFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NavigatorFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Negligence</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P_BesettingInIce</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P_Collision</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P_Grounding</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P_ShipIceCollision</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PowerFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PropellerFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RadarFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Rain</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SeaCurrent</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SeaTemperature</NAME>
+      <OUTCOME>_0</OUTCOME>
+      <OUTCOME>_0_1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShipType</NAME>
+      <OUTCOME>Oil_Tanker</OUTCOME>
+      <OUTCOME>General_Cargo_Ship</OUTCOME>
+      <OUTCOME>Passenger_Ship</OUTCOME>
+      <OUTCOME>Icebreaker</OUTCOME>
+      <OUTCOME>Others</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SteeringFailure</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StrongWind</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnsafeAct</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnsafeCondition</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnsafeSpeed</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Visibility</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterwayCondition</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WeatherCondition</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AidNavigationFailure</FOR>
+      <GIVEN>NavigatorFailure</GIVEN>
+      <GIVEN>RadarFailure</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 0.1 0.9 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AirTemperature</FOR>
+      <TABLE>0.29 0.71 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C_BesettingInIce</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.835 0.15 0.015 0.89 0.1 0.01 0.97 0.02 0.01 0.98 0.02 0.0 0.89 0.1 0.01 0.857 0.13 0.013 0.92 0.07 0.01 0.975 0.015 0.01 0.985 0.015 0.0 0.92 0.07 0.01 0.889 0.1 0.011 0.95 0.04 0.01 0.977 0.013 0.01 0.99 0.01 0.0 0.95 0.04 0.01 0.91 0.08 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.995 0.005 0.0 0.98 0.01 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C_Collision</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.835 0.15 0.015 0.82 0.15 0.03 0.966 0.02 0.014 0.79 0.2 0.01 0.79 0.2 0.01 0.857 0.13 0.013 0.845 0.13 0.025 0.973 0.015 0.012 0.842 0.15 0.008 0.842 0.15 0.008 0.889 0.1 0.011 0.87 0.11 0.02 0.977 0.013 0.01 0.894 0.1 0.006 0.894 0.1 0.006 0.982 0.008 0.01 0.905 0.08 0.015 0.982 0.01 0.008 0.946 0.05 0.004 0.946 0.05 0.004 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C_Grounding</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.835 0.15 0.015 0.3053435 0.4580153 0.2366412 0.667 0.333 0.0 0.8 0.2 0.0 0.64 0.35 0.01 0.857 0.13 0.013 0.417412 0.3577818 0.2248062 0.4285714 0.5714286 0.0 0.85 0.15 0.0 0.7062857 0.2857143 0.008 0.889 0.1 0.011 0.2624672 0.5249344 0.2125984 0.5 0.5 0.0 0.9 0.1 0.0 0.744 0.25 0.006 0.91 0.08 0.01 0.25 0.5 0.25 0.667 0.333 0.0 0.95 0.05 0.0 0.796 0.2 0.004 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C_ShipIceCollision</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.835 0.15 0.015 0.82 0.15 0.03 0.966 0.02 0.014 0.98 0.02 0.0 0.886 0.1 0.014 0.857 0.13 0.013 0.845 0.13 0.025 0.973 0.015 0.012 0.985 0.015 0.0 0.917 0.07 0.013 0.889 0.1 0.011 0.87 0.11 0.02 0.977 0.013 0.01 0.99 0.01 0.0 0.948 0.04 0.012 0.91 0.08 0.01 0.905 0.08 0.015 0.982 0.01 0.008 0.995 0.005 0.0 0.979 0.01 0.011 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChannelDepth</FOR>
+      <TABLE>0.02837 0.97163 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChartUpdating</FOR>
+      <TABLE>0.82 0.18 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CommunicationEquipmentFailure</FOR>
+      <TABLE>0.99934 0.00066 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DriftIce</FOR>
+      <GIVEN>SeaCurrent</GIVEN>
+      <GIVEN>StrongWind</GIVEN>
+      <TABLE>0.99738 0.00262 0.9 0.1 0.8 0.2 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EnvironmentalObstacles</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fatigue</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fog</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GrossTonnage</FOR>
+      <TABLE>0.17 0.41 0.23 0.19 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IceConcentration</FOR>
+      <GIVEN>SeaTemperature</GIVEN>
+      <TABLE>0.87 0.09 0.04 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IceCondition</FOR>
+      <GIVEN>DriftIce</GIVEN>
+      <GIVEN>IceConcentration</GIVEN>
+      <GIVEN>IceStrength</GIVEN>
+      <TABLE>0.05 0.95 0.1 0.9 0.3 0.7 0.3 0.7 0.5 0.5 0.7 0.3 0.7 0.3 0.8 0.2 0.95 0.05 0.15 0.85 0.25 0.75 0.4 0.6 0.4 0.6 0.6 0.4 0.75 0.25 0.85 0.15 0.9 0.1 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IceStrength</FOR>
+      <GIVEN>IceThickness</GIVEN>
+      <GIVEN>IceType</GIVEN>
+      <TABLE>0.9 0.1 0.0 0.6 0.3 0.1 0.1 0.3 0.6 0.6 0.3 0.1 0.1 0.3 0.6 0.0 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IceThickness</FOR>
+      <GIVEN>SeaTemperature</GIVEN>
+      <TABLE>0.74 0.26 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IceType</FOR>
+      <TABLE>0.1 0.8 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InadequateKnowledge</FOR>
+      <TABLE>0.86 0.14 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>JudgmentFailure</FOR>
+      <GIVEN>InadequateKnowledge</GIVEN>
+      <GIVEN>LackCommunication</GIVEN>
+      <GIVEN>LackSituationalAwareness</GIVEN>
+      <TABLE>0.875 0.125 0.75 0.25 0.8 0.2 0.67 0.33 0.6 0.4 0.2 0.8 0.1 0.9 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackCommunication</FOR>
+      <GIVEN>CommunicationEquipmentFailure</GIVEN>
+      <TABLE>0.82 0.18 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackSafetyMeasures</FOR>
+      <TABLE>0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackSituationalAwareness</FOR>
+      <GIVEN>Fatigue</GIVEN>
+      <TABLE>0.7 0.3 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MechanicalEquipmentFailure</FOR>
+      <GIVEN>AidNavigationFailure</GIVEN>
+      <GIVEN>CommunicationEquipmentFailure</GIVEN>
+      <GIVEN>PowerFailure</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 0.1 0.9 0.05 0.95 0.1 0.9 0.05 0.95 0.05 0.95 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NavigatorFailure</FOR>
+      <TABLE>0.99995604 4.396e-05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Negligence</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P_BesettingInIce</FOR>
+      <GIVEN>IceCondition</GIVEN>
+      <GIVEN>UnsafeAct</GIVEN>
+      <GIVEN>UnsafeCondition</GIVEN>
+      <GIVEN>WeatherCondition</GIVEN>
+      <TABLE>0.95 0.05 0.97 0.03 0.85 0.15 0.9 0.1 0.9 0.1 0.95 0.05 0.8 0.2 0.82 0.18 0.999 0.001 1.0 0.0 0.96 0.04 0.98 0.02 0.99 0.01 0.995 0.005 0.95 0.05 0.97 0.03 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P_Collision</FOR>
+      <GIVEN>IceCondition</GIVEN>
+      <GIVEN>UnsafeAct</GIVEN>
+      <GIVEN>UnsafeCondition</GIVEN>
+      <GIVEN>WeatherCondition</GIVEN>
+      <TABLE>0.975 0.025 0.986 0.014 0.965 0.035 0.975 0.025 0.963 0.037 0.973 0.027 0.95027624 0.04972376 0.96 0.04 0.99 0.01 1.0 0.0 0.975 0.025 0.985 0.015 0.973 0.027 0.983 0.017 0.96 0.04 0.97 0.03 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P_Grounding</FOR>
+      <GIVEN>UnsafeAct</GIVEN>
+      <GIVEN>UnsafeCondition</GIVEN>
+      <GIVEN>WaterwayCondition</GIVEN>
+      <GIVEN>WeatherCondition</GIVEN>
+      <TABLE>0.85 0.15 0.91 0.09 0.88 0.12 1.0 0.0 0.82 0.18 0.86 0.14 0.855 0.145 0.895 0.105 0.81 0.19 0.85 0.15 0.845 0.155 0.885 0.115 0.7734807 0.2265193 0.83 0.17 0.84 0.16 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P_ShipIceCollision</FOR>
+      <GIVEN>IceCondition</GIVEN>
+      <GIVEN>UnsafeAct</GIVEN>
+      <GIVEN>UnsafeCondition</GIVEN>
+      <GIVEN>WeatherCondition</GIVEN>
+      <TABLE>0.95 0.05 0.98 0.02 0.92 0.08 0.93 0.07 0.94 0.06 0.94 0.06 0.9 0.1 0.91 0.09 0.999 0.001 1.0 0.0 0.992 0.008 0.995 0.005 0.996 0.004 0.998 0.002 0.99 0.01 0.994 0.006 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PowerFailure</FOR>
+      <GIVEN>PropellerFailure</GIVEN>
+      <GIVEN>SteeringFailure</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 0.1 0.9 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PropellerFailure</FOR>
+      <TABLE>0.9997128 0.0002872 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RadarFailure</FOR>
+      <TABLE>0.9996632 0.0003368 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Rain</FOR>
+      <TABLE>0.93 0.07 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SeaCurrent</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SeaTemperature</FOR>
+      <TABLE>0.42 0.58 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShipType</FOR>
+      <TABLE>0.06 0.28 0.38 0.03 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SteeringFailure</FOR>
+      <TABLE>0.99986 0.00014 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StrongWind</FOR>
+      <TABLE>0.79 0.21 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnsafeAct</FOR>
+      <GIVEN>ChartUpdating</GIVEN>
+      <GIVEN>JudgmentFailure</GIVEN>
+      <GIVEN>LackSafetyMeasures</GIVEN>
+      <GIVEN>Negligence</GIVEN>
+      <TABLE>1.0 0.0 0.3 0.7 0.3 0.7 0.2 0.8 0.3 0.7 0.2 0.8 0.2 0.8 0.01 0.99 0.3 0.7 0.2 0.8 0.2 0.8 0.1 0.9 0.2 0.8 0.1 0.9 0.1 0.9 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnsafeCondition</FOR>
+      <GIVEN>MechanicalEquipmentFailure</GIVEN>
+      <GIVEN>UnsafeSpeed</GIVEN>
+      <TABLE>0.9 0.1 0.2 0.8 0.2 0.8 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnsafeSpeed</FOR>
+      <GIVEN>PowerFailure</GIVEN>
+      <TABLE>0.6 0.4 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Visibility</FOR>
+      <GIVEN>Fog</GIVEN>
+      <GIVEN>Rain</GIVEN>
+      <TABLE>0.08 0.92 0.7 0.3 0.8 0.2 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterwayCondition</FOR>
+      <GIVEN>ChannelDepth</GIVEN>
+      <GIVEN>EnvironmentalObstacles</GIVEN>
+      <TABLE>0.9 0.1 1.0 0.0 0.0 1.0 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WeatherCondition</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <GIVEN>StrongWind</GIVEN>
+      <GIVEN>Visibility</GIVEN>
+      <TABLE>0.75 0.25 0.2 0.8 0.8 0.2 0.15 0.85 0.6 0.4 0.05 0.95 0.7 0.3 0.1 0.9 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

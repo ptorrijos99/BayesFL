@@ -1,0 +1,361 @@
+network unknown {
+}
+variable AbnormalCoalWater {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable AbnormalLiquidLevel {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable AbnormalQuenchWater {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable AbnormalTemperature {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable AntiCorrosion {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable BurnerDamaged {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable CorrosionFailure {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable Cracking {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable DeliberateDestruction {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable ExternalCorrosion {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable FurnaceBricks {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable GasifierAbnormality {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable GasifierFailure {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable GaugeDamaged {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighCO2 {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighConcentration {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighFlow {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighFlowRate {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighH2O {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighH2S {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HighOxygen {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable HumanOrganization {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable ImproperOperation {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable Insulation {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable InternalCorrosion {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable Leakage {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable LowConcentration {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable LowFlowRate {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable LowLiquidLevel {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable LowOxygen {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable MediumContent {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable PiecesOfSlag {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable PreJobTraining {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable PressureFluctuation {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable SensorDamaged1 {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable TemperatureSensor {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable TooHighTemperature {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable TooLowTemperature {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable Unattended {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+variable UnintentionalDestruction {
+  type discrete [ 2 ] { Occurred, NotOccurred };
+}
+probability ( AbnormalCoalWater ) {
+  table 0.02, 0.98;
+}
+probability ( AbnormalLiquidLevel | AbnormalCoalWater, AbnormalQuenchWater, GaugeDamaged, Leakage ) {
+  (Occurred, Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred, Occurred) 0.81, 0.19;
+  (Occurred, NotOccurred, Occurred, Occurred) 0.76, 0.24;
+  (NotOccurred, NotOccurred, Occurred, Occurred) 0.69, 0.31;
+  (Occurred, Occurred, NotOccurred, Occurred) 0.83, 0.17;
+  (NotOccurred, Occurred, NotOccurred, Occurred) 0.73, 0.27;
+  (Occurred, NotOccurred, NotOccurred, Occurred) 0.69, 0.31;
+  (NotOccurred, NotOccurred, NotOccurred, Occurred) 0.4, 0.6;
+  (Occurred, Occurred, Occurred, NotOccurred) 0.86, 0.14;
+  (NotOccurred, Occurred, Occurred, NotOccurred) 0.71, 0.29;
+  (Occurred, NotOccurred, Occurred, NotOccurred) 0.7, 0.3;
+  (NotOccurred, NotOccurred, Occurred, NotOccurred) 0.38, 0.62;
+  (Occurred, Occurred, NotOccurred, NotOccurred) 0.68, 0.32;
+  (NotOccurred, Occurred, NotOccurred, NotOccurred) 0.35, 0.65;
+  (Occurred, NotOccurred, NotOccurred, NotOccurred) 0.36, 0.64;
+  (NotOccurred, NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( AbnormalQuenchWater ) {
+  table 0.02, 0.98;
+}
+probability ( AbnormalTemperature | TooHighTemperature, TooLowTemperature ) {
+  (Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred) 0.17, 0.83;
+  (Occurred, NotOccurred) 0.13, 0.87;
+  (NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( AntiCorrosion ) {
+  table 0.21, 0.79;
+}
+probability ( BurnerDamaged ) {
+  table 0.05, 0.95;
+}
+probability ( CorrosionFailure | ExternalCorrosion, InternalCorrosion ) {
+  (Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred) 0.17, 0.83;
+  (Occurred, NotOccurred) 0.15, 0.85;
+  (NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( Cracking ) {
+  table 0.02, 0.98;
+}
+probability ( DeliberateDestruction ) {
+  table 0.00001, 0.99999;
+}
+probability ( ExternalCorrosion | AntiCorrosion, Insulation ) {
+  (Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred) 0.36, 0.64;
+  (Occurred, NotOccurred) 0.45, 0.55;
+  (NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( FurnaceBricks ) {
+  table 0.02, 0.98;
+}
+probability ( GasifierAbnormality | AbnormalLiquidLevel, AbnormalTemperature, PressureFluctuation ) {
+  (Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred) 0.33, 0.67;
+  (Occurred, NotOccurred, Occurred) 0.22, 0.78;
+  (NotOccurred, NotOccurred, Occurred) 0.18, 0.82;
+  (Occurred, Occurred, NotOccurred) 0.32, 0.68;
+  (NotOccurred, Occurred, NotOccurred) 0.13, 0.87;
+  (Occurred, NotOccurred, NotOccurred) 0.19, 0.81;
+  (NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( GasifierFailure | CorrosionFailure, GasifierAbnormality, HumanOrganization ) {
+  (Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred) 0.37, 0.63;
+  (Occurred, NotOccurred, Occurred) 0.38, 0.62;
+  (NotOccurred, NotOccurred, Occurred) 0.23, 0.77;
+  (Occurred, Occurred, NotOccurred) 0.28, 0.72;
+  (NotOccurred, Occurred, NotOccurred) 0.33, 0.67;
+  (Occurred, NotOccurred, NotOccurred) 0.34, 0.66;
+  (NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( GaugeDamaged ) {
+  table 0.05, 0.95;
+}
+probability ( HighCO2 ) {
+  table 0.11, 0.89;
+}
+probability ( HighConcentration ) {
+  table 0.02, 0.98;
+}
+probability ( HighFlow ) {
+  table 0.06, 0.94;
+}
+probability ( HighFlowRate ) {
+  table 0.05, 0.95;
+}
+probability ( HighH2O ) {
+  table 0.84, 0.16;
+}
+probability ( HighH2S ) {
+  table 0.13, 0.87;
+}
+probability ( HighOxygen ) {
+  table 0.05, 0.95;
+}
+probability ( HumanOrganization | DeliberateDestruction, UnintentionalDestruction ) {
+  (Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred) 0.66, 0.34;
+  (Occurred, NotOccurred) 0.21, 0.79;
+  (NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( ImproperOperation ) {
+  table 0.06, 0.94;
+}
+probability ( Insulation ) {
+  table 0.21, 0.79;
+}
+probability ( InternalCorrosion | HighFlow, MediumContent ) {
+  (Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred) 0.65, 0.35;
+  (Occurred, NotOccurred) 0.33, 0.67;
+  (NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( Leakage ) {
+  table 0.02, 0.98;
+}
+probability ( LowConcentration ) {
+  table 0.02, 0.98;
+}
+probability ( LowFlowRate ) {
+  table 0.05, 0.95;
+}
+probability ( LowLiquidLevel ) {
+  table 0.01, 0.99;
+}
+probability ( LowOxygen ) {
+  table 0.05, 0.95;
+}
+probability ( MediumContent | HighCO2, HighH2O, HighH2S ) {
+  (Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred) 0.36, 0.64;
+  (Occurred, NotOccurred, Occurred) 0.35, 0.65;
+  (NotOccurred, NotOccurred, Occurred) 0.15, 0.85;
+  (Occurred, Occurred, NotOccurred) 0.37, 0.63;
+  (NotOccurred, Occurred, NotOccurred) 0.19, 0.81;
+  (Occurred, NotOccurred, NotOccurred) 0.17, 0.83;
+  (NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( PiecesOfSlag ) {
+  table 0.02, 0.98;
+}
+probability ( PreJobTraining ) {
+  table 0.03, 0.97;
+}
+probability ( PressureFluctuation | Cracking, FurnaceBricks, LowLiquidLevel, PiecesOfSlag ) {
+  (Occurred, Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred, Occurred) 0.67, 0.33;
+  (Occurred, NotOccurred, Occurred, Occurred) 0.72, 0.28;
+  (NotOccurred, NotOccurred, Occurred, Occurred) 0.62, 0.38;
+  (Occurred, Occurred, NotOccurred, Occurred) 0.69, 0.31;
+  (NotOccurred, Occurred, NotOccurred, Occurred) 0.57, 0.43;
+  (Occurred, NotOccurred, NotOccurred, Occurred) 0.58, 0.42;
+  (NotOccurred, NotOccurred, NotOccurred, Occurred) 0.21, 0.79;
+  (Occurred, Occurred, Occurred, NotOccurred) 0.85, 0.15;
+  (NotOccurred, Occurred, Occurred, NotOccurred) 0.67, 0.33;
+  (Occurred, NotOccurred, Occurred, NotOccurred) 0.42, 0.58;
+  (NotOccurred, NotOccurred, Occurred, NotOccurred) 0.18, 0.82;
+  (Occurred, Occurred, NotOccurred, NotOccurred) 0.68, 0.32;
+  (NotOccurred, Occurred, NotOccurred, NotOccurred) 0.31, 0.69;
+  (Occurred, NotOccurred, NotOccurred, NotOccurred) 0.21, 0.79;
+  (NotOccurred, NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( SensorDamaged1 ) {
+  table 0.08, 0.92;
+}
+probability ( TemperatureSensor ) {
+  table 0.09, 0.91;
+}
+probability ( TooHighTemperature | BurnerDamaged, HighOxygen, LowConcentration, LowFlowRate, SensorDamaged1 ) {
+  (Occurred, Occurred, Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred, Occurred, Occurred) 0.66, 0.34;
+  (Occurred, NotOccurred, Occurred, Occurred, Occurred) 0.45, 0.55;
+  (NotOccurred, NotOccurred, Occurred, Occurred, Occurred) 0.4, 0.6;
+  (Occurred, Occurred, NotOccurred, Occurred, Occurred) 0.6, 0.4;
+  (NotOccurred, Occurred, NotOccurred, Occurred, Occurred) 0.51, 0.49;
+  (Occurred, NotOccurred, NotOccurred, Occurred, Occurred) 0.34, 0.66;
+  (NotOccurred, NotOccurred, NotOccurred, Occurred, Occurred) 0.33, 0.67;
+  (Occurred, Occurred, Occurred, NotOccurred, Occurred) 0.47, 0.53;
+  (NotOccurred, Occurred, Occurred, NotOccurred, Occurred) 0.43, 0.57;
+  (Occurred, NotOccurred, Occurred, NotOccurred, Occurred) 0.3, 0.7;
+  (NotOccurred, NotOccurred, Occurred, NotOccurred, Occurred) 0.27, 0.73;
+  (Occurred, Occurred, NotOccurred, NotOccurred, Occurred) 0.38, 0.62;
+  (NotOccurred, Occurred, NotOccurred, NotOccurred, Occurred) 0.35, 0.65;
+  (Occurred, NotOccurred, NotOccurred, NotOccurred, Occurred) 0.25, 0.75;
+  (NotOccurred, NotOccurred, NotOccurred, NotOccurred, Occurred) 0.25, 0.75;
+  (Occurred, Occurred, Occurred, Occurred, NotOccurred) 0.75, 0.25;
+  (NotOccurred, Occurred, Occurred, Occurred, NotOccurred) 0.53, 0.47;
+  (Occurred, NotOccurred, Occurred, Occurred, NotOccurred) 0.39, 0.61;
+  (NotOccurred, NotOccurred, Occurred, Occurred, NotOccurred) 0.38, 0.62;
+  (Occurred, Occurred, NotOccurred, Occurred, NotOccurred) 0.49, 0.51;
+  (NotOccurred, Occurred, NotOccurred, Occurred, NotOccurred) 0.49, 0.51;
+  (Occurred, NotOccurred, NotOccurred, Occurred, NotOccurred) 0.34, 0.66;
+  (NotOccurred, NotOccurred, NotOccurred, Occurred, NotOccurred) 0.21, 0.79;
+  (Occurred, Occurred, Occurred, NotOccurred, NotOccurred) 0.47, 0.53;
+  (NotOccurred, Occurred, Occurred, NotOccurred, NotOccurred) 0.42, 0.58;
+  (Occurred, NotOccurred, Occurred, NotOccurred, NotOccurred) 0.29, 0.71;
+  (NotOccurred, NotOccurred, Occurred, NotOccurred, NotOccurred) 0.24, 0.76;
+  (Occurred, Occurred, NotOccurred, NotOccurred, NotOccurred) 0.37, 0.63;
+  (NotOccurred, Occurred, NotOccurred, NotOccurred, NotOccurred) 0.19, 0.81;
+  (Occurred, NotOccurred, NotOccurred, NotOccurred, NotOccurred) 0.2, 0.8;
+  (NotOccurred, NotOccurred, NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( TooLowTemperature | HighConcentration, HighFlowRate, LowOxygen, TemperatureSensor ) {
+  (Occurred, Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred, Occurred) 0.83, 0.17;
+  (Occurred, NotOccurred, Occurred, Occurred) 0.85, 0.15;
+  (NotOccurred, NotOccurred, Occurred, Occurred) 0.76, 0.24;
+  (Occurred, Occurred, NotOccurred, Occurred) 0.86, 0.14;
+  (NotOccurred, Occurred, NotOccurred, Occurred) 0.69, 0.31;
+  (Occurred, NotOccurred, NotOccurred, Occurred) 0.42, 0.58;
+  (NotOccurred, NotOccurred, NotOccurred, Occurred) 0.26, 0.74;
+  (Occurred, Occurred, Occurred, NotOccurred) 0.89, 0.11;
+  (NotOccurred, Occurred, Occurred, NotOccurred) 0.68, 0.32;
+  (Occurred, NotOccurred, Occurred, NotOccurred) 0.79, 0.21;
+  (NotOccurred, NotOccurred, Occurred, NotOccurred) 0.32, 0.68;
+  (Occurred, Occurred, NotOccurred, NotOccurred) 0.71, 0.29;
+  (NotOccurred, Occurred, NotOccurred, NotOccurred) 0.37, 0.63;
+  (Occurred, NotOccurred, NotOccurred, NotOccurred) 0.28, 0.72;
+  (NotOccurred, NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}
+probability ( Unattended ) {
+  table 0.06, 0.94;
+}
+probability ( UnintentionalDestruction | ImproperOperation, PreJobTraining, Unattended ) {
+  (Occurred, Occurred, Occurred) 1.0, 0.0;
+  (NotOccurred, Occurred, Occurred) 0.71, 0.29;
+  (Occurred, NotOccurred, Occurred) 0.69, 0.31;
+  (NotOccurred, NotOccurred, Occurred) 0.38, 0.62;
+  (Occurred, Occurred, NotOccurred) 0.67, 0.33;
+  (NotOccurred, Occurred, NotOccurred) 0.35, 0.65;
+  (Occurred, NotOccurred, NotOccurred) 0.41, 0.59;
+  (NotOccurred, NotOccurred, NotOccurred) 0.0, 1.0;
+}

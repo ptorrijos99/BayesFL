@@ -1,0 +1,979 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Acoustic_Link_Quality</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Acoustic_Link_Quality_buoy</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Altitude_of_AUV</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Control_algorith_is_flawed</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_2_SoftwareFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_2_of_Control_algorith_is_flawed</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_RIF5</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Air_temperature</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Control_algorith_is_flawed</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Environmental_constraint</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Flawed_algorithm</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Operator_effectiveness</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_RIF2Waypoint</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Research_vessel_effectiveness</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Salvage</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_SoftwareFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Strong_wind</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Training_level</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Copy_of_Weather_condition</NAME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Poor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Current_speed</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Depth_of_AUV</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Difficulty_of_AUV_salvage</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Difficulty_of_salvage_operation</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Difficulty_to_pinpoint_the_vehicle</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Dist_to_home</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Environmental_complexity</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Failure_of_ADCP_DVL</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Failure_of_CTD_sensor</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Failure_of_IMU_module</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Failure_of_temperature_sensor</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fins</NAME>
+      <OUTCOME>Reliable</OUTCOME>
+      <OUTCOME>Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Flawed_algorithm_of_waypoint_generation</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GNSS_accuracy</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H2</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H5</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H6</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H7</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ice_Environment</NAME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Poor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ice_Ruggnes</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ice_concentration</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ice_thickness</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Improper_handling_of_navigation_errors</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InaccurateWaypoint</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Loss_of_AUV</NAME>
+      <OUTCOME>Loss</OUTCOME>
+      <OUTCOME>Damage</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Loss_of_mission</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Multipath_From_Ice</NAME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Poor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Position_Measurement_Quality</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Power_capacity</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Power_system</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Propulsion_system_fails_to_provide_necessary_motion</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF2Propulsion</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF2Waypoint</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF3</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF3Collision</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF3Inaccurate</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF4</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF5</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RIF_Range_Quality</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RSSI_commu</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RSSI_ranging</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Range_to_buoy</NAME>
+      <OUTCOME>Long</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Close</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ReliabilityAcousticNavigation</NAME>
+      <OUTCOME>Reliable</OUTCOME>
+      <OUTCOME>Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Reliability_GPS_Module</NAME>
+      <OUTCOME>Reliable</OUTCOME>
+      <OUTCOME>Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Reliability_of_acoustic_module_in_AUV</NAME>
+      <OUTCOME>Reliable</OUTCOME>
+      <OUTCOME>Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Reliability_of_the_propulsion_system</NAME>
+      <OUTCOME>Reliable</OUTCOME>
+      <OUTCOME>Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SIL_commu</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SIL_ranging</NAME>
+      <OUTCOME>Acceptable</OUTCOME>
+      <OUTCOME>Unacceptable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoftwareFailure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Speed_of_AUV</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Steering_system_fails_to_provide_necessary_motion</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Time_left_to_salvage_the_vehicle_if_it_losts</NAME>
+      <OUTCOME>Plenty</OUTCOME>
+      <OUTCOME>Enough</OUTCOME>
+      <OUTCOME>Not_Enough</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Tool_effectiveness</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA17_N_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA17_P_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA18_N_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA18_P_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA5_P_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA6_N_1</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA6_N_2</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UCA6_N_3</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Vessel_constraint</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Visibility</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Water_Environment</NAME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Poor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Acoustic_Link_Quality</FOR>
+      <GIVEN>RSSI_ranging</GIVEN>
+      <GIVEN>SIL_ranging</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Acoustic_Link_Quality_buoy</FOR>
+      <GIVEN>RSSI_commu</GIVEN>
+      <GIVEN>SIL_commu</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Altitude_of_AUV</FOR>
+      <TABLE>0.99 0.005 0.005 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Control_algorith_is_flawed</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_2_SoftwareFailure</FOR>
+      <GIVEN>Copy_2_of_Control_algorith_is_flawed</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_2_of_Control_algorith_is_flawed</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_RIF5</FOR>
+      <GIVEN>Environmental_complexity</GIVEN>
+      <GIVEN>RIF3Collision</GIVEN>
+      <GIVEN>Steering_system_fails_to_provide_necessary_motion</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.95 0.05 0.8 0.2 0.05 0.95 0.01 0.99 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Air_temperature</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Control_algorith_is_flawed</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Environmental_constraint</FOR>
+      <GIVEN>Ice_concentration</GIVEN>
+      <GIVEN>Ice_thickness</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.8 0.2 0.0 0.5 0.3 0.2 0.25 0.75 0.0 0.2 0.5 0.3 0.0 0.1 0.9 0.0 0.2 0.8 0.0 0.05 0.95 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Flawed_algorithm</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Operator_effectiveness</FOR>
+      <GIVEN>Copy_of_Weather_condition</GIVEN>
+      <GIVEN>Difficulty_of_AUV_salvage</GIVEN>
+      <TABLE>0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.3 0.7 0.05 0.85 0.1 0.0 0.0 1.0 0.1 0.6 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_RIF2Waypoint</FOR>
+      <GIVEN>Copy_of_Flawed_algorithm</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Research_vessel_effectiveness</FOR>
+      <GIVEN>Copy_of_Environmental_constraint</GIVEN>
+      <GIVEN>Vessel_constraint</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.4 0.6 0.0 0.8 0.2 0.0 0.0 0.0 1.0 0.8 0.2 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Salvage</FOR>
+      <GIVEN>Copy_of_Operator_effectiveness</GIVEN>
+      <GIVEN>Copy_of_Research_vessel_effectiveness</GIVEN>
+      <TABLE>0.05 0.95 0.35 0.65 0.95 0.05 0.4 0.6 0.6 0.4 0.98 0.02 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_SoftwareFailure</FOR>
+      <GIVEN>Copy_of_Control_algorith_is_flawed</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Strong_wind</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Training_level</FOR>
+      <TABLE>0.7 0.3 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Copy_of_Weather_condition</FOR>
+      <GIVEN>Copy_of_Air_temperature</GIVEN>
+      <GIVEN>Copy_of_Strong_wind</GIVEN>
+      <GIVEN>Visibility</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.6 0.4 0.0 1.0 0.0 1.0 0.0 1.0 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Current_speed</FOR>
+      <TABLE>0.01 0.5 0.49 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Depth_of_AUV</FOR>
+      <TABLE>0.001 0.3333 0.6657 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Difficulty_of_AUV_salvage</FOR>
+      <GIVEN>Difficulty_of_salvage_operation</GIVEN>
+      <GIVEN>Difficulty_to_pinpoint_the_vehicle</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.2 0.8 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Difficulty_of_salvage_operation</FOR>
+      <GIVEN>Copy_of_Training_level</GIVEN>
+      <GIVEN>Ice_thickness</GIVEN>
+      <GIVEN>Tool_effectiveness</GIVEN>
+      <TABLE>0.9 0.1 0.0 0.95 0.05 0.0 1.0 0.0 0.0 0.92 0.08 0.0 0.97 0.03 0.0 1.0 0.0 0.0 0.95 0.05 0.0 0.99 0.01 0.0 1.0 0.0 0.0 0.1 0.7 0.2 0.6 0.4 0.0 0.99 0.01 0.0 0.3 0.6 0.1 0.65 0.35 0.0 0.99 0.01 0.0 0.75 0.25 0.0 0.9 0.1 0.0 0.99 0.01 0.0 0.0 0.0 1.0 0.0 0.1 0.9 0.0 0.4 0.6 0.0 0.1 0.9 0.0 0.3 0.7 0.1 0.4 0.5 0.0 0.6 0.4 0.2 0.5 0.3 0.3 0.6 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Difficulty_to_pinpoint_the_vehicle</FOR>
+      <GIVEN>Copy_of_Training_level</GIVEN>
+      <GIVEN>Dist_to_home</GIVEN>
+      <GIVEN>Tool_effectiveness</GIVEN>
+      <TABLE>0.1 0.9 0.0 0.0 0.4 0.6 0.0 0.0 1.0 0.3 0.7 0.0 0.0 0.7 0.3 0.0 0.1 0.9 1.0 0.0 0.0 0.8 0.2 0.0 0.0 0.6 0.4 0.3 0.7 0.0 0.0 0.6 0.4 0.0 0.05 0.95 0.45 0.55 0.0 0.1 0.7 0.2 0.0 0.2 0.8 1.0 0.0 0.0 0.9 0.1 0.0 0.1 0.6 0.3 0.6 0.4 0.0 0.3 0.7 0.0 0.1 0.9 0.0 0.8 0.2 0.0 0.4 0.6 0.0 0.15 0.85 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.2 0.8 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Dist_to_home</FOR>
+      <TABLE>0.5699 0.43 0.0001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Environmental_complexity</FOR>
+      <GIVEN>Current_speed</GIVEN>
+      <TABLE>0.5 0.5 0.0 0.0 0.4 0.6 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Failure_of_ADCP_DVL</FOR>
+      <TABLE>0.9968 0.0032 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Failure_of_CTD_sensor</FOR>
+      <TABLE>0.9995 0.0005 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Failure_of_IMU_module</FOR>
+      <TABLE>0.9999 0.0001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Failure_of_temperature_sensor</FOR>
+      <GIVEN>UCA18_N_1</GIVEN>
+      <GIVEN>UCA18_P_1</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fins</FOR>
+      <TABLE>0.999993 7e-06 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Flawed_algorithm_of_waypoint_generation</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GNSS_accuracy</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H1</FOR>
+      <GIVEN>UCA6_N_1</GIVEN>
+      <GIVEN>UCA6_N_2</GIVEN>
+      <GIVEN>UCA6_N_3</GIVEN>
+      <TABLE>0.75 0.25 0.28 0.72 0.7 0.3 0.22 0.78 0.25 0.75 0.05 0.95 0.2 0.8 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H2</FOR>
+      <GIVEN>UCA6_N_1</GIVEN>
+      <GIVEN>UCA6_N_2</GIVEN>
+      <GIVEN>UCA6_N_3</GIVEN>
+      <TABLE>0.9 0.1 0.35 0.65 0.8 0.2 0.3 0.7 0.38 0.62 0.15 0.85 0.3 0.7 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H5</FOR>
+      <GIVEN>UCA6_N_2</GIVEN>
+      <TABLE>1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H6</FOR>
+      <GIVEN>UCA6_N_1</GIVEN>
+      <GIVEN>UCA6_N_2</GIVEN>
+      <GIVEN>UCA6_N_3</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 0.2 0.8 0.45 0.55 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H7</FOR>
+      <GIVEN>Copy_of_Salvage</GIVEN>
+      <TABLE>1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ice_Environment</FOR>
+      <GIVEN>Depth_of_AUV</GIVEN>
+      <GIVEN>Ice_Ruggnes</GIVEN>
+      <TABLE>0.4 0.6 0.3 0.7 0.1 0.9 0.7 0.3 0.65 0.35 0.3 0.7 0.999 0.001 0.85 0.15 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ice_Ruggnes</FOR>
+      <TABLE>0.001 0.001 0.998 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ice_concentration</FOR>
+      <TABLE>0.999 0.0005 0.0005 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ice_thickness</FOR>
+      <TABLE>0.001 0.2 0.799 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Improper_handling_of_navigation_errors</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InaccurateWaypoint</FOR>
+      <GIVEN>Failure_of_ADCP_DVL</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Loss_of_AUV</FOR>
+      <GIVEN>H1</GIVEN>
+      <GIVEN>H2</GIVEN>
+      <GIVEN>H5</GIVEN>
+      <GIVEN>H7</GIVEN>
+      <TABLE>0.95 0.05 0.0 0.8 0.2 0.0 0.85 0.1 0.05 0.2 0.3 0.5 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.6 0.4 0.0 0.1 0.9 0.95 0.05 0.0 0.8 0.2 0.0 0.8 0.0 0.2 0.01 0.1 0.89 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.6 0.4 0.0 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Loss_of_mission</FOR>
+      <GIVEN>H1</GIVEN>
+      <GIVEN>H5</GIVEN>
+      <GIVEN>H6</GIVEN>
+      <GIVEN>H7</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.2 0.8 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.6 0.4 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Multipath_From_Ice</FOR>
+      <GIVEN>Ice_Environment</GIVEN>
+      <GIVEN>Water_Environment</GIVEN>
+      <TABLE>0.999 0.001 0.0 0.2 0.75 0.05 0.2 0.75 0.05 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Position_Measurement_Quality</FOR>
+      <GIVEN>UCA18_N_1</GIVEN>
+      <GIVEN>UCA18_P_1</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Power_capacity</FOR>
+      <TABLE>0.2 0.6 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Power_system</FOR>
+      <GIVEN>Power_capacity</GIVEN>
+      <TABLE>0.0 1.0 0.05 0.95 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Propulsion_system_fails_to_provide_necessary_motion</FOR>
+      <GIVEN>Power_system</GIVEN>
+      <GIVEN>Reliability_of_the_propulsion_system</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF2Propulsion</FOR>
+      <GIVEN>Environmental_complexity</GIVEN>
+      <GIVEN>Propulsion_system_fails_to_provide_necessary_motion</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.99 0.01 0.1 0.9 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF2Waypoint</FOR>
+      <GIVEN>Failure_of_temperature_sensor</GIVEN>
+      <GIVEN>Flawed_algorithm_of_waypoint_generation</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF3</FOR>
+      <GIVEN>Failure_of_ADCP_DVL</GIVEN>
+      <GIVEN>Failure_of_CTD_sensor</GIVEN>
+      <GIVEN>Failure_of_IMU_module</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF3Collision</FOR>
+      <GIVEN>Altitude_of_AUV</GIVEN>
+      <GIVEN>Depth_of_AUV</GIVEN>
+      <GIVEN>Speed_of_AUV</GIVEN>
+      <TABLE>0.001 0.999 0.02 0.98 0.99 0.01 0.45 0.55 0.05 0.95 0.99 0.01 0.95 0.05 0.99 0.01 0.999 0.001 0.0 1.0 0.02 0.98 0.6 0.4 0.1 0.9 0.05 0.95 0.65 0.35 0.4 0.6 0.65 0.35 0.7 0.3 0.001 0.999 0.02 0.98 0.2 0.8 0.35 0.65 0.05 0.95 0.25 0.75 0.9 0.1 0.25 0.75 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF3Inaccurate</FOR>
+      <GIVEN>UCA5_P_1</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF4</FOR>
+      <GIVEN>Failure_of_ADCP_DVL</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF5</FOR>
+      <GIVEN>Environmental_complexity</GIVEN>
+      <GIVEN>Steering_system_fails_to_provide_necessary_motion</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.1 0.9 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RIF_Range_Quality</FOR>
+      <GIVEN>UCA17_N_1</GIVEN>
+      <GIVEN>UCA17_P_1</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RSSI_commu</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RSSI_ranging</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Range_to_buoy</FOR>
+      <TABLE>0.1 0.2 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ReliabilityAcousticNavigation</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Reliability_GPS_Module</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Reliability_of_acoustic_module_in_AUV</FOR>
+      <TABLE>0.9938 0.0062 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Reliability_of_the_propulsion_system</FOR>
+      <TABLE>0.9988 0.0012 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SIL_commu</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SIL_ranging</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoftwareFailure</FOR>
+      <GIVEN>Control_algorith_is_flawed</GIVEN>
+      <GIVEN>Improper_handling_of_navigation_errors</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Speed_of_AUV</FOR>
+      <TABLE>0.49 0.5 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Steering_system_fails_to_provide_necessary_motion</FOR>
+      <GIVEN>Fins</GIVEN>
+      <GIVEN>Power_system</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Time_left_to_salvage_the_vehicle_if_it_losts</FOR>
+      <TABLE>0.7 0.2 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Tool_effectiveness</FOR>
+      <TABLE>0.7 0.3 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA17_N_1</FOR>
+      <GIVEN>Acoustic_Link_Quality</GIVEN>
+      <GIVEN>Range_to_buoy</GIVEN>
+      <GIVEN>Reliability_of_acoustic_module_in_AUV</GIVEN>
+      <GIVEN>ReliabilityAcousticNavigation</GIVEN>
+      <TABLE>0.4 0.6 0.001 0.999 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.05 0.95 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA17_P_1</FOR>
+      <GIVEN>Acoustic_Link_Quality</GIVEN>
+      <GIVEN>Multipath_From_Ice</GIVEN>
+      <GIVEN>Range_to_buoy</GIVEN>
+      <TABLE>0.45 0.55 1.0 0.0 0.1 0.9 0.0 1.0 0.005 0.995 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.7 0.3 0.05 0.95 0.2 0.8 0.001 0.999 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA18_N_1</FOR>
+      <GIVEN>Acoustic_Link_Quality_buoy</GIVEN>
+      <GIVEN>Multipath_From_Ice</GIVEN>
+      <GIVEN>Range_to_buoy</GIVEN>
+      <GIVEN>Reliability_of_acoustic_module_in_AUV</GIVEN>
+      <GIVEN>ReliabilityAcousticNavigation</GIVEN>
+      <TABLE>0.1 0.9 0.45 0.55 0.01 0.99 0.001 0.999 0.005 0.995 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.2 0.8 0.005 0.995 0.02 0.98 0.002 0.998 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA18_P_1</FOR>
+      <GIVEN>GNSS_accuracy</GIVEN>
+      <GIVEN>Reliability_GPS_Module</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA5_P_1</FOR>
+      <GIVEN>Position_Measurement_Quality</GIVEN>
+      <GIVEN>RIF3</GIVEN>
+      <GIVEN>RIF4</GIVEN>
+      <GIVEN>SoftwareFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA6_N_1</FOR>
+      <GIVEN>Copy_2_SoftwareFailure</GIVEN>
+      <GIVEN>RIF2Propulsion</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA6_N_2</FOR>
+      <GIVEN>Copy_of_SoftwareFailure</GIVEN>
+      <GIVEN>RIF2Waypoint</GIVEN>
+      <GIVEN>RIF3Inaccurate</GIVEN>
+      <GIVEN>RIF5</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UCA6_N_3</FOR>
+      <GIVEN>Copy_of_RIF2Waypoint</GIVEN>
+      <GIVEN>Copy_RIF5</GIVEN>
+      <GIVEN>InaccurateWaypoint</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Vessel_constraint</FOR>
+      <GIVEN>Time_left_to_salvage_the_vehicle_if_it_losts</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.0 0.3 0.7 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Visibility</FOR>
+      <TABLE>1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Water_Environment</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

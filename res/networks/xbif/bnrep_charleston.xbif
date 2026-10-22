@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AbilityToEvacuate</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ActiveHurricane</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DrowningMortality</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EvacuationRequired</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExtremePrecipitation</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExtremePrecipitationNonHurricane</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloodExposure</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloodHazard</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloodPreparedness</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HurricaneCategory</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NuisanceFloodExposure</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NuisanceFloodFrequency</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NuisanceFloodHazard</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PersonalVehicle</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PhysicalFloodProtection</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PopulationLocation</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RegionWithCoastline</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiskToHumanHealth</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RoadwayAccessibility</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RoadwayLocation</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SeaLevelRise</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StormSurge</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StormSurgeProtection</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TideLevelAboveHighTide</NAME>
+      <OUTCOME>Zero</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AbilityToEvacuate</FOR>
+      <GIVEN>EvacuationRequired</GIVEN>
+      <GIVEN>FloodPreparedness</GIVEN>
+      <GIVEN>PersonalVehicle</GIVEN>
+      <GIVEN>RoadwayAccessibility</GIVEN>
+      <TABLE>0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ActiveHurricane</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DrowningMortality</FOR>
+      <GIVEN>FloodExposure</GIVEN>
+      <GIVEN>FloodPreparedness</GIVEN>
+      <GIVEN>PopulationLocation</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EvacuationRequired</FOR>
+      <GIVEN>FloodExposure</GIVEN>
+      <GIVEN>PopulationLocation</GIVEN>
+      <GIVEN>RoadwayLocation</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.0 0.3 0.4 0.3 0.0 0.5 0.5 0.0 0.0 0.1 0.8 0.1 0.0 0.25 0.5 0.25 0.0 0.1 0.3 0.4 0.2 0.3 0.4 0.3 0.0 0.25 0.5 0.25 0.0 0.1 0.2 0.7 0.0 0.0 0.0 0.5 0.5 0.3 0.3 0.3 0.1 0.2 0.3 0.3 0.2 0.1 0.2 0.5 0.2 0.0 0.2 0.3 0.5 1.0 0.0 0.0 0.0 0.4 0.5 0.1 0.0 0.15 0.55 0.3 0.0 0.2 0.5 0.3 0.0 0.25 0.75 0.0 0.0 0.2 0.8 0.0 0.0 0.1 0.7 0.2 0.0 0.0 0.4 0.5 0.1 0.2 0.5 0.3 0.0 0.0 0.6 0.4 0.0 0.0 0.2 0.75 0.05 0.0 0.25 0.5 0.25 0.2 0.35 0.35 0.1 0.0 0.3 0.4 0.3 0.0 0.25 0.5 0.25 0.0 0.1 0.4 0.5 1.0 0.0 0.0 0.0 0.3 0.5 0.2 0.0 0.1 0.4 0.5 0.0 0.15 0.3 0.4 0.15 0.2 0.6 0.2 0.0 0.1 0.8 0.1 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.1 0.4 0.5 0.0 0.0 0.4 0.6 0.0 0.0 0.1 0.8 0.1 0.0 0.0 0.7 0.3 0.1 0.2 0.4 0.3 0.0 0.2 0.5 0.3 0.0 0.1 0.7 0.2 0.0 0.0 0.25 0.75 1.0 0.0 0.0 0.0 0.2 0.5 0.2 0.1 0.1 0.3 0.4 0.2 0.1 0.2 0.3 0.4 0.1 0.2 0.5 0.2 0.1 0.7 0.2 0.0 0.0 0.25 0.5 0.25 0.0 0.1 0.4 0.5 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 0.0 0.1 0.7 0.2 0.0 0.0 0.2 0.8 0.0 0.3 0.4 0.3 0.0 0.1 0.5 0.4 0.0 0.0 0.4 0.6 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExtremePrecipitation</FOR>
+      <GIVEN>ExtremePrecipitationNonHurricane</GIVEN>
+      <GIVEN>HurricaneCategory</GIVEN>
+      <GIVEN>RegionWithCoastline</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.8 0.2 0.0 0.0 0.2 0.8 0.0 0.0 0.0 0.8 0.2 0.0 0.0 0.2 0.8 0.0 0.0 0.5 0.5 0.0 0.0 0.2 0.6 0.2 0.8 0.2 0.0 0.0 0.2 0.8 0.0 0.0 0.8 0.1 0.1 0.0 0.1 0.8 0.1 0.0 0.4 0.5 0.1 0.0 0.0 0.5 0.5 0.0 0.0 0.5 0.3 0.2 0.0 0.2 0.3 0.5 0.0 0.8 0.2 0.0 0.0 0.2 0.8 0.0 0.5 0.4 0.1 0.0 0.0 0.5 0.5 0.0 0.0 0.4 0.5 0.1 0.0 0.1 0.8 0.1 0.0 0.5 0.5 0.0 0.0 0.0 0.5 0.5 0.4 0.2 0.2 0.2 0.2 0.2 0.2 0.4 0.0 0.5 0.3 0.2 0.0 0.2 0.3 0.5 0.0 0.0 0.2 0.8 0.0 0.0 0.2 0.8 0.0 0.0 0.8 0.2 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExtremePrecipitationNonHurricane</FOR>
+      <TABLE>0.8 0.2 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloodExposure</FOR>
+      <GIVEN>FloodHazard</GIVEN>
+      <GIVEN>PhysicalFloodProtection</GIVEN>
+      <GIVEN>StormSurgeProtection</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloodHazard</FOR>
+      <GIVEN>ExtremePrecipitation</GIVEN>
+      <GIVEN>SeaLevelRise</GIVEN>
+      <GIVEN>StormSurge</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.25 0.75 0.0 0.0 0.25 0.25 0.5 0.0 0.0 0.25 0.5 0.25 0.5 0.5 0.0 0.0 0.25 0.75 0.0 0.0 0.2 0.6 0.2 0.0 0.1 0.2 0.5 0.2 0.3 0.4 0.3 0.0 0.2 0.5 0.3 0.0 0.1 0.4 0.5 0.0 0.2 0.3 0.3 0.2 0.3 0.3 0.3 0.1 0.2 0.35 0.35 0.1 0.1 0.2 0.4 0.3 0.0 0.3 0.4 0.3 0.5 0.5 0.0 0.0 0.4 0.5 0.1 0.0 0.3 0.5 0.2 0.0 0.2 0.5 0.2 0.1 0.1 0.8 0.1 0.0 0.2 0.8 0.0 0.0 0.1 0.8 0.1 0.0 0.1 0.7 0.2 0.0 0.25 0.5 0.25 0.0 0.0 0.6 0.4 0.0 0.0 0.4 0.6 0.0 0.0 0.3 0.4 0.3 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 0.0 0.2 0.5 0.3 0.0 0.1 0.5 0.4 0.3 0.4 0.3 0.0 0.15 0.55 0.3 0.0 0.1 0.4 0.5 0.0 0.1 0.3 0.4 0.2 0.25 0.5 0.25 0.0 0.1 0.7 0.2 0.0 0.0 0.5 0.5 0.0 0.0 0.25 0.5 0.25 0.1 0.2 0.7 0.0 0.0 0.2 0.75 0.05 0.0 0.1 0.8 0.1 0.0 0.1 0.7 0.2 0.1 0.2 0.5 0.2 0.0 0.25 0.5 0.25 0.0 0.1 0.7 0.2 0.0 0.0 0.4 0.6 0.3 0.4 0.3 0.0 0.2 0.5 0.3 0.0 0.15 0.3 0.4 0.15 0.1 0.2 0.3 0.4 0.1 0.3 0.4 0.2 0.0 0.4 0.5 0.1 0.0 0.3 0.4 0.3 0.0 0.1 0.4 0.5 0.0 0.0 0.5 0.5 0.0 0.25 0.5 0.25 0.0 0.0 0.7 0.3 0.0 0.0 0.2 0.8 0.0 0.2 0.3 0.5 0.0 0.1 0.4 0.5 0.0 0.0 0.25 0.75 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloodPreparedness</FOR>
+      <TABLE>0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HurricaneCategory</FOR>
+      <TABLE>0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NuisanceFloodExposure</FOR>
+      <GIVEN>NuisanceFloodHazard</GIVEN>
+      <GIVEN>PhysicalFloodProtection</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NuisanceFloodFrequency</FOR>
+      <GIVEN>SeaLevelRise</GIVEN>
+      <TABLE>0.1 0.4 0.4 0.1 0.05 0.2 0.5 0.25 0.05 0.1 0.5 0.35 0.0 0.05 0.25 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NuisanceFloodHazard</FOR>
+      <GIVEN>NuisanceFloodFrequency</GIVEN>
+      <GIVEN>RegionWithCoastline</GIVEN>
+      <GIVEN>TideLevelAboveHighTide</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.1 0.4 0.5 0.0 0.0 0.05 0.9 0.05 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.85 0.15 0.0 0.0 0.1 0.65 0.25 0.0 0.0 0.05 0.85 0.1 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.85 0.1 0.05 0.0 0.05 0.1 0.8 0.05 0.0 0.05 0.35 0.6 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.2 0.5 0.25 0.05 0.0 0.05 0.7 0.25 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PersonalVehicle</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PhysicalFloodProtection</FOR>
+      <TABLE>0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PopulationLocation</FOR>
+      <TABLE>0.6 0.3 0.1 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RegionWithCoastline</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiskToHumanHealth</FOR>
+      <GIVEN>AbilityToEvacuate</GIVEN>
+      <GIVEN>DrowningMortality</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RoadwayAccessibility</FOR>
+      <GIVEN>FloodExposure</GIVEN>
+      <GIVEN>NuisanceFloodExposure</GIVEN>
+      <GIVEN>RoadwayLocation</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.0 0.3 0.3 0.3 0.1 0.25 0.75 0.0 0.0 0.25 0.75 0.0 0.0 0.2 0.5 0.3 0.0 0.2 0.35 0.35 0.1 0.25 0.25 0.5 0.0 0.2 0.6 0.2 0.0 0.1 0.4 0.5 0.0 0.1 0.2 0.4 0.3 0.0 0.25 0.5 0.25 0.1 0.2 0.5 0.2 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 1.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.0 0.3 0.3 0.3 0.1 0.25 0.75 0.0 0.0 0.25 0.75 0.0 0.0 0.2 0.5 0.3 0.0 0.2 0.35 0.35 0.1 0.25 0.25 0.5 0.0 0.2 0.6 0.2 0.0 0.1 0.4 0.5 0.0 0.1 0.2 0.4 0.3 0.0 0.25 0.5 0.25 0.1 0.2 0.5 0.2 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 1.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.0 0.3 0.3 0.3 0.1 0.25 0.75 0.0 0.0 0.25 0.75 0.0 0.0 0.2 0.5 0.3 0.0 0.2 0.35 0.35 0.1 0.25 0.25 0.5 0.0 0.2 0.6 0.2 0.0 0.1 0.4 0.5 0.0 0.1 0.2 0.4 0.3 0.0 0.25 0.5 0.25 0.1 0.2 0.5 0.2 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 1.0 0.0 0.0 0.0 0.5 0.5 0.0 0.0 0.3 0.4 0.3 0.0 0.3 0.3 0.3 0.1 0.25 0.75 0.0 0.0 0.25 0.75 0.0 0.0 0.2 0.5 0.3 0.0 0.2 0.35 0.35 0.1 0.25 0.25 0.5 0.0 0.2 0.6 0.2 0.0 0.1 0.4 0.5 0.0 0.1 0.2 0.4 0.3 0.0 0.25 0.5 0.25 0.1 0.2 0.5 0.2 0.2 0.3 0.3 0.2 0.0 0.3 0.4 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RoadwayLocation</FOR>
+      <TABLE>0.8 0.2 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SeaLevelRise</FOR>
+      <GIVEN>RegionWithCoastline</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.05 0.2 0.6 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StormSurge</FOR>
+      <GIVEN>ActiveHurricane</GIVEN>
+      <GIVEN>HurricaneCategory</GIVEN>
+      <GIVEN>RegionWithCoastline</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.8 0.2 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.3 0.4 0.3 1.0 0.0 0.0 0.0 0.0 0.1 0.5 0.4 1.0 0.0 0.0 0.0 0.0 0.0 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StormSurgeProtection</FOR>
+      <TABLE>1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TideLevelAboveHighTide</FOR>
+      <GIVEN>SeaLevelRise</GIVEN>
+      <TABLE>0.7 0.2 0.08 0.02 0.25 0.6 0.1 0.05 0.05 0.2 0.6 0.15 0.02 0.08 0.2 0.7 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

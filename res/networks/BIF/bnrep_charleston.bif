@@ -1,0 +1,550 @@
+network unknown {
+}
+variable AbilityToEvacuate {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable ActiveHurricane {
+  type discrete [ 2 ] { No, Yes };
+}
+variable DrowningMortality {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable EvacuationRequired {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable ExtremePrecipitation {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable ExtremePrecipitationNonHurricane {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable FloodExposure {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable FloodHazard {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable FloodPreparedness {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HurricaneCategory {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable NuisanceFloodExposure {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable NuisanceFloodFrequency {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable NuisanceFloodHazard {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable PersonalVehicle {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PhysicalFloodProtection {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PopulationLocation {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable RegionWithCoastline {
+  type discrete [ 2 ] { No, Yes };
+}
+variable RiskToHumanHealth {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable RoadwayAccessibility {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable RoadwayLocation {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable SeaLevelRise {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable StormSurge {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+variable StormSurgeProtection {
+  type discrete [ 2 ] { Yes, No };
+}
+variable TideLevelAboveHighTide {
+  type discrete [ 4 ] { Zero, Low, Medium, High };
+}
+probability ( AbilityToEvacuate | EvacuationRequired, FloodPreparedness, PersonalVehicle, RoadwayAccessibility ) {
+  (Zero, Yes, Yes, Zero) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Yes, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, Yes, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, No, Yes, Zero) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, No, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, No, Zero) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, No, Zero) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, No, Zero) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, No, Zero) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, No, Zero) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, No, Zero) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, No, Zero) 0.0, 0.0, 1.0, 0.0;
+  (High, No, No, Zero) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Yes, Yes, Low) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Yes, Low) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (High, No, Yes, Low) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Yes, No, Low) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, No, Low) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (High, No, No, Low) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Yes, Yes, Medium) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Yes, Medium) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (High, No, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Zero, Yes, No, Medium) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, No, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, No, Medium) 0.0, 0.0, 1.0, 0.0;
+  (High, Yes, No, Medium) 0.0, 0.0, 1.0, 0.0;
+  (Zero, No, No, Medium) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, No, Medium) 0.0, 0.0, 1.0, 0.0;
+  (Medium, No, No, Medium) 0.0, 0.0, 0.0, 1.0;
+  (High, No, No, Medium) 0.0, 0.0, 0.0, 1.0;
+  (Zero, Yes, Yes, High) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, Yes, High) 0.0, 0.0, 0.0, 1.0;
+  (Medium, Yes, Yes, High) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Yes, High) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Yes, High) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, Yes, High) 0.0, 0.0, 0.0, 1.0;
+  (Medium, No, Yes, High) 0.0, 0.0, 1.0, 0.0;
+  (High, No, Yes, High) 0.0, 1.0, 0.0, 0.0;
+  (Zero, Yes, No, High) 0.25, 0.25, 0.25, 0.25;
+  (Low, Yes, No, High) 0.0, 0.0, 0.0, 1.0;
+  (Medium, Yes, No, High) 0.0, 0.0, 0.0, 1.0;
+  (High, Yes, No, High) 0.0, 0.0, 0.0, 1.0;
+  (Zero, No, No, High) 0.25, 0.25, 0.25, 0.25;
+  (Low, No, No, High) 0.0, 0.0, 0.0, 1.0;
+  (Medium, No, No, High) 0.0, 0.0, 0.0, 1.0;
+  (High, No, No, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( ActiveHurricane ) {
+  table 0.0, 1.0;
+}
+probability ( DrowningMortality | FloodExposure, FloodPreparedness, PopulationLocation ) {
+  (Zero, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, Low) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Low) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Low) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, Low) 0.0, 0.0, 1.0, 0.0;
+  (High, No, Low) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Yes, Medium) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Medium) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Medium) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Medium) 0.0, 0.0, 1.0, 0.0;
+  (Medium, No, Medium) 0.0, 0.0, 1.0, 0.0;
+  (High, No, Medium) 0.0, 0.0, 0.0, 1.0;
+  (Zero, Yes, High) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, High) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, High) 0.0, 0.0, 1.0, 0.0;
+  (High, Yes, High) 0.0, 0.0, 1.0, 0.0;
+  (Zero, No, High) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, High) 0.0, 0.0, 1.0, 0.0;
+  (Medium, No, High) 0.0, 0.0, 0.0, 1.0;
+  (High, No, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( EvacuationRequired | FloodExposure, PopulationLocation, RoadwayLocation ) {
+  (Zero, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Low, Zero) 0.5, 0.5, 0.0, 0.0;
+  (Low, Low, Zero) 0.25, 0.75, 0.00, 0.00;
+  (Medium, Low, Zero) 0.2, 0.6, 0.2, 0.0;
+  (High, Low, Zero) 0.1, 0.2, 0.5, 0.2;
+  (Zero, Medium, Zero) 0.3, 0.4, 0.3, 0.0;
+  (Low, Medium, Zero) 0.2, 0.5, 0.3, 0.0;
+  (Medium, Medium, Zero) 0.1, 0.4, 0.5, 0.0;
+  (High, Medium, Zero) 0.2, 0.3, 0.3, 0.2;
+  (Zero, High, Zero) 0.3, 0.3, 0.3, 0.1;
+  (Low, High, Zero) 0.20, 0.35, 0.35, 0.10;
+  (Medium, High, Zero) 0.1, 0.2, 0.4, 0.3;
+  (High, High, Zero) 0.0, 0.3, 0.4, 0.3;
+  (Zero, Zero, Low) 0.5, 0.5, 0.0, 0.0;
+  (Low, Zero, Low) 0.4, 0.5, 0.1, 0.0;
+  (Medium, Zero, Low) 0.3, 0.5, 0.2, 0.0;
+  (High, Zero, Low) 0.2, 0.5, 0.2, 0.1;
+  (Zero, Low, Low) 0.1, 0.8, 0.1, 0.0;
+  (Low, Low, Low) 0.2, 0.8, 0.0, 0.0;
+  (Medium, Low, Low) 0.1, 0.8, 0.1, 0.0;
+  (High, Low, Low) 0.1, 0.7, 0.2, 0.0;
+  (Zero, Medium, Low) 0.25, 0.50, 0.25, 0.00;
+  (Low, Medium, Low) 0.0, 0.6, 0.4, 0.0;
+  (Medium, Medium, Low) 0.0, 0.4, 0.6, 0.0;
+  (High, Medium, Low) 0.0, 0.3, 0.4, 0.3;
+  (Zero, High, Low) 0.2, 0.3, 0.3, 0.2;
+  (Low, High, Low) 0.0, 0.3, 0.4, 0.3;
+  (Medium, High, Low) 0.0, 0.2, 0.5, 0.3;
+  (High, High, Low) 0.0, 0.1, 0.5, 0.4;
+  (Zero, Zero, Medium) 0.3, 0.4, 0.3, 0.0;
+  (Low, Zero, Medium) 0.15, 0.55, 0.30, 0.00;
+  (Medium, Zero, Medium) 0.1, 0.4, 0.5, 0.0;
+  (High, Zero, Medium) 0.1, 0.3, 0.4, 0.2;
+  (Zero, Low, Medium) 0.25, 0.50, 0.25, 0.00;
+  (Low, Low, Medium) 0.1, 0.7, 0.2, 0.0;
+  (Medium, Low, Medium) 0.0, 0.5, 0.5, 0.0;
+  (High, Low, Medium) 0.00, 0.25, 0.50, 0.25;
+  (Zero, Medium, Medium) 0.1, 0.2, 0.7, 0.0;
+  (Low, Medium, Medium) 0.00, 0.20, 0.75, 0.05;
+  (Medium, Medium, Medium) 0.0, 0.1, 0.8, 0.1;
+  (High, Medium, Medium) 0.0, 0.1, 0.7, 0.2;
+  (Zero, High, Medium) 0.1, 0.2, 0.5, 0.2;
+  (Low, High, Medium) 0.00, 0.25, 0.50, 0.25;
+  (Medium, High, Medium) 0.0, 0.1, 0.7, 0.2;
+  (High, High, Medium) 0.0, 0.0, 0.4, 0.6;
+  (Zero, Zero, High) 0.3, 0.4, 0.3, 0.0;
+  (Low, Zero, High) 0.2, 0.5, 0.3, 0.0;
+  (Medium, Zero, High) 0.15, 0.30, 0.40, 0.15;
+  (High, Zero, High) 0.1, 0.2, 0.3, 0.4;
+  (Zero, Low, High) 0.1, 0.3, 0.4, 0.2;
+  (Low, Low, High) 0.0, 0.4, 0.5, 0.1;
+  (Medium, Low, High) 0.0, 0.3, 0.4, 0.3;
+  (High, Low, High) 0.0, 0.1, 0.4, 0.5;
+  (Zero, Medium, High) 0.0, 0.0, 0.5, 0.5;
+  (Low, Medium, High) 0.00, 0.25, 0.50, 0.25;
+  (Medium, Medium, High) 0.0, 0.0, 0.7, 0.3;
+  (High, Medium, High) 0.0, 0.0, 0.2, 0.8;
+  (Zero, High, High) 0.0, 0.2, 0.3, 0.5;
+  (Low, High, High) 0.0, 0.1, 0.4, 0.5;
+  (Medium, High, High) 0.00, 0.00, 0.25, 0.75;
+  (High, High, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( ExtremePrecipitation | ExtremePrecipitationNonHurricane, HurricaneCategory, RegionWithCoastline ) {
+  (Zero, Zero, No) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero, No) 0.8, 0.2, 0.0, 0.0;
+  (Medium, Zero, No) 0.0, 0.8, 0.2, 0.0;
+  (High, Zero, No) 0.4, 0.2, 0.2, 0.2;
+  (Zero, Low, No) 0.8, 0.2, 0.0, 0.0;
+  (Low, Low, No) 0.8, 0.1, 0.1, 0.0;
+  (Medium, Low, No) 0.5, 0.4, 0.1, 0.0;
+  (High, Low, No) 0.0, 0.5, 0.3, 0.2;
+  (Zero, Medium, No) 0.0, 0.8, 0.2, 0.0;
+  (Low, Medium, No) 0.4, 0.5, 0.1, 0.0;
+  (Medium, Medium, No) 0.0, 0.4, 0.5, 0.1;
+  (High, Medium, No) 0.0, 0.0, 0.2, 0.8;
+  (Zero, High, No) 0.0, 0.5, 0.5, 0.0;
+  (Low, High, No) 0.0, 0.5, 0.3, 0.2;
+  (Medium, High, No) 0.0, 0.5, 0.5, 0.0;
+  (High, High, No) 0.0, 0.0, 0.8, 0.2;
+  (Zero, Zero, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero, Yes) 0.2, 0.8, 0.0, 0.0;
+  (Medium, Zero, Yes) 0.0, 0.2, 0.8, 0.0;
+  (High, Zero, Yes) 0.2, 0.2, 0.2, 0.4;
+  (Zero, Low, Yes) 0.2, 0.8, 0.0, 0.0;
+  (Low, Low, Yes) 0.1, 0.8, 0.1, 0.0;
+  (Medium, Low, Yes) 0.0, 0.5, 0.5, 0.0;
+  (High, Low, Yes) 0.0, 0.2, 0.3, 0.5;
+  (Zero, Medium, Yes) 0.0, 0.2, 0.8, 0.0;
+  (Low, Medium, Yes) 0.0, 0.5, 0.5, 0.0;
+  (Medium, Medium, Yes) 0.0, 0.1, 0.8, 0.1;
+  (High, Medium, Yes) 0.0, 0.0, 0.2, 0.8;
+  (Zero, High, Yes) 0.0, 0.2, 0.6, 0.2;
+  (Low, High, Yes) 0.0, 0.2, 0.3, 0.5;
+  (Medium, High, Yes) 0.0, 0.0, 0.5, 0.5;
+  (High, High, Yes) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( ExtremePrecipitationNonHurricane ) {
+  table 0.8, 0.2, 0.0, 0.0;
+}
+probability ( FloodExposure | FloodHazard, PhysicalFloodProtection, StormSurgeProtection ) {
+  (Zero, Yes, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Yes, Yes) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes, Yes) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Yes) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, Yes) 0.0, 1.0, 0.0, 0.0;
+  (High, No, Yes) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Yes, No) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, No) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Yes, No) 0.0, 0.0, 1.0, 0.0;
+  (High, Yes, No) 0.0, 0.0, 1.0, 0.0;
+  (Zero, No, No) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, No) 0.0, 1.0, 0.0, 0.0;
+  (Medium, No, No) 0.0, 0.0, 1.0, 0.0;
+  (High, No, No) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( FloodHazard | ExtremePrecipitation, SeaLevelRise, StormSurge ) {
+  (Zero, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero, Zero) 0.5, 0.5, 0.0, 0.0;
+  (Medium, Zero, Zero) 0.3, 0.4, 0.3, 0.0;
+  (High, Zero, Zero) 0.3, 0.4, 0.3, 0.0;
+  (Zero, Low, Zero) 0.5, 0.5, 0.0, 0.0;
+  (Low, Low, Zero) 0.1, 0.8, 0.1, 0.0;
+  (Medium, Low, Zero) 0.25, 0.50, 0.25, 0.00;
+  (High, Low, Zero) 0.1, 0.3, 0.4, 0.2;
+  (Zero, Medium, Zero) 0.3, 0.4, 0.3, 0.0;
+  (Low, Medium, Zero) 0.25, 0.50, 0.25, 0.00;
+  (Medium, Medium, Zero) 0.1, 0.2, 0.7, 0.0;
+  (High, Medium, Zero) 0.0, 0.0, 0.5, 0.5;
+  (Zero, High, Zero) 0.3, 0.3, 0.3, 0.1;
+  (Low, High, Zero) 0.2, 0.3, 0.3, 0.2;
+  (Medium, High, Zero) 0.1, 0.2, 0.5, 0.2;
+  (High, High, Zero) 0.0, 0.2, 0.3, 0.5;
+  (Zero, Zero, Low) 0.25, 0.75, 0.00, 0.00;
+  (Low, Zero, Low) 0.4, 0.5, 0.1, 0.0;
+  (Medium, Zero, Low) 0.15, 0.55, 0.30, 0.00;
+  (High, Zero, Low) 0.2, 0.5, 0.3, 0.0;
+  (Zero, Low, Low) 0.25, 0.75, 0.00, 0.00;
+  (Low, Low, Low) 0.2, 0.8, 0.0, 0.0;
+  (Medium, Low, Low) 0.1, 0.7, 0.2, 0.0;
+  (High, Low, Low) 0.0, 0.4, 0.5, 0.1;
+  (Zero, Medium, Low) 0.2, 0.5, 0.3, 0.0;
+  (Low, Medium, Low) 0.0, 0.6, 0.4, 0.0;
+  (Medium, Medium, Low) 0.00, 0.20, 0.75, 0.05;
+  (High, Medium, Low) 0.00, 0.25, 0.50, 0.25;
+  (Zero, High, Low) 0.20, 0.35, 0.35, 0.10;
+  (Low, High, Low) 0.0, 0.3, 0.4, 0.3;
+  (Medium, High, Low) 0.00, 0.25, 0.50, 0.25;
+  (High, High, Low) 0.0, 0.1, 0.4, 0.5;
+  (Zero, Zero, Medium) 0.25, 0.25, 0.50, 0.00;
+  (Low, Zero, Medium) 0.3, 0.5, 0.2, 0.0;
+  (Medium, Zero, Medium) 0.1, 0.4, 0.5, 0.0;
+  (High, Zero, Medium) 0.15, 0.30, 0.40, 0.15;
+  (Zero, Low, Medium) 0.2, 0.6, 0.2, 0.0;
+  (Low, Low, Medium) 0.1, 0.8, 0.1, 0.0;
+  (Medium, Low, Medium) 0.0, 0.5, 0.5, 0.0;
+  (High, Low, Medium) 0.0, 0.3, 0.4, 0.3;
+  (Zero, Medium, Medium) 0.1, 0.4, 0.5, 0.0;
+  (Low, Medium, Medium) 0.0, 0.4, 0.6, 0.0;
+  (Medium, Medium, Medium) 0.0, 0.1, 0.8, 0.1;
+  (High, Medium, Medium) 0.0, 0.0, 0.7, 0.3;
+  (Zero, High, Medium) 0.1, 0.2, 0.4, 0.3;
+  (Low, High, Medium) 0.0, 0.2, 0.5, 0.3;
+  (Medium, High, Medium) 0.0, 0.1, 0.7, 0.2;
+  (High, High, Medium) 0.00, 0.00, 0.25, 0.75;
+  (Zero, Zero, High) 0.00, 0.25, 0.50, 0.25;
+  (Low, Zero, High) 0.2, 0.5, 0.2, 0.1;
+  (Medium, Zero, High) 0.1, 0.3, 0.4, 0.2;
+  (High, Zero, High) 0.1, 0.2, 0.3, 0.4;
+  (Zero, Low, High) 0.1, 0.2, 0.5, 0.2;
+  (Low, Low, High) 0.1, 0.7, 0.2, 0.0;
+  (Medium, Low, High) 0.00, 0.25, 0.50, 0.25;
+  (High, Low, High) 0.0, 0.1, 0.4, 0.5;
+  (Zero, Medium, High) 0.2, 0.3, 0.3, 0.2;
+  (Low, Medium, High) 0.0, 0.3, 0.4, 0.3;
+  (Medium, Medium, High) 0.0, 0.1, 0.7, 0.2;
+  (High, Medium, High) 0.0, 0.0, 0.2, 0.8;
+  (Zero, High, High) 0.0, 0.3, 0.4, 0.3;
+  (Low, High, High) 0.0, 0.1, 0.5, 0.4;
+  (Medium, High, High) 0.0, 0.0, 0.4, 0.6;
+  (High, High, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( FloodPreparedness ) {
+  table 0.1, 0.9;
+}
+probability ( HurricaneCategory ) {
+  table 0.0, 0.0, 1.0, 0.0;
+}
+probability ( NuisanceFloodExposure | NuisanceFloodHazard, PhysicalFloodProtection ) {
+  (Zero, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Yes) 0.0, 1.0, 0.0, 0.0;
+  (High, Yes) 0.0, 1.0, 0.0, 0.0;
+  (Zero, No) 1.0, 0.0, 0.0, 0.0;
+  (Low, No) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No) 0.0, 0.0, 1.0, 0.0;
+  (High, No) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( NuisanceFloodFrequency | SeaLevelRise ) {
+  (Zero) 0.1, 0.4, 0.4, 0.1;
+  (Low) 0.05, 0.20, 0.50, 0.25;
+  (Medium) 0.05, 0.10, 0.50, 0.35;
+  (High) 0.00, 0.05, 0.25, 0.70;
+}
+probability ( NuisanceFloodHazard | NuisanceFloodFrequency, RegionWithCoastline, TideLevelAboveHighTide ) {
+  (Zero, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, No, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, Yes, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, No, Low) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Low) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, Low) 1.0, 0.0, 0.0, 0.0;
+  (High, No, Low) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, Low) 0.9, 0.1, 0.0, 0.0;
+  (Low, Yes, Low) 0.85, 0.15, 0.00, 0.00;
+  (Medium, Yes, Low) 0.85, 0.10, 0.05, 0.00;
+  (High, Yes, Low) 0.20, 0.50, 0.25, 0.05;
+  (Zero, No, Medium) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, Medium) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, Medium) 1.0, 0.0, 0.0, 0.0;
+  (High, No, Medium) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, Medium) 0.1, 0.4, 0.5, 0.0;
+  (Low, Yes, Medium) 0.10, 0.65, 0.25, 0.00;
+  (Medium, Yes, Medium) 0.05, 0.10, 0.80, 0.05;
+  (High, Yes, Medium) 0.00, 0.05, 0.70, 0.25;
+  (Zero, No, High) 1.0, 0.0, 0.0, 0.0;
+  (Low, No, High) 1.0, 0.0, 0.0, 0.0;
+  (Medium, No, High) 1.0, 0.0, 0.0, 0.0;
+  (High, No, High) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Yes, High) 0.00, 0.05, 0.90, 0.05;
+  (Low, Yes, High) 0.00, 0.05, 0.85, 0.10;
+  (Medium, Yes, High) 0.00, 0.05, 0.35, 0.60;
+  (High, Yes, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( PersonalVehicle ) {
+  table 0.9, 0.1;
+}
+probability ( PhysicalFloodProtection ) {
+  table 0.05, 0.95;
+}
+probability ( PopulationLocation ) {
+  table 0.6, 0.3, 0.1, 0.0;
+}
+probability ( RegionWithCoastline ) {
+  table 1.0, 0.0;
+}
+probability ( RiskToHumanHealth | AbilityToEvacuate, DrowningMortality ) {
+  (Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Zero) 0.0, 1.0, 0.0, 0.0;
+  (High, Zero) 0.0, 1.0, 0.0, 0.0;
+  (Zero, Low) 0.0, 1.0, 0.0, 0.0;
+  (Low, Low) 0.0, 1.0, 0.0, 0.0;
+  (Medium, Low) 0.0, 0.0, 1.0, 0.0;
+  (High, Low) 0.0, 0.0, 1.0, 0.0;
+  (Zero, Medium) 0.0, 0.0, 1.0, 0.0;
+  (Low, Medium) 0.0, 0.0, 1.0, 0.0;
+  (Medium, Medium) 0.0, 0.0, 0.0, 1.0;
+  (High, Medium) 0.0, 0.0, 0.0, 1.0;
+  (Zero, High) 0.0, 0.0, 1.0, 0.0;
+  (Low, High) 0.0, 0.0, 1.0, 0.0;
+  (Medium, High) 0.0, 0.0, 0.0, 1.0;
+  (High, High) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( RoadwayAccessibility | FloodExposure, NuisanceFloodExposure, RoadwayLocation ) {
+  (Zero, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Low, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Medium, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (High, Zero, Zero) 1.0, 0.0, 0.0, 0.0;
+  (Zero, Low, Zero) 0.25, 0.75, 0.00, 0.00;
+  (Low, Low, Zero) 0.25, 0.75, 0.00, 0.00;
+  (Medium, Low, Zero) 0.25, 0.75, 0.00, 0.00;
+  (High, Low, Zero) 0.25, 0.75, 0.00, 0.00;
+  (Zero, Medium, Zero) 0.25, 0.25, 0.50, 0.00;
+  (Low, Medium, Zero) 0.25, 0.25, 0.50, 0.00;
+  (Medium, Medium, Zero) 0.25, 0.25, 0.50, 0.00;
+  (High, Medium, Zero) 0.25, 0.25, 0.50, 0.00;
+  (Zero, High, Zero) 0.00, 0.25, 0.50, 0.25;
+  (Low, High, Zero) 0.00, 0.25, 0.50, 0.25;
+  (Medium, High, Zero) 0.00, 0.25, 0.50, 0.25;
+  (High, High, Zero) 0.00, 0.25, 0.50, 0.25;
+  (Zero, Zero, Low) 0.5, 0.5, 0.0, 0.0;
+  (Low, Zero, Low) 0.5, 0.5, 0.0, 0.0;
+  (Medium, Zero, Low) 0.5, 0.5, 0.0, 0.0;
+  (High, Zero, Low) 0.5, 0.5, 0.0, 0.0;
+  (Zero, Low, Low) 0.25, 0.75, 0.00, 0.00;
+  (Low, Low, Low) 0.25, 0.75, 0.00, 0.00;
+  (Medium, Low, Low) 0.25, 0.75, 0.00, 0.00;
+  (High, Low, Low) 0.25, 0.75, 0.00, 0.00;
+  (Zero, Medium, Low) 0.2, 0.6, 0.2, 0.0;
+  (Low, Medium, Low) 0.2, 0.6, 0.2, 0.0;
+  (Medium, Medium, Low) 0.2, 0.6, 0.2, 0.0;
+  (High, Medium, Low) 0.2, 0.6, 0.2, 0.0;
+  (Zero, High, Low) 0.1, 0.2, 0.5, 0.2;
+  (Low, High, Low) 0.1, 0.2, 0.5, 0.2;
+  (Medium, High, Low) 0.1, 0.2, 0.5, 0.2;
+  (High, High, Low) 0.1, 0.2, 0.5, 0.2;
+  (Zero, Zero, Medium) 0.3, 0.4, 0.3, 0.0;
+  (Low, Zero, Medium) 0.3, 0.4, 0.3, 0.0;
+  (Medium, Zero, Medium) 0.3, 0.4, 0.3, 0.0;
+  (High, Zero, Medium) 0.3, 0.4, 0.3, 0.0;
+  (Zero, Low, Medium) 0.2, 0.5, 0.3, 0.0;
+  (Low, Low, Medium) 0.2, 0.5, 0.3, 0.0;
+  (Medium, Low, Medium) 0.2, 0.5, 0.3, 0.0;
+  (High, Low, Medium) 0.2, 0.5, 0.3, 0.0;
+  (Zero, Medium, Medium) 0.1, 0.4, 0.5, 0.0;
+  (Low, Medium, Medium) 0.1, 0.4, 0.5, 0.0;
+  (Medium, Medium, Medium) 0.1, 0.4, 0.5, 0.0;
+  (High, Medium, Medium) 0.1, 0.4, 0.5, 0.0;
+  (Zero, High, Medium) 0.2, 0.3, 0.3, 0.2;
+  (Low, High, Medium) 0.2, 0.3, 0.3, 0.2;
+  (Medium, High, Medium) 0.2, 0.3, 0.3, 0.2;
+  (High, High, Medium) 0.2, 0.3, 0.3, 0.2;
+  (Zero, Zero, High) 0.3, 0.3, 0.3, 0.1;
+  (Low, Zero, High) 0.3, 0.3, 0.3, 0.1;
+  (Medium, Zero, High) 0.3, 0.3, 0.3, 0.1;
+  (High, Zero, High) 0.3, 0.3, 0.3, 0.1;
+  (Zero, Low, High) 0.20, 0.35, 0.35, 0.10;
+  (Low, Low, High) 0.20, 0.35, 0.35, 0.10;
+  (Medium, Low, High) 0.20, 0.35, 0.35, 0.10;
+  (High, Low, High) 0.20, 0.35, 0.35, 0.10;
+  (Zero, Medium, High) 0.1, 0.2, 0.4, 0.3;
+  (Low, Medium, High) 0.1, 0.2, 0.4, 0.3;
+  (Medium, Medium, High) 0.1, 0.2, 0.4, 0.3;
+  (High, Medium, High) 0.1, 0.2, 0.4, 0.3;
+  (Zero, High, High) 0.0, 0.3, 0.4, 0.3;
+  (Low, High, High) 0.0, 0.3, 0.4, 0.3;
+  (Medium, High, High) 0.0, 0.3, 0.4, 0.3;
+  (High, High, High) 0.0, 0.3, 0.4, 0.3;
+}
+probability ( RoadwayLocation ) {
+  table 0.8, 0.2, 0.0, 0.0;
+}
+probability ( SeaLevelRise | RegionWithCoastline ) {
+  (No) 1.0, 0.0, 0.0, 0.0;
+  (Yes) 0.05, 0.20, 0.60, 0.15;
+}
+probability ( StormSurge | ActiveHurricane, HurricaneCategory, RegionWithCoastline ) {
+  (No, Zero, No) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Zero, No) 1.0, 0.0, 0.0, 0.0;
+  (No, Low, No) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Low, No) 1.0, 0.0, 0.0, 0.0;
+  (No, Medium, No) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Medium, No) 1.0, 0.0, 0.0, 0.0;
+  (No, High, No) 1.0, 0.0, 0.0, 0.0;
+  (Yes, High, No) 1.0, 0.0, 0.0, 0.0;
+  (No, Zero, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Zero, Yes) 0.8, 0.2, 0.0, 0.0;
+  (No, Low, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Low, Yes) 0.0, 0.3, 0.4, 0.3;
+  (No, Medium, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Yes, Medium, Yes) 0.0, 0.1, 0.5, 0.4;
+  (No, High, Yes) 1.0, 0.0, 0.0, 0.0;
+  (Yes, High, Yes) 0.0, 0.0, 0.2, 0.8;
+}
+probability ( StormSurgeProtection ) {
+  table 1.0, 0.0;
+}
+probability ( TideLevelAboveHighTide | SeaLevelRise ) {
+  (Zero) 0.70, 0.20, 0.08, 0.02;
+  (Low) 0.25, 0.60, 0.10, 0.05;
+  (Medium) 0.05, 0.20, 0.60, 0.15;
+  (High) 0.02, 0.08, 0.20, 0.70;
+}

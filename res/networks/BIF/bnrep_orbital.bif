@@ -1,0 +1,499 @@
+network unknown {
+}
+variable ApproachingIntentionT1 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT10 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT2 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT3 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT4 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT5 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT6 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT7 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT8 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable ApproachingIntentionT9 {
+  type discrete [ 4 ] { Hover, Attach, Capture, Approach };
+}
+variable HeadingT1 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT10 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT2 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT3 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT4 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT5 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT6 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT7 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT8 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable HeadingT9 {
+  type discrete [ 2 ] { 0_110_degrees, __110_degrees };
+}
+variable LocationT1 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT10 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT2 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT3 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT4 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT5 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT6 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT7 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT8 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable LocationT9 {
+  type discrete [ 2 ] { Within_the_threat_range, Outside_the_threat_range };
+}
+variable ManeuverT1 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT10 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT2 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT3 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT4 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT5 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT6 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT7 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT8 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable ManeuverT9 {
+  type discrete [ 2 ] { Maneuver, Non_Maneuver };
+}
+variable RelativeDistanceT1 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT10 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT2 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT3 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT4 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT5 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT6 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT7 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT8 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeDistanceT9 {
+  type discrete [ 2 ] { Far, Near };
+}
+variable RelativeVelocityT1 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT10 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT2 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT3 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT4 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT5 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT6 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT7 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT8 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+variable RelativeVelocityT9 {
+  type discrete [ 2 ] { Fast, Slow };
+}
+probability ( ApproachingIntentionT1 ) {
+  table 0.25, 0.25, 0.25, 0.25;
+}
+probability ( ApproachingIntentionT10 | ApproachingIntentionT9 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT2 | ApproachingIntentionT1 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT3 | ApproachingIntentionT2 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT4 | ApproachingIntentionT3 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT5 | ApproachingIntentionT4 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT6 | ApproachingIntentionT5 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT7 | ApproachingIntentionT6 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT8 | ApproachingIntentionT7 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( ApproachingIntentionT9 | ApproachingIntentionT8 ) {
+  (Hover) 0.7, 0.1, 0.1, 0.1;
+  (Attach) 0.1, 0.7, 0.1, 0.1;
+  (Capture) 0.1, 0.1, 0.7, 0.1;
+  (Approach) 0.1, 0.1, 0.1, 0.7;
+}
+probability ( HeadingT1 | LocationT1 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT10 | LocationT10 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT2 | LocationT2 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT3 | LocationT3 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT4 | LocationT4 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT5 | LocationT5 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT6 | LocationT6 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT7 | LocationT7 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT8 | LocationT8 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( HeadingT9 | LocationT9 ) {
+  (Within_the_threat_range) 0.7, 0.3;
+  (Outside_the_threat_range) 0.3, 0.7;
+}
+probability ( LocationT1 | ApproachingIntentionT1 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT10 | ApproachingIntentionT10 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT2 | ApproachingIntentionT2 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT3 | ApproachingIntentionT3 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT4 | ApproachingIntentionT4 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT5 | ApproachingIntentionT5 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT6 | ApproachingIntentionT6 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT7 | ApproachingIntentionT7 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT8 | ApproachingIntentionT8 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( LocationT9 | ApproachingIntentionT9 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.6, 0.4;
+  (Approach) 0.7, 0.3;
+}
+probability ( ManeuverT1 | ApproachingIntentionT1 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT10 | ApproachingIntentionT10 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT2 | ApproachingIntentionT2 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT3 | ApproachingIntentionT3 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT4 | ApproachingIntentionT4 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT5 | ApproachingIntentionT5 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT6 | ApproachingIntentionT6 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT7 | ApproachingIntentionT7 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT8 | ApproachingIntentionT8 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( ManeuverT9 | ApproachingIntentionT9 ) {
+  (Hover) 0.8, 0.2;
+  (Attach) 0.6, 0.4;
+  (Capture) 0.7, 0.3;
+  (Approach) 0.5, 0.5;
+}
+probability ( RelativeDistanceT1 | LocationT1 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT10 | LocationT10 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT2 | LocationT2 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT3 | LocationT3 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT4 | LocationT4 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT5 | LocationT5 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT6 | LocationT6 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT7 | LocationT7 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT8 | LocationT8 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeDistanceT9 | LocationT9 ) {
+  (Within_the_threat_range) 0.3, 0.7;
+  (Outside_the_threat_range) 0.7, 0.3;
+}
+probability ( RelativeVelocityT1 | ApproachingIntentionT1 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT10 | ApproachingIntentionT10 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT2 | ApproachingIntentionT2 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT3 | ApproachingIntentionT3 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT4 | ApproachingIntentionT4 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT5 | ApproachingIntentionT5 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT6 | ApproachingIntentionT6 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT7 | ApproachingIntentionT7 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT8 | ApproachingIntentionT8 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}
+probability ( RelativeVelocityT9 | ApproachingIntentionT9 ) {
+  (Hover) 0.5, 0.5;
+  (Attach) 0.7, 0.3;
+  (Capture) 0.4, 0.6;
+  (Approach) 0.3, 0.7;
+}

@@ -1,0 +1,917 @@
+network unknown {
+}
+variable Acoustic_Link_Quality {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Acoustic_Link_Quality_buoy {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Altitude_of_AUV {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Control_algorith_is_flawed {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Copy_2_of_Control_algorith_is_flawed {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Copy_2_SoftwareFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_Air_temperature {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_Control_algorith_is_flawed {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Copy_of_Environmental_constraint {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Copy_of_Flawed_algorithm {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Copy_of_Operator_effectiveness {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Copy_of_Research_vessel_effectiveness {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Copy_of_RIF2Waypoint {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_Salvage {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_SoftwareFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_Strong_wind {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Copy_of_Training_level {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Copy_of_Weather_condition {
+  type discrete [ 2 ] { Good, Poor };
+}
+variable Copy_RIF5 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Current_speed {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Depth_of_AUV {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Difficulty_of_AUV_salvage {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Difficulty_of_salvage_operation {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Difficulty_to_pinpoint_the_vehicle {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Dist_to_home {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Environmental_complexity {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Failure_of_ADCP_DVL {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Failure_of_CTD_sensor {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Failure_of_IMU_module {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Failure_of_temperature_sensor {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable Fins {
+  type discrete [ 2 ] { Reliable, Failure };
+}
+variable Flawed_algorithm_of_waypoint_generation {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable GNSS_accuracy {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable H1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable H2 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable H5 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable H6 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable H7 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Ice_concentration {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Ice_Environment {
+  type discrete [ 2 ] { Good, Poor };
+}
+variable Ice_Ruggnes {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Ice_thickness {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Improper_handling_of_navigation_errors {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InaccurateWaypoint {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Loss_of_AUV {
+  type discrete [ 3 ] { Loss, Damage, No };
+}
+variable Loss_of_mission {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Multipath_From_Ice {
+  type discrete [ 3 ] { Good, Medium, Poor };
+}
+variable Position_Measurement_Quality {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Power_capacity {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Power_system {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Propulsion_system_fails_to_provide_necessary_motion {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Range_to_buoy {
+  type discrete [ 3 ] { Long, Medium, Close };
+}
+variable Reliability_GPS_Module {
+  type discrete [ 2 ] { Reliable, Failure };
+}
+variable Reliability_of_acoustic_module_in_AUV {
+  type discrete [ 2 ] { Reliable, Failure };
+}
+variable Reliability_of_the_propulsion_system {
+  type discrete [ 2 ] { Reliable, Failure };
+}
+variable ReliabilityAcousticNavigation {
+  type discrete [ 2 ] { Reliable, Failure };
+}
+variable RIF_Range_Quality {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF2Propulsion {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF2Waypoint {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF3 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF3Collision {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF3Inaccurate {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF4 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RIF5 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RSSI_commu {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable RSSI_ranging {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable SIL_commu {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable SIL_ranging {
+  type discrete [ 2 ] { Acceptable, Unacceptable };
+}
+variable SoftwareFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Speed_of_AUV {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Steering_system_fails_to_provide_necessary_motion {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Time_left_to_salvage_the_vehicle_if_it_losts {
+  type discrete [ 3 ] { Plenty, Enough, Not_Enough };
+}
+variable Tool_effectiveness {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable UCA17_N_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA17_P_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA18_N_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA18_P_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA5_P_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA6_N_1 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA6_N_2 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UCA6_N_3 {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Vessel_constraint {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Visibility {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable Water_Environment {
+  type discrete [ 2 ] { Good, Poor };
+}
+probability ( Acoustic_Link_Quality | RSSI_ranging, SIL_ranging ) {
+  (Acceptable, Acceptable) 1.0, 0.0;
+  (Unacceptable, Acceptable) 0.0, 1.0;
+  (Acceptable, Unacceptable) 0.0, 1.0;
+  (Unacceptable, Unacceptable) 0.0, 1.0;
+}
+probability ( Acoustic_Link_Quality_buoy | RSSI_commu, SIL_commu ) {
+  (Acceptable, Acceptable) 1.0, 0.0;
+  (Unacceptable, Acceptable) 0.0, 1.0;
+  (Acceptable, Unacceptable) 0.0, 1.0;
+  (Unacceptable, Unacceptable) 0.0, 1.0;
+}
+probability ( Altitude_of_AUV ) {
+  table 0.990, 0.005, 0.005;
+}
+probability ( Control_algorith_is_flawed ) {
+  table 1.0, 0.0;
+}
+probability ( Copy_2_of_Control_algorith_is_flawed ) {
+  table 1.0, 0.0;
+}
+probability ( Copy_2_SoftwareFailure | Copy_2_of_Control_algorith_is_flawed ) {
+  (Acceptable) 0.0, 1.0;
+  (Unacceptable) 1.0, 0.0;
+}
+probability ( Copy_of_Air_temperature ) {
+  table 0.0, 1.0;
+}
+probability ( Copy_of_Control_algorith_is_flawed ) {
+  table 1.0, 0.0;
+}
+probability ( Copy_of_Environmental_constraint | Ice_concentration, Ice_thickness ) {
+  (High, High) 1.0, 0.0, 0.0;
+  (Medium, High) 0.25, 0.75, 0.00;
+  (Low, High) 0.0, 0.2, 0.8;
+  (High, Medium) 0.8, 0.2, 0.0;
+  (Medium, Medium) 0.2, 0.5, 0.3;
+  (Low, Medium) 0.00, 0.05, 0.95;
+  (High, Low) 0.5, 0.3, 0.2;
+  (Medium, Low) 0.0, 0.1, 0.9;
+  (Low, Low) 0.0, 0.0, 1.0;
+}
+probability ( Copy_of_Flawed_algorithm ) {
+  table 1.0, 0.0;
+}
+probability ( Copy_of_Operator_effectiveness | Copy_of_Weather_condition, Difficulty_of_AUV_salvage ) {
+  (Good, High) 0.0, 0.0, 1.0;
+  (Poor, High) 0.05, 0.85, 0.10;
+  (Good, Medium) 1.0, 0.0, 0.0;
+  (Poor, Medium) 0.0, 0.0, 1.0;
+  (Good, Low) 0.0, 0.3, 0.7;
+  (Poor, Low) 0.1, 0.6, 0.3;
+}
+probability ( Copy_of_Research_vessel_effectiveness | Copy_of_Environmental_constraint, Vessel_constraint ) {
+  (High, High) 0.0, 0.0, 1.0;
+  (Medium, High) 0.0, 0.0, 1.0;
+  (Low, High) 0.0, 0.0, 1.0;
+  (High, Medium) 0.0, 0.0, 1.0;
+  (Medium, Medium) 0.4, 0.6, 0.0;
+  (Low, Medium) 0.8, 0.2, 0.0;
+  (High, Low) 0.0, 0.0, 1.0;
+  (Medium, Low) 0.8, 0.2, 0.0;
+  (Low, Low) 1.0, 0.0, 0.0;
+}
+probability ( Copy_of_RIF2Waypoint | Copy_of_Flawed_algorithm ) {
+  (Acceptable) 0.0, 1.0;
+  (Unacceptable) 1.0, 0.0;
+}
+probability ( Copy_of_Salvage | Copy_of_Operator_effectiveness, Copy_of_Research_vessel_effectiveness ) {
+  (High, High) 0.05, 0.95;
+  (Medium, High) 0.4, 0.6;
+  (Low, High) 1.0, 0.0;
+  (High, Medium) 0.35, 0.65;
+  (Medium, Medium) 0.6, 0.4;
+  (Low, Medium) 1.0, 0.0;
+  (High, Low) 0.95, 0.05;
+  (Medium, Low) 0.98, 0.02;
+  (Low, Low) 1.0, 0.0;
+}
+probability ( Copy_of_SoftwareFailure | Copy_of_Control_algorith_is_flawed ) {
+  (Acceptable) 0.0, 1.0;
+  (Unacceptable) 1.0, 0.0;
+}
+probability ( Copy_of_Strong_wind ) {
+  table 0.0, 1.0;
+}
+probability ( Copy_of_Training_level ) {
+  table 0.7, 0.3, 0.0;
+}
+probability ( Copy_of_Weather_condition | Copy_of_Air_temperature, Copy_of_Strong_wind, Visibility ) {
+  (Yes, Yes, High) 0.0, 1.0;
+  (No, Yes, High) 0.0, 1.0;
+  (Yes, No, High) 1.0, 0.0;
+  (No, No, High) 0.0, 1.0;
+  (Yes, Yes, Medium) 0.0, 1.0;
+  (No, Yes, Medium) 0.6, 0.4;
+  (Yes, No, Medium) 0.0, 1.0;
+  (No, No, Medium) 0.0, 1.0;
+  (Yes, Yes, Low) 0.0, 1.0;
+  (No, Yes, Low) 0.0, 1.0;
+  (Yes, No, Low) 0.0, 1.0;
+  (No, No, Low) 0.3, 0.7;
+}
+probability ( Copy_RIF5 | Environmental_complexity, RIF3Collision, Steering_system_fails_to_provide_necessary_motion ) {
+  (High, Yes, Yes) 1.0, 0.0;
+  (Medium, Yes, Yes) 1.0, 0.0;
+  (Low, Yes, Yes) 0.8, 0.2;
+  (High, No, Yes) 1.0, 0.0;
+  (Medium, No, Yes) 1.0, 0.0;
+  (Low, No, Yes) 0.01, 0.99;
+  (High, Yes, No) 1.0, 0.0;
+  (Medium, Yes, No) 1.0, 0.0;
+  (Low, Yes, No) 0.05, 0.95;
+  (High, No, No) 1.0, 0.0;
+  (Medium, No, No) 0.95, 0.05;
+  (Low, No, No) 0.0, 1.0;
+}
+probability ( Current_speed ) {
+  table 0.01, 0.50, 0.49;
+}
+probability ( Depth_of_AUV ) {
+  table 0.0010, 0.3333, 0.6657;
+}
+probability ( Difficulty_of_AUV_salvage | Difficulty_of_salvage_operation, Difficulty_to_pinpoint_the_vehicle ) {
+  (High, High) 1.0, 0.0, 0.0;
+  (Medium, High) 1.0, 0.0, 0.0;
+  (Low, High) 1.0, 0.0, 0.0;
+  (High, Medium) 1.0, 0.0, 0.0;
+  (Medium, Medium) 0.2, 0.8, 0.0;
+  (Low, Medium) 0.0, 1.0, 0.0;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.0, 1.0, 0.0;
+  (Low, Low) 0.0, 0.0, 1.0;
+}
+probability ( Difficulty_of_salvage_operation | Copy_of_Training_level, Ice_thickness, Tool_effectiveness ) {
+  (High, High, High) 0.9, 0.1, 0.0;
+  (Medium, High, High) 0.1, 0.7, 0.2;
+  (Low, High, High) 0.0, 0.0, 1.0;
+  (High, Medium, High) 0.92, 0.08, 0.00;
+  (Medium, Medium, High) 0.3, 0.6, 0.1;
+  (Low, Medium, High) 0.0, 0.1, 0.9;
+  (High, Low, High) 0.95, 0.05, 0.00;
+  (Medium, Low, High) 0.75, 0.25, 0.00;
+  (Low, Low, High) 0.0, 0.6, 0.4;
+  (High, High, Medium) 0.95, 0.05, 0.00;
+  (Medium, High, Medium) 0.6, 0.4, 0.0;
+  (Low, High, Medium) 0.0, 0.1, 0.9;
+  (High, Medium, Medium) 0.97, 0.03, 0.00;
+  (Medium, Medium, Medium) 0.65, 0.35, 0.00;
+  (Low, Medium, Medium) 0.0, 0.3, 0.7;
+  (High, Low, Medium) 0.99, 0.01, 0.00;
+  (Medium, Low, Medium) 0.9, 0.1, 0.0;
+  (Low, Low, Medium) 0.2, 0.5, 0.3;
+  (High, High, Low) 1.0, 0.0, 0.0;
+  (Medium, High, Low) 0.99, 0.01, 0.00;
+  (Low, High, Low) 0.0, 0.4, 0.6;
+  (High, Medium, Low) 1.0, 0.0, 0.0;
+  (Medium, Medium, Low) 0.99, 0.01, 0.00;
+  (Low, Medium, Low) 0.1, 0.4, 0.5;
+  (High, Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low, Low) 0.99, 0.01, 0.00;
+  (Low, Low, Low) 0.3, 0.6, 0.1;
+}
+probability ( Difficulty_to_pinpoint_the_vehicle | Copy_of_Training_level, Dist_to_home, Tool_effectiveness ) {
+  (High, High, High) 0.1, 0.9, 0.0;
+  (Medium, High, High) 0.3, 0.7, 0.0;
+  (Low, High, High) 0.6, 0.4, 0.0;
+  (High, Medium, High) 0.3, 0.7, 0.0;
+  (Medium, Medium, High) 0.45, 0.55, 0.00;
+  (Low, Medium, High) 0.8, 0.2, 0.0;
+  (High, Low, High) 1.0, 0.0, 0.0;
+  (Medium, Low, High) 1.0, 0.0, 0.0;
+  (Low, Low, High) 1.0, 0.0, 0.0;
+  (High, High, Medium) 0.0, 0.4, 0.6;
+  (Medium, High, Medium) 0.0, 0.6, 0.4;
+  (Low, High, Medium) 0.3, 0.7, 0.0;
+  (High, Medium, Medium) 0.0, 0.7, 0.3;
+  (Medium, Medium, Medium) 0.1, 0.7, 0.2;
+  (Low, Medium, Medium) 0.4, 0.6, 0.0;
+  (High, Low, Medium) 0.8, 0.2, 0.0;
+  (Medium, Low, Medium) 0.9, 0.1, 0.0;
+  (Low, Low, Medium) 1.0, 0.0, 0.0;
+  (High, High, Low) 0.0, 0.0, 1.0;
+  (Medium, High, Low) 0.00, 0.05, 0.95;
+  (Low, High, Low) 0.1, 0.9, 0.0;
+  (High, Medium, Low) 0.0, 0.1, 0.9;
+  (Medium, Medium, Low) 0.0, 0.2, 0.8;
+  (Low, Medium, Low) 0.15, 0.85, 0.00;
+  (High, Low, Low) 0.0, 0.6, 0.4;
+  (Medium, Low, Low) 0.1, 0.6, 0.3;
+  (Low, Low, Low) 0.2, 0.8, 0.0;
+}
+probability ( Dist_to_home ) {
+  table 0.5699, 0.4300, 0.0001;
+}
+probability ( Environmental_complexity | Current_speed ) {
+  (High) 0.5, 0.5, 0.0;
+  (Medium) 0.0, 0.4, 0.6;
+  (Low) 0.00, 0.05, 0.95;
+}
+probability ( Failure_of_ADCP_DVL ) {
+  table 0.9968, 0.0032;
+}
+probability ( Failure_of_CTD_sensor ) {
+  table 0.9995, 0.0005;
+}
+probability ( Failure_of_IMU_module ) {
+  table 0.9999, 0.0001;
+}
+probability ( Failure_of_temperature_sensor | UCA18_N_1, UCA18_P_1 ) {
+  (Yes, Yes) 0.0, 1.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 1.0, 0.0;
+}
+probability ( Fins ) {
+  table 0.999993, 0.000007;
+}
+probability ( Flawed_algorithm_of_waypoint_generation ) {
+  table 1.0, 0.0;
+}
+probability ( GNSS_accuracy ) {
+  table 0.999, 0.001;
+}
+probability ( H1 | UCA6_N_1, UCA6_N_2, UCA6_N_3 ) {
+  (Yes, Yes, Yes) 0.75, 0.25;
+  (No, Yes, Yes) 0.25, 0.75;
+  (Yes, No, Yes) 0.7, 0.3;
+  (No, No, Yes) 0.2, 0.8;
+  (Yes, Yes, No) 0.28, 0.72;
+  (No, Yes, No) 0.05, 0.95;
+  (Yes, No, No) 0.22, 0.78;
+  (No, No, No) 0.01, 0.99;
+}
+probability ( H2 | UCA6_N_1, UCA6_N_2, UCA6_N_3 ) {
+  (Yes, Yes, Yes) 0.9, 0.1;
+  (No, Yes, Yes) 0.38, 0.62;
+  (Yes, No, Yes) 0.8, 0.2;
+  (No, No, Yes) 0.3, 0.7;
+  (Yes, Yes, No) 0.35, 0.65;
+  (No, Yes, No) 0.15, 0.85;
+  (Yes, No, No) 0.3, 0.7;
+  (No, No, No) 0.001, 0.999;
+}
+probability ( H5 | UCA6_N_2 ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.05, 0.95;
+}
+probability ( H6 | UCA6_N_1, UCA6_N_2, UCA6_N_3 ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 0.5, 0.5;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 0.45, 0.55;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 0.2, 0.8;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( H7 | Copy_of_Salvage ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.05, 0.95;
+}
+probability ( Ice_concentration ) {
+  table 0.9990, 0.0005, 0.0005;
+}
+probability ( Ice_Environment | Depth_of_AUV, Ice_Ruggnes ) {
+  (High, High) 0.4, 0.6;
+  (Medium, High) 0.7, 0.3;
+  (Low, High) 0.999, 0.001;
+  (High, Medium) 0.3, 0.7;
+  (Medium, Medium) 0.65, 0.35;
+  (Low, Medium) 0.85, 0.15;
+  (High, Low) 0.1, 0.9;
+  (Medium, Low) 0.3, 0.7;
+  (Low, Low) 0.7, 0.3;
+}
+probability ( Ice_Ruggnes ) {
+  table 0.001, 0.001, 0.998;
+}
+probability ( Ice_thickness ) {
+  table 0.001, 0.200, 0.799;
+}
+probability ( Improper_handling_of_navigation_errors ) {
+  table 0.0, 1.0;
+}
+probability ( InaccurateWaypoint | Failure_of_ADCP_DVL ) {
+  (Acceptable) 0.0, 1.0;
+  (Unacceptable) 1.0, 0.0;
+}
+probability ( Loss_of_AUV | H1, H2, H5, H7 ) {
+  (Yes, Yes, Yes, Yes) 0.95, 0.05, 0.00;
+  (No, Yes, Yes, Yes) 0.95, 0.05, 0.00;
+  (Yes, No, Yes, Yes) 0.0, 1.0, 0.0;
+  (No, No, Yes, Yes) 0.0, 1.0, 0.0;
+  (Yes, Yes, No, Yes) 0.85, 0.10, 0.05;
+  (No, Yes, No, Yes) 0.8, 0.0, 0.2;
+  (Yes, No, No, Yes) 0.0, 0.6, 0.4;
+  (No, No, No, Yes) 0.0, 0.6, 0.4;
+  (Yes, Yes, Yes, No) 0.8, 0.2, 0.0;
+  (No, Yes, Yes, No) 0.8, 0.2, 0.0;
+  (Yes, No, Yes, No) 0.0, 1.0, 0.0;
+  (No, No, Yes, No) 0.0, 1.0, 0.0;
+  (Yes, Yes, No, No) 0.2, 0.3, 0.5;
+  (No, Yes, No, No) 0.01, 0.10, 0.89;
+  (Yes, No, No, No) 0.0, 0.1, 0.9;
+  (No, No, No, No) 0.000, 0.001, 0.999;
+}
+probability ( Loss_of_mission | H1, H5, H6, H7 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 0.6, 0.4;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 0.2, 0.8;
+  (No, No, No, No) 0.01, 0.99;
+}
+probability ( Multipath_From_Ice | Ice_Environment, Water_Environment ) {
+  (Good, Good) 0.999, 0.001, 0.000;
+  (Poor, Good) 0.20, 0.75, 0.05;
+  (Good, Poor) 0.20, 0.75, 0.05;
+  (Poor, Poor) 0.0, 0.0, 1.0;
+}
+probability ( Position_Measurement_Quality | UCA18_N_1, UCA18_P_1 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( Power_capacity ) {
+  table 0.2, 0.6, 0.2;
+}
+probability ( Power_system | Power_capacity ) {
+  (High) 0.0, 1.0;
+  (Medium) 0.05, 0.95;
+  (Low) 0.3, 0.7;
+}
+probability ( Propulsion_system_fails_to_provide_necessary_motion | Power_system, Reliability_of_the_propulsion_system ) {
+  (Yes, Reliable) 1.0, 0.0;
+  (No, Reliable) 1.0, 0.0;
+  (Yes, Failure) 0.0, 1.0;
+  (No, Failure) 1.0, 0.0;
+}
+probability ( Range_to_buoy ) {
+  table 0.1, 0.2, 0.7;
+}
+probability ( Reliability_GPS_Module ) {
+  table 0.999, 0.001;
+}
+probability ( Reliability_of_acoustic_module_in_AUV ) {
+  table 0.9938, 0.0062;
+}
+probability ( Reliability_of_the_propulsion_system ) {
+  table 0.9988, 0.0012;
+}
+probability ( ReliabilityAcousticNavigation ) {
+  table 0.999, 0.001;
+}
+probability ( RIF_Range_Quality | UCA17_N_1, UCA17_P_1 ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( RIF2Propulsion | Environmental_complexity, Propulsion_system_fails_to_provide_necessary_motion ) {
+  (High, Yes) 1.0, 0.0;
+  (Medium, Yes) 1.0, 0.0;
+  (Low, Yes) 0.1, 0.9;
+  (High, No) 1.0, 0.0;
+  (Medium, No) 0.99, 0.01;
+  (Low, No) 0.01, 0.99;
+}
+probability ( RIF2Waypoint | Failure_of_temperature_sensor, Flawed_algorithm_of_waypoint_generation ) {
+  (Acceptable, Acceptable) 0.0, 1.0;
+  (Unacceptable, Acceptable) 1.0, 0.0;
+  (Acceptable, Unacceptable) 1.0, 0.0;
+  (Unacceptable, Unacceptable) 1.0, 0.0;
+}
+probability ( RIF3 | Failure_of_ADCP_DVL, Failure_of_CTD_sensor, Failure_of_IMU_module ) {
+  (Acceptable, Acceptable, Acceptable) 0.0, 1.0;
+  (Unacceptable, Acceptable, Acceptable) 1.0, 0.0;
+  (Acceptable, Unacceptable, Acceptable) 1.0, 0.0;
+  (Unacceptable, Unacceptable, Acceptable) 1.0, 0.0;
+  (Acceptable, Acceptable, Unacceptable) 1.0, 0.0;
+  (Unacceptable, Acceptable, Unacceptable) 1.0, 0.0;
+  (Acceptable, Unacceptable, Unacceptable) 1.0, 0.0;
+  (Unacceptable, Unacceptable, Unacceptable) 1.0, 0.0;
+}
+probability ( RIF3Collision | Altitude_of_AUV, Depth_of_AUV, Speed_of_AUV ) {
+  (High, High, High) 0.001, 0.999;
+  (Medium, High, High) 0.0, 1.0;
+  (Low, High, High) 0.001, 0.999;
+  (High, Medium, High) 0.45, 0.55;
+  (Medium, Medium, High) 0.1, 0.9;
+  (Low, Medium, High) 0.35, 0.65;
+  (High, Low, High) 0.95, 0.05;
+  (Medium, Low, High) 0.4, 0.6;
+  (Low, Low, High) 0.9, 0.1;
+  (High, High, Medium) 0.02, 0.98;
+  (Medium, High, Medium) 0.02, 0.98;
+  (Low, High, Medium) 0.02, 0.98;
+  (High, Medium, Medium) 0.05, 0.95;
+  (Medium, Medium, Medium) 0.05, 0.95;
+  (Low, Medium, Medium) 0.05, 0.95;
+  (High, Low, Medium) 0.99, 0.01;
+  (Medium, Low, Medium) 0.65, 0.35;
+  (Low, Low, Medium) 0.25, 0.75;
+  (High, High, Low) 0.99, 0.01;
+  (Medium, High, Low) 0.6, 0.4;
+  (Low, High, Low) 0.2, 0.8;
+  (High, Medium, Low) 0.99, 0.01;
+  (Medium, Medium, Low) 0.65, 0.35;
+  (Low, Medium, Low) 0.25, 0.75;
+  (High, Low, Low) 0.999, 0.001;
+  (Medium, Low, Low) 0.7, 0.3;
+  (Low, Low, Low) 0.3, 0.7;
+}
+probability ( RIF3Inaccurate | UCA5_P_1 ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.0, 1.0;
+}
+probability ( RIF4 | Failure_of_ADCP_DVL ) {
+  (Acceptable) 0.0, 1.0;
+  (Unacceptable) 1.0, 0.0;
+}
+probability ( RIF5 | Environmental_complexity, Steering_system_fails_to_provide_necessary_motion ) {
+  (High, Yes) 1.0, 0.0;
+  (Medium, Yes) 1.0, 0.0;
+  (Low, Yes) 0.1, 0.9;
+  (High, No) 1.0, 0.0;
+  (Medium, No) 1.0, 0.0;
+  (Low, No) 0.001, 0.999;
+}
+probability ( RSSI_commu ) {
+  table 0.99, 0.01;
+}
+probability ( RSSI_ranging ) {
+  table 0.99, 0.01;
+}
+probability ( SIL_commu ) {
+  table 0.99, 0.01;
+}
+probability ( SIL_ranging ) {
+  table 0.99, 0.01;
+}
+probability ( SoftwareFailure | Control_algorith_is_flawed, Improper_handling_of_navigation_errors ) {
+  (Acceptable, Yes) 1.0, 0.0;
+  (Unacceptable, Yes) 0.0, 1.0;
+  (Acceptable, No) 1.0, 0.0;
+  (Unacceptable, No) 1.0, 0.0;
+}
+probability ( Speed_of_AUV ) {
+  table 0.49, 0.50, 0.01;
+}
+probability ( Steering_system_fails_to_provide_necessary_motion | Fins, Power_system ) {
+  (Reliable, Yes) 1.0, 0.0;
+  (Failure, Yes) 0.0, 1.0;
+  (Reliable, No) 1.0, 0.0;
+  (Failure, No) 1.0, 0.0;
+}
+probability ( Time_left_to_salvage_the_vehicle_if_it_losts ) {
+  table 0.7, 0.2, 0.1;
+}
+probability ( Tool_effectiveness ) {
+  table 0.7, 0.3, 0.0;
+}
+probability ( UCA17_N_1 | Acoustic_Link_Quality, Range_to_buoy, Reliability_of_acoustic_module_in_AUV, ReliabilityAcousticNavigation ) {
+  (Acceptable, Long, Reliable, Reliable) 0.4, 0.6;
+  (Unacceptable, Long, Reliable, Reliable) 0.05, 0.95;
+  (Acceptable, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Close, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Close, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Long, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Long, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Medium, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Close, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Close, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Long, Reliable, Failure) 0.001, 0.999;
+  (Unacceptable, Long, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Close, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Close, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Long, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Long, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Close, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Close, Failure, Failure) 1.0, 0.0;
+}
+probability ( UCA17_P_1 | Acoustic_Link_Quality, Multipath_From_Ice, Range_to_buoy ) {
+  (Acceptable, Good, Long) 0.45, 0.55;
+  (Unacceptable, Good, Long) 0.7, 0.3;
+  (Acceptable, Medium, Long) 0.0, 1.0;
+  (Unacceptable, Medium, Long) 0.001, 0.999;
+  (Acceptable, Poor, Long) 1.0, 0.0;
+  (Unacceptable, Poor, Long) 1.0, 0.0;
+  (Acceptable, Good, Medium) 1.0, 0.0;
+  (Unacceptable, Good, Medium) 0.05, 0.95;
+  (Acceptable, Medium, Medium) 0.005, 0.995;
+  (Unacceptable, Medium, Medium) 1.0, 0.0;
+  (Acceptable, Poor, Medium) 1.0, 0.0;
+  (Unacceptable, Poor, Medium) 1.0, 0.0;
+  (Acceptable, Good, Close) 0.1, 0.9;
+  (Unacceptable, Good, Close) 0.2, 0.8;
+  (Acceptable, Medium, Close) 1.0, 0.0;
+  (Unacceptable, Medium, Close) 1.0, 0.0;
+  (Acceptable, Poor, Close) 1.0, 0.0;
+  (Unacceptable, Poor, Close) 1.0, 0.0;
+}
+probability ( UCA18_N_1 | Acoustic_Link_Quality_buoy, Multipath_From_Ice, Range_to_buoy, Reliability_of_acoustic_module_in_AUV, ReliabilityAcousticNavigation ) {
+  (Acceptable, Good, Long, Reliable, Reliable) 0.1, 0.9;
+  (Unacceptable, Good, Long, Reliable, Reliable) 0.2, 0.8;
+  (Acceptable, Medium, Long, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Long, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Long, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Long, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Medium, Reliable, Reliable) 0.005, 0.995;
+  (Unacceptable, Good, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Medium, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Medium, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Close, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Good, Close, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Medium, Close, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Close, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Close, Reliable, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Close, Reliable, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Long, Failure, Reliable) 0.01, 0.99;
+  (Unacceptable, Good, Long, Failure, Reliable) 0.02, 0.98;
+  (Acceptable, Medium, Long, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Long, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Long, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Long, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Medium, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Good, Medium, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Medium, Medium, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Medium, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Medium, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Medium, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Close, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Good, Close, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Medium, Close, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Medium, Close, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Poor, Close, Failure, Reliable) 1.0, 0.0;
+  (Unacceptable, Poor, Close, Failure, Reliable) 1.0, 0.0;
+  (Acceptable, Good, Long, Reliable, Failure) 0.45, 0.55;
+  (Unacceptable, Good, Long, Reliable, Failure) 0.005, 0.995;
+  (Acceptable, Medium, Long, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Long, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Long, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Long, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Good, Medium, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Good, Medium, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Medium, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Medium, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Medium, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Medium, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Good, Close, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Good, Close, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Close, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Close, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Close, Reliable, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Close, Reliable, Failure) 1.0, 0.0;
+  (Acceptable, Good, Long, Failure, Failure) 0.001, 0.999;
+  (Unacceptable, Good, Long, Failure, Failure) 0.002, 0.998;
+  (Acceptable, Medium, Long, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Long, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Long, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Long, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Good, Medium, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Good, Medium, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Medium, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Medium, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Medium, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Medium, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Good, Close, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Good, Close, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Medium, Close, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Medium, Close, Failure, Failure) 1.0, 0.0;
+  (Acceptable, Poor, Close, Failure, Failure) 1.0, 0.0;
+  (Unacceptable, Poor, Close, Failure, Failure) 1.0, 0.0;
+}
+probability ( UCA18_P_1 | GNSS_accuracy, Reliability_GPS_Module ) {
+  (Acceptable, Reliable) 0.0, 1.0;
+  (Unacceptable, Reliable) 1.0, 0.0;
+  (Acceptable, Failure) 1.0, 0.0;
+  (Unacceptable, Failure) 1.0, 0.0;
+}
+probability ( UCA5_P_1 | Position_Measurement_Quality, RIF3, RIF4, SoftwareFailure ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 1.0, 0.0;
+}
+probability ( UCA6_N_1 | Copy_2_SoftwareFailure, RIF2Propulsion ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( UCA6_N_2 | Copy_of_SoftwareFailure, RIF2Waypoint, RIF3Inaccurate, RIF5 ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( UCA6_N_3 | Copy_of_RIF2Waypoint, Copy_RIF5, InaccurateWaypoint ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( Vessel_constraint | Time_left_to_salvage_the_vehicle_if_it_losts ) {
+  (Plenty) 0.0, 0.0, 1.0;
+  (Enough) 0.0, 0.3, 0.7;
+  (Not_Enough) 1.0, 0.0, 0.0;
+}
+probability ( Visibility ) {
+  table 1.0, 0.0, 0.0;
+}
+probability ( Water_Environment ) {
+  table 0.9, 0.1;
+}

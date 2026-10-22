@@ -1,0 +1,296 @@
+network unknown {
+}
+variable AirlineInherentRisks {
+  type discrete [ 2 ] { Yes, No };
+}
+variable CoastalPortsRisk {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DeepChannel {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DifficultHandlingLNG {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FewerPorts {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FireRiskLNG {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HeavyFog {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HeavyTraffic {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HighCurrent {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HighWaves {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ImpactEpidemic {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InfluencePoliticalGame {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InfluenceWeather {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LNGLoadingRisk {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LNGTransportRisk {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LongDistance {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LowVisibility {
+  type discrete [ 2 ] { Yes, No };
+}
+variable MaritimeSecurity {
+  type discrete [ 2 ] { Yes, No };
+}
+variable MilitaryConflict {
+  type discrete [ 2 ] { Yes, No };
+}
+variable NonTraditionalThreat {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ObjectiveFactors {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PiracyAttack {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorDraftLevel {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PoorOrganization {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SafetyPerformanceLNG {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SafetyRoutes {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SeaBreezeEffect {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SovereignityDispute {
+  type discrete [ 2 ] { Yes, No };
+}
+variable StrongSeaBreeze {
+  type discrete [ 2 ] { Yes, No };
+}
+variable StrongWinds {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SubjectiveFactors {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Thunderstorms {
+  type discrete [ 2 ] { Yes, No };
+}
+variable TransportLNGRisk {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UncertainNavigablePeriod {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UnsafePersonnel {
+  type discrete [ 2 ] { Yes, No };
+}
+variable VesselRisk {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( AirlineInherentRisks | DeepChannel, HeavyTraffic, HighCurrent, LongDistance ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes, Yes) 0.0, 1.0;
+  (No, No, Yes, Yes) 0.0, 1.0;
+  (Yes, Yes, No, Yes) 0.0, 1.0;
+  (No, Yes, No, Yes) 0.0, 1.0;
+  (Yes, No, No, Yes) 0.0, 1.0;
+  (No, No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, Yes, No) 0.0, 1.0;
+  (No, Yes, Yes, No) 0.0, 1.0;
+  (Yes, No, Yes, No) 0.0, 1.0;
+  (No, No, Yes, No) 0.0, 1.0;
+  (Yes, Yes, No, No) 0.0, 1.0;
+  (No, Yes, No, No) 0.0, 1.0;
+  (Yes, No, No, No) 0.0, 1.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( CoastalPortsRisk | ObjectiveFactors, SubjectiveFactors ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( DeepChannel ) {
+  table 0.000844, 0.999156;
+}
+probability ( DifficultHandlingLNG ) {
+  table 0.000738, 0.999262;
+}
+probability ( FewerPorts ) {
+  table 0.0142, 0.9858;
+}
+probability ( FireRiskLNG ) {
+  table 0.00313, 0.99687;
+}
+probability ( HeavyFog ) {
+  table 0.0186, 0.9814;
+}
+probability ( HeavyTraffic ) {
+  table 0.00605, 0.99395;
+}
+probability ( HighCurrent ) {
+  table 0.00578, 0.99422;
+}
+probability ( HighWaves ) {
+  table 0.00751, 0.99249;
+}
+probability ( ImpactEpidemic ) {
+  table 0.0237, 0.9763;
+}
+probability ( InfluencePoliticalGame | MilitaryConflict, SovereignityDispute ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( InfluenceWeather | HighWaves, LowVisibility, SeaBreezeEffect ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( LNGLoadingRisk ) {
+  table 0.0014, 0.9986;
+}
+probability ( LNGTransportRisk | FireRiskLNG, LNGLoadingRisk ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( LongDistance ) {
+  table 0.000553, 0.999447;
+}
+probability ( LowVisibility | HeavyFog, Thunderstorms ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( MaritimeSecurity | InfluencePoliticalGame, NonTraditionalThreat ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( MilitaryConflict ) {
+  table 0.00325, 0.99675;
+}
+probability ( NonTraditionalThreat | ImpactEpidemic, PiracyAttack ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( ObjectiveFactors | FewerPorts, PoorDraftLevel, UncertainNavigablePeriod ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( PiracyAttack ) {
+  table 0.0171, 0.9829;
+}
+probability ( PoorDraftLevel ) {
+  table 0.00128, 0.99872;
+}
+probability ( PoorOrganization ) {
+  table 0.000778, 0.999222;
+}
+probability ( SafetyPerformanceLNG ) {
+  table 0.00133, 0.99867;
+}
+probability ( SafetyRoutes | AirlineInherentRisks, CoastalPortsRisk, InfluenceWeather, MaritimeSecurity ) {
+  (Yes, Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes, Yes) 1.0, 0.0;
+  (No, No, Yes, Yes) 1.0, 0.0;
+  (Yes, Yes, No, Yes) 1.0, 0.0;
+  (No, Yes, No, Yes) 1.0, 0.0;
+  (Yes, No, No, Yes) 1.0, 0.0;
+  (No, No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, Yes, No) 1.0, 0.0;
+  (Yes, No, Yes, No) 1.0, 0.0;
+  (No, No, Yes, No) 1.0, 0.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 1.0, 0.0;
+  (Yes, No, No, No) 1.0, 0.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( SeaBreezeEffect | StrongSeaBreeze, StrongWinds ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( SovereignityDispute ) {
+  table 0.000966, 0.999034;
+}
+probability ( StrongSeaBreeze ) {
+  table 0.00247, 0.99753;
+}
+probability ( StrongWinds ) {
+  table 0.014, 0.986;
+}
+probability ( SubjectiveFactors | PoorOrganization, UnsafePersonnel ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 1.0, 0.0;
+  (Yes, No) 1.0, 0.0;
+  (No, No) 0.0, 1.0;
+}
+probability ( Thunderstorms ) {
+  table 0.00249, 0.99751;
+}
+probability ( TransportLNGRisk | LNGTransportRisk, SafetyRoutes, VesselRisk ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 1.0, 0.0;
+  (No, No, Yes) 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, Yes, No) 1.0, 0.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( UncertainNavigablePeriod ) {
+  table 0.00128, 0.99872;
+}
+probability ( UnsafePersonnel ) {
+  table 0.000463, 0.999537;
+}
+probability ( VesselRisk | DifficultHandlingLNG, SafetyPerformanceLNG ) {
+  (Yes, Yes) 1.0, 0.0;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.0, 1.0;
+  (No, No) 0.0, 1.0;
+}

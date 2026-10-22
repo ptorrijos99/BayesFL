@@ -1,0 +1,778 @@
+network unknown {
+}
+variable InterestAI {
+  type discrete [ 4 ] { Not_at_all, Less_strongly, Strongly, Very_strongly };
+}
+variable InformedAI {
+  type discrete [ 4 ] { Very_poor, Rather_poor, Rather_good, Very_good };
+}
+variable MediaAI {
+  type discrete [ 2 ] { No, Yes };
+}
+variable FriendsAI {
+  type discrete [ 2 ] { No, Yes };
+}
+variable SearchAI {
+  type discrete [ 2 ] { No, Yes };
+}
+variable DevelopAI {
+  type discrete [ 3 ] { Risk, Opportunity, Both };
+}
+variable AIReduceShortageWorkers {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIEasierLife {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIHealtcareBenefit {
+  type discrete [ 5 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree, Don_t_know };
+}
+variable AIFieldBenefit {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIvsHuman {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIFalseInfo {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIUncontrollable {
+  type discrete [ 4 ] { Strongly_disagree, Somewhat_disagree, Somewhat_agree, Strongly_agree };
+}
+variable AIRegulations {
+  type discrete [ 2 ] { No, Yes };
+}
+variable HeardEURegulation {
+  type discrete [ 2 ] { No, Yes };
+}
+variable EUAppropriateRegulation {
+  type discrete [ 4 ] { Appropriate, Too_strict, Not_strict_enough, Don_t_know };
+}
+variable Sex {
+  type discrete [ 2 ] { Female, Male };
+}
+variable Age {
+  type discrete [ 4 ] { 14_29, 30_44, 45_59, 60_ };
+}
+variable Education {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Income {
+  type discrete [ 4 ] { Low, Medium, High, Not_reported };
+}
+variable Municipality {
+  type discrete [ 5 ] { _5k, 5k_19k, 20k_99k, 100k_499k, 500k_ };
+}
+variable VoteIntent {
+  type discrete [ 3 ] { Left, Right, Other };
+}
+probability ( InterestAI | Sex, Education ) {
+  (Female, Low) 0.28249097, 0.52075812, 0.15252708, 0.04422383;
+  (Male, Low) 0.2432584, 0.4455056, 0.1623596, 0.1488764;
+  (Female, Medium) 0.26349831, 0.47272216, 0.18925759, 0.07452193;
+  (Male, Medium) 0.1841164, 0.3802349, 0.2760470, 0.1596016;
+  (Female, High) 0.1202980, 0.4016854, 0.3430630, 0.1349536;
+  (Male, High) 0.07249903, 0.28970417, 0.40881666, 0.22898015;
+}
+probability ( InformedAI | InterestAI ) {
+  (Not_at_all) 0.26741655, 0.42997097, 0.26741655, 0.03519594;
+  (Less_strongly) 0.05788451, 0.42656857, 0.47543032, 0.04011660;
+  (Strongly) 0.01577749, 0.33588159, 0.55448926, 0.09385166;
+  (Very_strongly) 0.03120978, 0.17020592, 0.44305019, 0.35553411;
+}
+probability ( MediaAI | InterestAI, InformedAI, Age, VoteIntent ) {
+  (Not_at_all, Very_poor, 14_29, Left) 0.5, 0.5;
+  (Less_strongly, Very_poor, 14_29, Left) 0.5, 0.5;
+  (Strongly, Very_poor, 14_29, Left) 0.5, 0.5;
+  (Very_strongly, Very_poor, 14_29, Left) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 14_29, Left) 0.5, 0.5;
+  (Less_strongly, Rather_poor, 14_29, Left) 0.0008665511, 0.9991334489;
+  (Strongly, Rather_poor, 14_29, Left) 0.3336222, 0.6663778;
+  (Very_strongly, Rather_poor, 14_29, Left) 0.001298701, 0.998701299;
+  (Not_at_all, Rather_good, 14_29, Left) 0.5, 0.5;
+  (Less_strongly, Rather_good, 14_29, Left) 0.0003717472, 0.9996282528;
+  (Strongly, Rather_good, 14_29, Left) 0.2728348, 0.7271652;
+  (Very_strongly, Rather_good, 14_29, Left) 0.5, 0.5;
+  (Not_at_all, Very_good, 14_29, Left) 0.5, 0.5;
+  (Less_strongly, Very_good, 14_29, Left) 0.001298701, 0.998701299;
+  (Strongly, Very_good, 14_29, Left) 0.3336222, 0.6663778;
+  (Very_strongly, Very_good, 14_29, Left) 0.0005202914, 0.9994797086;
+  (Not_at_all, Very_poor, 30_44, Left) 0.6663778, 0.3336222;
+  (Less_strongly, Very_poor, 30_44, Left) 0.001298701, 0.998701299;
+  (Strongly, Very_poor, 30_44, Left) 0.5, 0.5;
+  (Very_strongly, Very_poor, 30_44, Left) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 30_44, Left) 0.997409326, 0.002590674;
+  (Less_strongly, Rather_poor, 30_44, Left) 0.2223026, 0.7776974;
+  (Strongly, Rather_poor, 30_44, Left) 0.2501085, 0.7498915;
+  (Very_strongly, Rather_poor, 30_44, Left) 0.5, 0.5;
+  (Not_at_all, Rather_good, 30_44, Left) 0.2003122, 0.7996878;
+  (Less_strongly, Rather_good, 30_44, Left) 0.07709251, 0.92290749;
+  (Strongly, Rather_good, 30_44, Left) 0.1053713, 0.8946287;
+  (Very_strongly, Rather_good, 30_44, Left) 0.1431227, 0.8568773;
+  (Not_at_all, Very_good, 30_44, Left) 0.002590674, 0.997409326;
+  (Less_strongly, Very_good, 30_44, Left) 0.002590674, 0.997409326;
+  (Strongly, Very_good, 30_44, Left) 0.111336, 0.888664;
+  (Very_strongly, Very_good, 30_44, Left) 0.111336, 0.888664;
+  (Not_at_all, Very_poor, 45_59, Left) 0.6663778, 0.3336222;
+  (Less_strongly, Very_poor, 45_59, Left) 0.0008665511, 0.9991334489;
+  (Strongly, Very_poor, 45_59, Left) 0.002590674, 0.997409326;
+  (Very_strongly, Very_poor, 45_59, Left) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 45_59, Left) 0.2003122, 0.7996878;
+  (Less_strongly, Rather_poor, 45_59, Left) 0.1334606, 0.8665394;
+  (Strongly, Rather_poor, 45_59, Left) 0.1334606, 0.8665394;
+  (Very_strongly, Rather_poor, 45_59, Left) 0.4001041, 0.5998959;
+  (Not_at_all, Rather_good, 45_59, Left) 0.5, 0.5;
+  (Less_strongly, Rather_good, 45_59, Left) 0.08008748, 0.91991252;
+  (Strongly, Rather_good, 45_59, Left) 0.06458928, 0.93541072;
+  (Very_strongly, Rather_good, 45_59, Left) 0.1765697, 0.8234303;
+  (Not_at_all, Very_good, 45_59, Left) 0.5, 0.5;
+  (Less_strongly, Very_good, 45_59, Left) 0.0008665511, 0.9991334489;
+  (Strongly, Very_good, 45_59, Left) 0.001298701, 0.998701299;
+  (Very_strongly, Very_good, 45_59, Left) 0.000325309, 0.999674691;
+  (Not_at_all, Very_poor, 60_, Left) 0.6665703, 0.3334297;
+  (Less_strongly, Very_poor, 60_, Left) 0.0006501951, 0.9993498049;
+  (Strongly, Very_poor, 60_, Left) 0.5, 0.5;
+  (Very_strongly, Very_poor, 60_, Left) 0.001298701, 0.998701299;
+  (Not_at_all, Rather_poor, 60_, Left) 0.3334056, 0.6665944;
+  (Less_strongly, Rather_poor, 60_, Left) 0.1667028, 0.8332972;
+  (Strongly, Rather_poor, 60_, Left) 0.07150828, 0.92849172;
+  (Very_strongly, Rather_poor, 60_, Left) 0.0002891845, 0.9997108155;
+  (Not_at_all, Rather_good, 60_, Left) 0.0008665511, 0.9991334489;
+  (Less_strongly, Rather_good, 60_, Left) 0.03640754, 0.96359246;
+  (Strongly, Rather_good, 60_, Left) 0.04352994, 0.95647006;
+  (Very_strongly, Rather_good, 60_, Left) 0.0835141, 0.9164859;
+  (Not_at_all, Very_good, 60_, Left) 0.5, 0.5;
+  (Less_strongly, Very_good, 60_, Left) 0.0006501951, 0.9993498049;
+  (Strongly, Very_good, 60_, Left) 0.2003122, 0.7996878;
+  (Very_strongly, Very_good, 60_, Left) 0.000325309, 0.999674691;
+  (Not_at_all, Very_poor, 14_29, Right) 0.9991334489, 0.0008665511;
+  (Less_strongly, Very_poor, 14_29, Right) 0.5, 0.5;
+  (Strongly, Very_poor, 14_29, Right) 0.5, 0.5;
+  (Very_strongly, Very_poor, 14_29, Right) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 14_29, Right) 0.7496749, 0.2503251;
+  (Less_strongly, Rather_poor, 14_29, Right) 0.5998959, 0.4001041;
+  (Strongly, Rather_poor, 14_29, Right) 0.2503251, 0.7496749;
+  (Very_strongly, Rather_poor, 14_29, Right) 0.997409326, 0.002590674;
+  (Not_at_all, Rather_good, 14_29, Right) 0.002590674, 0.997409326;
+  (Less_strongly, Rather_good, 14_29, Right) 0.3750813, 0.6249187;
+  (Strongly, Rather_good, 14_29, Right) 0.1669558, 0.8330442;
+  (Very_strongly, Rather_good, 14_29, Right) 0.3334779, 0.6665221;
+  (Not_at_all, Very_good, 14_29, Right) 0.5, 0.5;
+  (Less_strongly, Very_good, 14_29, Right) 0.5, 0.5;
+  (Strongly, Very_good, 14_29, Right) 0.5, 0.5;
+  (Very_strongly, Very_good, 14_29, Right) 0.0008665511, 0.9991334489;
+  (Not_at_all, Very_poor, 30_44, Right) 0.5713755, 0.4286245;
+  (Less_strongly, Very_poor, 30_44, Right) 0.3336222, 0.6663778;
+  (Strongly, Very_poor, 30_44, Right) 0.5, 0.5;
+  (Very_strongly, Very_poor, 30_44, Right) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 30_44, Right) 0.3334779, 0.6665221;
+  (Less_strongly, Rather_poor, 30_44, Right) 0.7271652, 0.2728348;
+  (Strongly, Rather_poor, 30_44, Right) 0.125244, 0.874756;
+  (Very_strongly, Rather_poor, 30_44, Right) 0.0008665511, 0.9991334489;
+  (Not_at_all, Rather_good, 30_44, Right) 0.5, 0.5;
+  (Less_strongly, Rather_good, 30_44, Right) 0.4001041, 0.5998959;
+  (Strongly, Rather_good, 30_44, Right) 0.07158795, 0.92841205;
+  (Very_strongly, Rather_good, 30_44, Right) 0.2003122, 0.7996878;
+  (Not_at_all, Very_good, 30_44, Right) 0.5, 0.5;
+  (Less_strongly, Very_good, 30_44, Right) 0.5, 0.5;
+  (Strongly, Very_good, 30_44, Right) 0.2503251, 0.7496749;
+  (Very_strongly, Very_good, 30_44, Right) 0.111336, 0.888664;
+  (Not_at_all, Very_poor, 45_59, Right) 0.5713755, 0.4286245;
+  (Less_strongly, Very_poor, 45_59, Right) 0.002590674, 0.997409326;
+  (Strongly, Very_poor, 45_59, Right) 0.002590674, 0.997409326;
+  (Very_strongly, Very_poor, 45_59, Right) 0.3336222, 0.6663778;
+  (Not_at_all, Rather_poor, 45_59, Right) 0.6153384, 0.3846616;
+  (Less_strongly, Rather_poor, 45_59, Right) 0.3871157, 0.6128843;
+  (Strongly, Rather_poor, 45_59, Right) 0.428598, 0.571402;
+  (Very_strongly, Rather_poor, 45_59, Right) 0.1431227, 0.8568773;
+  (Not_at_all, Rather_good, 45_59, Right) 0.3334297, 0.6665703;
+  (Less_strongly, Rather_good, 45_59, Right) 0.2778421, 0.7221579;
+  (Strongly, Rather_good, 45_59, Right) 0.1539155, 0.8460845;
+  (Very_strongly, Rather_good, 45_59, Right) 0.0006501951, 0.9993498049;
+  (Not_at_all, Very_good, 45_59, Right) 0.0008665511, 0.9991334489;
+  (Less_strongly, Very_good, 45_59, Right) 0.001298701, 0.998701299;
+  (Strongly, Very_good, 45_59, Right) 0.0008665511, 0.9991334489;
+  (Very_strongly, Very_good, 45_59, Right) 0.0002169197, 0.9997830803;
+  (Not_at_all, Very_poor, 60_, Right) 0.3334779, 0.6665221;
+  (Less_strongly, Very_poor, 60_, Right) 0.3336222, 0.6663778;
+  (Strongly, Very_poor, 60_, Right) 0.001298701, 0.998701299;
+  (Very_strongly, Very_poor, 60_, Right) 0.002590674, 0.997409326;
+  (Not_at_all, Rather_poor, 60_, Right) 0.3684571, 0.6315429;
+  (Less_strongly, Rather_poor, 60_, Right) 0.2564428, 0.7435572;
+  (Strongly, Rather_poor, 60_, Right) 0.07415622, 0.92584378;
+  (Very_strongly, Rather_poor, 60_, Right) 0.3336222, 0.6663778;
+  (Not_at_all, Rather_good, 60_, Right) 0.0002602811, 0.9997397189;
+  (Less_strongly, Rather_good, 60_, Right) 0.08515235, 0.91484765;
+  (Strongly, Rather_good, 60_, Right) 6.509569e-05, 9.999349e-01;
+  (Very_strongly, Rather_good, 60_, Right) 0.0002169197, 0.9997830803;
+  (Not_at_all, Very_good, 60_, Right) 0.997409326, 0.002590674;
+  (Less_strongly, Very_good, 60_, Right) 0.001298701, 0.998701299;
+  (Strongly, Very_good, 60_, Right) 0.0008665511, 0.9991334489;
+  (Very_strongly, Very_good, 60_, Right) 0.0002891845, 0.9997108155;
+  (Not_at_all, Very_poor, 14_29, Other) 0.998701299, 0.001298701;
+  (Less_strongly, Very_poor, 14_29, Other) 0.5, 0.5;
+  (Strongly, Very_poor, 14_29, Other) 0.5, 0.5;
+  (Very_strongly, Very_poor, 14_29, Other) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 14_29, Other) 0.002590674, 0.997409326;
+  (Less_strongly, Rather_poor, 14_29, Other) 0.997409326, 0.002590674;
+  (Strongly, Rather_poor, 14_29, Other) 0.4001041, 0.5998959;
+  (Very_strongly, Rather_poor, 14_29, Other) 0.5, 0.5;
+  (Not_at_all, Rather_good, 14_29, Other) 0.5, 0.5;
+  (Less_strongly, Rather_good, 14_29, Other) 0.4444766, 0.5555234;
+  (Strongly, Rather_good, 14_29, Other) 0.0004336513, 0.9995663487;
+  (Very_strongly, Rather_good, 14_29, Other) 0.2003122, 0.7996878;
+  (Not_at_all, Very_good, 14_29, Other) 0.5, 0.5;
+  (Less_strongly, Very_good, 14_29, Other) 0.997409326, 0.002590674;
+  (Strongly, Very_good, 14_29, Other) 0.002590674, 0.997409326;
+  (Very_strongly, Very_good, 14_29, Other) 0.5, 0.5;
+  (Not_at_all, Very_poor, 30_44, Other) 0.002590674, 0.997409326;
+  (Less_strongly, Very_poor, 30_44, Other) 0.002590674, 0.997409326;
+  (Strongly, Very_poor, 30_44, Other) 0.5, 0.5;
+  (Very_strongly, Very_poor, 30_44, Other) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 30_44, Other) 0.002590674, 0.997409326;
+  (Less_strongly, Rather_poor, 30_44, Other) 0.3336222, 0.6663778;
+  (Strongly, Rather_poor, 30_44, Other) 0.5, 0.5;
+  (Very_strongly, Rather_poor, 30_44, Other) 0.5, 0.5;
+  (Not_at_all, Rather_good, 30_44, Other) 0.002590674, 0.997409326;
+  (Less_strongly, Rather_good, 30_44, Other) 0.2003122, 0.7996878;
+  (Strongly, Rather_good, 30_44, Other) 0.0005202914, 0.9994797086;
+  (Very_strongly, Rather_good, 30_44, Other) 0.002590674, 0.997409326;
+  (Not_at_all, Very_good, 30_44, Other) 0.5, 0.5;
+  (Less_strongly, Very_good, 30_44, Other) 0.5, 0.5;
+  (Strongly, Very_good, 30_44, Other) 0.5, 0.5;
+  (Very_strongly, Very_good, 30_44, Other) 0.3336222, 0.6663778;
+  (Not_at_all, Very_poor, 45_59, Other) 0.5, 0.5;
+  (Less_strongly, Very_poor, 45_59, Other) 0.5, 0.5;
+  (Strongly, Very_poor, 45_59, Other) 0.5, 0.5;
+  (Very_strongly, Very_poor, 45_59, Other) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 45_59, Other) 0.5, 0.5;
+  (Less_strongly, Rather_poor, 45_59, Other) 0.2501627, 0.7498373;
+  (Strongly, Rather_poor, 45_59, Other) 0.1669558, 0.8330442;
+  (Very_strongly, Rather_poor, 45_59, Other) 0.001298701, 0.998701299;
+  (Not_at_all, Rather_good, 45_59, Other) 0.4001041, 0.5998959;
+  (Less_strongly, Rather_good, 45_59, Other) 0.0911027, 0.9088973;
+  (Strongly, Rather_good, 45_59, Other) 0.0006501951, 0.9993498049;
+  (Very_strongly, Rather_good, 45_59, Other) 0.6663778, 0.3336222;
+  (Not_at_all, Very_good, 45_59, Other) 0.997409326, 0.002590674;
+  (Less_strongly, Very_good, 45_59, Other) 0.5, 0.5;
+  (Strongly, Very_good, 45_59, Other) 0.0008665511, 0.9991334489;
+  (Very_strongly, Very_good, 45_59, Other) 0.5, 0.5;
+  (Not_at_all, Very_poor, 60_, Other) 0.6663778, 0.3336222;
+  (Less_strongly, Very_poor, 60_, Other) 0.4001041, 0.5998959;
+  (Strongly, Very_poor, 60_, Other) 0.5, 0.5;
+  (Very_strongly, Very_poor, 60_, Other) 0.5, 0.5;
+  (Not_at_all, Rather_poor, 60_, Other) 0.1669558, 0.8330442;
+  (Less_strongly, Rather_poor, 60_, Other) 0.3001041, 0.6998959;
+  (Strongly, Rather_poor, 60_, Other) 0.2858736, 0.7141264;
+  (Very_strongly, Rather_poor, 60_, Other) 0.002590674, 0.997409326;
+  (Not_at_all, Rather_good, 60_, Other) 0.5, 0.5;
+  (Less_strongly, Rather_good, 60_, Other) 0.2728348, 0.7271652;
+  (Strongly, Rather_good, 60_, Other) 0.0005202914, 0.9994797086;
+  (Very_strongly, Rather_good, 60_, Other) 0.2001562, 0.7998438;
+  (Not_at_all, Very_good, 60_, Other) 0.5, 0.5;
+  (Less_strongly, Very_good, 60_, Other) 0.997409326, 0.002590674;
+  (Strongly, Very_good, 60_, Other) 0.002590674, 0.997409326;
+  (Very_strongly, Very_good, 60_, Other) 0.997409326, 0.002590674;
+}
+probability ( FriendsAI | InterestAI, SearchAI, Education ) {
+  (Not_at_all, No, Low) 0.93489933, 0.06510067;
+  (Less_strongly, No, Low) 0.7816048, 0.2183952;
+  (Strongly, No, Low) 0.5, 0.5;
+  (Very_strongly, No, Low) 0.7130178, 0.2869822;
+  (Not_at_all, Yes, Low) 0.5, 0.5;
+  (Less_strongly, Yes, Low) 0.5, 0.5;
+  (Strongly, Yes, Low) 0.2869822, 0.7130178;
+  (Very_strongly, Yes, Low) 0.003448276, 0.996551724;
+  (Not_at_all, No, Medium) 0.8936909, 0.1063091;
+  (Less_strongly, No, Medium) 0.6524885, 0.3475115;
+  (Strongly, No, Medium) 0.5166551, 0.4833449;
+  (Very_strongly, No, Medium) 0.416955, 0.583045;
+  (Not_at_all, Yes, Medium) 0.993150685, 0.006849315;
+  (Less_strongly, Yes, Medium) 0.5712166, 0.4287834;
+  (Strongly, Yes, Medium) 0.3083067, 0.6916933;
+  (Very_strongly, Yes, Medium) 0.1605657, 0.8394343;
+  (Not_at_all, No, High) 0.6955341, 0.3044659;
+  (Less_strongly, No, High) 0.5579296, 0.4420704;
+  (Strongly, No, High) 0.3630937, 0.6369063;
+  (Very_strongly, No, High) 0.3470688, 0.6529312;
+  (Not_at_all, Yes, High) 0.6643836, 0.3356164;
+  (Less_strongly, Yes, High) 0.2147103, 0.7852897;
+  (Strongly, Yes, High) 0.163067, 0.836933;
+  (Very_strongly, Yes, High) 0.07387111, 0.92612889;
+}
+probability ( SearchAI | InterestAI, Education ) {
+  (Not_at_all, Low) 0.998659517, 0.001340483;
+  (Less_strongly, Low) 0.96423358, 0.03576642;
+  (Strongly, Low) 0.6310044, 0.3689956;
+  (Very_strongly, Low) 0.5382166, 0.4617834;
+  (Not_at_all, Medium) 0.95597105, 0.04402895;
+  (Less_strongly, Medium) 0.8936909, 0.1063091;
+  (Strongly, Medium) 0.8215507, 0.1784493;
+  (Very_strongly, Medium) 0.3247191, 0.6752809;
+  (Not_at_all, High) 0.95780347, 0.04219653;
+  (Less_strongly, High) 0.892595, 0.107405;
+  (Strongly, High) 0.5376605, 0.4623395;
+  (Very_strongly, High) 0.3403702, 0.6596298;
+}
+probability ( DevelopAI | InterestAI ) {
+  (Not_at_all) 0.6565071, 0.2094823, 0.1340106;
+  (Less_strongly) 0.4577087, 0.3599852, 0.1823061;
+  (Strongly) 0.3515506, 0.3723704, 0.2760789;
+  (Very_strongly) 0.2526813, 0.5100815, 0.2372372;
+}
+probability ( AIReduceShortageWorkers | AIEasierLife ) {
+  (Strongly_disagree) 0.45229320, 0.31797707, 0.16072891, 0.06900082;
+  (Somewhat_disagree) 0.2065765, 0.4633417, 0.2644745, 0.0656073;
+  (Somewhat_agree) 0.1415947, 0.3678319, 0.3961115, 0.0944619;
+  (Strongly_agree) 0.1667822, 0.2666436, 0.3054785, 0.2610957;
+}
+probability ( AIEasierLife | InterestAI, DevelopAI, Age ) {
+  (Not_at_all, Risk, 14_29) 0.2856083086, 0.5704747774, 0.1431750742, 0.0007418398;
+  (Less_strongly, Risk, 14_29) 0.1003119, 0.2001040, 0.5992722, 0.1003119;
+  (Strongly, Risk, 14_29) 0.200104, 0.200104, 0.299896, 0.299896;
+  (Very_strongly, Risk, 14_29) 0.332758621, 0.332758621, 0.001724138, 0.332758621;
+  (Not_at_all, Opportunity, 14_29) 0.332758621, 0.663793103, 0.001724138, 0.001724138;
+  (Less_strongly, Opportunity, 14_29) 0.0002738226, 0.2631434830, 0.4208652793, 0.3157174151;
+  (Strongly, Opportunity, 14_29) 0.05020812, 0.10015609, 0.29994797, 0.54968782;
+  (Very_strongly, Opportunity, 14_29) 0.0002890173, 0.0002890173, 0.2777456647, 0.7216763007;
+  (Not_at_all, Both, 14_29) 0.005102041, 0.984693877, 0.005102041, 0.005102041;
+  (Less_strongly, Both, 14_29) 0.1431750742, 0.5704747774, 0.2856083086, 0.0007418398;
+  (Strongly, Both, 14_29) 0.1819471, 0.1819471, 0.4541588, 0.1819471;
+  (Very_strongly, Both, 14_29) 0.001037344, 0.001037344, 0.399377593, 0.598547719;
+  (Not_at_all, Risk, 30_44) 0.3528151775, 0.6465728273, 0.0003059976, 0.0003059976;
+  (Less_strongly, Risk, 30_44) 0.3498959, 0.3998439, 0.1501041, 0.1001561;
+  (Strongly, Risk, 30_44) 0.21056955, 0.52601315, 0.21056955, 0.05284775;
+  (Very_strongly, Risk, 30_44) 0.200207469, 0.200207469, 0.598547718, 0.001037344;
+  (Not_at_all, Opportunity, 30_44) 0.2500000, 0.1253247, 0.2500000, 0.3746753;
+  (Less_strongly, Opportunity, 30_44) 0.0646407, 0.2258227, 0.5159503, 0.1935863;
+  (Strongly, Opportunity, 30_44) 0.03348369, 0.10010409, 0.43320611, 0.43320611;
+  (Very_strongly, Opportunity, 30_44) 0.0002477701, 0.0953914767, 0.3808225966, 0.5235381566;
+  (Not_at_all, Both, 30_44) 0.663793103, 0.332758621, 0.001724138, 0.001724138;
+  (Less_strongly, Both, 30_44) 0.1540, 0.3076, 0.3076, 0.2308;
+  (Strongly, Both, 30_44) 0.1364711, 0.2272942, 0.4997635, 0.1364711;
+  (Very_strongly, Both, 30_44) 0.0004725898, 0.0004725898, 0.5448960302, 0.4541587902;
+  (Not_at_all, Risk, 45_59) 0.6381258308, 0.2553167922, 0.1064466105, 0.0001107665;
+  (Less_strongly, Risk, 45_59) 0.27776707, 0.51841496, 0.18521018, 0.01860779;
+  (Strongly, Risk, 45_59) 0.42095890, 0.39465753, 0.13164384, 0.05273973;
+  (Very_strongly, Risk, 45_59) 0.2777457, 0.4442197, 0.1667630, 0.1112717;
+  (Not_at_all, Opportunity, 45_59) 0.2998960499, 0.2998960499, 0.3996881497, 0.0005197505;
+  (Less_strongly, Opportunity, 45_59) 0.02336562, 0.37203390, 0.44176755, 0.16283293;
+  (Strongly, Opportunity, 45_59) 0.02336562, 0.25581114, 0.48825666, 0.23256659;
+  (Very_strongly, Opportunity, 45_59) 0.03348369, 0.13341430, 0.33327550, 0.49982651;
+  (Not_at_all, Both, 45_59) 0.399377593, 0.399377593, 0.200207469, 0.001037344;
+  (Less_strongly, Both, 45_59) 0.12510841, 0.70793583, 0.12510841, 0.04184735;
+  (Strongly, Both, 45_59) 0.04017485, 0.27997502, 0.51977519, 0.16007494;
+  (Very_strongly, Both, 45_59) 0.0003467406, 0.3997919556, 0.2666435506, 0.3332177531;
+  (Not_at_all, Risk, 60_) 0.6664600892, 0.2381011403, 0.0953148240, 0.0001239465;
+  (Less_strongly, Risk, 60_) 0.40161345, 0.45078539, 0.12297251, 0.02462865;
+  (Strongly, Risk, 60_) 0.45581930, 0.35290965, 0.11768760, 0.07358346;
+  (Very_strongly, Risk, 60_) 0.34773756, 0.30429864, 0.26085973, 0.08710407;
+  (Not_at_all, Opportunity, 60_) 0.53294036, 0.20006935, 0.20006935, 0.06692094;
+  (Less_strongly, Opportunity, 60_) 0.2029128, 0.3912617, 0.2608663, 0.1449593;
+  (Strongly, Opportunity, 60_) 0.1400458, 0.2400042, 0.4998959, 0.1200541;
+  (Very_strongly, Opportunity, 60_) 0.03348369, 0.20003470, 0.29996530, 0.46651631;
+  (Not_at_all, Both, 60_) 0.784918276, 0.071693908, 0.143016345, 0.000371471;
+  (Less_strongly, Both, 60_) 0.3420547945, 0.5524657534, 0.1053424658, 0.0001369863;
+  (Strongly, Both, 60_) 0.27082430, 0.39577007, 0.29164859, 0.04175705;
+  (Very_strongly, Both, 60_) 0.2000693, 0.3332178, 0.2666436, 0.2000693;
+}
+probability ( AIHealtcareBenefit | AIReduceShortageWorkers, AIFieldBenefit ) {
+  (Strongly_disagree, Strongly_disagree) 0.2181612, 0.2181612, 0.2181612, 0.2000000, 0.1455165;
+  (Somewhat_disagree, Strongly_disagree) 0.0573975, 0.1714795, 0.4281640, 0.2855615, 0.0573975;
+  (Somewhat_agree, Strongly_disagree) 0.1431111, 0.1431111, 0.2853333, 0.2853333, 0.1431111;
+  (Strongly_agree, Strongly_disagree) 0.003076923, 0.003076923, 0.495384615, 0.495384615, 0.003076923;
+  (Strongly_disagree, Somewhat_disagree) 0.20369942, 0.12971098, 0.38867052, 0.20369942, 0.07421965;
+  (Somewhat_disagree, Somewhat_disagree) 0.0001343183, 0.1505708529, 0.5696440565, 0.2257891202, 0.0538616521;
+  (Somewhat_agree, Somewhat_disagree) 0.0001759015, 0.0986807388, 0.4927000880, 0.3801231310, 0.0283201407;
+  (Strongly_agree, Somewhat_disagree) 0.0720000, 0.1431111, 0.1431111, 0.5697778, 0.0720000;
+  (Strongly_disagree, Somewhat_agree) 0.07535259, 0.13982539, 0.44069845, 0.30100738, 0.04311619;
+  (Somewhat_disagree, Somewhat_agree) 0.01544377, 0.12310157, 0.44094841, 0.36404998, 0.05645626;
+  (Somewhat_agree, Somewhat_agree) 8.442381e-05, 6.086957e-02, 4.728577e-01, 4.323343e-01, 3.385395e-02;
+  (Strongly_agree, Somewhat_agree) 0.0003120125, 0.0003120125, 0.3248049922, 0.6742589703, 0.0003120125;
+  (Strongly_disagree, Strongly_agree) 0.05386165, 0.04311619, 0.22578912, 0.62337139, 0.05386165;
+  (Somewhat_disagree, Strongly_agree) 0.01635348, 0.03260538, 0.28450990, 0.64205181, 0.02447943;
+  (Somewhat_agree, Strongly_agree) 0.000122474, 0.029516228, 0.264666258, 0.646785058, 0.058909982;
+  (Strongly_agree, Strongly_agree) 0.0001892148, 0.0304635762, 0.0910122990, 0.8630085145, 0.0153263955;
+}
+probability ( AIFieldBenefit | InterestAI, AIEasierLife ) {
+  (Not_at_all, Strongly_disagree) 0.3893820, 0.2000329, 0.2421105, 0.1684747;
+  (Less_strongly, Strongly_disagree) 0.1574610, 0.3055234, 0.3517929, 0.1852227;
+  (Strongly, Strongly_disagree) 0.1586062, 0.1951637, 0.4023229, 0.2439071;
+  (Very_strongly, Strongly_disagree) 0.2001558, 0.2001558, 0.2500000, 0.3496885;
+  (Not_at_all, Somewhat_disagree) 0.07864137, 0.45073439, 0.33323133, 0.13739290;
+  (Less_strongly, Somewhat_disagree) 0.08768116, 0.30925926, 0.41231884, 0.19074074;
+  (Strongly, Somewhat_disagree) 0.0001394311, 0.2053820413, 0.4998605689, 0.2946179587;
+  (Very_strongly, Somewhat_disagree) 0.02535101, 0.02535101, 0.34984399, 0.59945399;
+  (Not_at_all, Somewhat_agree) 0.2726629, 0.1366856, 0.4539660, 0.1366856;
+  (Less_strongly, Somewhat_agree) 0.0186524, 0.2407461, 0.4535859, 0.2870156;
+  (Strongly, Somewhat_agree) 0.007930698, 0.117252318, 0.507686677, 0.367130307;
+  (Very_strongly, Somewhat_agree) 0.01690947, 0.03355879, 0.53303850, 0.41649324;
+  (Not_at_all, Strongly_agree) 0.003846154, 0.003846154, 0.250000000, 0.742307692;
+  (Less_strongly, Strongly_agree) 0.07527301, 0.05031201, 0.42472699, 0.44968799;
+  (Strongly, Strongly_agree) 0.01636455, 0.04859013, 0.32250755, 0.61253777;
+  (Very_strongly, Strongly_agree) 0.01371308, 0.02721519, 0.21624473, 0.74282700;
+}
+probability ( AIvsHuman | AIFalseInfo, AIUncontrollable ) {
+  (Strongly_disagree, Strongly_disagree) 0.2939560, 0.1767399, 0.1181319, 0.4111722;
+  (Somewhat_disagree, Strongly_disagree) 0.0005197505, 0.2333679834, 0.3996881497, 0.3664241164;
+  (Somewhat_agree, Strongly_disagree) 0.07448037, 0.11143187, 0.25923788, 0.55484988;
+  (Strongly_agree, Strongly_disagree) 0.0006775068, 0.0873983740, 0.2174796748, 0.6944444444;
+  (Strongly_disagree, Somewhat_disagree) 0.001111111, 0.143333333, 0.285555556, 0.570000000;
+  (Somewhat_disagree, Somewhat_disagree) 0.02876896, 0.20004460, 0.52832293, 0.24286351;
+  (Somewhat_agree, Somewhat_disagree) 0.03044164, 0.18186120, 0.42413249, 0.36356467;
+  (Strongly_agree, Somewhat_disagree) 0.04893374, 0.03674791, 0.32920792, 0.58511043;
+  (Strongly_disagree, Somewhat_agree) 0.001937984, 0.250000000, 0.250000000, 0.498062016;
+  (Somewhat_disagree, Somewhat_agree) 0.0002601457, 0.0835067638, 0.5496878252, 0.3665452653;
+  (Somewhat_agree, Somewhat_agree) 0.03234583, 0.10328497, 0.45153164, 0.41283757;
+  (Strongly_agree, Somewhat_agree) 0.02951309, 0.05156178, 0.34554433, 0.57338080;
+  (Strongly_disagree, Strongly_agree) 0.001724138, 0.222413793, 0.332758621, 0.443103448;
+  (Somewhat_disagree, Strongly_agree) 0.06546811, 0.13059701, 0.15230665, 0.65162823;
+  (Somewhat_agree, Strongly_agree) 0.03401271, 0.02554262, 0.34740603, 0.59303864;
+  (Strongly_agree, Strongly_agree) 0.04252604, 0.05886257, 0.16995099, 0.72866040;
+}
+probability ( AIFalseInfo | AIUncontrollable ) {
+  (Strongly_disagree) 0.1754499, 0.3091260, 0.2782776, 0.2371465;
+  (Somewhat_disagree) 0.05301602, 0.26413761, 0.37346843, 0.30937795;
+  (Somewhat_agree) 0.02244259, 0.16718859, 0.43162839, 0.37874043;
+  (Strongly_agree) 0.01890975, 0.09611372, 0.24634846, 0.63862807;
+}
+probability ( AIUncontrollable | AIEasierLife ) {
+  (Strongly_disagree) 0.06244881, 0.09520885, 0.20331695, 0.63902539;
+  (Somewhat_disagree) 0.0278477, 0.1889553, 0.3576149, 0.4255821;
+  (Somewhat_agree) 0.0944619, 0.3238413, 0.3521210, 0.2295758;
+  (Strongly_agree) 0.2056172, 0.3221221, 0.2389043, 0.2333564;
+}
+probability ( AIRegulations | MediaAI, EUAppropriateRegulation, VoteIntent ) {
+  (No, Appropriate, Left) 0.1286019, 0.8713981;
+  (Yes, Appropriate, Left) 0.03471596, 0.96528404;
+  (No, Too_strict, Left) 0.004132231, 0.995867769;
+  (Yes, Too_strict, Left) 0.1056955, 0.8943045;
+  (No, Not_strict_enough, Left) 0.08770344, 0.91229656;
+  (Yes, Not_strict_enough, Left) 0.03280697, 0.96719303;
+  (No, Don_t_know, Left) 0.2525773, 0.7474227;
+  (Yes, Don_t_know, Left) 0.0862069, 0.9137931;
+  (No, Appropriate, Right) 0.09647718, 0.90352282;
+  (Yes, Appropriate, Right) 0.1000877, 0.8999123;
+  (No, Too_strict, Right) 0.3575668, 0.6424332;
+  (Yes, Too_strict, Right) 0.4333796, 0.5666204;
+  (No, Not_strict_enough, Right) 0.08381503, 0.91618497;
+  (Yes, Not_strict_enough, Right) 0.04604509, 0.95395491;
+  (No, Don_t_know, Right) 0.454717, 0.545283;
+  (Yes, Don_t_know, Right) 0.0392, 0.9608;
+  (No, Appropriate, Other) 0.1486903, 0.8513097;
+  (Yes, Appropriate, Other) 0.08369471, 0.91630529;
+  (No, Too_strict, Other) 0.7474227, 0.2525773;
+  (Yes, Too_strict, Other) 0.2506494, 0.7493506;
+  (No, Not_strict_enough, Other) 0.4287834, 0.5712166;
+  (Yes, Not_strict_enough, Other) 0.06421612, 0.93578388;
+  (No, Don_t_know, Other) 0.5, 0.5;
+  (Yes, Don_t_know, Other) 0.00148368, 0.99851632;
+}
+probability ( HeardEURegulation | InterestAI, VoteIntent ) {
+  (Not_at_all, Left) 0.93926789, 0.06073211;
+  (Less_strongly, Left) 0.7486664, 0.2513336;
+  (Strongly, Left) 0.6737194, 0.3262806;
+  (Very_strongly, Left) 0.5113529, 0.4886471;
+  (Not_at_all, Right) 0.91171089, 0.08828911;
+  (Less_strongly, Right) 0.868396, 0.131604;
+  (Strongly, Right) 0.7595998, 0.2404002;
+  (Very_strongly, Right) 0.653682, 0.346318;
+  (Not_at_all, Other) 0.96648794, 0.03351206;
+  (Less_strongly, Other) 0.8884393, 0.1115607;
+  (Strongly, Other) 0.8829787, 0.1170213;
+  (Very_strongly, Other) 0.7136499, 0.2863501;
+}
+probability ( EUAppropriateRegulation | AIUncontrollable ) {
+  (Strongly_disagree) 0.54562982, 0.19601542, 0.16516710, 0.09318766;
+  (Somewhat_disagree) 0.64491047, 0.13972667, 0.13972667, 0.07563619;
+  (Somewhat_agree) 0.54018790, 0.10873347, 0.27853166, 0.07254697;
+  (Strongly_agree) 0.35276474, 0.08776734, 0.47796035, 0.08150756;
+}
+probability ( Sex ) {
+  table 0.4458784, 0.5541216;
+}
+probability ( Age | Sex, Education ) {
+  (Female, Low) 0.02256318, 0.02256318, 0.30415162, 0.65072202;
+  (Male, Low) 0.06797753, 0.14887640, 0.27022472, 0.51292135;
+  (Female, Medium) 0.01377953, 0.06102362, 0.32424072, 0.60095613;
+  (Male, Medium) 0.0799285, 0.1350868, 0.3128192, 0.4721655;
+  (Female, High) 0.1085735, 0.1935760, 0.2961651, 0.4016854;
+  (Male, High) 0.1308875, 0.2126314, 0.2756909, 0.3807902;
+}
+probability ( Education | Sex ) {
+  (Female) 0.08621226, 0.27668845, 0.63709929;
+  (Male) 0.1114450, 0.2451791, 0.6433759;
+}
+probability ( Income | Sex, Age, Education ) {
+  (Female, 14_29, Low) 0.97, 0.01, 0.01, 0.01;
+  (Male, 14_29, Low) 0.002066116, 0.398760331, 0.002066116, 0.597107437;
+  (Female, 30_44, Low) 0.97, 0.01, 0.01, 0.01;
+  (Male, 30_44, Low) 0.4537735849, 0.3632075472, 0.1820754717, 0.0009433962;
+  (Female, 45_59, Low) 0.42804154, 0.35682493, 0.14317507, 0.07195846;
+  (Male, 45_59, Low) 0.3497921, 0.3996881, 0.2001040, 0.0504158;
+  (Female, 60_, Low) 0.39979196, 0.43307906, 0.03363384, 0.13349515;
+  (Male, 60_, Low) 0.28943045, 0.47343921, 0.15799562, 0.07913472;
+  (Female, 14_29, Medium) 0.494897959, 0.005102041, 0.005102041, 0.494897959;
+  (Male, 14_29, Medium) 0.1541534, 0.3841853, 0.1541534, 0.3075080;
+  (Female, 30_44, Medium) 0.1117512, 0.4435484, 0.3329493, 0.1117512;
+  (Male, 30_44, Medium) 0.09120983, 0.45415879, 0.36342155, 0.09120983;
+  (Female, 45_59, Medium) 0.1459237, 0.2291847, 0.3332611, 0.2916305;
+  (Male, 45_59, Medium) 0.1177551, 0.3136735, 0.4508163, 0.1177551;
+  (Female, 60_, Medium) 0.2584230, 0.3707300, 0.1798081, 0.1910388;
+  (Male, 60_, Medium) 0.1948350, 0.3895349, 0.2727150, 0.1429151;
+  (Female, 14_29, High) 0.1892576, 0.2972441, 0.2162542, 0.2972441;
+  (Male, 14_29, High) 0.1786245, 0.2500000, 0.2500000, 0.3213755;
+  (Female, 30_44, High) 0.16671924, 0.28785489, 0.45441640, 0.09100946;
+  (Male, 30_44, High) 0.06601831, 0.24176201, 0.59324943, 0.09897025;
+  (Female, 45_59, High) 0.1485567, 0.2871134, 0.4157732, 0.1485567;
+  (Male, 45_59, High) 0.09327568, 0.20340628, 0.50838334, 0.19493470;
+  (Female, 60_, High) 0.1533141, 0.2627698, 0.4597902, 0.1241259;
+  (Male, 60_, High) 0.1165985, 0.2760670, 0.4539356, 0.1533989;
+}
+probability ( Municipality | Education ) {
+  (Low) 0.16675900, 0.29141274, 0.34127424, 0.09196676, 0.10858726;
+  (Medium) 0.1736617, 0.3214133, 0.2443255, 0.1029979, 0.1576017;
+  (High) 0.1170711, 0.2392548, 0.2847487, 0.1612652, 0.1976603;
+}
+probability ( VoteIntent | Age, Education, Income, Municipality ) {
+  (14_29, Low, Low, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Low, _5k) 0.4996534997, 0.0006930007, 0.4996534997;
+  (45_59, Low, Low, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Low, _5k) 0.0006930007, 0.9986139986, 0.0006930007;
+  (14_29, Medium, Low, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Low, _5k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (45_59, Medium, Low, _5k) 0.2500867152, 0.7495664239, 0.0003468609;
+  (60_, Medium, Low, _5k) 0.2500434, 0.6248481, 0.1251085;
+  (14_29, High, Low, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, High, Low, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, High, Low, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (60_, High, Low, _5k) 0.0003468609, 0.9993062782, 0.0003468609;
+  (14_29, Low, Medium, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Low, Medium, _5k) 0.001383126, 0.001383126, 0.997233748;
+  (45_59, Low, Medium, _5k) 0.2500867, 0.2500867, 0.4998266;
+  (60_, Low, Medium, _5k) 0.4998843396, 0.4998843396, 0.0002313208;
+  (14_29, Medium, Medium, _5k) 0.0006930007, 0.9986139986, 0.0006930007;
+  (30_44, Medium, Medium, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Medium, Medium, _5k) 0.0001735207, 0.8747180288, 0.1251084505;
+  (60_, Medium, Medium, _5k) 0.1667245, 0.6665510, 0.1667245;
+  (14_29, High, Medium, _5k) 0.4998265695, 0.4998265695, 0.0003468609;
+  (30_44, High, Medium, _5k) 0.5712869323, 0.4285147730, 0.0001982947;
+  (45_59, High, Medium, _5k) 0.4999306, 0.3999722, 0.1000972;
+  (60_, High, Medium, _5k) 0.7775721117, 0.2222736387, 0.0001542496;
+  (14_29, Low, High, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, High, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, High, _5k) 0.0006930007, 0.9986139986, 0.0006930007;
+  (60_, Low, High, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, High, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, High, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, High, _5k) 0.2500867, 0.4998266, 0.2500867;
+  (60_, Medium, High, _5k) 0.3333333333, 0.6662043458, 0.0004623209;
+  (14_29, High, High, _5k) 0.2500867, 0.2500867, 0.4998266;
+  (30_44, High, High, _5k) 0.1112139, 0.7775722, 0.1112139;
+  (45_59, High, High, _5k) 0.4443930, 0.4443930, 0.1112139;
+  (60_, High, High, _5k) 7.332223e-01, 2.666852e-01, 9.256687e-05;
+  (14_29, Low, Not_reported, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Not_reported, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Not_reported, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Not_reported, _5k) 0.4996534997, 0.4996534997, 0.0006930007;
+  (14_29, Medium, Not_reported, _5k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Medium, Not_reported, _5k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Not_reported, _5k) 0.0002775465, 0.5997779628, 0.3999444907;
+  (60_, Medium, Not_reported, _5k) 0.2500867152, 0.7495664239, 0.0003468609;
+  (14_29, High, Not_reported, _5k) 0.0001982947, 0.4285147730, 0.5712869323;
+  (30_44, High, Not_reported, _5k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (45_59, High, Not_reported, _5k) 0.3999444907, 0.0002775465, 0.5997779628;
+  (60_, High, Not_reported, _5k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (14_29, Low, Low, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Low, 5k_19k) 0.0006930007, 0.9986139986, 0.0006930007;
+  (45_59, Low, Low, 5k_19k) 0.2500867, 0.4998266, 0.2500867;
+  (60_, Low, Low, 5k_19k) 0.1667823, 0.6664354, 0.1667823;
+  (14_29, Medium, Low, 5k_19k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (30_44, Medium, Low, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Low, 5k_19k) 0.001383126, 0.997233748, 0.001383126;
+  (60_, Medium, Low, 5k_19k) 0.2500289, 0.4166377, 0.3333333;
+  (14_29, High, Low, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, High, Low, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, High, Low, 5k_19k) 0.1667823, 0.4998843, 0.3333333;
+  (60_, High, Low, 5k_19k) 0.4999421, 0.3333333, 0.1667245;
+  (14_29, Low, Medium, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Medium, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Medium, 5k_19k) 0.3333333333, 0.6662043458, 0.0004623209;
+  (60_, Low, Medium, 5k_19k) 0.2857426, 0.5712869, 0.1429705;
+  (14_29, Medium, Medium, 5k_19k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (30_44, Medium, Medium, 5k_19k) 0.3333333, 0.4998843, 0.1667823;
+  (45_59, Medium, Medium, 5k_19k) 0.2222736, 0.4443930, 0.3333333;
+  (60_, Medium, Medium, 5k_19k) 0.3333333, 0.4761621, 0.1905045;
+  (14_29, High, Medium, 5k_19k) 0.2500867, 0.4998266, 0.2500867;
+  (30_44, High, Medium, 5k_19k) 0.4998843396, 0.4998843396, 0.0002313208;
+  (45_59, High, Medium, 5k_19k) 0.2500289, 0.5832466, 0.1667245;
+  (60_, High, Medium, 5k_19k) 0.5713814, 0.2381141, 0.1905045;
+  (14_29, Low, High, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, High, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, High, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, High, 5k_19k) 0.6662043458, 0.3333333333, 0.0004623209;
+  (14_29, Medium, High, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, High, 5k_19k) 0.2500867, 0.4998266, 0.2500867;
+  (45_59, Medium, High, 5k_19k) 0.4544996, 0.3636249, 0.1818756;
+  (60_, Medium, High, 5k_19k) 0.3749892, 0.4374729, 0.1875380;
+  (14_29, High, High, 5k_19k) 0.4998843396, 0.4998843396, 0.0002313208;
+  (30_44, High, High, 5k_19k) 6.874078e-01, 3.125054e-01, 8.678296e-05;
+  (45_59, High, High, 5k_19k) 0.49997520, 0.42855726, 0.07146754;
+  (60_, High, High, 5k_19k) 0.54051721, 0.37837331, 0.08110948;
+  (14_29, Low, Not_reported, 5k_19k) 0.997233748, 0.001383126, 0.001383126;
+  (30_44, Low, Not_reported, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Not_reported, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Not_reported, 5k_19k) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, Not_reported, 5k_19k) 0.001383126, 0.001383126, 0.997233748;
+  (30_44, Medium, Not_reported, 5k_19k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Medium, Not_reported, 5k_19k) 0.1667823, 0.6664354, 0.1667823;
+  (60_, Medium, Not_reported, 5k_19k) 0.1251085, 0.3749783, 0.4999132;
+  (14_29, High, Not_reported, 5k_19k) 0.0002313208, 0.3333333333, 0.6664353459;
+  (30_44, High, Not_reported, 5k_19k) 0.6664353459, 0.3333333333, 0.0002313208;
+  (45_59, High, Not_reported, 5k_19k) 0.4998843, 0.3333333, 0.1667823;
+  (60_, High, Not_reported, 5k_19k) 0.4999421497, 0.4999421497, 0.0001157006;
+  (14_29, Low, Low, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Low, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Low, 20k_99k) 0.7495664239, 0.2500867152, 0.0003468609;
+  (60_, Low, Low, 20k_99k) 0.36362489, 0.54537423, 0.09100088;
+  (14_29, Medium, Low, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Low, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Low, 20k_99k) 0.2500867152, 0.7495664239, 0.0003468609;
+  (60_, Medium, Low, 20k_99k) 0.5554528, 0.2222736, 0.2222736;
+  (14_29, High, Low, 20k_99k) 0.7140590918, 0.2857426135, 0.0001982947;
+  (30_44, High, Low, 20k_99k) 0.5998890, 0.2000555, 0.2000555;
+  (45_59, High, Low, 20k_99k) 0.7140590918, 0.2857426135, 0.0001982947;
+  (60_, High, Low, 20k_99k) 0.4443930279, 0.5554527225, 0.0001542496;
+  (14_29, Low, Medium, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Medium, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Medium, 20k_99k) 0.2001110, 0.3999445, 0.3999445;
+  (60_, Low, Medium, 20k_99k) 0.6665509661, 0.3333333333, 0.0001157006;
+  (14_29, Medium, Medium, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Medium, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Medium, 20k_99k) 0.0002313208, 0.8329863521, 0.1667823271;
+  (60_, Medium, Medium, 20k_99k) 0.74985537, 0.16672452, 0.08342011;
+  (14_29, High, Medium, 20k_99k) 0.3749783, 0.4999132, 0.1251085;
+  (30_44, High, Medium, 20k_99k) 0.2666852, 0.5999259, 0.1333889;
+  (45_59, High, Medium, 20k_99k) 0.3999815, 0.3333333, 0.2666852;
+  (60_, High, Medium, 20k_99k) 0.70364655, 0.22223937, 0.07411408;
+  (14_29, Low, High, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, High, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, High, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, High, 20k_99k) 0.2500867152, 0.7495664239, 0.0003468609;
+  (14_29, Medium, High, 20k_99k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Medium, High, 20k_99k) 0.4998266, 0.2500867, 0.2500867;
+  (45_59, Medium, High, 20k_99k) 0.49994215, 0.41663774, 0.08342011;
+  (60_, Medium, High, 20k_99k) 0.2222736, 0.5554528, 0.2222736;
+  (14_29, High, High, 20k_99k) 0.3999445, 0.3999445, 0.2001110;
+  (30_44, High, High, 20k_99k) 0.4736534, 0.4210334, 0.1053132;
+  (45_59, High, High, 20k_99k) 0.48385074, 0.41934328, 0.09680598;
+  (60_, High, High, 20k_99k) 0.56754119, 0.40539729, 0.02706152;
+  (14_29, Low, Not_reported, 20k_99k) 0.4996534997, 0.0006930007, 0.4996534997;
+  (30_44, Low, Not_reported, 20k_99k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Not_reported, 20k_99k) 0.0006930007, 0.9986139986, 0.0006930007;
+  (60_, Low, Not_reported, 20k_99k) 0.001383126, 0.997233748, 0.001383126;
+  (14_29, Medium, Not_reported, 20k_99k) 0.0004623209, 0.6662043458, 0.3333333333;
+  (30_44, Medium, Not_reported, 20k_99k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Medium, Not_reported, 20k_99k) 0.2500867, 0.2500867, 0.4998266;
+  (60_, Medium, Not_reported, 20k_99k) 0.2500434, 0.6248481, 0.1251085;
+  (14_29, High, Not_reported, 20k_99k) 0.200111, 0.200111, 0.599778;
+  (30_44, High, Not_reported, 20k_99k) 0.001383126, 0.001383126, 0.997233748;
+  (45_59, High, Not_reported, 20k_99k) 0.2500434, 0.4999132, 0.2500434;
+  (60_, High, Not_reported, 20k_99k) 0.3999815, 0.3333333, 0.2666852;
+  (14_29, Low, Low, 100k_499k) 0.001383126, 0.001383126, 0.997233748;
+  (30_44, Low, Low, 100k_499k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Low, Low, 100k_499k) 0.4996534997, 0.0006930007, 0.4996534997;
+  (60_, Low, Low, 100k_499k) 0.001383126, 0.001383126, 0.997233748;
+  (14_29, Medium, Low, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Low, 100k_499k) 0.001383126, 0.001383126, 0.997233748;
+  (45_59, Medium, Low, 100k_499k) 0.0006930007, 0.0006930007, 0.9986139986;
+  (60_, Medium, Low, 100k_499k) 0.6662043458, 0.3333333333, 0.0004623209;
+  (14_29, High, Low, 100k_499k) 0.9993062782, 0.0003468609, 0.0003468609;
+  (30_44, High, Low, 100k_499k) 0.4996534997, 0.0006930007, 0.4996534997;
+  (45_59, High, Low, 100k_499k) 0.4998843, 0.1667823, 0.3333333;
+  (60_, High, Low, 100k_499k) 0.8329863521, 0.1667823271, 0.0002313208;
+  (14_29, Low, Medium, 100k_499k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Low, Medium, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Medium, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Medium, 100k_499k) 0.0003468609, 0.4998265695, 0.4998265695;
+  (14_29, Medium, Medium, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Medium, 100k_499k) 0.3333333333, 0.6662043458, 0.0004623209;
+  (45_59, Medium, Medium, 100k_499k) 0.0006930007, 0.4996534997, 0.4996534997;
+  (60_, Medium, Medium, 100k_499k) 0.7140590918, 0.2857426135, 0.0001982947;
+  (14_29, High, Medium, 100k_499k) 0.4998265695, 0.4998265695, 0.0003468609;
+  (30_44, High, Medium, 100k_499k) 0.9995373584, 0.0002313208, 0.0002313208;
+  (45_59, High, Medium, 100k_499k) 0.7996114349, 0.2001110186, 0.0002775465;
+  (60_, High, Medium, 100k_499k) 0.3845990, 0.3077005, 0.3077005;
+  (14_29, Low, High, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, High, 100k_499k) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Low, High, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, High, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, High, 100k_499k) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Medium, High, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, High, 100k_499k) 0.6662043458, 0.0004623209, 0.3333333333;
+  (60_, Medium, High, 100k_499k) 0.7495664239, 0.2500867152, 0.0003468609;
+  (14_29, High, High, 100k_499k) 0.3333333333, 0.6664353459, 0.0002313208;
+  (30_44, High, High, 100k_499k) 7.057910e-01, 2.941273e-01, 8.167932e-05;
+  (45_59, High, High, 100k_499k) 0.5998889, 0.3000139, 0.1000972;
+  (60_, High, High, 100k_499k) 0.5999556, 0.2800089, 0.1200355;
+  (14_29, Low, Not_reported, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Not_reported, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Not_reported, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Not_reported, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, Not_reported, 100k_499k) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Not_reported, 100k_499k) 0.997233748, 0.001383126, 0.001383126;
+  (45_59, Medium, Not_reported, 100k_499k) 0.001383126, 0.001383126, 0.997233748;
+  (60_, Medium, Not_reported, 100k_499k) 0.0003468609, 0.4998265695, 0.4998265695;
+  (14_29, High, Not_reported, 100k_499k) 0.3999445, 0.2001110, 0.3999445;
+  (30_44, High, Not_reported, 100k_499k) 0.4996534997, 0.4996534997, 0.0006930007;
+  (45_59, High, Not_reported, 100k_499k) 0.1667823, 0.6664354, 0.1667823;
+  (60_, High, Not_reported, 100k_499k) 0.2857426135, 0.7140590918, 0.0001982947;
+  (14_29, Low, Low, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Low, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Low, Low, 500k_) 0.3333333333, 0.0004623209, 0.6662043458;
+  (60_, Low, Low, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, Low, 500k_) 0.997233748, 0.001383126, 0.001383126;
+  (30_44, Medium, Low, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Low, 500k_) 0.4996534997, 0.4996534997, 0.0006930007;
+  (60_, Medium, Low, 500k_) 0.6664353459, 0.3333333333, 0.0002313208;
+  (14_29, High, Low, 500k_) 0.4996534997, 0.0006930007, 0.4996534997;
+  (30_44, High, Low, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, High, Low, 500k_) 0.6664353459, 0.3333333333, 0.0002313208;
+  (60_, High, Low, 500k_) 0.3333333, 0.4443930, 0.2222736;
+  (14_29, Low, Medium, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Medium, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Medium, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (60_, Low, Medium, 500k_) 0.4996534997, 0.4996534997, 0.0006930007;
+  (14_29, Medium, Medium, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (30_44, Medium, Medium, 500k_) 0.997233748, 0.001383126, 0.001383126;
+  (45_59, Medium, Medium, 500k_) 0.4996534997, 0.4996534997, 0.0006930007;
+  (60_, Medium, Medium, 500k_) 0.54537423, 0.36362489, 0.09100088;
+  (14_29, High, Medium, 500k_) 0.7996114349, 0.0002775465, 0.2001110186;
+  (30_44, High, Medium, 500k_) 0.9996034106, 0.0001982947, 0.0001982947;
+  (45_59, High, Medium, 500k_) 0.63624890, 0.09100088, 0.27275022;
+  (60_, High, Medium, 500k_) 0.45449956, 0.45449956, 0.09100088;
+  (14_29, Low, High, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, High, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (45_59, Low, High, 500k_) 0.001383126, 0.997233748, 0.001383126;
+  (60_, Low, High, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (14_29, Medium, High, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, High, 500k_) 0.6662043458, 0.3333333333, 0.0004623209;
+  (45_59, Medium, High, 500k_) 0.2222736387, 0.7775721117, 0.0001542496;
+  (60_, Medium, High, 500k_) 0.2001110186, 0.7996114349, 0.0002775465;
+  (14_29, High, High, 500k_) 0.997233748, 0.001383126, 0.001383126;
+  (30_44, High, High, 500k_) 0.60864577, 0.30435308, 0.08700115;
+  (45_59, High, High, 500k_) 5.416305e-01, 4.583116e-01, 5.786033e-05;
+  (60_, High, High, 500k_) 0.43476423, 0.52170501, 0.04353076;
+  (14_29, Low, Not_reported, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Low, Not_reported, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Low, Not_reported, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (60_, Low, Not_reported, 500k_) 0.997233748, 0.001383126, 0.001383126;
+  (14_29, Medium, Not_reported, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (30_44, Medium, Not_reported, 500k_) 0.3333333, 0.3333333, 0.3333333;
+  (45_59, Medium, Not_reported, 500k_) 0.2500867152, 0.7495664239, 0.0003468609;
+  (60_, Medium, Not_reported, 500k_) 0.4998265695, 0.4998265695, 0.0003468609;
+  (14_29, High, Not_reported, 500k_) 0.3333333333, 0.0002313208, 0.6664353459;
+  (30_44, High, Not_reported, 500k_) 0.7495664239, 0.0003468609, 0.2500867152;
+  (45_59, High, Not_reported, 500k_) 0.61529425, 0.30770052, 0.07700523;
+  (60_, High, Not_reported, 500k_) 0.0002313208, 0.9995373584, 0.0002313208;
+}

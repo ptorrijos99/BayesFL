@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>APhaseFailure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>APhaseNegativeWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>APhasePositiveWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AbnormalPulseVoltageWaveform</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BPhaseFailure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BPhaseNegativeWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BPhasePositiveWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C1Failure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C1VoltageAnomaly</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C2Failure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C2VoltageAnomaly</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CPhaseFailure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CPhaseNegativeWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CPhasePositiveWaveFormDistortion</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CapacitanceParameterWeakening</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DCLinkFailure</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G1PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G2PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G3PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G4PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G5PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G6PulseMissing</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T1OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T2OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T3OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T4OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T5OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T6OC</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VoltageWaveFormAsymmetry</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>APhaseFailure</FOR>
+      <GIVEN>G1PulseMissing</GIVEN>
+      <GIVEN>G4PulseMissing</GIVEN>
+      <GIVEN>T1OC</GIVEN>
+      <GIVEN>T4OC</GIVEN>
+      <TABLE>0.99 0.01 0.94 0.06 0.85 0.15 0.72 0.28 0.87 0.13 0.41 0.59 0.69 0.31 0.34 0.66 0.83 0.17 0.77 0.23 0.6 0.4 0.23 0.77 0.63 0.37 0.34 0.66 0.27 0.73 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>APhaseNegativeWaveFormDistortion</FOR>
+      <GIVEN>APhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.78 0.22 0.35 0.65 0.55 0.45 0.16 0.84 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>APhasePositiveWaveFormDistortion</FOR>
+      <GIVEN>APhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.84 0.16 0.45 0.55 0.54 0.46 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AbnormalPulseVoltageWaveform</FOR>
+      <GIVEN>APhaseFailure</GIVEN>
+      <GIVEN>BPhaseFailure</GIVEN>
+      <GIVEN>CPhaseFailure</GIVEN>
+      <TABLE>0.95 0.05 0.62 0.38 0.48 0.52 0.32 0.68 0.53 0.47 0.45 0.55 0.15 0.85 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BPhaseFailure</FOR>
+      <GIVEN>G3PulseMissing</GIVEN>
+      <GIVEN>G6PulseMissing</GIVEN>
+      <GIVEN>T3OC</GIVEN>
+      <GIVEN>T6OC</GIVEN>
+      <TABLE>0.99 0.01 0.95 0.05 0.94 0.06 0.58 0.42 0.83 0.17 0.49 0.51 0.62 0.38 0.22 0.78 0.86 0.14 0.61 0.39 0.79 0.21 0.33 0.67 0.49 0.51 0.36 0.64 0.3 0.7 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BPhaseNegativeWaveFormDistortion</FOR>
+      <GIVEN>BPhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.74 0.26 0.51 0.49 0.34 0.66 0.22 0.78 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BPhasePositiveWaveFormDistortion</FOR>
+      <GIVEN>BPhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.81 0.19 0.59 0.41 0.31 0.69 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C1Failure</FOR>
+      <TABLE>0.13 0.87 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C1VoltageAnomaly</FOR>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.9 0.1 0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C2Failure</FOR>
+      <TABLE>0.16 0.84 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C2VoltageAnomaly</FOR>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.93 0.07 0.12 0.88 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CPhaseFailure</FOR>
+      <GIVEN>G2PulseMissing</GIVEN>
+      <GIVEN>G5PulseMissing</GIVEN>
+      <GIVEN>T2OC</GIVEN>
+      <GIVEN>T5OC</GIVEN>
+      <TABLE>0.99 0.01 0.86 0.14 0.65 0.35 0.8 0.2 0.82 0.18 0.55 0.45 0.27 0.73 0.34 0.66 0.87 0.13 0.56 0.44 0.67 0.33 0.38 0.62 0.84 0.16 0.38 0.62 0.86 0.14 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CPhaseNegativeWaveFormDistortion</FOR>
+      <GIVEN>CPhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.82 0.18 0.44 0.56 0.46 0.54 0.29 0.71 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CPhasePositiveWaveFormDistortion</FOR>
+      <GIVEN>CPhaseFailure</GIVEN>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.74 0.26 0.45 0.55 0.5 0.5 0.08 0.92 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CapacitanceParameterWeakening</FOR>
+      <TABLE>0.19 0.81 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DCLinkFailure</FOR>
+      <GIVEN>C1Failure</GIVEN>
+      <GIVEN>C2Failure</GIVEN>
+      <GIVEN>CapacitanceParameterWeakening</GIVEN>
+      <TABLE>0.91 0.09 0.5 0.5 0.44 0.56 0.34 0.66 0.72 0.28 0.24 0.76 0.21 0.79 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G1PulseMissing</FOR>
+      <TABLE>0.07 0.93 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G2PulseMissing</FOR>
+      <TABLE>0.07 0.93 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G3PulseMissing</FOR>
+      <TABLE>0.17 0.83 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G4PulseMissing</FOR>
+      <TABLE>0.18 0.82 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G5PulseMissing</FOR>
+      <TABLE>0.12 0.88 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G6PulseMissing</FOR>
+      <TABLE>0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T1OC</FOR>
+      <TABLE>0.14 0.86 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T2OC</FOR>
+      <TABLE>0.19 0.81 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T3OC</FOR>
+      <TABLE>0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T4OC</FOR>
+      <TABLE>0.09 0.91 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T5OC</FOR>
+      <TABLE>0.07 0.93 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T6OC</FOR>
+      <TABLE>0.17 0.83 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VoltageWaveFormAsymmetry</FOR>
+      <GIVEN>DCLinkFailure</GIVEN>
+      <TABLE>0.86 0.14 0.05 0.95 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

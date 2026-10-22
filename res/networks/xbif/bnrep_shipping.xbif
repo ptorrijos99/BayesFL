@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AirlineInherentRisks</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CoastalPortsRisk</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DeepChannel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DifficultHandlingLNG</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FewerPorts</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FireRiskLNG</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeavyFog</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeavyTraffic</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HighCurrent</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HighWaves</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImpactEpidemic</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InfluencePoliticalGame</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InfluenceWeather</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LNGLoadingRisk</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LNGTransportRisk</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LongDistance</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LowVisibility</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MaritimeSecurity</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MilitaryConflict</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NonTraditionalThreat</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ObjectiveFactors</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PiracyAttack</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorDraftLevel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorOrganization</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafetyPerformanceLNG</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafetyRoutes</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SeaBreezeEffect</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SovereignityDispute</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StrongSeaBreeze</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StrongWinds</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SubjectiveFactors</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Thunderstorms</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TransportLNGRisk</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UncertainNavigablePeriod</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnsafePersonnel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselRisk</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AirlineInherentRisks</FOR>
+      <GIVEN>DeepChannel</GIVEN>
+      <GIVEN>HeavyTraffic</GIVEN>
+      <GIVEN>HighCurrent</GIVEN>
+      <GIVEN>LongDistance</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CoastalPortsRisk</FOR>
+      <GIVEN>ObjectiveFactors</GIVEN>
+      <GIVEN>SubjectiveFactors</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DeepChannel</FOR>
+      <TABLE>0.000844 0.999156 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DifficultHandlingLNG</FOR>
+      <TABLE>0.000738 0.999262 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FewerPorts</FOR>
+      <TABLE>0.0142 0.9858 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FireRiskLNG</FOR>
+      <TABLE>0.00313 0.99687 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeavyFog</FOR>
+      <TABLE>0.0186 0.9814 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeavyTraffic</FOR>
+      <TABLE>0.00605 0.99395 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HighCurrent</FOR>
+      <TABLE>0.00578 0.99422 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HighWaves</FOR>
+      <TABLE>0.00751 0.99249 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImpactEpidemic</FOR>
+      <TABLE>0.0237 0.9763 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InfluencePoliticalGame</FOR>
+      <GIVEN>MilitaryConflict</GIVEN>
+      <GIVEN>SovereignityDispute</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InfluenceWeather</FOR>
+      <GIVEN>HighWaves</GIVEN>
+      <GIVEN>LowVisibility</GIVEN>
+      <GIVEN>SeaBreezeEffect</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LNGLoadingRisk</FOR>
+      <TABLE>0.0014 0.9986 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LNGTransportRisk</FOR>
+      <GIVEN>FireRiskLNG</GIVEN>
+      <GIVEN>LNGLoadingRisk</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LongDistance</FOR>
+      <TABLE>0.000553 0.999447 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LowVisibility</FOR>
+      <GIVEN>HeavyFog</GIVEN>
+      <GIVEN>Thunderstorms</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MaritimeSecurity</FOR>
+      <GIVEN>InfluencePoliticalGame</GIVEN>
+      <GIVEN>NonTraditionalThreat</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MilitaryConflict</FOR>
+      <TABLE>0.00325 0.99675 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NonTraditionalThreat</FOR>
+      <GIVEN>ImpactEpidemic</GIVEN>
+      <GIVEN>PiracyAttack</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ObjectiveFactors</FOR>
+      <GIVEN>FewerPorts</GIVEN>
+      <GIVEN>PoorDraftLevel</GIVEN>
+      <GIVEN>UncertainNavigablePeriod</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PiracyAttack</FOR>
+      <TABLE>0.0171 0.9829 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorDraftLevel</FOR>
+      <TABLE>0.00128 0.99872 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorOrganization</FOR>
+      <TABLE>0.000778 0.999222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafetyPerformanceLNG</FOR>
+      <TABLE>0.00133 0.99867 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafetyRoutes</FOR>
+      <GIVEN>AirlineInherentRisks</GIVEN>
+      <GIVEN>CoastalPortsRisk</GIVEN>
+      <GIVEN>InfluenceWeather</GIVEN>
+      <GIVEN>MaritimeSecurity</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SeaBreezeEffect</FOR>
+      <GIVEN>StrongSeaBreeze</GIVEN>
+      <GIVEN>StrongWinds</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SovereignityDispute</FOR>
+      <TABLE>0.000966 0.999034 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StrongSeaBreeze</FOR>
+      <TABLE>0.00247 0.99753 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StrongWinds</FOR>
+      <TABLE>0.014 0.986 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SubjectiveFactors</FOR>
+      <GIVEN>PoorOrganization</GIVEN>
+      <GIVEN>UnsafePersonnel</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Thunderstorms</FOR>
+      <TABLE>0.00249 0.99751 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TransportLNGRisk</FOR>
+      <GIVEN>LNGTransportRisk</GIVEN>
+      <GIVEN>SafetyRoutes</GIVEN>
+      <GIVEN>VesselRisk</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UncertainNavigablePeriod</FOR>
+      <TABLE>0.00128 0.99872 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnsafePersonnel</FOR>
+      <TABLE>0.000463 0.999537 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselRisk</FOR>
+      <GIVEN>DifficultHandlingLNG</GIVEN>
+      <GIVEN>SafetyPerformanceLNG</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

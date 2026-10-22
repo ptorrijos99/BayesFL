@@ -1,0 +1,376 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AssessmentFailure</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AvoidanceRules</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CautiousDriving</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Collision</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CompetentCrew</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConsequenceCollision</NAME>
+      <OUTCOME>Serious</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Minor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConsequenceContact</NAME>
+      <OUTCOME>Serious</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Minor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConsequenceSinking</NAME>
+      <OUTCOME>Serious</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Minor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Contact</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CrewTraining</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EarlyMeasures</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EquipmentFailure</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GrossTonnage</NAME>
+      <OUTCOME>__3000_tons</OUTCOME>
+      <OUTCOME>3000_10000_tons</OUTCOME>
+      <OUTCOME>__10000_tons</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HardwareMaintenance</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImproperStowage</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InadequateCommunication</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NegligentLookout</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NoGiveWay</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>QualifiedCrew</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ResourceManagement</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafetyTraining</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShipAge</NAME>
+      <OUTCOME>_10_years</OUTCOME>
+      <OUTCOME>10_20_years</OUTCOME>
+      <OUTCOME>__20_years</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShipTracking</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShipType</NAME>
+      <OUTCOME>Carrier_Container</OUTCOME>
+      <OUTCOME>Tanker</OUTCOME>
+      <OUTCOME>Other_ship</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sinking</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SupervisingCompanies</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SupervisionVessel</NAME>
+      <OUTCOME>Adopted</OUTCOME>
+      <OUTCOME>Unadopted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TrafficFlow</NAME>
+      <OUTCOME>Heavy</OUTCOME>
+      <OUTCOME>NormalOrLow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnsafeSpeed</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Visibility</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Wind</NAME>
+      <OUTCOME>___Category_5</OUTCOME>
+      <OUTCOME>__Category_5</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AssessmentFailure</FOR>
+      <GIVEN>AvoidanceRules</GIVEN>
+      <GIVEN>CrewTraining</GIVEN>
+      <GIVEN>NegligentLookout</GIVEN>
+      <GIVEN>TrafficFlow</GIVEN>
+      <TABLE>0.04335 0.95665 0.04501731 0.95498269 0.06177375 0.93822625 0.021675 0.978325 0.17 0.83 0.1765385 0.8234615 0.24225 0.75775 0.085 0.915 0.17 0.83 0.1765385 0.8234615 0.24225 0.75775 0.085 0.915 0.6666667 0.3333333 0.6923077 0.3076923 0.95 0.05 0.3333333 0.6666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AvoidanceRules</FOR>
+      <TABLE>0.3636364 0.6363636 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CautiousDriving</FOR>
+      <TABLE>0.1272727 0.8727273 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Collision</FOR>
+      <GIVEN>EarlyMeasures</GIVEN>
+      <GIVEN>NoGiveWay</GIVEN>
+      <GIVEN>UnsafeSpeed</GIVEN>
+      <TABLE>0.95 0.05 0.95 0.05 0.95 0.05 0.33333 0.66667 0.95 0.05 0.95 0.05 0.95 0.05 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CompetentCrew</FOR>
+      <GIVEN>QualifiedCrew</GIVEN>
+      <GIVEN>SupervisingCompanies</GIVEN>
+      <GIVEN>SupervisionVessel</GIVEN>
+      <TABLE>0.01423813 0.98576188 0.01614039 0.98385961 0.05225 0.94775 0.05923077 0.94076923 0.01742428 0.98257572 0.07336539 0.92663461 0.06394231 0.93605769 0.2692308 0.7307692 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConsequenceCollision</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipAge</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.19 0.02 0.79 0.01 0.01 0.98 0.49 0.02 0.49 0.07142857 0.21428571 0.71428571 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.98 0.01 0.01 0.01 0.98 0.2627273 0.02 0.7172727 0.323333 0.02 0.656667 0.01 0.01 0.98 0.02 0.49 0.49 0.98 0.01 0.01 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.29 0.02 0.69 0.01 0.01 0.98 0.01 0.01 0.98 0.19 0.02 0.79 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConsequenceContact</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipAge</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.02 0.02 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConsequenceSinking</FOR>
+      <GIVEN>GrossTonnage</GIVEN>
+      <GIVEN>ShipAge</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <TABLE>0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.98 0.01 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 0.01 0.01 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Contact</FOR>
+      <GIVEN>AssessmentFailure</GIVEN>
+      <GIVEN>NegligentLookout</GIVEN>
+      <TABLE>0.2 0.8 0.11111 0.88889 0.1 0.9 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CrewTraining</FOR>
+      <TABLE>0.1636364 0.8363636 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EarlyMeasures</FOR>
+      <GIVEN>AssessmentFailure</GIVEN>
+      <GIVEN>AvoidanceRules</GIVEN>
+      <GIVEN>CrewTraining</GIVEN>
+      <GIVEN>InadequateCommunication</GIVEN>
+      <TABLE>0.06284531 0.93715469 0.03258646 0.96741354 0.230625 0.769375 0.1195833 0.8804167 0.204375 0.795625 0.1059722 0.8940278 0.75 0.25 0.3888889 0.6111111 0.04189688 0.95810313 0.02094844 0.97905156 0.15375 0.84625 0.076875 0.923125 0.13625 0.86375 0.068125 0.931875 0.5 0.5 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EquipmentFailure</FOR>
+      <GIVEN>HardwareMaintenance</GIVEN>
+      <GIVEN>ShipAge</GIVEN>
+      <GIVEN>SupervisingCompanies</GIVEN>
+      <TABLE>0.009428066 0.990571934 0.03066038 0.96933962 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.02900943 0.97099057 0.09433962 0.90566038 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GrossTonnage</FOR>
+      <TABLE>0.5054945 0.2527473 0.2417582 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HardwareMaintenance</FOR>
+      <TABLE>0.05454545 0.94545455 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImproperStowage</FOR>
+      <GIVEN>HardwareMaintenance</GIVEN>
+      <GIVEN>ShipTracking</GIVEN>
+      <GIVEN>ShipType</GIVEN>
+      <GIVEN>SupervisingCompanies</GIVEN>
+      <GIVEN>SupervisionVessel</GIVEN>
+      <TABLE>0.000954451 0.999045549 0.003103906 0.996896094 0.003291211 0.996708789 0.01070313 0.98929687 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.002786719 0.997213281 0.0090625 0.9909375 0.009609375 0.990390625 0.03125 0.96875 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.002936773 0.997063227 0.009550481 0.990449519 0.0101268 0.9898732 0.03293269 0.96706731 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.008574519 0.991425481 0.02788462 0.97211538 0.02956731 0.97043269 0.09615385 0.90384615 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InadequateCommunication</FOR>
+      <GIVEN>AvoidanceRules</GIVEN>
+      <GIVEN>CompetentCrew</GIVEN>
+      <GIVEN>NegligentLookout</GIVEN>
+      <GIVEN>ResourceManagement</GIVEN>
+      <GIVEN>SafetyTraining</GIVEN>
+      <TABLE>0.00470475 0.99529525 0.0153 0.9847 0.01845 0.98155 0.06 0.94 0.003528563 0.996471437 0.011475 0.988525 0.0138375 0.9861625 0.045 0.955 0.01467882 0.98532118 0.047736 0.952264 0.057564 0.942436 0.1872 0.8128 0.006514269 0.993485731 0.02118462 0.97881538 0.02554615 0.97445385 0.08307692 0.91692308 0.01306875 0.98693125 0.0425 0.9575 0.05125 0.94875 0.1666667 0.8333333 0.009801563 0.990198437 0.031875 0.968125 0.0384375 0.9615625 0.125 0.875 0.0407745 0.9592255 0.1326 0.8674 0.1599 0.8401 0.52 0.48 0.01809519 0.98190481 0.05884615 0.94115385 0.07096154 0.92903846 0.2307692 0.7692308 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NegligentLookout</FOR>
+      <GIVEN>CautiousDriving</GIVEN>
+      <GIVEN>CrewTraining</GIVEN>
+      <GIVEN>TrafficFlow</GIVEN>
+      <GIVEN>Wind</GIVEN>
+      <TABLE>0.04253333 0.95746667 0.05671111 0.94328889 0.009114286 0.990885714 0.0319 0.9681 0.1933333 0.8066667 0.2577778 0.7422222 0.04142857 0.95857143 0.145 0.855 0.1466667 0.8533333 0.1955556 0.8044444 0.03142857 0.96857143 0.11 0.89 0.6666667 0.3333333 0.8888889 0.1111111 0.1428571 0.8571429 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NoGiveWay</FOR>
+      <GIVEN>AvoidanceRules</GIVEN>
+      <GIVEN>SafetyTraining</GIVEN>
+      <GIVEN>TrafficFlow</GIVEN>
+      <GIVEN>Visibility</GIVEN>
+      <TABLE>0.01975625 0.98024375 0.03718824 0.96281176 0.05 0.95 0.02155227 0.97844773 0.068125 0.931875 0.1282353 0.8717647 0.05 0.95 0.07431818 0.92568182 0.0725 0.9275 0.1364706 0.8635294 0.05 0.95 0.07909091 0.92090909 0.25 0.75 0.4705882 0.5294118 0.05 0.95 0.2727273 0.7272727 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>QualifiedCrew</FOR>
+      <TABLE>0.2909091 0.7090909 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ResourceManagement</FOR>
+      <TABLE>0.1090909 0.8909091 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafetyTraining</FOR>
+      <TABLE>0.1090909 0.8909091 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShipAge</FOR>
+      <TABLE>0.78021978 0.14285714 0.07692308 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShipTracking</FOR>
+      <TABLE>0.07272727 0.92727273 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShipType</FOR>
+      <TABLE>0.78021978 0.14285714 0.07692308 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sinking</FOR>
+      <GIVEN>CompetentCrew</GIVEN>
+      <GIVEN>ImproperStowage</GIVEN>
+      <GIVEN>Wind</GIVEN>
+      <TABLE>0.95 0.05 0.95 0.05 0.95 0.05 0.05 0.95 0.95 0.05 0.95 0.05 0.2 0.8 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SupervisingCompanies</FOR>
+      <TABLE>0.1818182 0.8181818 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SupervisionVessel</FOR>
+      <TABLE>0.7802198 0.2197802 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TrafficFlow</FOR>
+      <TABLE>0.4038 0.5962 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnsafeSpeed</FOR>
+      <GIVEN>AssessmentFailure</GIVEN>
+      <GIVEN>AvoidanceRules</GIVEN>
+      <GIVEN>EquipmentFailure</GIVEN>
+      <GIVEN>QualifiedCrew</GIVEN>
+      <GIVEN>Wind</GIVEN>
+      <TABLE>0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.01126592 0.98873408 0.052275 0.947725 0.04418006 0.95581994 0.205 0.795 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.03663712 0.96336288 0.17 0.83 0.143675 0.856325 0.6666667 0.3333333 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.02940469 0.97059531 0.05 0.95 0.1153125 0.8846875 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.095625 0.904375 0.05 0.95 0.375 0.625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Visibility</FOR>
+      <TABLE>0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Wind</FOR>
+      <TABLE>0.1923077 0.8076923 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CorrosionCausedByTheEnvironment</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CorrosiveEnvironment</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectInTheTankDryer</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectInTheTankPressureGauge</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectInTheTankReliabilityGauge</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInConnectingTankFastenersF1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInConnectingTankFastenersF2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInConnectionsAndGauges</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInInletAndOutletValvesV1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInInletAndOutletValvesV2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInTankEquipmentRepairs</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInTheExternalCoatingSystemOfTheTank</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInTheInspectionAndTestingProgramOfTankDevices</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DefectsInTheTankCoating</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalCorrosionOfTheTank</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureInProtectiveMeasures</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureInRepairsAndMaintenance</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureOfConnectionsAndFasteners</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureOfGauges</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureToUseStandardAndUpdatedInstructions</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HumanError</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InadequacyOfPeopleSkills</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InternalCorrosionOfTheTank</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OperationalError</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OrganizationalWeakness</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OxygenLeakage</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TankCorrosion</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ValveLeakage</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WeakEducationSystem</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WeaknessInPurchasingTankEquipment</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WeaknessInTheInstallationOfTankEquipment</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CorrosionCausedByTheEnvironment</FOR>
+      <GIVEN>CorrosiveEnvironment</GIVEN>
+      <GIVEN>DefectInTheTankDryer</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CorrosiveEnvironment</FOR>
+      <TABLE>0.000902 0.999098 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectInTheTankDryer</FOR>
+      <TABLE>0.000762 0.999238 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectInTheTankPressureGauge</FOR>
+      <TABLE>0.000613 0.999387 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectInTheTankReliabilityGauge</FOR>
+      <TABLE>0.000143 0.999857 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInConnectingTankFastenersF1</FOR>
+      <TABLE>6.2e-05 0.999938 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInConnectingTankFastenersF2</FOR>
+      <TABLE>6.2e-05 0.999938 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInConnectionsAndGauges</FOR>
+      <GIVEN>FailureOfConnectionsAndFasteners</GIVEN>
+      <GIVEN>FailureOfGauges</GIVEN>
+      <GIVEN>ValveLeakage</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInInletAndOutletValvesV1</FOR>
+      <TABLE>0.000482 0.999518 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInInletAndOutletValvesV2</FOR>
+      <TABLE>0.000482 0.999518 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInTankEquipmentRepairs</FOR>
+      <TABLE>0.000632 0.999368 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInTheExternalCoatingSystemOfTheTank</FOR>
+      <TABLE>0.000633 0.999367 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInTheInspectionAndTestingProgramOfTankDevices</FOR>
+      <TABLE>0.000722 0.999278 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DefectsInTheTankCoating</FOR>
+      <TABLE>0.000812 0.999188 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalCorrosionOfTheTank</FOR>
+      <GIVEN>CorrosiveEnvironment</GIVEN>
+      <GIVEN>DefectsInTheExternalCoatingSystemOfTheTank</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureInProtectiveMeasures</FOR>
+      <GIVEN>DefectInTheTankDryer</GIVEN>
+      <GIVEN>DefectsInTheTankCoating</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureInRepairsAndMaintenance</FOR>
+      <GIVEN>InadequacyOfPeopleSkills</GIVEN>
+      <GIVEN>OrganizationalWeakness</GIVEN>
+      <GIVEN>WeaknessInPurchasingTankEquipment</GIVEN>
+      <GIVEN>WeaknessInTheInstallationOfTankEquipment</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureOfConnectionsAndFasteners</FOR>
+      <GIVEN>DefectsInConnectingTankFastenersF1</GIVEN>
+      <GIVEN>DefectsInConnectingTankFastenersF2</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureOfGauges</FOR>
+      <GIVEN>DefectInTheTankPressureGauge</GIVEN>
+      <GIVEN>DefectInTheTankReliabilityGauge</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FailureToUseStandardAndUpdatedInstructions</FOR>
+      <TABLE>0.000762 0.999238 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HumanError</FOR>
+      <GIVEN>FailureInRepairsAndMaintenance</GIVEN>
+      <GIVEN>OperationalError</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InadequacyOfPeopleSkills</FOR>
+      <TABLE>0.000373 0.999627 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InternalCorrosionOfTheTank</FOR>
+      <GIVEN>CorrosionCausedByTheEnvironment</GIVEN>
+      <GIVEN>FailureInProtectiveMeasures</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OperationalError</FOR>
+      <GIVEN>DefectsInTankEquipmentRepairs</GIVEN>
+      <GIVEN>DefectsInTheInspectionAndTestingProgramOfTankDevices</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OrganizationalWeakness</FOR>
+      <GIVEN>FailureToUseStandardAndUpdatedInstructions</GIVEN>
+      <GIVEN>WeakEducationSystem</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OxygenLeakage</FOR>
+      <GIVEN>DefectsInConnectionsAndGauges</GIVEN>
+      <GIVEN>HumanError</GIVEN>
+      <GIVEN>TankCorrosion</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TankCorrosion</FOR>
+      <GIVEN>ExternalCorrosionOfTheTank</GIVEN>
+      <GIVEN>InternalCorrosionOfTheTank</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ValveLeakage</FOR>
+      <GIVEN>DefectsInInletAndOutletValvesV1</GIVEN>
+      <GIVEN>DefectsInInletAndOutletValvesV2</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WeakEducationSystem</FOR>
+      <TABLE>0.000322 0.999678 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WeaknessInPurchasingTankEquipment</FOR>
+      <TABLE>0.000323 0.999677 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WeaknessInTheInstallationOfTankEquipment</FOR>
+      <TABLE>0.000413 0.999587 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

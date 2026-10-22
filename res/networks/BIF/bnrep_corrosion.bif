@@ -1,0 +1,242 @@
+network unknown {
+}
+variable BurstPressure {
+  type discrete [ 2 ] { High, Low };
+}
+variable Chloride {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable DefectDepth {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DefectLength {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FlowVelocity {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable InorganicDeposits {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable MEG {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable MixedDeposits {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable OD {
+  type discrete [ 2 ] { High, Low };
+}
+variable OperatingPressure {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable OperatingTemperature {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable OrganicDeposits {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable PartialPressureCO2 {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable pH {
+  type discrete [ 3 ] { Acidic, Neutral, Basic };
+}
+variable PipeFailure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ShearingForce {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable SolidDeposits {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable SteelGrade {
+  type discrete [ 2 ] { High, Low };
+}
+variable SuspendedDeposits {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable UDCCorrRate {
+  type discrete [ 3 ] { High, Moderate, Low };
+}
+variable UnderDepositGalvanicCell {
+  type discrete [ 4 ] { Poor, Fair, Good, Excellent };
+}
+variable WallThicknessLoss {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( BurstPressure | DefectDepth, DefectLength, OD, SteelGrade ) {
+  (Yes, Yes, High, High) 0.0, 1.0;
+  (No, Yes, High, High) 0.1, 0.9;
+  (Yes, No, High, High) 0.1, 0.9;
+  (No, No, High, High) 0.12, 0.88;
+  (Yes, Yes, Low, High) 0.12, 0.88;
+  (No, Yes, Low, High) 0.02, 0.98;
+  (Yes, No, Low, High) 0.01, 0.99;
+  (No, No, Low, High) 0.44, 0.56;
+  (Yes, Yes, High, Low) 0.27, 0.73;
+  (No, Yes, High, Low) 0.45, 0.55;
+  (Yes, No, High, Low) 0.18, 0.82;
+  (No, No, High, Low) 0.81, 0.19;
+  (Yes, Yes, Low, Low) 0.58, 0.42;
+  (No, Yes, Low, Low) 0.39, 0.61;
+  (Yes, No, Low, Low) 0.22, 0.78;
+  (No, No, Low, Low) 0.34, 0.66;
+}
+probability ( Chloride ) {
+  table 0.456, 0.100, 0.444;
+}
+probability ( DefectDepth | WallThicknessLoss ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.0, 1.0;
+}
+probability ( DefectLength | UDCCorrRate ) {
+  (High) 0.88, 0.12;
+  (Moderate) 0.56, 0.44;
+  (Low) 0.02, 0.98;
+}
+probability ( FlowVelocity ) {
+  table 1.0, 0.0, 0.0;
+}
+probability ( InorganicDeposits ) {
+  table 0.56, 0.44;
+}
+probability ( MEG ) {
+  table 0.3, 0.7;
+}
+probability ( MixedDeposits ) {
+  table 0.57, 0.43;
+}
+probability ( OD ) {
+  table 0.92, 0.08;
+}
+probability ( OperatingPressure ) {
+  table 0.99, 0.01, 0.00;
+}
+probability ( OperatingTemperature ) {
+  table 0.1582576, 0.6747927, 0.1669497;
+}
+probability ( OrganicDeposits ) {
+  table 0.6667, 0.3333;
+}
+probability ( PartialPressureCO2 ) {
+  table 0.578, 0.100, 0.322;
+}
+probability ( pH | OperatingTemperature, PartialPressureCO2 ) {
+  (High, High) 0.7, 0.2, 0.1;
+  (Moderate, High) 0.4, 0.3, 0.3;
+  (Low, High) 0.45, 0.25, 0.30;
+  (High, Moderate) 0.6, 0.2, 0.2;
+  (Moderate, Moderate) 0.35, 0.15, 0.50;
+  (Low, Moderate) 0.2, 0.1, 0.7;
+  (High, Low) 0.0, 0.2, 0.8;
+  (Moderate, Low) 0.2, 0.2, 0.6;
+  (Low, Low) 0.03, 0.01, 0.96;
+}
+probability ( PipeFailure | BurstPressure, OperatingPressure ) {
+  (High, High) 0.44, 0.56;
+  (Low, High) 0.77, 0.23;
+  (High, Moderate) 0.88, 0.12;
+  (Low, Moderate) 0.324, 0.676;
+  (High, Low) 0.78, 0.22;
+  (Low, Low) 0.12, 0.88;
+}
+probability ( ShearingForce | FlowVelocity, OperatingPressure ) {
+  (High, High) 0.4, 0.4, 0.2;
+  (Moderate, High) 0.15, 0.65, 0.20;
+  (Low, High) 1.11e-16, 2.00e-01, 8.00e-01;
+  (High, Moderate) 0.1, 0.2, 0.7;
+  (Moderate, Moderate) 0.05, 0.05, 0.90;
+  (Low, Moderate) 0.05, 0.05, 0.90;
+  (High, Low) 0.05, 0.10, 0.85;
+  (Moderate, Low) 0.01, 0.05, 0.94;
+  (Low, Low) 0.03, 0.01, 0.96;
+}
+probability ( SolidDeposits | FlowVelocity, SuspendedDeposits ) {
+  (High, High) 0.4, 0.3, 0.3;
+  (Moderate, High) 0.6, 0.2, 0.2;
+  (Low, High) 0.7, 0.2, 0.1;
+  (High, Moderate) 0.5, 0.3, 0.2;
+  (Moderate, Moderate) 0.4, 0.3, 0.3;
+  (Low, Moderate) 0.5, 0.2, 0.3;
+  (High, Low) 0.01, 0.05, 0.94;
+  (Moderate, Low) 0.1, 0.5, 0.4;
+  (Low, Low) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( SteelGrade ) {
+  table 0.78, 0.22;
+}
+probability ( SuspendedDeposits | InorganicDeposits, MixedDeposits, OrganicDeposits ) {
+  (Absent, Absent, Absent) 0.1, 0.1, 0.8;
+  (Present, Absent, Absent) 0.4, 0.2, 0.4;
+  (Absent, Present, Absent) 0.85, 0.10, 0.05;
+  (Present, Present, Absent) 0.75, 0.01, 0.24;
+  (Absent, Absent, Present) 0.1, 0.2, 0.7;
+  (Present, Absent, Present) 0.6, 0.2, 0.2;
+  (Absent, Present, Present) 0.70, 0.05, 0.25;
+  (Present, Present, Present) 0.950, 0.005, 0.045;
+}
+probability ( UDCCorrRate | ShearingForce, SolidDeposits, UnderDepositGalvanicCell ) {
+  (High, High, Poor) 0.91, 0.08, 0.01;
+  (Moderate, High, Poor) 0.98, 0.00, 0.02;
+  (Low, High, Poor) 0.12, 0.78, 0.10;
+  (High, Moderate, Poor) 0.88, 0.07, 0.05;
+  (Moderate, Moderate, Poor) 0.43, 0.52, 0.05;
+  (Low, Moderate, Poor) 0.55, 0.40, 0.05;
+  (High, Low, Poor) 0.78, 0.22, 0.00;
+  (Moderate, Low, Poor) 0.78, 0.22, 0.00;
+  (Low, Low, Poor) 0.78, 0.20, 0.02;
+  (High, High, Fair) 0.88, 0.10, 0.02;
+  (Moderate, High, Fair) 0.98, 0.01, 0.01;
+  (Low, High, Fair) 0.88, 0.12, 0.00;
+  (High, Moderate, Fair) 0.78, 0.22, 0.00;
+  (Moderate, Moderate, Fair) 0.99, 0.00, 0.01;
+  (Low, Moderate, Fair) 0.89, 0.09, 0.02;
+  (High, Low, Fair) 0.88, 0.09, 0.03;
+  (Moderate, Low, Fair) 0.56, 0.40, 0.04;
+  (Low, Low, Fair) 0.45, 0.50, 0.05;
+  (High, High, Good) 0.43, 0.47, 0.10;
+  (Moderate, High, Good) 0.43, 0.37, 0.20;
+  (Low, High, Good) 0.56, 0.10, 0.34;
+  (High, Moderate, Good) 0.34, 0.66, 0.00;
+  (Moderate, Moderate, Good) 0.88, 0.00, 0.12;
+  (Low, Moderate, Good) 0.22, 0.56, 0.22;
+  (High, Low, Good) 0.45, 0.32, 0.23;
+  (Moderate, Low, Good) 0.88, 0.00, 0.12;
+  (Low, Low, Good) 0.73, 0.16, 0.11;
+  (High, High, Excellent) 0.43, 0.47, 0.10;
+  (Moderate, High, Excellent) 0.43, 0.37, 0.20;
+  (Low, High, Excellent) 0.56, 0.10, 0.34;
+  (High, Moderate, Excellent) 0.34, 0.66, 0.00;
+  (Moderate, Moderate, Excellent) 0.88, 0.00, 0.12;
+  (Low, Moderate, Excellent) 0.22, 0.56, 0.22;
+  (High, Low, Excellent) 0.45, 0.32, 0.23;
+  (Moderate, Low, Excellent) 0.88, 0.00, 0.12;
+  (Low, Low, Excellent) 0.73, 0.16, 0.11;
+}
+probability ( UnderDepositGalvanicCell | Chloride, MEG, pH ) {
+  (High, Absent, Acidic) 0.50, 0.35, 0.10, 0.05;
+  (Moderate, Absent, Acidic) 0.20, 0.20, 0.35, 0.25;
+  (Low, Absent, Acidic) 0.0001, 0.0010, 0.0100, 0.9889;
+  (High, Present, Acidic) 0.50, 0.35, 0.10, 0.05;
+  (Moderate, Present, Acidic) 0.20, 0.20, 0.35, 0.25;
+  (Low, Present, Acidic) 0.0001, 0.0010, 0.0100, 0.9889;
+  (High, Absent, Neutral) 0.0001, 0.0010, 0.0100, 0.9889;
+  (Moderate, Absent, Neutral) 0.0001, 0.0010, 0.0100, 0.9889;
+  (Low, Absent, Neutral) 0.70, 0.20, 0.08, 0.02;
+  (High, Present, Neutral) 0.0001, 0.0010, 0.0100, 0.9889;
+  (Moderate, Present, Neutral) 0.0001, 0.0010, 0.0100, 0.9889;
+  (Low, Present, Neutral) 0.70, 0.20, 0.08, 0.02;
+  (High, Absent, Basic) 0.70, 0.20, 0.08, 0.02;
+  (Moderate, Absent, Basic) 0.70, 0.20, 0.08, 0.02;
+  (Low, Absent, Basic) 0.70, 0.20, 0.08, 0.02;
+  (High, Present, Basic) 0.70, 0.20, 0.08, 0.02;
+  (Moderate, Present, Basic) 0.70, 0.20, 0.08, 0.02;
+  (Low, Present, Basic) 0.70, 0.20, 0.08, 0.02;
+}
+probability ( WallThicknessLoss | UDCCorrRate ) {
+  (High) 0.88, 0.12;
+  (Moderate) 0.02, 0.98;
+  (Low) 0.19, 0.81;
+}

@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AnchorageAreaSelection</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>COLREG</NAME>
+      <OUTCOME>Not_Violated</OUTCOME>
+      <OUTCOME>Violated</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CargoShiftingOrInappropriateStability</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CollisionAndContact</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CompanyManningStrategy</NAME>
+      <OUTCOME>Optimum_Safe_Manning</OUTCOME>
+      <OUTCOME>Minimum_Safe_Manning</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CrewAssignment</NAME>
+      <OUTCOME>Qualified_Crew</OUTCOME>
+      <OUTCOME>Unqualified_Crew</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DepartureFromPortInHeavyWeatherAndSeaCondition</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalInternalCommunication</NAME>
+      <OUTCOME>Adequate</OUTCOME>
+      <OUTCOME>Inadequate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalOperationalConditionsForCollisionAndContact</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalOperationalConditionsForGrounding</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalOperationalConditionsForSinking</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fatigue</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Grounding</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeavyWeatherAndSeaConditions</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InadequateManning</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InlandVessel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InternalOperationalConditionsForCollisionAndContact</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InternalOperationalConditionsForGrounding</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InternalOperationalConditionsForSinking</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Malfunction</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManoeuvreOfBridgeTeamMembers</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManoeuvreOfCaptain</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManoeuvreOfPilot</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManoeuvreOfWatchkeepingOfficer</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NavigationArea</NAME>
+      <OUTCOME>Narrow_Water</OUTCOME>
+      <OUTCOME>Port</OUTCOME>
+      <OUTCOME>Coastal_Water</OUTCOME>
+      <OUTCOME>Open_Sea</OUTCOME>
+      <OUTCOME>Anchorage</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NavigationOnStorm</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ObservationDuringOperation</NAME>
+      <OUTCOME>Clear</OUTCOME>
+      <OUTCOME>Unclear</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OversightAndControl</NAME>
+      <OUTCOME>Adequate</OUTCOME>
+      <OUTCOME>Inadequate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PilotOperationManagement</NAME>
+      <OUTCOME>Safe</OUTCOME>
+      <OUTCOME>Unsafe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlannedMaintenance</NAME>
+      <OUTCOME>Completed</OUTCOME>
+      <OUTCOME>Uncompleted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PortCompanyPressure</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PortOperationManagement</NAME>
+      <OUTCOME>Safe</OUTCOME>
+      <OUTCOME>Unsafe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PortOperationPlanning</NAME>
+      <OUTCOME>Adequate</OUTCOME>
+      <OUTCOME>Inadequate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Procedure</NAME>
+      <OUTCOME>Appropriate</OUTCOME>
+      <OUTCOME>Inappropriate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sinking</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SituationalAwareness</NAME>
+      <OUTCOME>Sufficient</OUTCOME>
+      <OUTCOME>Insufficient</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TrainingAndFamiliarization</NAME>
+      <OUTCOME>Sufficient</OUTCOME>
+      <OUTCOME>Insufficient</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TriggeringEventForCollisionAndContact</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TriggeringEventForGrounding</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TriggeringEventForSinking</NAME>
+      <OUTCOME>Observed</OUTCOME>
+      <OUTCOME>Unobserved</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TugboatOperation</NAME>
+      <OUTCOME>Operational</OUTCOME>
+      <OUTCOME>Faulty</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UseOfVesselInConditionOfExceedingDesignLimit</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselAge</NAME>
+      <OUTCOME>Old</OUTCOME>
+      <OUTCOME>New</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselCargoOperationManagement</NAME>
+      <OUTCOME>Safe</OUTCOME>
+      <OUTCOME>Unsafe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselCargoOperationPlanning</NAME>
+      <OUTCOME>Adequate</OUTCOME>
+      <OUTCOME>Inadequate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselNavigationOperationManagement</NAME>
+      <OUTCOME>Safe</OUTCOME>
+      <OUTCOME>Unsafe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselNavigationOperationPlanning</NAME>
+      <OUTCOME>Unsafe</OUTCOME>
+      <OUTCOME>Safe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Visibility</NAME>
+      <OUTCOME>Poor</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AnchorageAreaSelection</FOR>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.805 0.195 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>COLREG</FOR>
+      <GIVEN>ExternalInternalCommunication</GIVEN>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CargoShiftingOrInappropriateStability</FOR>
+      <GIVEN>PortOperationManagement</GIVEN>
+      <GIVEN>VesselCargoOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.818 0.182 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CollisionAndContact</FOR>
+      <GIVEN>ExternalOperationalConditionsForCollisionAndContact</GIVEN>
+      <GIVEN>InternalOperationalConditionsForCollisionAndContact</GIVEN>
+      <GIVEN>TriggeringEventForCollisionAndContact</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CompanyManningStrategy</FOR>
+      <TABLE>0.899 0.101 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CrewAssignment</FOR>
+      <TABLE>0.506 0.494 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DepartureFromPortInHeavyWeatherAndSeaCondition</FOR>
+      <GIVEN>PortOperationManagement</GIVEN>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.18 0.82 0.0 1.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalInternalCommunication</FOR>
+      <GIVEN>ObservationDuringOperation</GIVEN>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <TABLE>0.956 0.044 0.5 0.5 0.75 0.25 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalOperationalConditionsForCollisionAndContact</FOR>
+      <GIVEN>NavigationArea</GIVEN>
+      <GIVEN>Visibility</GIVEN>
+      <TABLE>0.048 0.952 0.015 0.985 0.142 0.858 0.118 0.882 0.333 0.667 0.0 1.0 0.095 0.905 0.029 0.971 0.286 0.714 0.015 0.985 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalOperationalConditionsForGrounding</FOR>
+      <GIVEN>HeavyWeatherAndSeaConditions</GIVEN>
+      <GIVEN>NavigationArea</GIVEN>
+      <TABLE>0.086 0.914 0.014 0.986 0.086 0.914 0.0 1.0 0.211 0.789 0.0 1.0 0.228 0.772 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalOperationalConditionsForSinking</FOR>
+      <GIVEN>HeavyWeatherAndSeaConditions</GIVEN>
+      <GIVEN>NavigationArea</GIVEN>
+      <TABLE>0.085 0.915 0.0 1.0 0.183 0.817 0.099 0.901 0.113 0.887 0.0 1.0 0.167 0.833 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fatigue</FOR>
+      <GIVEN>InadequateManning</GIVEN>
+      <TABLE>0.111 0.889 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Grounding</FOR>
+      <GIVEN>ExternalOperationalConditionsForGrounding</GIVEN>
+      <GIVEN>InternalOperationalConditionsForGrounding</GIVEN>
+      <GIVEN>TriggeringEventForGrounding</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeavyWeatherAndSeaConditions</FOR>
+      <TABLE>0.798 0.202 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InadequateManning</FOR>
+      <GIVEN>CompanyManningStrategy</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InlandVessel</FOR>
+      <TABLE>0.348 0.652 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InternalOperationalConditionsForCollisionAndContact</FOR>
+      <GIVEN>VesselCargoOperationManagement</GIVEN>
+      <TABLE>0.25 0.75 0.216 0.784 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InternalOperationalConditionsForGrounding</FOR>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>0.373 0.627 0.318 0.682 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InternalOperationalConditionsForSinking</FOR>
+      <GIVEN>Malfunction</GIVEN>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.393 0.607 0.318 0.682 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Malfunction</FOR>
+      <GIVEN>PlannedMaintenance</GIVEN>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>0.047 0.953 0.0 1.0 1.0 0.0 0.667 0.333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManoeuvreOfBridgeTeamMembers</FOR>
+      <GIVEN>ManoeuvreOfCaptain</GIVEN>
+      <GIVEN>ManoeuvreOfPilot</GIVEN>
+      <GIVEN>ManoeuvreOfWatchkeepingOfficer</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManoeuvreOfCaptain</FOR>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.18 0.82 0.0 1.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManoeuvreOfPilot</FOR>
+      <GIVEN>PilotOperationManagement</GIVEN>
+      <GIVEN>PortOperationManagement</GIVEN>
+      <GIVEN>TugboatOperation</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.924 0.076 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManoeuvreOfWatchkeepingOfficer</FOR>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.786 0.214 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NavigationArea</FOR>
+      <TABLE>0.146 0.191 0.258 0.135 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NavigationOnStorm</FOR>
+      <GIVEN>AnchorageAreaSelection</GIVEN>
+      <GIVEN>DepartureFromPortInHeavyWeatherAndSeaCondition</GIVEN>
+      <GIVEN>VesselNavigationOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.364 0.636 0.667 0.333 0.0 1.0 0.667 0.333 0.133 0.867 0.333 0.667 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ObservationDuringOperation</FOR>
+      <GIVEN>InadequateManning</GIVEN>
+      <GIVEN>OversightAndControl</GIVEN>
+      <GIVEN>VesselNavigationOperationPlanning</GIVEN>
+      <TABLE>0.333 0.667 0.667 0.333 0.0 1.0 0.0 1.0 0.687 0.313 1.0 0.0 0.0 1.0 0.32 0.68 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OversightAndControl</FOR>
+      <GIVEN>CrewAssignment</GIVEN>
+      <GIVEN>PortCompanyPressure</GIVEN>
+      <GIVEN>Procedure</GIVEN>
+      <GIVEN>TrainingAndFamiliarization</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.5 0.5 0.667 0.333 0.0 1.0 0.0 1.0 0.75 0.25 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.437 0.563 0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PilotOperationManagement</FOR>
+      <GIVEN>ExternalInternalCommunication</GIVEN>
+      <GIVEN>PortOperationPlanning</GIVEN>
+      <TABLE>1.0 0.0 0.857 0.143 1.0 0.0 0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlannedMaintenance</FOR>
+      <GIVEN>OversightAndControl</GIVEN>
+      <TABLE>1.0 0.0 0.959 0.041 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PortCompanyPressure</FOR>
+      <TABLE>0.067 0.933 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PortOperationManagement</FOR>
+      <GIVEN>PortOperationPlanning</GIVEN>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.125 0.875 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PortOperationPlanning</FOR>
+      <GIVEN>OversightAndControl</GIVEN>
+      <TABLE>1.0 0.0 0.699 0.301 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Procedure</FOR>
+      <TABLE>0.944 0.056 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sinking</FOR>
+      <GIVEN>ExternalOperationalConditionsForSinking</GIVEN>
+      <GIVEN>InternalOperationalConditionsForSinking</GIVEN>
+      <GIVEN>TriggeringEventForSinking</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SituationalAwareness</FOR>
+      <GIVEN>Fatigue</GIVEN>
+      <GIVEN>ObservationDuringOperation</GIVEN>
+      <GIVEN>PortOperationPlanning</GIVEN>
+      <GIVEN>VesselCargoOperationPlanning</GIVEN>
+      <TABLE>0.25 0.75 0.15 0.85 0.2 0.8 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 0.333 0.667 0.615 0.385 0.0 1.0 0.05 0.95 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TrainingAndFamiliarization</FOR>
+      <GIVEN>CrewAssignment</GIVEN>
+      <TABLE>0.644 0.356 0.227 0.773 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TriggeringEventForCollisionAndContact</FOR>
+      <GIVEN>COLREG</GIVEN>
+      <GIVEN>ManoeuvreOfBridgeTeamMembers</GIVEN>
+      <GIVEN>NavigationOnStorm</GIVEN>
+      <TABLE>0.0 1.0 0.041 0.959 0.467 0.533 0.0 1.0 0.0 1.0 0.0 1.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TriggeringEventForGrounding</FOR>
+      <GIVEN>ManoeuvreOfBridgeTeamMembers</GIVEN>
+      <GIVEN>NavigationOnStorm</GIVEN>
+      <GIVEN>UseOfVesselInConditionOfExceedingDesignLimit</GIVEN>
+      <TABLE>0.0 1.0 0.333 0.667 0.44 0.56 0.458 0.542 0.154 0.846 0.667 0.333 0.833 0.167 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TriggeringEventForSinking</FOR>
+      <GIVEN>CargoShiftingOrInappropriateStability</GIVEN>
+      <GIVEN>NavigationOnStorm</GIVEN>
+      <GIVEN>UseOfVesselInConditionOfExceedingDesignLimit</GIVEN>
+      <TABLE>0.12 0.88 0.333 0.667 0.4 0.6 0.52 0.48 1.0 0.0 0.667 0.333 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TugboatOperation</FOR>
+      <GIVEN>PilotOperationManagement</GIVEN>
+      <GIVEN>PortOperationManagement</GIVEN>
+      <TABLE>1.0 0.0 0.846 0.154 0.25 0.75 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UseOfVesselInConditionOfExceedingDesignLimit</FOR>
+      <GIVEN>InlandVessel</GIVEN>
+      <GIVEN>NavigationOnStorm</GIVEN>
+      <TABLE>1.0 0.0 0.2 0.8 1.0 0.0 0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselAge</FOR>
+      <TABLE>0.753 0.247 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselCargoOperationManagement</FOR>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <GIVEN>VesselCargoOperationPlanning</GIVEN>
+      <TABLE>1.0 0.0 0.167 0.833 1.0 0.0 0.143 0.857 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselCargoOperationPlanning</FOR>
+      <GIVEN>OversightAndControl</GIVEN>
+      <TABLE>1.0 0.0 0.89 0.11 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselNavigationOperationManagement</FOR>
+      <GIVEN>ExternalInternalCommunication</GIVEN>
+      <GIVEN>PortOperationPlanning</GIVEN>
+      <GIVEN>SituationalAwareness</GIVEN>
+      <GIVEN>VesselNavigationOperationPlanning</GIVEN>
+      <TABLE>0.26 0.74 1.0 0.0 0.0 1.0 0.54 0.46 0.0 1.0 0.7 0.3 0.25 0.75 0.24 0.76 0.0 1.0 0.5 0.5 0.0 1.0 0.04 0.96 0.0 1.0 0.2 0.8 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselNavigationOperationPlanning</FOR>
+      <GIVEN>OversightAndControl</GIVEN>
+      <GIVEN>PortCompanyPressure</GIVEN>
+      <GIVEN>TrainingAndFamiliarization</GIVEN>
+      <TABLE>0.7 0.3 0.5 0.5 0.333 0.667 0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 0.485 0.515 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Visibility</FOR>
+      <TABLE>0.236 0.764 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

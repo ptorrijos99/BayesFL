@@ -1,0 +1,250 @@
+network unknown {
+}
+variable CorrosionCausedByTheEnvironment {
+  type discrete [ 2 ] { True, False };
+}
+variable CorrosiveEnvironment {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectInTheTankDryer {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectInTheTankPressureGauge {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectInTheTankReliabilityGauge {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInConnectingTankFastenersF1 {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInConnectingTankFastenersF2 {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInConnectionsAndGauges {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInInletAndOutletValvesV1 {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInInletAndOutletValvesV2 {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInTankEquipmentRepairs {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInTheExternalCoatingSystemOfTheTank {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInTheInspectionAndTestingProgramOfTankDevices {
+  type discrete [ 2 ] { True, False };
+}
+variable DefectsInTheTankCoating {
+  type discrete [ 2 ] { True, False };
+}
+variable ExternalCorrosionOfTheTank {
+  type discrete [ 2 ] { True, False };
+}
+variable FailureInProtectiveMeasures {
+  type discrete [ 2 ] { True, False };
+}
+variable FailureInRepairsAndMaintenance {
+  type discrete [ 2 ] { True, False };
+}
+variable FailureOfConnectionsAndFasteners {
+  type discrete [ 2 ] { True, False };
+}
+variable FailureOfGauges {
+  type discrete [ 2 ] { True, False };
+}
+variable FailureToUseStandardAndUpdatedInstructions {
+  type discrete [ 2 ] { True, False };
+}
+variable HumanError {
+  type discrete [ 2 ] { True, False };
+}
+variable InadequacyOfPeopleSkills {
+  type discrete [ 2 ] { True, False };
+}
+variable InternalCorrosionOfTheTank {
+  type discrete [ 2 ] { True, False };
+}
+variable OperationalError {
+  type discrete [ 2 ] { True, False };
+}
+variable OrganizationalWeakness {
+  type discrete [ 2 ] { True, False };
+}
+variable OxygenLeakage {
+  type discrete [ 2 ] { True, False };
+}
+variable TankCorrosion {
+  type discrete [ 2 ] { True, False };
+}
+variable ValveLeakage {
+  type discrete [ 2 ] { True, False };
+}
+variable WeakEducationSystem {
+  type discrete [ 2 ] { True, False };
+}
+variable WeaknessInPurchasingTankEquipment {
+  type discrete [ 2 ] { True, False };
+}
+variable WeaknessInTheInstallationOfTankEquipment {
+  type discrete [ 2 ] { True, False };
+}
+probability ( CorrosionCausedByTheEnvironment | CorrosiveEnvironment, DefectInTheTankDryer ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( CorrosiveEnvironment ) {
+  table 0.000902, 0.999098;
+}
+probability ( DefectInTheTankDryer ) {
+  table 0.000762, 0.999238;
+}
+probability ( DefectInTheTankPressureGauge ) {
+  table 0.000613, 0.999387;
+}
+probability ( DefectInTheTankReliabilityGauge ) {
+  table 0.000143, 0.999857;
+}
+probability ( DefectsInConnectingTankFastenersF1 ) {
+  table 0.000062, 0.999938;
+}
+probability ( DefectsInConnectingTankFastenersF2 ) {
+  table 0.000062, 0.999938;
+}
+probability ( DefectsInConnectionsAndGauges | FailureOfConnectionsAndFasteners, FailureOfGauges, ValveLeakage ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 1.0, 0.0;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 1.0, 0.0;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 1.0, 0.0;
+  (True, False, False) 1.0, 0.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( DefectsInInletAndOutletValvesV1 ) {
+  table 0.000482, 0.999518;
+}
+probability ( DefectsInInletAndOutletValvesV2 ) {
+  table 0.000482, 0.999518;
+}
+probability ( DefectsInTankEquipmentRepairs ) {
+  table 0.000632, 0.999368;
+}
+probability ( DefectsInTheExternalCoatingSystemOfTheTank ) {
+  table 0.000633, 0.999367;
+}
+probability ( DefectsInTheInspectionAndTestingProgramOfTankDevices ) {
+  table 0.000722, 0.999278;
+}
+probability ( DefectsInTheTankCoating ) {
+  table 0.000812, 0.999188;
+}
+probability ( ExternalCorrosionOfTheTank | CorrosiveEnvironment, DefectsInTheExternalCoatingSystemOfTheTank ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( FailureInProtectiveMeasures | DefectInTheTankDryer, DefectsInTheTankCoating ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( FailureInRepairsAndMaintenance | InadequacyOfPeopleSkills, OrganizationalWeakness, WeaknessInPurchasingTankEquipment, WeaknessInTheInstallationOfTankEquipment ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( FailureOfConnectionsAndFasteners | DefectsInConnectingTankFastenersF1, DefectsInConnectingTankFastenersF2 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( FailureOfGauges | DefectInTheTankPressureGauge, DefectInTheTankReliabilityGauge ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( FailureToUseStandardAndUpdatedInstructions ) {
+  table 0.000762, 0.999238;
+}
+probability ( HumanError | FailureInRepairsAndMaintenance, OperationalError ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( InadequacyOfPeopleSkills ) {
+  table 0.000373, 0.999627;
+}
+probability ( InternalCorrosionOfTheTank | CorrosionCausedByTheEnvironment, FailureInProtectiveMeasures ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( OperationalError | DefectsInTankEquipmentRepairs, DefectsInTheInspectionAndTestingProgramOfTankDevices ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( OrganizationalWeakness | FailureToUseStandardAndUpdatedInstructions, WeakEducationSystem ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( OxygenLeakage | DefectsInConnectionsAndGauges, HumanError, TankCorrosion ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 1.0, 0.0;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 1.0, 0.0;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 1.0, 0.0;
+  (True, False, False) 1.0, 0.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( TankCorrosion | ExternalCorrosionOfTheTank, InternalCorrosionOfTheTank ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( ValveLeakage | DefectsInInletAndOutletValvesV1, DefectsInInletAndOutletValvesV2 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( WeakEducationSystem ) {
+  table 0.000322, 0.999678;
+}
+probability ( WeaknessInPurchasingTankEquipment ) {
+  table 0.000323, 0.999677;
+}
+probability ( WeaknessInTheInstallationOfTankEquipment ) {
+  table 0.000413, 0.999587;
+}

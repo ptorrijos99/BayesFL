@@ -1,0 +1,582 @@
+network unknown {
+}
+variable Kick {
+  type discrete [ 2 ] { F, S };
+}
+variable X1 {
+  type discrete [ 2 ] { F, S };
+}
+variable X10 {
+  type discrete [ 2 ] { F, S };
+}
+variable X11 {
+  type discrete [ 2 ] { F, S };
+}
+variable X12 {
+  type discrete [ 2 ] { F, S };
+}
+variable X13 {
+  type discrete [ 2 ] { F, S };
+}
+variable X14 {
+  type discrete [ 2 ] { F, S };
+}
+variable X15 {
+  type discrete [ 2 ] { F, S };
+}
+variable X16 {
+  type discrete [ 2 ] { F, S };
+}
+variable X17 {
+  type discrete [ 2 ] { F, S };
+}
+variable X18 {
+  type discrete [ 2 ] { F, S };
+}
+variable X19 {
+  type discrete [ 2 ] { F, S };
+}
+variable X2 {
+  type discrete [ 2 ] { F, S };
+}
+variable X20 {
+  type discrete [ 2 ] { F, S };
+}
+variable X21 {
+  type discrete [ 2 ] { F, S };
+}
+variable X22 {
+  type discrete [ 2 ] { F, S };
+}
+variable X23 {
+  type discrete [ 2 ] { F, S };
+}
+variable X24 {
+  type discrete [ 2 ] { F, S };
+}
+variable X25 {
+  type discrete [ 2 ] { F, S };
+}
+variable X26 {
+  type discrete [ 2 ] { F, S };
+}
+variable X27 {
+  type discrete [ 2 ] { F, S };
+}
+variable X28 {
+  type discrete [ 2 ] { F, S };
+}
+variable X29 {
+  type discrete [ 2 ] { F, S };
+}
+variable X3 {
+  type discrete [ 2 ] { F, S };
+}
+variable X30 {
+  type discrete [ 2 ] { F, S };
+}
+variable X31 {
+  type discrete [ 2 ] { F, S };
+}
+variable X32 {
+  type discrete [ 2 ] { F, S };
+}
+variable X33 {
+  type discrete [ 2 ] { F, S };
+}
+variable X34 {
+  type discrete [ 2 ] { F, S };
+}
+variable X35 {
+  type discrete [ 2 ] { F, S };
+}
+variable X36 {
+  type discrete [ 2 ] { F, S };
+}
+variable X37 {
+  type discrete [ 2 ] { F, S };
+}
+variable X38 {
+  type discrete [ 2 ] { F, S };
+}
+variable X39 {
+  type discrete [ 2 ] { F, S };
+}
+variable X4 {
+  type discrete [ 2 ] { F, S };
+}
+variable X40 {
+  type discrete [ 2 ] { F, S };
+}
+variable X41 {
+  type discrete [ 2 ] { F, S };
+}
+variable X42 {
+  type discrete [ 2 ] { F, S };
+}
+variable X43 {
+  type discrete [ 2 ] { F, S };
+}
+variable X44 {
+  type discrete [ 2 ] { F, S };
+}
+variable X45 {
+  type discrete [ 2 ] { F, S };
+}
+variable X5 {
+  type discrete [ 2 ] { F, S };
+}
+variable X6 {
+  type discrete [ 2 ] { F, S };
+}
+variable X7 {
+  type discrete [ 2 ] { F, S };
+}
+variable X8 {
+  type discrete [ 2 ] { F, S };
+}
+variable X9 {
+  type discrete [ 2 ] { F, S };
+}
+probability ( Kick | X1, X2, X3 ) {
+  (F, F, F) 1.0, 0.0;
+  (S, F, F) 0.0, 1.0;
+  (F, S, F) 0.0, 1.0;
+  (S, S, F) 0.0, 1.0;
+  (F, F, S) 0.0, 1.0;
+  (S, F, S) 0.0, 1.0;
+  (F, S, S) 0.0, 1.0;
+  (S, S, S) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.0055, 0.9945;
+}
+probability ( X10 ) {
+  table 0.005505028, 0.994494972;
+}
+probability ( X11 ) {
+  table 0.00334, 0.99666;
+}
+probability ( X12 ) {
+  table 0.001933, 0.998067;
+}
+probability ( X13 | X17, X18, X19, X20, X21 ) {
+  (F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F) 1.0, 0.0;
+  (F, S, F, F, F) 1.0, 0.0;
+  (S, S, F, F, F) 1.0, 0.0;
+  (F, F, S, F, F) 1.0, 0.0;
+  (S, F, S, F, F) 1.0, 0.0;
+  (F, S, S, F, F) 1.0, 0.0;
+  (S, S, S, F, F) 1.0, 0.0;
+  (F, F, F, S, F) 1.0, 0.0;
+  (S, F, F, S, F) 1.0, 0.0;
+  (F, S, F, S, F) 1.0, 0.0;
+  (S, S, F, S, F) 1.0, 0.0;
+  (F, F, S, S, F) 1.0, 0.0;
+  (S, F, S, S, F) 1.0, 0.0;
+  (F, S, S, S, F) 1.0, 0.0;
+  (S, S, S, S, F) 1.0, 0.0;
+  (F, F, F, F, S) 1.0, 0.0;
+  (S, F, F, F, S) 1.0, 0.0;
+  (F, S, F, F, S) 1.0, 0.0;
+  (S, S, F, F, S) 1.0, 0.0;
+  (F, F, S, F, S) 1.0, 0.0;
+  (S, F, S, F, S) 1.0, 0.0;
+  (F, S, S, F, S) 1.0, 0.0;
+  (S, S, S, F, S) 1.0, 0.0;
+  (F, F, F, S, S) 1.0, 0.0;
+  (S, F, F, S, S) 1.0, 0.0;
+  (F, S, F, S, S) 1.0, 0.0;
+  (S, S, F, S, S) 1.0, 0.0;
+  (F, F, S, S, S) 1.0, 0.0;
+  (S, F, S, S, S) 1.0, 0.0;
+  (F, S, S, S, S) 1.0, 0.0;
+  (S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X14 | X15, X16 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X15 ) {
+  table 0.044593, 0.955407;
+}
+probability ( X16 | X22, X23, X24, X25, X26, X27 ) {
+  (F, F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F, F) 1.0, 0.0;
+  (F, S, F, F, F, F) 1.0, 0.0;
+  (S, S, F, F, F, F) 1.0, 0.0;
+  (F, F, S, F, F, F) 1.0, 0.0;
+  (S, F, S, F, F, F) 1.0, 0.0;
+  (F, S, S, F, F, F) 1.0, 0.0;
+  (S, S, S, F, F, F) 1.0, 0.0;
+  (F, F, F, S, F, F) 1.0, 0.0;
+  (S, F, F, S, F, F) 1.0, 0.0;
+  (F, S, F, S, F, F) 1.0, 0.0;
+  (S, S, F, S, F, F) 1.0, 0.0;
+  (F, F, S, S, F, F) 1.0, 0.0;
+  (S, F, S, S, F, F) 1.0, 0.0;
+  (F, S, S, S, F, F) 1.0, 0.0;
+  (S, S, S, S, F, F) 1.0, 0.0;
+  (F, F, F, F, S, F) 1.0, 0.0;
+  (S, F, F, F, S, F) 1.0, 0.0;
+  (F, S, F, F, S, F) 1.0, 0.0;
+  (S, S, F, F, S, F) 1.0, 0.0;
+  (F, F, S, F, S, F) 1.0, 0.0;
+  (S, F, S, F, S, F) 1.0, 0.0;
+  (F, S, S, F, S, F) 1.0, 0.0;
+  (S, S, S, F, S, F) 1.0, 0.0;
+  (F, F, F, S, S, F) 1.0, 0.0;
+  (S, F, F, S, S, F) 1.0, 0.0;
+  (F, S, F, S, S, F) 1.0, 0.0;
+  (S, S, F, S, S, F) 1.0, 0.0;
+  (F, F, S, S, S, F) 1.0, 0.0;
+  (S, F, S, S, S, F) 1.0, 0.0;
+  (F, S, S, S, S, F) 1.0, 0.0;
+  (S, S, S, S, S, F) 1.0, 0.0;
+  (F, F, F, F, F, S) 1.0, 0.0;
+  (S, F, F, F, F, S) 1.0, 0.0;
+  (F, S, F, F, F, S) 1.0, 0.0;
+  (S, S, F, F, F, S) 1.0, 0.0;
+  (F, F, S, F, F, S) 1.0, 0.0;
+  (S, F, S, F, F, S) 1.0, 0.0;
+  (F, S, S, F, F, S) 1.0, 0.0;
+  (S, S, S, F, F, S) 1.0, 0.0;
+  (F, F, F, S, F, S) 1.0, 0.0;
+  (S, F, F, S, F, S) 1.0, 0.0;
+  (F, S, F, S, F, S) 1.0, 0.0;
+  (S, S, F, S, F, S) 1.0, 0.0;
+  (F, F, S, S, F, S) 1.0, 0.0;
+  (S, F, S, S, F, S) 1.0, 0.0;
+  (F, S, S, S, F, S) 1.0, 0.0;
+  (S, S, S, S, F, S) 1.0, 0.0;
+  (F, F, F, F, S, S) 1.0, 0.0;
+  (S, F, F, F, S, S) 1.0, 0.0;
+  (F, S, F, F, S, S) 1.0, 0.0;
+  (S, S, F, F, S, S) 1.0, 0.0;
+  (F, F, S, F, S, S) 1.0, 0.0;
+  (S, F, S, F, S, S) 1.0, 0.0;
+  (F, S, S, F, S, S) 1.0, 0.0;
+  (S, S, S, F, S, S) 1.0, 0.0;
+  (F, F, F, S, S, S) 1.0, 0.0;
+  (S, F, F, S, S, S) 1.0, 0.0;
+  (F, S, F, S, S, S) 1.0, 0.0;
+  (S, S, F, S, S, S) 1.0, 0.0;
+  (F, F, S, S, S, S) 1.0, 0.0;
+  (S, F, S, S, S, S) 1.0, 0.0;
+  (F, S, S, S, S, S) 1.0, 0.0;
+  (S, S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X17 ) {
+  table 0.0395, 0.9605;
+}
+probability ( X18 ) {
+  table 0.044593, 0.955407;
+}
+probability ( X19 | X34, X35, X36, X37, X38 ) {
+  (F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F) 1.0, 0.0;
+  (F, S, F, F, F) 1.0, 0.0;
+  (S, S, F, F, F) 1.0, 0.0;
+  (F, F, S, F, F) 1.0, 0.0;
+  (S, F, S, F, F) 1.0, 0.0;
+  (F, S, S, F, F) 1.0, 0.0;
+  (S, S, S, F, F) 1.0, 0.0;
+  (F, F, F, S, F) 1.0, 0.0;
+  (S, F, F, S, F) 1.0, 0.0;
+  (F, S, F, S, F) 1.0, 0.0;
+  (S, S, F, S, F) 1.0, 0.0;
+  (F, F, S, S, F) 1.0, 0.0;
+  (S, F, S, S, F) 1.0, 0.0;
+  (F, S, S, S, F) 1.0, 0.0;
+  (S, S, S, S, F) 1.0, 0.0;
+  (F, F, F, F, S) 1.0, 0.0;
+  (S, F, F, F, S) 1.0, 0.0;
+  (F, S, F, F, S) 1.0, 0.0;
+  (S, S, F, F, S) 1.0, 0.0;
+  (F, F, S, F, S) 1.0, 0.0;
+  (S, F, S, F, S) 1.0, 0.0;
+  (F, S, S, F, S) 1.0, 0.0;
+  (S, S, S, F, S) 1.0, 0.0;
+  (F, F, F, S, S) 1.0, 0.0;
+  (S, F, F, S, S) 1.0, 0.0;
+  (F, S, F, S, S) 1.0, 0.0;
+  (S, S, F, S, S) 1.0, 0.0;
+  (F, F, S, S, S) 1.0, 0.0;
+  (S, F, S, S, S) 1.0, 0.0;
+  (F, S, S, S, S) 1.0, 0.0;
+  (S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X2 | X4, X5 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 1.0, 0.0;
+  (F, S) 1.0, 0.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X20 | X31, X32, X33 ) {
+  (F, F, F) 1.0, 0.0;
+  (S, F, F) 0.0, 1.0;
+  (F, S, F) 0.0, 1.0;
+  (S, S, F) 0.0, 1.0;
+  (F, F, S) 0.0, 1.0;
+  (S, F, S) 0.0, 1.0;
+  (F, S, S) 0.0, 1.0;
+  (S, S, S) 0.0, 1.0;
+}
+probability ( X21 | X28, X29, X30 ) {
+  (F, F, F) 1.0, 0.0;
+  (S, F, F) 1.0, 0.0;
+  (F, S, F) 1.0, 0.0;
+  (S, S, F) 1.0, 0.0;
+  (F, F, S) 1.0, 0.0;
+  (S, F, S) 1.0, 0.0;
+  (F, S, S) 1.0, 0.0;
+  (S, S, S) 0.0, 1.0;
+}
+probability ( X22 ) {
+  table 0.00556, 0.99444;
+}
+probability ( X23 ) {
+  table 0.005897, 0.994103;
+}
+probability ( X24 ) {
+  table 0.0055, 0.9945;
+}
+probability ( X25 ) {
+  table 0.005505, 0.994495;
+}
+probability ( X26 ) {
+  table 0.005505, 0.994495;
+}
+probability ( X27 | X39, X40, X41, X42, X43, X44, X45 ) {
+  (F, F, F, F, F, F, F) 1.0, 0.0;
+  (S, F, F, F, F, F, F) 1.0, 0.0;
+  (F, S, F, F, F, F, F) 1.0, 0.0;
+  (S, S, F, F, F, F, F) 1.0, 0.0;
+  (F, F, S, F, F, F, F) 1.0, 0.0;
+  (S, F, S, F, F, F, F) 1.0, 0.0;
+  (F, S, S, F, F, F, F) 1.0, 0.0;
+  (S, S, S, F, F, F, F) 1.0, 0.0;
+  (F, F, F, S, F, F, F) 1.0, 0.0;
+  (S, F, F, S, F, F, F) 1.0, 0.0;
+  (F, S, F, S, F, F, F) 1.0, 0.0;
+  (S, S, F, S, F, F, F) 1.0, 0.0;
+  (F, F, S, S, F, F, F) 1.0, 0.0;
+  (S, F, S, S, F, F, F) 1.0, 0.0;
+  (F, S, S, S, F, F, F) 1.0, 0.0;
+  (S, S, S, S, F, F, F) 1.0, 0.0;
+  (F, F, F, F, S, F, F) 1.0, 0.0;
+  (S, F, F, F, S, F, F) 1.0, 0.0;
+  (F, S, F, F, S, F, F) 1.0, 0.0;
+  (S, S, F, F, S, F, F) 1.0, 0.0;
+  (F, F, S, F, S, F, F) 1.0, 0.0;
+  (S, F, S, F, S, F, F) 1.0, 0.0;
+  (F, S, S, F, S, F, F) 1.0, 0.0;
+  (S, S, S, F, S, F, F) 1.0, 0.0;
+  (F, F, F, S, S, F, F) 1.0, 0.0;
+  (S, F, F, S, S, F, F) 1.0, 0.0;
+  (F, S, F, S, S, F, F) 1.0, 0.0;
+  (S, S, F, S, S, F, F) 1.0, 0.0;
+  (F, F, S, S, S, F, F) 1.0, 0.0;
+  (S, F, S, S, S, F, F) 1.0, 0.0;
+  (F, S, S, S, S, F, F) 1.0, 0.0;
+  (S, S, S, S, S, F, F) 1.0, 0.0;
+  (F, F, F, F, F, S, F) 1.0, 0.0;
+  (S, F, F, F, F, S, F) 1.0, 0.0;
+  (F, S, F, F, F, S, F) 1.0, 0.0;
+  (S, S, F, F, F, S, F) 1.0, 0.0;
+  (F, F, S, F, F, S, F) 1.0, 0.0;
+  (S, F, S, F, F, S, F) 1.0, 0.0;
+  (F, S, S, F, F, S, F) 1.0, 0.0;
+  (S, S, S, F, F, S, F) 1.0, 0.0;
+  (F, F, F, S, F, S, F) 1.0, 0.0;
+  (S, F, F, S, F, S, F) 1.0, 0.0;
+  (F, S, F, S, F, S, F) 1.0, 0.0;
+  (S, S, F, S, F, S, F) 1.0, 0.0;
+  (F, F, S, S, F, S, F) 1.0, 0.0;
+  (S, F, S, S, F, S, F) 1.0, 0.0;
+  (F, S, S, S, F, S, F) 1.0, 0.0;
+  (S, S, S, S, F, S, F) 1.0, 0.0;
+  (F, F, F, F, S, S, F) 1.0, 0.0;
+  (S, F, F, F, S, S, F) 1.0, 0.0;
+  (F, S, F, F, S, S, F) 1.0, 0.0;
+  (S, S, F, F, S, S, F) 1.0, 0.0;
+  (F, F, S, F, S, S, F) 1.0, 0.0;
+  (S, F, S, F, S, S, F) 1.0, 0.0;
+  (F, S, S, F, S, S, F) 1.0, 0.0;
+  (S, S, S, F, S, S, F) 1.0, 0.0;
+  (F, F, F, S, S, S, F) 1.0, 0.0;
+  (S, F, F, S, S, S, F) 1.0, 0.0;
+  (F, S, F, S, S, S, F) 1.0, 0.0;
+  (S, S, F, S, S, S, F) 1.0, 0.0;
+  (F, F, S, S, S, S, F) 1.0, 0.0;
+  (S, F, S, S, S, S, F) 1.0, 0.0;
+  (F, S, S, S, S, S, F) 1.0, 0.0;
+  (S, S, S, S, S, S, F) 1.0, 0.0;
+  (F, F, F, F, F, F, S) 1.0, 0.0;
+  (S, F, F, F, F, F, S) 1.0, 0.0;
+  (F, S, F, F, F, F, S) 1.0, 0.0;
+  (S, S, F, F, F, F, S) 1.0, 0.0;
+  (F, F, S, F, F, F, S) 1.0, 0.0;
+  (S, F, S, F, F, F, S) 1.0, 0.0;
+  (F, S, S, F, F, F, S) 1.0, 0.0;
+  (S, S, S, F, F, F, S) 1.0, 0.0;
+  (F, F, F, S, F, F, S) 1.0, 0.0;
+  (S, F, F, S, F, F, S) 1.0, 0.0;
+  (F, S, F, S, F, F, S) 1.0, 0.0;
+  (S, S, F, S, F, F, S) 1.0, 0.0;
+  (F, F, S, S, F, F, S) 1.0, 0.0;
+  (S, F, S, S, F, F, S) 1.0, 0.0;
+  (F, S, S, S, F, F, S) 1.0, 0.0;
+  (S, S, S, S, F, F, S) 1.0, 0.0;
+  (F, F, F, F, S, F, S) 1.0, 0.0;
+  (S, F, F, F, S, F, S) 1.0, 0.0;
+  (F, S, F, F, S, F, S) 1.0, 0.0;
+  (S, S, F, F, S, F, S) 1.0, 0.0;
+  (F, F, S, F, S, F, S) 1.0, 0.0;
+  (S, F, S, F, S, F, S) 1.0, 0.0;
+  (F, S, S, F, S, F, S) 1.0, 0.0;
+  (S, S, S, F, S, F, S) 1.0, 0.0;
+  (F, F, F, S, S, F, S) 1.0, 0.0;
+  (S, F, F, S, S, F, S) 1.0, 0.0;
+  (F, S, F, S, S, F, S) 1.0, 0.0;
+  (S, S, F, S, S, F, S) 1.0, 0.0;
+  (F, F, S, S, S, F, S) 1.0, 0.0;
+  (S, F, S, S, S, F, S) 1.0, 0.0;
+  (F, S, S, S, S, F, S) 1.0, 0.0;
+  (S, S, S, S, S, F, S) 1.0, 0.0;
+  (F, F, F, F, F, S, S) 1.0, 0.0;
+  (S, F, F, F, F, S, S) 1.0, 0.0;
+  (F, S, F, F, F, S, S) 1.0, 0.0;
+  (S, S, F, F, F, S, S) 1.0, 0.0;
+  (F, F, S, F, F, S, S) 1.0, 0.0;
+  (S, F, S, F, F, S, S) 1.0, 0.0;
+  (F, S, S, F, F, S, S) 1.0, 0.0;
+  (S, S, S, F, F, S, S) 1.0, 0.0;
+  (F, F, F, S, F, S, S) 1.0, 0.0;
+  (S, F, F, S, F, S, S) 1.0, 0.0;
+  (F, S, F, S, F, S, S) 1.0, 0.0;
+  (S, S, F, S, F, S, S) 1.0, 0.0;
+  (F, F, S, S, F, S, S) 1.0, 0.0;
+  (S, F, S, S, F, S, S) 1.0, 0.0;
+  (F, S, S, S, F, S, S) 1.0, 0.0;
+  (S, S, S, S, F, S, S) 1.0, 0.0;
+  (F, F, F, F, S, S, S) 1.0, 0.0;
+  (S, F, F, F, S, S, S) 1.0, 0.0;
+  (F, S, F, F, S, S, S) 1.0, 0.0;
+  (S, S, F, F, S, S, S) 1.0, 0.0;
+  (F, F, S, F, S, S, S) 1.0, 0.0;
+  (S, F, S, F, S, S, S) 1.0, 0.0;
+  (F, S, S, F, S, S, S) 1.0, 0.0;
+  (S, S, S, F, S, S, S) 1.0, 0.0;
+  (F, F, F, S, S, S, S) 1.0, 0.0;
+  (S, F, F, S, S, S, S) 1.0, 0.0;
+  (F, S, F, S, S, S, S) 1.0, 0.0;
+  (S, S, F, S, S, S, S) 1.0, 0.0;
+  (F, F, S, S, S, S, S) 1.0, 0.0;
+  (S, F, S, S, S, S, S) 1.0, 0.0;
+  (F, S, S, S, S, S, S) 1.0, 0.0;
+  (S, S, S, S, S, S, S) 0.0, 1.0;
+}
+probability ( X28 ) {
+  table 0.012756, 0.987244;
+}
+probability ( X29 ) {
+  table 0.00155, 0.99845;
+}
+probability ( X3 ) {
+  table 0.2518, 0.7482;
+}
+probability ( X30 ) {
+  table 0.000699, 0.999301;
+}
+probability ( X31 ) {
+  table 0.005505, 0.994495;
+}
+probability ( X32 ) {
+  table 0.000188, 0.999812;
+}
+probability ( X33 ) {
+  table 0.006156, 0.993844;
+}
+probability ( X34 ) {
+  table 0.017597, 0.982403;
+}
+probability ( X35 ) {
+  table 0.009042, 0.990958;
+}
+probability ( X36 ) {
+  table 0.016612, 0.983388;
+}
+probability ( X37 ) {
+  table 0.008513, 0.991487;
+}
+probability ( X38 ) {
+  table 0.012756, 0.987244;
+}
+probability ( X39 ) {
+  table 0.00103, 0.99897;
+}
+probability ( X4 | X13, X14 ) {
+  (F, F) 1.0, 0.0;
+  (S, F) 0.0, 1.0;
+  (F, S) 0.0, 1.0;
+  (S, S) 0.0, 1.0;
+}
+probability ( X40 ) {
+  table 0.004961, 0.995039;
+}
+probability ( X41 ) {
+  table 0.006763, 0.993237;
+}
+probability ( X42 ) {
+  table 0.005505, 0.994495;
+}
+probability ( X43 ) {
+  table 0.000471, 0.999529;
+}
+probability ( X44 ) {
+  table 0.009095, 0.990905;
+}
+probability ( X45 ) {
+  table 0.001933, 0.998067;
+}
+probability ( X5 | X6, X7, X8, X9 ) {
+  (F, F, F, F) 1.0, 0.0;
+  (S, F, F, F) 1.0, 0.0;
+  (F, S, F, F) 1.0, 0.0;
+  (S, S, F, F) 1.0, 0.0;
+  (F, F, S, F) 1.0, 0.0;
+  (S, F, S, F) 1.0, 0.0;
+  (F, S, S, F) 1.0, 0.0;
+  (S, S, S, F) 1.0, 0.0;
+  (F, F, F, S) 1.0, 0.0;
+  (S, F, F, S) 1.0, 0.0;
+  (F, S, F, S) 1.0, 0.0;
+  (S, S, F, S) 1.0, 0.0;
+  (F, F, S, S) 1.0, 0.0;
+  (S, F, S, S) 1.0, 0.0;
+  (F, S, S, S) 1.0, 0.0;
+  (S, S, S, S) 0.0, 1.0;
+}
+probability ( X6 ) {
+  table 0.004293, 0.995707;
+}
+probability ( X7 ) {
+  table 0.005505, 0.994495;
+}
+probability ( X8 | X10, X11, X12 ) {
+  (F, F, F) 1.0, 0.0;
+  (S, F, F) 1.0, 0.0;
+  (F, S, F) 1.0, 0.0;
+  (S, S, F) 1.0, 0.0;
+  (F, F, S) 1.0, 0.0;
+  (S, F, S) 1.0, 0.0;
+  (F, S, S) 1.0, 0.0;
+  (S, S, S) 0.0, 1.0;
+}
+probability ( X9 ) {
+  table 0.004493, 0.995507;
+}

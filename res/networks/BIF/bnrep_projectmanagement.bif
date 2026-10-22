@@ -1,0 +1,232 @@
+network unknown {
+}
+variable C1 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C2 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C3 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C4 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C5 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C6 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C7 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable C8 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable O1 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable O2 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable O3 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable O4 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R1 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R10 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R11 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R12 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R13 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R14 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R2 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R3 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R4 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R5 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R6 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R7 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R8 {
+  type discrete [ 2 ] { YES, NO };
+}
+variable R9 {
+  type discrete [ 2 ] { YES, NO };
+}
+probability ( C1 ) {
+  table 0.5, 0.5;
+}
+probability ( C2 ) {
+  table 0.5, 0.5;
+}
+probability ( C3 ) {
+  table 0.5, 0.5;
+}
+probability ( C4 ) {
+  table 0.5, 0.5;
+}
+probability ( C5 ) {
+  table 0.5, 0.5;
+}
+probability ( C6 ) {
+  table 0.5, 0.5;
+}
+probability ( C7 ) {
+  table 0.5, 0.5;
+}
+probability ( C8 ) {
+  table 0.5, 0.5;
+}
+probability ( O1 | R1, R6 ) {
+  (YES, YES) 0.99, 0.01;
+  (NO, YES) 0.3, 0.7;
+  (YES, NO) 0.6, 0.4;
+  (NO, NO) 0.05, 0.95;
+}
+probability ( O2 | C2, O1, O3 ) {
+  (YES, YES, YES) 0.7, 0.3;
+  (NO, YES, YES) 0.99, 0.01;
+  (YES, NO, YES) 0.3, 0.7;
+  (NO, NO, YES) 0.6, 0.4;
+  (YES, YES, NO) 0.5, 0.5;
+  (NO, YES, NO) 0.7, 0.3;
+  (YES, NO, NO) 0.01, 0.99;
+  (NO, NO, NO) 0.2, 0.8;
+}
+probability ( O3 | R14, R3, R7, R9 ) {
+  (YES, YES, YES, YES) 0.99, 0.01;
+  (NO, YES, YES, YES) 0.95, 0.05;
+  (YES, NO, YES, YES) 0.95, 0.05;
+  (NO, NO, YES, YES) 0.9, 0.1;
+  (YES, YES, NO, YES) 0.95, 0.05;
+  (NO, YES, NO, YES) 0.9, 0.1;
+  (YES, NO, NO, YES) 0.9, 0.1;
+  (NO, NO, NO, YES) 0.8, 0.2;
+  (YES, YES, YES, NO) 0.95, 0.05;
+  (NO, YES, YES, NO) 0.9, 0.1;
+  (YES, NO, YES, NO) 0.9, 0.1;
+  (NO, NO, YES, NO) 0.8, 0.2;
+  (YES, YES, NO, NO) 0.9, 0.1;
+  (NO, YES, NO, NO) 0.8, 0.2;
+  (YES, NO, NO, NO) 0.8, 0.2;
+  (NO, NO, NO, NO) 0.01, 0.99;
+}
+probability ( O4 | R10, R13, R6, R9 ) {
+  (YES, YES, YES, YES) 0.99, 0.01;
+  (NO, YES, YES, YES) 0.95, 0.05;
+  (YES, NO, YES, YES) 0.9, 0.1;
+  (NO, NO, YES, YES) 0.8, 0.2;
+  (YES, YES, NO, YES) 0.8, 0.2;
+  (NO, YES, NO, YES) 0.9, 0.1;
+  (YES, NO, NO, YES) 0.75, 0.25;
+  (NO, NO, NO, YES) 0.8, 0.2;
+  (YES, YES, YES, NO) 0.9, 0.1;
+  (NO, YES, YES, NO) 0.8, 0.2;
+  (YES, NO, YES, NO) 0.7, 0.3;
+  (NO, NO, YES, NO) 0.65, 0.35;
+  (YES, YES, NO, NO) 0.7, 0.3;
+  (NO, YES, NO, NO) 0.3, 0.7;
+  (YES, NO, NO, NO) 0.65, 0.35;
+  (NO, NO, NO, NO) 0.01, 0.99;
+}
+probability ( R1 | C1 ) {
+  (YES) 0.5, 0.5;
+  (NO) 0.05, 0.95;
+}
+probability ( R10 | R5 ) {
+  (YES) 0.9, 0.1;
+  (NO) 0.2, 0.8;
+}
+probability ( R11 | C2, C3 ) {
+  (YES, YES) 0.95, 0.05;
+  (NO, YES) 0.3, 0.7;
+  (YES, NO) 0.5, 0.5;
+  (NO, NO) 0.03, 0.97;
+}
+probability ( R12 | C6, R4 ) {
+  (YES, YES) 0.99, 0.01;
+  (NO, YES) 0.7, 0.3;
+  (YES, NO) 0.3, 0.7;
+  (NO, NO) 0.02, 0.98;
+}
+probability ( R13 | R1, R8 ) {
+  (YES, YES) 0.95, 0.05;
+  (NO, YES) 0.5, 0.5;
+  (YES, NO) 0.6, 0.4;
+  (NO, NO) 0.03, 0.97;
+}
+probability ( R14 | R11, R12, R6 ) {
+  (YES, YES, YES) 0.99, 0.01;
+  (NO, YES, YES) 0.95, 0.05;
+  (YES, NO, YES) 0.92, 0.08;
+  (NO, NO, YES) 0.89, 0.11;
+  (YES, YES, NO) 0.92, 0.08;
+  (NO, YES, NO) 0.9, 0.1;
+  (YES, NO, NO) 0.9, 0.1;
+  (NO, NO, NO) 0.02, 0.98;
+}
+probability ( R2 | C1 ) {
+  (YES) 0.7, 0.3;
+  (NO) 0.2, 0.8;
+}
+probability ( R3 | C4 ) {
+  (YES) 0.9, 0.1;
+  (NO) 0.3, 0.7;
+}
+probability ( R4 | C5 ) {
+  (YES) 0.8, 0.2;
+  (NO) 0.2, 0.8;
+}
+probability ( R5 | C7 ) {
+  (YES) 0.7, 0.3;
+  (NO) 0.1, 0.9;
+}
+probability ( R6 | C2, C3, C4 ) {
+  (YES, YES, YES) 0.99, 0.01;
+  (NO, YES, YES) 0.6, 0.4;
+  (YES, NO, YES) 0.7, 0.3;
+  (NO, NO, YES) 0.3, 0.7;
+  (YES, YES, NO) 0.8, 0.2;
+  (NO, YES, NO) 0.3, 0.7;
+  (YES, NO, NO) 0.4, 0.6;
+  (NO, NO, NO) 0.01, 0.99;
+}
+probability ( R7 | R2 ) {
+  (YES) 0.99, 0.01;
+  (NO) 0.2, 0.8;
+}
+probability ( R8 | R5 ) {
+  (YES) 0.7, 0.3;
+  (NO) 0.2, 0.8;
+}
+probability ( R9 | C7, C8 ) {
+  (YES, YES) 0.8, 0.2;
+  (NO, YES) 0.5, 0.5;
+  (YES, NO) 0.3, 0.7;
+  (NO, NO) 0.02, 0.98;
+}

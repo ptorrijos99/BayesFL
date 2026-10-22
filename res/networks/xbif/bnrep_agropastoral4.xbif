@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Crop_Specialisation</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Distance_Coast</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Elevation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Exchange_InSettlement</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Exchange_OutSettlement</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Foraging_Intensification</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Landscape</NAME>
+      <OUTCOME>Aquatic</OUTCOME>
+      <OUTCOME>Tundra</OUTCOME>
+      <OUTCOME>Desert</OUTCOME>
+      <OUTCOME>Forest</OUTCOME>
+      <OUTCOME>Grassland</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>None</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Permanent_Migration</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Reciprocity</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Resource_Diversification</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Slope</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Storage</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Temporal_Migration</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Transhumance</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Annual_Temperature</FOR>
+      <GIVEN>Elevation</GIVEN>
+      <TABLE>0.04347826 0.08695652 0.86956522 0.0 0.2459016 0.7540984 0.06976744 0.72093023 0.20930233 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Precipitation</FOR>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <TABLE>0.01666667 0.0 0.98333333 0.0212766 0.0 0.9787234 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Productivity</FOR>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.15 0.025 0.825 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Temperature</FOR>
+      <GIVEN>Annual_Temperature</GIVEN>
+      <TABLE>0.6666667 0.0 0.3333333 0.19230769 0.09615385 0.71153846 0.4 0.3652174 0.2347826 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Crop_Specialisation</FOR>
+      <GIVEN>Resource_Diversification</GIVEN>
+      <TABLE>0.8867925 0.1132075 0.98507463 0.01492537 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Distance_Coast</FOR>
+      <GIVEN>CV_Annual_Productivity</GIVEN>
+      <TABLE>0.0 0.0 1.0 1.0 0.0 0.0 0.14457831 0.07228916 0.78313253 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Elevation</FOR>
+      <TABLE>0.3988439 0.3526012 0.2485549 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Exchange_InSettlement</FOR>
+      <GIVEN>Temporal_Migration</GIVEN>
+      <TABLE>0.8601399 0.1398601 0.6666667 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Exchange_OutSettlement</FOR>
+      <GIVEN>Temporal_Migration</GIVEN>
+      <TABLE>0.6573427 0.3426573 0.3333333 0.6666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Foraging_Intensification</FOR>
+      <TABLE>0.849711 0.150289 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Landscape</FOR>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.0 0.05 0.275 0.125 0.55 0.03296703 0.0 0.01098901 0.56043956 0.3956044 0.0 0.0 0.0 0.97619048 0.02380952 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Precipitation</FOR>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <TABLE>0.11666667 0.06666667 0.81666667 0.1276596 0.2765957 0.5957447 0.4545455 0.3787879 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Productivity</FOR>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.744186 0.255814 0.0 0.1428571 0.5714286 0.2857143 0.02272727 0.63636364 0.34090909 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>None</FOR>
+      <TABLE>0.97109827 0.02890173 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Permanent_Migration</FOR>
+      <GIVEN>Temporal_Migration</GIVEN>
+      <TABLE>0.93006993 0.06993007 0.7666667 0.2333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Reciprocity</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.93706294 0.06293706 0.6666667 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Resource_Diversification</FOR>
+      <TABLE>0.6127168 0.3872832 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Slope</FOR>
+      <GIVEN>Elevation</GIVEN>
+      <TABLE>0.56521739 0.36231884 0.07246377 0.2622951 0.3606557 0.3770492 0.09302326 0.37209302 0.53488372 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Storage</FOR>
+      <TABLE>0.91907514 0.08092486 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Temporal_Migration</FOR>
+      <TABLE>0.8265896 0.1734104 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Transhumance</FOR>
+      <TABLE>0.91907514 0.08092486 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,1133 @@
+network unknown {
+}
+variable A1 {
+  type discrete [ 2 ] { True, False };
+}
+variable A2 {
+  type discrete [ 2 ] { True, False };
+}
+variable A3 {
+  type discrete [ 2 ] { True, False };
+}
+variable Dragline {
+  type discrete [ 2 ] { True, False };
+}
+variable S1 {
+  type discrete [ 2 ] { True, False };
+}
+variable S2 {
+  type discrete [ 2 ] { True, False };
+}
+variable S3 {
+  type discrete [ 2 ] { True, False };
+}
+variable S4 {
+  type discrete [ 2 ] { True, False };
+}
+variable S5 {
+  type discrete [ 2 ] { True, False };
+}
+variable S6 {
+  type discrete [ 2 ] { True, False };
+}
+variable S7 {
+  type discrete [ 2 ] { True, False };
+}
+variable X1 {
+  type discrete [ 2 ] { True, False };
+}
+variable X10 {
+  type discrete [ 2 ] { True, False };
+}
+variable X11 {
+  type discrete [ 2 ] { True, False };
+}
+variable X12 {
+  type discrete [ 2 ] { True, False };
+}
+variable X13 {
+  type discrete [ 2 ] { True, False };
+}
+variable X14 {
+  type discrete [ 2 ] { True, False };
+}
+variable X15 {
+  type discrete [ 2 ] { True, False };
+}
+variable X16 {
+  type discrete [ 2 ] { True, False };
+}
+variable X17 {
+  type discrete [ 2 ] { True, False };
+}
+variable X18 {
+  type discrete [ 2 ] { True, False };
+}
+variable X19 {
+  type discrete [ 2 ] { True, False };
+}
+variable X2 {
+  type discrete [ 2 ] { True, False };
+}
+variable X20 {
+  type discrete [ 2 ] { True, False };
+}
+variable X21 {
+  type discrete [ 2 ] { True, False };
+}
+variable X22 {
+  type discrete [ 2 ] { True, False };
+}
+variable X23 {
+  type discrete [ 2 ] { True, False };
+}
+variable X24 {
+  type discrete [ 2 ] { True, False };
+}
+variable X25 {
+  type discrete [ 2 ] { True, False };
+}
+variable X26 {
+  type discrete [ 2 ] { True, False };
+}
+variable X27 {
+  type discrete [ 2 ] { True, False };
+}
+variable X28 {
+  type discrete [ 2 ] { True, False };
+}
+variable X29 {
+  type discrete [ 2 ] { True, False };
+}
+variable X3 {
+  type discrete [ 2 ] { True, False };
+}
+variable X30 {
+  type discrete [ 2 ] { True, False };
+}
+variable X31 {
+  type discrete [ 2 ] { True, False };
+}
+variable X32 {
+  type discrete [ 2 ] { True, False };
+}
+variable X33 {
+  type discrete [ 2 ] { True, False };
+}
+variable X34 {
+  type discrete [ 2 ] { True, False };
+}
+variable X35 {
+  type discrete [ 2 ] { True, False };
+}
+variable X36 {
+  type discrete [ 2 ] { True, False };
+}
+variable X37 {
+  type discrete [ 2 ] { True, False };
+}
+variable X38 {
+  type discrete [ 2 ] { True, False };
+}
+variable X39 {
+  type discrete [ 2 ] { True, False };
+}
+variable X4 {
+  type discrete [ 2 ] { True, False };
+}
+variable X40 {
+  type discrete [ 2 ] { True, False };
+}
+variable X5 {
+  type discrete [ 2 ] { True, False };
+}
+variable X6 {
+  type discrete [ 2 ] { True, False };
+}
+variable X7 {
+  type discrete [ 2 ] { True, False };
+}
+variable X8 {
+  type discrete [ 2 ] { True, False };
+}
+variable X9 {
+  type discrete [ 2 ] { True, False };
+}
+probability ( A1 | X6, X7 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( A2 | X19, X20 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( A3 | X29, X30 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( Dragline | S1, S2, S3, S4, S5, S6, S7 ) {
+  (True, True, True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True, True, True) 1.0, 0.0;
+  (False, True, False, True, True, True, True) 1.0, 0.0;
+  (True, False, False, True, True, True, True) 1.0, 0.0;
+  (False, False, False, True, True, True, True) 1.0, 0.0;
+  (True, True, True, False, True, True, True) 1.0, 0.0;
+  (False, True, True, False, True, True, True) 1.0, 0.0;
+  (True, False, True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, False, True, True, True) 1.0, 0.0;
+  (True, True, False, False, True, True, True) 1.0, 0.0;
+  (False, True, False, False, True, True, True) 1.0, 0.0;
+  (True, False, False, False, True, True, True) 1.0, 0.0;
+  (False, False, False, False, True, True, True) 1.0, 0.0;
+  (True, True, True, True, False, True, True) 1.0, 0.0;
+  (False, True, True, True, False, True, True) 1.0, 0.0;
+  (True, False, True, True, False, True, True) 1.0, 0.0;
+  (False, False, True, True, False, True, True) 1.0, 0.0;
+  (True, True, False, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, False, True, True) 1.0, 0.0;
+  (False, False, False, True, False, True, True) 1.0, 0.0;
+  (True, True, True, False, False, True, True) 1.0, 0.0;
+  (False, True, True, False, False, True, True) 1.0, 0.0;
+  (True, False, True, False, False, True, True) 1.0, 0.0;
+  (False, False, True, False, False, True, True) 1.0, 0.0;
+  (True, True, False, False, False, True, True) 1.0, 0.0;
+  (False, True, False, False, False, True, True) 1.0, 0.0;
+  (True, False, False, False, False, True, True) 1.0, 0.0;
+  (False, False, False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, True, True, False, True) 1.0, 0.0;
+  (True, False, True, True, True, False, True) 1.0, 0.0;
+  (False, False, True, True, True, False, True) 1.0, 0.0;
+  (True, True, False, True, True, False, True) 1.0, 0.0;
+  (False, True, False, True, True, False, True) 1.0, 0.0;
+  (True, False, False, True, True, False, True) 1.0, 0.0;
+  (False, False, False, True, True, False, True) 1.0, 0.0;
+  (True, True, True, False, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True, False, True) 1.0, 0.0;
+  (False, True, False, False, True, False, True) 1.0, 0.0;
+  (True, False, False, False, True, False, True) 1.0, 0.0;
+  (False, False, False, False, True, False, True) 1.0, 0.0;
+  (True, True, True, True, False, False, True) 1.0, 0.0;
+  (False, True, True, True, False, False, True) 1.0, 0.0;
+  (True, False, True, True, False, False, True) 1.0, 0.0;
+  (False, False, True, True, False, False, True) 1.0, 0.0;
+  (True, True, False, True, False, False, True) 1.0, 0.0;
+  (False, True, False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, True, False, False, True) 1.0, 0.0;
+  (False, False, False, True, False, False, True) 1.0, 0.0;
+  (True, True, True, False, False, False, True) 1.0, 0.0;
+  (False, True, True, False, False, False, True) 1.0, 0.0;
+  (True, False, True, False, False, False, True) 1.0, 0.0;
+  (False, False, True, False, False, False, True) 1.0, 0.0;
+  (True, True, False, False, False, False, True) 1.0, 0.0;
+  (False, True, False, False, False, False, True) 1.0, 0.0;
+  (True, False, False, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, True, True, False) 1.0, 0.0;
+  (False, False, True, True, True, True, False) 1.0, 0.0;
+  (True, True, False, True, True, True, False) 1.0, 0.0;
+  (False, True, False, True, True, True, False) 1.0, 0.0;
+  (True, False, False, True, True, True, False) 1.0, 0.0;
+  (False, False, False, True, True, True, False) 1.0, 0.0;
+  (True, True, True, False, True, True, False) 1.0, 0.0;
+  (False, True, True, False, True, True, False) 1.0, 0.0;
+  (True, False, True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, False, True, True, False) 1.0, 0.0;
+  (True, True, False, False, True, True, False) 1.0, 0.0;
+  (False, True, False, False, True, True, False) 1.0, 0.0;
+  (True, False, False, False, True, True, False) 1.0, 0.0;
+  (False, False, False, False, True, True, False) 1.0, 0.0;
+  (True, True, True, True, False, True, False) 1.0, 0.0;
+  (False, True, True, True, False, True, False) 1.0, 0.0;
+  (True, False, True, True, False, True, False) 1.0, 0.0;
+  (False, False, True, True, False, True, False) 1.0, 0.0;
+  (True, True, False, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False, True, False) 1.0, 0.0;
+  (False, True, True, False, False, True, False) 1.0, 0.0;
+  (True, False, True, False, False, True, False) 1.0, 0.0;
+  (False, False, True, False, False, True, False) 1.0, 0.0;
+  (True, True, False, False, False, True, False) 1.0, 0.0;
+  (False, True, False, False, False, True, False) 1.0, 0.0;
+  (True, False, False, False, False, True, False) 1.0, 0.0;
+  (False, False, False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, True, True, False, False) 1.0, 0.0;
+  (True, False, True, True, True, False, False) 1.0, 0.0;
+  (False, False, True, True, True, False, False) 1.0, 0.0;
+  (True, True, False, True, True, False, False) 1.0, 0.0;
+  (False, True, False, True, True, False, False) 1.0, 0.0;
+  (True, False, False, True, True, False, False) 1.0, 0.0;
+  (False, False, False, True, True, False, False) 1.0, 0.0;
+  (True, True, True, False, True, False, False) 1.0, 0.0;
+  (False, True, True, False, True, False, False) 1.0, 0.0;
+  (True, False, True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, True, False, False) 1.0, 0.0;
+  (False, True, False, False, True, False, False) 1.0, 0.0;
+  (True, False, False, False, True, False, False) 1.0, 0.0;
+  (False, False, False, False, True, False, False) 1.0, 0.0;
+  (True, True, True, True, False, False, False) 1.0, 0.0;
+  (False, True, True, True, False, False, False) 1.0, 0.0;
+  (True, False, True, True, False, False, False) 1.0, 0.0;
+  (False, False, True, True, False, False, False) 1.0, 0.0;
+  (True, True, False, True, False, False, False) 1.0, 0.0;
+  (False, True, False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, True, False, False, False) 1.0, 0.0;
+  (False, False, False, True, False, False, False) 1.0, 0.0;
+  (True, True, True, False, False, False, False) 1.0, 0.0;
+  (False, True, True, False, False, False, False) 1.0, 0.0;
+  (True, False, True, False, False, False, False) 1.0, 0.0;
+  (False, False, True, False, False, False, False) 1.0, 0.0;
+  (True, True, False, False, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S1 | X1, X2, X3, X4, X5 ) {
+  (True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S2 | A1, X10, X11, X12, X13, X14, X15, X8, X9 ) {
+  (True, True, True, True, True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True, True, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True, True, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True, True, True, True, True) 1.0, 0.0;
+  (False, True, False, True, True, True, True, True, True) 1.0, 0.0;
+  (True, False, False, True, True, True, True, True, True) 1.0, 0.0;
+  (False, False, False, True, True, True, True, True, True) 1.0, 0.0;
+  (True, True, True, False, True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, False, True, True, True, True, True) 1.0, 0.0;
+  (True, False, True, False, True, True, True, True, True) 1.0, 0.0;
+  (False, False, True, False, True, True, True, True, True) 1.0, 0.0;
+  (True, True, False, False, True, True, True, True, True) 1.0, 0.0;
+  (False, True, False, False, True, True, True, True, True) 1.0, 0.0;
+  (True, False, False, False, True, True, True, True, True) 1.0, 0.0;
+  (False, False, False, False, True, True, True, True, True) 1.0, 0.0;
+  (True, True, True, True, False, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, False, True, True, True, True) 1.0, 0.0;
+  (False, False, True, True, False, True, True, True, True) 1.0, 0.0;
+  (True, True, False, True, False, True, True, True, True) 1.0, 0.0;
+  (False, True, False, True, False, True, True, True, True) 1.0, 0.0;
+  (True, False, False, True, False, True, True, True, True) 1.0, 0.0;
+  (False, False, False, True, False, True, True, True, True) 1.0, 0.0;
+  (True, True, True, False, False, True, True, True, True) 1.0, 0.0;
+  (False, True, True, False, False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, False, False, True, True, True, True) 1.0, 0.0;
+  (False, False, True, False, False, True, True, True, True) 1.0, 0.0;
+  (True, True, False, False, False, True, True, True, True) 1.0, 0.0;
+  (False, True, False, False, False, True, True, True, True) 1.0, 0.0;
+  (True, False, False, False, False, True, True, True, True) 1.0, 0.0;
+  (False, False, False, False, False, True, True, True, True) 1.0, 0.0;
+  (True, True, True, True, True, False, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True, False, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True, False, True, True, True) 1.0, 0.0;
+  (False, True, False, True, True, False, True, True, True) 1.0, 0.0;
+  (True, False, False, True, True, False, True, True, True) 1.0, 0.0;
+  (False, False, False, True, True, False, True, True, True) 1.0, 0.0;
+  (True, True, True, False, True, False, True, True, True) 1.0, 0.0;
+  (False, True, True, False, True, False, True, True, True) 1.0, 0.0;
+  (True, False, True, False, True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, False, True, False, True, True, True) 1.0, 0.0;
+  (True, True, False, False, True, False, True, True, True) 1.0, 0.0;
+  (False, True, False, False, True, False, True, True, True) 1.0, 0.0;
+  (True, False, False, False, True, False, True, True, True) 1.0, 0.0;
+  (False, False, False, False, True, False, True, True, True) 1.0, 0.0;
+  (True, True, True, True, False, False, True, True, True) 1.0, 0.0;
+  (False, True, True, True, False, False, True, True, True) 1.0, 0.0;
+  (True, False, True, True, False, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, False, False, True, True, True) 1.0, 0.0;
+  (False, True, False, True, False, False, True, True, True) 1.0, 0.0;
+  (True, False, False, True, False, False, True, True, True) 1.0, 0.0;
+  (False, False, False, True, False, False, True, True, True) 1.0, 0.0;
+  (True, True, True, False, False, False, True, True, True) 1.0, 0.0;
+  (False, True, True, False, False, False, True, True, True) 1.0, 0.0;
+  (True, False, True, False, False, False, True, True, True) 1.0, 0.0;
+  (False, False, True, False, False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, False, False, False, True, True, True) 1.0, 0.0;
+  (False, True, False, False, False, False, True, True, True) 1.0, 0.0;
+  (True, False, False, False, False, False, True, True, True) 1.0, 0.0;
+  (False, False, False, False, False, False, True, True, True) 1.0, 0.0;
+  (True, True, True, True, True, True, False, True, True) 1.0, 0.0;
+  (False, True, True, True, True, True, False, True, True) 1.0, 0.0;
+  (True, False, True, True, True, True, False, True, True) 1.0, 0.0;
+  (False, False, True, True, True, True, False, True, True) 1.0, 0.0;
+  (True, True, False, True, True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True, True, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True, True, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True, True, False, True, True) 1.0, 0.0;
+  (False, True, True, False, True, True, False, True, True) 1.0, 0.0;
+  (True, False, True, False, True, True, False, True, True) 1.0, 0.0;
+  (False, False, True, False, True, True, False, True, True) 1.0, 0.0;
+  (True, True, False, False, True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, False, True, True, False, True, True) 1.0, 0.0;
+  (True, False, False, False, True, True, False, True, True) 1.0, 0.0;
+  (False, False, False, False, True, True, False, True, True) 1.0, 0.0;
+  (True, True, True, True, False, True, False, True, True) 1.0, 0.0;
+  (False, True, True, True, False, True, False, True, True) 1.0, 0.0;
+  (True, False, True, True, False, True, False, True, True) 1.0, 0.0;
+  (False, False, True, True, False, True, False, True, True) 1.0, 0.0;
+  (True, True, False, True, False, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, False, True, False, True, True) 1.0, 0.0;
+  (False, False, False, True, False, True, False, True, True) 1.0, 0.0;
+  (True, True, True, False, False, True, False, True, True) 1.0, 0.0;
+  (False, True, True, False, False, True, False, True, True) 1.0, 0.0;
+  (True, False, True, False, False, True, False, True, True) 1.0, 0.0;
+  (False, False, True, False, False, True, False, True, True) 1.0, 0.0;
+  (True, True, False, False, False, True, False, True, True) 1.0, 0.0;
+  (False, True, False, False, False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, False, False, True, False, True, True) 1.0, 0.0;
+  (False, False, False, False, False, True, False, True, True) 1.0, 0.0;
+  (True, True, True, True, True, False, False, True, True) 1.0, 0.0;
+  (False, True, True, True, True, False, False, True, True) 1.0, 0.0;
+  (True, False, True, True, True, False, False, True, True) 1.0, 0.0;
+  (False, False, True, True, True, False, False, True, True) 1.0, 0.0;
+  (True, True, False, True, True, False, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True, False, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True, False, False, True, True) 1.0, 0.0;
+  (False, True, True, False, True, False, False, True, True) 1.0, 0.0;
+  (True, False, True, False, True, False, False, True, True) 1.0, 0.0;
+  (False, False, True, False, True, False, False, True, True) 1.0, 0.0;
+  (True, True, False, False, True, False, False, True, True) 1.0, 0.0;
+  (False, True, False, False, True, False, False, True, True) 1.0, 0.0;
+  (True, False, False, False, True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, False, True, False, False, True, True) 1.0, 0.0;
+  (True, True, True, True, False, False, False, True, True) 1.0, 0.0;
+  (False, True, True, True, False, False, False, True, True) 1.0, 0.0;
+  (True, False, True, True, False, False, False, True, True) 1.0, 0.0;
+  (False, False, True, True, False, False, False, True, True) 1.0, 0.0;
+  (True, True, False, True, False, False, False, True, True) 1.0, 0.0;
+  (False, True, False, True, False, False, False, True, True) 1.0, 0.0;
+  (True, False, False, True, False, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, False, False, False, True, True) 1.0, 0.0;
+  (False, True, True, False, False, False, False, True, True) 1.0, 0.0;
+  (True, False, True, False, False, False, False, True, True) 1.0, 0.0;
+  (False, False, True, False, False, False, False, True, True) 1.0, 0.0;
+  (True, True, False, False, False, False, False, True, True) 1.0, 0.0;
+  (False, True, False, False, False, False, False, True, True) 1.0, 0.0;
+  (True, False, False, False, False, False, False, True, True) 1.0, 0.0;
+  (False, False, False, False, False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, True, True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, True, True, True, True, False, True) 1.0, 0.0;
+  (True, False, True, True, True, True, True, False, True) 1.0, 0.0;
+  (False, False, True, True, True, True, True, False, True) 1.0, 0.0;
+  (True, True, False, True, True, True, True, False, True) 1.0, 0.0;
+  (False, True, False, True, True, True, True, False, True) 1.0, 0.0;
+  (True, False, False, True, True, True, True, False, True) 1.0, 0.0;
+  (False, False, False, True, True, True, True, False, True) 1.0, 0.0;
+  (True, True, True, False, True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True, True, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True, True, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True, True, True, False, True) 1.0, 0.0;
+  (False, True, False, False, True, True, True, False, True) 1.0, 0.0;
+  (True, False, False, False, True, True, True, False, True) 1.0, 0.0;
+  (False, False, False, False, True, True, True, False, True) 1.0, 0.0;
+  (True, True, True, True, False, True, True, False, True) 1.0, 0.0;
+  (False, True, True, True, False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, True, False, True, True, False, True) 1.0, 0.0;
+  (False, False, True, True, False, True, True, False, True) 1.0, 0.0;
+  (True, True, False, True, False, True, True, False, True) 1.0, 0.0;
+  (False, True, False, True, False, True, True, False, True) 1.0, 0.0;
+  (True, False, False, True, False, True, True, False, True) 1.0, 0.0;
+  (False, False, False, True, False, True, True, False, True) 1.0, 0.0;
+  (True, True, True, False, False, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, False, True, True, False, True) 1.0, 0.0;
+  (False, False, True, False, False, True, True, False, True) 1.0, 0.0;
+  (True, True, False, False, False, True, True, False, True) 1.0, 0.0;
+  (False, True, False, False, False, True, True, False, True) 1.0, 0.0;
+  (True, False, False, False, False, True, True, False, True) 1.0, 0.0;
+  (False, False, False, False, False, True, True, False, True) 1.0, 0.0;
+  (True, True, True, True, True, False, True, False, True) 1.0, 0.0;
+  (False, True, True, True, True, False, True, False, True) 1.0, 0.0;
+  (True, False, True, True, True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, True, True, False, True, False, True) 1.0, 0.0;
+  (True, True, False, True, True, False, True, False, True) 1.0, 0.0;
+  (False, True, False, True, True, False, True, False, True) 1.0, 0.0;
+  (True, False, False, True, True, False, True, False, True) 1.0, 0.0;
+  (False, False, False, True, True, False, True, False, True) 1.0, 0.0;
+  (True, True, True, False, True, False, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True, False, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True, False, True, False, True) 1.0, 0.0;
+  (False, True, False, False, True, False, True, False, True) 1.0, 0.0;
+  (True, False, False, False, True, False, True, False, True) 1.0, 0.0;
+  (False, False, False, False, True, False, True, False, True) 1.0, 0.0;
+  (True, True, True, True, False, False, True, False, True) 1.0, 0.0;
+  (False, True, True, True, False, False, True, False, True) 1.0, 0.0;
+  (True, False, True, True, False, False, True, False, True) 1.0, 0.0;
+  (False, False, True, True, False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, True, False, False, True, False, True) 1.0, 0.0;
+  (False, True, False, True, False, False, True, False, True) 1.0, 0.0;
+  (True, False, False, True, False, False, True, False, True) 1.0, 0.0;
+  (False, False, False, True, False, False, True, False, True) 1.0, 0.0;
+  (True, True, True, False, False, False, True, False, True) 1.0, 0.0;
+  (False, True, True, False, False, False, True, False, True) 1.0, 0.0;
+  (True, False, True, False, False, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, False, False, True, False, True) 1.0, 0.0;
+  (False, True, False, False, False, False, True, False, True) 1.0, 0.0;
+  (True, False, False, False, False, False, True, False, True) 1.0, 0.0;
+  (False, False, False, False, False, False, True, False, True) 1.0, 0.0;
+  (True, True, True, True, True, True, False, False, True) 1.0, 0.0;
+  (False, True, True, True, True, True, False, False, True) 1.0, 0.0;
+  (True, False, True, True, True, True, False, False, True) 1.0, 0.0;
+  (False, False, True, True, True, True, False, False, True) 1.0, 0.0;
+  (True, True, False, True, True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, True, True, True, False, False, True) 1.0, 0.0;
+  (True, False, False, True, True, True, False, False, True) 1.0, 0.0;
+  (False, False, False, True, True, True, False, False, True) 1.0, 0.0;
+  (True, True, True, False, True, True, False, False, True) 1.0, 0.0;
+  (False, True, True, False, True, True, False, False, True) 1.0, 0.0;
+  (True, False, True, False, True, True, False, False, True) 1.0, 0.0;
+  (False, False, True, False, True, True, False, False, True) 1.0, 0.0;
+  (True, True, False, False, True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True, True, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True, True, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False, True, False, False, True) 1.0, 0.0;
+  (False, True, True, True, False, True, False, False, True) 1.0, 0.0;
+  (True, False, True, True, False, True, False, False, True) 1.0, 0.0;
+  (False, False, True, True, False, True, False, False, True) 1.0, 0.0;
+  (True, True, False, True, False, True, False, False, True) 1.0, 0.0;
+  (False, True, False, True, False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, True, False, True, False, False, True) 1.0, 0.0;
+  (False, False, False, True, False, True, False, False, True) 1.0, 0.0;
+  (True, True, True, False, False, True, False, False, True) 1.0, 0.0;
+  (False, True, True, False, False, True, False, False, True) 1.0, 0.0;
+  (True, False, True, False, False, True, False, False, True) 1.0, 0.0;
+  (False, False, True, False, False, True, False, False, True) 1.0, 0.0;
+  (True, True, False, False, False, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, False, True, False, False, True) 1.0, 0.0;
+  (False, False, False, False, False, True, False, False, True) 1.0, 0.0;
+  (True, True, True, True, True, False, False, False, True) 1.0, 0.0;
+  (False, True, True, True, True, False, False, False, True) 1.0, 0.0;
+  (True, False, True, True, True, False, False, False, True) 1.0, 0.0;
+  (False, False, True, True, True, False, False, False, True) 1.0, 0.0;
+  (True, True, False, True, True, False, False, False, True) 1.0, 0.0;
+  (False, True, False, True, True, False, False, False, True) 1.0, 0.0;
+  (True, False, False, True, True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, True, True, False, False, False, True) 1.0, 0.0;
+  (True, True, True, False, True, False, False, False, True) 1.0, 0.0;
+  (False, True, True, False, True, False, False, False, True) 1.0, 0.0;
+  (True, False, True, False, True, False, False, False, True) 1.0, 0.0;
+  (False, False, True, False, True, False, False, False, True) 1.0, 0.0;
+  (True, True, False, False, True, False, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True, False, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False, False, False, False, True) 1.0, 0.0;
+  (False, True, True, True, False, False, False, False, True) 1.0, 0.0;
+  (True, False, True, True, False, False, False, False, True) 1.0, 0.0;
+  (False, False, True, True, False, False, False, False, True) 1.0, 0.0;
+  (True, True, False, True, False, False, False, False, True) 1.0, 0.0;
+  (False, True, False, True, False, False, False, False, True) 1.0, 0.0;
+  (True, False, False, True, False, False, False, False, True) 1.0, 0.0;
+  (False, False, False, True, False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, False, False, False, False, False, True) 1.0, 0.0;
+  (False, True, True, False, False, False, False, False, True) 1.0, 0.0;
+  (True, False, True, False, False, False, False, False, True) 1.0, 0.0;
+  (False, False, True, False, False, False, False, False, True) 1.0, 0.0;
+  (True, True, False, False, False, False, False, False, True) 1.0, 0.0;
+  (False, True, False, False, False, False, False, False, True) 1.0, 0.0;
+  (True, False, False, False, False, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, True, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, True, True, True, True, False) 1.0, 0.0;
+  (False, False, True, True, True, True, True, True, False) 1.0, 0.0;
+  (True, True, False, True, True, True, True, True, False) 1.0, 0.0;
+  (False, True, False, True, True, True, True, True, False) 1.0, 0.0;
+  (True, False, False, True, True, True, True, True, False) 1.0, 0.0;
+  (False, False, False, True, True, True, True, True, False) 1.0, 0.0;
+  (True, True, True, False, True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, False, True, True, True, True, False) 1.0, 0.0;
+  (True, False, True, False, True, True, True, True, False) 1.0, 0.0;
+  (False, False, True, False, True, True, True, True, False) 1.0, 0.0;
+  (True, True, False, False, True, True, True, True, False) 1.0, 0.0;
+  (False, True, False, False, True, True, True, True, False) 1.0, 0.0;
+  (True, False, False, False, True, True, True, True, False) 1.0, 0.0;
+  (False, False, False, False, True, True, True, True, False) 1.0, 0.0;
+  (True, True, True, True, False, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False, True, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False, True, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False, True, True, True, False) 1.0, 0.0;
+  (False, True, False, True, False, True, True, True, False) 1.0, 0.0;
+  (True, False, False, True, False, True, True, True, False) 1.0, 0.0;
+  (False, False, False, True, False, True, True, True, False) 1.0, 0.0;
+  (True, True, True, False, False, True, True, True, False) 1.0, 0.0;
+  (False, True, True, False, False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, False, False, True, True, True, False) 1.0, 0.0;
+  (False, False, True, False, False, True, True, True, False) 1.0, 0.0;
+  (True, True, False, False, False, True, True, True, False) 1.0, 0.0;
+  (False, True, False, False, False, True, True, True, False) 1.0, 0.0;
+  (True, False, False, False, False, True, True, True, False) 1.0, 0.0;
+  (False, False, False, False, False, True, True, True, False) 1.0, 0.0;
+  (True, True, True, True, True, False, True, True, False) 1.0, 0.0;
+  (False, True, True, True, True, False, True, True, False) 1.0, 0.0;
+  (True, False, True, True, True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, True, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, True, False, True, True, False) 1.0, 0.0;
+  (False, True, False, True, True, False, True, True, False) 1.0, 0.0;
+  (True, False, False, True, True, False, True, True, False) 1.0, 0.0;
+  (False, False, False, True, True, False, True, True, False) 1.0, 0.0;
+  (True, True, True, False, True, False, True, True, False) 1.0, 0.0;
+  (False, True, True, False, True, False, True, True, False) 1.0, 0.0;
+  (True, False, True, False, True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, False, True, False, True, True, False) 1.0, 0.0;
+  (True, True, False, False, True, False, True, True, False) 1.0, 0.0;
+  (False, True, False, False, True, False, True, True, False) 1.0, 0.0;
+  (True, False, False, False, True, False, True, True, False) 1.0, 0.0;
+  (False, False, False, False, True, False, True, True, False) 1.0, 0.0;
+  (True, True, True, True, False, False, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False, False, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False, False, True, True, False) 1.0, 0.0;
+  (False, True, False, True, False, False, True, True, False) 1.0, 0.0;
+  (True, False, False, True, False, False, True, True, False) 1.0, 0.0;
+  (False, False, False, True, False, False, True, True, False) 1.0, 0.0;
+  (True, True, True, False, False, False, True, True, False) 1.0, 0.0;
+  (False, True, True, False, False, False, True, True, False) 1.0, 0.0;
+  (True, False, True, False, False, False, True, True, False) 1.0, 0.0;
+  (False, False, True, False, False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, False, False, False, True, True, False) 1.0, 0.0;
+  (False, True, False, False, False, False, True, True, False) 1.0, 0.0;
+  (True, False, False, False, False, False, True, True, False) 1.0, 0.0;
+  (False, False, False, False, False, False, True, True, False) 1.0, 0.0;
+  (True, True, True, True, True, True, False, True, False) 1.0, 0.0;
+  (False, True, True, True, True, True, False, True, False) 1.0, 0.0;
+  (True, False, True, True, True, True, False, True, False) 1.0, 0.0;
+  (False, False, True, True, True, True, False, True, False) 1.0, 0.0;
+  (True, True, False, True, True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, True, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, True, True, False, True, False) 1.0, 0.0;
+  (False, False, False, True, True, True, False, True, False) 1.0, 0.0;
+  (True, True, True, False, True, True, False, True, False) 1.0, 0.0;
+  (False, True, True, False, True, True, False, True, False) 1.0, 0.0;
+  (True, False, True, False, True, True, False, True, False) 1.0, 0.0;
+  (False, False, True, False, True, True, False, True, False) 1.0, 0.0;
+  (True, True, False, False, True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, False, True, True, False, True, False) 1.0, 0.0;
+  (True, False, False, False, True, True, False, True, False) 1.0, 0.0;
+  (False, False, False, False, True, True, False, True, False) 1.0, 0.0;
+  (True, True, True, True, False, True, False, True, False) 1.0, 0.0;
+  (False, True, True, True, False, True, False, True, False) 1.0, 0.0;
+  (True, False, True, True, False, True, False, True, False) 1.0, 0.0;
+  (False, False, True, True, False, True, False, True, False) 1.0, 0.0;
+  (True, True, False, True, False, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False, True, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False, True, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False, True, False, True, False) 1.0, 0.0;
+  (False, True, True, False, False, True, False, True, False) 1.0, 0.0;
+  (True, False, True, False, False, True, False, True, False) 1.0, 0.0;
+  (False, False, True, False, False, True, False, True, False) 1.0, 0.0;
+  (True, True, False, False, False, True, False, True, False) 1.0, 0.0;
+  (False, True, False, False, False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, False, False, True, False, True, False) 1.0, 0.0;
+  (False, False, False, False, False, True, False, True, False) 1.0, 0.0;
+  (True, True, True, True, True, False, False, True, False) 1.0, 0.0;
+  (False, True, True, True, True, False, False, True, False) 1.0, 0.0;
+  (True, False, True, True, True, False, False, True, False) 1.0, 0.0;
+  (False, False, True, True, True, False, False, True, False) 1.0, 0.0;
+  (True, True, False, True, True, False, False, True, False) 1.0, 0.0;
+  (False, True, False, True, True, False, False, True, False) 1.0, 0.0;
+  (True, False, False, True, True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, True, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, True, False, False, True, False) 1.0, 0.0;
+  (False, True, True, False, True, False, False, True, False) 1.0, 0.0;
+  (True, False, True, False, True, False, False, True, False) 1.0, 0.0;
+  (False, False, True, False, True, False, False, True, False) 1.0, 0.0;
+  (True, True, False, False, True, False, False, True, False) 1.0, 0.0;
+  (False, True, False, False, True, False, False, True, False) 1.0, 0.0;
+  (True, False, False, False, True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, False, True, False, False, True, False) 1.0, 0.0;
+  (True, True, True, True, False, False, False, True, False) 1.0, 0.0;
+  (False, True, True, True, False, False, False, True, False) 1.0, 0.0;
+  (True, False, True, True, False, False, False, True, False) 1.0, 0.0;
+  (False, False, True, True, False, False, False, True, False) 1.0, 0.0;
+  (True, True, False, True, False, False, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False, False, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False, False, False, True, False) 1.0, 0.0;
+  (False, True, True, False, False, False, False, True, False) 1.0, 0.0;
+  (True, False, True, False, False, False, False, True, False) 1.0, 0.0;
+  (False, False, True, False, False, False, False, True, False) 1.0, 0.0;
+  (True, True, False, False, False, False, False, True, False) 1.0, 0.0;
+  (False, True, False, False, False, False, False, True, False) 1.0, 0.0;
+  (True, False, False, False, False, False, False, True, False) 1.0, 0.0;
+  (False, False, False, False, False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, True, True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, True, True, True, True, False, False) 1.0, 0.0;
+  (True, False, True, True, True, True, True, False, False) 1.0, 0.0;
+  (False, False, True, True, True, True, True, False, False) 1.0, 0.0;
+  (True, True, False, True, True, True, True, False, False) 1.0, 0.0;
+  (False, True, False, True, True, True, True, False, False) 1.0, 0.0;
+  (True, False, False, True, True, True, True, False, False) 1.0, 0.0;
+  (False, False, False, True, True, True, True, False, False) 1.0, 0.0;
+  (True, True, True, False, True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, True, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, True, True, True, False, False) 1.0, 0.0;
+  (False, False, True, False, True, True, True, False, False) 1.0, 0.0;
+  (True, True, False, False, True, True, True, False, False) 1.0, 0.0;
+  (False, True, False, False, True, True, True, False, False) 1.0, 0.0;
+  (True, False, False, False, True, True, True, False, False) 1.0, 0.0;
+  (False, False, False, False, True, True, True, False, False) 1.0, 0.0;
+  (True, True, True, True, False, True, True, False, False) 1.0, 0.0;
+  (False, True, True, True, False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, True, False, True, True, False, False) 1.0, 0.0;
+  (False, False, True, True, False, True, True, False, False) 1.0, 0.0;
+  (True, True, False, True, False, True, True, False, False) 1.0, 0.0;
+  (False, True, False, True, False, True, True, False, False) 1.0, 0.0;
+  (True, False, False, True, False, True, True, False, False) 1.0, 0.0;
+  (False, False, False, True, False, True, True, False, False) 1.0, 0.0;
+  (True, True, True, False, False, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False, True, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False, True, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False, True, True, False, False) 1.0, 0.0;
+  (False, True, False, False, False, True, True, False, False) 1.0, 0.0;
+  (True, False, False, False, False, True, True, False, False) 1.0, 0.0;
+  (False, False, False, False, False, True, True, False, False) 1.0, 0.0;
+  (True, True, True, True, True, False, True, False, False) 1.0, 0.0;
+  (False, True, True, True, True, False, True, False, False) 1.0, 0.0;
+  (True, False, True, True, True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, True, True, False, True, False, False) 1.0, 0.0;
+  (True, True, False, True, True, False, True, False, False) 1.0, 0.0;
+  (False, True, False, True, True, False, True, False, False) 1.0, 0.0;
+  (True, False, False, True, True, False, True, False, False) 1.0, 0.0;
+  (False, False, False, True, True, False, True, False, False) 1.0, 0.0;
+  (True, True, True, False, True, False, True, False, False) 1.0, 0.0;
+  (False, True, True, False, True, False, True, False, False) 1.0, 0.0;
+  (True, False, True, False, True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, True, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, True, False, True, False, False) 1.0, 0.0;
+  (False, True, False, False, True, False, True, False, False) 1.0, 0.0;
+  (True, False, False, False, True, False, True, False, False) 1.0, 0.0;
+  (False, False, False, False, True, False, True, False, False) 1.0, 0.0;
+  (True, True, True, True, False, False, True, False, False) 1.0, 0.0;
+  (False, True, True, True, False, False, True, False, False) 1.0, 0.0;
+  (True, False, True, True, False, False, True, False, False) 1.0, 0.0;
+  (False, False, True, True, False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, True, False, False, True, False, False) 1.0, 0.0;
+  (False, True, False, True, False, False, True, False, False) 1.0, 0.0;
+  (True, False, False, True, False, False, True, False, False) 1.0, 0.0;
+  (False, False, False, True, False, False, True, False, False) 1.0, 0.0;
+  (True, True, True, False, False, False, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False, False, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False, False, True, False, False) 1.0, 0.0;
+  (False, True, False, False, False, False, True, False, False) 1.0, 0.0;
+  (True, False, False, False, False, False, True, False, False) 1.0, 0.0;
+  (False, False, False, False, False, False, True, False, False) 1.0, 0.0;
+  (True, True, True, True, True, True, False, False, False) 1.0, 0.0;
+  (False, True, True, True, True, True, False, False, False) 1.0, 0.0;
+  (True, False, True, True, True, True, False, False, False) 1.0, 0.0;
+  (False, False, True, True, True, True, False, False, False) 1.0, 0.0;
+  (True, True, False, True, True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, True, True, True, False, False, False) 1.0, 0.0;
+  (True, False, False, True, True, True, False, False, False) 1.0, 0.0;
+  (False, False, False, True, True, True, False, False, False) 1.0, 0.0;
+  (True, True, True, False, True, True, False, False, False) 1.0, 0.0;
+  (False, True, True, False, True, True, False, False, False) 1.0, 0.0;
+  (True, False, True, False, True, True, False, False, False) 1.0, 0.0;
+  (False, False, True, False, True, True, False, False, False) 1.0, 0.0;
+  (True, True, False, False, True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, True, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, True, True, False, False, False) 1.0, 0.0;
+  (False, False, False, False, True, True, False, False, False) 1.0, 0.0;
+  (True, True, True, True, False, True, False, False, False) 1.0, 0.0;
+  (False, True, True, True, False, True, False, False, False) 1.0, 0.0;
+  (True, False, True, True, False, True, False, False, False) 1.0, 0.0;
+  (False, False, True, True, False, True, False, False, False) 1.0, 0.0;
+  (True, True, False, True, False, True, False, False, False) 1.0, 0.0;
+  (False, True, False, True, False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, True, False, True, False, False, False) 1.0, 0.0;
+  (False, False, False, True, False, True, False, False, False) 1.0, 0.0;
+  (True, True, True, False, False, True, False, False, False) 1.0, 0.0;
+  (False, True, True, False, False, True, False, False, False) 1.0, 0.0;
+  (True, False, True, False, False, True, False, False, False) 1.0, 0.0;
+  (False, False, True, False, False, True, False, False, False) 1.0, 0.0;
+  (True, True, False, False, False, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False, True, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False, True, False, False, False) 1.0, 0.0;
+  (True, True, True, True, True, False, False, False, False) 1.0, 0.0;
+  (False, True, True, True, True, False, False, False, False) 1.0, 0.0;
+  (True, False, True, True, True, False, False, False, False) 1.0, 0.0;
+  (False, False, True, True, True, False, False, False, False) 1.0, 0.0;
+  (True, True, False, True, True, False, False, False, False) 1.0, 0.0;
+  (False, True, False, True, True, False, False, False, False) 1.0, 0.0;
+  (True, False, False, True, True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, True, True, False, False, False, False) 1.0, 0.0;
+  (True, True, True, False, True, False, False, False, False) 1.0, 0.0;
+  (False, True, True, False, True, False, False, False, False) 1.0, 0.0;
+  (True, False, True, False, True, False, False, False, False) 1.0, 0.0;
+  (False, False, True, False, True, False, False, False, False) 1.0, 0.0;
+  (True, True, False, False, True, False, False, False, False) 1.0, 0.0;
+  (False, True, False, False, True, False, False, False, False) 1.0, 0.0;
+  (True, False, False, False, True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, True, False, False, False, False) 1.0, 0.0;
+  (True, True, True, True, False, False, False, False, False) 1.0, 0.0;
+  (False, True, True, True, False, False, False, False, False) 1.0, 0.0;
+  (True, False, True, True, False, False, False, False, False) 1.0, 0.0;
+  (False, False, True, True, False, False, False, False, False) 1.0, 0.0;
+  (True, True, False, True, False, False, False, False, False) 1.0, 0.0;
+  (False, True, False, True, False, False, False, False, False) 1.0, 0.0;
+  (True, False, False, True, False, False, False, False, False) 1.0, 0.0;
+  (False, False, False, True, False, False, False, False, False) 1.0, 0.0;
+  (True, True, True, False, False, False, False, False, False) 1.0, 0.0;
+  (False, True, True, False, False, False, False, False, False) 1.0, 0.0;
+  (True, False, True, False, False, False, False, False, False) 1.0, 0.0;
+  (False, False, True, False, False, False, False, False, False) 1.0, 0.0;
+  (True, True, False, False, False, False, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False, False, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S3 | X16, X17, X18 ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 1.0, 0.0;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 1.0, 0.0;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 1.0, 0.0;
+  (True, False, False) 1.0, 0.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( S4 | A2, X21, X22, X23, X24 ) {
+  (True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S5 | A3, X25, X26, X27, X28 ) {
+  (True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True) 1.0, 0.0;
+  (False, True, False, True, True) 1.0, 0.0;
+  (True, False, False, True, True) 1.0, 0.0;
+  (False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, False, True) 1.0, 0.0;
+  (True, False, True, False, True) 1.0, 0.0;
+  (False, False, True, False, True) 1.0, 0.0;
+  (True, True, False, False, True) 1.0, 0.0;
+  (False, True, False, False, True) 1.0, 0.0;
+  (True, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, False) 1.0, 0.0;
+  (False, False, True, True, False) 1.0, 0.0;
+  (True, True, False, True, False) 1.0, 0.0;
+  (False, True, False, True, False) 1.0, 0.0;
+  (True, False, False, True, False) 1.0, 0.0;
+  (False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, False, False) 1.0, 0.0;
+  (True, False, True, False, False) 1.0, 0.0;
+  (False, False, True, False, False) 1.0, 0.0;
+  (True, True, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S6 | X31, X32, X33, X34, X35, X36 ) {
+  (True, True, True, True, True, True) 1.0, 0.0;
+  (False, True, True, True, True, True) 1.0, 0.0;
+  (True, False, True, True, True, True) 1.0, 0.0;
+  (False, False, True, True, True, True) 1.0, 0.0;
+  (True, True, False, True, True, True) 1.0, 0.0;
+  (False, True, False, True, True, True) 1.0, 0.0;
+  (True, False, False, True, True, True) 1.0, 0.0;
+  (False, False, False, True, True, True) 1.0, 0.0;
+  (True, True, True, False, True, True) 1.0, 0.0;
+  (False, True, True, False, True, True) 1.0, 0.0;
+  (True, False, True, False, True, True) 1.0, 0.0;
+  (False, False, True, False, True, True) 1.0, 0.0;
+  (True, True, False, False, True, True) 1.0, 0.0;
+  (False, True, False, False, True, True) 1.0, 0.0;
+  (True, False, False, False, True, True) 1.0, 0.0;
+  (False, False, False, False, True, True) 1.0, 0.0;
+  (True, True, True, True, False, True) 1.0, 0.0;
+  (False, True, True, True, False, True) 1.0, 0.0;
+  (True, False, True, True, False, True) 1.0, 0.0;
+  (False, False, True, True, False, True) 1.0, 0.0;
+  (True, True, False, True, False, True) 1.0, 0.0;
+  (False, True, False, True, False, True) 1.0, 0.0;
+  (True, False, False, True, False, True) 1.0, 0.0;
+  (False, False, False, True, False, True) 1.0, 0.0;
+  (True, True, True, False, False, True) 1.0, 0.0;
+  (False, True, True, False, False, True) 1.0, 0.0;
+  (True, False, True, False, False, True) 1.0, 0.0;
+  (False, False, True, False, False, True) 1.0, 0.0;
+  (True, True, False, False, False, True) 1.0, 0.0;
+  (False, True, False, False, False, True) 1.0, 0.0;
+  (True, False, False, False, False, True) 1.0, 0.0;
+  (False, False, False, False, False, True) 1.0, 0.0;
+  (True, True, True, True, True, False) 1.0, 0.0;
+  (False, True, True, True, True, False) 1.0, 0.0;
+  (True, False, True, True, True, False) 1.0, 0.0;
+  (False, False, True, True, True, False) 1.0, 0.0;
+  (True, True, False, True, True, False) 1.0, 0.0;
+  (False, True, False, True, True, False) 1.0, 0.0;
+  (True, False, False, True, True, False) 1.0, 0.0;
+  (False, False, False, True, True, False) 1.0, 0.0;
+  (True, True, True, False, True, False) 1.0, 0.0;
+  (False, True, True, False, True, False) 1.0, 0.0;
+  (True, False, True, False, True, False) 1.0, 0.0;
+  (False, False, True, False, True, False) 1.0, 0.0;
+  (True, True, False, False, True, False) 1.0, 0.0;
+  (False, True, False, False, True, False) 1.0, 0.0;
+  (True, False, False, False, True, False) 1.0, 0.0;
+  (False, False, False, False, True, False) 1.0, 0.0;
+  (True, True, True, True, False, False) 1.0, 0.0;
+  (False, True, True, True, False, False) 1.0, 0.0;
+  (True, False, True, True, False, False) 1.0, 0.0;
+  (False, False, True, True, False, False) 1.0, 0.0;
+  (True, True, False, True, False, False) 1.0, 0.0;
+  (False, True, False, True, False, False) 1.0, 0.0;
+  (True, False, False, True, False, False) 1.0, 0.0;
+  (False, False, False, True, False, False) 1.0, 0.0;
+  (True, True, True, False, False, False) 1.0, 0.0;
+  (False, True, True, False, False, False) 1.0, 0.0;
+  (True, False, True, False, False, False) 1.0, 0.0;
+  (False, False, True, False, False, False) 1.0, 0.0;
+  (True, True, False, False, False, False) 1.0, 0.0;
+  (False, True, False, False, False, False) 1.0, 0.0;
+  (True, False, False, False, False, False) 1.0, 0.0;
+  (False, False, False, False, False, False) 0.0, 1.0;
+}
+probability ( S7 | X37, X38, X39, X40 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.9928, 0.0072;
+}
+probability ( X10 ) {
+  table 0.9973, 0.0027;
+}
+probability ( X11 ) {
+  table 0.9981, 0.0019;
+}
+probability ( X12 ) {
+  table 0.9998, 0.0002;
+}
+probability ( X13 ) {
+  table 0.9715, 0.0285;
+}
+probability ( X14 ) {
+  table 0.9816, 0.0184;
+}
+probability ( X15 ) {
+  table 0.9751, 0.0249;
+}
+probability ( X16 ) {
+  table 0.9985, 0.0015;
+}
+probability ( X17 ) {
+  table 1.0, 0.0;
+}
+probability ( X18 ) {
+  table 0.9984, 0.0016;
+}
+probability ( X19 ) {
+  table 0.981, 0.019;
+}
+probability ( X2 ) {
+  table 0.9801, 0.0199;
+}
+probability ( X20 ) {
+  table 0.981, 0.019;
+}
+probability ( X21 ) {
+  table 0.9982, 0.0018;
+}
+probability ( X22 ) {
+  table 0.993, 0.007;
+}
+probability ( X23 ) {
+  table 0.9995, 0.0005;
+}
+probability ( X24 ) {
+  table 0.9955, 0.0045;
+}
+probability ( X25 ) {
+  table 0.9764, 0.0236;
+}
+probability ( X26 ) {
+  table 0.9922, 0.0078;
+}
+probability ( X27 ) {
+  table 0.982, 0.018;
+}
+probability ( X28 ) {
+  table 0.999, 0.001;
+}
+probability ( X29 ) {
+  table 0.9965, 0.0035;
+}
+probability ( X3 ) {
+  table 0.9978, 0.0022;
+}
+probability ( X30 ) {
+  table 0.9965, 0.0035;
+}
+probability ( X31 ) {
+  table 0.9978, 0.0022;
+}
+probability ( X32 ) {
+  table 0.9774, 0.0226;
+}
+probability ( X33 ) {
+  table 0.9544, 0.0456;
+}
+probability ( X34 ) {
+  table 0.9866, 0.0134;
+}
+probability ( X35 ) {
+  table 0.9904, 0.0096;
+}
+probability ( X36 ) {
+  table 0.9675, 0.0325;
+}
+probability ( X37 ) {
+  table 1.0, 0.0;
+}
+probability ( X38 ) {
+  table 0.9916, 0.0084;
+}
+probability ( X39 ) {
+  table 0.9776, 0.0224;
+}
+probability ( X4 ) {
+  table 0.9969, 0.0031;
+}
+probability ( X40 ) {
+  table 1.0, 0.0;
+}
+probability ( X5 ) {
+  table 0.9908, 0.0092;
+}
+probability ( X6 ) {
+  table 0.9599, 0.0401;
+}
+probability ( X7 ) {
+  table 0.9599, 0.0401;
+}
+probability ( X8 ) {
+  table 0.9998, 0.0002;
+}
+probability ( X9 ) {
+  table 0.9963, 0.0037;
+}

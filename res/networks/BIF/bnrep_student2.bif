@@ -1,0 +1,215 @@
+network unknown {
+}
+variable activities {
+  type discrete [ 2 ] { no, yes };
+}
+variable address {
+  type discrete [ 2 ] { Rural, Urban };
+}
+variable age {
+  type discrete [ 8 ] { 15, 16, 17, 18, 19, 20, 21, 22 };
+}
+variable class {
+  type discrete [ 2 ] { __10, ___10 };
+}
+variable failures {
+  type discrete [ 4 ] { 0, 1, 2, 3 };
+}
+variable famsize {
+  type discrete [ 2 ] { Less_or_equal_to_3, Greater_than_3 };
+}
+variable famsup {
+  type discrete [ 2 ] { no, yes };
+}
+variable Fedu {
+  type discrete [ 5 ] { None, Primary_Education, 5th_to_9th_Grade, Secondary_Education, Higher_Education };
+}
+variable Fjob {
+  type discrete [ 5 ] { At_Home, Healtcare_Related, Other, Civil_Services, Teacher };
+}
+variable G1 {
+  type discrete [ 2 ] { __10, ___10 };
+}
+variable G2 {
+  type discrete [ 2 ] { __10, ___10 };
+}
+variable goout {
+  type discrete [ 5 ] { Very_Low, Low, Medium, High, Very_High };
+}
+variable guardian {
+  type discrete [ 3 ] { Mother, Father, Other };
+}
+variable higher {
+  type discrete [ 2 ] { no, yes };
+}
+variable internet {
+  type discrete [ 2 ] { no, yes };
+}
+variable Medu {
+  type discrete [ 5 ] { None, Primary_Education, 5th_to_9th_Grade, Secondary_Education, Higher_Education };
+}
+variable Mjob {
+  type discrete [ 5 ] { At_Home, Healtcare_Related, Other, Civil_Services, Teacher };
+}
+variable nursery {
+  type discrete [ 2 ] { no, yes };
+}
+variable paid {
+  type discrete [ 2 ] { no, yes };
+}
+variable Pstatus {
+  type discrete [ 2 ] { Living_together, Apart };
+}
+variable reason {
+  type discrete [ 4 ] { Close_to_Home, School_Reputation, Course_Preference, Other };
+}
+variable romantic {
+  type discrete [ 2 ] { no, yes };
+}
+variable school {
+  type discrete [ 2 ] { Gabriel_Pereira, Mousinho_da_Silveira };
+}
+variable schoolsup {
+  type discrete [ 2 ] { no, yes };
+}
+variable sex {
+  type discrete [ 2 ] { Female, Male };
+}
+variable traveltime {
+  type discrete [ 4 ] { Less_than_15min, 15_to_30_mins, 30_mins_to_1_hour, More_than_1_hour };
+}
+probability ( activities ) {
+  table 0.4911392, 0.5088608;
+}
+probability ( address | school ) {
+  (Gabriel_Pereira) 0.1805158, 0.8194842;
+  (Mousinho_da_Silveira) 0.5434783, 0.4565217;
+}
+probability ( age | failures ) {
+  (0) 0.227564103, 0.282051282, 0.269230769, 0.201923077, 0.016025641, 0.003205128, 0.000000000, 0.000000000;
+  (1) 0.06, 0.20, 0.16, 0.32, 0.26, 0.00, 0.00, 0.00;
+  (2) 0.29411765, 0.23529412, 0.11764706, 0.05882353, 0.17647059, 0.11764706, 0.00000000, 0.00000000;
+  (3) 0.1875, 0.1250, 0.2500, 0.1250, 0.1875, 0.0000, 0.0625, 0.0625;
+}
+probability ( class | G2 ) {
+  (__10) 0.8356164, 0.1643836;
+  (___10) 0.03212851, 0.96787149;
+}
+probability ( failures | G2 ) {
+  (__10) 0.62328767, 0.17123288, 0.09589041, 0.10958904;
+  (___10) 0.88755020, 0.10040161, 0.01204819, 0.00000000;
+}
+probability ( famsize | Pstatus ) {
+  (Living_together) 0.2655367, 0.7344633;
+  (Apart) 0.4878049, 0.5121951;
+}
+probability ( famsup | paid, school ) {
+  (no, Gabriel_Pereira) 0.4734043, 0.5265957;
+  (yes, Gabriel_Pereira) 0.2236025, 0.7763975;
+  (no, Mousinho_da_Silveira) 0.8461538, 0.1538462;
+  (yes, Mousinho_da_Silveira) 0.3, 0.7;
+}
+probability ( Fedu | Medu ) {
+  (None) 0.0000000, 0.3333333, 0.6666667, 0.0000000, 0.0000000;
+  (Primary_Education) 0.01694915, 0.62711864, 0.25423729, 0.08474576, 0.01694915;
+  (5th_to_9th_Grade) 0.00000000, 0.27184466, 0.49514563, 0.16504854, 0.06796117;
+  (Secondary_Education) 0.0000000, 0.1515152, 0.2828283, 0.3838384, 0.1818182;
+  (Higher_Education) 0.007633588, 0.007633588, 0.145038168, 0.305343511, 0.534351145;
+}
+probability ( Fjob | Fedu ) {
+  (None) 0.0, 0.0, 1.0, 0.0, 0.0;
+  (Primary_Education) 0.04878049, 0.01219512, 0.69512195, 0.23170732, 0.01219512;
+  (5th_to_9th_Grade) 0.07826087, 0.02608696, 0.60000000, 0.29565217, 0.00000000;
+  (Secondary_Education) 0.03, 0.03, 0.58, 0.35, 0.01;
+  (Higher_Education) 0.04166667, 0.11458333, 0.32291667, 0.23958333, 0.28125000;
+}
+probability ( G1 | G2, schoolsup ) {
+  (__10, no) 0.8181818, 0.1818182;
+  (___10, no) 0.06726457, 0.93273543;
+  (__10, yes) 0.76, 0.24;
+  (___10, yes) 0.3461538, 0.6538462;
+}
+probability ( G2 ) {
+  table 0.3696203, 0.6303797;
+}
+probability ( goout ) {
+  table 0.05822785, 0.26075949, 0.32911392, 0.21772152, 0.13417722;
+}
+probability ( guardian | age ) {
+  (15) 0.67073171, 0.29268293, 0.03658537;
+  (16) 0.75961538, 0.22115385, 0.01923077;
+  (17) 0.73469388, 0.25510204, 0.01020408;
+  (18) 0.75609756, 0.19512195, 0.04878049;
+  (19) 0.16666667, 0.08333333, 0.75000000;
+  (20) 0.0, 0.0, 1.0;
+  (21) 0.0, 0.0, 1.0;
+  (22) 1.0, 0.0, 0.0;
+}
+probability ( higher | failures ) {
+  (0) 0.0224359, 0.9775641;
+  (1) 0.12, 0.88;
+  (2) 0.05882353, 0.94117647;
+  (3) 0.375, 0.625;
+}
+probability ( internet | address, famsup ) {
+  (Rural, no) 0.5277778, 0.4722222;
+  (Urban, no) 0.1196581, 0.8803419;
+  (Rural, yes) 0.1730769, 0.8269231;
+  (Urban, yes) 0.1263158, 0.8736842;
+}
+probability ( Medu | Mjob ) {
+  (At_Home) 0.03389831, 0.42372881, 0.37288136, 0.13559322, 0.03389831;
+  (Healtcare_Related) 0.00000000, 0.02941176, 0.05882353, 0.14705882, 0.76470588;
+  (Other) 0.007092199, 0.198581560, 0.333333333, 0.304964539, 0.156028369;
+  (Civil_Services) 0.00000000, 0.04854369, 0.31067961, 0.38834951, 0.25242718;
+  (Teacher) 0.00000000, 0.00000000, 0.00000000, 0.05172414, 0.94827586;
+}
+probability ( Mjob | internet ) {
+  (no) 0.33333333, 0.03030303, 0.40909091, 0.18181818, 0.04545455;
+  (yes) 0.11246201, 0.09726444, 0.34650456, 0.27659574, 0.16717325;
+}
+probability ( nursery ) {
+  table 0.2050633, 0.7949367;
+}
+probability ( paid | higher ) {
+  (no) 0.95, 0.05;
+  (yes) 0.52, 0.48;
+}
+probability ( Pstatus ) {
+  table 0.8962025, 0.1037975;
+}
+probability ( reason ) {
+  table 0.27594937, 0.26582278, 0.36708861, 0.09113924;
+}
+probability ( romantic | age ) {
+  (15) 0.7682927, 0.2317073;
+  (16) 0.7307692, 0.2692308;
+  (17) 0.622449, 0.377551;
+  (18) 0.5731707, 0.4268293;
+  (19) 0.5416667, 0.4583333;
+  (20) 0.6666667, 0.3333333;
+  (21) 1.0, 0.0;
+  (22) 0.0, 1.0;
+}
+probability ( school | age ) {
+  (15) 1.0, 0.0;
+  (16) 1.0, 0.0;
+  (17) 0.877551, 0.122449;
+  (18) 0.695122, 0.304878;
+  (19) 0.75, 0.25;
+  (20) 0.3333333, 0.6666667;
+  (21) 0.0, 1.0;
+  (22) 1.0, 0.0;
+}
+probability ( schoolsup | school ) {
+  (Gabriel_Pereira) 0.8538682, 0.1461318;
+  (Mousinho_da_Silveira) 1.0, 0.0;
+}
+probability ( sex | higher ) {
+  (no) 0.2, 0.8;
+  (yes) 0.544, 0.456;
+}
+probability ( traveltime | address ) {
+  (Rural) 0.39772727, 0.38636364, 0.15909091, 0.05681818;
+  (Urban) 0.723127036, 0.237785016, 0.029315961, 0.009771987;
+}

@@ -1,0 +1,1694 @@
+network unknown {
+}
+variable AbdominalPain {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable AgeGroup {
+  type discrete [ 3 ] { School, PreSchool, Infant };
+}
+variable AntibioticExposure {
+  type discrete [ 3 ] { Last_day, Last_week, No };
+}
+variable BloodCulturePerformed {
+  type discrete [ 2 ] { Yes, No };
+}
+variable BloodCultureResult {
+  type discrete [ 3 ] { Positive, Negative, NotDone };
+}
+variable BreathingDifficulty {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable CausativePathogenForPneumonia {
+  type discrete [ 3 ] { TypicalBac, ViralLike, NoPneumonia };
+}
+variable ChestPain {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable ChildcareDays {
+  type discrete [ 3 ] { Five_or_more, Two_to_four, One_or_less };
+}
+variable ChillSweat {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable ChronicRespiratoryDisease {
+  type discrete [ 2 ] { Reported, Unknown };
+}
+variable Cough {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable Crackles {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable CReactiveProteins {
+  type discrete [ 3 ] { Above_70, Between_30_and_70, Below_30 };
+}
+variable CurrentPhenotype {
+  type discrete [ 2 ] { Type_1, Type_2 };
+}
+variable DiagnosisBacterialPneumonia {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Diarrhoea {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable DurationOfSymptomsOnset {
+  type discrete [ 3 ] { More_than_one_week, Three_to_seven_days, One_or_two_days };
+}
+variable Earache {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable EnergyLoss {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable Ethnicity {
+  type discrete [ 2 ] { Indigenous, NonIndigenous };
+}
+variable Fever {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable Headache {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable HighestTemperature {
+  type discrete [ 3 ] { Above_39, Between_38_and_39, Below_38 };
+}
+variable HMPVInNasopharynx {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable HospitalTransfer {
+  type discrete [ 2 ] { Yes, No };
+}
+variable ImpairedImmunity {
+  type discrete [ 2 ] { Reported, Unknown };
+}
+variable InfluenzaInNasopharynx {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable InfluenzaSeason {
+  type discrete [ 2 ] { No, Yes };
+}
+variable InfluenzaVaccine {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Irritable {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable LevelOfExposure {
+  type discrete [ 2 ] { High, Low };
+}
+variable MycoplasmaInNasopharynx {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable NeutrophilProportion {
+  type discrete [ 3 ] { Above_80, Between_50_and_80, Below_50 };
+}
+variable O2Type {
+  type discrete [ 2 ] { Supp02, RoomAir };
+}
+variable OtherPain {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable OxygenSaturation {
+  type discrete [ 3 ] { Below_92, Betwenn_92_and_95, Above_95 };
+}
+variable ParainfluenzaInNasopharynx {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable PleuralEffusion {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PleuralFluidResult {
+  type discrete [ 3 ] { Positive, Negative, NotDone };
+}
+variable PneumococcalVaccine {
+  type discrete [ 2 ] { UnderVax, FullyVax };
+}
+variable Prematurity {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PreviousSignificantInfection {
+  type discrete [ 2 ] { Reported, Unknown };
+}
+variable Rash {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable ReducedOralIntake {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable RespiratoryRate {
+  type discrete [ 3 ] { Above_50, Between_30_and_50, Below_30 };
+}
+variable Rhinorrhoea {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable RSVInNasopharynx {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable SmokerInHousehold {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SoreThroat {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable SubjectGroup {
+  type discrete [ 2 ] { Case, Control };
+}
+variable SusceptibilityToColonisation {
+  type discrete [ 2 ] { High, Low };
+}
+variable SusceptibilityToProgression {
+  type discrete [ 2 ] { High, Low };
+}
+variable ThroatInfection {
+  type discrete [ 2 ] { Present, Absent };
+}
+variable TypicalBacteriaInNasopharynx {
+  type discrete [ 2 ] { Yes, No };
+}
+variable TypicalBacterialPneumonia {
+  type discrete [ 2 ] { Present, Absent };
+}
+variable UpperAirwayInvolvment {
+  type discrete [ 4 ] { NP, Throat, NPAndThroat, No };
+}
+variable ViralLikePneumonia {
+  type discrete [ 2 ] { Present, Absent };
+}
+variable ViralNasopharyngealInfection {
+  type discrete [ 2 ] { Present, Absent };
+}
+variable Vomiting {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable Wheezing {
+  type discrete [ 2 ] { Recorded, Unknown };
+}
+variable WhiteCellCount {
+  type discrete [ 3 ] { Above18, Between_10_and_18, Below10 };
+}
+probability ( AbdominalPain | CausativePathogenForPneumonia, CurrentPhenotype, Diarrhoea, PleuralEffusion ) {
+  (TypicalBac, Type_1, Recorded, Yes) 0.97527964, 0.02472036;
+  (ViralLike, Type_1, Recorded, Yes) 0.9390929, 0.0609071;
+  (NoPneumonia, Type_1, Recorded, Yes) 0.4275507, 0.5724493;
+  (TypicalBac, Type_2, Recorded, Yes) 0.8068939, 0.1931061;
+  (ViralLike, Type_2, Recorded, Yes) 0.2556063, 0.7443937;
+  (NoPneumonia, Type_2, Recorded, Yes) 0.7271225, 0.2728775;
+  (TypicalBac, Type_1, Unknown, Yes) 0.7428609, 0.2571391;
+  (ViralLike, Type_1, Unknown, Yes) 0.6938945, 0.3061055;
+  (NoPneumonia, Type_1, Unknown, Yes) 0.6457971, 0.3542029;
+  (TypicalBac, Type_2, Unknown, Yes) 0.4009909, 0.5990091;
+  (ViralLike, Type_2, Unknown, Yes) 0.129645, 0.870355;
+  (NoPneumonia, Type_2, Unknown, Yes) 0.1972222, 0.8027778;
+  (TypicalBac, Type_1, Recorded, No) 0.2447432, 0.7552568;
+  (ViralLike, Type_1, Recorded, No) 0.6826875, 0.3173125;
+  (NoPneumonia, Type_1, Recorded, No) 0.8170468, 0.1829532;
+  (TypicalBac, Type_2, Recorded, No) 0.4244274, 0.5755726;
+  (ViralLike, Type_2, Recorded, No) 0.4947166, 0.5052834;
+  (NoPneumonia, Type_2, Recorded, No) 0.4175017, 0.5824983;
+  (TypicalBac, Type_1, Unknown, No) 0.4402849, 0.5597151;
+  (ViralLike, Type_1, Unknown, No) 0.3721004, 0.6278996;
+  (NoPneumonia, Type_1, Unknown, No) 0.3143045, 0.6856955;
+  (TypicalBac, Type_2, Unknown, No) 0.09956227, 0.90043773;
+  (ViralLike, Type_2, Unknown, No) 0.6683163, 0.3316837;
+  (NoPneumonia, Type_2, Unknown, No) 0.1809561, 0.8190439;
+}
+probability ( AgeGroup ) {
+  table 0.3607503, 0.3217893, 0.3174603;
+}
+probability ( AntibioticExposure | AgeGroup, HospitalTransfer, ImpairedImmunity ) {
+  (School, Yes, Reported) 0.3333333, 0.3333333, 0.3333333;
+  (PreSchool, Yes, Reported) 0.6666616, 0.1666692, 0.1666692;
+  (Infant, Yes, Reported) 0.3333333, 0.3333333, 0.3333333;
+  (School, No, Reported) 0.77777667, 0.02777854, 0.19444479;
+  (PreSchool, No, Reported) 0.44444418, 0.02777854, 0.52777728;
+  (Infant, No, Reported) 0.66666466, 0.06666826, 0.26666708;
+  (School, Yes, Unknown) 0.72222027, 0.05555694, 0.22222279;
+  (PreSchool, Yes, Unknown) 0.46666587, 0.06666826, 0.46666587;
+  (Infant, Yes, Unknown) 0.6666616, 0.1666692, 0.1666692;
+  (School, No, Unknown) 0.44607840, 0.07843149, 0.47549010;
+  (PreSchool, No, Unknown) 0.29378533, 0.09039562, 0.61581906;
+  (Infant, No, Unknown) 0.2946860, 0.1062803, 0.5990337;
+}
+probability ( BloodCulturePerformed | AgeGroup, HospitalTransfer ) {
+  (School, Yes) 0.291667, 0.708333;
+  (PreSchool, Yes) 0.6506849, 0.3493151;
+  (Infant, Yes) 0.3461541, 0.6538459;
+  (School, No) 0.8333332, 0.1666668;
+  (PreSchool, No) 0.5, 0.5;
+  (Infant, No) 0.8071428, 0.1928572;
+}
+probability ( BloodCultureResult | AntibioticExposure, BloodCulturePerformed, CausativePathogenForPneumonia, PleuralEffusion ) {
+  (Last_day, Yes, TypicalBac, Yes) 1.752663e-02, 9.824680e-01, 5.323797e-06;
+  (Last_week, Yes, TypicalBac, Yes) 4.217312e-05, 9.999527e-01, 5.104892e-06;
+  (No, Yes, TypicalBac, Yes) 0.0010398760, 0.9989201279, 0.0000399961;
+  (Last_day, No, TypicalBac, Yes) 3.253914e-03, 9.967449e-01, 1.153069e-06;
+  (Last_week, No, TypicalBac, Yes) 1.663200e-06, 9.999981e-01, 2.013239e-07;
+  (No, No, TypicalBac, Yes) 0.0010398760, 0.9989201279, 0.0000399961;
+  (Last_day, Yes, ViralLike, Yes) 5.000839e-02, 9.499794e-01, 1.220967e-05;
+  (Last_week, Yes, ViralLike, Yes) 6.087633e-04, 9.993798e-01, 1.139983e-05;
+  (No, Yes, ViralLike, Yes) 0.0010398760, 0.9989201279, 0.0000399961;
+  (Last_day, No, ViralLike, Yes) 1.697136e-01, 8.302844e-01, 1.983087e-06;
+  (Last_week, No, ViralLike, Yes) 9.886435e-05, 9.998995e-01, 1.665969e-06;
+  (No, No, ViralLike, Yes) 0.0010398760, 0.9989201279, 0.0000399961;
+  (Last_day, Yes, NoPneumonia, Yes) 2.974145e-01, 7.025841e-01, 1.470769e-06;
+  (Last_week, Yes, NoPneumonia, Yes) 3.340409e-05, 9.999615e-01, 5.068901e-06;
+  (No, Yes, NoPneumonia, Yes) 0.0010398690, 0.9989201349, 0.0000399961;
+  (Last_day, No, NoPneumonia, Yes) 3.168297e-03, 9.968313e-01, 4.344649e-07;
+  (Last_week, No, NoPneumonia, Yes) 1.040819e-06, 9.999988e-01, 1.581089e-07;
+  (No, No, NoPneumonia, Yes) 0.0010398690, 0.9989201349, 0.0000399961;
+  (Last_day, Yes, TypicalBac, No) 1.075727e-06, 1.075727e-06, 9.999978e-01;
+  (Last_week, Yes, TypicalBac, No) 5.347206e-06, 5.347206e-06, 9.999893e-01;
+  (No, Yes, TypicalBac, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_day, No, TypicalBac, No) 3.373229e-06, 3.373229e-06, 9.999933e-01;
+  (Last_week, No, TypicalBac, No) 5.712083e-07, 5.712082e-07, 9.999989e-01;
+  (No, No, TypicalBac, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_day, Yes, ViralLike, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_week, Yes, ViralLike, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (No, Yes, ViralLike, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_day, No, ViralLike, No) 3.705469e-06, 3.705469e-06, 9.999926e-01;
+  (Last_week, No, ViralLike, No) 2.107296e-06, 2.107295e-06, 9.999958e-01;
+  (No, No, ViralLike, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_day, Yes, NoPneumonia, No) 3.582060e-06, 3.582059e-06, 9.999928e-01;
+  (Last_week, Yes, NoPneumonia, No) 5.373704e-06, 5.373703e-06, 9.999893e-01;
+  (No, Yes, NoPneumonia, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+  (Last_day, No, NoPneumonia, No) 1.374382e-06, 1.374382e-06, 9.999973e-01;
+  (Last_week, No, NoPneumonia, No) 5.602926e-07, 5.602926e-07, 9.999989e-01;
+  (No, No, NoPneumonia, No) 1.074648e-05, 1.074648e-05, 9.999785e-01;
+}
+probability ( BreathingDifficulty | CausativePathogenForPneumonia, CurrentPhenotype, OxygenSaturation, UpperAirwayInvolvment ) {
+  (TypicalBac, Type_1, Below_92, NP) 0.9732425, 0.0267575;
+  (ViralLike, Type_1, Below_92, NP) 0.718618, 0.281382;
+  (NoPneumonia, Type_1, Below_92, NP) 0.7457952, 0.2542048;
+  (TypicalBac, Type_2, Below_92, NP) 0.97566084, 0.02433916;
+  (ViralLike, Type_2, Below_92, NP) 0.4323559, 0.5676441;
+  (NoPneumonia, Type_2, Below_92, NP) 0.91394611, 0.08605389;
+  (TypicalBac, Type_1, Betwenn_92_and_95, NP) 0.94979101, 0.05020899;
+  (ViralLike, Type_1, Betwenn_92_and_95, NP) 0.050009, 0.949991;
+  (NoPneumonia, Type_1, Betwenn_92_and_95, NP) 0.7457951, 0.2542049;
+  (TypicalBac, Type_2, Betwenn_92_and_95, NP) 0.94979101, 0.05020899;
+  (ViralLike, Type_2, Betwenn_92_and_95, NP) 0.050009, 0.949991;
+  (NoPneumonia, Type_2, Betwenn_92_and_95, NP) 0.7457951, 0.2542049;
+  (TypicalBac, Type_1, Above_95, NP) 0.91468567, 0.08531433;
+  (ViralLike, Type_1, Above_95, NP) 0.95017065, 0.04982935;
+  (NoPneumonia, Type_1, Above_95, NP) 0.4366516, 0.5633484;
+  (TypicalBac, Type_2, Above_95, NP) 0.7416751, 0.2583249;
+  (ViralLike, Type_2, Above_95, NP) 0.9544697, 0.0455303;
+  (NoPneumonia, Type_2, Above_95, NP) 0.808932, 0.191068;
+  (TypicalBac, Type_1, Below_92, Throat) 0.9756036, 0.0243964;
+  (ViralLike, Type_1, Below_92, Throat) 0.708816, 0.291184;
+  (NoPneumonia, Type_1, Below_92, Throat) 0.7520204, 0.2479796;
+  (TypicalBac, Type_2, Below_92, Throat) 0.954096, 0.045904;
+  (ViralLike, Type_2, Below_92, Throat) 0.7714564, 0.2285436;
+  (NoPneumonia, Type_2, Below_92, Throat) 0.7093838, 0.2906162;
+  (TypicalBac, Type_1, Betwenn_92_and_95, Throat) 0.94979101, 0.05020899;
+  (ViralLike, Type_1, Betwenn_92_and_95, Throat) 0.050009, 0.949991;
+  (NoPneumonia, Type_1, Betwenn_92_and_95, Throat) 0.7457951, 0.2542049;
+  (TypicalBac, Type_2, Betwenn_92_and_95, Throat) 0.94979101, 0.05020899;
+  (ViralLike, Type_2, Betwenn_92_and_95, Throat) 0.050009, 0.949991;
+  (NoPneumonia, Type_2, Betwenn_92_and_95, Throat) 0.7457951, 0.2542049;
+  (TypicalBac, Type_1, Above_95, Throat) 0.8381716, 0.1618284;
+  (ViralLike, Type_1, Above_95, Throat) 0.95530499, 0.04469501;
+  (NoPneumonia, Type_1, Above_95, Throat) 0.03010533, 0.96989467;
+  (TypicalBac, Type_2, Above_95, Throat) 0.8228624, 0.1771376;
+  (ViralLike, Type_2, Above_95, Throat) 0.6755097, 0.3244903;
+  (NoPneumonia, Type_2, Above_95, Throat) 0.4865401, 0.5134599;
+  (TypicalBac, Type_1, Below_92, NPAndThroat) 0.98669218, 0.01330782;
+  (ViralLike, Type_1, Below_92, NPAndThroat) 0.7248027, 0.2751973;
+  (NoPneumonia, Type_1, Below_92, NPAndThroat) 0.7667339, 0.2332661;
+  (TypicalBac, Type_2, Below_92, NPAndThroat) 0.97627716, 0.02372284;
+  (ViralLike, Type_2, Below_92, NPAndThroat) 0.805024, 0.194976;
+  (NoPneumonia, Type_2, Below_92, NPAndThroat) 0.93661293, 0.06338707;
+  (TypicalBac, Type_1, Betwenn_92_and_95, NPAndThroat) 0.7620219, 0.2379781;
+  (ViralLike, Type_1, Betwenn_92_and_95, NPAndThroat) 0.95016955, 0.04983045;
+  (NoPneumonia, Type_1, Betwenn_92_and_95, NPAndThroat) 0.4296028, 0.5703972;
+  (TypicalBac, Type_2, Betwenn_92_and_95, NPAndThroat) 0.7459165, 0.2540835;
+  (ViralLike, Type_2, Betwenn_92_and_95, NPAndThroat) 0.97554567, 0.02445433;
+  (NoPneumonia, Type_2, Betwenn_92_and_95, NPAndThroat) 0.8073393, 0.1926607;
+  (TypicalBac, Type_1, Above_95, NPAndThroat) 0.7457951, 0.2542049;
+  (ViralLike, Type_1, Above_95, NPAndThroat) 0.94979101, 0.05020899;
+  (NoPneumonia, Type_1, Above_95, NPAndThroat) 0.050009, 0.949991;
+  (TypicalBac, Type_2, Above_95, NPAndThroat) 0.7457951, 0.2542049;
+  (ViralLike, Type_2, Above_95, NPAndThroat) 0.94979101, 0.05020899;
+  (NoPneumonia, Type_2, Above_95, NPAndThroat) 0.0100098, 0.9899902;
+  (TypicalBac, Type_1, Below_92, No) 0.991231211, 0.008768789;
+  (ViralLike, Type_1, Below_92, No) 0.483676, 0.516324;
+  (NoPneumonia, Type_1, Below_92, No) 0.770952, 0.229048;
+  (TypicalBac, Type_2, Below_92, No) 0.991750564, 0.008249436;
+  (ViralLike, Type_2, Below_92, No) 0.8477519, 0.1522481;
+  (NoPneumonia, Type_2, Below_92, No) 0.8481677, 0.1518323;
+  (TypicalBac, Type_1, Betwenn_92_and_95, No) 0.95916425, 0.04083575;
+  (ViralLike, Type_1, Betwenn_92_and_95, No) 0.94911578, 0.05088422;
+  (NoPneumonia, Type_1, Betwenn_92_and_95, No) 0.1049074, 0.8950926;
+  (TypicalBac, Type_2, Betwenn_92_and_95, No) 0.94714988, 0.05285012;
+  (ViralLike, Type_2, Betwenn_92_and_95, No) 0.4984298, 0.5015702;
+  (NoPneumonia, Type_2, Betwenn_92_and_95, No) 0.726375, 0.273625;
+  (TypicalBac, Type_1, Above_95, No) 0.7457951, 0.2542049;
+  (ViralLike, Type_1, Above_95, No) 0.94979101, 0.05020899;
+  (NoPneumonia, Type_1, Above_95, No) 0.050009, 0.949991;
+  (TypicalBac, Type_2, Above_95, No) 0.7457951, 0.2542049;
+  (ViralLike, Type_2, Above_95, No) 0.94979101, 0.05020899;
+  (NoPneumonia, Type_2, Above_95, No) 0.0100098, 0.9899902;
+}
+probability ( CausativePathogenForPneumonia | TypicalBacterialPneumonia, ViralLikePneumonia ) {
+  (Present, Present) 1.0, 0.0, 0.0;
+  (Absent, Present) 1.0, 0.0, 0.0;
+  (Present, Absent) 0.0, 1.0, 0.0;
+  (Absent, Absent) 0.0, 0.0, 1.0;
+}
+probability ( ChestPain | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype, PleuralEffusion ) {
+  (School, TypicalBac, Type_1, Yes) 0.2492166, 0.7507834;
+  (PreSchool, TypicalBac, Type_1, Yes) 0.1493758, 0.8506242;
+  (Infant, TypicalBac, Type_1, Yes) 0.150007, 0.849993;
+  (School, ViralLike, Type_1, Yes) 0.242744, 0.757256;
+  (PreSchool, ViralLike, Type_1, Yes) 0.2128604, 0.7871396;
+  (Infant, ViralLike, Type_1, Yes) 0.100008, 0.899992;
+  (School, NoPneumonia, Type_1, Yes) 0.1572023, 0.8427977;
+  (PreSchool, NoPneumonia, Type_1, Yes) 0.4077018, 0.5922982;
+  (Infant, NoPneumonia, Type_1, Yes) 0.050009, 0.949991;
+  (School, TypicalBac, Type_2, Yes) 0.2180581, 0.7819419;
+  (PreSchool, TypicalBac, Type_2, Yes) 0.191008, 0.808992;
+  (Infant, TypicalBac, Type_2, Yes) 0.00100998, 0.99899002;
+  (School, ViralLike, Type_2, Yes) 0.1951508, 0.8048492;
+  (PreSchool, ViralLike, Type_2, Yes) 0.01409202, 0.98590798;
+  (Infant, ViralLike, Type_2, Yes) 0.00100998, 0.99899002;
+  (School, NoPneumonia, Type_2, Yes) 0.1764062, 0.8235938;
+  (PreSchool, NoPneumonia, Type_2, Yes) 0.03709947, 0.96290053;
+  (Infant, NoPneumonia, Type_2, Yes) 0.00100998, 0.99899002;
+  (School, TypicalBac, Type_1, No) 0.07432878, 0.92567122;
+  (PreSchool, TypicalBac, Type_1, No) 0.1869678, 0.8130322;
+  (Infant, TypicalBac, Type_1, No) 0.150007, 0.849993;
+  (School, ViralLike, Type_1, No) 0.2038476, 0.7961524;
+  (PreSchool, ViralLike, Type_1, No) 0.1758098, 0.8241902;
+  (Infant, ViralLike, Type_1, No) 0.100008, 0.899992;
+  (School, NoPneumonia, Type_1, No) 0.4077018, 0.5922982;
+  (PreSchool, NoPneumonia, Type_1, No) 0.3323034, 0.6676966;
+  (Infant, NoPneumonia, Type_1, No) 0.050009, 0.949991;
+  (School, TypicalBac, Type_2, No) 0.07140516, 0.92859484;
+  (PreSchool, TypicalBac, Type_2, No) 0.03957564, 0.96042436;
+  (Infant, TypicalBac, Type_2, No) 0.00100998, 0.99899002;
+  (School, ViralLike, Type_2, No) 0.009670124, 0.990329876;
+  (PreSchool, ViralLike, Type_2, No) 0.0235092, 0.9764908;
+  (Infant, ViralLike, Type_2, No) 0.00100998, 0.99899002;
+  (School, NoPneumonia, Type_2, No) 0.006128347, 0.993871653;
+  (PreSchool, NoPneumonia, Type_2, No) 0.001175464, 0.998824536;
+  (Infant, NoPneumonia, Type_2, No) 0.00100998, 0.99899002;
+}
+probability ( ChildcareDays | AgeGroup, Ethnicity, Prematurity ) {
+  (School, Indigenous, Yes) 0.1666692, 0.1666692, 0.6666616;
+  (PreSchool, Indigenous, Yes) 0.76190292, 0.04762027, 0.19047681;
+  (Infant, Indigenous, Yes) 0.7037024, 0.1481488, 0.1481488;
+  (School, NonIndigenous, Yes) 0.961352389, 0.033816550, 0.004831061;
+  (PreSchool, NonIndigenous, Yes) 0.1111133, 0.7777734, 0.1111133;
+  (Infant, NonIndigenous, Yes) 0.1904768, 0.3333333, 0.4761899;
+  (School, Indigenous, No) 0.2592595, 0.3703702, 0.3703702;
+  (PreSchool, Indigenous, No) 0.1412430, 0.5310734, 0.3276836;
+  (Infant, Indigenous, No) 0.1111133, 0.1111133, 0.7777734;
+  (School, NonIndigenous, No) 0.2222228, 0.3888886, 0.3888886;
+  (PreSchool, NonIndigenous, No) 0.1111117, 0.1944448, 0.6944435;
+  (Infant, NonIndigenous, No) 0.1309525, 0.4523809, 0.4166666;
+}
+probability ( ChillSweat | CausativePathogenForPneumonia, CurrentPhenotype, HighestTemperature ) {
+  (TypicalBac, Type_1, Above_39) 0.1284535, 0.8715465;
+  (ViralLike, Type_1, Above_39) 0.4304923, 0.5695077;
+  (NoPneumonia, Type_1, Above_39) 0.91871996, 0.08128004;
+  (TypicalBac, Type_2, Above_39) 0.05404168, 0.94595832;
+  (ViralLike, Type_2, Above_39) 0.148715, 0.851285;
+  (NoPneumonia, Type_2, Above_39) 0.01363809, 0.98636191;
+  (TypicalBac, Type_1, Between_38_and_39) 0.110294, 0.889706;
+  (ViralLike, Type_1, Between_38_and_39) 0.08732562, 0.91267438;
+  (NoPneumonia, Type_1, Between_38_and_39) 0.1944537, 0.8055463;
+  (TypicalBac, Type_2, Between_38_and_39) 0.05805603, 0.94194397;
+  (ViralLike, Type_2, Between_38_and_39) 0.01025227, 0.98974773;
+  (NoPneumonia, Type_2, Between_38_and_39) 0.001623686, 0.998376314;
+  (TypicalBac, Type_1, Below_38) 0.100008, 0.899992;
+  (ViralLike, Type_1, Below_38) 0.050009, 0.949991;
+  (NoPneumonia, Type_1, Below_38) 0.0100098, 0.9899902;
+  (TypicalBac, Type_2, Below_38) 0.100008, 0.899992;
+  (ViralLike, Type_2, Below_38) 0.050009, 0.949991;
+  (NoPneumonia, Type_2, Below_38) 0.0100098, 0.9899902;
+}
+probability ( ChronicRespiratoryDisease ) {
+  table 0.04112558, 0.95887442;
+}
+probability ( Cough | CausativePathogenForPneumonia, CurrentPhenotype, UpperAirwayInvolvment ) {
+  (TypicalBac, Type_1, NP) 0.96603504, 0.03396496;
+  (ViralLike, Type_1, NP) 0.0100098, 0.9899902;
+  (NoPneumonia, Type_1, NP) 0.8863617, 0.1136383;
+  (TypicalBac, Type_2, NP) 0.95183909, 0.04816091;
+  (ViralLike, Type_2, NP) 0.050009, 0.949991;
+  (NoPneumonia, Type_2, NP) 0.97939081, 0.02060919;
+  (TypicalBac, Type_1, Throat) 0.8727249, 0.1272751;
+  (ViralLike, Type_1, Throat) 0.0100098, 0.9899902;
+  (NoPneumonia, Type_1, Throat) 0.8911665, 0.1088335;
+  (TypicalBac, Type_2, Throat) 0.94684904, 0.05315096;
+  (ViralLike, Type_2, Throat) 0.050009, 0.949991;
+  (NoPneumonia, Type_2, Throat) 0.93206426, 0.06793574;
+  (TypicalBac, Type_1, NPAndThroat) 0.98161171, 0.01838829;
+  (ViralLike, Type_1, NPAndThroat) 0.90086067, 0.09913933;
+  (NoPneumonia, Type_1, NPAndThroat) 0.050009, 0.949991;
+  (TypicalBac, Type_2, NPAndThroat) 0.98398625, 0.01601375;
+  (ViralLike, Type_2, NPAndThroat) 0.6486037, 0.3513963;
+  (NoPneumonia, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (TypicalBac, Type_1, No) 0.93803881, 0.06196119;
+  (ViralLike, Type_1, No) 0.5502, 0.4498;
+  (NoPneumonia, Type_1, No) 0.050009, 0.949991;
+  (TypicalBac, Type_2, No) 0.991083156, 0.008916844;
+  (ViralLike, Type_2, No) 0.7608988, 0.2391012;
+  (NoPneumonia, Type_2, No) 0.0100098, 0.9899902;
+}
+probability ( Crackles | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.06460875, 0.93539125;
+  (ViralLike, Type_1) 0.2052245, 0.7947755;
+  (NoPneumonia, Type_1) 0.8781676, 0.1218324;
+  (TypicalBac, Type_2) 0.559332, 0.440668;
+  (ViralLike, Type_2) 0.0100098, 0.9899902;
+  (NoPneumonia, Type_2) 0.0100098, 0.9899902;
+}
+probability ( CReactiveProteins | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.84799404, 0.14088889, 0.01111707;
+  (ViralLike, Type_1) 0.4725086, 0.3022373, 0.2252541;
+  (NoPneumonia, Type_1) 0.2517622, 0.2553906, 0.4928472;
+  (TypicalBac, Type_2) 0.1305051, 0.2488578, 0.6206371;
+  (ViralLike, Type_2) 0.0100097, 0.0500085, 0.9399818;
+  (NoPneumonia, Type_2) 0.0100097, 0.0500085, 0.9399818;
+}
+probability ( CurrentPhenotype | CausativePathogenForPneumonia, DurationOfSymptomsOnset, HospitalTransfer, SusceptibilityToProgression ) {
+  (TypicalBac, More_than_one_week, Yes, High) 0.6240726, 0.3759274;
+  (ViralLike, More_than_one_week, Yes, High) 0.7702287, 0.2297713;
+  (NoPneumonia, More_than_one_week, Yes, High) 0.799994, 0.200006;
+  (TypicalBac, Three_to_seven_days, Yes, High) 0.2497558, 0.7502442;
+  (ViralLike, Three_to_seven_days, Yes, High) 0.599998, 0.400002;
+  (NoPneumonia, Three_to_seven_days, Yes, High) 0.3465625, 0.6534375;
+  (TypicalBac, One_or_two_days, Yes, High) 0.599998, 0.400002;
+  (ViralLike, One_or_two_days, Yes, High) 0.06117915, 0.93882085;
+  (NoPneumonia, One_or_two_days, Yes, High) 0.02966398, 0.97033602;
+  (TypicalBac, More_than_one_week, No, High) 0.6318994, 0.3681006;
+  (ViralLike, More_than_one_week, No, High) 0.799994, 0.200006;
+  (NoPneumonia, More_than_one_week, No, High) 0.1196257, 0.8803743;
+  (TypicalBac, Three_to_seven_days, No, High) 0.4486566, 0.5513434;
+  (ViralLike, Three_to_seven_days, No, High) 0.2540576, 0.7459424;
+  (NoPneumonia, Three_to_seven_days, No, High) 0.3841796, 0.6158204;
+  (TypicalBac, One_or_two_days, No, High) 0.599998, 0.400002;
+  (ViralLike, One_or_two_days, No, High) 0.08596432, 0.91403568;
+  (NoPneumonia, One_or_two_days, No, High) 0.200006, 0.799994;
+  (TypicalBac, More_than_one_week, Yes, Low) 0.7113832, 0.2886168;
+  (ViralLike, More_than_one_week, Yes, Low) 0.8260846, 0.1739154;
+  (NoPneumonia, More_than_one_week, Yes, Low) 0.1526786, 0.8473214;
+  (TypicalBac, Three_to_seven_days, Yes, Low) 0.07218832, 0.92781168;
+  (ViralLike, Three_to_seven_days, Yes, Low) 0.599998, 0.400002;
+  (NoPneumonia, Three_to_seven_days, Yes, Low) 0.1535487, 0.8464513;
+  (TypicalBac, One_or_two_days, Yes, Low) 0.599998, 0.400002;
+  (ViralLike, One_or_two_days, Yes, Low) 0.1637857, 0.8362143;
+  (NoPneumonia, One_or_two_days, Yes, Low) 0.200006, 0.799994;
+  (TypicalBac, More_than_one_week, No, Low) 0.7278603, 0.2721397;
+  (ViralLike, More_than_one_week, No, Low) 0.799994, 0.200006;
+  (NoPneumonia, More_than_one_week, No, Low) 0.4920968, 0.5079032;
+  (TypicalBac, Three_to_seven_days, No, Low) 0.599998, 0.400002;
+  (ViralLike, Three_to_seven_days, No, Low) 0.1493809, 0.8506191;
+  (NoPneumonia, Three_to_seven_days, No, Low) 0.7825203, 0.2174797;
+  (TypicalBac, One_or_two_days, No, Low) 0.07860101, 0.92139899;
+  (ViralLike, One_or_two_days, No, Low) 0.09783512, 0.90216488;
+  (NoPneumonia, One_or_two_days, No, Low) 0.200006, 0.799994;
+}
+probability ( DiagnosisBacterialPneumonia | BloodCultureResult, PleuralEffusion ) {
+  (Positive, Yes) 1.0, 0.0;
+  (Negative, Yes) 1.0, 0.0;
+  (NotDone, Yes) 1.0, 0.0;
+  (Positive, No) 0.0, 1.0;
+  (Negative, No) 1.0, 0.0;
+  (NotDone, No) 0.0, 1.0;
+}
+probability ( Diarrhoea | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.6005571, 0.3994429;
+  (ViralLike, Type_1) 0.2414514, 0.7585486;
+  (NoPneumonia, Type_1) 0.4414151, 0.5585849;
+  (TypicalBac, Type_2) 0.2375768, 0.7624232;
+  (ViralLike, Type_2) 0.0100098, 0.9899902;
+  (NoPneumonia, Type_2) 0.0100098, 0.9899902;
+}
+probability ( DurationOfSymptomsOnset | AgeGroup, HospitalTransfer ) {
+  (School, Yes) 0.69444354, 0.27777792, 0.02777854;
+  (PreSchool, Yes) 0.3881278, 0.3881278, 0.2237443;
+  (Infant, Yes) 0.6410250, 0.2564104, 0.1025646;
+  (School, No) 0.2592593, 0.5925925, 0.1481482;
+  (PreSchool, No) 0.2666671, 0.4666659, 0.2666671;
+  (Infant, No) 0.2619048, 0.5761904, 0.1619048;
+}
+probability ( Earache | AgeGroup, UpperAirwayInvolvment ) {
+  (School, NP) 0.09134199, 0.90865801;
+  (PreSchool, NP) 0.07589404, 0.92410596;
+  (Infant, NP) 0.02117462, 0.97882538;
+  (School, Throat) 0.008175573, 0.991824427;
+  (PreSchool, Throat) 0.02161773, 0.97838227;
+  (Infant, Throat) 0.06025382, 0.93974618;
+  (School, NPAndThroat) 0.1519352, 0.8480648;
+  (PreSchool, NPAndThroat) 0.05648768, 0.94351232;
+  (Infant, NPAndThroat) 3.898106e-05, 9.999610e-01;
+  (School, No) 0.05004422, 0.94995578;
+  (PreSchool, No) 0.05056201, 0.94943799;
+  (Infant, No) 7.562886e-05, 9.999244e-01;
+}
+probability ( EnergyLoss | CausativePathogenForPneumonia, CurrentPhenotype, ReducedOralIntake ) {
+  (TypicalBac, Type_1, Recorded) 0.8781351, 0.1218649;
+  (ViralLike, Type_1, Recorded) 0.6318936, 0.3681064;
+  (NoPneumonia, Type_1, Recorded) 0.6320507, 0.3679493;
+  (TypicalBac, Type_2, Recorded) 0.1520451, 0.8479549;
+  (ViralLike, Type_2, Recorded) 0.8130375, 0.1869625;
+  (NoPneumonia, Type_2, Recorded) 0.5044343, 0.4955657;
+  (TypicalBac, Type_1, Unknown) 0.621096, 0.378904;
+  (ViralLike, Type_1, Unknown) 0.5052451, 0.4947549;
+  (NoPneumonia, Type_1, Unknown) 0.100008, 0.899992;
+  (TypicalBac, Type_2, Unknown) 0.0100098, 0.9899902;
+  (ViralLike, Type_2, Unknown) 0.100008, 0.899992;
+  (NoPneumonia, Type_2, Unknown) 0.0100098, 0.9899902;
+}
+probability ( Ethnicity ) {
+  table 0.09740262, 0.90259738;
+}
+probability ( Fever | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (School, TypicalBac, Type_1) 0.95846397, 0.04153603;
+  (PreSchool, TypicalBac, Type_1) 0.8120505, 0.1879495;
+  (Infant, TypicalBac, Type_1) 0.0100098, 0.9899902;
+  (School, ViralLike, Type_1) 0.94994731, 0.05005269;
+  (PreSchool, ViralLike, Type_1) 0.6699707, 0.3300293;
+  (Infant, ViralLike, Type_1) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_1) 0.98333011, 0.01666989;
+  (PreSchool, NoPneumonia, Type_1) 0.6333323, 0.3666677;
+  (Infant, NoPneumonia, Type_1) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_2) 0.543874, 0.456126;
+  (PreSchool, TypicalBac, Type_2) 0.8439647, 0.1560353;
+  (Infant, TypicalBac, Type_2) 0.0100098, 0.9899902;
+  (School, ViralLike, Type_2) 0.7633948, 0.2366052;
+  (PreSchool, ViralLike, Type_2) 0.8368682, 0.1631318;
+  (Infant, ViralLike, Type_2) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2) 0.97105452, 0.02894548;
+  (PreSchool, NoPneumonia, Type_2) 0.894976, 0.105024;
+  (Infant, NoPneumonia, Type_2) 0.0100098, 0.9899902;
+}
+probability ( Headache | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype, UpperAirwayInvolvment ) {
+  (School, TypicalBac, Type_1, NP) 0.2353102, 0.7646898;
+  (PreSchool, TypicalBac, Type_1, NP) 0.2315058, 0.7684942;
+  (Infant, TypicalBac, Type_1, NP) 0.050009, 0.949991;
+  (School, ViralLike, Type_1, NP) 0.1008372, 0.8991628;
+  (PreSchool, ViralLike, Type_1, NP) 0.07916299, 0.92083701;
+  (Infant, ViralLike, Type_1, NP) 0.0350093, 0.9649907;
+  (School, NoPneumonia, Type_1, NP) 0.1717483, 0.8282517;
+  (PreSchool, NoPneumonia, Type_1, NP) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Type_1, NP) 0.1590682, 0.8409318;
+  (School, TypicalBac, Type_2, NP) 0.050009, 0.949991;
+  (PreSchool, TypicalBac, Type_2, NP) 0.2424936, 0.7575064;
+  (Infant, TypicalBac, Type_2, NP) 0.07317829, 0.92682171;
+  (School, ViralLike, Type_2, NP) 0.0350093, 0.9649907;
+  (PreSchool, ViralLike, Type_2, NP) 0.04982933, 0.95017067;
+  (Infant, ViralLike, Type_2, NP) 0.06737476, 0.93262524;
+  (School, NoPneumonia, Type_2, NP) 0.166572, 0.833428;
+  (PreSchool, NoPneumonia, Type_2, NP) 0.05779219, 0.94220781;
+  (Infant, NoPneumonia, Type_2, NP) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, Throat) 0.5954695, 0.4045305;
+  (PreSchool, TypicalBac, Type_1, Throat) 0.212627, 0.787373;
+  (Infant, TypicalBac, Type_1, Throat) 0.0350093, 0.9649907;
+  (School, ViralLike, Type_1, Throat) 0.008877409, 0.991122591;
+  (PreSchool, ViralLike, Type_1, Throat) 0.03653111, 0.96346889;
+  (Infant, ViralLike, Type_1, Throat) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_1, Throat) 0.1871762, 0.8128238;
+  (PreSchool, NoPneumonia, Type_1, Throat) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Type_1, Throat) 0.08586574, 0.91413426;
+  (School, TypicalBac, Type_2, Throat) 0.0350093, 0.9649907;
+  (PreSchool, TypicalBac, Type_2, Throat) 0.2042293, 0.7957707;
+  (Infant, TypicalBac, Type_2, Throat) 0.4159879, 0.5840121;
+  (School, ViralLike, Type_2, Throat) 0.0100098, 0.9899902;
+  (PreSchool, ViralLike, Type_2, Throat) 0.3299196, 0.6700804;
+  (Infant, ViralLike, Type_2, Throat) 0.01027112, 0.98972888;
+  (School, NoPneumonia, Type_2, Throat) 0.1271312, 0.8728688;
+  (PreSchool, NoPneumonia, Type_2, Throat) 0.6002316, 0.3997684;
+  (Infant, NoPneumonia, Type_2, Throat) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, NPAndThroat) 0.08948843, 0.91051157;
+  (PreSchool, TypicalBac, Type_1, NPAndThroat) 0.1713155, 0.8286845;
+  (Infant, TypicalBac, Type_1, NPAndThroat) 0.0100098, 0.9899902;
+  (School, ViralLike, Type_1, NPAndThroat) 0.4535293, 0.5464707;
+  (PreSchool, ViralLike, Type_1, NPAndThroat) 0.0100098, 0.9899902;
+  (Infant, ViralLike, Type_1, NPAndThroat) 0.3801861, 0.6198139;
+  (School, NoPneumonia, Type_1, NPAndThroat) 0.008662606, 0.991337394;
+  (PreSchool, NoPneumonia, Type_1, NPAndThroat) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Type_1, NPAndThroat) 0.0123027, 0.9876973;
+  (School, TypicalBac, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (PreSchool, TypicalBac, Type_2, NPAndThroat) 0.08133932, 0.91866068;
+  (Infant, TypicalBac, Type_2, NPAndThroat) 0.1712859, 0.8287141;
+  (School, ViralLike, Type_2, NPAndThroat) 0.2424864, 0.7575136;
+  (PreSchool, ViralLike, Type_2, NPAndThroat) 0.2141082, 0.7858918;
+  (Infant, ViralLike, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2, NPAndThroat) 0.09375528, 0.90624472;
+  (PreSchool, NoPneumonia, Type_2, NPAndThroat) 0.004919503, 0.995080497;
+  (Infant, NoPneumonia, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, No) 0.3134799, 0.6865201;
+  (PreSchool, TypicalBac, Type_1, No) 0.6712947, 0.3287053;
+  (Infant, TypicalBac, Type_1, No) 0.050009, 0.949991;
+  (School, ViralLike, Type_1, No) 0.06794374, 0.93205626;
+  (PreSchool, ViralLike, Type_1, No) 0.0100098, 0.9899902;
+  (Infant, ViralLike, Type_1, No) 0.2116134, 0.7883866;
+  (School, NoPneumonia, Type_1, No) 0.005716042, 0.994283958;
+  (PreSchool, NoPneumonia, Type_1, No) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Type_1, No) 0.01110849, 0.98889151;
+  (School, TypicalBac, Type_2, No) 0.050009, 0.949991;
+  (PreSchool, TypicalBac, Type_2, No) 0.02589711, 0.97410289;
+  (Infant, TypicalBac, Type_2, No) 0.2607524, 0.7392476;
+  (School, ViralLike, Type_2, No) 0.2004142, 0.7995858;
+  (PreSchool, ViralLike, Type_2, No) 0.1843214, 0.8156786;
+  (Infant, ViralLike, Type_2, No) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2, No) 0.06775916, 0.93224084;
+  (PreSchool, NoPneumonia, Type_2, No) 0.002600986, 0.997399014;
+  (Infant, NoPneumonia, Type_2, No) 0.0100098, 0.9899902;
+}
+probability ( HighestTemperature | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (School, TypicalBac, Type_1) 0.73058644, 0.07848664, 0.19092691;
+  (PreSchool, TypicalBac, Type_1) 0.0379060, 0.3104399, 0.6516541;
+  (Infant, TypicalBac, Type_1) 0.0100097, 0.0500085, 0.9399818;
+  (School, ViralLike, Type_1) 0.72510062, 0.19994421, 0.07495517;
+  (PreSchool, ViralLike, Type_1) 0.3349249, 0.4450450, 0.2200301;
+  (Infant, ViralLike, Type_1) 0.0100097, 0.0500085, 0.9399818;
+  (School, NoPneumonia, Type_1) 0.53333154, 0.43333213, 0.03333632;
+  (PreSchool, NoPneumonia, Type_1) 0.83332824, 0.13333541, 0.03333635;
+  (Infant, NoPneumonia, Type_1) 0.0100097, 0.0500085, 0.9399818;
+  (School, TypicalBac, Type_2) 0.2608544, 0.3146614, 0.4244842;
+  (PreSchool, TypicalBac, Type_2) 0.1486681, 0.3729381, 0.4783938;
+  (Infant, TypicalBac, Type_2) 0.0100097, 0.0500085, 0.9399818;
+  (School, ViralLike, Type_2) 0.2056652, 0.4518144, 0.3425204;
+  (PreSchool, ViralLike, Type_2) 0.2623653, 0.3715909, 0.3660438;
+  (Infant, ViralLike, Type_2) 0.0100097, 0.0500085, 0.9399818;
+  (School, NoPneumonia, Type_2) 0.3439330, 0.2199694, 0.4360977;
+  (PreSchool, NoPneumonia, Type_2) 0.1520426, 0.4603647, 0.3875927;
+  (Infant, NoPneumonia, Type_2) 0.0100097, 0.0500085, 0.9399818;
+}
+probability ( HMPVInNasopharynx | AgeGroup, InfluenzaSeason, LevelOfExposure ) {
+  (School, No, High) 0.005038579, 0.994961421;
+  (PreSchool, No, High) 0.03412544, 0.96587456;
+  (Infant, No, High) 0.01289513, 0.98710487;
+  (School, Yes, High) 0.05597429, 0.94402571;
+  (PreSchool, Yes, High) 0.1502052, 0.8497948;
+  (Infant, Yes, High) 0.0219254, 0.9780746;
+  (School, No, Low) 0.009827136, 0.990172864;
+  (PreSchool, No, Low) 0.1599907, 0.8400093;
+  (Infant, No, Low) 0.01337935, 0.98662065;
+  (School, Yes, Low) 0.05606302, 0.94393698;
+  (PreSchool, Yes, Low) 0.335255, 0.664745;
+  (Infant, Yes, Low) 0.3503273, 0.6496727;
+}
+probability ( HospitalTransfer | AgeGroup, Ethnicity ) {
+  (School, Indigenous) 0.1875008, 0.8124992;
+  (PreSchool, Indigenous) 0.1875008, 0.8124992;
+  (Infant, Indigenous) 0.1417911, 0.8582089;
+  (School, NonIndigenous) 0.3888891, 0.6111109;
+  (PreSchool, NonIndigenous) 0.1363637, 0.8636363;
+  (Infant, NonIndigenous) 0.05223894, 0.94776106;
+}
+probability ( ImpairedImmunity ) {
+  table 0.04978359, 0.95021641;
+}
+probability ( InfluenzaInNasopharynx | AgeGroup, InfluenzaSeason, InfluenzaVaccine, LevelOfExposure ) {
+  (School, No, No, High) 0.00634028, 0.99365972;
+  (PreSchool, No, No, High) 0.07376904, 0.92623096;
+  (Infant, No, No, High) 0.01144733, 0.98855267;
+  (School, Yes, No, High) 0.01038355, 0.98961645;
+  (PreSchool, Yes, No, High) 0.01170281, 0.98829719;
+  (Infant, Yes, No, High) 0.06108363, 0.93891637;
+  (School, No, Yes, High) 0.04282159, 0.95717841;
+  (PreSchool, No, Yes, High) 0.3008136, 0.6991864;
+  (Infant, No, Yes, High) 0.01094367, 0.98905633;
+  (School, Yes, Yes, High) 0.06356141, 0.93643859;
+  (PreSchool, Yes, Yes, High) 0.06563818, 0.93436182;
+  (Infant, Yes, Yes, High) 0.02055451, 0.97944549;
+  (School, No, No, Low) 0.05101679, 0.94898321;
+  (PreSchool, No, No, Low) 0.02447549, 0.97552451;
+  (Infant, No, No, Low) 0.09184901, 0.90815099;
+  (School, Yes, No, Low) 0.01631814, 0.98368186;
+  (PreSchool, Yes, No, Low) 0.02657878, 0.97342122;
+  (Infant, Yes, No, Low) 0.01162665, 0.98837335;
+  (School, No, Yes, Low) 0.04099298, 0.95900702;
+  (PreSchool, No, Yes, Low) 0.02523052, 0.97476948;
+  (Infant, No, Yes, Low) 0.05796071, 0.94203929;
+  (School, Yes, Yes, Low) 0.381218, 0.618782;
+  (PreSchool, Yes, Yes, Low) 0.008457811, 0.991542189;
+  (Infant, Yes, Yes, Low) 0.01278593, 0.98721407;
+}
+probability ( InfluenzaSeason ) {
+  table 0.465368, 0.534632;
+}
+probability ( InfluenzaVaccine | AgeGroup, Ethnicity, Prematurity ) {
+  (School, Indigenous, Yes) 0.7499975, 0.2500025;
+  (PreSchool, Indigenous, Yes) 0.5, 0.5;
+  (Infant, Indigenous, Yes) 0.8333311, 0.1666689;
+  (School, NonIndigenous, Yes) 0.9285702, 0.0714298;
+  (PreSchool, NonIndigenous, Yes) 0.7857135, 0.2142865;
+  (Infant, NonIndigenous, Yes) 0.7499992, 0.2500008;
+  (School, Indigenous, No) 0.8333326, 0.1666674;
+  (PreSchool, Indigenous, No) 0.8333326, 0.1666674;
+  (Infant, Indigenous, No) 0.7916662, 0.2083338;
+  (School, NonIndigenous, No) 0.93478248, 0.06521752;
+  (PreSchool, NonIndigenous, No) 0.8389829, 0.1610171;
+  (Infant, NonIndigenous, No) 0.91964271, 0.08035729;
+}
+probability ( Irritable | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (School, TypicalBac, Type_1) 0.1123666, 0.8876334;
+  (PreSchool, TypicalBac, Type_1) 0.1912401, 0.8087599;
+  (Infant, TypicalBac, Type_1) 0.100008, 0.899992;
+  (School, ViralLike, Type_1) 0.398926, 0.601074;
+  (PreSchool, ViralLike, Type_1) 0.0670201, 0.9329799;
+  (Infant, ViralLike, Type_1) 0.150007, 0.849993;
+  (School, NoPneumonia, Type_1) 0.2996679, 0.7003321;
+  (PreSchool, NoPneumonia, Type_1) 0.6026662, 0.3973338;
+  (Infant, NoPneumonia, Type_1) 0.250005, 0.749995;
+  (School, TypicalBac, Type_2) 0.01528217, 0.98471783;
+  (PreSchool, TypicalBac, Type_2) 0.02426187, 0.97573813;
+  (Infant, TypicalBac, Type_2) 0.100008, 0.899992;
+  (School, ViralLike, Type_2) 0.02553595, 0.97446405;
+  (PreSchool, ViralLike, Type_2) 0.07173619, 0.92826381;
+  (Infant, ViralLike, Type_2) 0.150007, 0.849993;
+  (School, NoPneumonia, Type_2) 0.03621484, 0.96378516;
+  (PreSchool, NoPneumonia, Type_2) 0.009576503, 0.990423497;
+  (Infant, NoPneumonia, Type_2) 0.250005, 0.749995;
+}
+probability ( LevelOfExposure | AgeGroup, ChildcareDays, Ethnicity ) {
+  (School, Five_or_more, Indigenous) 0.801, 0.199;
+  (PreSchool, Five_or_more, Indigenous) 0.5058494, 0.4941506;
+  (Infant, Five_or_more, Indigenous) 0.4508, 0.5492;
+  (School, Two_to_four, Indigenous) 0.7142, 0.2858;
+  (PreSchool, Two_to_four, Indigenous) 0.3963, 0.6037;
+  (Infant, Two_to_four, Indigenous) 0.3433, 0.6567;
+  (School, One_or_less, Indigenous) 0.614, 0.386;
+  (PreSchool, One_or_less, Indigenous) 0.5606, 0.4394;
+  (Infant, One_or_less, Indigenous) 0.245, 0.755;
+  (School, Five_or_more, NonIndigenous) 0.7595, 0.2405;
+  (PreSchool, Five_or_more, NonIndigenous) 0.4508, 0.5492;
+  (Infant, Five_or_more, NonIndigenous) 0.3963, 0.6037;
+  (School, Two_to_four, NonIndigenous) 0.6655, 0.3345;
+  (PreSchool, Two_to_four, NonIndigenous) 0.614, 0.386;
+  (Infant, Two_to_four, NonIndigenous) 0.2926, 0.7074;
+  (School, One_or_less, NonIndigenous) 0.5606, 0.4394;
+  (PreSchool, One_or_less, NonIndigenous) 0.5058494, 0.4941506;
+  (Infant, One_or_less, NonIndigenous) 0.2012, 0.7988;
+}
+probability ( MycoplasmaInNasopharynx | AgeGroup, LevelOfExposure ) {
+  (School, High) 0.3653027, 0.6346973;
+  (PreSchool, High) 0.003779552, 0.996220448;
+  (Infant, High) 0.04338311, 0.95661689;
+  (School, Low) 0.005162972, 0.994837028;
+  (PreSchool, Low) 0.008596147, 0.991403853;
+  (Infant, Low) 0.06612327, 0.93387673;
+}
+probability ( NeutrophilProportion | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.49333410, 0.48777180, 0.01889409;
+  (ViralLike, Type_1) 0.51326652, 0.48247652, 0.00425696;
+  (NoPneumonia, Type_1) 0.4516702, 0.4055669, 0.1427628;
+  (TypicalBac, Type_2) 0.09254315, 0.64249763, 0.26495921;
+  (ViralLike, Type_2) 0.0100097, 0.0500085, 0.9399818;
+  (NoPneumonia, Type_2) 0.0100097, 0.0500085, 0.9399818;
+}
+probability ( O2Type | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.3880154, 0.6119846;
+  (ViralLike, Type_1) 0.5, 0.5;
+  (NoPneumonia, Type_1) 0.01677646, 0.98322354;
+  (TypicalBac, Type_2) 0.2370936, 0.7629064;
+  (ViralLike, Type_2) 0.1108335, 0.8891665;
+  (NoPneumonia, Type_2) 0.5, 0.5;
+}
+probability ( OtherPain | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (School, TypicalBac, Type_1) 0.3898662, 0.6101338;
+  (PreSchool, TypicalBac, Type_1) 0.5341074, 0.4658926;
+  (Infant, TypicalBac, Type_1) 0.0100098, 0.9899902;
+  (School, ViralLike, Type_1) 0.1528983, 0.8471017;
+  (PreSchool, ViralLike, Type_1) 0.1215875, 0.8784125;
+  (Infant, ViralLike, Type_1) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_1) 0.08870272, 0.91129728;
+  (PreSchool, NoPneumonia, Type_1) 0.06050295, 0.93949705;
+  (Infant, NoPneumonia, Type_1) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_2) 0.05168744, 0.94831256;
+  (PreSchool, TypicalBac, Type_2) 0.002564575, 0.997435425;
+  (Infant, TypicalBac, Type_2) 0.0100098, 0.9899902;
+  (School, ViralLike, Type_2) 0.05965126, 0.94034874;
+  (PreSchool, ViralLike, Type_2) 0.02356845, 0.97643155;
+  (Infant, ViralLike, Type_2) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2) 0.00726323, 0.99273677;
+  (PreSchool, NoPneumonia, Type_2) 0.001383645, 0.998616355;
+  (Infant, NoPneumonia, Type_2) 0.0100098, 0.9899902;
+}
+probability ( OxygenSaturation | CausativePathogenForPneumonia, CurrentPhenotype, O2Type ) {
+  (TypicalBac, Type_1, Supp02) 0.2874959, 0.3874931, 0.3250110;
+  (ViralLike, Type_1, Supp02) 0.3654507, 0.2562492, 0.3783000;
+  (NoPneumonia, Type_1, Supp02) 0.002845177, 0.032704601, 0.964450222;
+  (TypicalBac, Type_2, Supp02) 0.1171553, 0.2485204, 0.6343243;
+  (ViralLike, Type_2, Supp02) 0.2340033, 0.2960039, 0.4699928;
+  (NoPneumonia, Type_2, Supp02) 0.2149486, 0.5625832, 0.2224682;
+  (TypicalBac, Type_1, RoomAir) 0.006743947, 0.060668569, 0.932587484;
+  (ViralLike, Type_1, RoomAir) 0.1716270, 0.3880411, 0.4403319;
+  (NoPneumonia, Type_1, RoomAir) 0.0001099967, 0.0010099700, 0.9988800333;
+  (TypicalBac, Type_2, RoomAir) 0.0001099967, 0.0010099700, 0.9988800333;
+  (ViralLike, Type_2, RoomAir) 0.0001099967, 0.0010099700, 0.9988800333;
+  (NoPneumonia, Type_2, RoomAir) 0.0001099967, 0.0010099700, 0.9988800333;
+}
+probability ( ParainfluenzaInNasopharynx | AgeGroup, LevelOfExposure ) {
+  (School, High) 0.03120656, 0.96879344;
+  (PreSchool, High) 0.006606346, 0.993393654;
+  (Infant, High) 0.06763972, 0.93236028;
+  (School, Low) 0.06795287, 0.93204713;
+  (PreSchool, Low) 0.04611722, 0.95388278;
+  (Infant, Low) 0.1295852, 0.8704148;
+}
+probability ( PleuralEffusion | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.92992198, 0.07007802;
+  (ViralLike, Type_1) 0.1883328, 0.8116672;
+  (NoPneumonia, Type_1) 0.160281, 0.839719;
+  (TypicalBac, Type_2) 0.01377018, 0.98622982;
+  (ViralLike, Type_2) 0.001039917, 0.998960083;
+  (NoPneumonia, Type_2) 0.001039917, 0.998960083;
+}
+probability ( PleuralFluidResult | AntibioticExposure, CausativePathogenForPneumonia, PleuralEffusion ) {
+  (Last_day, TypicalBac, Yes) 0.528707318, 0.462964516, 0.008328166;
+  (Last_week, TypicalBac, Yes) 0.0100097, 0.8899833, 0.1000070;
+  (No, TypicalBac, Yes) 2.288492e-07, 2.288492e-07, 9.999995e-01;
+  (Last_day, ViralLike, Yes) 0.28464989, 0.70422827, 0.01112184;
+  (Last_week, ViralLike, Yes) 0.0100097, 0.8899833, 0.1000070;
+  (No, ViralLike, Yes) 1.902551e-07, 1.902551e-07, 9.999996e-01;
+  (Last_day, NoPneumonia, Yes) 0.0100097, 0.8899833, 0.1000070;
+  (Last_week, NoPneumonia, Yes) 1.948180e-06, 1.948180e-06, 9.999961e-01;
+  (No, NoPneumonia, Yes) 1.569663e-05, 1.569663e-05, 9.999686e-01;
+  (Last_day, TypicalBac, No) 0.4299971, 0.4699959, 0.1000070;
+  (Last_week, TypicalBac, No) 0.0100097, 0.8899833, 0.1000070;
+  (No, TypicalBac, No) 1.434475e-06, 1.434475e-06, 9.999971e-01;
+  (Last_day, ViralLike, No) 0.002561921, 0.471124890, 0.526313189;
+  (Last_week, ViralLike, No) 1.375898e-06, 1.375899e-06, 9.999972e-01;
+  (No, ViralLike, No) 1.569663e-05, 1.569663e-05, 9.999686e-01;
+  (Last_day, NoPneumonia, No) 0.3359439, 0.2981574, 0.3658987;
+  (Last_week, NoPneumonia, No) 5.147516e-07, 5.147516e-07, 9.999990e-01;
+  (No, NoPneumonia, No) 1.569663e-05, 1.569663e-05, 9.999686e-01;
+}
+probability ( PneumococcalVaccine | AgeGroup, Ethnicity ) {
+  (School, Indigenous) 0.1875008, 0.8124992;
+  (PreSchool, Indigenous) 0.2272728, 0.7727272;
+  (Infant, Indigenous) 0.05555655, 0.94444345;
+  (School, NonIndigenous) 0.1268658, 0.8731342;
+  (PreSchool, NonIndigenous) 0.4375, 0.5625;
+  (Infant, NonIndigenous) 0.1119404, 0.8880596;
+}
+probability ( Prematurity | Ethnicity, SmokerInHousehold ) {
+  (Indigenous, Yes) 0.3181821, 0.6818179;
+  (NonIndigenous, Yes) 0.1923082, 0.8076918;
+  (Indigenous, No) 0.1551727, 0.8448273;
+  (NonIndigenous, No) 0.1298343, 0.8701657;
+}
+probability ( PreviousSignificantInfection | AgeGroup, SusceptibilityToColonisation, SusceptibilityToProgression ) {
+  (School, High, High) 0.5579422, 0.4420578;
+  (PreSchool, High, High) 0.7567519, 0.2432481;
+  (Infant, High, High) 0.5233819, 0.4766181;
+  (School, Low, High) 0.1714632, 0.8285368;
+  (PreSchool, Low, High) 0.7250283, 0.2749717;
+  (Infant, Low, High) 0.5744139, 0.4255861;
+  (School, High, Low) 0.4047153, 0.5952847;
+  (PreSchool, High, Low) 0.1626692, 0.8373308;
+  (Infant, High, Low) 0.2691395, 0.7308605;
+  (School, Low, Low) 0.2186787, 0.7813213;
+  (PreSchool, Low, Low) 0.475694, 0.524306;
+  (Infant, Low, Low) 0.3635187, 0.6364813;
+}
+probability ( Rash | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.2251777, 0.7748223;
+  (ViralLike, Type_1) 0.09139027, 0.90860973;
+  (NoPneumonia, Type_1) 0.1643772, 0.8356228;
+  (TypicalBac, Type_2) 0.1471031, 0.8528969;
+  (ViralLike, Type_2) 0.00100998, 0.99899002;
+  (NoPneumonia, Type_2) 0.00100998, 0.99899002;
+}
+probability ( ReducedOralIntake | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype, Diarrhoea, Vomiting ) {
+  (School, TypicalBac, Type_1, Recorded, Recorded) 0.95285166, 0.04714834;
+  (PreSchool, TypicalBac, Type_1, Recorded, Recorded) 0.8811949, 0.1188051;
+  (Infant, TypicalBac, Type_1, Recorded, Recorded) 0.5, 0.5;
+  (School, ViralLike, Type_1, Recorded, Recorded) 0.93367409, 0.06632591;
+  (PreSchool, ViralLike, Type_1, Recorded, Recorded) 0.90463142, 0.09536858;
+  (Infant, ViralLike, Type_1, Recorded, Recorded) 0.5, 0.5;
+  (School, NoPneumonia, Type_1, Recorded, Recorded) 0.9702453, 0.0297547;
+  (PreSchool, NoPneumonia, Type_1, Recorded, Recorded) 0.5, 0.5;
+  (Infant, NoPneumonia, Type_1, Recorded, Recorded) 0.8325468, 0.1674532;
+  (School, TypicalBac, Type_2, Recorded, Recorded) 0.5, 0.5;
+  (PreSchool, TypicalBac, Type_2, Recorded, Recorded) 0.599898, 0.400102;
+  (Infant, TypicalBac, Type_2, Recorded, Recorded) 0.7216454, 0.2783546;
+  (School, ViralLike, Type_2, Recorded, Recorded) 0.5, 0.5;
+  (PreSchool, ViralLike, Type_2, Recorded, Recorded) 0.7394637, 0.2605363;
+  (Infant, ViralLike, Type_2, Recorded, Recorded) 0.7666548, 0.2333452;
+  (School, NoPneumonia, Type_2, Recorded, Recorded) 0.8629927, 0.1370073;
+  (PreSchool, NoPneumonia, Type_2, Recorded, Recorded) 0.7911942, 0.2088058;
+  (Infant, NoPneumonia, Type_2, Recorded, Recorded) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, Unknown, Recorded) 0.97484525, 0.02515475;
+  (PreSchool, TypicalBac, Type_1, Unknown, Recorded) 0.8463931, 0.1536069;
+  (Infant, TypicalBac, Type_1, Unknown, Recorded) 0.5, 0.5;
+  (School, ViralLike, Type_1, Unknown, Recorded) 0.95805746, 0.04194254;
+  (PreSchool, ViralLike, Type_1, Unknown, Recorded) 0.5, 0.5;
+  (Infant, ViralLike, Type_1, Unknown, Recorded) 0.4607101, 0.5392899;
+  (School, NoPneumonia, Type_1, Unknown, Recorded) 0.6843577, 0.3156423;
+  (PreSchool, NoPneumonia, Type_1, Unknown, Recorded) 0.5, 0.5;
+  (Infant, NoPneumonia, Type_1, Unknown, Recorded) 0.8259736, 0.1740264;
+  (School, TypicalBac, Type_2, Unknown, Recorded) 0.5, 0.5;
+  (PreSchool, TypicalBac, Type_2, Unknown, Recorded) 0.8103938, 0.1896062;
+  (Infant, TypicalBac, Type_2, Unknown, Recorded) 0.8216467, 0.1783533;
+  (School, ViralLike, Type_2, Unknown, Recorded) 0.8882725, 0.1117275;
+  (PreSchool, ViralLike, Type_2, Unknown, Recorded) 0.5785984, 0.4214016;
+  (Infant, ViralLike, Type_2, Unknown, Recorded) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2, Unknown, Recorded) 0.7629355, 0.2370645;
+  (PreSchool, NoPneumonia, Type_2, Unknown, Recorded) 0.8651561, 0.1348439;
+  (Infant, NoPneumonia, Type_2, Unknown, Recorded) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, Recorded, Unknown) 0.93933838, 0.06066162;
+  (PreSchool, TypicalBac, Type_1, Recorded, Unknown) 0.6824751, 0.3175249;
+  (Infant, TypicalBac, Type_1, Recorded, Unknown) 0.5, 0.5;
+  (School, ViralLike, Type_1, Recorded, Unknown) 0.9694485, 0.0305515;
+  (PreSchool, ViralLike, Type_1, Recorded, Unknown) 0.98511728, 0.01488272;
+  (Infant, ViralLike, Type_1, Recorded, Unknown) 0.5, 0.5;
+  (School, NoPneumonia, Type_1, Recorded, Unknown) 0.95184137, 0.04815863;
+  (PreSchool, NoPneumonia, Type_1, Recorded, Unknown) 0.5, 0.5;
+  (Infant, NoPneumonia, Type_1, Recorded, Unknown) 0.552825, 0.447175;
+  (School, TypicalBac, Type_2, Recorded, Unknown) 0.5, 0.5;
+  (PreSchool, TypicalBac, Type_2, Recorded, Unknown) 0.6868963, 0.3131037;
+  (Infant, TypicalBac, Type_2, Recorded, Unknown) 0.6292595, 0.3707405;
+  (School, ViralLike, Type_2, Recorded, Unknown) 0.5, 0.5;
+  (PreSchool, ViralLike, Type_2, Recorded, Unknown) 0.806727, 0.193273;
+  (Infant, ViralLike, Type_2, Recorded, Unknown) 0.7812015, 0.2187985;
+  (School, NoPneumonia, Type_2, Recorded, Unknown) 0.7023839, 0.2976161;
+  (PreSchool, NoPneumonia, Type_2, Recorded, Unknown) 0.8489316, 0.1510684;
+  (Infant, NoPneumonia, Type_2, Recorded, Unknown) 0.0100098, 0.9899902;
+  (School, TypicalBac, Type_1, Unknown, Unknown) 0.1696905, 0.8303095;
+  (PreSchool, TypicalBac, Type_1, Unknown, Unknown) 0.97124615, 0.02875385;
+  (Infant, TypicalBac, Type_1, Unknown, Unknown) 0.5, 0.5;
+  (School, ViralLike, Type_1, Unknown, Unknown) 0.96573729, 0.03426271;
+  (PreSchool, ViralLike, Type_1, Unknown, Unknown) 0.5, 0.5;
+  (Infant, ViralLike, Type_1, Unknown, Unknown) 0.5371732, 0.4628268;
+  (School, NoPneumonia, Type_1, Unknown, Unknown) 0.8974963, 0.1025037;
+  (PreSchool, NoPneumonia, Type_1, Unknown, Unknown) 0.5, 0.5;
+  (Infant, NoPneumonia, Type_1, Unknown, Unknown) 0.6894957, 0.3105043;
+  (School, TypicalBac, Type_2, Unknown, Unknown) 0.5, 0.5;
+  (PreSchool, TypicalBac, Type_2, Unknown, Unknown) 0.4119391, 0.5880609;
+  (Infant, TypicalBac, Type_2, Unknown, Unknown) 0.8674313, 0.1325687;
+  (School, ViralLike, Type_2, Unknown, Unknown) 0.7507906, 0.2492094;
+  (PreSchool, ViralLike, Type_2, Unknown, Unknown) 0.6650967, 0.3349033;
+  (Infant, ViralLike, Type_2, Unknown, Unknown) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Type_2, Unknown, Unknown) 0.93344354, 0.06655646;
+  (PreSchool, NoPneumonia, Type_2, Unknown, Unknown) 0.94685782, 0.05314218;
+  (Infant, NoPneumonia, Type_2, Unknown, Unknown) 0.0100098, 0.9899902;
+}
+probability ( RespiratoryRate | AgeGroup, CausativePathogenForPneumonia, CurrentPhenotype, OxygenSaturation ) {
+  (School, TypicalBac, Type_1, Below_92) 0.67502055, 0.29997662, 0.02500282;
+  (PreSchool, TypicalBac, Type_1, Below_92) 0.06619663, 0.58629008, 0.34751329;
+  (Infant, TypicalBac, Type_1, Below_92) 0.05004424, 0.87322305, 0.07673272;
+  (School, ViralLike, Type_1, Below_92) 0.05949782, 0.59632245, 0.34417973;
+  (PreSchool, ViralLike, Type_1, Below_92) 0.02984213, 0.76444788, 0.20570999;
+  (Infant, ViralLike, Type_1, Below_92) 0.08733261, 0.62321049, 0.28945690;
+  (School, NoPneumonia, Type_1, Below_92) 0.4499698, 0.2000120, 0.3500183;
+  (PreSchool, NoPneumonia, Type_1, Below_92) 0.04419107, 0.73084142, 0.22496751;
+  (Infant, NoPneumonia, Type_1, Below_92) 0.10986700, 0.83020328, 0.05992972;
+  (School, TypicalBac, Type_2, Below_92) 0.2579900, 0.4047152, 0.3372948;
+  (PreSchool, TypicalBac, Type_2, Below_92) 0.06439569, 0.20302360, 0.73258071;
+  (Infant, TypicalBac, Type_2, Below_92) 0.002923635, 0.107921896, 0.889154469;
+  (School, ViralLike, Type_2, Below_92) 0.3499995, 0.5999920, 0.0500085;
+  (PreSchool, ViralLike, Type_2, Below_92) 0.21000370, 0.72998811, 0.06000819;
+  (Infant, ViralLike, Type_2, Below_92) 0.0100097, 0.4999950, 0.4899953;
+  (School, NoPneumonia, Type_2, Below_92) 0.3499995, 0.5999920, 0.0500085;
+  (PreSchool, NoPneumonia, Type_2, Below_92) 0.21000370, 0.72998811, 0.06000819;
+  (Infant, NoPneumonia, Type_2, Below_92) 0.0100097, 0.4999950, 0.4899953;
+  (School, TypicalBac, Type_1, Betwenn_92_and_95) 0.54999607, 0.40999538, 0.04000855;
+  (PreSchool, TypicalBac, Type_1, Betwenn_92_and_95) 0.39947850, 0.55057799, 0.04994351;
+  (Infant, TypicalBac, Type_1, Betwenn_92_and_95) 0.66500663, 0.26499191, 0.07000145;
+  (School, ViralLike, Type_1, Betwenn_92_and_95) 0.75937898, 0.21893419, 0.02168683;
+  (PreSchool, ViralLike, Type_1, Betwenn_92_and_95) 0.09606895, 0.68272613, 0.22120491;
+  (Infant, ViralLike, Type_1, Betwenn_92_and_95) 0.07905283, 0.53008438, 0.39086279;
+  (School, NoPneumonia, Type_1, Betwenn_92_and_95) 0.51666392, 0.46999952, 0.01333656;
+  (PreSchool, NoPneumonia, Type_1, Betwenn_92_and_95) 0.28607468, 0.69991976, 0.01400556;
+  (Infant, NoPneumonia, Type_1, Betwenn_92_and_95) 0.35748851, 0.62500881, 0.01750268;
+  (School, TypicalBac, Type_2, Betwenn_92_and_95) 0.1557844, 0.7402324, 0.1039832;
+  (PreSchool, TypicalBac, Type_2, Betwenn_92_and_95) 0.1767859, 0.5061095, 0.3171046;
+  (Infant, TypicalBac, Type_2, Betwenn_92_and_95) 0.2603764, 0.5874569, 0.1521667;
+  (School, ViralLike, Type_2, Betwenn_92_and_95) 0.54999351, 0.40999770, 0.04000879;
+  (PreSchool, ViralLike, Type_2, Betwenn_92_and_95) 0.4099977, 0.5299941, 0.0600082;
+  (Infant, ViralLike, Type_2, Betwenn_92_and_95) 0.0500085, 0.5499935, 0.3999980;
+  (School, NoPneumonia, Type_2, Betwenn_92_and_95) 0.54999351, 0.40999770, 0.04000879;
+  (PreSchool, NoPneumonia, Type_2, Betwenn_92_and_95) 0.4099977, 0.5299941, 0.0600082;
+  (Infant, NoPneumonia, Type_2, Betwenn_92_and_95) 0.0500085, 0.5499935, 0.3999980;
+  (School, TypicalBac, Type_1, Above_95) 0.889994460, 0.103335607, 0.006669933;
+  (PreSchool, TypicalBac, Type_1, Above_95) 0.49999560, 0.48999470, 0.01000969;
+  (Infant, TypicalBac, Type_1, Above_95) 0.4799956, 0.4499965, 0.0700079;
+  (School, ViralLike, Type_1, Above_95) 0.7265628, 0.2569872, 0.0164500;
+  (PreSchool, ViralLike, Type_1, Above_95) 0.55351418, 0.44352559, 0.00296023;
+  (Infant, ViralLike, Type_1, Above_95) 0.3855689, 0.4580095, 0.1564216;
+  (School, NoPneumonia, Type_1, Above_95) 0.6699899, 0.3100007, 0.0200094;
+  (PreSchool, NoPneumonia, Type_1, Above_95) 0.78999299, 0.19000230, 0.02000471;
+  (Infant, NoPneumonia, Type_1, Above_95) 0.7899931, 0.1900022, 0.0200047;
+  (School, TypicalBac, Type_2, Above_95) 0.621179302, 0.376542601, 0.002278097;
+  (PreSchool, TypicalBac, Type_2, Above_95) 0.39798522, 0.50300153, 0.09901325;
+  (Infant, TypicalBac, Type_2, Above_95) 0.3825969, 0.4980248, 0.1193784;
+  (School, ViralLike, Type_2, Above_95) 0.6699899, 0.3100007, 0.0200094;
+  (PreSchool, ViralLike, Type_2, Above_95) 0.5499935, 0.4299971, 0.0200094;
+  (Infant, ViralLike, Type_2, Above_95) 0.1000070, 0.6499905, 0.2500025;
+  (School, NoPneumonia, Type_2, Above_95) 0.6699899, 0.3100007, 0.0200094;
+  (PreSchool, NoPneumonia, Type_2, Above_95) 0.5499935, 0.4299971, 0.0200094;
+  (Infant, NoPneumonia, Type_2, Above_95) 0.1000070, 0.6499905, 0.2500025;
+}
+probability ( Rhinorrhoea | UpperAirwayInvolvment ) {
+  (NP) 0.97601121, 0.02398879;
+  (Throat) 0.5626447, 0.4373553;
+  (NPAndThroat) 0.991373521, 0.008626479;
+  (No) 0.08481378, 0.91518622;
+}
+probability ( RSVInNasopharynx | AgeGroup, InfluenzaSeason, LevelOfExposure ) {
+  (School, No, High) 0.03926136, 0.96073864;
+  (PreSchool, No, High) 0.009850838, 0.990149162;
+  (Infant, No, High) 0.90690476, 0.09309524;
+  (School, Yes, High) 0.1900547, 0.8099453;
+  (PreSchool, Yes, High) 0.005450159, 0.994549841;
+  (Infant, Yes, High) 0.01086282, 0.98913718;
+  (School, No, Low) 0.6801507, 0.3198493;
+  (PreSchool, No, Low) 0.1267663, 0.8732337;
+  (Infant, No, Low) 0.513037, 0.486963;
+  (School, Yes, Low) 0.002801016, 0.997198984;
+  (PreSchool, Yes, Low) 0.1304636, 0.8695364;
+  (Infant, Yes, Low) 0.2512858, 0.7487142;
+}
+probability ( SmokerInHousehold | Ethnicity ) {
+  (Indigenous) 0.4565218, 0.5434782;
+  (NonIndigenous) 0.1363637, 0.8636363;
+}
+probability ( SoreThroat | AgeGroup, UpperAirwayInvolvment ) {
+  (School, NP) 0.002056355, 0.997943645;
+  (PreSchool, NP) 0.4733817, 0.5266183;
+  (Infant, NP) 0.03435494, 0.96564506;
+  (School, Throat) 0.001466704, 0.998533296;
+  (PreSchool, Throat) 0.1468323, 0.8531677;
+  (Infant, Throat) 0.1030005, 0.8969995;
+  (School, NPAndThroat) 0.0004392629, 0.9995607371;
+  (PreSchool, NPAndThroat) 0.2067763, 0.7932237;
+  (Infant, NPAndThroat) 3.921311e-05, 9.999608e-01;
+  (School, No) 0.8928286, 0.1071714;
+  (PreSchool, No) 0.1716603, 0.8283397;
+  (Infant, No) 7.126688e-05, 9.999287e-01;
+}
+probability ( SubjectGroup | CausativePathogenForPneumonia ) {
+  (TypicalBac) 1.0, 0.0;
+  (ViralLike) 1.0, 0.0;
+  (NoPneumonia) 0.0, 1.0;
+}
+probability ( SusceptibilityToColonisation | AgeGroup, ImpairedImmunity, SmokerInHousehold ) {
+  (School, Reported, Yes) 0.6655, 0.3345;
+  (PreSchool, Reported, Yes) 0.5875, 0.4125;
+  (Infant, Reported, Yes) 0.5059, 0.4941;
+  (School, Unknown, Yes) 0.7373, 0.2627;
+  (PreSchool, Unknown, Yes) 0.6655, 0.3345;
+  (Infant, Unknown, Yes) 0.2012, 0.7988;
+  (School, Reported, No) 0.8009, 0.1991;
+  (PreSchool, Reported, No) 0.3433, 0.6567;
+  (Infant, Reported, No) 0.2684, 0.7316;
+  (School, Unknown, No) 0.5059, 0.4941;
+  (PreSchool, Unknown, No) 0.4234, 0.5766;
+  (Infant, Unknown, No) 0.3433, 0.6567;
+}
+probability ( SusceptibilityToProgression | AgeGroup, ChronicRespiratoryDisease, ImpairedImmunity ) {
+  (School, Reported, Reported) 0.6607, 0.3393;
+  (PreSchool, Reported, Reported) 0.498, 0.502;
+  (Infant, Reported, Reported) 0.6607, 0.3393;
+  (School, Unknown, Reported) 0.7994, 0.2006;
+  (PreSchool, Unknown, Reported) 0.6607, 0.3393;
+  (Infant, Unknown, Reported) 0.1, 0.9;
+  (School, Reported, Unknown) 0.8991, 0.1009;
+  (PreSchool, Reported, Unknown) 0.3359, 0.6641;
+  (Infant, Reported, Unknown) 0.1985, 0.8015;
+  (School, Unknown, Unknown) 0.3359, 0.6641;
+  (PreSchool, Unknown, Unknown) 0.498, 0.502;
+  (Infant, Unknown, Unknown) 0.3359, 0.6641;
+}
+probability ( ThroatInfection | HMPVInNasopharynx, InfluenzaInNasopharynx, MycoplasmaInNasopharynx, ParainfluenzaInNasopharynx, RSVInNasopharynx, ViralNasopharyngealInfection ) {
+  (Positive, Positive, Positive, Positive, Positive, Present) 0.8549929, 0.1450071;
+  (Negative, Positive, Positive, Positive, Positive, Present) 0.8549929, 0.1450071;
+  (Positive, Negative, Positive, Positive, Positive, Present) 0.8549929, 0.1450071;
+  (Negative, Negative, Positive, Positive, Positive, Present) 0.8549929, 0.1450071;
+  (Positive, Positive, Negative, Positive, Positive, Present) 0.3800024, 0.6199976;
+  (Negative, Positive, Negative, Positive, Positive, Present) 0.3800024, 0.6199976;
+  (Positive, Negative, Negative, Positive, Positive, Present) 0.3800024, 0.6199976;
+  (Negative, Negative, Negative, Positive, Positive, Present) 0.3800024, 0.6199976;
+  (Positive, Positive, Positive, Negative, Positive, Present) 0.4746005, 0.5253995;
+  (Negative, Positive, Positive, Negative, Positive, Present) 0.4746005, 0.5253995;
+  (Positive, Negative, Positive, Negative, Positive, Present) 0.3750025, 0.6249975;
+  (Negative, Negative, Positive, Negative, Positive, Present) 0.3005013, 0.6994987;
+  (Positive, Positive, Negative, Negative, Positive, Present) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Negative, Positive, Present) 0.2800044, 0.7199956;
+  (Positive, Negative, Negative, Negative, Positive, Present) 0.250005, 0.749995;
+  (Negative, Negative, Negative, Negative, Positive, Present) 0.3920027, 0.6079973;
+  (Positive, Positive, Positive, Positive, Negative, Present) 0.8549929, 0.1450071;
+  (Negative, Positive, Positive, Positive, Negative, Present) 0.8549929, 0.1450071;
+  (Positive, Negative, Positive, Positive, Negative, Present) 0.8549929, 0.1450071;
+  (Negative, Negative, Positive, Positive, Negative, Present) 0.8540231, 0.1459769;
+  (Positive, Positive, Negative, Positive, Negative, Present) 0.3800024, 0.6199976;
+  (Negative, Positive, Negative, Positive, Negative, Present) 0.3800024, 0.6199976;
+  (Positive, Negative, Negative, Positive, Negative, Present) 0.3800024, 0.6199976;
+  (Negative, Negative, Negative, Positive, Negative, Present) 0.1947947, 0.8052053;
+  (Positive, Positive, Positive, Negative, Negative, Present) 0.4746005, 0.5253995;
+  (Negative, Positive, Positive, Negative, Negative, Present) 0.4751846, 0.5248154;
+  (Positive, Negative, Positive, Negative, Negative, Present) 0.3750025, 0.6249975;
+  (Negative, Negative, Positive, Negative, Negative, Present) 0.1623395, 0.8376605;
+  (Positive, Positive, Negative, Negative, Negative, Present) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Negative, Negative, Present) 0.1411282, 0.8588718;
+  (Positive, Negative, Negative, Negative, Negative, Present) 0.250005, 0.749995;
+  (Negative, Negative, Negative, Negative, Negative, Present) 0.1956692, 0.8043308;
+  (Positive, Positive, Positive, Positive, Positive, Absent) 0.8549929, 0.1450071;
+  (Negative, Positive, Positive, Positive, Positive, Absent) 0.8549929, 0.1450071;
+  (Positive, Negative, Positive, Positive, Positive, Absent) 0.8549929, 0.1450071;
+  (Negative, Negative, Positive, Positive, Positive, Absent) 0.91778963, 0.08221037;
+  (Positive, Positive, Negative, Positive, Positive, Absent) 0.3800024, 0.6199976;
+  (Negative, Positive, Negative, Positive, Positive, Absent) 0.3800024, 0.6199976;
+  (Positive, Negative, Negative, Positive, Positive, Absent) 0.3800024, 0.6199976;
+  (Negative, Negative, Negative, Positive, Positive, Absent) 0.3862585, 0.6137415;
+  (Positive, Positive, Positive, Negative, Positive, Absent) 0.4746005, 0.5253995;
+  (Negative, Positive, Positive, Negative, Positive, Absent) 0.4634355, 0.5365645;
+  (Positive, Negative, Positive, Negative, Positive, Absent) 0.3750025, 0.6249975;
+  (Negative, Negative, Positive, Negative, Positive, Absent) 0.8723066, 0.1276934;
+  (Positive, Positive, Negative, Negative, Positive, Absent) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Negative, Positive, Absent) 0.6040522, 0.3959478;
+  (Positive, Negative, Negative, Negative, Positive, Absent) 0.250005, 0.749995;
+  (Negative, Negative, Negative, Negative, Positive, Absent) 0.06044136, 0.93955864;
+  (Positive, Positive, Positive, Positive, Negative, Absent) 0.8947229, 0.1052771;
+  (Negative, Positive, Positive, Positive, Negative, Absent) 0.8549929, 0.1450071;
+  (Positive, Negative, Positive, Positive, Negative, Absent) 0.91273755, 0.08726245;
+  (Negative, Negative, Positive, Positive, Negative, Absent) 0.990418811, 0.009581189;
+  (Positive, Positive, Negative, Positive, Negative, Absent) 0.3960941, 0.6039059;
+  (Negative, Positive, Negative, Positive, Negative, Absent) 0.3800024, 0.6199976;
+  (Positive, Negative, Negative, Positive, Negative, Absent) 0.3844757, 0.6155243;
+  (Negative, Negative, Negative, Positive, Negative, Absent) 0.0588662, 0.9411338;
+  (Positive, Positive, Positive, Negative, Negative, Absent) 0.4746005, 0.5253995;
+  (Negative, Positive, Positive, Negative, Negative, Absent) 0.90241826, 0.09758174;
+  (Positive, Negative, Positive, Negative, Negative, Absent) 0.04604308, 0.95395692;
+  (Negative, Negative, Positive, Negative, Negative, Absent) 0.001503288, 0.998496712;
+  (Positive, Positive, Negative, Negative, Negative, Absent) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Negative, Negative, Absent) 0.1441674, 0.8558326;
+  (Positive, Negative, Negative, Negative, Negative, Absent) 0.1771061, 0.8228939;
+  (Negative, Negative, Negative, Negative, Negative, Absent) 0.0009902572, 0.9990097428;
+}
+probability ( TypicalBacteriaInNasopharynx | AgeGroup, AntibioticExposure, LevelOfExposure, PneumococcalVaccine, SusceptibilityToColonisation ) {
+  (School, Last_day, High, UnderVax, High) 0.510244, 0.489756;
+  (PreSchool, Last_day, High, UnderVax, High) 0.3484741, 0.6515259;
+  (Infant, Last_day, High, UnderVax, High) 0.4289496, 0.5710504;
+  (School, Last_week, High, UnderVax, High) 0.93657977, 0.06342023;
+  (PreSchool, Last_week, High, UnderVax, High) 0.5291994, 0.4708006;
+  (Infant, Last_week, High, UnderVax, High) 0.8799701, 0.1200299;
+  (School, No, High, UnderVax, High) 0.8421363, 0.1578637;
+  (PreSchool, No, High, UnderVax, High) 0.7366228, 0.2633772;
+  (Infant, No, High, UnderVax, High) 0.3272059, 0.6727941;
+  (School, Last_day, Low, UnderVax, High) 0.8760764, 0.1239236;
+  (PreSchool, Last_day, Low, UnderVax, High) 0.288746, 0.711254;
+  (Infant, Last_day, Low, UnderVax, High) 0.7140553, 0.2859447;
+  (School, Last_week, Low, UnderVax, High) 0.6700733, 0.3299267;
+  (PreSchool, Last_week, Low, UnderVax, High) 0.5909504, 0.4090496;
+  (Infant, Last_week, Low, UnderVax, High) 0.5274255, 0.4725745;
+  (School, No, Low, UnderVax, High) 0.3868124, 0.6131876;
+  (PreSchool, No, Low, UnderVax, High) 0.8928293, 0.1071707;
+  (Infant, No, Low, UnderVax, High) 0.2239325, 0.7760675;
+  (School, Last_day, High, FullyVax, High) 0.7422079, 0.2577921;
+  (PreSchool, Last_day, High, FullyVax, High) 0.7683335, 0.2316665;
+  (Infant, Last_day, High, FullyVax, High) 0.5484478, 0.4515522;
+  (School, Last_week, High, FullyVax, High) 0.5172931, 0.4827069;
+  (PreSchool, Last_week, High, FullyVax, High) 0.2355134, 0.7644866;
+  (Infant, Last_week, High, FullyVax, High) 0.3601826, 0.6398174;
+  (School, No, High, FullyVax, High) 0.6520995, 0.3479005;
+  (PreSchool, No, High, FullyVax, High) 0.91960071, 0.08039929;
+  (Infant, No, High, FullyVax, High) 0.6290326, 0.3709674;
+  (School, Last_day, Low, FullyVax, High) 0.90049199, 0.09950801;
+  (PreSchool, Last_day, Low, FullyVax, High) 0.6076317, 0.3923683;
+  (Infant, Last_day, Low, FullyVax, High) 0.8000715, 0.1999285;
+  (School, Last_week, Low, FullyVax, High) 0.7391933, 0.2608067;
+  (PreSchool, Last_week, Low, FullyVax, High) 0.6065263, 0.3934737;
+  (Infant, Last_week, Low, FullyVax, High) 0.8098823, 0.1901177;
+  (School, No, Low, FullyVax, High) 0.2693026, 0.7306974;
+  (PreSchool, No, Low, FullyVax, High) 0.3732478, 0.6267522;
+  (Infant, No, Low, FullyVax, High) 0.8359818, 0.1640182;
+  (School, Last_day, High, UnderVax, Low) 0.6079037, 0.3920963;
+  (PreSchool, Last_day, High, UnderVax, Low) 0.8272773, 0.1727227;
+  (Infant, Last_day, High, UnderVax, Low) 0.710201, 0.289799;
+  (School, Last_week, High, UnderVax, Low) 0.5487007, 0.4512993;
+  (PreSchool, Last_week, High, UnderVax, Low) 0.8233878, 0.1766122;
+  (Infant, Last_week, High, UnderVax, Low) 0.589317, 0.410683;
+  (School, No, High, UnderVax, Low) 0.4558861, 0.5441139;
+  (PreSchool, No, High, UnderVax, Low) 0.8795205, 0.1204795;
+  (Infant, No, High, UnderVax, Low) 0.1563377, 0.8436623;
+  (School, Last_day, Low, UnderVax, Low) 0.7701259, 0.2298741;
+  (PreSchool, Last_day, Low, UnderVax, Low) 0.3924453, 0.6075547;
+  (Infant, Last_day, Low, UnderVax, Low) 0.3919987, 0.6080013;
+  (School, Last_week, Low, UnderVax, Low) 0.800494, 0.199506;
+  (PreSchool, Last_week, Low, UnderVax, Low) 0.91261741, 0.08738259;
+  (Infant, Last_week, Low, UnderVax, Low) 0.6892862, 0.3107138;
+  (School, No, Low, UnderVax, Low) 0.7794945, 0.2205055;
+  (PreSchool, No, Low, UnderVax, Low) 0.5301113, 0.4698887;
+  (Infant, No, Low, UnderVax, Low) 0.7749269, 0.2250731;
+  (School, Last_day, High, FullyVax, Low) 0.782055, 0.217945;
+  (PreSchool, Last_day, High, FullyVax, Low) 0.624443, 0.375557;
+  (Infant, Last_day, High, FullyVax, Low) 0.7679786, 0.2320214;
+  (School, Last_week, High, FullyVax, Low) 0.6452081, 0.3547919;
+  (PreSchool, Last_week, High, FullyVax, Low) 0.5782982, 0.4217018;
+  (Infant, Last_week, High, FullyVax, Low) 0.8676092, 0.1323908;
+  (School, No, High, FullyVax, Low) 0.5973741, 0.4026259;
+  (PreSchool, No, High, FullyVax, Low) 0.7105082, 0.2894918;
+  (Infant, No, High, FullyVax, Low) 0.1825964, 0.8174036;
+  (School, Last_day, Low, FullyVax, Low) 0.8637087, 0.1362913;
+  (PreSchool, Last_day, Low, FullyVax, Low) 0.4679019, 0.5320981;
+  (Infant, Last_day, Low, FullyVax, Low) 0.7130087, 0.2869913;
+  (School, Last_week, Low, FullyVax, Low) 0.5503275, 0.4496725;
+  (PreSchool, Last_week, Low, FullyVax, Low) 0.5789417, 0.4210583;
+  (Infant, Last_week, Low, FullyVax, Low) 0.04938743, 0.95061257;
+  (School, No, Low, FullyVax, Low) 0.6703966, 0.3296034;
+  (PreSchool, No, Low, FullyVax, Low) 0.6371468, 0.3628532;
+  (Infant, No, Low, FullyVax, Low) 0.8759606, 0.1240394;
+}
+probability ( TypicalBacterialPneumonia | AgeGroup, PneumococcalVaccine, ThroatInfection, TypicalBacteriaInNasopharynx, ViralLikePneumonia, ViralNasopharyngealInfection ) {
+  (School, UnderVax, Present, Yes, Present, Present) 0.04426878, 0.95573122;
+  (PreSchool, UnderVax, Present, Yes, Present, Present) 0.007782674, 0.992217326;
+  (Infant, UnderVax, Present, Yes, Present, Present) 0.0100113, 0.9899887;
+  (School, FullyVax, Present, Yes, Present, Present) 0.0302624, 0.9697376;
+  (PreSchool, FullyVax, Present, Yes, Present, Present) 0.005580984, 0.994419016;
+  (Infant, FullyVax, Present, Yes, Present, Present) 0.01580022, 0.98419978;
+  (School, UnderVax, Absent, Yes, Present, Present) 0.2896748, 0.7103252;
+  (PreSchool, UnderVax, Absent, Yes, Present, Present) 0.008931919, 0.991068081;
+  (Infant, UnderVax, Absent, Yes, Present, Present) 0.009392187, 0.990607813;
+  (School, FullyVax, Absent, Yes, Present, Present) 0.5724724, 0.4275276;
+  (PreSchool, FullyVax, Absent, Yes, Present, Present) 0.006848864, 0.993151136;
+  (Infant, FullyVax, Absent, Yes, Present, Present) 0.008809966, 0.991190034;
+  (School, UnderVax, Present, No, Present, Present) 0.09085742, 0.90914258;
+  (PreSchool, UnderVax, Present, No, Present, Present) 0.4710175, 0.5289825;
+  (Infant, UnderVax, Present, No, Present, Present) 0.01231811, 0.98768189;
+  (School, FullyVax, Present, No, Present, Present) 0.009471873, 0.990528127;
+  (PreSchool, FullyVax, Present, No, Present, Present) 0.003394846, 0.996605154;
+  (Infant, FullyVax, Present, No, Present, Present) 0.6445913, 0.3554087;
+  (School, UnderVax, Absent, No, Present, Present) 0.0910045, 0.9089955;
+  (PreSchool, UnderVax, Absent, No, Present, Present) 0.4932809, 0.5067191;
+  (Infant, UnderVax, Absent, No, Present, Present) 0.01108426, 0.98891574;
+  (School, FullyVax, Absent, No, Present, Present) 0.05883216, 0.94116784;
+  (PreSchool, FullyVax, Absent, No, Present, Present) 0.008696933, 0.991303067;
+  (Infant, FullyVax, Absent, No, Present, Present) 0.00876536, 0.99123464;
+  (School, UnderVax, Present, Yes, Absent, Present) 0.3282125, 0.6717875;
+  (PreSchool, UnderVax, Present, Yes, Absent, Present) 0.06759554, 0.93240446;
+  (Infant, UnderVax, Present, Yes, Absent, Present) 0.01135038, 0.98864962;
+  (School, FullyVax, Present, Yes, Absent, Present) 0.0407626, 0.9592374;
+  (PreSchool, FullyVax, Present, Yes, Absent, Present) 0.002712161, 0.997287839;
+  (Infant, FullyVax, Present, Yes, Absent, Present) 0.7989082, 0.2010918;
+  (School, UnderVax, Absent, Yes, Absent, Present) 0.7725034, 0.2274966;
+  (PreSchool, UnderVax, Absent, Yes, Absent, Present) 0.006149416, 0.993850584;
+  (Infant, UnderVax, Absent, Yes, Absent, Present) 0.009910048, 0.990089952;
+  (School, FullyVax, Absent, Yes, Absent, Present) 0.001785601, 0.998214399;
+  (PreSchool, FullyVax, Absent, Yes, Absent, Present) 0.001823278, 0.998176722;
+  (Infant, FullyVax, Absent, Yes, Absent, Present) 0.009243416, 0.990756584;
+  (School, UnderVax, Present, No, Absent, Present) 0.02482018, 0.97517982;
+  (PreSchool, UnderVax, Present, No, Absent, Present) 0.006137942, 0.993862058;
+  (Infant, UnderVax, Present, No, Absent, Present) 0.01541983, 0.98458017;
+  (School, FullyVax, Present, No, Absent, Present) 0.5469885, 0.4530115;
+  (PreSchool, FullyVax, Present, No, Absent, Present) 0.004041792, 0.995958208;
+  (Infant, FullyVax, Present, No, Absent, Present) 0.5223583, 0.4776417;
+  (School, UnderVax, Absent, No, Absent, Present) 0.02680395, 0.97319605;
+  (PreSchool, UnderVax, Absent, No, Absent, Present) 0.3878685, 0.6121315;
+  (Infant, UnderVax, Absent, No, Absent, Present) 0.01355982, 0.98644018;
+  (School, FullyVax, Absent, No, Absent, Present) 0.005198719, 0.994801281;
+  (PreSchool, FullyVax, Absent, No, Absent, Present) 0.002737639, 0.997262361;
+  (Infant, FullyVax, Absent, No, Absent, Present) 0.008821712, 0.991178288;
+  (School, UnderVax, Present, Yes, Present, Absent) 0.01543839, 0.98456161;
+  (PreSchool, UnderVax, Present, Yes, Present, Absent) 0.01495401, 0.98504599;
+  (Infant, UnderVax, Present, Yes, Present, Absent) 0.009232964, 0.990767036;
+  (School, FullyVax, Present, Yes, Present, Absent) 0.5539229, 0.4460771;
+  (PreSchool, FullyVax, Present, Yes, Present, Absent) 0.01267262, 0.98732738;
+  (Infant, FullyVax, Present, Yes, Present, Absent) 0.008658535, 0.991341465;
+  (School, UnderVax, Absent, Yes, Present, Absent) 0.01481841, 0.98518159;
+  (PreSchool, UnderVax, Absent, Yes, Present, Absent) 0.01584588, 0.98415412;
+  (Infant, UnderVax, Absent, Yes, Present, Absent) 0.008709626, 0.991290374;
+  (School, FullyVax, Absent, Yes, Present, Absent) 0.01260977, 0.98739023;
+  (PreSchool, FullyVax, Absent, Yes, Present, Absent) 0.01244694, 0.98755306;
+  (Infant, FullyVax, Absent, Yes, Present, Absent) 0.009304167, 0.990695833;
+  (School, UnderVax, Present, No, Present, Absent) 0.1968219, 0.8031781;
+  (PreSchool, UnderVax, Present, No, Present, Absent) 0.02340055, 0.97659945;
+  (Infant, UnderVax, Present, No, Present, Absent) 0.09460908, 0.90539092;
+  (School, FullyVax, Present, No, Present, Absent) 0.1322101, 0.8677899;
+  (PreSchool, FullyVax, Present, No, Present, Absent) 0.01151677, 0.98848323;
+  (Infant, FullyVax, Present, No, Present, Absent) 0.009257676, 0.990742324;
+  (School, UnderVax, Absent, No, Present, Absent) 0.4997732, 0.5002268;
+  (PreSchool, UnderVax, Absent, No, Present, Absent) 0.4112336, 0.5887664;
+  (Infant, UnderVax, Absent, No, Present, Absent) 0.009967839, 0.990032161;
+  (School, FullyVax, Absent, No, Present, Absent) 0.003501396, 0.996498604;
+  (PreSchool, FullyVax, Absent, No, Present, Absent) 0.01790568, 0.98209432;
+  (Infant, FullyVax, Absent, No, Present, Absent) 0.6905274, 0.3094726;
+  (School, UnderVax, Present, Yes, Absent, Absent) 0.01162305, 0.98837695;
+  (PreSchool, UnderVax, Present, Yes, Absent, Absent) 0.02076028, 0.97923972;
+  (Infant, UnderVax, Present, Yes, Absent, Absent) 0.6335641, 0.3664359;
+  (School, FullyVax, Present, Yes, Absent, Absent) 0.1234848, 0.8765152;
+  (PreSchool, FullyVax, Present, Yes, Absent, Absent) 0.01497192, 0.98502808;
+  (Infant, FullyVax, Present, Yes, Absent, Absent) 0.008962607, 0.991037393;
+  (School, UnderVax, Absent, Yes, Absent, Absent) 0.01830786, 0.98169214;
+  (PreSchool, UnderVax, Absent, Yes, Absent, Absent) 0.3419607, 0.6580393;
+  (Infant, UnderVax, Absent, Yes, Absent, Absent) 0.00863871, 0.99136129;
+  (School, FullyVax, Absent, Yes, Absent, Absent) 0.01546654, 0.98453346;
+  (PreSchool, FullyVax, Absent, Yes, Absent, Absent) 0.01444754, 0.98555246;
+  (Infant, FullyVax, Absent, Yes, Absent, Absent) 0.8559814, 0.1440186;
+  (School, UnderVax, Present, No, Absent, Absent) 0.392824, 0.607176;
+  (PreSchool, UnderVax, Present, No, Absent, Absent) 0.01114367, 0.98885633;
+  (Infant, UnderVax, Present, No, Absent, Absent) 0.008864834, 0.991135166;
+  (School, FullyVax, Present, No, Absent, Absent) 0.8024655, 0.1975345;
+  (PreSchool, FullyVax, Present, No, Absent, Absent) 0.01476914, 0.98523086;
+  (Infant, FullyVax, Present, No, Absent, Absent) 0.008855299, 0.991144701;
+  (School, UnderVax, Absent, No, Absent, Absent) 0.4955178, 0.5044822;
+  (PreSchool, UnderVax, Absent, No, Absent, Absent) 0.4512587, 0.5487413;
+  (Infant, UnderVax, Absent, No, Absent, Absent) 0.01073059, 0.98926941;
+  (School, FullyVax, Absent, No, Absent, Absent) 0.01372313, 0.98627687;
+  (PreSchool, FullyVax, Absent, No, Absent, Absent) 0.009446026, 0.990553974;
+  (Infant, FullyVax, Absent, No, Absent, Absent) 0.00987369, 0.99012631;
+}
+probability ( UpperAirwayInvolvment | ThroatInfection, TypicalBacteriaInNasopharynx, ViralNasopharyngealInfection ) {
+  (Present, Yes, Present) 0.0, 0.0, 1.0, 0.0;
+  (Absent, Yes, Present) 0.0, 0.0, 1.0, 0.0;
+  (Present, No, Present) 0.95, 0.00, 0.05, 0.00;
+  (Absent, No, Present) 1.0, 0.0, 0.0, 0.0;
+  (Present, Yes, Absent) 0.00, 0.95, 0.05, 0.00;
+  (Absent, Yes, Absent) 0.0, 0.0, 1.0, 0.0;
+  (Present, No, Absent) 0.02, 0.02, 0.01, 0.95;
+  (Absent, No, Absent) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( ViralLikePneumonia | HMPVInNasopharynx, InfluenzaInNasopharynx, MycoplasmaInNasopharynx, ParainfluenzaInNasopharynx, RSVInNasopharynx, ThroatInfection, ViralNasopharyngealInfection ) {
+  (Positive, Positive, Positive, Positive, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Positive, Positive, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Positive, Positive, Present, Present) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Positive, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Negative, Positive, Positive, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Negative, Positive, Positive, Present, Present) 0.549999, 0.450001;
+  (Positive, Positive, Positive, Negative, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Positive, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Negative, Positive, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Negative, Positive, Present, Present) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Negative, Positive, Present, Present) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Positive, Present, Present) 0.799994, 0.200006;
+  (Positive, Negative, Negative, Negative, Positive, Present, Present) 0.599998, 0.400002;
+  (Negative, Negative, Negative, Negative, Positive, Present, Present) 0.5, 0.5;
+  (Positive, Positive, Positive, Positive, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Positive, Negative, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Positive, Negative, Present, Present) 0.4407049, 0.5592951;
+  (Positive, Positive, Negative, Positive, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Negative, Positive, Negative, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Negative, Positive, Negative, Present, Present) 0.4407135, 0.5592865;
+  (Positive, Positive, Positive, Negative, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Negative, Present, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Negative, Negative, Present, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Negative, Negative, Present, Present) 0.7164547, 0.2835453;
+  (Positive, Positive, Negative, Negative, Negative, Present, Present) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Negative, Present, Present) 0.799994, 0.200006;
+  (Positive, Negative, Negative, Negative, Negative, Present, Present) 0.599998, 0.400002;
+  (Negative, Negative, Negative, Negative, Negative, Present, Present) 0.7033055, 0.2966945;
+  (Positive, Positive, Positive, Positive, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Positive, Positive, Absent, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Positive, Positive, Absent, Present) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Positive, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Negative, Positive, Positive, Absent, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Negative, Positive, Positive, Absent, Present) 0.549999, 0.450001;
+  (Positive, Positive, Positive, Negative, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Positive, Absent, Present) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Negative, Positive, Absent, Present) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Negative, Positive, Absent, Present) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Negative, Positive, Absent, Present) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Positive, Absent, Present) 0.799994, 0.200006;
+  (Positive, Negative, Negative, Negative, Positive, Absent, Present) 0.599998, 0.400002;
+  (Negative, Negative, Negative, Negative, Positive, Absent, Present) 0.5, 0.5;
+  (Positive, Positive, Positive, Positive, Negative, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Negative, Absent, Present) 0.93887942, 0.06112058;
+  (Positive, Negative, Positive, Positive, Negative, Absent, Present) 0.6780327, 0.3219673;
+  (Negative, Negative, Positive, Positive, Negative, Absent, Present) 0.92483905, 0.07516095;
+  (Positive, Positive, Negative, Positive, Negative, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Negative, Absent, Present) 0.8821044, 0.1178956;
+  (Positive, Negative, Negative, Positive, Negative, Absent, Present) 0.6877693, 0.3122307;
+  (Negative, Negative, Negative, Positive, Negative, Absent, Present) 0.565354, 0.434646;
+  (Positive, Positive, Positive, Negative, Negative, Absent, Present) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Negative, Absent, Present) 0.8815334, 0.1184666;
+  (Positive, Negative, Positive, Negative, Negative, Absent, Present) 0.8152674, 0.1847326;
+  (Negative, Negative, Positive, Negative, Negative, Absent, Present) 0.4691091, 0.5308909;
+  (Positive, Positive, Negative, Negative, Negative, Absent, Present) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Negative, Absent, Present) 0.8005178, 0.1994822;
+  (Positive, Negative, Negative, Negative, Negative, Absent, Present) 0.6057059, 0.3942941;
+  (Negative, Negative, Negative, Negative, Negative, Absent, Present) 0.8309602, 0.1690398;
+  (Positive, Positive, Positive, Positive, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Positive, Positive, Present, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Positive, Positive, Present, Absent) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Positive, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Positive, Negative, Negative, Positive, Positive, Present, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Negative, Positive, Positive, Present, Absent) 0.549999, 0.450001;
+  (Positive, Positive, Positive, Negative, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Positive, Present, Absent) 0.8799924, 0.1200076;
+  (Positive, Negative, Positive, Negative, Positive, Present, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Negative, Positive, Present, Absent) 0.549999, 0.450001;
+  (Positive, Positive, Negative, Negative, Positive, Present, Absent) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Positive, Present, Absent) 0.799994, 0.200006;
+  (Positive, Negative, Negative, Negative, Positive, Present, Absent) 0.599998, 0.400002;
+  (Negative, Negative, Negative, Negative, Positive, Present, Absent) 0.5, 0.5;
+  (Positive, Positive, Positive, Positive, Negative, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Negative, Present, Absent) 0.880079, 0.119921;
+  (Positive, Negative, Positive, Positive, Negative, Present, Absent) 0.6603856, 0.3396144;
+  (Negative, Negative, Positive, Positive, Negative, Present, Absent) 0.2238954, 0.7761046;
+  (Positive, Positive, Negative, Positive, Negative, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Negative, Present, Absent) 0.8801433, 0.1198567;
+  (Positive, Negative, Negative, Positive, Negative, Present, Absent) 0.6600087, 0.3399913;
+  (Negative, Negative, Negative, Positive, Negative, Present, Absent) 0.2521785, 0.7478215;
+  (Positive, Positive, Positive, Negative, Negative, Present, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Negative, Present, Absent) 0.8810836, 0.1189164;
+  (Positive, Negative, Positive, Negative, Negative, Present, Absent) 0.6607034, 0.3392966;
+  (Negative, Negative, Positive, Negative, Negative, Present, Absent) 0.8426215, 0.1573785;
+  (Positive, Positive, Negative, Negative, Negative, Present, Absent) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Negative, Present, Absent) 0.8892072, 0.1107928;
+  (Positive, Negative, Negative, Negative, Negative, Present, Absent) 0.799659, 0.200341;
+  (Negative, Negative, Negative, Negative, Negative, Present, Absent) 0.92983986, 0.07016014;
+  (Positive, Positive, Positive, Positive, Positive, Absent, Absent) 0.93563575, 0.06436425;
+  (Negative, Positive, Positive, Positive, Positive, Absent, Absent) 0.93849119, 0.06150881;
+  (Positive, Negative, Positive, Positive, Positive, Absent, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Positive, Positive, Absent, Absent) 0.6450362, 0.3549638;
+  (Positive, Positive, Negative, Positive, Positive, Absent, Absent) 0.8864979, 0.1135021;
+  (Negative, Positive, Negative, Positive, Positive, Absent, Absent) 0.8832212, 0.1167788;
+  (Positive, Negative, Negative, Positive, Positive, Absent, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Negative, Positive, Positive, Absent, Absent) 0.96704418, 0.03295582;
+  (Positive, Positive, Positive, Negative, Positive, Absent, Absent) 0.8853832, 0.1146168;
+  (Negative, Positive, Positive, Negative, Positive, Absent, Absent) 0.8813811, 0.1186189;
+  (Positive, Negative, Positive, Negative, Positive, Absent, Absent) 0.6599968, 0.3400032;
+  (Negative, Negative, Positive, Negative, Positive, Absent, Absent) 0.5888197, 0.4111803;
+  (Positive, Positive, Negative, Negative, Positive, Absent, Absent) 0.8060125, 0.1939875;
+  (Negative, Positive, Negative, Negative, Positive, Absent, Absent) 0.8009735, 0.1990265;
+  (Positive, Negative, Negative, Negative, Positive, Absent, Absent) 0.599998, 0.400002;
+  (Negative, Negative, Negative, Negative, Positive, Absent, Absent) 0.6549369, 0.3450631;
+  (Positive, Positive, Positive, Positive, Negative, Absent, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Positive, Negative, Absent, Absent) 0.996745447, 0.003254553;
+  (Positive, Negative, Positive, Positive, Negative, Absent, Absent) 0.98146725, 0.01853275;
+  (Negative, Negative, Positive, Positive, Negative, Absent, Absent) 0.1175699, 0.8824301;
+  (Positive, Positive, Negative, Positive, Negative, Absent, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Negative, Positive, Negative, Absent, Absent) 0.90105815, 0.09894185;
+  (Positive, Negative, Negative, Positive, Negative, Absent, Absent) 0.8585967, 0.1414033;
+  (Negative, Negative, Negative, Positive, Negative, Absent, Absent) 0.98394211, 0.01605789;
+  (Positive, Positive, Positive, Negative, Negative, Absent, Absent) 0.8799924, 0.1200076;
+  (Negative, Positive, Positive, Negative, Negative, Absent, Absent) 0.91449176, 0.08550824;
+  (Positive, Negative, Positive, Negative, Negative, Absent, Absent) 0.7094048, 0.2905952;
+  (Negative, Negative, Positive, Negative, Negative, Absent, Absent) 0.1125399, 0.8874601;
+  (Positive, Positive, Negative, Negative, Negative, Absent, Absent) 0.799994, 0.200006;
+  (Negative, Positive, Negative, Negative, Negative, Absent, Absent) 0.96883852, 0.03116148;
+  (Positive, Negative, Negative, Negative, Negative, Absent, Absent) 0.8618777, 0.1381223;
+  (Negative, Negative, Negative, Negative, Negative, Absent, Absent) 0.6520899, 0.3479101;
+}
+probability ( ViralNasopharyngealInfection | HMPVInNasopharynx, InfluenzaInNasopharynx, MycoplasmaInNasopharynx, ParainfluenzaInNasopharynx, RSVInNasopharynx ) {
+  (Positive, Positive, Positive, Positive, Positive) 0.3800024, 0.6199976;
+  (Negative, Positive, Positive, Positive, Positive) 0.3800024, 0.6199976;
+  (Positive, Negative, Positive, Positive, Positive) 0.3800024, 0.6199976;
+  (Negative, Negative, Positive, Positive, Positive) 0.3800024, 0.6199976;
+  (Positive, Positive, Negative, Positive, Positive) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Positive, Positive) 0.2800044, 0.7199956;
+  (Positive, Negative, Negative, Positive, Positive) 0.2800044, 0.7199956;
+  (Negative, Negative, Negative, Positive, Positive) 0.1405935, 0.8594065;
+  (Positive, Positive, Positive, Negative, Positive) 0.3800024, 0.6199976;
+  (Negative, Positive, Positive, Negative, Positive) 0.3800024, 0.6199976;
+  (Positive, Negative, Positive, Negative, Positive) 0.3800024, 0.6199976;
+  (Negative, Negative, Positive, Negative, Positive) 0.1909948, 0.8090052;
+  (Positive, Positive, Negative, Negative, Positive) 0.250005, 0.749995;
+  (Negative, Positive, Negative, Negative, Positive) 0.250005, 0.749995;
+  (Positive, Negative, Negative, Negative, Positive) 0.06751361, 0.93248639;
+  (Negative, Negative, Negative, Negative, Positive) 0.007542826, 0.992457174;
+  (Positive, Positive, Positive, Positive, Negative) 0.3800024, 0.6199976;
+  (Negative, Positive, Positive, Positive, Negative) 0.650938, 0.349062;
+  (Positive, Negative, Positive, Positive, Negative) 0.3800024, 0.6199976;
+  (Negative, Negative, Positive, Positive, Negative) 0.3800024, 0.6199976;
+  (Positive, Positive, Negative, Positive, Negative) 0.2800044, 0.7199956;
+  (Negative, Positive, Negative, Positive, Negative) 0.2800044, 0.7199956;
+  (Positive, Negative, Negative, Positive, Negative) 0.2124888, 0.7875112;
+  (Negative, Negative, Negative, Positive, Negative) 0.8707598, 0.1292402;
+  (Positive, Positive, Positive, Negative, Negative) 0.3800024, 0.6199976;
+  (Negative, Positive, Positive, Negative, Negative) 0.6805566, 0.3194434;
+  (Positive, Negative, Positive, Negative, Negative) 0.6812367, 0.3187633;
+  (Negative, Negative, Positive, Negative, Negative) 0.7406558, 0.2593442;
+  (Positive, Positive, Negative, Negative, Negative) 0.250005, 0.749995;
+  (Negative, Positive, Negative, Negative, Negative) 0.8867441, 0.1132559;
+  (Positive, Negative, Negative, Negative, Negative) 0.6347499, 0.3652501;
+  (Negative, Negative, Negative, Negative, Negative) 0.5074272, 0.4925728;
+}
+probability ( Vomiting | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.8336912, 0.1663088;
+  (ViralLike, Type_1) 0.4931066, 0.5068934;
+  (NoPneumonia, Type_1) 0.7052125, 0.2947875;
+  (TypicalBac, Type_2) 0.5991587, 0.4008413;
+  (ViralLike, Type_2) 0.0100098, 0.9899902;
+  (NoPneumonia, Type_2) 0.0100098, 0.9899902;
+}
+probability ( Wheezing | AgeGroup, CausativePathogenForPneumonia, ChronicRespiratoryDisease, CurrentPhenotype, UpperAirwayInvolvment ) {
+  (School, TypicalBac, Reported, Type_1, NP) 0.5876986, 0.4123014;
+  (PreSchool, TypicalBac, Reported, Type_1, NP) 0.4335058, 0.5664942;
+  (Infant, TypicalBac, Reported, Type_1, NP) 0.0100098, 0.9899902;
+  (School, ViralLike, Reported, Type_1, NP) 0.050009, 0.949991;
+  (PreSchool, ViralLike, Reported, Type_1, NP) 0.3701324, 0.6298676;
+  (Infant, ViralLike, Reported, Type_1, NP) 0.2373196, 0.7626804;
+  (School, NoPneumonia, Reported, Type_1, NP) 0.7170239, 0.2829761;
+  (PreSchool, NoPneumonia, Reported, Type_1, NP) 0.0300094, 0.9699906;
+  (Infant, NoPneumonia, Reported, Type_1, NP) 0.2026354, 0.7973646;
+  (School, TypicalBac, Unknown, Type_1, NP) 0.6661985, 0.3338015;
+  (PreSchool, TypicalBac, Unknown, Type_1, NP) 0.5333993, 0.4666007;
+  (Infant, TypicalBac, Unknown, Type_1, NP) 0.0100098, 0.9899902;
+  (School, ViralLike, Unknown, Type_1, NP) 0.100008, 0.899992;
+  (PreSchool, ViralLike, Unknown, Type_1, NP) 0.2388082, 0.7611918;
+  (Infant, ViralLike, Unknown, Type_1, NP) 0.1653827, 0.8346173;
+  (School, NoPneumonia, Unknown, Type_1, NP) 0.0200096, 0.9799904;
+  (PreSchool, NoPneumonia, Unknown, Type_1, NP) 0.328287, 0.671713;
+  (Infant, NoPneumonia, Unknown, Type_1, NP) 0.0773901, 0.9226099;
+  (School, TypicalBac, Reported, Type_2, NP) 0.7280954, 0.2719046;
+  (PreSchool, TypicalBac, Reported, Type_2, NP) 0.6352325, 0.3647675;
+  (Infant, TypicalBac, Reported, Type_2, NP) 0.0300094, 0.9699906;
+  (School, ViralLike, Reported, Type_2, NP) 0.651797, 0.348203;
+  (PreSchool, ViralLike, Reported, Type_2, NP) 0.2095466, 0.7904534;
+  (Infant, ViralLike, Reported, Type_2, NP) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Reported, Type_2, NP) 0.0200096, 0.9799904;
+  (PreSchool, NoPneumonia, Reported, Type_2, NP) 0.4332256, 0.5667744;
+  (Infant, NoPneumonia, Reported, Type_2, NP) 0.06806418, 0.93193582;
+  (School, TypicalBac, Unknown, Type_2, NP) 0.8836876, 0.1163124;
+  (PreSchool, TypicalBac, Unknown, Type_2, NP) 0.050009, 0.949991;
+  (Infant, TypicalBac, Unknown, Type_2, NP) 0.045223, 0.954777;
+  (School, ViralLike, Unknown, Type_2, NP) 0.7170239, 0.2829761;
+  (PreSchool, ViralLike, Unknown, Type_2, NP) 0.4327092, 0.5672908;
+  (Infant, ViralLike, Unknown, Type_2, NP) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Unknown, Type_2, NP) 0.050009, 0.949991;
+  (PreSchool, NoPneumonia, Unknown, Type_2, NP) 0.5295286, 0.4704714;
+  (Infant, NoPneumonia, Unknown, Type_2, NP) 0.2003736, 0.7996264;
+  (School, TypicalBac, Reported, Type_1, Throat) 0.8611823, 0.1388177;
+  (PreSchool, TypicalBac, Reported, Type_1, Throat) 0.050009, 0.949991;
+  (Infant, TypicalBac, Reported, Type_1, Throat) 0.3649124, 0.6350876;
+  (School, ViralLike, Reported, Type_1, Throat) 0.7659947, 0.2340053;
+  (PreSchool, ViralLike, Reported, Type_1, Throat) 0.7719563, 0.2280437;
+  (Infant, ViralLike, Reported, Type_1, Throat) 0.0300094, 0.9699906;
+  (School, NoPneumonia, Reported, Type_1, Throat) 0.3914789, 0.6085211;
+  (PreSchool, NoPneumonia, Reported, Type_1, Throat) 0.4046258, 0.5953742;
+  (Infant, NoPneumonia, Reported, Type_1, Throat) 0.0100098, 0.9899902;
+  (School, TypicalBac, Unknown, Type_1, Throat) 0.7739165, 0.2260835;
+  (PreSchool, TypicalBac, Unknown, Type_1, Throat) 0.100008, 0.899992;
+  (Infant, TypicalBac, Unknown, Type_1, Throat) 0.4498366, 0.5501634;
+  (School, ViralLike, Unknown, Type_1, Throat) 0.7350586, 0.2649414;
+  (PreSchool, ViralLike, Unknown, Type_1, Throat) 0.0200096, 0.9799904;
+  (Infant, ViralLike, Unknown, Type_1, Throat) 0.1395763, 0.8604237;
+  (School, NoPneumonia, Unknown, Type_1, Throat) 0.4862418, 0.5137582;
+  (PreSchool, NoPneumonia, Unknown, Type_1, Throat) 0.5261738, 0.4738262;
+  (Infant, NoPneumonia, Unknown, Type_1, Throat) 0.0100098, 0.9899902;
+  (School, TypicalBac, Reported, Type_2, Throat) 0.050009, 0.949991;
+  (PreSchool, TypicalBac, Reported, Type_2, Throat) 0.474516, 0.525484;
+  (Infant, TypicalBac, Reported, Type_2, Throat) 0.09775838, 0.90224162;
+  (School, ViralLike, Reported, Type_2, Throat) 0.7660605, 0.2339395;
+  (PreSchool, ViralLike, Reported, Type_2, Throat) 0.0200096, 0.9799904;
+  (Infant, ViralLike, Reported, Type_2, Throat) 0.2228198, 0.7771802;
+  (School, NoPneumonia, Reported, Type_2, Throat) 0.581268, 0.418732;
+  (PreSchool, NoPneumonia, Reported, Type_2, Throat) 0.6171055, 0.3828945;
+  (Infant, NoPneumonia, Reported, Type_2, Throat) 0.0300094, 0.9699906;
+  (School, TypicalBac, Unknown, Type_2, Throat) 0.050009, 0.949991;
+  (PreSchool, TypicalBac, Unknown, Type_2, Throat) 0.5701982, 0.4298018;
+  (Infant, TypicalBac, Unknown, Type_2, Throat) 0.1543746, 0.8456254;
+  (School, ViralLike, Unknown, Type_2, Throat) 0.799894, 0.200106;
+  (PreSchool, ViralLike, Unknown, Type_2, Throat) 0.050009, 0.949991;
+  (Infant, ViralLike, Unknown, Type_2, Throat) 0.3165889, 0.6834111;
+  (School, NoPneumonia, Unknown, Type_2, Throat) 0.4836254, 0.5163746;
+  (PreSchool, NoPneumonia, Unknown, Type_2, Throat) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Unknown, Type_2, Throat) 0.2429071, 0.7570929;
+  (School, TypicalBac, Reported, Type_1, NPAndThroat) 0.100008, 0.899992;
+  (PreSchool, TypicalBac, Reported, Type_1, NPAndThroat) 0.6516741, 0.3483259;
+  (Infant, TypicalBac, Reported, Type_1, NPAndThroat) 0.5664924, 0.4335076;
+  (School, ViralLike, Reported, Type_1, NPAndThroat) 0.050009, 0.949991;
+  (PreSchool, ViralLike, Reported, Type_1, NPAndThroat) 0.3501347, 0.6498653;
+  (Infant, ViralLike, Reported, Type_1, NPAndThroat) 0.07835854, 0.92164146;
+  (School, NoPneumonia, Reported, Type_1, NPAndThroat) 0.2037271, 0.7962729;
+  (PreSchool, NoPneumonia, Reported, Type_1, NPAndThroat) 0.0100098, 0.9899902;
+  (Infant, NoPneumonia, Reported, Type_1, NPAndThroat) 0.02074138, 0.97925862;
+  (School, TypicalBac, Unknown, Type_1, NPAndThroat) 0.5333993, 0.4666007;
+  (PreSchool, TypicalBac, Unknown, Type_1, NPAndThroat) 0.5701983, 0.4298017;
+  (Infant, TypicalBac, Unknown, Type_1, NPAndThroat) 0.0100098, 0.9899902;
+  (School, ViralLike, Unknown, Type_1, NPAndThroat) 0.050009, 0.949991;
+  (PreSchool, ViralLike, Unknown, Type_1, NPAndThroat) 0.2498775, 0.7501225;
+  (Infant, ViralLike, Unknown, Type_1, NPAndThroat) 0.2994148, 0.7005852;
+  (School, NoPneumonia, Unknown, Type_1, NPAndThroat) 0.6693891, 0.3306109;
+  (PreSchool, NoPneumonia, Unknown, Type_1, NPAndThroat) 0.0300094, 0.9699906;
+  (Infant, NoPneumonia, Unknown, Type_1, NPAndThroat) 0.3670532, 0.6329468;
+  (School, TypicalBac, Reported, Type_2, NPAndThroat) 0.6210355, 0.3789645;
+  (PreSchool, TypicalBac, Reported, Type_2, NPAndThroat) 0.6515, 0.3485;
+  (Infant, TypicalBac, Reported, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (School, ViralLike, Reported, Type_2, NPAndThroat) 0.100008, 0.899992;
+  (PreSchool, ViralLike, Reported, Type_2, NPAndThroat) 0.3134412, 0.6865588;
+  (Infant, ViralLike, Reported, Type_2, NPAndThroat) 0.2685928, 0.7314072;
+  (School, NoPneumonia, Reported, Type_2, NPAndThroat) 0.050009, 0.949991;
+  (PreSchool, NoPneumonia, Reported, Type_2, NPAndThroat) 0.4744932, 0.5255068;
+  (Infant, NoPneumonia, Reported, Type_2, NPAndThroat) 0.04063394, 0.95936606;
+  (School, TypicalBac, Unknown, Type_2, NPAndThroat) 0.6928961, 0.3071039;
+  (PreSchool, TypicalBac, Unknown, Type_2, NPAndThroat) 0.7336923, 0.2663077;
+  (Infant, TypicalBac, Unknown, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (School, ViralLike, Unknown, Type_2, NPAndThroat) 0.4745006, 0.5254994;
+  (PreSchool, ViralLike, Unknown, Type_2, NPAndThroat) 0.4772254, 0.5227746;
+  (Infant, ViralLike, Unknown, Type_2, NPAndThroat) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Unknown, Type_2, NPAndThroat) 0.050009, 0.949991;
+  (PreSchool, NoPneumonia, Unknown, Type_2, NPAndThroat) 0.5667844, 0.4332156;
+  (Infant, NoPneumonia, Unknown, Type_2, NPAndThroat) 0.01775748, 0.98224252;
+  (School, TypicalBac, Reported, Type_1, No) 0.6214076, 0.3785924;
+  (PreSchool, TypicalBac, Reported, Type_1, No) 0.050009, 0.949991;
+  (Infant, TypicalBac, Reported, Type_1, No) 0.1794924, 0.8205076;
+  (School, ViralLike, Reported, Type_1, No) 0.5701987, 0.4298013;
+  (PreSchool, ViralLike, Reported, Type_1, No) 0.800189, 0.199811;
+  (Infant, ViralLike, Reported, Type_1, No) 0.0100098, 0.9899902;
+  (School, NoPneumonia, Reported, Type_1, No) 0.100008, 0.899992;
+  (PreSchool, NoPneumonia, Reported, Type_1, No) 0.3159713, 0.6840287;
+  (Infant, NoPneumonia, Reported, Type_1, No) 0.06783772, 0.93216228;
+  (School, TypicalBac, Unknown, Type_1, No) 0.6928961, 0.3071039;
+  (PreSchool, TypicalBac, Unknown, Type_1, No) 0.050009, 0.949991;
+  (Infant, TypicalBac, Unknown, Type_1, No) 0.03266516, 0.96733484;
+  (School, ViralLike, Unknown, Type_1, No) 0.651797, 0.348203;
+  (PreSchool, ViralLike, Unknown, Type_1, No) 0.6636532, 0.3363468;
+  (Infant, ViralLike, Unknown, Type_1, No) 0.0300094, 0.9699906;
+  (School, NoPneumonia, Unknown, Type_1, No) 0.3284321, 0.6715679;
+  (PreSchool, NoPneumonia, Unknown, Type_1, No) 0.5686491, 0.4313509;
+  (Infant, NoPneumonia, Unknown, Type_1, No) 0.0100098, 0.9899902;
+  (School, TypicalBac, Reported, Type_2, No) 0.748295, 0.251705;
+  (PreSchool, TypicalBac, Reported, Type_2, No) 0.100008, 0.899992;
+  (Infant, TypicalBac, Reported, Type_2, No) 0.1251187, 0.8748813;
+  (School, ViralLike, Reported, Type_2, No) 0.5949163, 0.4050837;
+  (PreSchool, ViralLike, Reported, Type_2, No) 0.0100098, 0.9899902;
+  (Infant, ViralLike, Reported, Type_2, No) 0.05437387, 0.94562613;
+  (School, NoPneumonia, Reported, Type_2, No) 0.4335013, 0.5664987;
+  (PreSchool, NoPneumonia, Reported, Type_2, No) 0.6232648, 0.3767352;
+  (Infant, NoPneumonia, Reported, Type_2, No) 0.0100098, 0.9899902;
+  (School, TypicalBac, Unknown, Type_2, No) 0.050009, 0.949991;
+  (PreSchool, TypicalBac, Unknown, Type_2, No) 0.6208889, 0.3791111;
+  (Infant, TypicalBac, Unknown, Type_2, No) 0.0197497, 0.9802503;
+  (School, ViralLike, Unknown, Type_2, No) 0.6655031, 0.3344969;
+  (PreSchool, ViralLike, Unknown, Type_2, No) 0.0100098, 0.9899902;
+  (Infant, ViralLike, Unknown, Type_2, No) 0.1578094, 0.8421906;
+  (School, NoPneumonia, Unknown, Type_2, No) 0.5331324, 0.4668676;
+  (PreSchool, NoPneumonia, Unknown, Type_2, No) 0.2403527, 0.7596473;
+  (Infant, NoPneumonia, Unknown, Type_2, No) 0.0100098, 0.9899902;
+}
+probability ( WhiteCellCount | CausativePathogenForPneumonia, CurrentPhenotype ) {
+  (TypicalBac, Type_1) 0.6033364, 0.2698046, 0.1268590;
+  (ViralLike, Type_1) 0.60315872, 0.36859441, 0.02824687;
+  (NoPneumonia, Type_1) 0.1755993, 0.4634103, 0.3609903;
+  (TypicalBac, Type_2) 0.1110508, 0.3703499, 0.5185993;
+  (ViralLike, Type_2) 0.0100097, 0.0500085, 0.9399818;
+  (NoPneumonia, Type_2) 0.0100097, 0.0500085, 0.9399818;
+}

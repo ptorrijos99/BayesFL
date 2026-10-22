@@ -1,0 +1,270 @@
+network unknown {
+}
+variable ARHGAP6 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ARHGEF19 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable CD44 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable CDC42-IT1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable CDH1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable CFL2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable DAGLB {
+  type discrete [ 2 ] { Below, Above };
+}
+variable DGKZ {
+  type discrete [ 2 ] { Below, Above };
+}
+variable DLC1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ECM1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ERMAP {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ERMP1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable GNA11 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable GNG11 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable GPRC5A {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ITGB2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable LACTB {
+  type discrete [ 2 ] { Below, Above };
+}
+variable LIMK2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PAAF1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PAK1 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PAK2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PIP {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PIP4K2A {
+  type discrete [ 2 ] { Below, Above };
+}
+variable PIP5K1B {
+  type discrete [ 2 ] { Below, Above };
+}
+variable RAC2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable RHOJ {
+  type discrete [ 2 ] { Below, Above };
+}
+variable ROCK2 {
+  type discrete [ 2 ] { Below, Above };
+}
+variable RTKN {
+  type discrete [ 2 ] { Below, Above };
+}
+probability ( ARHGAP6 ) {
+  table 0.635676, 0.364324;
+}
+probability ( ARHGEF19 | CDH1, DLC1, GNA11, GNG11, ITGB2, RTKN ) {
+  (Below, Below, Below, Below, Below, Below) 0.5, 0.5;
+  (Above, Below, Below, Below, Below, Below) 0.1884058, 0.8115942;
+  (Below, Above, Below, Below, Below, Below) 0.4, 0.6;
+  (Above, Above, Below, Below, Below, Below) 0.2105263, 0.7894737;
+  (Below, Below, Above, Below, Below, Below) 0.3846154, 0.6153846;
+  (Above, Below, Above, Below, Below, Below) 0.2352941, 0.7647059;
+  (Below, Above, Above, Below, Below, Below) 0.0, 1.0;
+  (Above, Above, Above, Below, Below, Below) 0.5, 0.5;
+  (Below, Below, Below, Above, Below, Below) 0.6666667, 0.3333333;
+  (Above, Below, Below, Above, Below, Below) 0.4285714, 0.5714286;
+  (Below, Above, Below, Above, Below, Below) 0.7, 0.3;
+  (Above, Above, Below, Above, Below, Below) 0.4444444, 0.5555556;
+  (Below, Below, Above, Above, Below, Below) 1.0, 0.0;
+  (Above, Below, Above, Above, Below, Below) 0.4285714, 0.5714286;
+  (Below, Above, Above, Above, Below, Below) 0.4285714, 0.5714286;
+  (Above, Above, Above, Above, Below, Below) 0.2222222, 0.7777778;
+  (Below, Below, Below, Below, Above, Below) 0.6296296, 0.3703704;
+  (Above, Below, Below, Below, Above, Below) 0.2916667, 0.7083333;
+  (Below, Above, Below, Below, Above, Below) 0.8, 0.2;
+  (Above, Above, Below, Below, Above, Below) 0.04347826, 0.95652174;
+  (Below, Below, Above, Below, Above, Below) 0.125, 0.875;
+  (Above, Below, Above, Below, Above, Below) 0.4782609, 0.5217391;
+  (Below, Above, Above, Below, Above, Below) 0.3333333, 0.6666667;
+  (Above, Above, Above, Below, Above, Below) 0.4285714, 0.5714286;
+  (Below, Below, Below, Above, Above, Below) 0.8571429, 0.1428571;
+  (Above, Below, Below, Above, Above, Below) 0.4444444, 0.5555556;
+  (Below, Above, Below, Above, Above, Below) 0.8787879, 0.1212121;
+  (Above, Above, Below, Above, Above, Below) 0.3125, 0.6875;
+  (Below, Below, Above, Above, Above, Below) 0.8571429, 0.1428571;
+  (Above, Below, Above, Above, Above, Below) 0.6, 0.4;
+  (Below, Above, Above, Above, Above, Below) 0.4545455, 0.5454545;
+  (Above, Above, Above, Above, Above, Below) 0.4615385, 0.5384615;
+  (Below, Below, Below, Below, Below, Above) 0.3103448, 0.6896552;
+  (Above, Below, Below, Below, Below, Above) 0.4117647, 0.5882353;
+  (Below, Above, Below, Below, Below, Above) 0.6666667, 0.3333333;
+  (Above, Above, Below, Below, Below, Above) 0.4444444, 0.5555556;
+  (Below, Below, Above, Below, Below, Above) 0.3125, 0.6875;
+  (Above, Below, Above, Below, Below, Above) 0.5, 0.5;
+  (Below, Above, Above, Below, Below, Above) 1.0, 0.0;
+  (Above, Above, Above, Below, Below, Above) 0.4666667, 0.5333333;
+  (Below, Below, Below, Above, Below, Above) 0.4444444, 0.5555556;
+  (Above, Below, Below, Above, Below, Above) 0.4444444, 0.5555556;
+  (Below, Above, Below, Above, Below, Above) 0.4285714, 0.5714286;
+  (Above, Above, Below, Above, Below, Above) 0.5, 0.5;
+  (Below, Below, Above, Above, Below, Above) 0.5, 0.5;
+  (Above, Below, Above, Above, Below, Above) 0.8, 0.2;
+  (Below, Above, Above, Above, Below, Above) 0.5882353, 0.4117647;
+  (Above, Above, Above, Above, Below, Above) 0.5384615, 0.4615385;
+  (Below, Below, Below, Below, Above, Above) 0.4074074, 0.5925926;
+  (Above, Below, Below, Below, Above, Above) 0.6666667, 0.3333333;
+  (Below, Above, Below, Below, Above, Above) 0.5, 0.5;
+  (Above, Above, Below, Below, Above, Above) 0.7, 0.3;
+  (Below, Below, Above, Below, Above, Above) 0.5, 0.5;
+  (Above, Below, Above, Below, Above, Above) 0.6666667, 0.3333333;
+  (Below, Above, Above, Below, Above, Above) 0.8695652, 0.1304348;
+  (Above, Above, Above, Below, Above, Above) 0.4, 0.6;
+  (Below, Below, Below, Above, Above, Above) 0.6666667, 0.3333333;
+  (Above, Below, Below, Above, Above, Above) 0.2105263, 0.7894737;
+  (Below, Above, Below, Above, Above, Above) 0.5, 0.5;
+  (Above, Above, Below, Above, Above, Above) 0.08333333, 0.91666667;
+  (Below, Below, Above, Above, Above, Above) 0.5, 0.5;
+  (Above, Below, Above, Above, Above, Above) 0.2307692, 0.7692308;
+  (Below, Above, Above, Above, Above, Above) 0.1904762, 0.8095238;
+  (Above, Above, Above, Above, Above, Above) 0.5, 0.5;
+}
+probability ( CD44 ) {
+  table 0.473514, 0.526486;
+}
+probability ( CDC42-IT1 | RHOJ ) {
+  (Below) 0.5919732, 0.4080268;
+  (Above) 0.5259939, 0.4740061;
+}
+probability ( CDH1 ) {
+  table 0.392432, 0.607568;
+}
+probability ( CFL2 | LIMK2 ) {
+  (Below) 0.6051587, 0.3948413;
+  (Above) 0.5961995, 0.4038005;
+}
+probability ( DAGLB ) {
+  table 0.505946, 0.494054;
+}
+probability ( DGKZ | DAGLB, RHOJ ) {
+  (Below, Below) 0.513986, 0.486014;
+  (Above, Below) 0.4775641, 0.5224359;
+  (Below, Above) 0.5824176, 0.4175824;
+  (Above, Above) 0.5172414, 0.4827586;
+}
+probability ( DLC1 | ARHGAP6, ERMP1, PAK2 ) {
+  (Below, Below, Below) 0.6054054, 0.3945946;
+  (Above, Below, Below) 0.1909091, 0.8090909;
+  (Below, Above, Below) 0.7698413, 0.2301587;
+  (Above, Above, Below) 0.475, 0.525;
+  (Below, Below, Above) 0.7722772, 0.2277228;
+  (Above, Below, Above) 0.2409639, 0.7590361;
+  (Below, Above, Above) 0.8806818, 0.1193182;
+  (Above, Above, Above) 0.3653846, 0.6346154;
+}
+probability ( ECM1 ) {
+  table 0.547027, 0.452973;
+}
+probability ( ERMAP | CD44, PIP4K2A, RHOJ ) {
+  (Below, Below, Below) 0.678733, 0.321267;
+  (Above, Below, Below) 0.4895105, 0.5104895;
+  (Below, Above, Below) 0.6601942, 0.3398058;
+  (Above, Above, Below) 0.4885496, 0.5114504;
+  (Below, Below, Above) 0.5396825, 0.4603175;
+  (Above, Below, Above) 0.3859649, 0.6140351;
+  (Below, Above, Above) 0.5490196, 0.4509804;
+  (Above, Above, Above) 0.3782051, 0.6217949;
+}
+probability ( ERMP1 ) {
+  table 0.517838, 0.482162;
+}
+probability ( GNA11 | GPRC5A ) {
+  (Below) 0.6193548, 0.3806452;
+  (Above) 0.523913, 0.476087;
+}
+probability ( GNG11 | GPRC5A ) {
+  (Below) 0.6946237, 0.3053763;
+  (Above) 0.5347826, 0.4652174;
+}
+probability ( GPRC5A ) {
+  table 0.502703, 0.497297;
+}
+probability ( ITGB2 | ECM1 ) {
+  (Below) 0.5592885, 0.4407115;
+  (Above) 0.398568, 0.601432;
+}
+probability ( LACTB | ERMAP ) {
+  (Below) 0.5717172, 0.4282828;
+  (Above) 0.4883721, 0.5116279;
+}
+probability ( LIMK2 | PAK1, ROCK2 ) {
+  (Below, Below) 0.5792683, 0.4207317;
+  (Above, Below) 0.4640719, 0.5359281;
+  (Below, Above) 0.601626, 0.398374;
+  (Above, Above) 0.5856354, 0.4143646;
+}
+probability ( PAAF1 | DGKZ ) {
+  (Below) 0.4444444, 0.5555556;
+  (Above) 0.46875, 0.53125;
+}
+probability ( PAK1 | CDC42-IT1, RAC2 ) {
+  (Below, Below) 0.3360324, 0.6639676;
+  (Above, Below) 0.5588235, 0.4411765;
+  (Below, Above) 0.4480287, 0.5519713;
+  (Above, Above) 0.4512821, 0.5487179;
+}
+probability ( PAK2 ) {
+  table 0.498378, 0.501622;
+}
+probability ( PIP ) {
+  table 0.655135, 0.344865;
+}
+probability ( PIP4K2A | PIP5K1B ) {
+  (Below) 0.5816514, 0.4183486;
+  (Above) 0.4394737, 0.5605263;
+}
+probability ( PIP5K1B | PAAF1, PIP ) {
+  (Below, Below) 0.6071429, 0.3928571;
+  (Above, Below) 0.6104294, 0.3895706;
+  (Below, Above) 0.471831, 0.528169;
+  (Above, Above) 0.6158192, 0.3841808;
+}
+probability ( RAC2 | RHOJ ) {
+  (Below) 0.5451505, 0.4548495;
+  (Above) 0.382263, 0.617737;
+}
+probability ( RHOJ | ARHGEF19 ) {
+  (Below) 0.5240506, 0.4759494;
+  (Above) 0.7377358, 0.2622642;
+}
+probability ( ROCK2 | RHOJ ) {
+  (Below) 0.59699, 0.40301;
+  (Above) 0.4311927, 0.5688073;
+}
+probability ( RTKN ) {
+  table 0.458378, 0.541622;
+}

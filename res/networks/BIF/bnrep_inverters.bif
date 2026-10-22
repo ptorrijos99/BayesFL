@@ -1,0 +1,256 @@
+network unknown {
+}
+variable AbnormalPulseVoltageWaveform {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable APhaseFailure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable APhaseNegativeWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable APhasePositiveWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BPhaseFailure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BPhaseNegativeWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BPhasePositiveWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable C1Failure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable C1VoltageAnomaly {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable C2Failure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable C2VoltageAnomaly {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable CapacitanceParameterWeakening {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable CPhaseFailure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable CPhaseNegativeWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable CPhasePositiveWaveFormDistortion {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DCLinkFailure {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G1PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G2PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G3PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G4PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G5PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable G6PulseMissing {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T1OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T2OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T3OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T4OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T5OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable T6OC {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable VoltageWaveFormAsymmetry {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( AbnormalPulseVoltageWaveform | APhaseFailure, BPhaseFailure, CPhaseFailure ) {
+  (TRUE, TRUE, TRUE) 0.95, 0.05;
+  (FALSE, TRUE, TRUE) 0.53, 0.47;
+  (TRUE, FALSE, TRUE) 0.48, 0.52;
+  (FALSE, FALSE, TRUE) 0.15, 0.85;
+  (TRUE, TRUE, FALSE) 0.62, 0.38;
+  (FALSE, TRUE, FALSE) 0.45, 0.55;
+  (TRUE, FALSE, FALSE) 0.32, 0.68;
+  (FALSE, FALSE, FALSE) 0.05, 0.95;
+}
+probability ( APhaseFailure | G1PulseMissing, G4PulseMissing, T1OC, T4OC ) {
+  (TRUE, TRUE, TRUE, TRUE) 0.99, 0.01;
+  (FALSE, TRUE, TRUE, TRUE) 0.83, 0.17;
+  (TRUE, FALSE, TRUE, TRUE) 0.87, 0.13;
+  (FALSE, FALSE, TRUE, TRUE) 0.63, 0.37;
+  (TRUE, TRUE, FALSE, TRUE) 0.85, 0.15;
+  (FALSE, TRUE, FALSE, TRUE) 0.6, 0.4;
+  (TRUE, FALSE, FALSE, TRUE) 0.69, 0.31;
+  (FALSE, FALSE, FALSE, TRUE) 0.27, 0.73;
+  (TRUE, TRUE, TRUE, FALSE) 0.94, 0.06;
+  (FALSE, TRUE, TRUE, FALSE) 0.77, 0.23;
+  (TRUE, FALSE, TRUE, FALSE) 0.41, 0.59;
+  (FALSE, FALSE, TRUE, FALSE) 0.34, 0.66;
+  (TRUE, TRUE, FALSE, FALSE) 0.72, 0.28;
+  (FALSE, TRUE, FALSE, FALSE) 0.23, 0.77;
+  (TRUE, FALSE, FALSE, FALSE) 0.34, 0.66;
+  (FALSE, FALSE, FALSE, FALSE) 0.01, 0.99;
+}
+probability ( APhaseNegativeWaveFormDistortion | APhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.78, 0.22;
+  (FALSE, TRUE) 0.55, 0.45;
+  (TRUE, FALSE) 0.35, 0.65;
+  (FALSE, FALSE) 0.16, 0.84;
+}
+probability ( APhasePositiveWaveFormDistortion | APhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.84, 0.16;
+  (FALSE, TRUE) 0.54, 0.46;
+  (TRUE, FALSE) 0.45, 0.55;
+  (FALSE, FALSE) 0.1, 0.9;
+}
+probability ( BPhaseFailure | G3PulseMissing, G6PulseMissing, T3OC, T6OC ) {
+  (TRUE, TRUE, TRUE, TRUE) 0.99, 0.01;
+  (FALSE, TRUE, TRUE, TRUE) 0.86, 0.14;
+  (TRUE, FALSE, TRUE, TRUE) 0.83, 0.17;
+  (FALSE, FALSE, TRUE, TRUE) 0.49, 0.51;
+  (TRUE, TRUE, FALSE, TRUE) 0.94, 0.06;
+  (FALSE, TRUE, FALSE, TRUE) 0.79, 0.21;
+  (TRUE, FALSE, FALSE, TRUE) 0.62, 0.38;
+  (FALSE, FALSE, FALSE, TRUE) 0.3, 0.7;
+  (TRUE, TRUE, TRUE, FALSE) 0.95, 0.05;
+  (FALSE, TRUE, TRUE, FALSE) 0.61, 0.39;
+  (TRUE, FALSE, TRUE, FALSE) 0.49, 0.51;
+  (FALSE, FALSE, TRUE, FALSE) 0.36, 0.64;
+  (TRUE, TRUE, FALSE, FALSE) 0.58, 0.42;
+  (FALSE, TRUE, FALSE, FALSE) 0.33, 0.67;
+  (TRUE, FALSE, FALSE, FALSE) 0.22, 0.78;
+  (FALSE, FALSE, FALSE, FALSE) 0.01, 0.99;
+}
+probability ( BPhaseNegativeWaveFormDistortion | BPhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.74, 0.26;
+  (FALSE, TRUE) 0.34, 0.66;
+  (TRUE, FALSE) 0.51, 0.49;
+  (FALSE, FALSE) 0.22, 0.78;
+}
+probability ( BPhasePositiveWaveFormDistortion | BPhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.81, 0.19;
+  (FALSE, TRUE) 0.31, 0.69;
+  (TRUE, FALSE) 0.59, 0.41;
+  (FALSE, FALSE) 0.25, 0.75;
+}
+probability ( C1Failure ) {
+  table 0.13, 0.87;
+}
+probability ( C1VoltageAnomaly | DCLinkFailure ) {
+  (TRUE) 0.9, 0.1;
+  (FALSE) 0.04, 0.96;
+}
+probability ( C2Failure ) {
+  table 0.16, 0.84;
+}
+probability ( C2VoltageAnomaly | DCLinkFailure ) {
+  (TRUE) 0.93, 0.07;
+  (FALSE) 0.12, 0.88;
+}
+probability ( CapacitanceParameterWeakening ) {
+  table 0.19, 0.81;
+}
+probability ( CPhaseFailure | G2PulseMissing, G5PulseMissing, T2OC, T5OC ) {
+  (TRUE, TRUE, TRUE, TRUE) 0.99, 0.01;
+  (FALSE, TRUE, TRUE, TRUE) 0.87, 0.13;
+  (TRUE, FALSE, TRUE, TRUE) 0.82, 0.18;
+  (FALSE, FALSE, TRUE, TRUE) 0.84, 0.16;
+  (TRUE, TRUE, FALSE, TRUE) 0.65, 0.35;
+  (FALSE, TRUE, FALSE, TRUE) 0.67, 0.33;
+  (TRUE, FALSE, FALSE, TRUE) 0.27, 0.73;
+  (FALSE, FALSE, FALSE, TRUE) 0.86, 0.14;
+  (TRUE, TRUE, TRUE, FALSE) 0.86, 0.14;
+  (FALSE, TRUE, TRUE, FALSE) 0.56, 0.44;
+  (TRUE, FALSE, TRUE, FALSE) 0.55, 0.45;
+  (FALSE, FALSE, TRUE, FALSE) 0.38, 0.62;
+  (TRUE, TRUE, FALSE, FALSE) 0.8, 0.2;
+  (FALSE, TRUE, FALSE, FALSE) 0.38, 0.62;
+  (TRUE, FALSE, FALSE, FALSE) 0.34, 0.66;
+  (FALSE, FALSE, FALSE, FALSE) 0.01, 0.99;
+}
+probability ( CPhaseNegativeWaveFormDistortion | CPhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.82, 0.18;
+  (FALSE, TRUE) 0.46, 0.54;
+  (TRUE, FALSE) 0.44, 0.56;
+  (FALSE, FALSE) 0.29, 0.71;
+}
+probability ( CPhasePositiveWaveFormDistortion | CPhaseFailure, DCLinkFailure ) {
+  (TRUE, TRUE) 0.74, 0.26;
+  (FALSE, TRUE) 0.5, 0.5;
+  (TRUE, FALSE) 0.45, 0.55;
+  (FALSE, FALSE) 0.08, 0.92;
+}
+probability ( DCLinkFailure | C1Failure, C2Failure, CapacitanceParameterWeakening ) {
+  (TRUE, TRUE, TRUE) 0.91, 0.09;
+  (FALSE, TRUE, TRUE) 0.72, 0.28;
+  (TRUE, FALSE, TRUE) 0.44, 0.56;
+  (FALSE, FALSE, TRUE) 0.21, 0.79;
+  (TRUE, TRUE, FALSE) 0.5, 0.5;
+  (FALSE, TRUE, FALSE) 0.24, 0.76;
+  (TRUE, FALSE, FALSE) 0.34, 0.66;
+  (FALSE, FALSE, FALSE) 0.05, 0.95;
+}
+probability ( G1PulseMissing ) {
+  table 0.07, 0.93;
+}
+probability ( G2PulseMissing ) {
+  table 0.07, 0.93;
+}
+probability ( G3PulseMissing ) {
+  table 0.17, 0.83;
+}
+probability ( G4PulseMissing ) {
+  table 0.18, 0.82;
+}
+probability ( G5PulseMissing ) {
+  table 0.12, 0.88;
+}
+probability ( G6PulseMissing ) {
+  table 0.01, 0.99;
+}
+probability ( T1OC ) {
+  table 0.14, 0.86;
+}
+probability ( T2OC ) {
+  table 0.19, 0.81;
+}
+probability ( T3OC ) {
+  table 0.04, 0.96;
+}
+probability ( T4OC ) {
+  table 0.09, 0.91;
+}
+probability ( T5OC ) {
+  table 0.07, 0.93;
+}
+probability ( T6OC ) {
+  table 0.17, 0.83;
+}
+probability ( VoltageWaveFormAsymmetry | DCLinkFailure ) {
+  (TRUE) 0.86, 0.14;
+  (FALSE) 0.05, 0.95;
+}

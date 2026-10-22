@@ -1,0 +1,301 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>C1</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C2</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C3</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C4</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C5</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C6</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C7</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C8</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>O1</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>O2</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>O3</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>O4</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R1</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R10</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R11</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R12</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R13</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R14</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R2</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R3</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R4</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R5</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R6</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R7</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R8</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R9</NAME>
+      <OUTCOME>YES</OUTCOME>
+      <OUTCOME>NO</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>C1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C3</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C4</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C5</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C6</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C7</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C8</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>O1</FOR>
+      <GIVEN>R1</GIVEN>
+      <GIVEN>R6</GIVEN>
+      <TABLE>0.99 0.01 0.6 0.4 0.3 0.7 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>O2</FOR>
+      <GIVEN>C2</GIVEN>
+      <GIVEN>O1</GIVEN>
+      <GIVEN>O3</GIVEN>
+      <TABLE>0.7 0.3 0.5 0.5 0.3 0.7 0.01 0.99 0.99 0.01 0.7 0.3 0.6 0.4 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>O3</FOR>
+      <GIVEN>R14</GIVEN>
+      <GIVEN>R3</GIVEN>
+      <GIVEN>R7</GIVEN>
+      <GIVEN>R9</GIVEN>
+      <TABLE>0.99 0.01 0.95 0.05 0.95 0.05 0.9 0.1 0.95 0.05 0.9 0.1 0.9 0.1 0.8 0.2 0.95 0.05 0.9 0.1 0.9 0.1 0.8 0.2 0.9 0.1 0.8 0.2 0.8 0.2 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>O4</FOR>
+      <GIVEN>R10</GIVEN>
+      <GIVEN>R13</GIVEN>
+      <GIVEN>R6</GIVEN>
+      <GIVEN>R9</GIVEN>
+      <TABLE>0.99 0.01 0.9 0.1 0.8 0.2 0.7 0.3 0.9 0.1 0.7 0.3 0.75 0.25 0.65 0.35 0.95 0.05 0.8 0.2 0.9 0.1 0.3 0.7 0.8 0.2 0.65 0.35 0.8 0.2 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R1</FOR>
+      <GIVEN>C1</GIVEN>
+      <TABLE>0.5 0.5 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R10</FOR>
+      <GIVEN>R5</GIVEN>
+      <TABLE>0.9 0.1 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R11</FOR>
+      <GIVEN>C2</GIVEN>
+      <GIVEN>C3</GIVEN>
+      <TABLE>0.95 0.05 0.5 0.5 0.3 0.7 0.03 0.97 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R12</FOR>
+      <GIVEN>C6</GIVEN>
+      <GIVEN>R4</GIVEN>
+      <TABLE>0.99 0.01 0.3 0.7 0.7 0.3 0.02 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R13</FOR>
+      <GIVEN>R1</GIVEN>
+      <GIVEN>R8</GIVEN>
+      <TABLE>0.95 0.05 0.6 0.4 0.5 0.5 0.03 0.97 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R14</FOR>
+      <GIVEN>R11</GIVEN>
+      <GIVEN>R12</GIVEN>
+      <GIVEN>R6</GIVEN>
+      <TABLE>0.99 0.01 0.92 0.08 0.92 0.08 0.9 0.1 0.95 0.05 0.9 0.1 0.89 0.11 0.02 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R2</FOR>
+      <GIVEN>C1</GIVEN>
+      <TABLE>0.7 0.3 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R3</FOR>
+      <GIVEN>C4</GIVEN>
+      <TABLE>0.9 0.1 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R4</FOR>
+      <GIVEN>C5</GIVEN>
+      <TABLE>0.8 0.2 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R5</FOR>
+      <GIVEN>C7</GIVEN>
+      <TABLE>0.7 0.3 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R6</FOR>
+      <GIVEN>C2</GIVEN>
+      <GIVEN>C3</GIVEN>
+      <GIVEN>C4</GIVEN>
+      <TABLE>0.99 0.01 0.8 0.2 0.7 0.3 0.4 0.6 0.6 0.4 0.3 0.7 0.3 0.7 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R7</FOR>
+      <GIVEN>R2</GIVEN>
+      <TABLE>0.99 0.01 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R8</FOR>
+      <GIVEN>R5</GIVEN>
+      <TABLE>0.7 0.3 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R9</FOR>
+      <GIVEN>C7</GIVEN>
+      <GIVEN>C8</GIVEN>
+      <TABLE>0.8 0.2 0.3 0.7 0.5 0.5 0.02 0.98 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

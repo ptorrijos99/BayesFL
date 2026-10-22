@@ -1,0 +1,2836 @@
+network unknown {
+}
+variable AdjacentLandUses {
+  type discrete [ 2 ] { T, F };
+}
+variable AnticipatedEvents {
+  type discrete [ 2 ] { T, F };
+}
+variable ChemicalContaminants {
+  type discrete [ 2 ] { T, F };
+}
+variable ClimateChanges {
+  type discrete [ 2 ] { T, F };
+}
+variable Dispenser {
+  type discrete [ 2 ] { T, F };
+}
+variable Dryer {
+  type discrete [ 2 ] { T, F };
+}
+variable EnvironmentChanges {
+  type discrete [ 2 ] { T, F };
+}
+variable Exhaustion {
+  type discrete [ 2 ] { T, F };
+}
+variable FailureToInspectAndOperateEquipment {
+  type discrete [ 2 ] { T, F };
+}
+variable FortuitousEvents {
+  type discrete [ 2 ] { T, F };
+}
+variable HearingLoss {
+  type discrete [ 2 ] { T, F };
+}
+variable HumanReasons {
+  type discrete [ 2 ] { T, F };
+}
+variable ImproperOperatorPerformance {
+  type discrete [ 2 ] { T, F };
+}
+variable InadequateTraining {
+  type discrete [ 2 ] { T, F };
+}
+variable LeakOfCNG {
+  type discrete [ 2 ] { T, F };
+}
+variable Lighting {
+  type discrete [ 2 ] { T, F };
+}
+variable MilitaryIncidents {
+  type discrete [ 2 ] { T, F };
+}
+variable NaturalDisasters {
+  type discrete [ 2 ] { T, F };
+}
+variable ProcessProblems {
+  type discrete [ 2 ] { T, F };
+}
+variable RoomMetering {
+  type discrete [ 2 ] { T, F };
+}
+variable Storage {
+  type discrete [ 2 ] { T, F };
+}
+variable Stress {
+  type discrete [ 2 ] { T, F };
+}
+variable TankStructure {
+  type discrete [ 2 ] { T, F };
+}
+variable Temperature {
+  type discrete [ 2 ] { T, F };
+}
+variable Wastes {
+  type discrete [ 2 ] { T, F };
+}
+variable WindSpeed {
+  type discrete [ 2 ] { T, F };
+}
+variable X1 {
+  type discrete [ 2 ] { T, F };
+}
+variable X10 {
+  type discrete [ 2 ] { T, F };
+}
+variable X11 {
+  type discrete [ 2 ] { T, F };
+}
+variable X12 {
+  type discrete [ 2 ] { T, F };
+}
+variable X13 {
+  type discrete [ 2 ] { T, F };
+}
+variable X14 {
+  type discrete [ 2 ] { T, F };
+}
+variable X15 {
+  type discrete [ 2 ] { T, F };
+}
+variable X16 {
+  type discrete [ 2 ] { T, F };
+}
+variable X17 {
+  type discrete [ 2 ] { T, F };
+}
+variable X18 {
+  type discrete [ 2 ] { T, F };
+}
+variable X19 {
+  type discrete [ 2 ] { T, F };
+}
+variable X2 {
+  type discrete [ 2 ] { T, F };
+}
+variable X20 {
+  type discrete [ 2 ] { T, F };
+}
+variable X21 {
+  type discrete [ 2 ] { T, F };
+}
+variable X22 {
+  type discrete [ 2 ] { T, F };
+}
+variable X23 {
+  type discrete [ 2 ] { T, F };
+}
+variable X24 {
+  type discrete [ 2 ] { T, F };
+}
+variable X25 {
+  type discrete [ 2 ] { T, F };
+}
+variable X26 {
+  type discrete [ 2 ] { T, F };
+}
+variable X27 {
+  type discrete [ 2 ] { T, F };
+}
+variable X28 {
+  type discrete [ 2 ] { T, F };
+}
+variable X29 {
+  type discrete [ 2 ] { T, F };
+}
+variable X3 {
+  type discrete [ 2 ] { T, F };
+}
+variable X30 {
+  type discrete [ 2 ] { T, F };
+}
+variable X31 {
+  type discrete [ 2 ] { T, F };
+}
+variable X32 {
+  type discrete [ 2 ] { T, F };
+}
+variable X33 {
+  type discrete [ 2 ] { T, F };
+}
+variable X34 {
+  type discrete [ 2 ] { T, F };
+}
+variable X35 {
+  type discrete [ 2 ] { T, F };
+}
+variable X36 {
+  type discrete [ 2 ] { T, F };
+}
+variable X37 {
+  type discrete [ 2 ] { T, F };
+}
+variable X38 {
+  type discrete [ 2 ] { T, F };
+}
+variable X39 {
+  type discrete [ 2 ] { T, F };
+}
+variable X4 {
+  type discrete [ 2 ] { T, F };
+}
+variable X40 {
+  type discrete [ 2 ] { T, F };
+}
+variable X41 {
+  type discrete [ 2 ] { T, F };
+}
+variable X42 {
+  type discrete [ 2 ] { T, F };
+}
+variable X43 {
+  type discrete [ 2 ] { T, F };
+}
+variable X44 {
+  type discrete [ 2 ] { T, F };
+}
+variable X45 {
+  type discrete [ 2 ] { T, F };
+}
+variable X46 {
+  type discrete [ 2 ] { T, F };
+}
+variable X47 {
+  type discrete [ 2 ] { T, F };
+}
+variable X48 {
+  type discrete [ 2 ] { T, F };
+}
+variable X49 {
+  type discrete [ 2 ] { T, F };
+}
+variable X5 {
+  type discrete [ 2 ] { T, F };
+}
+variable X50 {
+  type discrete [ 2 ] { T, F };
+}
+variable X51 {
+  type discrete [ 2 ] { T, F };
+}
+variable X52 {
+  type discrete [ 2 ] { T, F };
+}
+variable X53 {
+  type discrete [ 2 ] { T, F };
+}
+variable X54 {
+  type discrete [ 2 ] { T, F };
+}
+variable X55 {
+  type discrete [ 2 ] { T, F };
+}
+variable X56 {
+  type discrete [ 2 ] { T, F };
+}
+variable X57 {
+  type discrete [ 2 ] { T, F };
+}
+variable X58 {
+  type discrete [ 2 ] { T, F };
+}
+variable X59 {
+  type discrete [ 2 ] { T, F };
+}
+variable X6 {
+  type discrete [ 2 ] { T, F };
+}
+variable X60 {
+  type discrete [ 2 ] { T, F };
+}
+variable X7 {
+  type discrete [ 2 ] { T, F };
+}
+variable X8 {
+  type discrete [ 2 ] { T, F };
+}
+variable X9 {
+  type discrete [ 2 ] { T, F };
+}
+probability ( AdjacentLandUses | X46, X47, X48 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( AnticipatedEvents | ClimateChanges, EnvironmentChanges, HumanReasons, ProcessProblems, TankStructure ) {
+  (T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F) 0.0, 1.0;
+}
+probability ( ChemicalContaminants | X42, X43 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( ClimateChanges | Temperature, WindSpeed, X13, X14, X15 ) {
+  (T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F) 0.0, 1.0;
+}
+probability ( Dispenser | X57, X58, X59 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( Dryer | X52, X53, X54 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( EnvironmentChanges | AdjacentLandUses, Wastes, X49 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( Exhaustion | X5, X6, X7 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( FailureToInspectAndOperateEquipment | ImproperOperatorPerformance, X60 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 0.0, 1.0;
+  (T, F) 0.0, 1.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( FortuitousEvents | MilitaryIncidents, NaturalDisasters, X24 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( HearingLoss | X37, X38 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( HumanReasons | FailureToInspectAndOperateEquipment, X25, X26, X27 ) {
+  (T, T, T, T) 1.0, 0.0;
+  (F, T, T, T) 1.0, 0.0;
+  (T, F, T, T) 1.0, 0.0;
+  (F, F, T, T) 1.0, 0.0;
+  (T, T, F, T) 1.0, 0.0;
+  (F, T, F, T) 1.0, 0.0;
+  (T, F, F, T) 1.0, 0.0;
+  (F, F, F, T) 1.0, 0.0;
+  (T, T, T, F) 1.0, 0.0;
+  (F, T, T, F) 1.0, 0.0;
+  (T, F, T, F) 1.0, 0.0;
+  (F, F, T, F) 1.0, 0.0;
+  (T, T, F, F) 1.0, 0.0;
+  (F, T, F, F) 1.0, 0.0;
+  (T, F, F, F) 1.0, 0.0;
+  (F, F, F, F) 0.0, 1.0;
+}
+probability ( ImproperOperatorPerformance | ChemicalContaminants, HearingLoss, InadequateTraining, Lighting, Stress, X32, X33, X36, X39, X40, X41 ) {
+  (T, T, T, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, T, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, T, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, T, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F, F, F, F, F, F) 0.0, 1.0;
+}
+probability ( InadequateTraining | X30, X31 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( LeakOfCNG | AnticipatedEvents, FortuitousEvents ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( Lighting | X28, X29 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( MilitaryIncidents | X21, X22, X23 ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 1.0, 0.0;
+  (T, F, T) 1.0, 0.0;
+  (F, F, T) 1.0, 0.0;
+  (T, T, F) 1.0, 0.0;
+  (F, T, F) 1.0, 0.0;
+  (T, F, F) 1.0, 0.0;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( NaturalDisasters | X16, X17, X18, X19, X20 ) {
+  (T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T) 1.0, 0.0;
+  (F, T, F, T, T) 1.0, 0.0;
+  (T, F, F, T, T) 1.0, 0.0;
+  (F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, F, T) 1.0, 0.0;
+  (T, F, T, F, T) 1.0, 0.0;
+  (F, F, T, F, T) 1.0, 0.0;
+  (T, T, F, F, T) 1.0, 0.0;
+  (F, T, F, F, T) 1.0, 0.0;
+  (T, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, F) 1.0, 0.0;
+  (F, F, T, T, F) 1.0, 0.0;
+  (T, T, F, T, F) 1.0, 0.0;
+  (F, T, F, T, F) 1.0, 0.0;
+  (T, F, F, T, F) 1.0, 0.0;
+  (F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, F, F) 1.0, 0.0;
+  (T, F, T, F, F) 1.0, 0.0;
+  (F, F, T, F, F) 1.0, 0.0;
+  (T, T, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F) 0.0, 1.0;
+}
+probability ( ProcessProblems | Dispenser, Dryer, RoomMetering, Storage ) {
+  (T, T, T, T) 1.0, 0.0;
+  (F, T, T, T) 1.0, 0.0;
+  (T, F, T, T) 1.0, 0.0;
+  (F, F, T, T) 1.0, 0.0;
+  (T, T, F, T) 1.0, 0.0;
+  (F, T, F, T) 1.0, 0.0;
+  (T, F, F, T) 1.0, 0.0;
+  (F, F, F, T) 1.0, 0.0;
+  (T, T, T, F) 1.0, 0.0;
+  (F, T, T, F) 1.0, 0.0;
+  (T, F, T, F) 1.0, 0.0;
+  (F, F, T, F) 1.0, 0.0;
+  (T, T, F, F) 1.0, 0.0;
+  (F, T, F, F) 1.0, 0.0;
+  (T, F, F, F) 1.0, 0.0;
+  (F, F, F, F) 0.0, 1.0;
+}
+probability ( RoomMetering | X50, X51 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( Storage | X55, X56 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( Stress | X34, X35 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( TankStructure | Exhaustion, X1, X2, X3, X4, X8 ) {
+  (T, T, T, T, T, T) 1.0, 0.0;
+  (F, T, T, T, T, T) 1.0, 0.0;
+  (T, F, T, T, T, T) 1.0, 0.0;
+  (F, F, T, T, T, T) 1.0, 0.0;
+  (T, T, F, T, T, T) 1.0, 0.0;
+  (F, T, F, T, T, T) 1.0, 0.0;
+  (T, F, F, T, T, T) 1.0, 0.0;
+  (F, F, F, T, T, T) 1.0, 0.0;
+  (T, T, T, F, T, T) 1.0, 0.0;
+  (F, T, T, F, T, T) 1.0, 0.0;
+  (T, F, T, F, T, T) 1.0, 0.0;
+  (F, F, T, F, T, T) 1.0, 0.0;
+  (T, T, F, F, T, T) 1.0, 0.0;
+  (F, T, F, F, T, T) 1.0, 0.0;
+  (T, F, F, F, T, T) 1.0, 0.0;
+  (F, F, F, F, T, T) 1.0, 0.0;
+  (T, T, T, T, F, T) 1.0, 0.0;
+  (F, T, T, T, F, T) 1.0, 0.0;
+  (T, F, T, T, F, T) 1.0, 0.0;
+  (F, F, T, T, F, T) 1.0, 0.0;
+  (T, T, F, T, F, T) 1.0, 0.0;
+  (F, T, F, T, F, T) 1.0, 0.0;
+  (T, F, F, T, F, T) 1.0, 0.0;
+  (F, F, F, T, F, T) 1.0, 0.0;
+  (T, T, T, F, F, T) 1.0, 0.0;
+  (F, T, T, F, F, T) 1.0, 0.0;
+  (T, F, T, F, F, T) 1.0, 0.0;
+  (F, F, T, F, F, T) 1.0, 0.0;
+  (T, T, F, F, F, T) 1.0, 0.0;
+  (F, T, F, F, F, T) 1.0, 0.0;
+  (T, F, F, F, F, T) 1.0, 0.0;
+  (F, F, F, F, F, T) 1.0, 0.0;
+  (T, T, T, T, T, F) 1.0, 0.0;
+  (F, T, T, T, T, F) 1.0, 0.0;
+  (T, F, T, T, T, F) 1.0, 0.0;
+  (F, F, T, T, T, F) 1.0, 0.0;
+  (T, T, F, T, T, F) 1.0, 0.0;
+  (F, T, F, T, T, F) 1.0, 0.0;
+  (T, F, F, T, T, F) 1.0, 0.0;
+  (F, F, F, T, T, F) 1.0, 0.0;
+  (T, T, T, F, T, F) 1.0, 0.0;
+  (F, T, T, F, T, F) 1.0, 0.0;
+  (T, F, T, F, T, F) 1.0, 0.0;
+  (F, F, T, F, T, F) 1.0, 0.0;
+  (T, T, F, F, T, F) 1.0, 0.0;
+  (F, T, F, F, T, F) 1.0, 0.0;
+  (T, F, F, F, T, F) 1.0, 0.0;
+  (F, F, F, F, T, F) 1.0, 0.0;
+  (T, T, T, T, F, F) 1.0, 0.0;
+  (F, T, T, T, F, F) 1.0, 0.0;
+  (T, F, T, T, F, F) 1.0, 0.0;
+  (F, F, T, T, F, F) 1.0, 0.0;
+  (T, T, F, T, F, F) 1.0, 0.0;
+  (F, T, F, T, F, F) 1.0, 0.0;
+  (T, F, F, T, F, F) 1.0, 0.0;
+  (F, F, F, T, F, F) 1.0, 0.0;
+  (T, T, T, F, F, F) 1.0, 0.0;
+  (F, T, T, F, F, F) 1.0, 0.0;
+  (T, F, T, F, F, F) 1.0, 0.0;
+  (F, F, T, F, F, F) 1.0, 0.0;
+  (T, T, F, F, F, F) 1.0, 0.0;
+  (F, T, F, F, F, F) 1.0, 0.0;
+  (T, F, F, F, F, F) 1.0, 0.0;
+  (F, F, F, F, F, F) 0.0, 1.0;
+}
+probability ( Temperature | X10, X9 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( Wastes | X44, X45 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( WindSpeed | X11, X12 ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 1.0, 0.0;
+  (T, F) 1.0, 0.0;
+  (F, F) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.00175388, 0.99824612;
+}
+probability ( X10 ) {
+  table 0.00110154, 0.99889846;
+}
+probability ( X11 ) {
+  table 0.00157036, 0.99842964;
+}
+probability ( X12 ) {
+  table 0.00133352, 0.99866648;
+}
+probability ( X13 ) {
+  table 0.00148594, 0.99851406;
+}
+probability ( X14 ) {
+  table 0.0011722, 0.9988278;
+}
+probability ( X15 ) {
+  table 0.00140281, 0.99859719;
+}
+probability ( X16 ) {
+  table 0.0013213, 0.9986787;
+}
+probability ( X17 ) {
+  table 0.0012331, 0.9987669;
+}
+probability ( X18 ) {
+  table 0.00128233, 0.99871767;
+}
+probability ( X19 ) {
+  table 0.00148594, 0.99851406;
+}
+probability ( X2 ) {
+  table 0.00166341, 0.99833659;
+}
+probability ( X20 ) {
+  table 0.0012942, 0.9987058;
+}
+probability ( X21 ) {
+  table 0.00145546, 0.99854454;
+}
+probability ( X22 ) {
+  table 0.00142889, 0.99857111;
+}
+probability ( X23 ) {
+  table 0.00155597, 0.99844403;
+}
+probability ( X24 ) {
+  table 0.00115878, 0.99884122;
+}
+probability ( X25 ) {
+  table 0.0012331, 0.9987669;
+}
+probability ( X26 ) {
+  table 0.00083946, 0.99916054;
+}
+probability ( X27 ) {
+  table 0.00164816, 0.99835184;
+}
+probability ( X28 ) {
+  table 0.00138676, 0.99861324;
+}
+probability ( X29 ) {
+  table 0.00144212, 0.99855788;
+}
+probability ( X3 ) {
+  table 0.00174181, 0.99825819;
+}
+probability ( X30 ) {
+  table 0.00151356, 0.99848644;
+}
+probability ( X31 ) {
+  table 0.00133352, 0.99866648;
+}
+probability ( X32 ) {
+  table 0.00102329, 0.99897671;
+}
+probability ( X33 ) {
+  table 0.0012942, 0.9987058;
+}
+probability ( X34 ) {
+  table 0.00151356, 0.99848644;
+}
+probability ( X35 ) {
+  table 0.0012942, 0.9987058;
+}
+probability ( X36 ) {
+  table 0.0015417, 0.9984583;
+}
+probability ( X37 ) {
+  table 0.0012331, 0.9987669;
+}
+probability ( X38 ) {
+  table 0.00120781, 0.99879219;
+}
+probability ( X39 ) {
+  table 0.00185353, 0.99814647;
+}
+probability ( X4 ) {
+  table 0.00151356, 0.99848644;
+}
+probability ( X40 ) {
+  table 0.0013213, 0.9986787;
+}
+probability ( X41 ) {
+  table 0.0012331, 0.9987669;
+}
+probability ( X42 ) {
+  table 0.00103276, 0.99896724;
+}
+probability ( X43 ) {
+  table 0.0010666, 0.9989334;
+}
+probability ( X44 ) {
+  table 0.00115878, 0.99884122;
+}
+probability ( X45 ) {
+  table 0.00108893, 0.99891107;
+}
+probability ( X46 ) {
+  table 0.00130918, 0.99869082;
+}
+probability ( X47 ) {
+  table 0.00115878, 0.99884122;
+}
+probability ( X48 ) {
+  table 0.0012942, 0.9987058;
+}
+probability ( X49 ) {
+  table 0.00142889, 0.99857111;
+}
+probability ( X5 ) {
+  table 0.00149968, 0.99850032;
+}
+probability ( X50 ) {
+  table 0.00127057, 0.99872943;
+}
+probability ( X51 ) {
+  table 0.0011246, 0.9988754;
+}
+probability ( X52 ) {
+  table 0.0013213, 0.9986787;
+}
+probability ( X53 ) {
+  table 0.00107895, 0.99892105;
+}
+probability ( X54 ) {
+  table 0.0011246, 0.9988754;
+}
+probability ( X55 ) {
+  table 0.0012942, 0.9987058;
+}
+probability ( X56 ) {
+  table 0.00108893, 0.99891107;
+}
+probability ( X57 ) {
+  table 0.00130918, 0.99869082;
+}
+probability ( X58 ) {
+  table 0.0010666, 0.9989334;
+}
+probability ( X59 ) {
+  table 0.0013213, 0.9986787;
+}
+probability ( X6 ) {
+  table 0.00149968, 0.99850032;
+}
+probability ( X60 ) {
+  table 0.00016326, 0.99983674;
+}
+probability ( X7 ) {
+  table 0.00149968, 0.99850032;
+}
+probability ( X8 ) {
+  table 0.00141579, 0.99858421;
+}
+probability ( X9 ) {
+  table 0.00125603, 0.99874397;
+}

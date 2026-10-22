@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BindingFailure</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExternalShortCircuit</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HighTemperature</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Impact</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImproperOperation</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InsufficientFireMonitoring</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InsufficientFirefightingCapacity</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InternalShortCircuit</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LBESSCatchFire</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LBESSFireAccident</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PoorShipStability</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShortCircuit</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnableToPutOutFire</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ViolentRolling</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X10</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X11</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X12</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X13</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X14</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X15</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X16</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X17</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X18</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X19</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X20</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X21</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X22</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X23</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X24</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X25</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X26</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X27</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X28</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X29</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X3</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X30</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X31</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X4</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X5</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X6</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X7</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X8</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X9</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BindingFailure</FOR>
+      <GIVEN>X5</GIVEN>
+      <GIVEN>X6</GIVEN>
+      <GIVEN>X7</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExternalShortCircuit</FOR>
+      <GIVEN>X14</GIVEN>
+      <GIVEN>X15</GIVEN>
+      <GIVEN>X16</GIVEN>
+      <GIVEN>X17</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HighTemperature</FOR>
+      <GIVEN>X10</GIVEN>
+      <GIVEN>X11</GIVEN>
+      <GIVEN>X12</GIVEN>
+      <GIVEN>X13</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Impact</FOR>
+      <GIVEN>BindingFailure</GIVEN>
+      <GIVEN>ViolentRolling</GIVEN>
+      <GIVEN>X8</GIVEN>
+      <GIVEN>X9</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImproperOperation</FOR>
+      <GIVEN>PoorShipStability</GIVEN>
+      <GIVEN>X4</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InsufficientFireMonitoring</FOR>
+      <GIVEN>X22</GIVEN>
+      <GIVEN>X23</GIVEN>
+      <GIVEN>X24</GIVEN>
+      <GIVEN>X25</GIVEN>
+      <GIVEN>X26</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InsufficientFirefightingCapacity</FOR>
+      <GIVEN>X27</GIVEN>
+      <GIVEN>X28</GIVEN>
+      <GIVEN>X29</GIVEN>
+      <GIVEN>X30</GIVEN>
+      <GIVEN>X31</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InternalShortCircuit</FOR>
+      <GIVEN>X18</GIVEN>
+      <GIVEN>X19</GIVEN>
+      <GIVEN>X20</GIVEN>
+      <GIVEN>X21</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LBESSCatchFire</FOR>
+      <GIVEN>HighTemperature</GIVEN>
+      <GIVEN>Impact</GIVEN>
+      <GIVEN>ShortCircuit</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LBESSFireAccident</FOR>
+      <GIVEN>LBESSCatchFire</GIVEN>
+      <GIVEN>UnableToPutOutFire</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PoorShipStability</FOR>
+      <GIVEN>X2</GIVEN>
+      <GIVEN>X3</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShortCircuit</FOR>
+      <GIVEN>ExternalShortCircuit</GIVEN>
+      <GIVEN>InternalShortCircuit</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnableToPutOutFire</FOR>
+      <GIVEN>InsufficientFirefightingCapacity</GIVEN>
+      <GIVEN>InsufficientFireMonitoring</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ViolentRolling</FOR>
+      <GIVEN>ImproperOperation</GIVEN>
+      <GIVEN>X1</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X1</FOR>
+      <TABLE>0.0008 0.9992 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X10</FOR>
+      <TABLE>0.0134 0.9866 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X11</FOR>
+      <TABLE>0.0094 0.9906 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X12</FOR>
+      <TABLE>0.007 0.993 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X13</FOR>
+      <TABLE>0.0256 0.9744 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X14</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X15</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X16</FOR>
+      <TABLE>0.047 0.953 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X17</FOR>
+      <TABLE>0.0009 0.9991 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X18</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X19</FOR>
+      <TABLE>0.0001 0.9999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X2</FOR>
+      <TABLE>0.0094 0.9906 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X20</FOR>
+      <TABLE>0.0001 0.9999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X21</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X22</FOR>
+      <TABLE>0.0003 0.9997 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X23</FOR>
+      <TABLE>0.0115 0.9885 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X24</FOR>
+      <TABLE>0.0001 0.9999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X25</FOR>
+      <TABLE>0.047 0.953 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X26</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X27</FOR>
+      <TABLE>0.0094 0.9906 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X28</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X29</FOR>
+      <TABLE>0.0663 0.9337 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X3</FOR>
+      <TABLE>0.0008 0.9992 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X30</FOR>
+      <TABLE>0.0256 0.9744 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X31</FOR>
+      <TABLE>0.0192 0.9808 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X4</FOR>
+      <TABLE>0.0008 0.9992 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X5</FOR>
+      <TABLE>0.0094 0.9906 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X6</FOR>
+      <TABLE>0.0005 0.9995 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X7</FOR>
+      <TABLE>0.0001 0.9999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X8</FOR>
+      <TABLE>0.0099 0.9901 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X9</FOR>
+      <TABLE>0.0015 0.9985 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

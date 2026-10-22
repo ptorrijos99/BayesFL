@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct1</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct2</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct3</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct4</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct5</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct6</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct7</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmAct8</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Void</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario10</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario11</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario3</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario4</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario5</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario6</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario7</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario8</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent1</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent2</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent3</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent4</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent5</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent6</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent7</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sent8</NAME>
+      <OUTCOME>Optimism</OUTCOME>
+      <OUTCOME>Gloomy</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target1</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target2</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target3</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target4</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target5</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target6</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target7</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Target8</NAME>
+      <OUTCOME>Attain</OUTCOME>
+      <OUTCOME>Miss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>EmAct1</FOR>
+      <TABLE>0.92 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct2</FOR>
+      <TABLE>0.79 0.21 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct3</FOR>
+      <TABLE>0.74 0.26 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct4</FOR>
+      <TABLE>0.86 0.14 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct5</FOR>
+      <TABLE>0.81 0.19 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct6</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct7</FOR>
+      <TABLE>0.93 0.07 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmAct8</FOR>
+      <TABLE>0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario1</FOR>
+      <GIVEN>EmAct1</GIVEN>
+      <GIVEN>Sent1</GIVEN>
+      <TABLE>0.6 0.4 0.51 0.49 0.42 0.58 0.37 0.63 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario10</FOR>
+      <GIVEN>Target7</GIVEN>
+      <TABLE>0.53 0.47 0.16 0.84 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario11</FOR>
+      <GIVEN>Target8</GIVEN>
+      <TABLE>0.38 0.62 0.12 0.88 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario2</FOR>
+      <GIVEN>EmAct2</GIVEN>
+      <GIVEN>Sent2</GIVEN>
+      <GIVEN>Target1</GIVEN>
+      <TABLE>0.66 0.34 0.92 0.08 0.62 0.38 0.82 0.18 0.78 0.22 0.52 0.48 0.53 0.47 0.44 0.56 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario3</FOR>
+      <GIVEN>EmAct3</GIVEN>
+      <GIVEN>Sent3</GIVEN>
+      <GIVEN>Target1</GIVEN>
+      <TABLE>0.87 0.13 0.24 0.76 0.8 0.2 0.3 0.7 0.72 0.28 0.19 0.81 0.67 0.33 0.28 0.72 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario4</FOR>
+      <GIVEN>EmAct4</GIVEN>
+      <GIVEN>Sent4</GIVEN>
+      <GIVEN>Target2</GIVEN>
+      <TABLE>0.8 0.2 0.31 0.69 0.72 0.28 0.39 0.61 0.68 0.32 0.23 0.77 0.54 0.46 0.29 0.71 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario5</FOR>
+      <GIVEN>EmAct5</GIVEN>
+      <GIVEN>Sent5</GIVEN>
+      <GIVEN>Target4</GIVEN>
+      <TABLE>0.88 0.12 0.69 0.31 0.78 0.22 0.72 0.28 0.69 0.31 0.44 0.56 0.7 0.3 0.58 0.42 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario6</FOR>
+      <GIVEN>EmAct6</GIVEN>
+      <GIVEN>Sent6</GIVEN>
+      <GIVEN>Target1</GIVEN>
+      <TABLE>0.87 0.13 0.57 0.43 0.94 0.06 0.69 0.31 0.81 0.19 0.32 0.68 0.88 0.12 0.43 0.57 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario7</FOR>
+      <GIVEN>EmAct7</GIVEN>
+      <GIVEN>Sent7</GIVEN>
+      <GIVEN>Target6</GIVEN>
+      <TABLE>0.81 0.19 0.61 0.39 0.88 0.12 0.69 0.31 0.85 0.15 0.34 0.66 0.91 0.09 0.41 0.59 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario8</FOR>
+      <GIVEN>EmAct8</GIVEN>
+      <GIVEN>Sent8</GIVEN>
+      <GIVEN>Target6</GIVEN>
+      <TABLE>0.68 0.32 0.73 0.27 0.74 0.26 0.78 0.22 0.86 0.14 0.8 0.2 0.9 0.1 0.83 0.17 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent3</FOR>
+      <TABLE>0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent4</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent5</FOR>
+      <TABLE>0.74 0.26 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent6</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent7</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sent8</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target1</FOR>
+      <GIVEN>Scenario1</GIVEN>
+      <TABLE>0.75 0.25 0.43 0.57 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target2</FOR>
+      <GIVEN>Scenario2</GIVEN>
+      <TABLE>0.79 0.21 0.36 0.64 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target3</FOR>
+      <GIVEN>Scenario3</GIVEN>
+      <TABLE>0.87 0.13 0.22 0.78 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target4</FOR>
+      <GIVEN>Scenario4</GIVEN>
+      <TABLE>0.84 0.16 0.46 0.54 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target5</FOR>
+      <GIVEN>Scenario5</GIVEN>
+      <TABLE>0.93 0.07 0.54 0.46 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target6</FOR>
+      <GIVEN>Scenario6</GIVEN>
+      <TABLE>0.89 0.11 0.39 0.61 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target7</FOR>
+      <GIVEN>Scenario7</GIVEN>
+      <TABLE>0.91 0.09 0.48 0.52 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Target8</FOR>
+      <GIVEN>Scenario8</GIVEN>
+      <TABLE>0.96 0.04 0.63 0.37 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

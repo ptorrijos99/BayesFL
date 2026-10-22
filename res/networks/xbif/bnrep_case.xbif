@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Body</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ComplicityMurder</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DebtFightFK</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FBarn</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FStenGun</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FightBarn</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Help</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Intent</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>KBarn</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>KKilled</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Killed</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Murder</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Murdered</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlanBarnF</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Premed</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prov</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SBarn</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShootStenGun</NAME>
+      <OUTCOME>none</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>Not_F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TMathus</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TSF1</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TSF2</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TSLocation</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TStenGun</NAME>
+      <OUTCOME>f</OUTCOME>
+      <OUTCOME>t</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Body</FOR>
+      <GIVEN>KKilled</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ComplicityMurder</FOR>
+      <GIVEN>Help</GIVEN>
+      <GIVEN>Murdered</GIVEN>
+      <GIVEN>Prov</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 1.0 0.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DebtFightFK</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FBarn</FOR>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FStenGun</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FightBarn</FOR>
+      <GIVEN>DebtFightFK</GIVEN>
+      <GIVEN>FBarn</GIVEN>
+      <GIVEN>KBarn</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Help</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Intent</FOR>
+      <GIVEN>ShootStenGun</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>KBarn</FOR>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>KKilled</FOR>
+      <GIVEN>ShootStenGun</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Killed</FOR>
+      <GIVEN>KKilled</GIVEN>
+      <GIVEN>ShootStenGun</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Murder</FOR>
+      <GIVEN>Intent</GIVEN>
+      <GIVEN>Killed</GIVEN>
+      <GIVEN>Premed</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Murdered</FOR>
+      <GIVEN>KKilled</GIVEN>
+      <GIVEN>ShootStenGun</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlanBarnF</FOR>
+      <GIVEN>DebtFightFK</GIVEN>
+      <TABLE>0.9999 0.0001 0.3333333 0.6666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Premed</FOR>
+      <GIVEN>FightBarn</GIVEN>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prov</FOR>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SBarn</FOR>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShootStenGun</FOR>
+      <GIVEN>FBarn</GIVEN>
+      <GIVEN>FightBarn</GIVEN>
+      <GIVEN>FStenGun</GIVEN>
+      <GIVEN>KBarn</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.5 0.0 0.5 1.0 0.0 0.0 0.5 0.0 0.5 1.0 0.0 0.0 0.5 0.0 0.5 1.0 0.0 0.0 0.5 0.0 0.5 1.0 0.0 0.0 0.5 0.0 0.5 1.0 0.0 0.0 0.9950199244 0.0039840597 0.0009960159 1.0 0.0 0.0 0.9995 0.0001 0.0004 1.0 0.0 0.0 0.0 0.90909091 0.09090909 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TMathus</FOR>
+      <GIVEN>DebtFightFK</GIVEN>
+      <GIVEN>PlanBarnF</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TSF1</FOR>
+      <GIVEN>FBarn</GIVEN>
+      <TABLE>0.999 0.001 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TSF2</FOR>
+      <GIVEN>FBarn</GIVEN>
+      <GIVEN>TSF1</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.9 0.1 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TSLocation</FOR>
+      <GIVEN>KBarn</GIVEN>
+      <GIVEN>SBarn</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TStenGun</FOR>
+      <GIVEN>FStenGun</GIVEN>
+      <TABLE>0.5 0.5 0.2 0.8 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

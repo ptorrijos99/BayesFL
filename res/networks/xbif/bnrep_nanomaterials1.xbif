@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AcuteToxicityByTheExposureRouteOral</NAME>
+      <OUTCOME>Less_than_5</OUTCOME>
+      <OUTCOME>5_50</OUTCOME>
+      <OUTCOME>50_300</OUTCOME>
+      <OUTCOME>300_2000</OUTCOME>
+      <OUTCOME>2000_5000</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AcuteToxicityDermalExposure</NAME>
+      <OUTCOME>Less_than_50</OUTCOME>
+      <OUTCOME>50_200</OUTCOME>
+      <OUTCOME>200_1000</OUTCOME>
+      <OUTCOME>1000_2000</OUTCOME>
+      <OUTCOME>2000_5000</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AcuteToxicityExposureByDustInhalation</NAME>
+      <OUTCOME>Less_than_0_5</OUTCOME>
+      <OUTCOME>0_5_2</OUTCOME>
+      <OUTCOME>2_10</OUTCOME>
+      <OUTCOME>10_20</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AcuteToxicityExposureByGasInhalation</NAME>
+      <OUTCOME>Less_than_100</OUTCOME>
+      <OUTCOME>100_500</OUTCOME>
+      <OUTCOME>500_2500</OUTCOME>
+      <OUTCOME>2500_20000</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AcuteToxicityInTheAquaticEnvironment</NAME>
+      <OUTCOME>Less_than_1</OUTCOME>
+      <OUTCOME>1_10</OUTCOME>
+      <OUTCOME>10_100</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AdministrativeMeasures</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AerosolFormation</NAME>
+      <OUTCOME>With</OUTCOME>
+      <OUTCOME>Without</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Agglomeration</NAME>
+      <OUTCOME>With</OUTCOME>
+      <OUTCOME>Without</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Amount</NAME>
+      <OUTCOME>_10mg</OUTCOME>
+      <OUTCOME>10_100mg</OUTCOME>
+      <OUTCOME>_100mg</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BodyProtection</NAME>
+      <OUTCOME>No_use</OUTCOME>
+      <OUTCOME>Cotton_lab_coats</OUTCOME>
+      <OUTCOME>Synthetic_material_lab_coats</OUTCOME>
+      <OUTCOME>Chemical_protection_coveralls</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityByTheExposureRouteInhalationDust</NAME>
+      <OUTCOME>Less_than_0_5</OUTCOME>
+      <OUTCOME>0_5_2</OUTCOME>
+      <OUTCOME>2_10</OUTCOME>
+      <OUTCOME>10_20</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityByTheExposureRouteInhalationGas</NAME>
+      <OUTCOME>Less_than_50</OUTCOME>
+      <OUTCOME>50_200</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityDermalExposure</NAME>
+      <OUTCOME>Less_than_20</OUTCOME>
+      <OUTCOME>20_200</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityExposureByDustInhalation</NAME>
+      <OUTCOME>Less_than_0_02</OUTCOME>
+      <OUTCOME>0_02_0_2</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityExposureOral</NAME>
+      <OUTCOME>Less_than_10</OUTCOME>
+      <OUTCOME>10_100</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChronicToxicityInTheAquaticEnvironment</NAME>
+      <OUTCOME>Less_than_0_01</OUTCOME>
+      <OUTCOME>0_01_0_1</OUTCOME>
+      <OUTCOME>0_1_1</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ClassificationGHS</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <OUTCOME>4</OUTCOME>
+      <OUTCOME>5</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CrystallineStructure</NAME>
+      <OUTCOME>With</OUTCOME>
+      <OUTCOME>Without</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Duration</NAME>
+      <OUTCOME>_30min</OUTCOME>
+      <OUTCOME>30_240min</OUTCOME>
+      <OUTCOME>_240min</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DustFormation</NAME>
+      <OUTCOME>With</OUTCOME>
+      <OUTCOME>Without</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Exposure</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EyeIrritation</NAME>
+      <OUTCOME>No_effect</OUTCOME>
+      <OUTCOME>Reversible_irritation</OUTCOME>
+      <OUTCOME>Irreversible_damage</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EyesProtection</NAME>
+      <OUTCOME>No_use</OUTCOME>
+      <OUTCOME>Safety_glasses</OUTCOME>
+      <OUTCOME>Safety_goggles</OUTCOME>
+      <OUTCOME>Face_shields</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FootProtection</NAME>
+      <OUTCOME>Open_shoes</OUTCOME>
+      <OUTCOME>Work_shoes</OUTCOME>
+      <OUTCOME>Safety_shoes_for_chemical_agents</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Frequency</NAME>
+      <OUTCOME>Daily</OUTCOME>
+      <OUTCOME>Weekly</OUTCOME>
+      <OUTCOME>Monthly</OUTCOME>
+      <OUTCOME>Semiannual</OUTCOME>
+      <OUTCOME>Yearly</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HandProtection</NAME>
+      <OUTCOME>No_use</OUTCOME>
+      <OUTCOME>Rubber_gloves</OUTCOME>
+      <OUTCOME>Nitrile_gloves___1_pair</OUTCOME>
+      <OUTCOME>Nitrile_gloves___2_pairs</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Hazard</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MedicalSurveillance</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>Yes__consider_NMs</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Morphology</NAME>
+      <OUTCOME>Spherical</OUTCOME>
+      <OUTCOME>Plates</OUTCOME>
+      <OUTCOME>Rods</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OccupationalEnvironmentRiskProgram</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>Yes__consider_NMs</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PeriodicMaintenanceOfCPE</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes__less_than_12_months</OUTCOME>
+      <OUTCOME>Yes__more_than_12_months</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PersonalProtectiveEquipment</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PotentiallyCarcinogenic</NAME>
+      <OUTCOME>Confirmed_for_humans</OUTCOME>
+      <OUTCOME>Possibly_toxic_to_humans</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProtectionByUsingCollectiveProtectiveEquipment</NAME>
+      <OUTCOME>Full_containment_isolation</OUTCOME>
+      <OUTCOME>Enclosed_ventilation</OUTCOME>
+      <OUTCOME>Local_ventilation</OUTCOME>
+      <OUTCOME>General_mechanical_ventilation</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RespiratoryProtection</NAME>
+      <OUTCOME>No_use</OUTCOME>
+      <OUTCOME>Safety_mask_without_selection_criteria</OUTCOME>
+      <OUTCOME>Respiratory_mask_according_to_the_respiratory_protection_program</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RespiratoryProtectionProgram</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>Yes__consider_NMs</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RespiratorySensitization</NAME>
+      <OUTCOME>There_is_evidence_for_humans</OUTCOME>
+      <OUTCOME>There_are_positive_tests_for_animal_testing</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Risk</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiskControl</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiskTrainingInvolvingNMs</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SizeOfAtLeastOneDimension</NAME>
+      <OUTCOME>Less_than_100</OUTCOME>
+      <OUTCOME>More_than_100</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SkinIrritation</NAME>
+      <OUTCOME>Skin_corrosion</OUTCOME>
+      <OUTCOME>Skin_irritation</OUTCOME>
+      <OUTCOME>ILskin_irritation</OUTCOME>
+      <OUTCOME>No_effect</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SolubilityInWater</NAME>
+      <OUTCOME>Dissolution_pH_5_to_9</OUTCOME>
+      <OUTCOME>Insoluble</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StandardOperatingProcedureOfTask</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SurfaceArea</NAME>
+      <OUTCOME>__10_m2g</OUTCOME>
+      <OUTCOME>10_49_m2g</OUTCOME>
+      <OUTCOME>_50_m2g</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SurfaceChargeInSolution</NAME>
+      <OUTCOME>Charged</OUTCOME>
+      <OUTCOME>Neutral</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SurfaceModificationWithHydrophilicGroups</NAME>
+      <OUTCOME>Without</OUTCOME>
+      <OUTCOME>With</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspensionStability</NAME>
+      <OUTCOME>Less_than_30</OUTCOME>
+      <OUTCOME>More_than_30</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VariablesPhysicoChemical</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AcuteToxicityByTheExposureRouteOral</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.35 0.2 0.15 0.1 0.1 0.1 0.2 0.35 0.15 0.1 0.1 0.1 0.1 0.15 0.35 0.2 0.1 0.1 0.1 0.1 0.15 0.35 0.2 0.1 0.1 0.1 0.1 0.15 0.35 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AcuteToxicityDermalExposure</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.15 0.15 0.1 0.1 0.1 0.15 0.4 0.15 0.1 0.1 0.1 0.1 0.15 0.4 0.15 0.1 0.1 0.1 0.1 0.1 0.4 0.15 0.15 0.1 0.1 0.1 0.15 0.4 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AcuteToxicityExposureByDustInhalation</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.2 0.2 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.2 0.2 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AcuteToxicityExposureByGasInhalation</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.2 0.2 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.2 0.2 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AcuteToxicityInTheAquaticEnvironment</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.3 0.2 0.1 0.2 0.4 0.3 0.1 0.2 0.25 0.4 0.15 0.2 0.2 0.35 0.25 0.1 0.2 0.3 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AdministrativeMeasures</FOR>
+      <GIVEN>RiskControl</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.3 0.4 0.3 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AerosolFormation</FOR>
+      <GIVEN>Exposure</GIVEN>
+      <TABLE>0.7 0.3 0.6 0.4 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Agglomeration</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Amount</FOR>
+      <GIVEN>Exposure</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.3 0.4 0.3 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BodyProtection</FOR>
+      <GIVEN>PersonalProtectiveEquipment</GIVEN>
+      <TABLE>0.1 0.2 0.3 0.4 0.15 0.3 0.35 0.2 0.4 0.3 0.2 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityByTheExposureRouteInhalationDust</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.2 0.2 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.2 0.2 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityByTheExposureRouteInhalationGas</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.45 0.35 0.2 0.35 0.45 0.2 0.35 0.35 0.3 0.3 0.3 0.4 0.2 0.35 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityDermalExposure</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.45 0.35 0.2 0.35 0.45 0.2 0.35 0.35 0.3 0.3 0.3 0.4 0.2 0.35 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityExposureByDustInhalation</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.45 0.35 0.2 0.35 0.45 0.2 0.35 0.35 0.3 0.3 0.3 0.4 0.2 0.35 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityExposureOral</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.55 0.3 0.15 0.3 0.55 0.15 0.35 0.35 0.3 0.25 0.3 0.45 0.2 0.25 0.55 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChronicToxicityInTheAquaticEnvironment</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.3 0.2 0.1 0.2 0.4 0.3 0.1 0.2 0.25 0.4 0.15 0.2 0.2 0.35 0.25 0.1 0.2 0.3 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ClassificationGHS</FOR>
+      <GIVEN>Hazard</GIVEN>
+      <TABLE>0.5 0.2 0.1 0.1 0.1 0.1 0.2 0.4 0.2 0.1 0.1 0.1 0.15 0.25 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CrystallineStructure</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Duration</FOR>
+      <GIVEN>Exposure</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.3 0.4 0.3 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DustFormation</FOR>
+      <GIVEN>Exposure</GIVEN>
+      <TABLE>0.7 0.3 0.6 0.4 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Exposure</FOR>
+      <GIVEN>Risk</GIVEN>
+      <TABLE>0.25 0.35 0.4 0.25 0.4 0.35 0.4 0.35 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EyeIrritation</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.2 0.35 0.45 0.2 0.45 0.35 0.3 0.35 0.35 0.4 0.3 0.3 0.45 0.35 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EyesProtection</FOR>
+      <GIVEN>PersonalProtectiveEquipment</GIVEN>
+      <TABLE>0.1 0.2 0.3 0.4 0.15 0.3 0.35 0.2 0.4 0.3 0.2 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FootProtection</FOR>
+      <GIVEN>PersonalProtectiveEquipment</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.25 0.35 0.4 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Frequency</FOR>
+      <GIVEN>Exposure</GIVEN>
+      <TABLE>0.4 0.25 0.15 0.1 0.1 0.2 0.3 0.2 0.15 0.15 0.1 0.15 0.2 0.25 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HandProtection</FOR>
+      <GIVEN>PersonalProtectiveEquipment</GIVEN>
+      <TABLE>0.1 0.2 0.3 0.4 0.15 0.3 0.35 0.2 0.4 0.3 0.2 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Hazard</FOR>
+      <GIVEN>Risk</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.2 0.5 0.3 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MedicalSurveillance</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.15 0.3 0.55 0.25 0.4 0.35 0.55 0.3 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Morphology</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.45 0.3 0.25 0.4 0.35 0.25 0.25 0.3 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OccupationalEnvironmentRiskProgram</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.15 0.3 0.55 0.25 0.4 0.35 0.55 0.3 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PeriodicMaintenanceOfCPE</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.15 0.25 0.6 0.2 0.45 0.35 0.6 0.25 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PersonalProtectiveEquipment</FOR>
+      <GIVEN>RiskControl</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.4 0.3 0.3 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PotentiallyCarcinogenic</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.5 0.35 0.15 0.35 0.5 0.15 0.25 0.35 0.4 0.3 0.3 0.4 0.2 0.3 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProtectionByUsingCollectiveProtectiveEquipment</FOR>
+      <GIVEN>RiskControl</GIVEN>
+      <TABLE>0.4 0.3 0.2 0.1 0.35 0.3 0.2 0.15 0.1 0.2 0.3 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RespiratoryProtection</FOR>
+      <GIVEN>PersonalProtectiveEquipment</GIVEN>
+      <TABLE>0.15 0.25 0.6 0.2 0.45 0.35 0.6 0.25 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RespiratoryProtectionProgram</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.15 0.25 0.6 0.2 0.45 0.35 0.6 0.25 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RespiratorySensitization</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.5 0.3 0.2 0.3 0.5 0.2 0.35 0.45 0.2 0.25 0.35 0.4 0.2 0.3 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Risk</FOR>
+      <TABLE>0.4 0.3 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiskControl</FOR>
+      <GIVEN>Risk</GIVEN>
+      <TABLE>0.6 0.3 0.1 0.25 0.45 0.3 0.1 0.3 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiskTrainingInvolvingNMs</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SizeOfAtLeastOneDimension</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.7 0.3 0.6 0.4 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SkinIrritation</FOR>
+      <GIVEN>ClassificationGHS</GIVEN>
+      <TABLE>0.4 0.3 0.2 0.1 0.2 0.4 0.3 0.1 0.2 0.25 0.4 0.15 0.2 0.2 0.35 0.25 0.1 0.2 0.3 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SolubilityInWater</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.3 0.7 0.4 0.6 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StandardOperatingProcedureOfTask</FOR>
+      <GIVEN>AdministrativeMeasures</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SurfaceArea</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.25 0.3 0.45 0.25 0.4 0.35 0.55 0.3 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SurfaceChargeInSolution</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.6 0.4 0.55 0.45 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SurfaceModificationWithHydrophilicGroups</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspensionStability</FOR>
+      <GIVEN>VariablesPhysicoChemical</GIVEN>
+      <TABLE>0.4 0.6 0.45 0.55 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VariablesPhysicoChemical</FOR>
+      <GIVEN>Hazard</GIVEN>
+      <TABLE>0.2 0.3 0.5 0.25 0.5 0.25 0.5 0.3 0.2 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

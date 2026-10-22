@@ -1,0 +1,649 @@
+network unknown {
+}
+variable AgriculturalLand {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable AnchorDamageRisk {
+  type discrete [ 2 ] { Low, High };
+}
+variable BottomSubstrate {
+  type discrete [ 2 ] { Soft, Hard };
+}
+variable Cod {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable DevelopedLand {
+  type discrete [ 2 ] { Low, High };
+}
+variable DIN {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable DIP {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Discharge {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Eelgrass {
+  type discrete [ 3 ] { Decrease, No_change, Increase };
+}
+variable FilamentousAlgae {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable HabitatQuality {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable IntermediateFishPredators {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable LeisureBoating {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Mesograzers {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable MusselCultivation {
+  type discrete [ 4 ] { Low, Medium, High, Very_high };
+}
+variable Noise {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable NorthernShrimp {
+  type discrete [ 3 ] { Decrease, No_change, Increase };
+}
+variable NutrientEnrichmentRisk {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable OxygenDeep {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable OxygenShallow {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Phytoplankton {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable POM {
+  type discrete [ 2 ] { Low, High };
+}
+variable Precipitation {
+  type discrete [ 2 ] { Low, High };
+}
+variable Prey {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable RadiativeForcing {
+  type discrete [ 3 ] { Current, RF45, RF85 };
+}
+variable SeafloorDisturbance {
+  type discrete [ 2 ] { Low, High };
+}
+variable SedimentLoad {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TNExchange {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TNLoad {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TPExchange {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TPLoad {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Transparency {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TrawlingFrequency {
+  type discrete [ 2 ] { Low, High };
+}
+variable Turbidity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable WaterTemperatureDeep {
+  type discrete [ 2 ] { Low, High };
+}
+variable WaterTemperatureShallow {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Wind {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Zooplankton {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( AgriculturalLand ) {
+  table 0.45, 0.30, 0.25;
+}
+probability ( AnchorDamageRisk | LeisureBoating ) {
+  (Low) 0.99, 0.01;
+  (Medium) 0.5, 0.5;
+  (High) 0.01, 0.99;
+}
+probability ( BottomSubstrate ) {
+  table 0.3, 0.7;
+}
+probability ( Cod | HabitatQuality, Noise ) {
+  (Low, Low) 0.625, 0.270, 0.105;
+  (Medium, Low) 0.450, 0.325, 0.225;
+  (High, Low) 0.2, 0.4, 0.4;
+  (Low, Medium) 0.625, 0.270, 0.105;
+  (Medium, Medium) 0.450, 0.325, 0.225;
+  (High, Medium) 0.2, 0.4, 0.4;
+  (Low, High) 0.675, 0.270, 0.055;
+  (Medium, High) 0.520, 0.315, 0.165;
+  (High, High) 0.26, 0.40, 0.34;
+}
+probability ( DevelopedLand ) {
+  table 0.65, 0.35;
+}
+probability ( DIN | TNLoad ) {
+  (Low) 0.55, 0.40, 0.05;
+  (Medium) 0.5, 0.4, 0.1;
+  (High) 0.2, 0.3, 0.5;
+}
+probability ( DIP | TPLoad ) {
+  (Low) 0.80, 0.15, 0.05;
+  (Medium) 0.45, 0.45, 0.10;
+  (High) 0.40, 0.35, 0.25;
+}
+probability ( Discharge | Precipitation ) {
+  (Low) 0.90, 0.09, 0.01;
+  (High) 0.45, 0.40, 0.15;
+}
+probability ( Eelgrass | AnchorDamageRisk, FilamentousAlgae, Transparency ) {
+  (Low, Low, Low) 0.85, 0.10, 0.05;
+  (High, Low, Low) 0.90, 0.05, 0.05;
+  (Low, Medium, Low) 0.90, 0.08, 0.02;
+  (High, Medium, Low) 0.90, 0.08, 0.02;
+  (Low, High, Low) 0.90, 0.08, 0.02;
+  (High, High, Low) 0.90, 0.08, 0.02;
+  (Low, Low, Medium) 0.8, 0.1, 0.1;
+  (High, Low, Medium) 0.75, 0.15, 0.10;
+  (Low, Medium, Medium) 0.85, 0.10, 0.05;
+  (High, Medium, Medium) 0.80, 0.15, 0.05;
+  (Low, High, Medium) 0.90, 0.08, 0.02;
+  (High, High, Medium) 0.90, 0.08, 0.02;
+  (Low, Low, High) 0.3, 0.5, 0.2;
+  (High, Low, High) 0.35, 0.45, 0.20;
+  (Low, Medium, High) 0.35, 0.50, 0.15;
+  (High, Medium, High) 0.45, 0.45, 0.10;
+  (Low, High, High) 0.60, 0.35, 0.05;
+  (High, High, High) 0.70, 0.25, 0.05;
+}
+probability ( FilamentousAlgae | Mesograzers, NutrientEnrichmentRisk, WaterTemperatureShallow ) {
+  (Low, Low, Low) 0.85, 0.10, 0.05;
+  (Medium, Low, Low) 0.90, 0.09, 0.01;
+  (High, Low, Low) 0.98, 0.01, 0.01;
+  (Low, Medium, Low) 0.325, 0.200, 0.475;
+  (Medium, Medium, Low) 0.500, 0.275, 0.225;
+  (High, Medium, Low) 0.700, 0.175, 0.125;
+  (Low, High, Low) 0.015, 0.340, 0.645;
+  (Medium, High, Low) 0.15, 0.45, 0.40;
+  (High, High, Low) 0.2, 0.4, 0.4;
+  (Low, Low, Medium) 0.800, 0.125, 0.075;
+  (Medium, Low, Medium) 0.85, 0.10, 0.05;
+  (High, Low, Medium) 0.98, 0.01, 0.01;
+  (Low, Medium, Medium) 0.225, 0.275, 0.500;
+  (Medium, Medium, Medium) 0.375, 0.400, 0.225;
+  (High, Medium, Medium) 0.500, 0.375, 0.125;
+  (Low, High, Medium) 0.015, 0.285, 0.700;
+  (Medium, High, Medium) 0.1, 0.4, 0.5;
+  (High, High, Medium) 0.200, 0.375, 0.425;
+  (Low, Low, High) 0.700, 0.175, 0.125;
+  (Medium, Low, High) 0.75, 0.20, 0.05;
+  (High, Low, High) 0.98, 0.01, 0.01;
+  (Low, Medium, High) 0.11, 0.29, 0.60;
+  (Medium, Medium, High) 0.225, 0.450, 0.325;
+  (High, Medium, High) 0.3, 0.5, 0.2;
+  (Low, High, High) 0.015, 0.045, 0.940;
+  (Medium, High, High) 0.075, 0.125, 0.800;
+  (High, High, High) 0.175, 0.200, 0.625;
+}
+probability ( HabitatQuality | OxygenDeep, SeafloorDisturbance, Turbidity ) {
+  (Low, Low, Low) 0.3, 0.3, 0.4;
+  (Medium, Low, Low) 0.20, 0.25, 0.55;
+  (High, Low, Low) 0.05, 0.15, 0.80;
+  (Low, High, Low) 0.50, 0.25, 0.25;
+  (Medium, High, Low) 0.45, 0.30, 0.25;
+  (High, High, Low) 0.2, 0.3, 0.5;
+  (Low, Low, Medium) 0.55, 0.15, 0.30;
+  (Medium, Low, Medium) 0.40, 0.25, 0.35;
+  (High, Low, Medium) 0.25, 0.20, 0.55;
+  (Low, High, Medium) 0.75, 0.20, 0.05;
+  (Medium, High, Medium) 0.75, 0.20, 0.05;
+  (High, High, Medium) 0.55, 0.35, 0.10;
+  (Low, Low, High) 0.7, 0.1, 0.2;
+  (Medium, Low, High) 0.5, 0.2, 0.3;
+  (High, Low, High) 0.3, 0.2, 0.5;
+  (Low, High, High) 0.4, 0.3, 0.3;
+  (Medium, High, High) 0.90, 0.09, 0.01;
+  (High, High, High) 0.75, 0.20, 0.05;
+}
+probability ( IntermediateFishPredators | Cod, Noise ) {
+  (Low, Low) 0.10, 0.25, 0.65;
+  (Medium, Low) 0.2875, 0.4500, 0.2625;
+  (High, Low) 0.7, 0.2, 0.1;
+  (Low, Medium) 0.10, 0.25, 0.65;
+  (Medium, Medium) 0.2875, 0.4500, 0.2625;
+  (High, Medium) 0.7, 0.2, 0.1;
+  (Low, High) 0.125, 0.250, 0.625;
+  (Medium, High) 0.3125, 0.4500, 0.2375;
+  (High, High) 0.74, 0.18, 0.08;
+}
+probability ( LeisureBoating ) {
+  table 0.10, 0.25, 0.65;
+}
+probability ( Mesograzers | IntermediateFishPredators ) {
+  (Low) 0.05, 0.15, 0.80;
+  (Medium) 0.2, 0.5, 0.3;
+  (High) 0.80, 0.15, 0.05;
+}
+probability ( MusselCultivation ) {
+  table 0.60, 0.25, 0.10, 0.05;
+}
+probability ( Noise | LeisureBoating ) {
+  (Low) 0.3, 0.3, 0.4;
+  (Medium) 0.2, 0.3, 0.5;
+  (High) 0.1, 0.3, 0.6;
+}
+probability ( NorthernShrimp | Cod, Prey, TrawlingFrequency, WaterTemperatureDeep ) {
+  (Low, Low, Low, Low) 0.2, 0.2, 0.6;
+  (Medium, Low, Low, Low) 0.20, 0.25, 0.55;
+  (High, Low, Low, Low) 0.3, 0.2, 0.5;
+  (Low, Medium, Low, Low) 0.15, 0.25, 0.60;
+  (Medium, Medium, Low, Low) 0.20, 0.25, 0.55;
+  (High, Medium, Low, Low) 0.2, 0.2, 0.6;
+  (Low, High, Low, Low) 0.2, 0.2, 0.6;
+  (Medium, High, Low, Low) 0.20, 0.25, 0.55;
+  (High, High, Low, Low) 0.3, 0.2, 0.5;
+  (Low, Low, High, Low) 0.20, 0.65, 0.15;
+  (Medium, Low, High, Low) 0.50, 0.35, 0.15;
+  (High, Low, High, Low) 0.95, 0.04, 0.01;
+  (Low, Medium, High, Low) 0.30, 0.55, 0.15;
+  (Medium, Medium, High, Low) 0.55, 0.30, 0.15;
+  (High, Medium, High, Low) 0.90, 0.09, 0.01;
+  (Low, High, High, Low) 0.20, 0.65, 0.15;
+  (Medium, High, High, Low) 0.50, 0.35, 0.15;
+  (High, High, High, Low) 0.95, 0.04, 0.01;
+  (Low, Low, Low, High) 0.05, 0.20, 0.75;
+  (Medium, Low, Low, High) 0.1, 0.2, 0.7;
+  (High, Low, Low, High) 0.15, 0.20, 0.65;
+  (Low, Medium, Low, High) 0.10, 0.15, 0.75;
+  (Medium, Medium, Low, High) 0.15, 0.20, 0.65;
+  (High, Medium, Low, High) 0.25, 0.15, 0.60;
+  (Low, High, Low, High) 0.05, 0.20, 0.75;
+  (Medium, High, Low, High) 0.1, 0.2, 0.7;
+  (High, High, Low, High) 0.15, 0.20, 0.65;
+  (Low, Low, High, High) 0.25, 0.55, 0.20;
+  (Medium, Low, High, High) 0.4, 0.4, 0.2;
+  (High, Low, High, High) 0.85, 0.10, 0.05;
+  (Low, Medium, High, High) 0.3, 0.5, 0.2;
+  (Medium, Medium, High, High) 0.45, 0.40, 0.15;
+  (High, Medium, High, High) 0.75, 0.20, 0.05;
+  (Low, High, High, High) 0.25, 0.55, 0.20;
+  (Medium, High, High, High) 0.4, 0.4, 0.2;
+  (High, High, High, High) 0.85, 0.10, 0.05;
+}
+probability ( NutrientEnrichmentRisk | DIN, DIP, POM ) {
+  (Low, Low, Low) 0.80, 0.15, 0.05;
+  (Medium, Low, Low) 0.35, 0.50, 0.15;
+  (High, Low, Low) 0.25, 0.55, 0.20;
+  (Low, Medium, Low) 0.7, 0.2, 0.1;
+  (Medium, Medium, Low) 0.25, 0.60, 0.15;
+  (High, Medium, Low) 0.150, 0.625, 0.225;
+  (Low, High, Low) 0.6, 0.3, 0.1;
+  (Medium, High, Low) 0.20, 0.65, 0.15;
+  (High, High, Low) 0.075, 0.700, 0.225;
+  (Low, Low, High) 0.75, 0.15, 0.10;
+  (Medium, Low, High) 0.3, 0.5, 0.2;
+  (High, Low, High) 0.2, 0.6, 0.2;
+  (Low, Medium, High) 0.65, 0.25, 0.10;
+  (Medium, Medium, High) 0.2, 0.6, 0.2;
+  (High, Medium, High) 0.10, 0.65, 0.25;
+  (Low, High, High) 0.6, 0.3, 0.1;
+  (Medium, High, High) 0.1, 0.7, 0.2;
+  (High, High, High) 0.05, 0.70, 0.25;
+}
+probability ( OxygenDeep | Phytoplankton, POM ) {
+  (Low, Low) 0.1, 0.6, 0.3;
+  (Medium, Low) 0.1, 0.7, 0.2;
+  (High, Low) 0.30, 0.55, 0.15;
+  (Low, High) 0.25, 0.60, 0.15;
+  (Medium, High) 0.25, 0.70, 0.05;
+  (High, High) 0.45, 0.50, 0.05;
+}
+probability ( OxygenShallow | Phytoplankton, WaterTemperatureShallow ) {
+  (Low, Low) 0.05, 0.05, 0.90;
+  (Medium, Low) 0.05, 0.05, 0.90;
+  (High, Low) 0.1, 0.3, 0.6;
+  (Low, Medium) 0.05, 0.05, 0.90;
+  (Medium, Medium) 0.20, 0.05, 0.75;
+  (High, Medium) 0.05, 0.55, 0.40;
+  (Low, High) 0.40, 0.45, 0.15;
+  (Medium, High) 0.40, 0.45, 0.15;
+  (High, High) 0.15, 0.75, 0.10;
+}
+probability ( Phytoplankton | MusselCultivation, NutrientEnrichmentRisk, WaterTemperatureShallow ) {
+  (Low, Low, Low) 0.8, 0.1, 0.1;
+  (Medium, Low, Low) 0.8, 0.1, 0.1;
+  (High, Low, Low) 0.8, 0.1, 0.1;
+  (Very_high, Low, Low) 0.8, 0.1, 0.1;
+  (Low, Medium, Low) 0.65, 0.25, 0.10;
+  (Medium, Medium, Low) 0.65, 0.25, 0.10;
+  (High, Medium, Low) 0.65, 0.25, 0.10;
+  (Very_high, Medium, Low) 0.70, 0.29, 0.01;
+  (Low, High, Low) 0.5, 0.4, 0.1;
+  (Medium, High, Low) 0.5, 0.4, 0.1;
+  (High, High, Low) 0.5, 0.4, 0.1;
+  (Very_high, High, Low) 0.75, 0.15, 0.10;
+  (Low, Low, Medium) 0.8, 0.1, 0.1;
+  (Medium, Low, Medium) 0.8, 0.1, 0.1;
+  (High, Low, Medium) 0.8, 0.1, 0.1;
+  (Very_high, Low, Medium) 0.8, 0.1, 0.1;
+  (Low, Medium, Medium) 0.65, 0.25, 0.10;
+  (Medium, Medium, Medium) 0.65, 0.25, 0.10;
+  (High, Medium, Medium) 0.65, 0.25, 0.10;
+  (Very_high, Medium, Medium) 0.65, 0.34, 0.01;
+  (Low, High, Medium) 0.45, 0.40, 0.15;
+  (Medium, High, Medium) 0.45, 0.40, 0.15;
+  (High, High, Medium) 0.45, 0.40, 0.15;
+  (Very_high, High, Medium) 0.75, 0.15, 0.10;
+  (Low, Low, High) 0.8, 0.1, 0.1;
+  (Medium, Low, High) 0.8, 0.1, 0.1;
+  (High, Low, High) 0.8, 0.1, 0.1;
+  (Very_high, Low, High) 0.8, 0.1, 0.1;
+  (Low, Medium, High) 0.60, 0.25, 0.15;
+  (Medium, Medium, High) 0.60, 0.25, 0.15;
+  (High, Medium, High) 0.60, 0.25, 0.15;
+  (Very_high, Medium, High) 0.65, 0.34, 0.01;
+  (Low, High, High) 0.4, 0.4, 0.2;
+  (Medium, High, High) 0.4, 0.4, 0.2;
+  (High, High, High) 0.4, 0.4, 0.2;
+  (Very_high, High, High) 0.55, 0.40, 0.05;
+}
+probability ( POM | MusselCultivation, SedimentLoad ) {
+  (Low, Low) 0.6, 0.4;
+  (Medium, Low) 0.6, 0.4;
+  (High, Low) 0.65, 0.35;
+  (Very_high, Low) 0.7, 0.3;
+  (Low, Medium) 0.55, 0.45;
+  (Medium, Medium) 0.55, 0.45;
+  (High, Medium) 0.625, 0.375;
+  (Very_high, Medium) 0.675, 0.325;
+  (Low, High) 0.5, 0.5;
+  (Medium, High) 0.5, 0.5;
+  (High, High) 0.6, 0.4;
+  (Very_high, High) 0.65, 0.35;
+}
+probability ( Precipitation | RadiativeForcing ) {
+  (Current) 0.75, 0.25;
+  (RF45) 0.65, 0.35;
+  (RF85) 0.25, 0.75;
+}
+probability ( Prey | SeafloorDisturbance, Zooplankton ) {
+  (Low, Low) 0.3333333, 0.3333333, 0.3333333;
+  (High, Low) 0.3333333, 0.3333333, 0.3333333;
+  (Low, Medium) 0.3333333, 0.3333333, 0.3333333;
+  (High, Medium) 0.3333333, 0.3333333, 0.3333333;
+  (Low, High) 0.3333333, 0.3333333, 0.3333333;
+  (High, High) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( RadiativeForcing ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( SeafloorDisturbance | BottomSubstrate, TrawlingFrequency ) {
+  (Soft, Low) 0.4, 0.6;
+  (Hard, Low) 0.95, 0.05;
+  (Soft, High) 0.05, 0.95;
+  (Hard, High) 0.95, 0.05;
+}
+probability ( SedimentLoad | AgriculturalLand, DevelopedLand, Discharge ) {
+  (Low, Low, Low) 0.98, 0.01, 0.01;
+  (Medium, Low, Low) 0.80, 0.19, 0.01;
+  (High, Low, Low) 0.1, 0.7, 0.2;
+  (Low, High, Low) 0.94, 0.05, 0.01;
+  (Medium, High, Low) 0.65, 0.30, 0.05;
+  (High, High, Low) 0.60, 0.15, 0.25;
+  (Low, Low, Medium) 0.10, 0.55, 0.35;
+  (Medium, Low, Medium) 0.1, 0.5, 0.4;
+  (High, Low, Medium) 0.1, 0.7, 0.2;
+  (Low, High, Medium) 0.449910, 0.525095, 0.024995;
+  (Medium, High, Medium) 0.19, 0.80, 0.01;
+  (High, High, Medium) 0.5, 0.3, 0.2;
+  (Low, Low, High) 0.03, 0.03, 0.94;
+  (Medium, Low, High) 0.01, 0.05, 0.94;
+  (High, Low, High) 0.01, 0.01, 0.98;
+  (Low, High, High) 0.50, 0.15, 0.35;
+  (Medium, High, High) 0.20, 0.35, 0.45;
+  (High, High, High) 0.35, 0.20, 0.45;
+}
+probability ( TNExchange ) {
+  table 0.45, 0.15, 0.40;
+}
+probability ( TNLoad | AgriculturalLand, DevelopedLand, Discharge, TNExchange ) {
+  (Low, Low, Low, Low) 0.950, 0.025, 0.025;
+  (Medium, Low, Low, Low) 0.94, 0.03, 0.03;
+  (High, Low, Low, Low) 0.950, 0.025, 0.025;
+  (Low, High, Low, Low) 0.94, 0.05, 0.01;
+  (Medium, High, Low, Low) 0.94, 0.03, 0.03;
+  (High, High, Low, Low) 0.950, 0.025, 0.025;
+  (Low, Low, Medium, Low) 0.98, 0.01, 0.01;
+  (Medium, Low, Medium, Low) 0.950, 0.025, 0.025;
+  (High, Low, Medium, Low) 0.950, 0.025, 0.025;
+  (Low, High, Medium, Low) 0.98, 0.01, 0.01;
+  (Medium, High, Medium, Low) 0.94, 0.03, 0.03;
+  (High, High, Medium, Low) 0.950, 0.025, 0.025;
+  (Low, Low, High, Low) 0.950, 0.025, 0.025;
+  (Medium, Low, High, Low) 0.98, 0.01, 0.01;
+  (High, Low, High, Low) 0.98, 0.01, 0.01;
+  (Low, High, High, Low) 0.950, 0.025, 0.025;
+  (Medium, High, High, Low) 0.98, 0.01, 0.01;
+  (High, High, High, Low) 0.98, 0.01, 0.01;
+  (Low, Low, Low, Medium) 0.01, 0.98, 0.01;
+  (Medium, Low, Low, Medium) 0.01, 0.98, 0.01;
+  (High, Low, Low, Medium) 0.01, 0.98, 0.01;
+  (Low, High, Low, Medium) 0.025, 0.950, 0.025;
+  (Medium, High, Low, Medium) 0.025, 0.950, 0.025;
+  (High, High, Low, Medium) 0.025, 0.950, 0.025;
+  (Low, Low, Medium, Medium) 0.01, 0.79, 0.20;
+  (Medium, Low, Medium, Medium) 0.01, 0.79, 0.20;
+  (High, Low, Medium, Medium) 0.01, 0.79, 0.20;
+  (Low, High, Medium, Medium) 0.01, 0.79, 0.20;
+  (Medium, High, Medium, Medium) 0.01, 0.79, 0.20;
+  (High, High, Medium, Medium) 0.01, 0.79, 0.20;
+  (Low, Low, High, Medium) 0.10, 0.45, 0.45;
+  (Medium, Low, High, Medium) 0.10, 0.45, 0.45;
+  (High, Low, High, Medium) 0.10, 0.45, 0.45;
+  (Low, High, High, Medium) 0.01, 0.79, 0.20;
+  (Medium, High, High, Medium) 0.01, 0.79, 0.20;
+  (High, High, High, Medium) 0.01, 0.79, 0.20;
+  (Low, Low, Low, High) 0.1, 0.1, 0.8;
+  (Medium, Low, Low, High) 0.15, 0.15, 0.70;
+  (High, Low, Low, High) 0.025, 0.025, 0.950;
+  (Low, High, Low, High) 0.1, 0.1, 0.8;
+  (Medium, High, Low, High) 0.15, 0.15, 0.70;
+  (High, High, Low, High) 0.025, 0.025, 0.950;
+  (Low, Low, Medium, High) 0.04, 0.04, 0.92;
+  (Medium, Low, Medium, High) 0.025, 0.025, 0.950;
+  (High, Low, Medium, High) 0.025, 0.025, 0.950;
+  (Low, High, Medium, High) 0.04, 0.04, 0.92;
+  (Medium, High, Medium, High) 0.025, 0.025, 0.950;
+  (High, High, Medium, High) 0.025, 0.025, 0.950;
+  (Low, Low, High, High) 0.04, 0.04, 0.92;
+  (Medium, Low, High, High) 0.05, 0.05, 0.90;
+  (High, Low, High, High) 0.025, 0.025, 0.950;
+  (Low, High, High, High) 0.04, 0.04, 0.92;
+  (Medium, High, High, High) 0.05, 0.05, 0.90;
+  (High, High, High, High) 0.025, 0.025, 0.950;
+}
+probability ( TPExchange ) {
+  table 0.60, 0.15, 0.25;
+}
+probability ( TPLoad | AgriculturalLand, DevelopedLand, Discharge, TPExchange ) {
+  (Low, Low, Low, Low) 0.96, 0.02, 0.02;
+  (Medium, Low, Low, Low) 0.950, 0.025, 0.025;
+  (High, Low, Low, Low) 0.98, 0.01, 0.01;
+  (Low, High, Low, Low) 0.98, 0.01, 0.01;
+  (Medium, High, Low, Low) 0.950, 0.025, 0.025;
+  (High, High, Low, Low) 0.98, 0.01, 0.01;
+  (Low, Low, Medium, Low) 0.98, 0.01, 0.01;
+  (Medium, Low, Medium, Low) 0.96, 0.02, 0.02;
+  (High, Low, Medium, Low) 0.8, 0.1, 0.1;
+  (Low, High, Medium, Low) 0.98, 0.01, 0.01;
+  (Medium, High, Medium, Low) 0.950, 0.025, 0.025;
+  (High, High, Medium, Low) 0.98, 0.01, 0.01;
+  (Low, Low, High, Low) 0.950, 0.025, 0.025;
+  (Medium, Low, High, Low) 0.98, 0.01, 0.01;
+  (High, Low, High, Low) 0.98, 0.01, 0.01;
+  (Low, High, High, Low) 0.950, 0.025, 0.025;
+  (Medium, High, High, Low) 0.950, 0.025, 0.025;
+  (High, High, High, Low) 0.98, 0.01, 0.01;
+  (Low, Low, Low, Medium) 0.05, 0.90, 0.05;
+  (Medium, Low, Low, Medium) 0.15, 0.70, 0.15;
+  (High, Low, Low, Medium) 0.05, 0.90, 0.05;
+  (Low, High, Low, Medium) 0.05, 0.90, 0.05;
+  (Medium, High, Low, Medium) 0.15, 0.70, 0.15;
+  (High, High, Low, Medium) 0.05, 0.90, 0.05;
+  (Low, Low, Medium, Medium) 0.15, 0.70, 0.15;
+  (Medium, Low, Medium, Medium) 0.15, 0.70, 0.15;
+  (High, Low, Medium, Medium) 0.05, 0.90, 0.05;
+  (Low, High, Medium, Medium) 0.15, 0.70, 0.15;
+  (Medium, High, Medium, Medium) 0.15, 0.70, 0.15;
+  (High, High, Medium, Medium) 0.05, 0.90, 0.05;
+  (Low, Low, High, Medium) 0.05, 0.90, 0.05;
+  (Medium, Low, High, Medium) 0.05, 0.90, 0.05;
+  (High, Low, High, Medium) 0.05, 0.90, 0.05;
+  (Low, High, High, Medium) 0.05, 0.90, 0.05;
+  (Medium, High, High, Medium) 0.05, 0.90, 0.05;
+  (High, High, High, Medium) 0.05, 0.90, 0.05;
+  (Low, Low, Low, High) 0.1, 0.1, 0.8;
+  (Medium, Low, Low, High) 0.1, 0.1, 0.8;
+  (High, Low, Low, High) 0.05, 0.05, 0.90;
+  (Low, High, Low, High) 0.05, 0.05, 0.90;
+  (Medium, High, Low, High) 0.05, 0.05, 0.90;
+  (High, High, Low, High) 0.05, 0.05, 0.90;
+  (Low, Low, Medium, High) 0.1, 0.1, 0.8;
+  (Medium, Low, Medium, High) 0.05, 0.05, 0.90;
+  (High, Low, Medium, High) 0.05, 0.05, 0.90;
+  (Low, High, Medium, High) 0.1, 0.1, 0.8;
+  (Medium, High, Medium, High) 0.05, 0.05, 0.90;
+  (High, High, Medium, High) 0.05, 0.05, 0.90;
+  (Low, Low, High, High) 0.05, 0.05, 0.90;
+  (Medium, Low, High, High) 0.05, 0.05, 0.90;
+  (High, Low, High, High) 0.05, 0.05, 0.90;
+  (Low, High, High, High) 0.05, 0.05, 0.90;
+  (Medium, High, High, High) 0.05, 0.05, 0.90;
+  (High, High, High, High) 0.05, 0.05, 0.90;
+}
+probability ( Transparency | LeisureBoating, Phytoplankton, POM, Wind ) {
+  (Low, Low, Low, Low) 0.01, 0.50, 0.49;
+  (Medium, Low, Low, Low) 0.1, 0.5, 0.4;
+  (High, Low, Low, Low) 0.15, 0.50, 0.35;
+  (Low, Medium, Low, Low) 0.15, 0.40, 0.45;
+  (Medium, Medium, Low, Low) 0.2, 0.4, 0.4;
+  (High, Medium, Low, Low) 0.25, 0.40, 0.35;
+  (Low, High, Low, Low) 0.75, 0.24, 0.01;
+  (Medium, High, Low, Low) 0.75, 0.24, 0.01;
+  (High, High, Low, Low) 0.75, 0.24, 0.01;
+  (Low, Low, High, Low) 0.15, 0.45, 0.40;
+  (Medium, Low, High, Low) 0.20, 0.45, 0.35;
+  (High, Low, High, Low) 0.25, 0.45, 0.30;
+  (Low, Medium, High, Low) 0.25, 0.35, 0.40;
+  (Medium, Medium, High, Low) 0.2, 0.4, 0.4;
+  (High, Medium, High, Low) 0.35, 0.35, 0.30;
+  (Low, High, High, Low) 0.75, 0.24, 0.01;
+  (Medium, High, High, Low) 0.75, 0.24, 0.01;
+  (High, High, High, Low) 0.75, 0.24, 0.01;
+  (Low, Low, Low, Medium) 0.1, 0.5, 0.4;
+  (Medium, Low, Low, Medium) 0.20, 0.45, 0.35;
+  (High, Low, Low, Medium) 0.25, 0.45, 0.30;
+  (Low, Medium, Low, Medium) 0.25, 0.35, 0.40;
+  (Medium, Medium, Low, Medium) 0.30, 0.35, 0.35;
+  (High, Medium, Low, Medium) 0.35, 0.35, 0.30;
+  (Low, High, Low, Medium) 0.75, 0.24, 0.01;
+  (Medium, High, Low, Medium) 0.75, 0.24, 0.01;
+  (High, High, Low, Medium) 0.75, 0.24, 0.01;
+  (Low, Low, High, Medium) 0.3, 0.4, 0.3;
+  (Medium, Low, High, Medium) 0.3, 0.4, 0.3;
+  (High, Low, High, Medium) 0.4, 0.4, 0.2;
+  (Low, Medium, High, Medium) 0.400, 0.325, 0.275;
+  (Medium, Medium, High, Medium) 0.425, 0.300, 0.275;
+  (High, Medium, High, Medium) 0.5, 0.3, 0.2;
+  (Low, High, High, Medium) 0.75, 0.24, 0.01;
+  (Medium, High, High, Medium) 0.75, 0.24, 0.01;
+  (High, High, High, Medium) 0.75, 0.24, 0.01;
+  (Low, Low, Low, High) 0.15, 0.50, 0.35;
+  (Medium, Low, Low, High) 0.2, 0.5, 0.3;
+  (High, Low, Low, High) 0.25, 0.50, 0.25;
+  (Low, Medium, Low, High) 0.3, 0.4, 0.3;
+  (Medium, Medium, Low, High) 0.3, 0.4, 0.3;
+  (High, Medium, Low, High) 0.3775, 0.3725, 0.2500;
+  (Low, High, Low, High) 0.75, 0.24, 0.01;
+  (Medium, High, Low, High) 0.75, 0.24, 0.01;
+  (High, High, Low, High) 0.75, 0.24, 0.01;
+  (Low, Low, High, High) 0.3, 0.4, 0.3;
+  (Medium, Low, High, High) 0.35, 0.40, 0.25;
+  (High, Low, High, High) 0.400, 0.425, 0.175;
+  (Low, Medium, High, High) 0.400, 0.325, 0.275;
+  (Medium, Medium, High, High) 0.45, 0.30, 0.25;
+  (High, Medium, High, High) 0.500, 0.325, 0.175;
+  (Low, High, High, High) 0.75, 0.24, 0.01;
+  (Medium, High, High, High) 0.75, 0.24, 0.01;
+  (High, High, High, High) 0.75, 0.24, 0.01;
+}
+probability ( TrawlingFrequency ) {
+  table 0.5, 0.5;
+}
+probability ( Turbidity | BottomSubstrate, TrawlingFrequency ) {
+  (Soft, Low) 0.35, 0.40, 0.25;
+  (Hard, Low) 0.74, 0.25, 0.01;
+  (Soft, High) 0.25, 0.40, 0.35;
+  (Hard, High) 0.69, 0.30, 0.01;
+}
+probability ( WaterTemperatureDeep | RadiativeForcing ) {
+  (Current) 0.55, 0.45;
+  (RF45) 0.25, 0.75;
+  (RF85) 0.15, 0.85;
+}
+probability ( WaterTemperatureShallow | RadiativeForcing ) {
+  (Current) 0.45, 0.45, 0.10;
+  (RF45) 0.25, 0.45, 0.30;
+  (RF85) 0.1, 0.6, 0.3;
+}
+probability ( Wind | RadiativeForcing ) {
+  (Current) 0.35, 0.35, 0.30;
+  (RF45) 0.2, 0.5, 0.3;
+  (RF85) 0.1, 0.4, 0.5;
+}
+probability ( Zooplankton | OxygenShallow, Phytoplankton, WaterTemperatureShallow ) {
+  (Low, Low, Low) 0.875, 0.090, 0.035;
+  (Medium, Low, Low) 0.70, 0.24, 0.06;
+  (High, Low, Low) 0.65, 0.24, 0.11;
+  (Low, Medium, Low) 0.875, 0.090, 0.035;
+  (Medium, Medium, Low) 0.35, 0.40, 0.25;
+  (High, Medium, Low) 0.25, 0.40, 0.35;
+  (Low, High, Low) 0.875, 0.090, 0.035;
+  (Medium, High, Low) 0.20, 0.35, 0.45;
+  (High, High, Low) 0.105, 0.295, 0.600;
+  (Low, Low, Medium) 0.875, 0.090, 0.035;
+  (Medium, Low, Medium) 0.70, 0.24, 0.06;
+  (High, Low, Medium) 0.65, 0.24, 0.11;
+  (Low, Medium, Medium) 0.875, 0.090, 0.035;
+  (Medium, Medium, Medium) 0.3, 0.3, 0.4;
+  (High, Medium, Medium) 0.2, 0.3, 0.5;
+  (Low, High, Medium) 0.875, 0.090, 0.035;
+  (Medium, High, Medium) 0.15, 0.25, 0.60;
+  (High, High, Medium) 0.055, 0.195, 0.750;
+  (Low, Low, High) 0.900, 0.065, 0.035;
+  (Medium, Low, High) 0.75, 0.19, 0.06;
+  (High, Low, High) 0.70, 0.24, 0.06;
+  (Low, Medium, High) 0.900, 0.065, 0.035;
+  (Medium, Medium, High) 0.30, 0.25, 0.45;
+  (High, Medium, High) 0.20, 0.25, 0.55;
+  (Low, High, High) 0.900, 0.065, 0.035;
+  (Medium, High, High) 0.155, 0.205, 0.640;
+  (High, High, High) 0.055, 0.155, 0.790;
+}

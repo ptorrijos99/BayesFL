@@ -1,0 +1,168 @@
+network unknown {
+}
+variable RISK {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable EARTHQUAKE {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable FLOOD {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable TSUNAMI {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable TROPICAL_CYCLONE {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable DROUGHT {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable EPIDEMIC {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable PCR {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable CHVCI {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable D_AND_D {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable ECON_DEP {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable UNP_PEOPLE {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable HEALTH_COND {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable CHILDREN_U5 {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable RECENT_SHOCKS {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable FOOD_SECURITY {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable OTHER_VULN_GROUPS {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable GOVERNANCE {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable COMMUNICATION {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable PHYS_INFRA {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable ACCESS_TO_HEALTH {
+  type discrete [ 3 ] { low, medium, high };
+}
+probability ( RISK | D_AND_D ) {
+  (low) 0.759326114, 0.239470517, 0.001203369;
+  (medium) 0.17892157, 0.75245098, 0.06862745;
+  (high) 0.02083333, 0.63958334, 0.33958333;
+}
+probability ( EARTHQUAKE | TSUNAMI ) {
+  (low) 0.5815085, 0.2639903, 0.1545012;
+  (medium) 0.5125786, 0.2861635, 0.2012579;
+  (high) 0.3126079, 0.1882556, 0.4991364;
+}
+probability ( FLOOD | PCR ) {
+  (low) 0.4245098, 0.4686275, 0.1068627;
+  (medium) 0.1025641, 0.7619048, 0.1355311;
+  (high) 0.0657277, 0.4248826, 0.5093897;
+}
+probability ( TSUNAMI | D_AND_D ) {
+  (low) 0.5102286, 0.1419976, 0.3477738;
+  (medium) 0.3333333, 0.1127451, 0.5539216;
+  (high) 0.5458334, 0.3208333, 0.1333333;
+}
+probability ( TROPICAL_CYCLONE | TSUNAMI ) {
+  (low) 0.93187347, 0.02311436, 0.04501217;
+  (medium) 0.6823899, 0.1729560, 0.1446541;
+  (high) 0.5457685, 0.2815199, 0.1727116;
+}
+probability ( DROUGHT | RISK ) {
+  (low) 0.7577031, 0.2282913, 0.0140056;
+  (medium) 0.3776138, 0.5325953, 0.0897909;
+  (high) 0.2395833, 0.5208334, 0.2395833;
+}
+probability ( EPIDEMIC | HEALTH_COND ) {
+  (low) 0.3455583, 0.5069274, 0.1475143;
+  (medium) 0.07909605, 0.20621469, 0.71468926;
+  (high) 0.07246377, 0.33333333, 0.59420290;
+}
+probability ( PCR | RISK ) {
+  (low) 0.94677872, 0.02661064, 0.02661064;
+  (medium) 0.4218942, 0.3001230, 0.2779828;
+  (high) 0.005208333, 0.052083333, 0.942708334;
+}
+probability ( CHVCI | RISK ) {
+  (low) 0.99719888, 0.00140056, 0.00140056;
+  (medium) 0.897908979, 0.001230012, 0.100861009;
+  (high) 0.098958333, 0.005208333, 0.895833334;
+}
+probability ( D_AND_D | EPIDEMIC ) {
+  (low) 0.85930736, 0.09956710, 0.04112554;
+  (medium) 0.56005398, 0.36572200, 0.07422402;
+  (high) 0.03682171, 0.17635659, 0.78682170;
+}
+probability ( ECON_DEP | OTHER_VULN_GROUPS ) {
+  (low) 0.89191644, 0.08265213, 0.02543143;
+  (medium) 0.7655367, 0.1299435, 0.1045198;
+  (high) 0.3106061, 0.4469697, 0.2424242;
+}
+probability ( UNP_PEOPLE | RISK ) {
+  (low) 0.5812325, 0.3039216, 0.1148459;
+  (medium) 0.3776138, 0.3222632, 0.3001230;
+  (high) 0.052083333, 0.005208333, 0.942708334;
+}
+probability ( HEALTH_COND | OTHER_VULN_GROUPS ) {
+  (low) 0.9491371481, 0.0499545867, 0.0009082652;
+  (medium) 0.2824859, 0.5112994, 0.2062147;
+  (high) 0.3106061, 0.4469697, 0.2424242;
+}
+probability ( CHILDREN_U5 | D_AND_D ) {
+  (low) 0.975932612, 0.022864019, 0.001203369;
+  (medium) 0.84068627, 0.15686275, 0.00245098;
+  (high) 0.48958333, 0.45208333, 0.05833333;
+}
+probability ( RECENT_SHOCKS ) {
+  table 0.76090751, 0.05933682, 0.17975567;
+}
+probability ( FOOD_SECURITY | OTHER_VULN_GROUPS ) {
+  (low) 0.8346957312, 0.1643960036, 0.0009082652;
+  (medium) 0.2062147, 0.4096045, 0.3841808;
+  (high) 0.2083333, 0.4128788, 0.3787879;
+}
+probability ( OTHER_VULN_GROUPS | RECENT_SHOCKS ) {
+  (low) 0.81957187, 0.17278287, 0.00764526;
+  (medium) 0.27450980, 0.62745098, 0.09803922;
+  (high) 0.003236246, 0.207119741, 0.789644013;
+}
+probability ( GOVERNANCE | EPIDEMIC ) {
+  (low) 0.56709957, 0.37229437, 0.06060606;
+  (medium) 0.06207827, 0.76653172, 0.17139001;
+  (high) 0.001937984, 0.333333333, 0.664728683;
+}
+probability ( COMMUNICATION | D_AND_D ) {
+  (low) 0.975932612, 0.022864019, 0.001203369;
+  (medium) 0.59803922, 0.39950980, 0.00245098;
+  (high) 0.02083333, 0.48958333, 0.48958333;
+}
+probability ( PHYS_INFRA | D_AND_D ) {
+  (low) 0.921780987, 0.077015644, 0.001203369;
+  (medium) 0.33333333, 0.66421569, 0.00245098;
+  (high) 0.002083333, 0.264583333, 0.733333334;
+}
+probability ( ACCESS_TO_HEALTH | D_AND_D ) {
+  (low) 0.791817088, 0.206979543, 0.001203369;
+  (medium) 0.02450980, 0.90686275, 0.06862745;
+  (high) 0.02083333, 0.39583333, 0.58333334;
+}

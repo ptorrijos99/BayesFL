@@ -1,0 +1,268 @@
+network unknown {
+}
+variable EmAct1 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct2 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct3 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct4 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct5 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct6 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct7 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable EmAct8 {
+  type discrete [ 2 ] { Effective, Void };
+}
+variable Scenario1 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario10 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario11 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario2 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario3 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario4 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario5 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario6 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario7 {
+  type discrete [ 2 ] { True, False };
+}
+variable Scenario8 {
+  type discrete [ 2 ] { True, False };
+}
+variable Sent1 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent2 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent3 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent4 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent5 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent6 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent7 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Sent8 {
+  type discrete [ 2 ] { Optimism, Gloomy };
+}
+variable Target1 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target2 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target3 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target4 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target5 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target6 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target7 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+variable Target8 {
+  type discrete [ 2 ] { Attain, Miss };
+}
+probability ( EmAct1 ) {
+  table 0.92, 0.08;
+}
+probability ( EmAct2 ) {
+  table 0.79, 0.21;
+}
+probability ( EmAct3 ) {
+  table 0.74, 0.26;
+}
+probability ( EmAct4 ) {
+  table 0.86, 0.14;
+}
+probability ( EmAct5 ) {
+  table 0.81, 0.19;
+}
+probability ( EmAct6 ) {
+  table 0.9, 0.1;
+}
+probability ( EmAct7 ) {
+  table 0.93, 0.07;
+}
+probability ( EmAct8 ) {
+  table 0.95, 0.05;
+}
+probability ( Scenario1 | EmAct1, Sent1 ) {
+  (Effective, Optimism) 0.6, 0.4;
+  (Void, Optimism) 0.42, 0.58;
+  (Effective, Gloomy) 0.51, 0.49;
+  (Void, Gloomy) 0.37, 0.63;
+}
+probability ( Scenario10 | Target7 ) {
+  (Attain) 0.53, 0.47;
+  (Miss) 0.16, 0.84;
+}
+probability ( Scenario11 | Target8 ) {
+  (Attain) 0.38, 0.62;
+  (Miss) 0.12, 0.88;
+}
+probability ( Scenario2 | EmAct2, Sent2, Target1 ) {
+  (Effective, Optimism, Attain) 0.66, 0.34;
+  (Void, Optimism, Attain) 0.78, 0.22;
+  (Effective, Gloomy, Attain) 0.62, 0.38;
+  (Void, Gloomy, Attain) 0.53, 0.47;
+  (Effective, Optimism, Miss) 0.92, 0.08;
+  (Void, Optimism, Miss) 0.52, 0.48;
+  (Effective, Gloomy, Miss) 0.82, 0.18;
+  (Void, Gloomy, Miss) 0.44, 0.56;
+}
+probability ( Scenario3 | EmAct3, Sent3, Target1 ) {
+  (Effective, Optimism, Attain) 0.87, 0.13;
+  (Void, Optimism, Attain) 0.72, 0.28;
+  (Effective, Gloomy, Attain) 0.8, 0.2;
+  (Void, Gloomy, Attain) 0.67, 0.33;
+  (Effective, Optimism, Miss) 0.24, 0.76;
+  (Void, Optimism, Miss) 0.19, 0.81;
+  (Effective, Gloomy, Miss) 0.3, 0.7;
+  (Void, Gloomy, Miss) 0.28, 0.72;
+}
+probability ( Scenario4 | EmAct4, Sent4, Target2 ) {
+  (Effective, Optimism, Attain) 0.8, 0.2;
+  (Void, Optimism, Attain) 0.68, 0.32;
+  (Effective, Gloomy, Attain) 0.72, 0.28;
+  (Void, Gloomy, Attain) 0.54, 0.46;
+  (Effective, Optimism, Miss) 0.31, 0.69;
+  (Void, Optimism, Miss) 0.23, 0.77;
+  (Effective, Gloomy, Miss) 0.39, 0.61;
+  (Void, Gloomy, Miss) 0.29, 0.71;
+}
+probability ( Scenario5 | EmAct5, Sent5, Target4 ) {
+  (Effective, Optimism, Attain) 0.88, 0.12;
+  (Void, Optimism, Attain) 0.69, 0.31;
+  (Effective, Gloomy, Attain) 0.78, 0.22;
+  (Void, Gloomy, Attain) 0.7, 0.3;
+  (Effective, Optimism, Miss) 0.69, 0.31;
+  (Void, Optimism, Miss) 0.44, 0.56;
+  (Effective, Gloomy, Miss) 0.72, 0.28;
+  (Void, Gloomy, Miss) 0.58, 0.42;
+}
+probability ( Scenario6 | EmAct6, Sent6, Target1 ) {
+  (Effective, Optimism, Attain) 0.87, 0.13;
+  (Void, Optimism, Attain) 0.81, 0.19;
+  (Effective, Gloomy, Attain) 0.94, 0.06;
+  (Void, Gloomy, Attain) 0.88, 0.12;
+  (Effective, Optimism, Miss) 0.57, 0.43;
+  (Void, Optimism, Miss) 0.32, 0.68;
+  (Effective, Gloomy, Miss) 0.69, 0.31;
+  (Void, Gloomy, Miss) 0.43, 0.57;
+}
+probability ( Scenario7 | EmAct7, Sent7, Target6 ) {
+  (Effective, Optimism, Attain) 0.81, 0.19;
+  (Void, Optimism, Attain) 0.85, 0.15;
+  (Effective, Gloomy, Attain) 0.88, 0.12;
+  (Void, Gloomy, Attain) 0.91, 0.09;
+  (Effective, Optimism, Miss) 0.61, 0.39;
+  (Void, Optimism, Miss) 0.34, 0.66;
+  (Effective, Gloomy, Miss) 0.69, 0.31;
+  (Void, Gloomy, Miss) 0.41, 0.59;
+}
+probability ( Scenario8 | EmAct8, Sent8, Target6 ) {
+  (Effective, Optimism, Attain) 0.68, 0.32;
+  (Void, Optimism, Attain) 0.86, 0.14;
+  (Effective, Gloomy, Attain) 0.74, 0.26;
+  (Void, Gloomy, Attain) 0.9, 0.1;
+  (Effective, Optimism, Miss) 0.73, 0.27;
+  (Void, Optimism, Miss) 0.8, 0.2;
+  (Effective, Gloomy, Miss) 0.78, 0.22;
+  (Void, Gloomy, Miss) 0.83, 0.17;
+}
+probability ( Sent1 ) {
+  table 0.5, 0.5;
+}
+probability ( Sent2 ) {
+  table 0.5, 0.5;
+}
+probability ( Sent3 ) {
+  table 0.8, 0.2;
+}
+probability ( Sent4 ) {
+  table 0.5, 0.5;
+}
+probability ( Sent5 ) {
+  table 0.74, 0.26;
+}
+probability ( Sent6 ) {
+  table 0.5, 0.5;
+}
+probability ( Sent7 ) {
+  table 0.5, 0.5;
+}
+probability ( Sent8 ) {
+  table 0.5, 0.5;
+}
+probability ( Target1 | Scenario1 ) {
+  (True) 0.75, 0.25;
+  (False) 0.43, 0.57;
+}
+probability ( Target2 | Scenario2 ) {
+  (True) 0.79, 0.21;
+  (False) 0.36, 0.64;
+}
+probability ( Target3 | Scenario3 ) {
+  (True) 0.87, 0.13;
+  (False) 0.22, 0.78;
+}
+probability ( Target4 | Scenario4 ) {
+  (True) 0.84, 0.16;
+  (False) 0.46, 0.54;
+}
+probability ( Target5 | Scenario5 ) {
+  (True) 0.93, 0.07;
+  (False) 0.54, 0.46;
+}
+probability ( Target6 | Scenario6 ) {
+  (True) 0.89, 0.11;
+  (False) 0.39, 0.61;
+}
+probability ( Target7 | Scenario7 ) {
+  (True) 0.91, 0.09;
+  (False) 0.48, 0.52;
+}
+probability ( Target8 | Scenario8 ) {
+  (True) 0.96, 0.04;
+  (False) 0.63, 0.37;
+}

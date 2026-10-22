@@ -82,7 +82,7 @@ scripts*/
 
 logos/
 
-res/classification/AnDE/Census-Income_(KDD).arff
+res/classification/AnDE/Census-Income_(KDD).arff*
 src/main/java/consensusBN/Experiments/prueba.java
 /scripts-slurm
 res/classification/metadata nIters.csv
@@ -101,3 +101,5 @@ docs/
 *lbfgsb_wrapper*
 *.bat
 articulo/
+# Local classpath dump
+cp.txt

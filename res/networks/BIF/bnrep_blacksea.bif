@@ -1,0 +1,491 @@
+network unknown {
+}
+variable AnchorageAreaSelection {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable CargoShiftingOrInappropriateStability {
+  type discrete [ 2 ] { No, Yes };
+}
+variable CollisionAndContact {
+  type discrete [ 2 ] { Yes, No };
+}
+variable COLREG {
+  type discrete [ 2 ] { Not_Violated, Violated };
+}
+variable CompanyManningStrategy {
+  type discrete [ 2 ] { Optimum_Safe_Manning, Minimum_Safe_Manning };
+}
+variable CrewAssignment {
+  type discrete [ 2 ] { Qualified_Crew, Unqualified_Crew };
+}
+variable DepartureFromPortInHeavyWeatherAndSeaCondition {
+  type discrete [ 2 ] { No, Yes };
+}
+variable ExternalInternalCommunication {
+  type discrete [ 2 ] { Adequate, Inadequate };
+}
+variable ExternalOperationalConditionsForCollisionAndContact {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable ExternalOperationalConditionsForGrounding {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable ExternalOperationalConditionsForSinking {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable Fatigue {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Grounding {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HeavyWeatherAndSeaConditions {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InadequateManning {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InlandVessel {
+  type discrete [ 2 ] { Yes, No };
+}
+variable InternalOperationalConditionsForCollisionAndContact {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable InternalOperationalConditionsForGrounding {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable InternalOperationalConditionsForSinking {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable Malfunction {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable ManoeuvreOfBridgeTeamMembers {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable ManoeuvreOfCaptain {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable ManoeuvreOfPilot {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable ManoeuvreOfWatchkeepingOfficer {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable NavigationArea {
+  type discrete [ 5 ] { Narrow_Water, Port, Coastal_Water, Open_Sea, Anchorage };
+}
+variable NavigationOnStorm {
+  type discrete [ 2 ] { No, Yes };
+}
+variable ObservationDuringOperation {
+  type discrete [ 2 ] { Clear, Unclear };
+}
+variable OversightAndControl {
+  type discrete [ 2 ] { Adequate, Inadequate };
+}
+variable PilotOperationManagement {
+  type discrete [ 2 ] { Safe, Unsafe };
+}
+variable PlannedMaintenance {
+  type discrete [ 2 ] { Completed, Uncompleted };
+}
+variable PortCompanyPressure {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PortOperationManagement {
+  type discrete [ 2 ] { Safe, Unsafe };
+}
+variable PortOperationPlanning {
+  type discrete [ 2 ] { Adequate, Inadequate };
+}
+variable Procedure {
+  type discrete [ 2 ] { Appropriate, Inappropriate };
+}
+variable Sinking {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SituationalAwareness {
+  type discrete [ 2 ] { Sufficient, Insufficient };
+}
+variable TrainingAndFamiliarization {
+  type discrete [ 2 ] { Sufficient, Insufficient };
+}
+variable TriggeringEventForCollisionAndContact {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable TriggeringEventForGrounding {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable TriggeringEventForSinking {
+  type discrete [ 2 ] { Observed, Unobserved };
+}
+variable TugboatOperation {
+  type discrete [ 2 ] { Operational, Faulty };
+}
+variable UseOfVesselInConditionOfExceedingDesignLimit {
+  type discrete [ 2 ] { No, Yes };
+}
+variable VesselAge {
+  type discrete [ 2 ] { Old, New };
+}
+variable VesselCargoOperationManagement {
+  type discrete [ 2 ] { Safe, Unsafe };
+}
+variable VesselCargoOperationPlanning {
+  type discrete [ 2 ] { Adequate, Inadequate };
+}
+variable VesselNavigationOperationManagement {
+  type discrete [ 2 ] { Safe, Unsafe };
+}
+variable VesselNavigationOperationPlanning {
+  type discrete [ 2 ] { Unsafe, Safe };
+}
+variable Visibility {
+  type discrete [ 2 ] { Poor, Good };
+}
+probability ( AnchorageAreaSelection | VesselNavigationOperationManagement ) {
+  (Safe) 1.0, 0.0;
+  (Unsafe) 0.805, 0.195;
+}
+probability ( CargoShiftingOrInappropriateStability | PortOperationManagement, VesselCargoOperationManagement ) {
+  (Safe, Safe) 1.0, 0.0;
+  (Unsafe, Safe) 0.818, 0.182;
+  (Safe, Unsafe) 0.0, 1.0;
+  (Unsafe, Unsafe) 0.0, 1.0;
+}
+probability ( CollisionAndContact | ExternalOperationalConditionsForCollisionAndContact, InternalOperationalConditionsForCollisionAndContact, TriggeringEventForCollisionAndContact ) {
+  (Observed, Observed, Observed) 1.0, 0.0;
+  (Unobserved, Observed, Observed) 0.0, 1.0;
+  (Observed, Unobserved, Observed) 0.0, 1.0;
+  (Unobserved, Unobserved, Observed) 0.0, 1.0;
+  (Observed, Observed, Unobserved) 0.0, 1.0;
+  (Unobserved, Observed, Unobserved) 0.0, 1.0;
+  (Observed, Unobserved, Unobserved) 0.0, 1.0;
+  (Unobserved, Unobserved, Unobserved) 0.0, 1.0;
+}
+probability ( COLREG | ExternalInternalCommunication, SituationalAwareness, VesselNavigationOperationManagement ) {
+  (Adequate, Sufficient, Safe) 1.0, 0.0;
+  (Inadequate, Sufficient, Safe) 1.0, 0.0;
+  (Adequate, Insufficient, Safe) 1.0, 0.0;
+  (Inadequate, Insufficient, Safe) 1.0, 0.0;
+  (Adequate, Sufficient, Unsafe) 1.0, 0.0;
+  (Inadequate, Sufficient, Unsafe) 1.0, 0.0;
+  (Adequate, Insufficient, Unsafe) 1.0, 0.0;
+  (Inadequate, Insufficient, Unsafe) 0.0, 1.0;
+}
+probability ( CompanyManningStrategy ) {
+  table 0.899, 0.101;
+}
+probability ( CrewAssignment ) {
+  table 0.506, 0.494;
+}
+probability ( DepartureFromPortInHeavyWeatherAndSeaCondition | PortOperationManagement, VesselNavigationOperationManagement ) {
+  (Safe, Safe) 1.0, 0.0;
+  (Unsafe, Safe) 0.0, 1.0;
+  (Safe, Unsafe) 0.18, 0.82;
+  (Unsafe, Unsafe) 0.5, 0.5;
+}
+probability ( ExternalInternalCommunication | ObservationDuringOperation, SituationalAwareness ) {
+  (Clear, Sufficient) 0.956, 0.044;
+  (Unclear, Sufficient) 0.75, 0.25;
+  (Clear, Insufficient) 0.5, 0.5;
+  (Unclear, Insufficient) 0.0, 1.0;
+}
+probability ( ExternalOperationalConditionsForCollisionAndContact | NavigationArea, Visibility ) {
+  (Narrow_Water, Poor) 0.048, 0.952;
+  (Port, Poor) 0.142, 0.858;
+  (Coastal_Water, Poor) 0.333, 0.667;
+  (Open_Sea, Poor) 0.095, 0.905;
+  (Anchorage, Poor) 0.286, 0.714;
+  (Narrow_Water, Good) 0.015, 0.985;
+  (Port, Good) 0.118, 0.882;
+  (Coastal_Water, Good) 0.0, 1.0;
+  (Open_Sea, Good) 0.029, 0.971;
+  (Anchorage, Good) 0.015, 0.985;
+}
+probability ( ExternalOperationalConditionsForGrounding | HeavyWeatherAndSeaConditions, NavigationArea ) {
+  (Yes, Narrow_Water) 0.086, 0.914;
+  (No, Narrow_Water) 0.0, 1.0;
+  (Yes, Port) 0.014, 0.986;
+  (No, Port) 0.228, 0.772;
+  (Yes, Coastal_Water) 0.086, 0.914;
+  (No, Coastal_Water) 0.0, 1.0;
+  (Yes, Open_Sea) 0.0, 1.0;
+  (No, Open_Sea) 0.0, 1.0;
+  (Yes, Anchorage) 0.211, 0.789;
+  (No, Anchorage) 0.0, 1.0;
+}
+probability ( ExternalOperationalConditionsForSinking | HeavyWeatherAndSeaConditions, NavigationArea ) {
+  (Yes, Narrow_Water) 0.085, 0.915;
+  (No, Narrow_Water) 0.0, 1.0;
+  (Yes, Port) 0.0, 1.0;
+  (No, Port) 0.167, 0.833;
+  (Yes, Coastal_Water) 0.183, 0.817;
+  (No, Coastal_Water) 0.0, 1.0;
+  (Yes, Open_Sea) 0.099, 0.901;
+  (No, Open_Sea) 0.0, 1.0;
+  (Yes, Anchorage) 0.113, 0.887;
+  (No, Anchorage) 0.0, 1.0;
+}
+probability ( Fatigue | InadequateManning ) {
+  (Yes) 0.111, 0.889;
+  (No) 0.0, 1.0;
+}
+probability ( Grounding | ExternalOperationalConditionsForGrounding, InternalOperationalConditionsForGrounding, TriggeringEventForGrounding ) {
+  (Observed, Observed, Observed) 1.0, 0.0;
+  (Unobserved, Observed, Observed) 0.0, 1.0;
+  (Observed, Unobserved, Observed) 0.0, 1.0;
+  (Unobserved, Unobserved, Observed) 0.0, 1.0;
+  (Observed, Observed, Unobserved) 0.0, 1.0;
+  (Unobserved, Observed, Unobserved) 0.0, 1.0;
+  (Observed, Unobserved, Unobserved) 0.0, 1.0;
+  (Unobserved, Unobserved, Unobserved) 0.0, 1.0;
+}
+probability ( HeavyWeatherAndSeaConditions ) {
+  table 0.798, 0.202;
+}
+probability ( InadequateManning | CompanyManningStrategy ) {
+  (Optimum_Safe_Manning) 1.0, 0.0;
+  (Minimum_Safe_Manning) 0.0, 1.0;
+}
+probability ( InlandVessel ) {
+  table 0.348, 0.652;
+}
+probability ( InternalOperationalConditionsForCollisionAndContact | VesselCargoOperationManagement ) {
+  (Safe) 0.25, 0.75;
+  (Unsafe) 0.216, 0.784;
+}
+probability ( InternalOperationalConditionsForGrounding | VesselAge ) {
+  (Old) 0.373, 0.627;
+  (New) 0.318, 0.682;
+}
+probability ( InternalOperationalConditionsForSinking | Malfunction, VesselAge ) {
+  (Observed, Old) 1.0, 0.0;
+  (Unobserved, Old) 0.393, 0.607;
+  (Observed, New) 0.0, 1.0;
+  (Unobserved, New) 0.318, 0.682;
+}
+probability ( Malfunction | PlannedMaintenance, VesselAge ) {
+  (Completed, Old) 0.047, 0.953;
+  (Uncompleted, Old) 1.0, 0.0;
+  (Completed, New) 0.0, 1.0;
+  (Uncompleted, New) 0.667, 0.333;
+}
+probability ( ManoeuvreOfBridgeTeamMembers | ManoeuvreOfCaptain, ManoeuvreOfPilot, ManoeuvreOfWatchkeepingOfficer ) {
+  (Appropriate, Appropriate, Appropriate) 1.0, 0.0;
+  (Inappropriate, Appropriate, Appropriate) 0.0, 1.0;
+  (Appropriate, Inappropriate, Appropriate) 0.0, 1.0;
+  (Inappropriate, Inappropriate, Appropriate) 0.0, 1.0;
+  (Appropriate, Appropriate, Inappropriate) 0.0, 1.0;
+  (Inappropriate, Appropriate, Inappropriate) 0.0, 1.0;
+  (Appropriate, Inappropriate, Inappropriate) 0.0, 1.0;
+  (Inappropriate, Inappropriate, Inappropriate) 0.0, 1.0;
+}
+probability ( ManoeuvreOfCaptain | SituationalAwareness, VesselNavigationOperationManagement ) {
+  (Sufficient, Safe) 1.0, 0.0;
+  (Insufficient, Safe) 0.0, 1.0;
+  (Sufficient, Unsafe) 0.18, 0.82;
+  (Insufficient, Unsafe) 0.5, 0.5;
+}
+probability ( ManoeuvreOfPilot | PilotOperationManagement, PortOperationManagement, TugboatOperation ) {
+  (Safe, Safe, Operational) 1.0, 0.0;
+  (Unsafe, Safe, Operational) 0.0, 1.0;
+  (Safe, Unsafe, Operational) 0.924, 0.076;
+  (Unsafe, Unsafe, Operational) 0.0, 1.0;
+  (Safe, Safe, Faulty) 1.0, 0.0;
+  (Unsafe, Safe, Faulty) 0.0, 1.0;
+  (Safe, Unsafe, Faulty) 1.0, 0.0;
+  (Unsafe, Unsafe, Faulty) 0.0, 1.0;
+}
+probability ( ManoeuvreOfWatchkeepingOfficer | SituationalAwareness, VesselNavigationOperationManagement ) {
+  (Sufficient, Safe) 1.0, 0.0;
+  (Insufficient, Safe) 1.0, 0.0;
+  (Sufficient, Unsafe) 1.0, 0.0;
+  (Insufficient, Unsafe) 0.786, 0.214;
+}
+probability ( NavigationArea ) {
+  table 0.146, 0.191, 0.258, 0.135, 0.270;
+}
+probability ( NavigationOnStorm | AnchorageAreaSelection, DepartureFromPortInHeavyWeatherAndSeaCondition, VesselNavigationOperationManagement ) {
+  (Appropriate, No, Safe) 1.0, 0.0;
+  (Inappropriate, No, Safe) 0.667, 0.333;
+  (Appropriate, Yes, Safe) 0.667, 0.333;
+  (Inappropriate, Yes, Safe) 0.333, 0.667;
+  (Appropriate, No, Unsafe) 0.364, 0.636;
+  (Inappropriate, No, Unsafe) 0.133, 0.867;
+  (Appropriate, Yes, Unsafe) 0.0, 1.0;
+  (Inappropriate, Yes, Unsafe) 0.0, 1.0;
+}
+probability ( ObservationDuringOperation | InadequateManning, OversightAndControl, VesselNavigationOperationPlanning ) {
+  (Yes, Adequate, Unsafe) 0.333, 0.667;
+  (No, Adequate, Unsafe) 0.687, 0.313;
+  (Yes, Inadequate, Unsafe) 0.0, 1.0;
+  (No, Inadequate, Unsafe) 0.0, 1.0;
+  (Yes, Adequate, Safe) 0.667, 0.333;
+  (No, Adequate, Safe) 1.0, 0.0;
+  (Yes, Inadequate, Safe) 0.0, 1.0;
+  (No, Inadequate, Safe) 0.32, 0.68;
+}
+probability ( OversightAndControl | CrewAssignment, PortCompanyPressure, Procedure, TrainingAndFamiliarization ) {
+  (Qualified_Crew, Yes, Appropriate, Sufficient) 0.0, 1.0;
+  (Unqualified_Crew, Yes, Appropriate, Sufficient) 0.0, 1.0;
+  (Qualified_Crew, No, Appropriate, Sufficient) 0.0, 1.0;
+  (Unqualified_Crew, No, Appropriate, Sufficient) 0.0, 1.0;
+  (Qualified_Crew, Yes, Inappropriate, Sufficient) 0.5, 0.5;
+  (Unqualified_Crew, Yes, Inappropriate, Sufficient) 0.0, 1.0;
+  (Qualified_Crew, No, Inappropriate, Sufficient) 0.75, 0.25;
+  (Unqualified_Crew, No, Inappropriate, Sufficient) 0.437, 0.563;
+  (Qualified_Crew, Yes, Appropriate, Insufficient) 0.0, 1.0;
+  (Unqualified_Crew, Yes, Appropriate, Insufficient) 0.0, 1.0;
+  (Qualified_Crew, No, Appropriate, Insufficient) 0.0, 1.0;
+  (Unqualified_Crew, No, Appropriate, Insufficient) 0.0, 1.0;
+  (Qualified_Crew, Yes, Inappropriate, Insufficient) 0.667, 0.333;
+  (Unqualified_Crew, Yes, Inappropriate, Insufficient) 0.0, 1.0;
+  (Qualified_Crew, No, Inappropriate, Insufficient) 1.0, 0.0;
+  (Unqualified_Crew, No, Inappropriate, Insufficient) 0.75, 0.25;
+}
+probability ( PilotOperationManagement | ExternalInternalCommunication, PortOperationPlanning ) {
+  (Adequate, Adequate) 1.0, 0.0;
+  (Inadequate, Adequate) 1.0, 0.0;
+  (Adequate, Inadequate) 0.857, 0.143;
+  (Inadequate, Inadequate) 0.65, 0.35;
+}
+probability ( PlannedMaintenance | OversightAndControl ) {
+  (Adequate) 1.0, 0.0;
+  (Inadequate) 0.959, 0.041;
+}
+probability ( PortCompanyPressure ) {
+  table 0.067, 0.933;
+}
+probability ( PortOperationManagement | PortOperationPlanning, SituationalAwareness ) {
+  (Adequate, Sufficient) 1.0, 0.0;
+  (Inadequate, Sufficient) 0.125, 0.875;
+  (Adequate, Insufficient) 1.0, 0.0;
+  (Inadequate, Insufficient) 0.0, 1.0;
+}
+probability ( PortOperationPlanning | OversightAndControl ) {
+  (Adequate) 1.0, 0.0;
+  (Inadequate) 0.699, 0.301;
+}
+probability ( Procedure ) {
+  table 0.944, 0.056;
+}
+probability ( Sinking | ExternalOperationalConditionsForSinking, InternalOperationalConditionsForSinking, TriggeringEventForSinking ) {
+  (Observed, Observed, Observed) 1.0, 0.0;
+  (Unobserved, Observed, Observed) 0.0, 1.0;
+  (Observed, Unobserved, Observed) 0.0, 1.0;
+  (Unobserved, Unobserved, Observed) 0.0, 1.0;
+  (Observed, Observed, Unobserved) 0.0, 1.0;
+  (Unobserved, Observed, Unobserved) 0.0, 1.0;
+  (Observed, Unobserved, Unobserved) 0.0, 1.0;
+  (Unobserved, Unobserved, Unobserved) 0.0, 1.0;
+}
+probability ( SituationalAwareness | Fatigue, ObservationDuringOperation, PortOperationPlanning, VesselCargoOperationPlanning ) {
+  (Yes, Clear, Adequate, Adequate) 0.25, 0.75;
+  (No, Clear, Adequate, Adequate) 1.0, 0.0;
+  (Yes, Unclear, Adequate, Adequate) 0.0, 1.0;
+  (No, Unclear, Adequate, Adequate) 0.05, 0.95;
+  (Yes, Clear, Inadequate, Adequate) 0.2, 0.8;
+  (No, Clear, Inadequate, Adequate) 0.615, 0.385;
+  (Yes, Unclear, Inadequate, Adequate) 0.0, 1.0;
+  (No, Unclear, Inadequate, Adequate) 0.0, 1.0;
+  (Yes, Clear, Adequate, Inadequate) 0.15, 0.85;
+  (No, Clear, Adequate, Inadequate) 0.333, 0.667;
+  (Yes, Unclear, Adequate, Inadequate) 0.0, 1.0;
+  (No, Unclear, Adequate, Inadequate) 0.0, 1.0;
+  (Yes, Clear, Inadequate, Inadequate) 0.0, 1.0;
+  (No, Clear, Inadequate, Inadequate) 0.0, 1.0;
+  (Yes, Unclear, Inadequate, Inadequate) 0.0, 1.0;
+  (No, Unclear, Inadequate, Inadequate) 0.0, 1.0;
+}
+probability ( TrainingAndFamiliarization | CrewAssignment ) {
+  (Qualified_Crew) 0.644, 0.356;
+  (Unqualified_Crew) 0.227, 0.773;
+}
+probability ( TriggeringEventForCollisionAndContact | COLREG, ManoeuvreOfBridgeTeamMembers, NavigationOnStorm ) {
+  (Not_Violated, Appropriate, No) 0.0, 1.0;
+  (Violated, Appropriate, No) 0.0, 1.0;
+  (Not_Violated, Inappropriate, No) 0.467, 0.533;
+  (Violated, Inappropriate, No) 1.0, 0.0;
+  (Not_Violated, Appropriate, Yes) 0.041, 0.959;
+  (Violated, Appropriate, Yes) 0.0, 1.0;
+  (Not_Violated, Inappropriate, Yes) 0.0, 1.0;
+  (Violated, Inappropriate, Yes) 1.0, 0.0;
+}
+probability ( TriggeringEventForGrounding | ManoeuvreOfBridgeTeamMembers, NavigationOnStorm, UseOfVesselInConditionOfExceedingDesignLimit ) {
+  (Appropriate, No, No) 0.0, 1.0;
+  (Inappropriate, No, No) 0.154, 0.846;
+  (Appropriate, Yes, No) 0.44, 0.56;
+  (Inappropriate, Yes, No) 0.833, 0.167;
+  (Appropriate, No, Yes) 0.333, 0.667;
+  (Inappropriate, No, Yes) 0.667, 0.333;
+  (Appropriate, Yes, Yes) 0.458, 0.542;
+  (Inappropriate, Yes, Yes) 1.0, 0.0;
+}
+probability ( TriggeringEventForSinking | CargoShiftingOrInappropriateStability, NavigationOnStorm, UseOfVesselInConditionOfExceedingDesignLimit ) {
+  (No, No, No) 0.12, 0.88;
+  (Yes, No, No) 1.0, 0.0;
+  (No, Yes, No) 0.4, 0.6;
+  (Yes, Yes, No) 1.0, 0.0;
+  (No, No, Yes) 0.333, 0.667;
+  (Yes, No, Yes) 0.667, 0.333;
+  (No, Yes, Yes) 0.52, 0.48;
+  (Yes, Yes, Yes) 1.0, 0.0;
+}
+probability ( TugboatOperation | PilotOperationManagement, PortOperationManagement ) {
+  (Safe, Safe) 1.0, 0.0;
+  (Unsafe, Safe) 0.25, 0.75;
+  (Safe, Unsafe) 0.846, 0.154;
+  (Unsafe, Unsafe) 0.0, 1.0;
+}
+probability ( UseOfVesselInConditionOfExceedingDesignLimit | InlandVessel, NavigationOnStorm ) {
+  (Yes, No) 1.0, 0.0;
+  (No, No) 1.0, 0.0;
+  (Yes, Yes) 0.2, 0.8;
+  (No, Yes) 0.75, 0.25;
+}
+probability ( VesselAge ) {
+  table 0.753, 0.247;
+}
+probability ( VesselCargoOperationManagement | SituationalAwareness, VesselCargoOperationPlanning ) {
+  (Sufficient, Adequate) 1.0, 0.0;
+  (Insufficient, Adequate) 1.0, 0.0;
+  (Sufficient, Inadequate) 0.167, 0.833;
+  (Insufficient, Inadequate) 0.143, 0.857;
+}
+probability ( VesselCargoOperationPlanning | OversightAndControl ) {
+  (Adequate) 1.0, 0.0;
+  (Inadequate) 0.89, 0.11;
+}
+probability ( VesselNavigationOperationManagement | ExternalInternalCommunication, PortOperationPlanning, SituationalAwareness, VesselNavigationOperationPlanning ) {
+  (Adequate, Adequate, Sufficient, Unsafe) 0.26, 0.74;
+  (Inadequate, Adequate, Sufficient, Unsafe) 0.0, 1.0;
+  (Adequate, Inadequate, Sufficient, Unsafe) 0.0, 1.0;
+  (Inadequate, Inadequate, Sufficient, Unsafe) 0.0, 1.0;
+  (Adequate, Adequate, Insufficient, Unsafe) 0.0, 1.0;
+  (Inadequate, Adequate, Insufficient, Unsafe) 0.0, 1.0;
+  (Adequate, Inadequate, Insufficient, Unsafe) 0.25, 0.75;
+  (Inadequate, Inadequate, Insufficient, Unsafe) 0.0, 1.0;
+  (Adequate, Adequate, Sufficient, Safe) 1.0, 0.0;
+  (Inadequate, Adequate, Sufficient, Safe) 0.5, 0.5;
+  (Adequate, Inadequate, Sufficient, Safe) 0.7, 0.3;
+  (Inadequate, Inadequate, Sufficient, Safe) 0.2, 0.8;
+  (Adequate, Adequate, Insufficient, Safe) 0.54, 0.46;
+  (Inadequate, Adequate, Insufficient, Safe) 0.04, 0.96;
+  (Adequate, Inadequate, Insufficient, Safe) 0.24, 0.76;
+  (Inadequate, Inadequate, Insufficient, Safe) 0.0, 1.0;
+}
+probability ( VesselNavigationOperationPlanning | OversightAndControl, PortCompanyPressure, TrainingAndFamiliarization ) {
+  (Adequate, Yes, Sufficient) 0.7, 0.3;
+  (Inadequate, Yes, Sufficient) 1.0, 0.0;
+  (Adequate, No, Sufficient) 0.333, 0.667;
+  (Inadequate, No, Sufficient) 1.0, 0.0;
+  (Adequate, Yes, Insufficient) 0.5, 0.5;
+  (Inadequate, Yes, Insufficient) 1.0, 0.0;
+  (Adequate, No, Insufficient) 0.0, 1.0;
+  (Inadequate, No, Insufficient) 0.485, 0.515;
+}
+probability ( Visibility ) {
+  table 0.236, 0.764;
+}

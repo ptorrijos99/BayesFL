@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>A1</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>A2</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>A3</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B1</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B10</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B11</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B12</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B13</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B14</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B2</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B3</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B4</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B5</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B6</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B7</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B8</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>B9</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C1</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C2</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C3</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C4</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C5</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C6</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>A1</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>A2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>A3</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B1</FOR>
+      <GIVEN>A1</GIVEN>
+      <TABLE>0.7 0.3 0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B10</FOR>
+      <GIVEN>A2</GIVEN>
+      <TABLE>0.7 0.3 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B11</FOR>
+      <GIVEN>B10</GIVEN>
+      <GIVEN>B7</GIVEN>
+      <TABLE>0.99 0.01 0.9 0.1 0.9 0.1 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B12</FOR>
+      <GIVEN>A3</GIVEN>
+      <TABLE>0.7 0.3 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B13</FOR>
+      <GIVEN>B12</GIVEN>
+      <TABLE>0.6 0.4 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B14</FOR>
+      <GIVEN>B12</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B2</FOR>
+      <GIVEN>B1</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B3</FOR>
+      <GIVEN>B2</GIVEN>
+      <TABLE>0.9 0.1 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B4</FOR>
+      <GIVEN>A1</GIVEN>
+      <GIVEN>A2</GIVEN>
+      <TABLE>0.9 0.1 0.85 0.15 0.85 0.15 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B5</FOR>
+      <GIVEN>B2</GIVEN>
+      <GIVEN>B4</GIVEN>
+      <TABLE>0.95 0.05 0.9 0.1 0.9 0.1 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B6</FOR>
+      <GIVEN>B5</GIVEN>
+      <TABLE>0.95 0.05 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B7</FOR>
+      <GIVEN>B6</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B8</FOR>
+      <GIVEN>B7</GIVEN>
+      <TABLE>0.98 0.02 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>B9</FOR>
+      <GIVEN>B8</GIVEN>
+      <TABLE>0.85 0.15 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C1</FOR>
+      <GIVEN>B3</GIVEN>
+      <GIVEN>B8</GIVEN>
+      <TABLE>0.99 0.01 0.9 0.1 0.7 0.3 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C2</FOR>
+      <GIVEN>B8</GIVEN>
+      <TABLE>0.97 0.03 0.02 0.98 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C3</FOR>
+      <GIVEN>B11</GIVEN>
+      <GIVEN>B13</GIVEN>
+      <GIVEN>B9</GIVEN>
+      <TABLE>0.99 0.01 0.8 0.2 0.9 0.1 0.8 0.2 0.9 0.1 0.8 0.2 0.9 0.1 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C4</FOR>
+      <GIVEN>B14</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C5</FOR>
+      <GIVEN>B14</GIVEN>
+      <TABLE>0.4 0.6 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C6</FOR>
+      <GIVEN>B12</GIVEN>
+      <TABLE>0.65 0.35 0.2 0.8 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

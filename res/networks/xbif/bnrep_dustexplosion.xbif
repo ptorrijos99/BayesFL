@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AccidentDoNotOccur</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AccidentUnderControl</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlastWavesThroughPipes</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BuildingDamage</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Casualties</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CombustibleDustAccumulates</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DirectEconomicLosses</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DustAccumulationUnderControl</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DustCloudDisappearance</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DustExplosionIntensityCoefficient</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <OUTCOME>V</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EndOfRescue</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EnvironmentalImpact</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EquipmentDamage</NAME>
+      <OUTCOME>I</OUTCOME>
+      <OUTCOME>II</OUTCOME>
+      <OUTCOME>III</OUTCOME>
+      <OUTCOME>IV</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExplosionPreventionMeasures</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExtinctionOfSpark</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IgnitingTheDustCloud</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InitiateEmergencyResponse</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Misoperation</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NoExplosionControlMeasures</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OpenFireExtinguished</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PreventFurtherExpansion</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RestrictedSpace</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SparkDetectorExtinguishSparks</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SparkOccurence</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StrengthenDustControl</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TriggerSecondaryExplosion</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AccidentDoNotOccur</FOR>
+      <GIVEN>ExtinctionOfSpark</GIVEN>
+      <TABLE>0.97 0.03 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AccidentUnderControl</FOR>
+      <GIVEN>InitiateEmergencyResponse</GIVEN>
+      <GIVEN>PreventFurtherExpansion</GIVEN>
+      <TABLE>0.85 0.15 0.15 0.85 0.73 0.27 0.27 0.73 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlastWavesThroughPipes</FOR>
+      <TABLE>0.62 0.38 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BuildingDamage</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.0 0.8 0.1 0.1 0.0 0.6 0.3 0.1 0.3 0.6 0.1 0.0 0.3 0.5 0.2 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Casualties</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.9 0.1 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CombustibleDustAccumulates</FOR>
+      <GIVEN>RestrictedSpace</GIVEN>
+      <GIVEN>StrengthenDustControl</GIVEN>
+      <TABLE>0.23 0.77 0.97 0.03 0.38 0.62 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DirectEconomicLosses</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <GIVEN>SparkOccurence</GIVEN>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.9 0.1 0.0 0.0 0.9 0.1 0.0 0.0 0.9 0.1 0.0 0.0 1.0 0.0 0.0 0.0 0.9 0.1 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DustAccumulationUnderControl</FOR>
+      <GIVEN>CombustibleDustAccumulates</GIVEN>
+      <TABLE>0.62 0.38 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DustCloudDisappearance</FOR>
+      <GIVEN>DustAccumulationUnderControl</GIVEN>
+      <TABLE>0.97 0.03 0.48 0.52 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DustExplosionIntensityCoefficient</FOR>
+      <GIVEN>CombustibleDustAccumulates</GIVEN>
+      <TABLE>0.0 0.2 0.3 0.4 0.1 0.2 0.2 0.3 0.2 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EndOfRescue</FOR>
+      <GIVEN>OpenFireExtinguished</GIVEN>
+      <TABLE>0.97 0.03 0.15 0.85 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EnvironmentalImpact</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.7 0.2 0.1 0.0 0.8 0.2 0.0 0.0 0.8 0.2 0.0 0.0 0.9 0.1 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EquipmentDamage</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <GIVEN>SparkOccurence</GIVEN>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.0 0.8 0.1 0.1 0.2 0.7 0.1 0.0 0.2 0.7 0.1 0.0 0.2 0.6 0.2 0.0 0.2 0.7 0.1 0.0 0.2 0.6 0.2 0.0 0.2 0.6 0.2 0.0 0.6 0.4 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExplosionPreventionMeasures</FOR>
+      <TABLE>0.27 0.73 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExtinctionOfSpark</FOR>
+      <GIVEN>SparkOccurence</GIVEN>
+      <TABLE>0.15 0.85 0.97 0.03 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IgnitingTheDustCloud</FOR>
+      <GIVEN>ExplosionPreventionMeasures</GIVEN>
+      <GIVEN>NoExplosionControlMeasures</GIVEN>
+      <GIVEN>SparkOccurence</GIVEN>
+      <TABLE>0.48 0.52 0.27 0.73 0.97 0.03 0.85 0.15 0.15 0.85 0.27 0.73 0.97 0.03 0.48 0.52 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InitiateEmergencyResponse</FOR>
+      <TABLE>0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Misoperation</FOR>
+      <TABLE>0.62 0.38 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NoExplosionControlMeasures</FOR>
+      <TABLE>0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OpenFireExtinguished</FOR>
+      <GIVEN>TriggerSecondaryExplosion</GIVEN>
+      <TABLE>0.85 0.15 0.27 0.73 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PreventFurtherExpansion</FOR>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <TABLE>0.03 0.97 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RestrictedSpace</FOR>
+      <TABLE>0.97 0.03 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SparkDetectorExtinguishSparks</FOR>
+      <TABLE>0.27 0.73 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SparkOccurence</FOR>
+      <GIVEN>CombustibleDustAccumulates</GIVEN>
+      <GIVEN>Misoperation</GIVEN>
+      <GIVEN>SparkDetectorExtinguishSparks</GIVEN>
+      <TABLE>0.03 0.97 0.27 0.73 0.97 0.03 0.85 0.15 0.48 0.52 0.15 0.85 0.97 0.03 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StrengthenDustControl</FOR>
+      <TABLE>0.15 0.85 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TriggerSecondaryExplosion</FOR>
+      <GIVEN>BlastWavesThroughPipes</GIVEN>
+      <GIVEN>IgnitingTheDustCloud</GIVEN>
+      <TABLE>0.97 0.03 0.62 0.38 0.5 0.5 0.15 0.85 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

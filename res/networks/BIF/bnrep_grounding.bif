@@ -1,0 +1,389 @@
+network unknown {
+}
+variable BW {
+  type discrete [ 2 ] { no, yes };
+}
+variable DAM {
+  type discrete [ 2 ] { no, yes };
+}
+variable DE {
+  type discrete [ 2 ] { no, yes };
+}
+variable GRO {
+  type discrete [ 2 ] { no, yes };
+}
+variable ICC {
+  type discrete [ 2 ] { no, yes };
+}
+variable IER {
+  type discrete [ 2 ] { no, yes };
+}
+variable ILC {
+  type discrete [ 2 ] { no, yes };
+}
+variable INE {
+  type discrete [ 2 ] { no, yes };
+}
+variable IO {
+  type discrete [ 2 ] { no, yes };
+}
+variable IPS {
+  type discrete [ 2 ] { no, yes };
+}
+variable IRP {
+  type discrete [ 2 ] { no, yes };
+}
+variable IRR {
+  type discrete [ 2 ] { no, yes };
+}
+variable IS {
+  type discrete [ 2 ] { no, yes };
+}
+variable ISL {
+  type discrete [ 2 ] { no, yes };
+}
+variable ISS {
+  type discrete [ 2 ] { no, yes };
+}
+variable IWP {
+  type discrete [ 2 ] { no, yes };
+}
+variable LID {
+  type discrete [ 2 ] { no, yes };
+}
+variable LNE {
+  type discrete [ 2 ] { no, yes };
+}
+variable LSM {
+  type discrete [ 2 ] { no, yes };
+}
+variable LT {
+  type discrete [ 2 ] { no, yes };
+}
+variable MIJ {
+  type discrete [ 2 ] { no, yes };
+}
+variable OD {
+  type discrete [ 2 ] { no, yes };
+}
+variable PC {
+  type discrete [ 2 ] { no, yes };
+}
+variable PEC {
+  type discrete [ 2 ] { no, yes };
+}
+variable PF {
+  type discrete [ 2 ] { no, yes };
+}
+variable PFC {
+  type discrete [ 2 ] { no, yes };
+}
+variable PSA {
+  type discrete [ 2 ] { no, yes };
+}
+variable PSM {
+  type discrete [ 2 ] { no, yes };
+}
+variable PSQ {
+  type discrete [ 2 ] { no, yes };
+}
+variable SMS {
+  type discrete [ 2 ] { no, yes };
+}
+variable UCD {
+  type discrete [ 2 ] { no, yes };
+}
+variable UDL {
+  type discrete [ 2 ] { no, yes };
+}
+variable UPA {
+  type discrete [ 2 ] { no, yes };
+}
+variable UR {
+  type discrete [ 2 ] { no, yes };
+}
+variable US {
+  type discrete [ 2 ] { no, yes };
+}
+variable WD {
+  type discrete [ 2 ] { no, yes };
+}
+probability ( BW ) {
+  table 0.7257525, 0.2742475;
+}
+probability ( DAM | BW, GRO, LNE, MIJ, US ) {
+  (no, no, no, no, no) 0.5, 0.5;
+  (yes, no, no, no, no) 0.5, 0.5;
+  (no, yes, no, no, no) 0.6140351, 0.3859649;
+  (yes, yes, no, no, no) 0.6451613, 0.3548387;
+  (no, no, yes, no, no) 0.5, 0.5;
+  (yes, no, yes, no, no) 0.5, 0.5;
+  (no, yes, yes, no, no) 0.7, 0.3;
+  (yes, yes, yes, no, no) 0.4285714, 0.5714286;
+  (no, no, no, yes, no) 0.5, 0.5;
+  (yes, no, no, yes, no) 0.5, 0.5;
+  (no, yes, no, yes, no) 0.5833333, 0.4166667;
+  (yes, yes, no, yes, no) 0.25, 0.75;
+  (no, no, yes, yes, no) 0.5, 0.5;
+  (yes, no, yes, yes, no) 0.5, 0.5;
+  (no, yes, yes, yes, no) 0.5, 0.5;
+  (yes, yes, yes, yes, no) 0.5, 0.5;
+  (no, no, no, no, yes) 0.5, 0.5;
+  (yes, no, no, no, yes) 0.5, 0.5;
+  (no, yes, no, no, yes) 0.7368421, 0.2631579;
+  (yes, yes, no, no, yes) 1.0, 0.0;
+  (no, no, yes, no, yes) 0.5, 0.5;
+  (yes, no, yes, no, yes) 0.5, 0.5;
+  (no, yes, yes, no, yes) 0.5, 0.5;
+  (yes, yes, yes, no, yes) 0.5, 0.5;
+  (no, no, no, yes, yes) 0.5, 0.5;
+  (yes, no, no, yes, yes) 0.5, 0.5;
+  (no, yes, no, yes, yes) 0.6666667, 0.3333333;
+  (yes, yes, no, yes, yes) 1.0, 0.0;
+  (no, no, yes, yes, yes) 0.5, 0.5;
+  (yes, no, yes, yes, yes) 0.5, 0.5;
+  (no, yes, yes, yes, yes) 0.5, 0.5;
+  (yes, yes, yes, yes, yes) 1.0, 0.0;
+}
+probability ( DE | LNE ) {
+  (no) 0.92920354, 0.07079646;
+  (yes) 0.94520548, 0.05479452;
+}
+probability ( GRO | PFC ) {
+  (no) 0.9375, 0.0625;
+  (yes) 0.5, 0.5;
+}
+probability ( ICC ) {
+  table 0.8561873, 0.1438127;
+}
+probability ( IER | PEC ) {
+  (no) 0.890411, 0.109589;
+  (yes) 0.8571429, 0.1428571;
+}
+probability ( ILC | LSM ) {
+  (no) 0.88, 0.12;
+  (yes) 0.0, 1.0;
+}
+probability ( INE | IPS ) {
+  (no) 0.94880546, 0.05119454;
+  (yes) 0.8333333, 0.1666667;
+}
+probability ( IO | DE ) {
+  (no) 0.8213058, 0.1786942;
+  (yes) 0.875, 0.125;
+}
+probability ( IPS | IRP, IRR, IS, UCD, UR ) {
+  (no, no, no, no, no) 0.98757764, 0.01242236;
+  (yes, no, no, no, no) 0.9375, 0.0625;
+  (no, yes, no, no, no) 1.0, 0.0;
+  (yes, yes, no, no, no) 1.0, 0.0;
+  (no, no, yes, no, no) 1.0, 0.0;
+  (yes, no, yes, no, no) 1.0, 0.0;
+  (no, yes, yes, no, no) 1.0, 0.0;
+  (yes, yes, yes, no, no) 0.5, 0.5;
+  (no, no, no, yes, no) 1.0, 0.0;
+  (yes, no, no, yes, no) 0.6666667, 0.3333333;
+  (no, yes, no, yes, no) 0.5, 0.5;
+  (yes, yes, no, yes, no) 1.0, 0.0;
+  (no, no, yes, yes, no) 0.5, 0.5;
+  (yes, no, yes, yes, no) 0.5, 0.5;
+  (no, yes, yes, yes, no) 0.5, 0.5;
+  (yes, yes, yes, yes, no) 0.5, 0.5;
+  (no, no, no, no, yes) 1.0, 0.0;
+  (yes, no, no, no, yes) 1.0, 0.0;
+  (no, yes, no, no, yes) 1.0, 0.0;
+  (yes, yes, no, no, yes) 1.0, 0.0;
+  (no, no, yes, no, yes) 1.0, 0.0;
+  (yes, no, yes, no, yes) 0.5, 0.5;
+  (no, yes, yes, no, yes) 0.5, 0.5;
+  (yes, yes, yes, no, yes) 0.5, 0.5;
+  (no, no, no, yes, yes) 0.5, 0.5;
+  (yes, no, no, yes, yes) 0.5, 0.5;
+  (no, yes, no, yes, yes) 0.5, 0.5;
+  (yes, yes, no, yes, yes) 0.5, 0.5;
+  (no, no, yes, yes, yes) 0.5, 0.5;
+  (yes, no, yes, yes, yes) 0.5, 0.5;
+  (no, yes, yes, yes, yes) 0.5, 0.5;
+  (yes, yes, yes, yes, yes) 0.0, 1.0;
+}
+probability ( IRP | SMS ) {
+  (no) 0.5, 0.5;
+  (yes) 0.5, 0.5;
+}
+probability ( IRR | LT, UDL ) {
+  (no, no) 0.7666667, 0.2333333;
+  (yes, no) 0.7, 0.3;
+  (no, yes) 1.0, 0.0;
+  (yes, yes) 0.5, 0.5;
+}
+probability ( IS ) {
+  table 0.8929766, 0.1070234;
+}
+probability ( ISL | PSQ ) {
+  (no) 0.7894737, 0.2105263;
+  (yes) 0.7777778, 0.2222222;
+}
+probability ( ISS | LID ) {
+  (no) 0.75, 0.25;
+  (yes) 0.875, 0.125;
+}
+probability ( IWP | UPA ) {
+  (no) 0.8823529, 0.1176471;
+  (yes) 0.3636364, 0.6363636;
+}
+probability ( LID | LSM ) {
+  (no) 0.44, 0.56;
+  (yes) 0.333, 0.667;
+}
+probability ( LNE | IRR ) {
+  (no) 0.97491039, 0.02508961;
+  (yes) 0.95, 0.05;
+}
+probability ( LSM ) {
+  table 0.892857, 0.107143;
+}
+probability ( LT ) {
+  table 0.819398, 0.180602;
+}
+probability ( MIJ | ICC ) {
+  (no) 0.921875, 0.078125;
+  (yes) 0.97674419, 0.02325581;
+}
+probability ( OD | ILC, IWP, LID ) {
+  (no, no, no) 0.625, 0.375;
+  (yes, no, no) 1.0, 0.0;
+  (no, yes, no) 1.0, 0.0;
+  (yes, yes, no) 0.5, 0.5;
+  (no, no, yes) 0.4285714, 0.5714286;
+  (yes, no, yes) 0.0, 1.0;
+  (no, yes, yes) 0.2, 0.8;
+  (yes, yes, yes) 0.5, 0.5;
+}
+probability ( PC ) {
+  table 0.892857, 0.107143;
+}
+probability ( PEC ) {
+  table 0.97658863, 0.02341137;
+}
+probability ( PF ) {
+  table 0.8928571, 0.1071429;
+}
+probability ( PFC | PSA ) {
+  (no) 0.8308271, 0.1691729;
+  (yes) 0.6060606, 0.3939394;
+}
+probability ( PSA | DE, INE, IO, LNE, MIJ, UCD ) {
+  (no, no, no, no, no, no) 0.8743456, 0.1256544;
+  (yes, no, no, no, no, no) 1.0, 0.0;
+  (no, yes, no, no, no, no) 0.8461538, 0.1538462;
+  (yes, yes, no, no, no, no) 0.5, 0.5;
+  (no, no, yes, no, no, no) 0.93333333, 0.06666667;
+  (yes, no, yes, no, no, no) 0.5, 0.5;
+  (no, yes, yes, no, no, no) 0.5, 0.5;
+  (yes, yes, yes, no, no, no) 0.5, 0.5;
+  (no, no, no, yes, no, no) 1.0, 0.0;
+  (yes, no, no, yes, no, no) 0.5, 0.5;
+  (no, yes, no, yes, no, no) 0.5, 0.5;
+  (yes, yes, no, yes, no, no) 0.5, 0.5;
+  (no, no, yes, yes, no, no) 1.0, 0.0;
+  (yes, no, yes, yes, no, no) 0.5, 0.5;
+  (no, yes, yes, yes, no, no) 1.0, 0.0;
+  (yes, yes, yes, yes, no, no) 0.5, 0.5;
+  (no, no, no, no, yes, no) 0.8666667, 0.1333333;
+  (yes, no, no, no, yes, no) 0.0, 1.0;
+  (no, yes, no, no, yes, no) 1.0, 0.0;
+  (yes, yes, no, no, yes, no) 0.5, 0.5;
+  (no, no, yes, no, yes, no) 1.0, 0.0;
+  (yes, no, yes, no, yes, no) 0.5, 0.5;
+  (no, yes, yes, no, yes, no) 0.5, 0.5;
+  (yes, yes, yes, no, yes, no) 0.5, 0.5;
+  (no, no, no, yes, yes, no) 0.5, 0.5;
+  (yes, no, no, yes, yes, no) 0.5, 0.5;
+  (no, yes, no, yes, yes, no) 0.5, 0.5;
+  (yes, yes, no, yes, yes, no) 0.5, 0.5;
+  (no, no, yes, yes, yes, no) 0.5, 0.5;
+  (yes, no, yes, yes, yes, no) 0.5, 0.5;
+  (no, yes, yes, yes, yes, no) 0.5, 0.5;
+  (yes, yes, yes, yes, yes, no) 0.5, 0.5;
+  (no, no, no, no, no, yes) 1.0, 0.0;
+  (yes, no, no, no, no, yes) 0.5, 0.5;
+  (no, yes, no, no, no, yes) 0.5, 0.5;
+  (yes, yes, no, no, no, yes) 0.5, 0.5;
+  (no, no, yes, no, no, yes) 0.5, 0.5;
+  (yes, no, yes, no, no, yes) 0.5, 0.5;
+  (no, yes, yes, no, no, yes) 0.5, 0.5;
+  (yes, yes, yes, no, no, yes) 0.5, 0.5;
+  (no, no, no, yes, no, yes) 1.0, 0.0;
+  (yes, no, no, yes, no, yes) 0.5, 0.5;
+  (no, yes, no, yes, no, yes) 0.5, 0.5;
+  (yes, yes, no, yes, no, yes) 0.5, 0.5;
+  (no, no, yes, yes, no, yes) 0.5, 0.5;
+  (yes, no, yes, yes, no, yes) 0.5, 0.5;
+  (no, yes, yes, yes, no, yes) 0.5, 0.5;
+  (yes, yes, yes, yes, no, yes) 0.5, 0.5;
+  (no, no, no, no, yes, yes) 0.5, 0.5;
+  (yes, no, no, no, yes, yes) 0.5, 0.5;
+  (no, yes, no, no, yes, yes) 0.5, 0.5;
+  (yes, yes, no, no, yes, yes) 0.5, 0.5;
+  (no, no, yes, no, yes, yes) 0.5, 0.5;
+  (yes, no, yes, no, yes, yes) 0.5, 0.5;
+  (no, yes, yes, no, yes, yes) 0.5, 0.5;
+  (yes, yes, yes, no, yes, yes) 0.5, 0.5;
+  (no, no, no, yes, yes, yes) 0.5, 0.5;
+  (yes, no, no, yes, yes, yes) 0.5, 0.5;
+  (no, yes, no, yes, yes, yes) 0.5, 0.5;
+  (yes, yes, no, yes, yes, yes) 0.5, 0.5;
+  (no, no, yes, yes, yes, yes) 0.5, 0.5;
+  (yes, no, yes, yes, yes, yes) 0.5, 0.5;
+  (no, yes, yes, yes, yes, yes) 0.5, 0.5;
+  (yes, yes, yes, yes, yes, yes) 0.0, 1.0;
+}
+probability ( PSM | LT ) {
+  (no) 0.8979592, 0.1020408;
+  (yes) 0.8333333, 0.1666667;
+}
+probability ( PSQ ) {
+  table 0.6785714, 0.3214286;
+}
+probability ( SMS ) {
+  table 0.5, 0.5;
+}
+probability ( UCD | OD ) {
+  (no) 0.95454545, 0.04545454;
+  (yes) 0.8333333, 0.1666667;
+}
+probability ( UDL ) {
+  table 0.96989967, 0.03010033;
+}
+probability ( UPA | LID ) {
+  (no) 0.8333333, 0.1666667;
+  (yes) 0.4375, 0.5625;
+}
+probability ( UR | ISL, ISS, OD, PC ) {
+  (no, no, no, no) 0.75, 0.25;
+  (yes, no, no, no) 0.6666667, 0.3333333;
+  (no, yes, no, no) 1.0, 0.0;
+  (yes, yes, no, no) 0.5, 0.5;
+  (no, no, yes, no) 0.90909091, 0.09090909;
+  (yes, no, yes, no) 0.5, 0.5;
+  (no, yes, yes, no) 0.5, 0.5;
+  (yes, yes, yes, no) 0.5, 0.5;
+  (no, no, no, yes) 0.5, 0.5;
+  (yes, no, no, yes) 0.5, 0.5;
+  (no, yes, no, yes) 0.5, 0.5;
+  (yes, yes, no, yes) 0.5, 0.5;
+  (no, no, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes) 0.5, 0.5;
+  (no, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, yes) 0.0, 1.0;
+}
+probability ( US | PSM, WD ) {
+  (no, no) 0.95982143, 0.04017857;
+  (yes, no) 0.93103448, 0.06896552;
+  (no, yes) 0.8536585, 0.1463415;
+  (yes, yes) 0.6, 0.4;
+}
+probability ( WD | PF ) {
+  (no) 0.8556338, 0.1443662;
+  (yes) 0.6666667, 0.3333333;
+}

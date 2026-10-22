@@ -1,0 +1,685 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT1</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT10</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT2</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT3</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT4</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT5</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT6</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT7</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT8</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ApproachingIntentionT9</NAME>
+      <OUTCOME>Hover</OUTCOME>
+      <OUTCOME>Attach</OUTCOME>
+      <OUTCOME>Capture</OUTCOME>
+      <OUTCOME>Approach</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT1</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT10</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT2</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT3</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT4</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT5</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT6</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT7</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT8</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HeadingT9</NAME>
+      <OUTCOME>0_110_degrees</OUTCOME>
+      <OUTCOME>__110_degrees</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT1</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT10</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT2</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT3</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT4</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT5</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT6</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT7</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT8</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LocationT9</NAME>
+      <OUTCOME>Within_the_threat_range</OUTCOME>
+      <OUTCOME>Outside_the_threat_range</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT1</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT10</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT2</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT3</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT4</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT5</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT6</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT7</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT8</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ManeuverT9</NAME>
+      <OUTCOME>Maneuver</OUTCOME>
+      <OUTCOME>Non_Maneuver</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT1</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT10</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT2</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT3</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT4</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT5</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT6</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT7</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT8</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeDistanceT9</NAME>
+      <OUTCOME>Far</OUTCOME>
+      <OUTCOME>Near</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT1</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT10</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT2</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT3</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT4</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT5</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT6</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT7</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT8</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RelativeVelocityT9</NAME>
+      <OUTCOME>Fast</OUTCOME>
+      <OUTCOME>Slow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT1</FOR>
+      <TABLE>0.25 0.25 0.25 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT10</FOR>
+      <GIVEN>ApproachingIntentionT9</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT2</FOR>
+      <GIVEN>ApproachingIntentionT1</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT3</FOR>
+      <GIVEN>ApproachingIntentionT2</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT4</FOR>
+      <GIVEN>ApproachingIntentionT3</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT5</FOR>
+      <GIVEN>ApproachingIntentionT4</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT6</FOR>
+      <GIVEN>ApproachingIntentionT5</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT7</FOR>
+      <GIVEN>ApproachingIntentionT6</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT8</FOR>
+      <GIVEN>ApproachingIntentionT7</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ApproachingIntentionT9</FOR>
+      <GIVEN>ApproachingIntentionT8</GIVEN>
+      <TABLE>0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 0.1 0.1 0.1 0.1 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT1</FOR>
+      <GIVEN>LocationT1</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT10</FOR>
+      <GIVEN>LocationT10</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT2</FOR>
+      <GIVEN>LocationT2</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT3</FOR>
+      <GIVEN>LocationT3</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT4</FOR>
+      <GIVEN>LocationT4</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT5</FOR>
+      <GIVEN>LocationT5</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT6</FOR>
+      <GIVEN>LocationT6</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT7</FOR>
+      <GIVEN>LocationT7</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT8</FOR>
+      <GIVEN>LocationT8</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HeadingT9</FOR>
+      <GIVEN>LocationT9</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT1</FOR>
+      <GIVEN>ApproachingIntentionT1</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT10</FOR>
+      <GIVEN>ApproachingIntentionT10</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT2</FOR>
+      <GIVEN>ApproachingIntentionT2</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT3</FOR>
+      <GIVEN>ApproachingIntentionT3</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT4</FOR>
+      <GIVEN>ApproachingIntentionT4</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT5</FOR>
+      <GIVEN>ApproachingIntentionT5</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT6</FOR>
+      <GIVEN>ApproachingIntentionT6</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT7</FOR>
+      <GIVEN>ApproachingIntentionT7</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT8</FOR>
+      <GIVEN>ApproachingIntentionT8</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LocationT9</FOR>
+      <GIVEN>ApproachingIntentionT9</GIVEN>
+      <TABLE>0.8 0.2 0.7 0.3 0.6 0.4 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT1</FOR>
+      <GIVEN>ApproachingIntentionT1</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT10</FOR>
+      <GIVEN>ApproachingIntentionT10</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT2</FOR>
+      <GIVEN>ApproachingIntentionT2</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT3</FOR>
+      <GIVEN>ApproachingIntentionT3</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT4</FOR>
+      <GIVEN>ApproachingIntentionT4</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT5</FOR>
+      <GIVEN>ApproachingIntentionT5</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT6</FOR>
+      <GIVEN>ApproachingIntentionT6</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT7</FOR>
+      <GIVEN>ApproachingIntentionT7</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT8</FOR>
+      <GIVEN>ApproachingIntentionT8</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ManeuverT9</FOR>
+      <GIVEN>ApproachingIntentionT9</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT1</FOR>
+      <GIVEN>LocationT1</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT10</FOR>
+      <GIVEN>LocationT10</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT2</FOR>
+      <GIVEN>LocationT2</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT3</FOR>
+      <GIVEN>LocationT3</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT4</FOR>
+      <GIVEN>LocationT4</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT5</FOR>
+      <GIVEN>LocationT5</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT6</FOR>
+      <GIVEN>LocationT6</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT7</FOR>
+      <GIVEN>LocationT7</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT8</FOR>
+      <GIVEN>LocationT8</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeDistanceT9</FOR>
+      <GIVEN>LocationT9</GIVEN>
+      <TABLE>0.3 0.7 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT1</FOR>
+      <GIVEN>ApproachingIntentionT1</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT10</FOR>
+      <GIVEN>ApproachingIntentionT10</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT2</FOR>
+      <GIVEN>ApproachingIntentionT2</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT3</FOR>
+      <GIVEN>ApproachingIntentionT3</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT4</FOR>
+      <GIVEN>ApproachingIntentionT4</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT5</FOR>
+      <GIVEN>ApproachingIntentionT5</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT6</FOR>
+      <GIVEN>ApproachingIntentionT6</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT7</FOR>
+      <GIVEN>ApproachingIntentionT7</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT8</FOR>
+      <GIVEN>ApproachingIntentionT8</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RelativeVelocityT9</FOR>
+      <GIVEN>ApproachingIntentionT9</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.4 0.6 0.3 0.7 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>
