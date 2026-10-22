@@ -44,6 +44,7 @@ import bayesfl.model.Classes;
 import bayesfl.privacy.Gaussian_Noise;
 import bayesfl.privacy.Laplace_Noise;
 import bayesfl.privacy.NumericNoiseGenerator;
+import bayesfl.privacy.SecAggLaplace_Noise;
 import bayesfl.privacy.ZCDP_Noise;
 import weka.core.Instances;
 import weka.core.Utils;
@@ -196,7 +197,8 @@ public class CCBNExperiment {
      * @return An instance of the selected local learning algorithm.
      */
     private static LocalAlgorithm getAlgorithm(String name, String[] options, Object model, Object modelAnDE,
-                                               NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp) {
+                                               NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp,
+                                               boolean secureTableAggregation) {
         switch (name) {
             // Supervised discretization wrapper
             case "Bins_Supervised" -> {
@@ -237,7 +239,8 @@ public class CCBNExperiment {
 
                 // Retrieve combinations and class maps from modelsAnDE
                 Classes structure = (Classes) modelAnDE;
-                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator, paramDp);
+                return new WDPT_CCBN(options, cutPoints, structure.getSyntheticClassMaps(), noiseGenerator, paramDp,
+                        secureTableAggregation);
             }
 
             // Class-conditional SPODEs with the restricted softmax (categorical data)
@@ -413,12 +416,12 @@ public class CCBNExperiment {
                 return "";
             }
             case "PT_NB" -> {
-                String combinedName = structure + "-" + parameterLearning;
+                String combinedName = algorithmLabel(structure + "-" + parameterLearning, secAggEnabled(dpOptions));
                 return fold + "," + combinedName + "," + nodeName + "," + nBins + "," + seed + "," + nClients + ",false,false" + "," + dpType + "," + epsilon + "," + delta + "," + rho + "," + sensitivity + "," + autoSensitivity + "," + alpha;
             }
             case "WDPT_CCBN", "SPODE_CCBN" -> {
                 // Construct a composite name
-                String combinedName = structure + "-" + parameterLearning;
+                String combinedName = algorithmLabel(structure + "-" + parameterLearning, secAggEnabled(dpOptions));
 
                 // Param-space (DP-SGD) channel: a disabled/absent channel contributes
                 // defaults consistent with WDPT_CCBN(..., paramDp=null) (no DP-SGD applied)
@@ -511,6 +514,86 @@ public class CCBNExperiment {
     }
 
     /**
+     * @param dpOptions the DP options of the run
+     * @return whether the run uses secure aggregation ({@code -SECAGG} flag)
+     */
+    static boolean secAggEnabled(String[] dpOptions) {
+        return dpOptions != null && Arrays.asList(dpOptions).contains("-SECAGG");
+    }
+
+    /**
+     * Whether the table noise can be split into shares: only tables that the
+     * server receives as a SUM qualify. The generative (Weka) tables and the
+     * shared AnDEwP tables are summed as counts; the split-key local tables never
+     * leave the client, so they keep the full per-client noise.
+     *
+     * @param secAgg            whether the run uses secure aggregation
+     * @param parameterLearning the parameter-learning scheme ({@code Weka}, {@code wCCBN}, {@code dCCBN})
+     * @param fuseProbabilities whether the tables are shared with the server
+     * @param dpType            the table DP mechanism ({@code None}, {@code Laplace}, ...)
+     * @return whether the tables are securely aggregated
+     */
+    static boolean tablesSecurelyAggregated(boolean secAgg, String parameterLearning, boolean fuseProbabilities, String dpType) {
+        boolean tableNoise = dpType != null && !dpType.isEmpty() && !dpType.equalsIgnoreCase("None");
+        return secAgg && tableNoise && (parameterLearning.equalsIgnoreCase("Weka") || fuseProbabilities);
+    }
+
+    /**
+     * Number of shares the table noise is split into ({@code -SECAGGTABLES} flag).
+     *
+     * @param dpOptions the DP options of the run
+     * @param nClients  the number of clients
+     * @return the number of shares, {@code 1} meaning full per-client noise
+     */
+    static int tableNoiseShares(String[] dpOptions, int nClients) {
+        return dpOptions != null && Arrays.asList(dpOptions).contains("-SECAGGTABLES") ? nClients : 1;
+    }
+
+    /**
+     * Number of private weight steps the DP-SGD budget is calibrated for. With
+     * securely aggregated tables the round-1 weights stay at their public start
+     * (their features would be the local tables), so there is one step less.
+     *
+     * @param nIterations       the number of federated rounds
+     * @param secAggTables      whether the tables are securely aggregated
+     * @param parameterLearning the parameter-learning scheme
+     * @return the number of rounds with a private weight step
+     */
+    static int privateRounds(int nIterations, boolean secAggTables, String parameterLearning) {
+        return secAggTables && !parameterLearning.equalsIgnoreCase("Weka") ? nIterations - 1 : nIterations;
+    }
+
+    /**
+     * Label written in the {@code algorithm} column. Secure-aggregation runs get a
+     * {@code -SecAgg} suffix so the join keeps them apart from same-config runs
+     * without secure aggregation, without changing the number of CSV columns.
+     *
+     * @param combinedName structure and parameter learning, e.g. {@code A1DE-dCCBN}
+     * @param secAgg       whether the run uses secure aggregation
+     * @return the label for the {@code algorithm} column
+     */
+    static String algorithmLabel(String combinedName, boolean secAgg) {
+        return secAgg ? combinedName + "-SecAgg" : combinedName;
+    }
+
+    /**
+     * Rejects secure-aggregation configurations the code cannot honour: only the
+     * Laplace table mechanism has noise shares.
+     *
+     * @param secAgg            whether the run uses secure aggregation
+     * @param parameterLearning the parameter-learning scheme ({@code Weka}, {@code wCCBN}, {@code dCCBN})
+     * @param fuseProbabilities whether the tables are shared with the server
+     * @param dpType            the table DP mechanism ({@code None}, {@code Laplace}, ...)
+     */
+    static void checkSecAggSupported(boolean secAgg, String parameterLearning, boolean fuseProbabilities, String dpType) {
+        if (!secAgg) return;
+        boolean tableNoise = dpType != null && !dpType.isEmpty() && !dpType.equalsIgnoreCase("None");
+        if (tableNoise && !dpType.equalsIgnoreCase("Laplace")) {
+            throw new IllegalArgumentException("Secure aggregation only implements Laplace noise shares for tables");
+        }
+    }
+
+    /**
      * Creates a {@link NumericNoiseGenerator} based on Weka-style differential privacy options.
      * <p>
      * Accepted formats:
@@ -524,7 +607,7 @@ public class CCBNExperiment {
      * @param dpOptions array of command-line style options
      * @return a configured {@link NumericNoiseGenerator} instance or {@code null} if disabled or invalid
      */
-    private static NumericNoiseGenerator getNoiseGenerator(String[] dpOptions) {
+    static NumericNoiseGenerator getNoiseGenerator(String[] dpOptions, int laplaceShares) {
         if (dpOptions == null || dpOptions.length == 0) return null;
 
         // Copy the options to avoid modifying the original array
@@ -537,7 +620,9 @@ public class CCBNExperiment {
                 case "laplace" -> {
                     double epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
                     double sensitivity = Double.parseDouble(Utils.getOption("S", dpOptions));
-                    return new Laplace_Noise(epsilon, sensitivity);
+                    return laplaceShares > 1
+                            ? new SecAggLaplace_Noise(epsilon, sensitivity, laplaceShares)
+                            : new Laplace_Noise(epsilon, sensitivity);
                 }
                 case "gaussian" -> {
                     double epsilon = Double.parseDouble(Utils.getOption("E", dpOptions));
@@ -590,7 +675,8 @@ public class CCBNExperiment {
             Instances test = partitions[i][1];
             Data data = new Weka_Instances(datasetName, train, test);
 
-            NumericNoiseGenerator dp = getNoiseGenerator(dpOptions);
+            int tableShares = tableNoiseShares(dpOptions, nClients);
+            NumericNoiseGenerator dp = getNoiseGenerator(dpOptions, tableShares);
             try {
                 // Local copy: weka's getFlag blanks the matched entry, and dpOptions
                 // must stay intact for the next client's iteration
@@ -605,7 +691,7 @@ public class CCBNExperiment {
             // by the client after each build.
             boolean noiseInsideAlgorithm = algorithmName.equals("WDPT_CCBN");
             LocalAlgorithm algorithm = getAlgorithm(algorithmName, algorithmOptions, model, modelAnDE,
-                    noiseInsideAlgorithm ? dp : null, noiseInsideAlgorithm ? paramDp : null);
+                    noiseInsideAlgorithm ? dp : null, noiseInsideAlgorithm ? paramDp : null, tableShares > 1);
 
             Client client = new Client(fusionClient, algorithm, data, noiseInsideAlgorithm ? null : dp);
             client.setStats(buildStats, fusionStats, outputPath);
@@ -671,6 +757,8 @@ public class CCBNExperiment {
         double clipC = 1.0;
         int localSteps = 1;
         double paramLr = 0.1;
+        boolean secAgg = false;   // secure aggregation (distributed noise shares)
+        int statsEvery = 1;       // save client statistics every k rounds (plus first and last)
 
         // Check if arguments are provided
         // If arguments are provided, read the parameters from the file and override the default values
@@ -769,6 +857,12 @@ public class CCBNExperiment {
                     localSteps = 1;
                 }
             }
+            if (parameters.length > 22) {
+                secAgg = Boolean.parseBoolean(parameters[22]);
+            }
+            if (parameters.length > 23) {
+                statsEvery = Integer.parseInt(parameters[23]);
+            }
             if (parameters.length > 21) {
                 try {
                     paramLr = Double.parseDouble(parameters[21]);
@@ -814,12 +908,22 @@ public class CCBNExperiment {
             case "zcdp" -> dpList.addAll(List.of("-DP", "ZCDP", "-R", "" + rho, "-S", "" + sensitivity));
         }
         if (autoSensitivity) dpList.add("-AUTO");
+        Client.setStatsEvery(statsEvery);
+
+        // Secure aggregation: the server only sees sums, so summed noise is split into shares
+        if (secAgg) dpList.add("-SECAGG");
+        checkSecAggSupported(secAgg, parameterLearning, fuseProbabilities, dpType);
+        boolean secAggTables = tablesSecurelyAggregated(secAgg, parameterLearning, fuseProbabilities, dpType);
+        if (secAggTables) dpList.add("-SECAGGTABLES");
         String[] dpOptions = dpList.toArray(new String[0]);
 
         // Build the discriminative-channel (DP-SGD) configuration. rounds is the number of
         // federated communication rounds already configured for this run (nIterations); a
         // disabled channel (epsilonParam = infinity) calibrates sigma to 0.
-        DPSGDConfig paramDp = new DPSGDConfig(epsilonParam, delta, clipC, nIterations, localSteps, paramLr, seed);
+        // Under secure aggregation each of the nClients adds a share of the gradient noise.
+        DPSGDConfig paramDp = new DPSGDConfig(epsilonParam, delta, clipC,
+                privateRounds(nIterations, secAggTables, parameterLearning), localSteps, paramLr, seed,
+                secAgg ? nClients : 1);
 
         // When the DP-SGD weight channel is active, tag the filename so these runs do
         // not collide with the same-config non-private runs (epsilonParam is otherwise
@@ -833,6 +937,7 @@ public class CCBNExperiment {
         // Create output suffix for result identification
         String suffix = datasetName + "_" + nBins + "_" + structure + "_" + parameterLearning + "_" + maxIterations + "_" + fuseParameters + "_" + fuseProbabilities
                 + "_" + dpType + "_" + epsilon + "_" + delta + "_" + rho + "_" + sensitivity + "_" + autoSensitivity + dpsgdTag
+                + (secAgg ? "_secagg" : "")
                 + "_" + nClients + "_" + seed + "_" + nIterations + "_" + nFolds + "_a" + alpha + ".csv";
 
         // Run the experiment
@@ -1096,9 +1201,18 @@ public class CCBNExperiment {
 
                 if (dirtyFound) {
                     System.out.println(">>> CLEANING: Wiping incomplete data for Fold " + foldToCheck + " (Alpha eq. " + targetAlpha + ") in " + fullPath);
-                    try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(file))) {
+                    // Atomic rewrite: write to a temp file in the same directory and
+                    // rename over the original. A truncating in-place rewrite leaves a
+                    // corrupt/partial CSV if the job is killed mid-write (OOM) or if a
+                    // duplicate job of the same config is appending concurrently on NFS.
+                    java.io.File tmp = new java.io.File(file.getParentFile(),
+                            file.getName() + ".tmp." + ProcessHandle.current().pid());
+                    try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(tmp))) {
                         for (String l : cleanLines) pw.println(l);
                     }
+                    java.nio.file.Files.move(tmp.toPath(), file.toPath(),
+                            java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                            java.nio.file.StandardCopyOption.ATOMIC_MOVE);
                 }
 
             } catch (Exception e) {

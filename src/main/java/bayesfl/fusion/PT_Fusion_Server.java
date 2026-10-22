@@ -185,6 +185,13 @@ public class PT_Fusion_Server implements Fusion {
                 }
             }
 
+            // The aggregated counts may be negative when the clients sent shares of
+            // the noise (secure aggregation): clamp them here, after summing.
+            clampRawCountsAtZero(fusedClassDist);
+            for (DiscreteEstimator[] row : fusedDistributions) {
+                for (DiscreteEstimator est : row) clampRawCountsAtZero(est);
+            }
+
             // Create fused classifier
             DummyNB fusedNB = new DummyNB();
             fusedNB.setDistributions(fusedDistributions.toArray(new DiscreteEstimator[0][]));
@@ -194,6 +201,22 @@ public class PT_Fusion_Server implements Fusion {
         }
 
         return new PT(fusedEnsemble, combinations, fusedClassMaps);
+    }
+
+    /**
+     * Clamps the raw counts of an aggregated estimator at zero. Weka's
+     * estimators start every count at 1, so the raw count is {@code count - 1}
+     * and the clamp raises any count below 1 back to 1, keeping the total in
+     * step. It is post-processing of the released aggregate, so it costs no
+     * privacy budget.
+     *
+     * @param estimator the aggregated estimator, modified in place
+     */
+    public static void clampRawCountsAtZero(DiscreteEstimator estimator) {
+        for (int i = 0; i < estimator.getNumSymbols(); i++) {
+            double count = estimator.getCount(i);
+            if (count < 1.0) estimator.addValue(i, 1.0 - count);
+        }
     }
 
 }

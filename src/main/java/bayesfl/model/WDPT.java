@@ -100,6 +100,13 @@ public class WDPT implements Model {
     private int numInstances = 0;
 
     /**
+     * Round-1 release under secure aggregation of the tables: this client's
+     * raw counts plus its share of the noise, one entry per tree ({@code null}
+     * when the tables are not securely aggregated, and after round 1).
+     */
+    private List<TableCounts> countShares = null;
+
+    /**
      * The header for the file.
      * <p>
      * {@code epsilon} is the table (count-space) DP budget; the
@@ -283,6 +290,20 @@ public class WDPT implements Model {
      * Gets the number of instances.
      * * @return The number of instances.
      */
+    /**
+     * @return the count shares this client sends (see {@link TableCounts}), or {@code null}
+     */
+    public List<TableCounts> getCountShares() {
+        return countShares;
+    }
+
+    /**
+     * @param countShares the count shares this client sends, one per tree
+     */
+    public void setCountShares(List<TableCounts> countShares) {
+        this.countShares = countShares;
+    }
+
     public int getNumInstances() {
         return this.numInstances;
     }

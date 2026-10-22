@@ -35,13 +35,17 @@ import DataStructure.wdBayesNode;
 import DataStructure.wdBayesParametersTree;
 import EBNC.wdBayes;
 import Utils.SUtils;
+import objectiveFunction.ObjectiveFunctionCLL_w;
+import objectiveFunction.parallel.ParallelObjectiveFunctionCLL_w;
 import weka.core.Instance;
 import weka.core.Instances;
 
 /**
- * Per-instance discriminative (CLL) data-loss gradient, ported from
- * {@code objectiveFunction.ObjectiveFunctionCLL_d#getValues(double[])} in the
- * EBNC library. Only the non-regularized per-instance data term is
+ * Per-instance discriminative (CLL) data-loss gradient, ported from the EBNC
+ * library objective the model was built with: {@code ObjectiveFunctionCLL_d}
+ * for dCCBN (log-linear coefficients over indicator features) and
+ * {@code ObjectiveFunctionCLL_w} for wCCBN (weights that multiply the
+ * log-probability tables, so each term is scaled by its table value). Only the non-regularized per-instance data term is
  * reproduced here: DP-SGD clips and noises the data-loss gradient per
  * sample, then adds the data-independent regularization gradient in the
  * clear afterwards (post-processing), so the regularization branch of the
@@ -49,7 +53,7 @@ import weka.core.Instances;
  *
  * <p>Correctness gate: summing {@link #gradient(int, double[])} over every
  * instance of a dataset must reproduce exactly the batch gradient that
- * {@code ObjectiveFunctionCLL_d#getValues(double[])} computes when
+ * library objective's {@code getValues(double[])} computes when
  * {@code wdBayes#getRegularization()} is {@code false}.</p>
  */
 public final class PerSampleCLLGradient implements SampleGradient {
@@ -91,6 +95,12 @@ public final class PerSampleCLLGradient implements SampleGradient {
     private final int np;
 
     /**
+     * Whether the tree holds wCCBN weights, whose features are the model's
+     * log-probability tables, rather than dCCBN coefficients.
+     */
+    private final boolean weighted;
+
+    /**
      * Builds a per-sample gradient computer bound to an already-built
      * wdBayes model.
      *
@@ -106,6 +116,8 @@ public final class PerSampleCLLGradient implements SampleGradient {
         this.nc = algorithm.getNc();
         this.n = algorithm.getnAttributes();
         this.np = tree.getNp();
+        this.weighted = algorithm.getObjectiveFunction() instanceof ObjectiveFunctionCLL_w
+                || algorithm.getObjectiveFunction() instanceof ParallelObjectiveFunctionCLL_w;
     }
 
     /**
@@ -130,25 +142,32 @@ public final class PerSampleCLLGradient implements SampleGradient {
         wdBayesNode[] nodes = new wdBayesNode[n];
         wdBayes.findNodesForInstance(nodes, instance, tree);
 
+        // wCCBN scales every parameter by its log-probability table entry;
+        // dCCBN's features are indicators, i.e. a factor of one.
+        double[] classCounts = tree.getClassCounts();
         double[] probs = new double[nc];
-        for (int c = 0; c < nc; c++) probs[c] = tree.getClassParameter(c);
+        for (int c = 0; c < nc; c++) {
+            probs[c] = tree.getClassParameter(c) * (weighted ? classCounts[c] : 1.0);
+        }
         for (int u = 0; u < nodes.length; u++) {
             wdBayesNode node = nodes[u];
             int v = (int) instance.value(order[u]);
-            for (int c = 0; c < nc; c++) probs[c] += node.getXYParameter(v, c);
+            for (int c = 0; c < nc; c++) {
+                probs[c] += node.getXYParameter(v, c) * (weighted ? node.getXYCount(v, c) : 1.0);
+            }
         }
         SUtils.normalizeInLogDomain(probs);
         SUtils.exp(probs);
 
         for (int c = 0; c < nc; c++) {
-            g[c] += -(SUtils.ind(c, x_C) - probs[c]);
+            g[c] += -(SUtils.ind(c, x_C) - probs[c]) * (weighted ? classCounts[c] : 1.0);
         }
         for (int u = 0; u < nodes.length; u++) {
             wdBayesNode node = nodes[u];
             int v = (int) instance.value(order[u]);
             for (int c = 0; c < nc; c++) {
                 int posp = node.getXYIndex(v, c);
-                g[posp] += -(SUtils.ind(c, x_C) - probs[c]);
+                g[posp] += -(SUtils.ind(c, x_C) - probs[c]) * (weighted ? node.getXYCount(v, c) : 1.0);
             }
         }
         return g;

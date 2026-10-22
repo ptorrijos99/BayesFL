@@ -71,6 +71,12 @@ public final class DPSGDConfig {
     private final double sigma;
 
     /**
+     * Number of clients whose noise shares are summed by secure aggregation
+     * ({@code 1} = each client adds the full noise itself).
+     */
+    private final int nShares;
+
+    /**
      * Builds an immutable DP-SGD configuration and calibrates {@link #sigma()}
      * for the total number of steps ({@code rounds * localSteps}).
      *
@@ -80,10 +86,33 @@ public final class DPSGDConfig {
      * @param rounds       number of federated rounds.
      * @param localSteps   number of full-batch DP-SGD steps per round.
      * @param learningRate fixed learning rate.
-     * @param seed         seed for the shared noise RNG.
+     * @param seed         run seed, kept for bookkeeping; the noise comes from a SecureRandom.
      */
     public DPSGDConfig(double epsilonParam, double delta, double clipC,
                         int rounds, int localSteps, double learningRate, long seed) {
+        this(epsilonParam, delta, clipC, rounds, localSteps, learningRate, seed, 1);
+    }
+
+    /**
+     * Builds a DP-SGD configuration whose noise is split across the clients of a
+     * secure-aggregation round: each client adds a Gaussian share with standard
+     * deviation {@code sigma * C / sqrt(nShares)}, so the aggregate the server
+     * sees carries {@code sigma * C} once. {@link #sigma()} stays calibrated for
+     * the aggregate over {@code rounds * localSteps} steps.
+     *
+     * @param epsilonParam target per-tree epsilon; {@code Double.POSITIVE_INFINITY} disables noise.
+     * @param delta        target delta.
+     * @param clipC        per-sample L2 clipping norm.
+     * @param rounds       number of federated rounds.
+     * @param localSteps   number of full-batch DP-SGD steps per round.
+     * @param learningRate fixed learning rate.
+     * @param seed         run seed, kept for bookkeeping; the noise comes from a SecureRandom.
+     * @param nShares      number of clients whose shares are summed, at least 1.
+     */
+    public DPSGDConfig(double epsilonParam, double delta, double clipC,
+                        int rounds, int localSteps, double learningRate, long seed, int nShares) {
+        if (nShares < 1) throw new IllegalArgumentException("The number of noise shares must be at least 1.");
+        this.nShares = nShares;
         this.epsilonParam = epsilonParam;
         this.delta = delta;
         this.clipC = clipC;
@@ -117,6 +146,7 @@ public final class DPSGDConfig {
 
     /** @return the shared noise RNG seed. */
     public long seed()           { return seed; }
+    public int nShares()         { return nShares; }
 
     /** @return the calibrated Gaussian noise multiplier ({@code 0.0} when DP is disabled). */
     public double sigma()        { return sigma; }

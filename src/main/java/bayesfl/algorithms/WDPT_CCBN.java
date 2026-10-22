@@ -54,6 +54,7 @@ import bayesfl.algorithms.dp.PerSampleCLLGradient;
 import bayesfl.algorithms.dp.SampleGradient;
 import bayesfl.data.Data;
 import bayesfl.model.Model;
+import bayesfl.model.TableCounts;
 import bayesfl.model.WDPT;
 import bayesfl.privacy.NumericNoiseGenerator;
 
@@ -124,6 +125,12 @@ public class WDPT_CCBN implements LocalAlgorithm {
     private DPSGDConfig paramDp;
 
     /**
+     * Whether the tables are securely aggregated: the round-1 release is then
+     * the raw counts plus a noise share, summed by the server.
+     */
+    private final boolean secureTableAggregation;
+
+    /**
      * Constructor.
      *
      * @param options      The options to set the parameters of the algorithm.
@@ -143,11 +150,32 @@ public class WDPT_CCBN implements LocalAlgorithm {
      */
     public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
                      NumericNoiseGenerator noiseGenerator) {
+        this(options, cutPoints, globalClassMaps, noiseGenerator, false);
+    }
+
+    /**
+     * Shared constructor body.
+     *
+     * @param secureTableAggregation whether the tables are securely aggregated (noise shares allowed)
+     */
+    private WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
+                      NumericNoiseGenerator noiseGenerator, boolean secureTableAggregation) {
+        this.secureTableAggregation = secureTableAggregation;
         this.cutPoints = cutPoints;
         this.options = Arrays.copyOf(options, options.length);
         this.globalClassMaps = globalClassMaps;
         this.noiseGenerator = noiseGenerator;
         this.paramDp = null;
+
+        // A noise share is meaningless on its own: it only protects the tables when
+        // the server sums the clients' counts (secure aggregation of the tables).
+        // Otherwise the tables are fused by averaging probabilities, and shares
+        // would not add up to the calibrated noise.
+        if (noiseGenerator != null && noiseGenerator.isShare() && !secureTableAggregation) {
+            throw new UnsupportedOperationException(
+                "Secure-aggregation noise shares need secure aggregation of the tables: WDPT otherwise "
+                + "fuses them by averaging probabilities, not by summing counts");
+        }
 
         // Copy the options to avoid modifying the original array
         try {
@@ -172,8 +200,62 @@ public class WDPT_CCBN implements LocalAlgorithm {
      */
     public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
                      NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp) {
-        this(options, cutPoints, globalClassMaps, noiseGenerator);
+        this(options, cutPoints, globalClassMaps, noiseGenerator, paramDp, false);
+    }
+
+    /**
+     * Constructor with secure aggregation of the tables (AnDEwP): in round 1
+     * each client sends its raw counts plus a share of the noise, the server
+     * sums them and writes the global tables, and the weights only take
+     * private steps from round 2 on, with those global (public) tables as
+     * their features.
+     *
+     * @param options                The options to set the parameters of the algorithm.
+     * @param cutPoints              The cut points of the discretization filter.
+     * @param globalClassMaps        Global class maps for synthetic classes.
+     * @param noiseGenerator         The DP noise generator applied to the raw counts.
+     * @param paramDp                The DP-SGD configuration for the parameter channel (null disables it).
+     * @param secureTableAggregation Whether the tables are securely aggregated.
+     */
+    public WDPT_CCBN(String[] options, double[][] cutPoints, List<Map<String, Integer>> globalClassMaps,
+                     NumericNoiseGenerator noiseGenerator, DPSGDConfig paramDp, boolean secureTableAggregation) {
+        this(options, cutPoints, globalClassMaps, noiseGenerator, secureTableAggregation);
         this.paramDp = paramDp;
+
+        // wCCBN weights multiply the log-probability tables, and those tables are
+        // computed from every local record: without table noise one record shifts
+        // every other record's gradient, so per-record clipping no longer bounds
+        // the sensitivity by C.
+        if (privateWeights() && noiseGenerator == null && isWeightedScheme()) {
+            throw new IllegalArgumentException(
+                "DP-SGD on wCCBN weights requires privatized count tables (-DP): their "
+                + "log-probabilities are the per-record features of the weight gradient");
+        }
+    }
+
+    /**
+     * @return whether the round-1 tables are released as securely aggregated count shares.
+     */
+    private boolean sharesTables() {
+        return secureTableAggregation && noiseGenerator != null;
+    }
+
+    /**
+     * @return whether the released parameters are trained with DP-SGD.
+     */
+    private boolean privateWeights() {
+        return paramDp != null && paramDp.enabled();
+    }
+
+    /**
+     * @return whether the parameter-learning scheme ({@code -P}) is wCCBN.
+     */
+    private boolean isWeightedScheme() {
+        try {
+            return "wCCBN".equalsIgnoreCase(Utils.getOption("P", Arrays.copyOf(options, options.length)));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -200,6 +282,7 @@ public class WDPT_CCBN implements LocalAlgorithm {
         List<Minimizer> minimizers = new ArrayList<>();
         List<ObjectiveFunction> functions = new ArrayList<>();
         List<Map<String, Integer>> syntheticClassMaps = new ArrayList<>();
+        List<TableCounts> countShares = new ArrayList<>();
 
         for (int i = 0; i < combinations.size(); i++) {
             int[] indices = combinations.get(i);
@@ -248,16 +331,34 @@ public class WDPT_CCBN implements LocalAlgorithm {
             // they are needed to build the local model from the global model
             wdBayesParametersTree tree = algorithm.getdParameters_();
 
-            if (noiseGenerator != null) {
+            if (sharesTables()) {
+                // Secure aggregation: release the raw counts plus this client's share
+                // of the noise; the server sums them and writes the global tables.
+                // The local tables are never released.
+                countShares.add(rawCounts(modified, indices, originalData.classIndex())
+                        .privatized(noiseGenerator, false));
+            } else if (noiseGenerator != null) {
                 privatizeTree(tree, modified, indices, originalData.classIndex(), classMap);
 
                 // Refit the round-1 weights against the noisy tables so the shared
-                // parameters are consistent with the tables used at prediction time
-                try {
-                    minimizer.run(algorithm.getObjectiveFunction(), tree.getParameters());
-                } catch (Exception e) {
-                    e.printStackTrace();
+                // parameters are consistent with the tables used at prediction time.
+                // Under DP-SGD the weights are released, so the private round below
+                // learns them instead of this non-private refit.
+                if (!privateWeights()) {
+                    try {
+                        minimizer.run(algorithm.getObjectiveFunction(), tree.getParameters());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+
+            // Under DP-SGD, discard what buildClassifier's optimizer learned from the
+            // raw records and restart from the scheme's constant initialization, which
+            // is data-independent: the private round is then the only thing that moves
+            // the parameters this client releases in round 1.
+            if (privateWeights()) {
+                tree.initializeParameters(algorithm.getM_WeightingInitialization());
             }
 
             trees.add(tree);
@@ -266,7 +367,16 @@ public class WDPT_CCBN implements LocalAlgorithm {
             syntheticClassMaps.add(classMap);
         }
 
-        return new WDPT(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions, data.getNInstances());
+        // With securely aggregated tables the features of round 1 would be the local,
+        // unreleased tables: the weights stay at their public start until the global
+        // tables arrive, and take their first private step in round 2.
+        if (privateWeights() && !sharesTables()) {
+            runPrivateRound(trees, classifiers, data);
+        }
+
+        WDPT model = new WDPT(trees, classifiers, minimizers, combinations, syntheticClassMaps, functions, data.getNInstances());
+        if (sharesTables()) model.setCountShares(countShares);
+        return model;
     }
 
     /**
@@ -293,31 +403,9 @@ public class WDPT_CCBN implements LocalAlgorithm {
 
         List<wdBayesParametersTree> newTrees = new ArrayList<>();
 
-        if (paramDp != null && paramDp.enabled()) {
-            // Joint multi-tree DP-SGD refinement (Task 4's optimizer) over the
-            // discriminative CLL data-loss gradient of every tree at once, so
-            // the per-record clipping sensitivity is bounded across the whole
-            // ensemble rather than per tree.
-            int nTrees = oldTrees.size();
-            double[][] treeParams = new double[nTrees][];
-            SampleGradient[] grads = new SampleGradient[nTrees];
-            double[] lambdas = new double[nTrees];
-            for (int i = 0; i < nTrees; i++) {
-                treeParams[i] = oldTrees.get(i).getParameters();
-                wdBayes alg = (wdBayes) ((FilteredClassifier) classifiers.get(i)).getClassifier();
-                grads[i] = new PerSampleCLLGradient(alg);
-                lambdas[i] = alg.getRegularization() ? alg.getLambda() : 0.0;
-            }
-            new DPSGDOptimizer(paramDp).runRound(treeParams, grads, lambdas, data.getNInstances());
-
-            // Re-sync each tree's trie with the final parameters: the gradient
-            // calls above leave it in a stale "probe" state (PerSampleCLLGradient
-            // re-syncs the trie from whichever params it was last called with),
-            // so this write-back must run before the tree is reused for inference.
-            for (int i = 0; i < nTrees; i++) {
-                oldTrees.get(i).copyParameters(treeParams[i]);
-                newTrees.add(oldTrees.get(i));
-            }
+        if (privateWeights()) {
+            runPrivateRound(oldTrees, classifiers, data);
+            newTrees.addAll(oldTrees);
         } else {
             // Optimize each tree individually using its objective function
             for (int i = 0; i < oldTrees.size(); i++) {
@@ -336,6 +424,38 @@ public class WDPT_CCBN implements LocalAlgorithm {
 
         // Return a new model instance with updated parameters
         return new WDPT(newTrees, classifiers, minimizers, combinations, classMaps, functions, data.getNInstances());
+    }
+
+    /**
+     * Runs one round of joint multi-tree DP-SGD over the discriminative CLL
+     * data-loss gradient of every tree at once, so the per-record clipping
+     * sensitivity is bounded across the whole ensemble rather than per tree.
+     * Every round a client releases, the first included, goes through here.
+     *
+     * @param trees       The parameter trees, updated in place.
+     * @param classifiers The classifiers the trees belong to, in the same order.
+     * @param data        The local data.
+     */
+    private void runPrivateRound(List<wdBayesParametersTree> trees, List<AbstractClassifier> classifiers, Data data) {
+        int nTrees = trees.size();
+        double[][] treeParams = new double[nTrees][];
+        SampleGradient[] grads = new SampleGradient[nTrees];
+        double[] lambdas = new double[nTrees];
+        for (int i = 0; i < nTrees; i++) {
+            treeParams[i] = trees.get(i).getParameters();
+            wdBayes alg = (wdBayes) ((FilteredClassifier) classifiers.get(i)).getClassifier();
+            grads[i] = new PerSampleCLLGradient(alg);
+            lambdas[i] = alg.getRegularization() ? alg.getLambda() : 0.0;
+        }
+        new DPSGDOptimizer(paramDp).runRound(treeParams, grads, lambdas, data.getNInstances());
+
+        // Re-sync each tree's trie with the final parameters: the gradient
+        // calls above leave it in a stale "probe" state (PerSampleCLLGradient
+        // re-syncs the trie from whichever params it was last called with),
+        // so this write-back must run before the tree is reused for inference.
+        for (int i = 0; i < nTrees; i++) {
+            trees.get(i).copyParameters(treeParams[i]);
+        }
     }
 
     /**
@@ -394,6 +514,22 @@ public class WDPT_CCBN implements LocalAlgorithm {
      */
     private void privatizeTree(wdBayesParametersTree tree, Instances modified, int[] parentOriginalIdx,
                                int origClassIdx, Map<String, Integer> classMap) {
+        // 1. Recount, 2. Laplace-perturb and clip at zero, 3. write the tables.
+        TableCounts noisy = rawCounts(modified, parentOriginalIdx, origClassIdx).privatized(noiseGenerator, true);
+        writeTablesFromCounts(tree, noisy, classMap);
+    }
+
+    /**
+     * Recounts the released sufficient statistics of one SPnDE from the data it
+     * was built on (the tree already holds probabilities): synthetic-class prior
+     * counts and the conditional counts of the non-parent attributes.
+     *
+     * @param modified          the tree's relabelled data
+     * @param parentOriginalIdx the parent attributes of the combination, in original indices
+     * @param origClassIdx      the class index in the original data
+     * @return the raw counts
+     */
+    private static TableCounts rawCounts(Instances modified, int[] parentOriginalIdx, int origClassIdx) {
         int nc = modified.classAttribute().numValues();
         int a = modified.numAttributes() - 1; // predictive attributes; synthetic class is last
 
@@ -420,22 +556,31 @@ public class WDPT_CCBN implements LocalAlgorithm {
             }
         }
 
-        // 2. Laplace-perturb the released counts and clip at zero
-        double[] noisyClass = noiseGenerator.privatize(classCounts);
+        return new TableCounts(modified, parentPos, classCounts, xyCounts);
+    }
+
+    /**
+     * Overwrites a tree's probability tables with tables derived from (noisy)
+     * counts. Probability conversion replicates
+     * wdBayesParametersTree.countsToProbability: linear-scale m-estimates for the
+     * class prior, log-scale m-estimates clamped at 1e-75 for conditionals; parent
+     * tables are reconstructed deterministically from the prior. The server uses
+     * it too, to write the global tables from the securely aggregated counts.
+     *
+     * @param tree     the tree to overwrite
+     * @param counts   the counts, already clamped at zero
+     * @param classMap the synthetic class map of the tree
+     */
+    public static void writeTablesFromCounts(wdBayesParametersTree tree, TableCounts counts,
+                                             Map<String, Integer> classMap) {
+        Instances header = counts.header();
+        Map<Integer, Integer> parentPos = counts.parentPos();
+        double[] noisyClass = counts.cls();
+        double[][][] xyCounts = counts.xy();
+        int nc = header.classAttribute().numValues();
+        int a = header.numAttributes() - 1;
         double noisyN = 0.0;
-        for (int c = 0; c < nc; c++) {
-            noisyClass[c] = Math.max(0.0, noisyClass[c]);
-            noisyN += noisyClass[c];
-        }
-        for (int u = 0; u < a; u++) {
-            if (parentPos.containsKey(u)) continue;
-            for (int v = 0; v < xyCounts[u].length; v++) {
-                xyCounts[u][v] = noiseGenerator.privatize(xyCounts[u][v]);
-                for (int c = 0; c < nc; c++) {
-                    xyCounts[u][v][c] = Math.max(0.0, xyCounts[u][v][c]);
-                }
-            }
-        }
+        for (double c : noisyClass) noisyN += c;
 
         // 3. Overwrite the tree tables with probabilities from the noisy counts
         double[] treeClass = tree.getClassCounts();
@@ -447,7 +592,7 @@ public class WDPT_CCBN implements LocalAlgorithm {
         for (int pos = 0; pos < a; pos++) {
             int u = order[pos];
             wdBayesNode node = tree.wdBayesNode_[pos];
-            int k = modified.attribute(u).numValues();
+            int k = header.attribute(u).numValues();
 
             if (parentPos.containsKey(u)) {
                 // Deterministic reconstruction: all mass on the parent value
@@ -456,13 +601,17 @@ public class WDPT_CCBN implements LocalAlgorithm {
                 for (Map.Entry<String, Integer> e : classMap.entrySet()) {
                     int y = e.getValue();
                     String[] parts = e.getKey().split("\\|\\|\\|");
-                    int vStar = modified.attribute(u).indexOfValue(parts[p]);
-                    if (vStar < 0) {
+                    int vStar = header.attribute(u).indexOfValue(parts[p]);
+                    if (vStar < 0 && !"?".equals(parts[p])) {
                         throw new IllegalStateException("Parent value '" + parts[p]
-                                + "' not found in attribute " + modified.attribute(u).name());
+                                + "' not found in attribute " + header.attribute(u).name());
                     }
+                    // parts[p] == "?" (Weka's missing marker, vStar < 0): no observed
+                    // parent value for this synthetic class -> spread the mass uniformly
+                    // (deterministic post-processing of the noisy prior, no leak).
                     for (int v = 0; v < k; v++) {
-                        double count = (v == vStar) ? noisyClass[y] : 0.0;
+                        double count = vStar < 0 ? noisyClass[y] / k
+                                : ((v == vStar) ? noisyClass[y] : 0.0);
                         node.setXYCount(v, y, Math.log(Math.max(mEsti(count, noisyClass[y], k), 1e-75)));
                     }
                 }

@@ -70,5 +70,18 @@ public interface NumericNoiseGenerator extends NoiseGenerator {
      * @param newSensitivity the new sensitivity value
      */
     void setSensitivity(double newSensitivity);
+
+    /**
+     * Whether each call returns only this client's share of the noise, as under
+     * secure aggregation, where the server sees the sum of all shares. A share
+     * is not private on its own, so the client must not post-process it (for
+     * example, clamping counts at zero): that would bias the sum. Any clamping
+     * belongs to the server, after aggregation.
+     *
+     * @return {@code true} if the generated noise is a share of the aggregate noise
+     */
+    default boolean isShare() {
+        return false;
+    }
 }
 

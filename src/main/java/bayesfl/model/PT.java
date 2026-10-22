@@ -220,11 +220,15 @@ public class PT implements NumericDenoisableModel {
             for (int p = 0; p < parents.length; p++) {
                 int att = parents[p] < classIndex ? parents[p] : parents[p] - 1;
                 int vStar = header.attribute(att).indexOfValue(parts[p]);
-                if (vStar < 0) {
+                if (vStar < 0 && !"?".equals(parts[p])) {
                     throw new IllegalStateException("Parent value '" + parts[p]
                             + "' not found in attribute " + header.attribute(att).name()
                             + " — DP requires pre-discretized categorical data");
                 }
+                // parts[p] == "?" (Weka's missing marker, vStar < 0): the records under
+                // this synthetic class have no observed parent value, so the mass is
+                // spread uniformly instead — still a deterministic function of the noisy
+                // prior (the raw un-noised counts must never be released).
                 setDeterministicCounts((DiscreteEstimator) conds[att][yIdx], vStar, noisyCount);
             }
         }
@@ -234,13 +238,14 @@ public class PT implements NumericDenoisableModel {
      * Overwrites a {@link DiscreteEstimator} so that value {@code vStar} carries
      * {@code mass} raw counts and every other value carries zero, keeping Weka's
      * +1 initialization convention (server recovers raw counts as getCount-1).
+     * A negative {@code vStar} (missing parent value) spreads the mass uniformly.
      */
     private void setDeterministicCounts(DiscreteEstimator estimator, int vStar, double mass) {
         int k = estimator.getNumSymbols();
         double[] counts = new double[k];
         double sum = 0.0;
         for (int v = 0; v < k; v++) {
-            counts[v] = (v == vStar ? mass : 0.0) + 1.0;
+            counts[v] = (vStar < 0 ? mass / k : (v == vStar ? mass : 0.0)) + 1.0;
             sum += counts[v];
         }
         try {
@@ -279,8 +284,12 @@ public class PT implements NumericDenoisableModel {
         /* 2. Laplace noise on raw counts */
         double[] noisy = noise.privatize(raw);
 
-        /* 3. clip negatives (consistency only — no smoothing α here) */
-        for (int i = 0; i < k; i++) noisy[i] = Math.max(0.0, noisy[i]);
+        /* 3. clip negatives (consistency only — no smoothing α here). A share of
+              the noise (secure aggregation) is left untouched: clamping it would
+              bias the sum, so the server clamps the aggregate instead. */
+        if (!noise.isShare()) {
+            for (int i = 0; i < k; i++) noisy[i] = Math.max(0.0, noisy[i]);
+        }
 
         /* 4. re-add Weka's +1 so the server's getCount(i)-1.0 still recovers the noisy count */
         double newSum = 0.0;

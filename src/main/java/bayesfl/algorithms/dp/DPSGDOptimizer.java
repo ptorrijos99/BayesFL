@@ -31,6 +31,8 @@ package bayesfl.algorithms.dp;
 /**
  * Third party imports.
  */
+import bayesfl.privacy.NoiseGenerator;
+
 import java.util.Random;
 
 /**
@@ -54,11 +56,14 @@ public final class DPSGDOptimizer {
     private final Random rng;
 
     /**
-     * @param cfg the DP-SGD configuration; also seeds the shared noise RNG.
+     * @param cfg the DP-SGD configuration.
      */
     public DPSGDOptimizer(DPSGDConfig cfg) {
         this.cfg = cfg;
-        this.rng = new Random(cfg.seed());
+        // Fresh, unpredictable noise for every client and round. A seeded RNG
+        // rebuilt each round replays the same draw: clients would share it and
+        // the server could cancel it by differencing consecutive releases.
+        this.rng = NoiseGenerator.rng;
     }
 
     /**
@@ -88,7 +93,8 @@ public final class DPSGDOptimizer {
                           double[] lambdaPerTree, int numInstances) {
         int nTrees = treeParams.length;
         double C = cfg.clipC();
-        double noiseStd = cfg.sigma() * C;
+        // Under secure aggregation each client adds only its share of the noise.
+        double noiseStd = cfg.sigma() * C / Math.sqrt(cfg.nShares());
 
         for (int step = 0; step < cfg.localSteps(); step++) {
             double[][] acc = new double[nTrees][];

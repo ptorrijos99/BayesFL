@@ -40,7 +40,9 @@ import org.apache.commons.math3.util.MathArrays;
  * Local application imports.
  */
 import bayesfl.model.Model;
+import bayesfl.model.TableCounts;
 import bayesfl.model.WDPT;
+import bayesfl.algorithms.WDPT_CCBN;
 import weka.classifiers.AbstractClassifier;
 
 import java.util.ArrayList;
@@ -117,6 +119,10 @@ public class WDPT_Fusion_Server implements Fusion {
 
         int nTrees = reference.getTrees().size();
 
+        // Round 1 of securely aggregated tables: every client sent count shares.
+        boolean countShares = fuseProbabilities;
+        for (Model m : models) countShares &= ((WDPT) m).getCountShares() != null;
+
         for (int t = 0; t < nTrees; t++) {
             wdBayesParametersTree fused = reference.getTrees().get(t);
 
@@ -124,7 +130,14 @@ public class WDPT_Fusion_Server implements Fusion {
                 this.fuseParameters(fused, models, t);
             }
 
-            if (fuseProbabilities) {
+            if (countShares) {
+                // Sum the counts (the noise shares add up to the calibrated noise),
+                // clamp the sum and write the global tables from it. Never average:
+                // the reference tree still holds client 0's local, unreleased tables.
+                List<TableCounts> parts = new ArrayList<>();
+                for (Model m : models) parts.add(((WDPT) m).getCountShares().get(t));
+                WDPT_CCBN.writeTablesFromCounts(fused, TableCounts.sum(parts).clampAtZero(), classMaps.get(t));
+            } else if (fuseProbabilities) {
                 this.fuseProbabilities(fused, models, t);
             }
 

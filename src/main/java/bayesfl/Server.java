@@ -205,6 +205,7 @@ public class Server {
      */
     public void setnIterations(int nIterations) {
         this.nIterations = nIterations;
+        for (Client client : clients) client.setNIterations(nIterations);
     }
 
     /**

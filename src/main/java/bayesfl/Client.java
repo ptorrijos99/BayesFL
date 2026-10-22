@@ -91,6 +91,19 @@ public class Client {
 
     private int iteration;
     
+    /**
+     * Total number of rounds of the run, set by the server; the last round
+     * always saves its statistics.
+     */
+    private int nIterations = 0;
+
+    /**
+     * Save the statistics every this many rounds (plus the first and the last).
+     * Long private runs take one step per round and cannot afford to evaluate
+     * every client on train and test in every round.
+     */
+    private static int statsEvery = 1;
+
     private String experimentName;
 
     /**
@@ -157,7 +170,7 @@ public class Client {
         localModel = localAlgorithm.buildLocalModel(localModel, data);
         double time = (System.currentTimeMillis() - start) / 1000;
         
-        if (buildStats)  {
+        if (buildStats && saveStatsAt(iteration, statsEvery, nIterations))  {
             localModel.saveStats(experimentName, "Client/Build", path, nClients, id, data, iteration, time);
         }
     }
@@ -184,7 +197,7 @@ public class Client {
         localModel = localFusion.fusion(localModel, globalModel);
         double time = (System.currentTimeMillis() - start) / 1000;
 
-        if (fusionStats) {
+        if (fusionStats && saveStatsAt(iteration, statsEvery, nIterations)) {
             localModel.saveStats(experimentName, "Client/Fusion", path, nClients, id, data, iteration, time);
         }
         
@@ -194,7 +207,7 @@ public class Client {
             localModel = localAlgorithm.refinateLocalModel(oldModel, localModel, data);
             time = (System.currentTimeMillis() - start) / 1000;
 
-            if (fusionStats)  {
+            if (fusionStats && saveStatsAt(iteration, statsEvery, nIterations))  {
                 localModel.saveStats(experimentName, "Client/Refinement", path, nClients, id, data, iteration, time);
             }
         }
@@ -204,6 +217,39 @@ public class Client {
      * Set the ID of the client.
      * @param id The ID of the client.
      */
+    /**
+     * Whether a round saves its statistics: the first round, every
+     * {@code every}-th round and the last one. The resume logic treats a fold as
+     * complete when it finds the final iteration, so that one is never skipped.
+     *
+     * @param iteration   the current round, starting at 1
+     * @param every       save every this many rounds
+     * @param nIterations the total number of rounds (0 if unknown)
+     * @return whether to save the statistics of this round
+     */
+    static boolean saveStatsAt(int iteration, int every, int nIterations) {
+        return iteration == 1 || iteration % every == 0 || iteration == nIterations;
+    }
+
+    /**
+     * Sets how often the clients save their statistics.
+     *
+     * @param every save every this many rounds (plus the first and the last), at least 1
+     */
+    public static void setStatsEvery(int every) {
+        if (every < 1) throw new IllegalArgumentException("statsEvery must be at least 1");
+        statsEvery = every;
+    }
+
+    /**
+     * Sets the total number of rounds of the run.
+     *
+     * @param nIterations the total number of rounds
+     */
+    public void setNIterations(int nIterations) {
+        this.nIterations = nIterations;
+    }
+
     public void setID(int id) {
         this.id = id;
     }
