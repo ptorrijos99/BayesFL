@@ -124,13 +124,18 @@ public class FedMiniAnDEExperiment {
         // data instead of a full-dimensional Gaussian NB, so smoothing (γ > 0) is usable
         // in continuous mode.
         if (args.length > 15) cgNBDiscretized = args[15].equalsIgnoreCase("true") || args[15].equals("1");
+        // args[16] = buildOnly: write only the Round-1 Build stats and skip the Fusion
+        // evaluation and Round 2. At K=1 both are redundant with Build.
+        boolean buildOnly = false;
+        if (args.length > 16) buildOnly = args[16].equalsIgnoreCase("true") || args[16].equals("1");
 
         if (epsilon > 0) {
             noiseGenerator = new Laplace_Noise(epsilon, 2.0);
         }
 
         experimentFedMiniAnDE(folder, bbdd, nClients, seed, folds, n, nTrees, bagSize, ensemble,
-                epsilon, discMode, alpha, noiseGenerator, nodeName, continuous, cgPriorVarDof, cgNBDiscretized);
+                epsilon, discMode, alpha, noiseGenerator, nodeName, continuous, cgPriorVarDof, cgNBDiscretized,
+                buildOnly);
     }
 
     public static void experimentFedMiniAnDE(String folder, String bbdd, int nClients, int seed, int nFolds,
@@ -155,6 +160,17 @@ public class FedMiniAnDEExperiment {
                                              double epsilon, String discMode, double alpha,
                                              NumericNoiseGenerator noiseGenerator, String nodeName,
                                              boolean continuous, double cgPriorVarDof, boolean cgNBDiscretized) {
+        experimentFedMiniAnDE(folder, bbdd, nClients, seed, nFolds, n, nTrees, bagSize, ensemble,
+                epsilon, discMode, alpha, noiseGenerator, nodeName, continuous, cgPriorVarDof, cgNBDiscretized,
+                false);
+    }
+
+    public static void experimentFedMiniAnDE(String folder, String bbdd, int nClients, int seed, int nFolds,
+                                             int n, int nTrees, double bagSize, String ensemble,
+                                             double epsilon, String discMode, double alpha,
+                                             NumericNoiseGenerator noiseGenerator, String nodeName,
+                                             boolean continuous, double cgPriorVarDof, boolean cgNBDiscretized,
+                                             boolean buildOnly) {
 
         // CG (conditional-Gaussian) is centralized-only: the federated parameter
         // fusion (Round 2) is not implemented for CG SPnDEs, so force local-only.
@@ -185,26 +201,28 @@ public class FedMiniAnDEExperiment {
         Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed, alpha);
         int actualFolds = splits.length;
 
-        // Completeness check: verify ALL γ files exist
-        int expectedRows = actualFolds * nClients;
-        boolean complete = true;
-        for (double gamma : GAMMA_VALUES) {
-            String op = opBase + gamma;
-            complete = complete && isOpComplete(bbdd, op, nClients, expectedRows);
-            if (!localOnly) {
-                complete = complete && isOpComplete(bbdd, r2OpBase + gamma, nClients, expectedRows);
-            }
-        }
-        if (complete) {
+        // Resume: a fold counts as done once every output file holds it for all
+        // clients. Rows of unfinished folds are dropped, so a killed job restarts
+        // from its first missing fold without duplicating rows.
+        List<String> outputs = outputFiles(bbdd, opBase, r2OpBase, nClients, localOnly, buildOnly);
+        Set<Integer> doneFolds = completedFolds(outputs, nClients);
+        if (doneFolds.size() >= actualFolds) {
             System.out.println("Experiment already complete (all γ files present). Skipping "
                     + r1AlgoTag + " bbdd=" + bbdd + " K=" + nClients + " seed=" + seed);
             return;
         }
-        for (double gamma : GAMMA_VALUES) {
-            deletePartialOutputs(bbdd, opBase + gamma, r2OpBase + gamma, nClients);
+        for (String f : outputs) {
+            keepOnlyFolds(f, doneFolds);
         }
+        System.out.println("Resuming " + r1AlgoTag + " bbdd=" + bbdd + " seed=" + seed + ": "
+                + doneFolds.size() + "/" + actualFolds + " folds already done.");
 
         for (int cv = 0; cv < actualFolds; cv++) {
+            // Detach the fold from `splits`: the discretized copies written back into
+            // it would otherwise stay reachable for the whole run, one dataset per fold.
+            Instances[][] foldSplits = splits[cv];
+            splits[cv] = null;
+            if (doneFolds.contains(cv)) continue;
 
             // ── Phase 0: Discretization ─────────────────────────────────
             System.out.println("\n=== ROUND 0: Discretization (cv=" + cv + ", mode=" + discMode + ") ===\n");
@@ -214,19 +232,19 @@ public class FedMiniAnDEExperiment {
             if (discMode.equals("None")) {
                 System.out.println("Skipping discretization (data assumed already discrete).");
             } else if (discMode.startsWith("Central")) {
-                applyCentralDiscretization(splits[cv], nClients, discMode);
+                applyCentralDiscretization(foldSplits, nClients, discMode);
             } else {
-                cutPoints = federatedDiscretization(splits[cv], nClients, bbdd, cv);
+                cutPoints = federatedDiscretization(foldSplits, nClients, bbdd, cv);
             }
 
             if (cutPoints != null) {
                 try {
                     bayesfl.algorithms.Dummy explicitFilter = new bayesfl.algorithms.Dummy();
                     explicitFilter.setCutPoints(cutPoints);
-                    explicitFilter.setInputFormat(splits[cv][0][0]);
+                    explicitFilter.setInputFormat(foldSplits[0][0]);
                     for (int i = 0; i < nClients; i++) {
-                        splits[cv][i][0] = weka.filters.Filter.useFilter(splits[cv][i][0], explicitFilter);
-                        splits[cv][i][1] = weka.filters.Filter.useFilter(splits[cv][i][1], explicitFilter);
+                        foldSplits[i][0] = weka.filters.Filter.useFilter(foldSplits[i][0], explicitFilter);
+                        foldSplits[i][1] = weka.filters.Filter.useFilter(foldSplits[i][1], explicitFilter);
                     }
                     System.out.println("Dataset explicitly discretized using global cut points.");
                 } catch (Exception e) {
@@ -243,7 +261,7 @@ public class FedMiniAnDEExperiment {
             for (int i = 0; i < nClients; i++) {
                 Weka_Instances data = new Weka_Instances(
                         bbdd + "," + i + "," + cv + "," + nodeName,
-                        splits[cv][i][0], splits[cv][i][1]);
+                        foldSplits[i][0], foldSplits[i][1]);
 
                 mAnDETree_mAnDE alg = new mAnDETree_mAnDE(n, nTrees, bagSize, ensemble, 0.0, cutPoints);
                 alg.setAddNBValues(GAMMA_VALUES);
@@ -272,6 +290,8 @@ public class FedMiniAnDEExperiment {
                 System.out.println("  Client " + i + "/" + nClients + " structure done (" + localSPnDEs.size() + " SPODEs)");
             }
 
+            if (buildOnly) continue;
+
             mAnDETree globalStructure = new mAnDETree(fusedStructure, algorithmRef);
             System.out.println("Fused structure has " + fusedStructure.size() + " SPODEs (from " + nClients + " clients)");
 
@@ -279,7 +299,7 @@ public class FedMiniAnDEExperiment {
             for (int i = 0; i < nClients; i++) {
                 Weka_Instances data = new Weka_Instances(
                         bbdd + "," + i + "," + cv + "," + nodeName,
-                        splits[cv][i][0], splits[cv][i][1]);
+                        foldSplits[i][0], foldSplits[i][1]);
                 globalStructure.saveStats(operation, "Client/Fusion", PATH, nClients, i, data, 1, 0);
             }
 
@@ -311,7 +331,7 @@ public class FedMiniAnDEExperiment {
             for (int i = 0; i < nClients; i++) {
                 Weka_Instances data = new Weka_Instances(
                         bbdd + "," + i + "," + cv + "," + nodeName,
-                        splits[cv][i][0], splits[cv][i][1]);
+                        foldSplits[i][0], foldSplits[i][1]);
 
                 mAnDETree_LocalParams paramAlg = new mAnDETree_LocalParams(globalStructure, null, noiseGenerator);
 
@@ -336,48 +356,96 @@ public class FedMiniAnDEExperiment {
             for (int i = 0; i < nClients; i++) {
                 Weka_Instances data = new Weka_Instances(
                         bbdd + "," + i + "," + cv + "," + nodeName,
-                        splits[cv][i][0], splits[cv][i][1]);
+                        foldSplits[i][0], foldSplits[i][1]);
                 globalParams.saveStats(round2Op, "Client/Fusion", PATH, nClients, i, data, 1, 0);
             }
         }
     }
 
-    // ── Completeness check ──────────────────────────────────────────────
+    // ── Resume support ──────────────────────────────────────────────────
 
-    private static boolean isOpComplete(String bbdd, String op, int nClients, int expectedRows) {
-        // Only check Fusion files — Round 2 Build stats are not saved in the
-        // incremental approach. Round 1 Build exists but Fusion is the
-        // authoritative completeness marker for both rounds.
-        java.io.File f = new java.io.File(PATH + "results/Client/Fusion/" + bbdd + "_" + op + "_" + nClients + ".csv");
-        if (!f.isFile()) return false;
-        return countDataRows(f) >= expectedRows;
-    }
-
-    private static int countDataRows(java.io.File f) {
-        int n = 0;
-        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(f))) {
-            String line = br.readLine(); // header
-            if (line == null) return 0;
-            while ((line = br.readLine()) != null) {
-                if (!line.isEmpty()) n++;
+    /** Every CSV this run writes, one per γ and role. */
+    private static List<String> outputFiles(String bbdd, String opBase, String r2OpBase, int nClients,
+                                            boolean localOnly, boolean buildOnly) {
+        List<String> files = new ArrayList<>();
+        for (double gamma : GAMMA_VALUES) {
+            files.add(resultFile("Client/Build", bbdd, opBase + gamma, nClients));
+            if (buildOnly) continue;
+            files.add(resultFile("Client/Fusion", bbdd, opBase + gamma, nClients));
+            if (!localOnly) {
+                files.add(resultFile("Client/Fusion", bbdd, r2OpBase + gamma, nClients));
             }
-        } catch (java.io.IOException e) {
-            return 0;
         }
-        return n;
+        return files;
     }
 
-    private static void deletePartialOutputs(String bbdd, String operation, String round2Op, int nClients) {
-        String[] roleDirs = { "Client/Build", "Client/Fusion" };
-        for (String role : roleDirs) {
-            for (String op : new String[] { operation, round2Op }) {
-                java.io.File f = new java.io.File(PATH + "results/" + role + "/" + bbdd + "_" + op + "_" + nClients + ".csv");
-                if (f.isFile()) {
-                    if (!f.delete()) {
-                        System.err.println("WARNING: failed to delete stale partial output " + f);
+    private static String resultFile(String role, String bbdd, String op, int nClients) {
+        return PATH + "results/" + role + "/" + bbdd + "_" + op + "_" + nClients + ".csv";
+    }
+
+    /** Folds present for all clients in every file (columns: bbdd,id,cv,...). */
+    private static Set<Integer> completedFolds(List<String> files, int nClients) {
+        Set<Integer> done = null;
+        for (String path : files) {
+            Map<Integer, Set<Integer>> clientsPerFold = new HashMap<>();
+            java.io.File f = new java.io.File(path);
+            if (f.isFile()) {
+                try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(f))) {
+                    String header = br.readLine();
+                    int nCols = header == null ? 0 : header.split(",", -1).length;
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        String[] cols = line.split(",", -1);
+                        if (cols.length != nCols) continue; // truncated last line of a killed job
+                        try {
+                            clientsPerFold.computeIfAbsent(Integer.parseInt(cols[2].trim()), k -> new HashSet<>())
+                                    .add(Integer.parseInt(cols[1].trim()));
+                        } catch (NumberFormatException ignored) {
+                            // malformed row
+                        }
                     }
+                } catch (java.io.IOException e) {
+                    return new HashSet<>();
                 }
             }
+            Set<Integer> fileDone = new HashSet<>();
+            for (Map.Entry<Integer, Set<Integer>> e : clientsPerFold.entrySet()) {
+                if (e.getValue().size() >= nClients) fileDone.add(e.getKey());
+            }
+            if (done == null) done = fileDone;
+            else done.retainAll(fileDone);
+        }
+        return done == null ? new HashSet<>() : done;
+    }
+
+    /** Rewrites a result file keeping the header and the rows of the given folds. */
+    private static void keepOnlyFolds(String path, Set<Integer> folds) {
+        java.io.File f = new java.io.File(path);
+        if (!f.isFile()) return;
+        List<String> kept = new ArrayList<>();
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(f))) {
+            String header = br.readLine();
+            if (header == null) return;
+            kept.add(header);
+            int nCols = header.split(",", -1).length;
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] cols = line.split(",", -1);
+                if (cols.length != nCols) continue;
+                try {
+                    if (folds.contains(Integer.parseInt(cols[2].trim()))) kept.add(line);
+                } catch (NumberFormatException ignored) {
+                    // drop malformed rows
+                }
+            }
+        } catch (java.io.IOException e) {
+            System.err.println("WARNING: could not read " + f + " for resume: " + e.getMessage());
+            return;
+        }
+        try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(f, false))) {
+            for (String l : kept) pw.println(l);
+        } catch (java.io.IOException e) {
+            System.err.println("WARNING: could not rewrite " + f + " for resume: " + e.getMessage());
         }
     }
 
