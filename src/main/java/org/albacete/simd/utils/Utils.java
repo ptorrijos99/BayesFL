@@ -558,13 +558,22 @@ public class Utils {
                     sum++;  // Directed edge in bn2 but not in bn1 (without counting reverse edges, as they are already counted)
                 }
             } else {
-                if (!bn1.containsEdge(e)) {
+                if (!containsUndirected(bn1, e)) {
                     sum++;  // Undirected edge in bn2 but not in bn1
                 }
             }
         }
 
         return sum;
+    }
+
+    /**
+     * Whether g holds the undirected edge e. Graph.containsEdge is a hash lookup and the hash
+     * of an Edge depends on the order of its endpoints, so a --- b is not found when g stores
+     * b --- a, although the two are equal. Both orders are tried.
+     */
+    private static boolean containsUndirected(Graph g, Edge e) {
+        return g.containsEdge(e) || g.containsEdge(Edges.undirectedEdge(e.getNode2(), e.getNode1()));
     }
 
 
@@ -661,7 +670,7 @@ public class Utils {
     public static int countDifferences(Graph g1, Graph g2) {
         int diff = 0;
         for (Edge e : g1.getEdges()) {
-            if (!g2.containsEdge(e)) {
+            if (e.isDirected() ? !g2.containsEdge(e) : !containsUndirected(g2, e)) {
                 diff++;
             }
         }
