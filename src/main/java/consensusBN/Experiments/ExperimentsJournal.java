@@ -434,7 +434,7 @@ public class ExperimentsJournal {
      * Loads GES-learned DAGs for each client (0..nDags-1) using the same
      * file-locking cache as ExperimentMinCutGES.
      */
-    static List<Dag> loadGESDags(String net, String netName, int nDags) {
+    public static List<Dag> loadGESDags(String net, String netName, int nDags) {
         String cachePath = PATH + "results/Cache/";
         new File(cachePath).mkdirs();
         File cacheFile = new File(cachePath + "cachedDAGs-" + net + ".ser");
