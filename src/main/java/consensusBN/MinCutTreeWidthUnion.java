@@ -23,6 +23,10 @@ public class MinCutTreeWidthUnion {
 	public boolean equivalenceSearch = false;
 	public boolean experiments_tw = false;
 	public boolean experiments_perc = false;
+	/** With experiments_perc: stop once the first point of the theta trajectory is recorded. */
+	public boolean stopAtFirstPoint = false;
+	/** True when the run stopped there; false when the sweep ended first (no point was missing). */
+	public boolean stoppedAtFirstPoint = false;
 	public List<Dag> outputExperimentDAGs = new ArrayList<>();
 	public List<Double> outputExperimentTimes = new ArrayList<>();
 	public List<List<Dag>> outputExperimentDAGsList = new ArrayList<>();
@@ -46,6 +50,21 @@ public class MinCutTreeWidthUnion {
 
 	public MinCutTreeWidthUnion(List<Dag> dags, int maxSize, int maxTW, double percentage) {
 		this(dags, maxSize, maxTW);
+		this.percentage = percentage;
+	}
+
+	/**
+	 * Starts from a union built beforehand, so that several methods can share one
+	 * construction of it. The union must be the one this class builds from the same DAGs.
+	 */
+	public MinCutTreeWidthUnion(List<Dag> dags, Dag union, int maxSize, int maxTW, double percentage) {
+		this.setOfInitialDAGs = new ArrayList<>();
+		for (Dag d : dags) {
+			this.setOfInitialDAGs.add(new Dag(d));
+		}
+		this.maxSize = maxSize;
+		this.fusionUnion = union;
+		this.maxTW = maxTW;
 		this.percentage = percentage;
 	}
 
@@ -164,6 +183,23 @@ public class MinCutTreeWidthUnion {
 			}
 
 			if (experiments_perc && max_percentage == 0) {
+				// Every threshold below the first cost returns the untouched union; without this
+				// snapshot the union is never a candidate (e.g. identical inputs give one plateau)
+				if (outputExperimentDAGs.isEmpty() && bestScore > 0) {
+					Graph g = new EdgeListGraph(graph);
+					pdagToDag(g);
+					outputExperimentDAGs.add(new Dag(g));
+					outputExperimentTimes.add((System.currentTimeMillis() - initialTime) / 1000.0);
+					outputExperimentDAGsList.add(new ArrayList<>());
+					for (Dag d : setOfInitialDAGs) {
+						outputExperimentDAGsList.get(outputExperimentDAGsList.size() - 1).add(new Dag(d));
+					}
+					outputExperimentPercentages.add(0.0);
+					if (stopAtFirstPoint) {
+						stoppedAtFirstPoint = true;
+						return this.outputDag = new Dag(g);
+					}
+				}
 				max_percentage = bestScore;
 			}
 

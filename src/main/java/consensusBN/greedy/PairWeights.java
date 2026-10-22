@@ -28,6 +28,7 @@ public class PairWeights {
     private final int r;
     private final int[][] cMoral;
     private final int[][] cSkel;
+    private final int[][] cDir;
     private final long constMoral;
     private final long constSkel;
 
@@ -39,12 +40,16 @@ public class PairWeights {
 
         this.cMoral = new int[n][n];
         this.cSkel = new int[n][n];
+        this.cDir = new int[n][n];
         long sm = 0, ss = 0;
         for (Dag g : inputs) {
             Graph m = Utils.moralize(g);
             for (Edge e : m.getEdges()) bump(cMoral, e);
             sm += m.getNumEdges();
-            for (Edge e : g.getEdges()) bump(cSkel, e);
+            for (Edge e : g.getEdges()) {
+                bump(cSkel, e);
+                cDir[idx(Edges.getDirectedEdgeTail(e))][idx(Edges.getDirectedEdgeHead(e))]++;
+            }
             ss += g.getNumEdges();
         }
         this.constMoral = sm;
@@ -68,6 +73,9 @@ public class PairWeights {
 
     public int countMoral(int a, int b) { return cMoral[a][b]; }
     public int countSkel(int a, int b) { return cSkel[a][b]; }
+
+    /** Number of inputs that hold the arc a->b, in that direction. */
+    public int countDir(int a, int b) { return cDir[a][b]; }
 
     /** SUM over the edges of a MORAL graph of w_ab: the R-dependent part of SMHD. */
     public double objectiveOfMoral(Graph moralGraph) {
@@ -120,6 +128,20 @@ public class PairWeights {
         for (int i = 0; i < cSkel.length; i++)
             for (int j = i + 1; j < cSkel.length; j++)
                 if (cSkel[i][j] > 0) out.add(new int[]{i, j});
+        return out;
+    }
+
+    /**
+     * The wider pool: pairs joined in at least one input MORAL graph, which adds
+     * the pairs that some input only marries as co-parents. Those pairs are the
+     * ones whose moral weight can be negative although no input links them, and
+     * an arc between them is the cheapest way to obtain the moral edge.
+     */
+    public List<int[]> moralPairs() {
+        List<int[]> out = new ArrayList<>();
+        for (int i = 0; i < cMoral.length; i++)
+            for (int j = i + 1; j < cMoral.length; j++)
+                if (cMoral[i][j] > 0) out.add(new int[]{i, j});
         return out;
     }
 

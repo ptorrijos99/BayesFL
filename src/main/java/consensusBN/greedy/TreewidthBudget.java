@@ -21,6 +21,17 @@ public class TreewidthBudget {
 
     private final int maxCliqueSize;
 
+    /**
+     * Use FastTreewidth instead of Utils.getTreeWidth. Off by default so the
+     * journal runs keep their convention; the memetic front study turns it on
+     * and measures every reported treewidth with the same function.
+     */
+    public static boolean fast = false;
+
+    public static int treewidth(Graph g) {
+        return fast ? FastTreewidth.of(g) : Utils.getTreeWidth(g);
+    }
+
     public TreewidthBudget(int maxCliqueSize) {
         this.maxCliqueSize = maxCliqueSize;
     }
@@ -30,7 +41,8 @@ public class TreewidthBudget {
     }
 
     public boolean fits(Graph g) {
-        return maxCliqueSize == Integer.MAX_VALUE || Utils.getTreeWidth(g) <= maxCliqueSize;
+        if (maxCliqueSize == Integer.MAX_VALUE) return true;
+        return fast ? FastTreewidth.fits(g, maxCliqueSize) : treewidth(g) <= maxCliqueSize;
     }
 
     public int maxCliqueSize() { return maxCliqueSize; }

@@ -31,7 +31,9 @@ public class CacheDir {
         String p = path().replace('\\', '/');
         if (p.endsWith("/")) p = p.substring(0, p.length() - 1);
         String base = p.substring(p.lastIndexOf('/') + 1);
-        return base.startsWith("Cache-n") ? base.substring("Cache-n".length()) : "5000";
+        // Cache-n1000, and the other learners' Cache-mix-n1000: the rows are what follows "-n"
+        int k = base.lastIndexOf("-n");
+        return base.startsWith("Cache") && k >= 0 ? base.substring(k + 2) : "5000";
     }
 
     public static Map<Integer, Dag> read(String net) {

@@ -44,6 +44,30 @@ public class StructuralHillClimb {
      */
     public double skelWeight = 0.0;
 
+    /**
+     * Orders moves of equal gain by the inputs. The two objectives depend on the
+     * orientation of an arc only through the pairs it marries, so when a pair is
+     * first joined both orientations have the same gain, and a wrong choice can
+     * leave a v-structure of the inputs turned into a fork that no single
+     * improving move repairs. Among moves of equal gain, the one whose arc
+     * direction is held by more inputs goes first. It never changes which moves
+     * improve the objective; false reproduces the original order.
+     */
+    public boolean dirTieBreak = true;
+
+    /** Inputs holding x->y minus inputs holding y->x. */
+    private int dirMargin(Node x, Node y) {
+        int a = w.idx(x), b = w.idx(y);
+        return w.countDir(a, b) - w.countDir(b, a);
+    }
+
+    /**
+     * Candidate insertions over the pairs of the input moral graphs (c^M >= 1)
+     * instead of the pairs adjacent in some input (c^S >= 1). False reproduces
+     * the original pool.
+     */
+    public boolean poolMoral = false;
+
     /** Only reversals: the skeleton is kept and only the orientation is searched. */
     public boolean fixedSkeleton = false;
 
@@ -108,7 +132,7 @@ public class StructuralHillClimb {
 
         Dag r = initial;
         MoralGraphTracker t = new MoralGraphTracker(w, r);
-        List<int[]> pairs = w.supportedPairs();
+        List<int[]> pairs = poolMoral ? w.moralPairs() : w.supportedPairs();
 
         while (true) {
             List<Move> moves = new ArrayList<>();
@@ -119,9 +143,9 @@ public class StructuralHillClimb {
                 if (fixedSkeleton || r.isAdjacentTo(a, b)) continue;
                 double gs = skelWeight * w.wSkel(p[0], p[1]);
                 double ga = moralWeight * t.gainAddArc(a, b) + gs + immAdd(r, a, b);
-                if (ga < 0) moves.add(new Move(Kind.ADD, a, b, ga));
+                if (ga < 0) moves.add(new Move(Kind.ADD, a, b, ga, -dirMargin(a, b)));
                 double gb = moralWeight * t.gainAddArc(b, a) + gs + immAdd(r, b, a);
-                if (gb < 0) moves.add(new Move(Kind.ADD, b, a, gb));
+                if (gb < 0) moves.add(new Move(Kind.ADD, b, a, gb, -dirMargin(b, a)));
             }
 
             // Removals and reversals over the current arcs.
@@ -131,7 +155,7 @@ public class StructuralHillClimb {
 
                 double gr = moralWeight * t.gainRemoveArc(x, y) + immRemove(r, x, y);
                 double grTotal = gr - skelWeight * w.wSkel(w.idx(x), w.idx(y));
-                if (!fixedSkeleton && grTotal < 0) moves.add(new Move(Kind.REMOVE, x, y, grTotal));
+                if (!fixedSkeleton && grTotal < 0) moves.add(new Move(Kind.REMOVE, x, y, grTotal, 0));
 
                 // Reversal = removal then insertion the other way, evaluated exactly
                 // by applying the removal and undoing it.
@@ -146,11 +170,16 @@ public class StructuralHillClimb {
                     t.addArc(x, y);
                 }
                 // Reversing x->y creates a cycle iff another directed path x ~> y exists.
-                if (gRev < 0 && !otherDirectedPath(r, x, y)) moves.add(new Move(Kind.REVERSE, x, y, gRev));
+                if (gRev < 0 && !otherDirectedPath(r, x, y)) moves.add(new Move(Kind.REVERSE, x, y, gRev, -dirMargin(y, x)));
             }
 
             if (moves.isEmpty()) break;
-            moves.sort(Comparator.comparingDouble(m -> m.gain));
+            if (dirTieBreak) {
+                moves.sort((p, q) -> Math.abs(p.gain - q.gain) > 1e-9
+                        ? Double.compare(p.gain, q.gain) : Integer.compare(p.tie, q.tie));
+            } else {
+                moves.sort(Comparator.comparingDouble(m -> m.gain));
+            }
 
             boolean applied = false;
             for (Move m : moves) {
@@ -183,11 +212,19 @@ public class StructuralHillClimb {
                 if (applied) break;
             }
             if (!applied) break;
+            if (onStep != null) onStep.accept(r);
         }
 
         executionTime = (System.currentTimeMillis() - t0) / 1000.0;
         return r;
     }
+
+    /**
+     * Called after every applied move with the current DAG (not a copy), so a
+     * caller can score the whole trajectory, as MCBNC's theta sweep does, and
+     * select a point of it by a data-free criterion other than the objective.
+     */
+    public java.util.function.Consumer<Dag> onStep = null;
 
     private enum Kind { ADD, REMOVE, REVERSE }
 
@@ -195,8 +232,9 @@ public class StructuralHillClimb {
         final Kind kind;
         final Node x, y;
         final double gain;
-        Move(Kind kind, Node x, Node y, double gain) {
-            this.kind = kind; this.x = x; this.y = y; this.gain = gain;
+        final int tie;
+        Move(Kind kind, Node x, Node y, double gain, int tie) {
+            this.kind = kind; this.x = x; this.y = y; this.gain = gain; this.tie = tie;
         }
     }
 }
