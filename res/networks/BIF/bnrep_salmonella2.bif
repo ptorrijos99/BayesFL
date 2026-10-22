@@ -1,0 +1,73 @@
+network unknown {
+}
+variable AMP {
+  type discrete [ 2 ] { r, s };
+}
+variable CAZ {
+  type discrete [ 2 ] { r, s };
+}
+variable CHL {
+  type discrete [ 2 ] { r, s };
+}
+variable CIP {
+  type discrete [ 2 ] { r, s };
+}
+variable CTX {
+  type discrete [ 2 ] { r, s };
+}
+variable GEN {
+  type discrete [ 2 ] { r, s };
+}
+variable NAL {
+  type discrete [ 2 ] { r, s };
+}
+variable SMX {
+  type discrete [ 2 ] { r, s };
+}
+variable TET {
+  type discrete [ 2 ] { r, s };
+}
+variable TMP {
+  type discrete [ 2 ] { r, s };
+}
+probability ( AMP | SMX ) {
+  (r) 0.805, 0.195;
+  (s) 0.087, 0.913;
+}
+probability ( CAZ | CTX ) {
+  (r) 0.273, 0.727;
+  (s) 0.0, 1.0;
+}
+probability ( CHL | SMX ) {
+  (r) 0.31, 0.69;
+  (s) 0.0, 1.0;
+}
+probability ( CIP | GEN ) {
+  (r) 0.452, 0.548;
+  (s) 0.129, 0.871;
+}
+probability ( CTX | AMP ) {
+  (r) 0.03, 0.97;
+  (s) 0.0, 1.0;
+}
+probability ( GEN | TMP ) {
+  (r) 0.148, 0.852;
+  (s) 0.03, 0.97;
+}
+probability ( NAL | CIP ) {
+  (r) 0.693, 0.307;
+  (s) 0.002, 0.998;
+}
+probability ( SMX ) {
+  table 0.628, 0.372;
+}
+probability ( TET | AMP, SMX ) {
+  (r, r) 0.95, 0.05;
+  (s, r) 0.892, 0.108;
+  (r, s) 0.864, 0.136;
+  (s, s) 0.487, 0.513;
+}
+probability ( TMP | SMX ) {
+  (r) 0.413, 0.587;
+  (s) 0.028, 0.972;
+}

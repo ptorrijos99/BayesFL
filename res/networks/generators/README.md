@@ -19,11 +19,14 @@ missing, so experiment code keeps using `.csv` and `.arff` paths.
 
 - **bnlearn**: networks from the [bnlearn repository](https://www.bnlearn.com/bnrepository/).
   Datasets drawn by forward sampling with python bnlearn (`bnlearn_samples.py`).
-- **bnRep**: discrete networks with more than 20 nodes from the R package
-  [bnRep](https://cran.r-project.org/package=bnRep), exported with
-  `bnrep_export.R` (state names sanitised, samples drawn with `bnlearn::rbn`).
+- **bnRep**: the 202 discrete networks of the R package
+  [bnRep](https://cran.r-project.org/package=bnRep) 0.0.6, exported with
+  `bnrep_export.R` (state and node names sanitised, undefined CPT columns set
+  to uniform, samples drawn with `bnlearn::rbn`). Its summary table lists a
+  second `asia`, but the package ships only the 8-node one.
   Prefixed `bnrep_` because bnRep and bnlearn share names (`earthquake`).
-  `bnrep_forest` has no `.xbif`: the pgmpy conversion of its BIF fails.
+  `bnrep_forest` and `bnrep_tbm` have no `.xbif`: the pgmpy conversion of their
+  BIFs fails.
 
 No sampler fixed a seed, so the datasets in the repository cannot be redrawn
 identically; they are the reference data of the experiments.

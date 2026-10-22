@@ -1,0 +1,68 @@
+network unknown {
+}
+variable Age {
+  type discrete [ 2 ] { Young, Adult };
+}
+variable Gender {
+  type discrete [ 2 ] { Female, Male };
+}
+variable Fear {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable Think {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable Hands {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable Life {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable News {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable Sleep {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+variable Heart {
+  type discrete [ 3 ] { Disagree, Neither, Agree };
+}
+probability ( Age ) {
+  table 0.4738956, 0.5261044;
+}
+probability ( Gender ) {
+  table 0.91967871, 0.08032129;
+}
+probability ( Fear | Life ) {
+  (Disagree) 0.2624113, 0.4539007, 0.2836879;
+  (Neither) 0.05263158, 0.31578947, 0.63157895;
+  (Agree) 0.03921569, 0.09803922, 0.86274510;
+}
+probability ( Think ) {
+  table 0.3453815, 0.2891566, 0.3654618;
+}
+probability ( Hands | Heart ) {
+  (Disagree) 0.96932515, 0.03067485, 0.00000000;
+  (Neither) 0.76595745, 0.17021277, 0.06382979;
+  (Agree) 0.5128205, 0.2051282, 0.2820513;
+}
+probability ( Life | Heart ) {
+  (Disagree) 0.73619632, 0.19631902, 0.06748466;
+  (Neither) 0.3191489, 0.3829787, 0.2978723;
+  (Agree) 0.1538462, 0.1794872, 0.6666667;
+}
+probability ( News | Think ) {
+  (Disagree) 0.6744186, 0.1976744, 0.1279070;
+  (Neither) 0.4166667, 0.3888889, 0.1944444;
+  (Agree) 0.1428571, 0.1758242, 0.6813187;
+}
+probability ( Sleep | Heart ) {
+  (Disagree) 0.97546012, 0.02453988, 0.00000000;
+  (Neither) 0.65957447, 0.27659574, 0.06382979;
+  (Agree) 0.4615385, 0.3333333, 0.2051282;
+}
+probability ( Heart | News ) {
+  (Disagree) 0.96039604, 0.02970297, 0.00990099;
+  (Neither) 0.6065574, 0.2622951, 0.1311475;
+  (Agree) 0.3333333, 0.3218391, 0.3448276;
+}

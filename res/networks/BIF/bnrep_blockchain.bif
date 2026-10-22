@@ -1,0 +1,135 @@
+network unknown {
+}
+variable BA {
+  type discrete [ 2 ] { Low, High };
+}
+variable COMPB {
+  type discrete [ 2 ] { Low, High };
+}
+variable COMPX {
+  type discrete [ 2 ] { Low, High };
+}
+variable CP {
+  type discrete [ 2 ] { Low, High };
+}
+variable PEOU {
+  type discrete [ 2 ] { Low, High };
+}
+variable PFB {
+  type discrete [ 2 ] { Low, High };
+}
+variable PR {
+  type discrete [ 2 ] { Low, High };
+}
+variable PU {
+  type discrete [ 2 ] { Low, High };
+}
+variable RA {
+  type discrete [ 2 ] { Low, High };
+}
+variable TE {
+  type discrete [ 2 ] { Low, High };
+}
+variable TKH {
+  type discrete [ 2 ] { Low, High };
+}
+variable TMS {
+  type discrete [ 2 ] { Low, High };
+}
+probability ( BA | CP, PEOU, PR, PU ) {
+  (Low, Low, Low, Low) 1.0, 0.0;
+  (High, Low, Low, Low) 0.5, 0.5;
+  (Low, High, Low, Low) 1.0, 0.0;
+  (High, High, Low, Low) 0.0, 1.0;
+  (Low, Low, High, Low) 0.5, 0.5;
+  (High, Low, High, Low) 0.06, 0.94;
+  (Low, High, High, Low) 0.0, 1.0;
+  (High, High, High, Low) 0.0, 1.0;
+  (Low, Low, Low, High) 0.0, 1.0;
+  (High, Low, Low, High) 0.13, 0.87;
+  (Low, High, Low, High) 0.0, 1.0;
+  (High, High, Low, High) 0.105, 0.895;
+  (Low, Low, High, High) 0.0, 1.0;
+  (High, Low, High, High) 0.07, 0.93;
+  (Low, High, High, High) 0.15, 0.85;
+  (High, High, High, High) 0.03, 0.97;
+}
+probability ( COMPB ) {
+  table 0.67, 0.33;
+}
+probability ( COMPX ) {
+  table 0.33, 0.67;
+}
+probability ( CP ) {
+  table 0.2, 0.8;
+}
+probability ( PEOU | COMPX, PFB, TE, TKH ) {
+  (Low, Low, Low, Low) 1.0, 0.0;
+  (High, Low, Low, Low) 0.5, 0.5;
+  (Low, High, Low, Low) 0.9, 0.1;
+  (High, High, Low, Low) 0.5, 0.5;
+  (Low, Low, High, Low) 1.0, 0.0;
+  (High, Low, High, Low) 0.8, 0.2;
+  (Low, High, High, Low) 0.75, 0.25;
+  (High, High, High, Low) 0.42, 0.58;
+  (Low, Low, Low, High) 0.5, 0.5;
+  (High, Low, Low, High) 0.6, 0.4;
+  (Low, High, Low, High) 0.57, 0.43;
+  (High, High, Low, High) 0.24, 0.76;
+  (Low, Low, High, High) 0.25, 0.75;
+  (High, Low, High, High) 0.0, 1.0;
+  (Low, High, High, High) 0.7, 0.3;
+  (High, High, High, High) 0.36, 0.64;
+}
+probability ( PFB ) {
+  table 0.73, 0.27;
+}
+probability ( PR ) {
+  table 0.27, 0.73;
+}
+probability ( PU | COMPB, PEOU, RA, TE, TMS ) {
+  (Low, Low, Low, Low, Low) 0.33, 0.67;
+  (High, Low, Low, Low, Low) 0.0, 1.0;
+  (Low, High, Low, Low, Low) 0.5, 0.5;
+  (High, High, Low, Low, Low) 0.5, 0.5;
+  (Low, Low, High, Low, Low) 0.5, 0.5;
+  (High, Low, High, Low, Low) 0.0, 1.0;
+  (Low, High, High, Low, Low) 0.25, 0.75;
+  (High, High, High, Low, Low) 0.2, 0.8;
+  (Low, Low, Low, High, Low) 0.0, 1.0;
+  (High, Low, Low, High, Low) 1.0, 0.0;
+  (Low, High, Low, High, Low) 0.0, 1.0;
+  (High, High, Low, High, Low) 0.0, 1.0;
+  (Low, Low, High, High, Low) 0.25, 0.75;
+  (High, Low, High, High, Low) 0.0, 1.0;
+  (Low, High, High, High, Low) 0.0, 1.0;
+  (High, High, High, High, Low) 0.0, 1.0;
+  (Low, Low, Low, Low, High) 0.67, 0.33;
+  (High, Low, Low, Low, High) 0.6, 0.4;
+  (Low, High, Low, Low, High) 0.33, 0.67;
+  (High, High, Low, Low, High) 0.5, 0.5;
+  (Low, Low, High, Low, High) 0.45, 0.55;
+  (High, Low, High, Low, High) 0.35, 0.65;
+  (Low, High, High, Low, High) 0.53, 0.47;
+  (High, High, High, Low, High) 0.07, 0.93;
+  (Low, Low, Low, High, High) 0.33, 0.67;
+  (High, Low, Low, High, High) 0.33, 0.67;
+  (Low, High, Low, High, High) 0.0, 1.0;
+  (High, High, Low, High, High) 0.0, 1.0;
+  (Low, Low, High, High, High) 0.25, 0.75;
+  (High, Low, High, High, High) 0.0, 1.0;
+  (Low, High, High, High, High) 0.0, 1.0;
+  (High, High, High, High, High) 0.0, 1.0;
+}
+probability ( RA ) {
+  table 0.625, 0.375;
+}
+probability ( TE ) {
+  table 0.86, 0.14;
+}
+probability ( TKH ) {
+  table 0.26, 0.74;
+}
+probability ( TMS ) {
+  table 0.66, 0.34;
+}

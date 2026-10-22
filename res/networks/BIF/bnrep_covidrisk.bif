@@ -1,0 +1,74 @@
+network unknown {
+}
+variable HAZARD {
+  type discrete [ 2 ] { low, high };
+}
+variable VULNERABILITY {
+  type discrete [ 2 ] { low, high };
+}
+variable COPING {
+  type discrete [ 2 ] { low, high };
+}
+variable RISK {
+  type discrete [ 2 ] { low, high };
+}
+variable ECONOMIC {
+  type discrete [ 2 ] { low, high };
+}
+variable BUSINESS {
+  type discrete [ 2 ] { low, high };
+}
+variable POLITICAL {
+  type discrete [ 2 ] { low, high };
+}
+variable COMMERCIAL {
+  type discrete [ 2 ] { low, high };
+}
+variable FINANCING {
+  type discrete [ 2 ] { low, high };
+}
+probability ( HAZARD ) {
+  table 0.6629834, 0.3370166;
+}
+probability ( VULNERABILITY | HAZARD ) {
+  (low) 0.45, 0.55;
+  (high) 0.93442623, 0.06557377;
+}
+probability ( COPING | HAZARD, VULNERABILITY ) {
+  (low, low) 0.2962963, 0.7037037;
+  (high, low) 0.07017544, 0.92982456;
+  (low, high) 0.6818182, 0.3181818;
+  (high, high) 0.25, 0.75;
+}
+probability ( RISK | HAZARD, COPING ) {
+  (low, low) 1.0, 0.0;
+  (high, low) 1.0, 0.0;
+  (low, high) 0.779661, 0.220339;
+  (high, high) 0.01785714, 0.98214286;
+}
+probability ( ECONOMIC | COPING, BUSINESS ) {
+  (low, low) 0.7636364, 0.2363636;
+  (high, low) 0.0952381, 0.9047619;
+  (low, high) 0.1818182, 0.8181818;
+  (high, high) 0.07446809, 0.92553191;
+}
+probability ( BUSINESS | VULNERABILITY, COPING ) {
+  (low, low) 0.6, 0.4;
+  (high, low) 0.93478261, 0.06521739;
+  (low, high) 0.1428571, 0.8571429;
+  (high, high) 0.3333333, 0.6666667;
+}
+probability ( POLITICAL | BUSINESS, FINANCING ) {
+  (low, low) 0.8947368, 0.1052632;
+  (high, low) 0.2758621, 0.7241379;
+  (low, high) 0.4736842, 0.5263158;
+  (high, high) 0.05263158, 0.94736842;
+}
+probability ( COMMERCIAL | HAZARD ) {
+  (low) 0.06666667, 0.93333333;
+  (high) 0.1967213, 0.8032787;
+}
+probability ( FINANCING | ECONOMIC ) {
+  (low) 1.0, 0.0;
+  (high) 0.2578125, 0.7421875;
+}

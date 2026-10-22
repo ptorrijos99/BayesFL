@@ -1,0 +1,88 @@
+network unknown {
+}
+variable DragChainLinkBroken {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DragHitchShacklePinOut {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DragRopeFault {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DragSubsystem {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DumpRopeFault {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DumpSocketPinOut {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable DumpSubsystem {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable HoistChainPinOut {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable HoistRopeSystem {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable HoistSubsystem {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable RopeSegment {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( DragChainLinkBroken ) {
+  table 0.008, 0.992;
+}
+probability ( DragHitchShacklePinOut ) {
+  table 0.003, 0.997;
+}
+probability ( DragRopeFault ) {
+  table 0.025, 0.975;
+}
+probability ( DragSubsystem | DragChainLinkBroken, DragHitchShacklePinOut, DragRopeFault ) {
+  (TRUE, TRUE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE, TRUE) 0.0, 1.0;
+  (FALSE, FALSE, TRUE) 0.0, 1.0;
+  (TRUE, TRUE, FALSE) 0.0, 1.0;
+  (FALSE, TRUE, FALSE) 0.0, 1.0;
+  (TRUE, FALSE, FALSE) 0.0, 1.0;
+  (FALSE, FALSE, FALSE) 0.0, 1.0;
+}
+probability ( DumpRopeFault ) {
+  table 0.006, 0.994;
+}
+probability ( DumpSocketPinOut ) {
+  table 0.004, 0.996;
+}
+probability ( DumpSubsystem | DumpRopeFault, DumpSocketPinOut ) {
+  (TRUE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE) 0.0, 1.0;
+  (FALSE, FALSE) 0.0, 1.0;
+}
+probability ( HoistChainPinOut ) {
+  table 0.004, 0.996;
+}
+probability ( HoistRopeSystem ) {
+  table 0.003, 0.997;
+}
+probability ( HoistSubsystem | HoistChainPinOut, HoistRopeSystem ) {
+  (TRUE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE) 0.0, 1.0;
+  (FALSE, FALSE) 0.0, 1.0;
+}
+probability ( RopeSegment | DragSubsystem, DumpSubsystem, HoistSubsystem ) {
+  (TRUE, TRUE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE, TRUE) 0.0, 1.0;
+  (FALSE, FALSE, TRUE) 0.0, 1.0;
+  (TRUE, TRUE, FALSE) 0.0, 1.0;
+  (FALSE, TRUE, FALSE) 0.0, 1.0;
+  (TRUE, FALSE, FALSE) 0.0, 1.0;
+  (FALSE, FALSE, FALSE) 0.0, 1.0;
+}

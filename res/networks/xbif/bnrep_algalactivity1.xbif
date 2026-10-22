@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>C</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Chl_a</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DO</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>N</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Te</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Tu</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>pH</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>C</FOR>
+      <GIVEN>pH</GIVEN>
+      <TABLE>0.61 0.39 0.39 0.61 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Chl_a</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DO</FOR>
+      <GIVEN>Chl_a</GIVEN>
+      <GIVEN>Te</GIVEN>
+      <TABLE>0.5 0.5 0.57 0.43 0.05 0.95 0.63 0.37 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>N</FOR>
+      <GIVEN>pH</GIVEN>
+      <TABLE>0.35 0.65 0.73 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P</FOR>
+      <GIVEN>N</GIVEN>
+      <GIVEN>Tu</GIVEN>
+      <TABLE>0.83 0.17 0.7 0.3 0.47 0.53 0.18 0.82 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Te</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Tu</FOR>
+      <GIVEN>C</GIVEN>
+      <GIVEN>Te</GIVEN>
+      <TABLE>0.22 0.78 0.44 0.56 0.61 0.39 0.74 0.26 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>pH</FOR>
+      <GIVEN>DO</GIVEN>
+      <GIVEN>Te</GIVEN>
+      <TABLE>0.97 0.03 0.46 0.54 0.55 0.45 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

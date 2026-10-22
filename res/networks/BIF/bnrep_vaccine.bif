@@ -1,0 +1,26 @@
+network unknown {
+}
+variable Disease {
+  type discrete [ 3 ] { Healthy, Mildly, Severly };
+}
+variable Screening_Test {
+  type discrete [ 2 ] { Negative, Positive };
+}
+variable Vaccine {
+  type discrete [ 2 ] { No, Yes };
+}
+probability ( Disease | Screening_Test ) {
+  (Negative) 0.5, 0.4, 0.1;
+  (Positive) 0.24, 0.35, 0.41;
+}
+probability ( Screening_Test ) {
+  table 0.6, 0.4;
+}
+probability ( Vaccine | Disease, Screening_Test ) {
+  (Healthy, Negative) 0.8, 0.2;
+  (Mildly, Negative) 0.5, 0.5;
+  (Severly, Negative) 0.2, 0.8;
+  (Healthy, Positive) 0.6, 0.4;
+  (Mildly, Positive) 0.5, 0.5;
+  (Severly, Positive) 0.2, 0.8;
+}

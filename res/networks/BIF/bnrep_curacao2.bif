@@ -1,0 +1,176 @@
+network unknown {
+}
+variable CoastalView {
+  type discrete [ 2 ] { no, yes };
+}
+variable DistanceToTourismCore {
+  type discrete [ 3 ] { distant, nearby, inside };
+}
+variable ImmediateBeachAccess {
+  type discrete [ 2 ] { no, yes };
+}
+variable NaturalAmenities {
+  type discrete [ 2 ] { low, high };
+}
+variable NeighborhoodSafetyScore {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable ProximityToPOIs {
+  type discrete [ 3 ] { far, near, immediate };
+}
+variable ProximityToSouthernCoast {
+  type discrete [ 3 ] { far, near, immediate };
+}
+variable RoadsWithin1KM {
+  type discrete [ 2 ] { no, yes };
+}
+variable SiteInfrastructure {
+  type discrete [ 2 ] { low, high };
+}
+variable SuitabilityForTourism {
+  type discrete [ 2 ] { no, yes };
+}
+variable UtilityAccess {
+  type discrete [ 2 ] { no, yes };
+}
+variable ViewExtent {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable ViewQuality {
+  type discrete [ 2 ] { low, high };
+}
+probability ( CoastalView ) {
+  table 0.5, 0.5;
+}
+probability ( DistanceToTourismCore ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( ImmediateBeachAccess ) {
+  table 0.5, 0.5;
+}
+probability ( NaturalAmenities | ImmediateBeachAccess, ProximityToPOIs, ProximityToSouthernCoast ) {
+  (no, far, far) 1.0, 0.0;
+  (yes, far, far) 0.0, 1.0;
+  (no, near, far) 0.8, 0.2;
+  (yes, near, far) 0.0, 1.0;
+  (no, immediate, far) 0.5, 0.5;
+  (yes, immediate, far) 0.0, 1.0;
+  (no, far, near) 0.7, 0.3;
+  (yes, far, near) 0.0, 1.0;
+  (no, near, near) 0.6, 0.4;
+  (yes, near, near) 0.0, 1.0;
+  (no, immediate, near) 0.3, 0.7;
+  (yes, immediate, near) 0.0, 1.0;
+  (no, far, immediate) 0.5, 0.5;
+  (yes, far, immediate) 0.0, 1.0;
+  (no, near, immediate) 0.3, 0.7;
+  (yes, near, immediate) 0.0, 1.0;
+  (no, immediate, immediate) 0.2, 0.8;
+  (yes, immediate, immediate) 0.0, 1.0;
+}
+probability ( NeighborhoodSafetyScore ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( ProximityToPOIs ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( ProximityToSouthernCoast ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( RoadsWithin1KM ) {
+  table 0.5, 0.5;
+}
+probability ( SiteInfrastructure | RoadsWithin1KM, UtilityAccess ) {
+  (no, no) 1.0, 0.0;
+  (yes, no) 0.5, 0.5;
+  (no, yes) 0.5, 0.5;
+  (yes, yes) 0.0, 1.0;
+}
+probability ( SuitabilityForTourism | DistanceToTourismCore, NaturalAmenities, NeighborhoodSafetyScore, SiteInfrastructure, ViewQuality ) {
+  (distant, low, low, low, low) 1.0, 0.0;
+  (nearby, low, low, low, low) 1.0, 0.0;
+  (inside, low, low, low, low) 0.15, 0.85;
+  (distant, high, low, low, low) 0.7, 0.3;
+  (nearby, high, low, low, low) 0.5, 0.5;
+  (inside, high, low, low, low) 0.3, 0.7;
+  (distant, low, medium, low, low) 1.0, 0.0;
+  (nearby, low, medium, low, low) 1.0, 0.0;
+  (inside, low, medium, low, low) 0.1, 0.9;
+  (distant, high, medium, low, low) 0.65, 0.35;
+  (nearby, high, medium, low, low) 0.4, 0.6;
+  (inside, high, medium, low, low) 0.2, 0.8;
+  (distant, low, high, low, low) 1.0, 0.0;
+  (nearby, low, high, low, low) 1.0, 0.0;
+  (inside, low, high, low, low) 1.0, 0.0;
+  (distant, high, high, low, low) 0.625, 0.375;
+  (nearby, high, high, low, low) 0.35, 0.65;
+  (inside, high, high, low, low) 0.35, 0.65;
+  (distant, low, low, high, low) 1.0, 0.0;
+  (nearby, low, low, high, low) 0.9, 0.1;
+  (inside, low, low, high, low) 0.6, 0.4;
+  (distant, high, low, high, low) 0.4, 0.6;
+  (nearby, high, low, high, low) 0.35, 0.65;
+  (inside, high, low, high, low) 0.15, 0.85;
+  (distant, low, medium, high, low) 0.9, 0.1;
+  (nearby, low, medium, high, low) 0.8, 0.2;
+  (inside, low, medium, high, low) 0.5, 0.5;
+  (distant, high, medium, high, low) 0.35, 0.65;
+  (nearby, high, medium, high, low) 0.25, 0.75;
+  (inside, high, medium, high, low) 0.05, 0.95;
+  (distant, low, high, high, low) 0.85, 0.15;
+  (nearby, low, high, high, low) 0.75, 0.25;
+  (inside, low, high, high, low) 0.45, 0.55;
+  (distant, high, high, high, low) 0.325, 0.675;
+  (nearby, high, high, high, low) 0.2, 0.8;
+  (inside, high, high, high, low) 0.3, 0.7;
+  (distant, low, low, low, high) 1.0, 0.0;
+  (nearby, low, low, low, high) 0.8, 0.2;
+  (inside, low, low, low, high) 1.0, 0.0;
+  (distant, high, low, low, high) 0.45, 0.55;
+  (nearby, high, low, low, high) 0.4, 0.6;
+  (inside, high, low, low, high) 0.25, 0.75;
+  (distant, low, medium, low, high) 0.9, 0.1;
+  (nearby, low, medium, low, high) 0.7, 0.3;
+  (inside, low, medium, low, high) 1.0, 0.0;
+  (distant, high, medium, low, high) 0.4, 0.6;
+  (nearby, high, medium, low, high) 0.3, 0.7;
+  (inside, high, medium, low, high) 0.15, 0.85;
+  (distant, low, high, low, high) 0.85, 0.15;
+  (nearby, low, high, low, high) 0.65, 0.35;
+  (inside, low, high, low, high) 0.7, 0.3;
+  (distant, high, high, low, high) 0.375, 0.625;
+  (nearby, high, high, low, high) 0.25, 0.75;
+  (inside, high, high, low, high) 0.25, 0.75;
+  (distant, low, low, high, high) 0.45, 0.55;
+  (nearby, low, low, high, high) 0.45, 0.55;
+  (inside, low, low, high, high) 0.35, 0.65;
+  (distant, high, low, high, high) 0.225, 0.775;
+  (nearby, high, low, high, high) 0.25, 0.75;
+  (inside, high, low, high, high) 0.2, 0.8;
+  (distant, low, medium, high, high) 0.4, 0.6;
+  (nearby, low, medium, high, high) 0.35, 0.65;
+  (inside, low, medium, high, high) 0.25, 0.75;
+  (distant, high, medium, high, high) 0.175, 0.825;
+  (nearby, high, medium, high, high) 0.2, 0.8;
+  (inside, high, medium, high, high) 0.1, 0.9;
+  (distant, low, high, high, high) 0.35, 0.65;
+  (nearby, low, high, high, high) 0.3, 0.7;
+  (inside, low, high, high, high) 0.4, 0.6;
+  (distant, high, high, high, high) 0.15, 0.85;
+  (nearby, high, high, high, high) 0.25, 0.75;
+  (inside, high, high, high, high) 0.2, 0.8;
+}
+probability ( UtilityAccess ) {
+  table 0.5, 0.5;
+}
+probability ( ViewExtent ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( ViewQuality | CoastalView, ViewExtent ) {
+  (no, low) 1.0, 0.0;
+  (yes, low) 0.6, 0.4;
+  (no, medium) 0.5, 0.5;
+  (yes, medium) 0.2, 0.8;
+  (no, high) 0.4, 0.6;
+  (yes, high) 0.0, 1.0;
+}

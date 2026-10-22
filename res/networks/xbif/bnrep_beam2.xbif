@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BeamWidth</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConcreteStrength</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProbabilityOfFailure</NAME>
+      <OUTCOME>Fail</OUTCOME>
+      <OUTCOME>Pass</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Reinforcement</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TempAndHumidity</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterCementRatio</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BeamWidth</FOR>
+      <TABLE>0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConcreteStrength</FOR>
+      <GIVEN>TempAndHumidity</GIVEN>
+      <GIVEN>WaterCementRatio</GIVEN>
+      <TABLE>0.3 0.7 0.35 0.65 0.4 0.6 0.45 0.55 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProbabilityOfFailure</FOR>
+      <GIVEN>BeamWidth</GIVEN>
+      <GIVEN>ConcreteStrength</GIVEN>
+      <GIVEN>Reinforcement</GIVEN>
+      <TABLE>0.35 0.65 0.4 0.6 0.45 0.55 0.5 0.5 0.3 0.7 0.35 0.65 0.4 0.6 0.45 0.55 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Reinforcement</FOR>
+      <TABLE>0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TempAndHumidity</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterCementRatio</FOR>
+      <TABLE>0.55 0.45 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

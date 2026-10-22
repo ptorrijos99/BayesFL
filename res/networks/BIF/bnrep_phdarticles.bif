@@ -1,0 +1,44 @@
+network unknown {
+}
+variable Articles {
+  type discrete [ 3 ] { 0, 1_2, _2 };
+}
+variable Gender {
+  type discrete [ 2 ] { male, female };
+}
+variable Kids {
+  type discrete [ 2 ] { yes, no };
+}
+variable Married {
+  type discrete [ 2 ] { no, yes };
+}
+variable Mentor {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Prestige {
+  type discrete [ 2 ] { low, high };
+}
+probability ( Articles ) {
+  table 0.3005464, 0.4633880, 0.2360656;
+}
+probability ( Gender ) {
+  table 0.5398907, 0.4601093;
+}
+probability ( Kids | Gender ) {
+  (male) 0.4777328, 0.5222672;
+  (female) 0.1900238, 0.8099762;
+}
+probability ( Married | Kids ) {
+  (yes) 0.0, 1.0;
+  (no) 0.5158598, 0.4841402;
+}
+probability ( Mentor | Articles ) {
+  (0) 0.4763636, 0.3600000, 0.1636364;
+  (1_2) 0.2900943, 0.4245283, 0.2853774;
+  (_2) 0.1712963, 0.3564815, 0.4722222;
+}
+probability ( Prestige | Mentor ) {
+  (low) 0.6185567, 0.3814433;
+  (medium) 0.5280899, 0.4719101;
+  (high) 0.3395522, 0.6604478;
+}

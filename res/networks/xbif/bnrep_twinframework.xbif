@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CampusActivities</NAME>
+      <OUTCOME>Campus_activities</OUTCOME>
+      <OUTCOME>No_campus_activities</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EquipmentStatus</NAME>
+      <OUTCOME>Good_equipment</OUTCOME>
+      <OUTCOME>Equipment_abnormality</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PersonnelType</NAME>
+      <OUTCOME>Student</OUTCOME>
+      <OUTCOME>Social_personnel</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SocialActivities</NAME>
+      <OUTCOME>Active</OUTCOME>
+      <OUTCOME>No_activity</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Time</NAME>
+      <OUTCOME>Non_working_hours</OUTCOME>
+      <OUTCOME>Working_hours</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UsingPlayground</NAME>
+      <OUTCOME>Use</OUTCOME>
+      <OUTCOME>Not_in_use</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Weather</NAME>
+      <OUTCOME>Fine_weather</OUTCOME>
+      <OUTCOME>Bad_weather</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CampusActivities</FOR>
+      <GIVEN>Weather</GIVEN>
+      <TABLE>0.7 0.3 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EquipmentStatus</FOR>
+      <TABLE>0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PersonnelType</FOR>
+      <GIVEN>CampusActivities</GIVEN>
+      <GIVEN>SocialActivities</GIVEN>
+      <GIVEN>Time</GIVEN>
+      <TABLE>0.7 0.3 0.85 0.15 0.8 0.2 0.8 0.2 0.4 0.6 0.7 0.3 0.5 0.5 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SocialActivities</FOR>
+      <GIVEN>Weather</GIVEN>
+      <TABLE>0.7 0.3 0.3 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Time</FOR>
+      <TABLE>0.38 0.62 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UsingPlayground</FOR>
+      <GIVEN>EquipmentStatus</GIVEN>
+      <GIVEN>PersonnelType</GIVEN>
+      <TABLE>0.9 0.1 0.4 0.6 0.5 0.5 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Weather</FOR>
+      <TABLE>0.75 0.25 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

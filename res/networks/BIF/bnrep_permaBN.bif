@@ -1,0 +1,499 @@
+network unknown {
+}
+variable ActiveLayerIceContent {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable AirTemperature {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Aspect {
+  type discrete [ 4 ] { North, East, South, West };
+}
+variable Insulation {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Rain {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Season {
+  type discrete [ 2 ] { Snow_free, Snow };
+}
+variable Snow {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SnowDepth {
+  type discrete [ 4 ] { None, Low, Medium, High };
+}
+variable SoilDensity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SoilMoisture {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SoilTemperature {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SoilWaterInput {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ThawDepth {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable VegetationHeight {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( ActiveLayerIceContent | SoilMoisture, SoilTemperature ) {
+  (Low, Low) 0.05, 0.10, 0.85;
+  (Medium, Low) 0.04, 0.08, 0.88;
+  (High, Low) 0.03, 0.07, 0.90;
+  (Low, Medium) 0.25, 0.55, 0.20;
+  (Medium, Medium) 0.35, 0.50, 0.15;
+  (High, Medium) 0.45, 0.45, 0.10;
+  (Low, High) 0.90, 0.07, 0.03;
+  (Medium, High) 0.88, 0.08, 0.04;
+  (High, High) 0.85, 0.10, 0.05;
+}
+probability ( AirTemperature ) {
+  table 0.1, 0.6, 0.3;
+}
+probability ( Aspect ) {
+  table 0.25, 0.25, 0.25, 0.25;
+}
+probability ( Insulation | SnowDepth, SoilDensity, VegetationHeight ) {
+  (None, Low, Low) 0.75, 0.10, 0.15;
+  (Low, Low, Low) 0.85, 0.10, 0.05;
+  (Medium, Low, Low) 0.75, 0.15, 0.10;
+  (High, Low, Low) 0.7, 0.2, 0.1;
+  (None, Medium, Low) 0.85, 0.05, 0.10;
+  (Low, Medium, Low) 0.88, 0.07, 0.05;
+  (Medium, Medium, Low) 0.80, 0.13, 0.07;
+  (High, Medium, Low) 0.75, 0.18, 0.07;
+  (None, High, Low) 0.90, 0.05, 0.05;
+  (Low, High, Low) 0.90, 0.05, 0.05;
+  (Medium, High, Low) 0.85, 0.10, 0.05;
+  (High, High, Low) 0.80, 0.15, 0.05;
+  (None, Low, Medium) 0.25, 0.15, 0.60;
+  (Low, Low, Medium) 0.29, 0.55, 0.16;
+  (Medium, Low, Medium) 0.22, 0.60, 0.18;
+  (High, Low, Medium) 0.15, 0.65, 0.20;
+  (None, Medium, Medium) 0.25, 0.20, 0.55;
+  (Low, Medium, Medium) 0.38, 0.50, 0.12;
+  (Medium, Medium, Medium) 0.30, 0.55, 0.15;
+  (High, Medium, Medium) 0.22, 0.60, 0.18;
+  (None, High, Medium) 0.25, 0.25, 0.50;
+  (Low, High, Medium) 0.45, 0.45, 0.10;
+  (Medium, High, Medium) 0.38, 0.50, 0.12;
+  (High, High, Medium) 0.30, 0.55, 0.15;
+  (None, Low, High) 0.10, 0.05, 0.85;
+  (Low, Low, High) 0.05, 0.15, 0.80;
+  (Medium, Low, High) 0.05, 0.10, 0.85;
+  (High, Low, High) 0.05, 0.05, 0.90;
+  (None, Medium, High) 0.1, 0.1, 0.8;
+  (Low, Medium, High) 0.07, 0.18, 0.75;
+  (Medium, Medium, High) 0.07, 0.13, 0.80;
+  (High, Medium, High) 0.05, 0.10, 0.85;
+  (None, High, High) 0.15, 0.10, 0.75;
+  (Low, High, High) 0.1, 0.2, 0.7;
+  (Medium, High, High) 0.10, 0.15, 0.75;
+  (High, High, High) 0.05, 0.15, 0.80;
+}
+probability ( Rain | AirTemperature ) {
+  (Low) 0.25, 0.50, 0.25;
+  (Medium) 0.15, 0.40, 0.45;
+  (High) 0.05, 0.30, 0.65;
+}
+probability ( Season ) {
+  table 0.5, 0.5;
+}
+probability ( Snow | AirTemperature ) {
+  (Low) 0.3, 0.5, 0.2;
+  (Medium) 0.45, 0.40, 0.15;
+  (High) 0.70, 0.25, 0.05;
+}
+probability ( SnowDepth | Aspect, Rain, Season, Snow, VegetationHeight ) {
+  (North, Low, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Low, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Low, Low) 0.00, 0.14, 0.21, 0.65;
+  (East, Low, Snow, Low, Low) 0.00, 0.16, 0.21, 0.63;
+  (South, Low, Snow, Low, Low) 0.00, 0.20, 0.25, 0.55;
+  (West, Low, Snow, Low, Low) 0.00, 0.18, 0.21, 0.61;
+  (North, Medium, Snow, Low, Low) 0.00, 0.33, 0.55, 0.12;
+  (East, Medium, Snow, Low, Low) 0.00, 0.21, 0.58, 0.21;
+  (South, Medium, Snow, Low, Low) 0.00, 0.35, 0.55, 0.10;
+  (West, Medium, Snow, Low, Low) 0.00, 0.23, 0.58, 0.19;
+  (North, High, Snow, Low, Low) 0.00, 0.75, 0.15, 0.10;
+  (East, High, Snow, Low, Low) 0.00, 0.78, 0.14, 0.08;
+  (South, High, Snow, Low, Low) 0.00, 0.85, 0.10, 0.05;
+  (West, High, Snow, Low, Low) 0.00, 0.80, 0.13, 0.07;
+  (North, Low, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Medium, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Medium, Low) 0.00, 0.12, 0.18, 0.70;
+  (East, Low, Snow, Medium, Low) 0.00, 0.14, 0.19, 0.67;
+  (South, Low, Snow, Medium, Low) 0.00, 0.16, 0.24, 0.60;
+  (West, Low, Snow, Medium, Low) 0.00, 0.16, 0.19, 0.65;
+  (North, Medium, Snow, Medium, Low) 0.00, 0.26, 0.60, 0.14;
+  (East, Medium, Snow, Medium, Low) 0.0, 0.2, 0.6, 0.2;
+  (South, Medium, Snow, Medium, Low) 0.00, 0.29, 0.60, 0.11;
+  (West, Medium, Snow, Medium, Low) 0.00, 0.22, 0.60, 0.18;
+  (North, High, Snow, Medium, Low) 0.00, 0.70, 0.18, 0.12;
+  (East, High, Snow, Medium, Low) 0.00, 0.76, 0.14, 0.10;
+  (South, High, Snow, Medium, Low) 0.00, 0.80, 0.13, 0.07;
+  (West, High, Snow, Medium, Low) 0.00, 0.78, 0.13, 0.09;
+  (North, Low, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, High, Low) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, High, Low) 0.00, 0.10, 0.15, 0.75;
+  (East, Low, Snow, High, Low) 0.00, 0.12, 0.15, 0.73;
+  (South, Low, Snow, High, Low) 0.00, 0.13, 0.22, 0.65;
+  (West, Low, Snow, High, Low) 0.00, 0.14, 0.16, 0.70;
+  (North, Medium, Snow, High, Low) 0.00, 0.20, 0.65, 0.15;
+  (East, Medium, Snow, High, Low) 0.00, 0.17, 0.66, 0.17;
+  (South, Medium, Snow, High, Low) 0.00, 0.23, 0.65, 0.12;
+  (West, Medium, Snow, High, Low) 0.00, 0.19, 0.66, 0.15;
+  (North, High, Snow, High, Low) 0.00, 0.65, 0.22, 0.13;
+  (East, High, Snow, High, Low) 0.00, 0.74, 0.14, 0.12;
+  (South, High, Snow, High, Low) 0.00, 0.75, 0.15, 0.10;
+  (West, High, Snow, High, Low) 0.00, 0.76, 0.13, 0.11;
+  (North, Low, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Low, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Low, Medium) 0.00, 0.12, 0.18, 0.70;
+  (East, Low, Snow, Low, Medium) 0.00, 0.14, 0.19, 0.67;
+  (South, Low, Snow, Low, Medium) 0.00, 0.16, 0.24, 0.60;
+  (West, Low, Snow, Low, Medium) 0.00, 0.16, 0.19, 0.65;
+  (North, Medium, Snow, Low, Medium) 0.00, 0.22, 0.62, 0.16;
+  (East, Medium, Snow, Low, Medium) 0.0, 0.2, 0.6, 0.2;
+  (South, Medium, Snow, Low, Medium) 0.00, 0.25, 0.62, 0.13;
+  (West, Medium, Snow, Low, Medium) 0.00, 0.22, 0.60, 0.18;
+  (North, High, Snow, Low, Medium) 0.00, 0.70, 0.18, 0.12;
+  (East, High, Snow, Low, Medium) 0.00, 0.76, 0.14, 0.10;
+  (South, High, Snow, Low, Medium) 0.00, 0.80, 0.13, 0.07;
+  (West, High, Snow, Low, Medium) 0.00, 0.78, 0.13, 0.09;
+  (North, Low, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Medium, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Medium, Medium) 0.00, 0.10, 0.15, 0.75;
+  (East, Low, Snow, Medium, Medium) 0.00, 0.12, 0.15, 0.73;
+  (South, Low, Snow, Medium, Medium) 0.00, 0.13, 0.22, 0.65;
+  (West, Low, Snow, Medium, Medium) 0.00, 0.14, 0.16, 0.70;
+  (North, Medium, Snow, Medium, Medium) 0.00, 0.17, 0.65, 0.18;
+  (East, Medium, Snow, Medium, Medium) 0.00, 0.17, 0.66, 0.17;
+  (South, Medium, Snow, Medium, Medium) 0.00, 0.20, 0.65, 0.15;
+  (West, Medium, Snow, Medium, Medium) 0.00, 0.18, 0.66, 0.16;
+  (North, High, Snow, Medium, Medium) 0.00, 0.65, 0.22, 0.13;
+  (East, High, Snow, Medium, Medium) 0.00, 0.74, 0.14, 0.12;
+  (South, High, Snow, Medium, Medium) 0.00, 0.75, 0.15, 0.10;
+  (West, High, Snow, Medium, Medium) 0.00, 0.76, 0.13, 0.11;
+  (North, Low, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, High, Medium) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, High, Medium) 0.00, 0.07, 0.13, 0.80;
+  (East, Low, Snow, High, Medium) 0.00, 0.10, 0.15, 0.75;
+  (South, Low, Snow, High, Medium) 0.00, 0.12, 0.18, 0.70;
+  (West, Low, Snow, High, Medium) 0.00, 0.12, 0.15, 0.73;
+  (North, Medium, Snow, High, Medium) 0.00, 0.12, 0.68, 0.20;
+  (East, Medium, Snow, High, Medium) 0.00, 0.16, 0.68, 0.16;
+  (South, Medium, Snow, High, Medium) 0.00, 0.15, 0.68, 0.17;
+  (West, Medium, Snow, High, Medium) 0.00, 0.17, 0.68, 0.15;
+  (North, High, Snow, High, Medium) 0.00, 0.60, 0.24, 0.16;
+  (East, High, Snow, High, Medium) 0.00, 0.72, 0.14, 0.14;
+  (South, High, Snow, High, Medium) 0.00, 0.70, 0.18, 0.12;
+  (West, High, Snow, High, Medium) 0.00, 0.74, 0.13, 0.13;
+  (North, Low, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Low, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Low, High) 0.00, 0.10, 0.15, 0.75;
+  (East, Low, Snow, Low, High) 0.00, 0.12, 0.15, 0.73;
+  (South, Low, Snow, Low, High) 0.00, 0.13, 0.22, 0.65;
+  (West, Low, Snow, Low, High) 0.00, 0.14, 0.16, 0.70;
+  (North, Medium, Snow, Low, High) 0.00, 0.14, 0.65, 0.21;
+  (East, Medium, Snow, Low, High) 0.00, 0.17, 0.66, 0.17;
+  (South, Medium, Snow, Low, High) 0.00, 0.16, 0.65, 0.19;
+  (West, Medium, Snow, Low, High) 0.00, 0.18, 0.66, 0.16;
+  (North, High, Snow, Low, High) 0.00, 0.65, 0.22, 0.13;
+  (East, High, Snow, Low, High) 0.00, 0.74, 0.14, 0.12;
+  (South, High, Snow, Low, High) 0.00, 0.75, 0.15, 0.10;
+  (West, High, Snow, Low, High) 0.00, 0.76, 0.13, 0.11;
+  (North, Low, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, Medium, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, Medium, High) 0.00, 0.07, 0.13, 0.80;
+  (East, Low, Snow, Medium, High) 0.00, 0.10, 0.15, 0.75;
+  (South, Low, Snow, Medium, High) 0.00, 0.12, 0.18, 0.70;
+  (West, Low, Snow, Medium, High) 0.00, 0.12, 0.15, 0.73;
+  (North, Medium, Snow, Medium, High) 0.00, 0.12, 0.68, 0.20;
+  (East, Medium, Snow, Medium, High) 0.00, 0.16, 0.68, 0.16;
+  (South, Medium, Snow, Medium, High) 0.00, 0.14, 0.68, 0.18;
+  (West, Medium, Snow, Medium, High) 0.00, 0.17, 0.68, 0.15;
+  (North, High, Snow, Medium, High) 0.00, 0.60, 0.24, 0.16;
+  (East, High, Snow, Medium, High) 0.00, 0.72, 0.14, 0.14;
+  (South, High, Snow, Medium, High) 0.00, 0.70, 0.18, 0.12;
+  (West, High, Snow, Medium, High) 0.00, 0.74, 0.13, 0.13;
+  (North, Low, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Low, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Low, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Low, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Medium, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (East, Medium, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (South, Medium, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (West, Medium, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (North, High, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (East, High, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (South, High, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (West, High, Snow_free, High, High) 1.0, 0.0, 0.0, 0.0;
+  (North, Low, Snow, High, High) 0.00, 0.05, 0.10, 0.85;
+  (East, Low, Snow, High, High) 0.0, 0.1, 0.1, 0.8;
+  (South, Low, Snow, High, High) 0.00, 0.10, 0.15, 0.75;
+  (West, Low, Snow, High, High) 0.00, 0.10, 0.12, 0.78;
+  (North, Medium, Snow, High, High) 0.0, 0.1, 0.7, 0.2;
+  (East, Medium, Snow, High, High) 0.00, 0.15, 0.70, 0.15;
+  (South, Medium, Snow, High, High) 0.00, 0.12, 0.70, 0.18;
+  (West, Medium, Snow, High, High) 0.00, 0.15, 0.70, 0.15;
+  (North, High, Snow, High, High) 0.00, 0.55, 0.25, 0.20;
+  (East, High, Snow, High, High) 0.00, 0.70, 0.14, 0.16;
+  (South, High, Snow, High, High) 0.00, 0.65, 0.21, 0.14;
+  (West, High, Snow, High, High) 0.00, 0.72, 0.13, 0.15;
+}
+probability ( SoilDensity ) {
+  table 0.33, 0.38, 0.29;
+}
+probability ( SoilMoisture | Aspect, SoilDensity, SoilWaterInput ) {
+  (North, Low, Low) 0.75, 0.20, 0.05;
+  (East, Low, Low) 0.66, 0.22, 0.12;
+  (South, Low, Low) 0.60, 0.25, 0.15;
+  (West, Low, Low) 0.63, 0.22, 0.15;
+  (North, Medium, Low) 0.80, 0.15, 0.05;
+  (East, Medium, Low) 0.7, 0.2, 0.1;
+  (South, Medium, Low) 0.65, 0.23, 0.12;
+  (West, Medium, Low) 0.67, 0.20, 0.13;
+  (North, High, Low) 0.85, 0.10, 0.05;
+  (East, High, Low) 0.75, 0.17, 0.08;
+  (South, High, Low) 0.7, 0.2, 0.1;
+  (West, High, Low) 0.72, 0.17, 0.11;
+  (North, Low, Medium) 0.15, 0.60, 0.25;
+  (East, Low, Medium) 0.3, 0.5, 0.2;
+  (South, Low, Medium) 0.40, 0.42, 0.18;
+  (West, Low, Medium) 0.33, 0.47, 0.20;
+  (North, Medium, Medium) 0.25, 0.55, 0.20;
+  (East, Medium, Medium) 0.38, 0.45, 0.17;
+  (South, Medium, Medium) 0.47, 0.38, 0.15;
+  (West, Medium, Medium) 0.41, 0.42, 0.17;
+  (North, High, Medium) 0.35, 0.50, 0.15;
+  (East, High, Medium) 0.48, 0.40, 0.12;
+  (South, High, Medium) 0.55, 0.35, 0.10;
+  (West, High, Medium) 0.51, 0.37, 0.12;
+  (North, Low, High) 0.05, 0.10, 0.85;
+  (East, Low, High) 0.08, 0.17, 0.75;
+  (South, Low, High) 0.1, 0.2, 0.7;
+  (West, Low, High) 0.11, 0.17, 0.72;
+  (North, Medium, High) 0.05, 0.15, 0.80;
+  (East, Medium, High) 0.1, 0.2, 0.7;
+  (South, Medium, High) 0.12, 0.23, 0.65;
+  (West, Medium, High) 0.13, 0.20, 0.67;
+  (North, High, High) 0.05, 0.20, 0.75;
+  (East, High, High) 0.12, 0.22, 0.66;
+  (South, High, High) 0.15, 0.25, 0.60;
+  (West, High, High) 0.15, 0.22, 0.63;
+}
+probability ( SoilTemperature | AirTemperature, Insulation, Season, SoilMoisture ) {
+  (Low, Low, Snow_free, Low) 0.7, 0.2, 0.1;
+  (Medium, Low, Snow_free, Low) 0.40, 0.55, 0.05;
+  (High, Low, Snow_free, Low) 0.6, 0.2, 0.2;
+  (Low, Medium, Snow_free, Low) 0.75, 0.15, 0.10;
+  (Medium, Medium, Snow_free, Low) 0.45, 0.50, 0.05;
+  (High, Medium, Snow_free, Low) 0.65, 0.17, 0.18;
+  (Low, High, Snow_free, Low) 0.80, 0.12, 0.08;
+  (Medium, High, Snow_free, Low) 0.50, 0.45, 0.05;
+  (High, High, Snow_free, Low) 0.70, 0.15, 0.15;
+  (Low, Low, Snow, Low) 0.90, 0.07, 0.03;
+  (Medium, Low, Snow, Low) 0.60, 0.37, 0.03;
+  (High, Low, Snow, Low) 0.85, 0.10, 0.05;
+  (Low, Medium, Snow, Low) 0.85, 0.10, 0.05;
+  (Medium, Medium, Snow, Low) 0.55, 0.40, 0.05;
+  (High, Medium, Snow, Low) 0.80, 0.15, 0.05;
+  (Low, High, Snow, Low) 0.80, 0.12, 0.08;
+  (Medium, High, Snow, Low) 0.50, 0.42, 0.08;
+  (High, High, Snow, Low) 0.75, 0.15, 0.10;
+  (Low, Low, Snow_free, Medium) 0.75, 0.15, 0.10;
+  (Medium, Low, Snow_free, Medium) 0.45, 0.50, 0.05;
+  (High, Low, Snow_free, Medium) 0.65, 0.17, 0.18;
+  (Low, Medium, Snow_free, Medium) 0.80, 0.12, 0.08;
+  (Medium, Medium, Snow_free, Medium) 0.50, 0.45, 0.05;
+  (High, Medium, Snow_free, Medium) 0.70, 0.15, 0.15;
+  (Low, High, Snow_free, Medium) 0.85, 0.10, 0.05;
+  (Medium, High, Snow_free, Medium) 0.55, 0.40, 0.05;
+  (High, High, Snow_free, Medium) 0.75, 0.10, 0.15;
+  (Low, Low, Snow, Medium) 0.85, 0.10, 0.05;
+  (Medium, Low, Snow, Medium) 0.55, 0.40, 0.05;
+  (High, Low, Snow, Medium) 0.80, 0.15, 0.05;
+  (Low, Medium, Snow, Medium) 0.80, 0.12, 0.08;
+  (Medium, Medium, Snow, Medium) 0.50, 0.42, 0.08;
+  (High, Medium, Snow, Medium) 0.75, 0.15, 0.10;
+  (Low, High, Snow, Medium) 0.75, 0.15, 0.10;
+  (Medium, High, Snow, Medium) 0.45, 0.45, 0.10;
+  (High, High, Snow, Medium) 0.70, 0.15, 0.15;
+  (Low, Low, Snow_free, High) 0.80, 0.12, 0.08;
+  (Medium, Low, Snow_free, High) 0.50, 0.45, 0.05;
+  (High, Low, Snow_free, High) 0.70, 0.15, 0.15;
+  (Low, Medium, Snow_free, High) 0.85, 0.10, 0.05;
+  (Medium, Medium, Snow_free, High) 0.55, 0.40, 0.05;
+  (High, Medium, Snow_free, High) 0.75, 0.10, 0.15;
+  (Low, High, Snow_free, High) 0.90, 0.07, 0.03;
+  (Medium, High, Snow_free, High) 0.60, 0.35, 0.05;
+  (High, High, Snow_free, High) 0.8, 0.1, 0.1;
+  (Low, Low, Snow, High) 0.80, 0.12, 0.08;
+  (Medium, Low, Snow, High) 0.50, 0.42, 0.08;
+  (High, Low, Snow, High) 0.75, 0.15, 0.10;
+  (Low, Medium, Snow, High) 0.75, 0.15, 0.10;
+  (Medium, Medium, Snow, High) 0.45, 0.45, 0.10;
+  (High, Medium, Snow, High) 0.70, 0.15, 0.15;
+  (Low, High, Snow, High) 0.70, 0.15, 0.15;
+  (Medium, High, Snow, High) 0.40, 0.45, 0.15;
+  (High, High, Snow, High) 0.65, 0.18, 0.17;
+}
+probability ( SoilWaterInput | AirTemperature, Rain, Snow ) {
+  (Low, Low, Low) 0.75, 0.15, 0.10;
+  (Medium, Low, Low) 0.80, 0.12, 0.08;
+  (High, Low, Low) 0.85, 0.10, 0.05;
+  (Low, Medium, Low) 0.45, 0.35, 0.20;
+  (Medium, Medium, Low) 0.50, 0.32, 0.18;
+  (High, Medium, Low) 0.55, 0.30, 0.15;
+  (Low, High, Low) 0.08, 0.17, 0.75;
+  (Medium, High, Low) 0.12, 0.18, 0.70;
+  (High, High, Low) 0.15, 0.20, 0.65;
+  (Low, Low, Medium) 0.70, 0.18, 0.12;
+  (Medium, Low, Medium) 0.75, 0.16, 0.09;
+  (High, Low, Medium) 0.80, 0.15, 0.05;
+  (Low, Medium, Medium) 0.30, 0.45, 0.25;
+  (Medium, Medium, Medium) 0.35, 0.45, 0.20;
+  (High, Medium, Medium) 0.40, 0.42, 0.18;
+  (Low, High, Medium) 0.05, 0.15, 0.80;
+  (Medium, High, Medium) 0.09, 0.16, 0.75;
+  (High, High, Medium) 0.12, 0.18, 0.70;
+  (Low, Low, High) 0.65, 0.20, 0.15;
+  (Medium, Low, High) 0.70, 0.18, 0.12;
+  (High, Low, High) 0.75, 0.17, 0.08;
+  (Low, Medium, High) 0.1, 0.3, 0.6;
+  (Medium, Medium, High) 0.15, 0.30, 0.55;
+  (High, Medium, High) 0.2, 0.3, 0.5;
+  (Low, High, High) 0.05, 0.10, 0.85;
+  (Medium, High, High) 0.08, 0.12, 0.80;
+  (High, High, High) 0.10, 0.15, 0.75;
+}
+probability ( ThawDepth | ActiveLayerIceContent, SoilMoisture, SoilTemperature ) {
+  (Low, Low, Low) 0.05, 0.40, 0.55;
+  (Medium, Low, Low) 0.5, 0.4, 0.1;
+  (High, Low, Low) 0.85, 0.10, 0.05;
+  (Low, Medium, Low) 0.05, 0.35, 0.60;
+  (Medium, Medium, Low) 0.45, 0.40, 0.15;
+  (High, Medium, Low) 0.80, 0.15, 0.05;
+  (Low, High, Low) 0.10, 0.25, 0.65;
+  (Medium, High, Low) 0.40, 0.35, 0.25;
+  (High, High, Low) 0.75, 0.15, 0.10;
+  (Low, Low, Medium) 0.05, 0.35, 0.60;
+  (Medium, Low, Medium) 0.15, 0.40, 0.45;
+  (High, Low, Medium) 0.7, 0.2, 0.1;
+  (Low, Medium, Medium) 0.05, 0.30, 0.65;
+  (Medium, Medium, Medium) 0.1, 0.4, 0.5;
+  (High, Medium, Medium) 0.65, 0.30, 0.05;
+  (Low, High, Medium) 0.1, 0.2, 0.7;
+  (Medium, High, Medium) 0.05, 0.40, 0.55;
+  (High, High, Medium) 0.60, 0.35, 0.05;
+  (Low, Low, High) 0.10, 0.15, 0.75;
+  (Medium, Low, High) 0.25, 0.35, 0.40;
+  (High, Low, High) 0.65, 0.25, 0.10;
+  (Low, Medium, High) 0.05, 0.15, 0.80;
+  (Medium, Medium, High) 0.15, 0.40, 0.45;
+  (High, Medium, High) 0.60, 0.35, 0.05;
+  (Low, High, High) 0.05, 0.10, 0.85;
+  (Medium, High, High) 0.1, 0.4, 0.5;
+  (High, High, High) 0.55, 0.40, 0.05;
+}
+probability ( VegetationHeight | AirTemperature, Aspect ) {
+  (Low, North) 1.0, 0.0, 0.0;
+  (Medium, North) 1.0, 0.0, 0.0;
+  (High, North) 1.0, 0.0, 0.0;
+  (Low, East) 0.86, 0.10, 0.04;
+  (Medium, East) 0.86, 0.10, 0.04;
+  (High, East) 0.86, 0.10, 0.04;
+  (Low, South) 0.83, 0.17, 0.00;
+  (Medium, South) 0.83, 0.17, 0.00;
+  (High, South) 0.83, 0.17, 0.00;
+  (Low, West) 1.0, 0.0, 0.0;
+  (Medium, West) 1.0, 0.0, 0.0;
+  (High, West) 1.0, 0.0, 0.0;
+}

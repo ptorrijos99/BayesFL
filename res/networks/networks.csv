@@ -3,58 +3,207 @@ alarm,bnlearn,37,46,,,1,100
 andes,bnlearn,223,338,,,1,100
 asia,bnlearn,8,8,,,1,100
 barley,bnlearn,48,84,,,1,100
+bnrep_accidents,bnRep,17,16,Engineering,Fixed,1,100
+bnrep_adhd,bnRep,19,18,Psychology,Fixed,1,100
+bnrep_adversarialbehavior,bnRep,4,4,Computer Science,Synthetic,1,100
 bnrep_aerialvehicles,bnRep,39,41,Social Sciences,Knowledge,1,100
+bnrep_agropastoral1,bnRep,15,12,Social Sciences,Data,1,100
+bnrep_agropastoral2,bnRep,11,17,Social Sciences,Data,1,100
+bnrep_agropastoral3,bnRep,11,15,Social Sciences,Data,1,100
 bnrep_agropastoral4,bnRep,21,14,Social Sciences,Data,1,100
+bnrep_agropastoral5,bnRep,5,4,Social Sciences,Data,1,100
+bnrep_aircrash,bnRep,9,8,Law,Knowledge,1,100
 bnrep_airegulation1,bnRep,22,42,Business,Data,1,100
+bnrep_airegulation2,bnRep,19,36,Business,Data,1,100
+bnrep_airegulation3,bnRep,19,37,Business,Data,1,100
+bnrep_algal1,bnRep,9,9,Environmental Science,Knowledge,1,100
+bnrep_algalactivity1,bnRep,8,10,Environmental Science,Data,1,100
+bnrep_algalactivity2,bnRep,8,15,Environmental Science,Data,1,100
+bnrep_algorithms3,bnRep,4,3,Computer Science,Synthetic,1,100
+bnrep_algorithms4,bnRep,4,4,Computer Science,Synthetic,1,100
+bnrep_APSsystem,bnRep,10,9,Computer Science,Knowledge,1,100
 bnrep_arcticwaters,bnRep,46,59,Engineering,Knowledge,1,100
+bnrep_argument,bnRep,10,11,Psychology,Knowledge,1,100
+bnrep_asia,bnRep,8,8,Medicine,Synthetic,1,100
+bnrep_augmenting,bnRep,6,6,Engineering,Knowledge,1,100
+bnrep_bank,bnRep,4,5,Business,Data,1,100
+bnrep_bankruptcy,bnRep,9,8,Economics,Fixed,1,100
+bnrep_beam1,bnRep,6,5,Engineering,Knowledge,1,100
+bnrep_beam2,bnRep,6,5,Engineering,Knowledge,1,100
+bnrep_beatles,bnRep,5,4,Law,Fixed,1,100
 bnrep_blacksea,bnRep,48,87,Engineering,Knowledge,1,100
+bnrep_blockchain,bnRep,12,13,Social Sciences,Data,1,100
 bnrep_BOPfailure1,bnRep,30,29,Engineering,Knowledge,1,100
 bnrep_BOPfailure2,bnRep,46,45,Engineering,Knowledge,1,100
 bnrep_BOPfailure3,bnRep,28,27,Engineering,Knowledge,1,100
+bnrep_bullet,bnRep,5,7,Law,Data,1,100
+bnrep_burglar,bnRep,3,2,Psychology,Knowledge,1,100
+bnrep_cardiovascular,bnRep,13,40,Medicine,Data,1,100
 bnrep_case,bnRep,23,35,Law,Knowledge,1,100
+bnrep_catchment,bnRep,19,26,Environmental Science,Mixed,1,100
 bnrep_charleston,bnRep,24,35,Environmental Science,Knowledge,1,100
+bnrep_chds,bnRep,4,3,Medicine,Data,1,100
 bnrep_cng,bnRep,86,85,Earth Sciences,Knowledge,1,100
+bnrep_compaction,bnRep,6,5,Agricultural Sciences,Knowledge,1,100
+bnrep_conasense,bnRep,4,6,Computer Science,Knowledge,1,100
+bnrep_concrete1,bnRep,4,4,Chemical Engineering,Data,1,100
+bnrep_concrete2,bnRep,4,4,Chemical Engineering,Data,1,100
+bnrep_concrete3,bnRep,3,2,Chemical Engineering,Data,1,100
+bnrep_concrete4,bnRep,4,3,Chemical Engineering,Data,1,100
+bnrep_concrete5,bnRep,3,2,Chemical Engineering,Data,1,100
+bnrep_concrete6,bnRep,3,2,Chemical Engineering,Data,1,100
+bnrep_concrete7,bnRep,5,4,Chemical Engineering,Data,1,100
+bnrep_consequenceCovid,bnRep,15,34,Social Sciences,Data,1,100
+bnrep_constructionproductivity,bnRep,18,19,Engineering,Expert,1,100
+bnrep_coral1,bnRep,8,12,Environmental Science,Data,1,100
+bnrep_coral2,bnRep,8,12,Environmental Science,Data,1,100
+bnrep_coral3,bnRep,8,12,Environmental Science,Data,1,100
+bnrep_coral4,bnRep,8,12,Environmental Science,Data,1,100
+bnrep_coral5,bnRep,8,12,Environmental Science,Data,1,100
+bnrep_corical,bnRep,20,26,Medicine,Expert,1,100
 bnrep_corrosion,bnRep,22,24,Engineering,Knowledge,1,100
+bnrep_corticosteroid,bnRep,3,3,Medicine,Knowledge,1,100
+bnrep_covid1,bnRep,12,11,Medicine,Fixed,1,100
+bnrep_covid2,bnRep,12,21,Medicine,Data,1,100
+bnrep_covid3,bnRep,12,30,Medicine,Data,1,100
+bnrep_covidfear,bnRep,9,6,Psychology,Data,1,100
+bnrep_covidrisk,bnRep,9,13,Social Sciences,Data,1,100
+bnrep_covidtech,bnRep,18,18,Psychology,Data,1,100
+bnrep_crimescene,bnRep,9,13,Law,Knowledge,1,100
+bnrep_criminal1,bnRep,12,14,Law,Data,1,100
+bnrep_criminal2,bnRep,12,14,Law,Data,1,100
+bnrep_criminal3,bnRep,8,9,Law,Data,1,100
+bnrep_criminal4,bnRep,8,9,Law,Data,1,100
+bnrep_crypto,bnRep,6,4,Economics,Data,1,100
+bnrep_curacao1,bnRep,13,12,Environmental Science,Expert,1,100
+bnrep_curacao2,bnRep,13,12,Environmental Science,Expert,1,100
+bnrep_curacao3,bnRep,19,18,Environmental Science,Expert,1,100
+bnrep_curacao4,bnRep,13,12,Environmental Science,Expert,1,100
+bnrep_curacao5,bnRep,13,12,Environmental Science,Expert,1,100
+bnrep_diabetes,bnRep,9,8,Medicine,Data,1,100
+bnrep_dioxins,bnRep,9,15,Agricultural Sciences,Data,1,100
+bnrep_disputed1,bnRep,11,11,Law,Knowledge,1,100
+bnrep_disputed2,bnRep,17,19,Law,Knowledge,1,100
 bnrep_disputed3,bnRep,27,34,Law,Knowledge,1,100
 bnrep_disputed4,bnRep,23,29,Law,Knowledge,1,100
 bnrep_dragline,bnRep,51,50,Engineering,Knowledge,1,100
+bnrep_drainage,bnRep,11,10,Engineering,Knowledge,1,100
 bnrep_dustexplosion,bnRep,26,32,Engineering,Knowledge,1,100
 bnrep_earthquake,bnRep,40,77,Engineering,Expert,1,100
+bnrep_ecosystem,bnRep,13,12,Environmental Science,Knowledge,1,100
 bnrep_electricvehicle,bnRep,23,22,Engineering,Knowledge,1,100
+bnrep_electrolysis,bnRep,16,18,Chemical Engineering,Knowledge,1,100
+bnrep_emergency,bnRep,17,16,Engineering,Knowledge,1,100
+bnrep_engines,bnRep,12,18,Engineering,Knowledge,1,100
+bnrep_enrollment,bnRep,8,7,Social Sciences,Fixed,1,100
 bnrep_estuary,bnRep,30,44,Environmental Science,Knowledge,1,100
+bnrep_ets,bnRep,20,32,Business,Data,1,100
+bnrep_fingermarks1,bnRep,12,20,Law,Knowledge,1,100
+bnrep_fingermarks2,bnRep,12,20,Law,Knowledge,1,100
+bnrep_fire,bnRep,11,14,Psychology,Expert,1,100
+bnrep_firealarm,bnRep,6,5,Engineering,Synthetic,1,100
 bnrep_firerisk,bnRep,23,26,Engineering,Knowledge,1,100
 bnrep_flood,bnRep,22,42,Agricultural Sciences,Knowledge,1,100
-bnrep_forest,bnRep,80,121,,,0,100
+bnrep_fluids1,bnRep,4,4,Law,Knowledge,1,100
+bnrep_fluids2,bnRep,5,4,Law,Knowledge,1,100
+bnrep_fluids3,bnRep,9,11,Law,Knowledge,1,100
+bnrep_foodallergy1,bnRep,8,12,Medicine,Data,1,100
+bnrep_foodallergy2,bnRep,8,8,Medicine,Data,1,100
+bnrep_foodallergy3,bnRep,8,8,Medicine,Data,1,100
+bnrep_forest,bnRep,80,121,Environmental Science,Knowledge,0,100
+bnrep_fundraising,bnRep,8,8,Business,Knowledge,1,100
+bnrep_gasexplosion,bnRep,18,23,Chemical Engineering,Knowledge,1,100
 bnrep_gasifier,bnRep,40,39,Chemical Engineering,Knowledge,1,100
 bnrep_GDIpathway1,bnRep,28,31,Genetics,Knowledge,1,100
 bnrep_GDIpathway2,bnRep,28,31,Genetics,Knowledge,1,100
+bnrep_gonorrhoeae,bnRep,10,9,Medicine,Knowledge,1,100
+bnrep_greencredit,bnRep,10,12,Energy,Data,1,100
 bnrep_grounding,bnRep,36,45,Engineering,Knowledge,1,100
 bnrep_humanitarian,bnRep,21,20,Social Sciences,Data,1,100
+bnrep_hydraulicsystem,bnRep,4,3,Engineering,Fixed,1,100
+bnrep_income,bnRep,13,20,Economics,Data,1,100
+bnrep_intensification,bnRep,16,29,Agricultural Sciences,Data,1,100
+bnrep_intentionalattacks,bnRep,8,7,Computer Science,Synthetic,1,100
 bnrep_inverters,bnRep,29,33,Engineering,Knowledge,1,100
+bnrep_knowledge,bnRep,6,5,Social Sciences,Data,1,100
 bnrep_kosterhavet,bnRep,38,63,Earth Sciences,Expert,1,100
+bnrep_lawschool,bnRep,10,21,Social Sciences,Data,1,100
+bnrep_lidar,bnRep,9,8,Earth Sciences,Synthetic,1,100
+bnrep_liquidity,bnRep,10,13,Economics,Data,1,100
 bnrep_lithium,bnRep,45,44,Energy,Knowledge,1,100
+bnrep_macrophytes,bnRep,15,20,Environmental Science,Knowledge,1,100
+bnrep_medicaltest,bnRep,3,2,Medicine,Synthetic,1,100
+bnrep_megacities,bnRep,18,17,Energy,Knowledge,1,100
+bnrep_metal,bnRep,8,7,Engineering,Fixed,1,100
+bnrep_moodstate,bnRep,7,6,Psychology,Fixed,1,100
+bnrep_mountaingoat,bnRep,7,12,Environmental Science,Data,1,100
 bnrep_nanomaterials1,bnRep,49,48,Pharmacology,Knowledge,1,100
 bnrep_nanomaterials2,bnRep,46,45,Pharmacology,Knowledge,1,100
+bnrep_navigation,bnRep,4,3,Engineering,Knowledge,1,100
+bnrep_nuclearwaste,bnRep,10,11,Engineering,Knowledge,1,100
+bnrep_nuisancegrowth,bnRep,19,24,Environmental Science,Knowledge,1,100
 bnrep_oildepot,bnRep,41,40,Engineering,Knowledge,1,100
 bnrep_onlinerisk,bnRep,84,109,Engineering,Knowledge,1,100
 bnrep_orbital,bnRep,60,59,Earth Sciences,Knowledge,1,100
 bnrep_oxygen,bnRep,31,32,Engineering,Knowledge,1,100
+bnrep_perioperative,bnRep,5,4,Medicine,Fixed,1,100
+bnrep_permaBN,bnRep,14,27,Environmental Science,Knowledge,1,100
+bnrep_phdarticles,bnRep,6,4,Social Sciences,Data,1,100
 bnrep_pilot,bnRep,42,41,Engineering,Knowledge,1,100
 bnrep_pneumonia,bnRep,62,171,Medicine,Expert,1,100
 bnrep_polymorphic,bnRep,22,21,Engineering,Knowledge,1,100
+bnrep_poultry,bnRep,47,41,Genetics,Data,1,100
 bnrep_project,bnRep,21,21,Environmental Science,Knowledge,1,100
 bnrep_projectmanagement,bnRep,26,35,Business,Knowledge,1,100
 bnrep_propellant,bnRep,49,48,Engineering,Knowledge,1,100
 bnrep_rainstorm,bnRep,34,33,Earth Sciences,Knowledge,1,100
+bnrep_rainwater,bnRep,6,6,Environmental Science,Knowledge,1,100
 bnrep_realestate1,bnRep,27,77,Social Sciences,Data,1,100
 bnrep_realestate2,bnRep,27,81,Social Sciences,Data,1,100
 bnrep_realestate3,bnRep,27,69,Social Sciences,Data,1,100
+bnrep_redmeat,bnRep,11,11,Psychology,Data,1,100
 bnrep_resilience,bnRep,36,52,Environmental Science,Knowledge,1,100
+bnrep_ricci,bnRep,6,6,Social Sciences,Data,1,100
+bnrep_rockburst,bnRep,6,9,Engineering,Data,1,100
+bnrep_rockquality,bnRep,9,8,Earth Sciences,Data,1,100
+bnrep_ropesegment,bnRep,11,10,Engineering,Knowledge,1,100
+bnrep_safespeeds,bnRep,9,15,Social Sciences,Data,1,100
+bnrep_sallyclark,bnRep,6,5,Law,Knowledge,1,100
+bnrep_salmonella1,bnRep,7,5,Veterinary,Data,1,100
+bnrep_salmonella2,bnRep,10,10,Veterinary,Data,1,100
+bnrep_seismic,bnRep,10,12,Engineering,Knowledge,1,100
 bnrep_shipping,bnRep,36,35,Engineering,Knowledge,1,100
+bnrep_simulation,bnRep,4,3,Engineering,Fixed,1,100
+bnrep_softwarelogs1,bnRep,5,5,Computer Science,Data,1,100
 bnrep_softwarelogs2,bnRep,40,67,Computer Science,Data,1,100
+bnrep_softwarelogs3,bnRep,14,13,Computer Science,Fixed,1,100
+bnrep_softwarelogs4,bnRep,14,21,Computer Science,Data,1,100
+bnrep_soil,bnRep,6,6,Earth Sciences,Knowledge,1,100
+bnrep_soillead,bnRep,9,22,Environmental Science,Data,1,100
+bnrep_soilliquefaction1,bnRep,7,6,Engineering,Data,1,100
+bnrep_soilliquefaction2,bnRep,7,6,Engineering,Data,1,100
+bnrep_soilliquefaction3,bnRep,7,12,Engineering,Data,1,100
+bnrep_soilliquefaction4,bnRep,7,6,Engineering,Data,1,100
+bnrep_student1,bnRep,26,27,Social Sciences,Data,1,100
 bnrep_student2,bnRep,26,23,Social Sciences,Data,1,100
+bnrep_tastingtea,bnRep,17,72,Social Sciences,Knowledge,1,100
+bnrep_tbm,bnRep,10,15,Earth Sciences,Knowledge,0,100
+bnrep_theft1,bnRep,4,3,Law,Knowledge,1,100
+bnrep_theft2,bnRep,5,4,Law,Knowledge,1,100
+bnrep_titanic,bnRep,4,5,Social Sciences,Data,1,100
+bnrep_trajectories,bnRep,5,9,Medicine,Data,1,100
+bnrep_transport,bnRep,6,6,Social Sciences,Synthetic,1,100
+bnrep_tubercolosis,bnRep,5,4,Medicine,Knowledge,1,100
+bnrep_twinframework,bnRep,7,7,Engineering,Knowledge,1,100
 bnrep_urinary,bnRep,36,109,Medicine,Expert,1,100
+bnrep_vaccine,bnRep,3,3,Medicine,Synthetic,1,100
+bnrep_vessel1,bnRep,16,17,Engineering,Knowledge,1,100
+bnrep_vessel2,bnRep,13,18,Engineering,Knowledge,1,100
+bnrep_volleyball,bnRep,14,18,Sports,Data,1,100
+bnrep_waterlead,bnRep,17,31,Environmental Science,Data,1,100
+bnrep_wheat,bnRep,5,4,Agricultural Sciences,Fixed,1,100
 bnrep_windturbine,bnRep,122,123,Engineering,Knowledge,1,100
+bnrep_witness,bnRep,6,5,Law,Knowledge,1,100
 bnrep_yangtze,bnRep,31,54,Engineering,Knowledge,1,100
 cancer,bnlearn,5,4,,,1,100
 child,bnlearn,20,25,,,1,100

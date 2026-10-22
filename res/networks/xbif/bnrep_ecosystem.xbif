@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Budget</NAME>
+      <OUTCOME>Deficit</OUTCOME>
+      <OUTCOME>Balance</OUTCOME>
+      <OUTCOME>Surplus</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Bus</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Demand</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Green</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Lot</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Opportunity</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Park</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>People</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Potential</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Road</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Supply</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Traffic</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Water</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Budget</FOR>
+      <GIVEN>Demand</GIVEN>
+      <GIVEN>Supply</GIVEN>
+      <TABLE>0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Bus</FOR>
+      <TABLE>0.211 0.789 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Demand</FOR>
+      <GIVEN>People</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Green</FOR>
+      <TABLE>0.62237762 0.08991009 0.28771229 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Lot</FOR>
+      <TABLE>0.317 0.683 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Opportunity</FOR>
+      <GIVEN>Park</GIVEN>
+      <GIVEN>Traffic</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.8 0.2 0.0 0.2 0.8 0.0 0.8 0.2 0.0 0.0 1.0 0.0 0.0 0.8 0.2 0.2 0.8 0.0 0.0 0.8 0.2 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Park</FOR>
+      <TABLE>0.3363363 0.2922923 0.3713714 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>People</FOR>
+      <TABLE>0.482 0.327 0.191 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Potential</FOR>
+      <GIVEN>Green</GIVEN>
+      <GIVEN>Water</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.2 0.8 0.0 0.0 1.0 0.0 0.0 0.2 0.8 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Road</FOR>
+      <TABLE>0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Supply</FOR>
+      <GIVEN>Opportunity</GIVEN>
+      <GIVEN>Potential</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.8 0.2 0.0 0.0 1.0 0.0 0.0 0.8 0.2 0.2 0.8 0.0 0.0 0.2 0.8 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Traffic</FOR>
+      <GIVEN>Bus</GIVEN>
+      <GIVEN>Lot</GIVEN>
+      <GIVEN>Road</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.8 0.2 0.0 0.8 0.2 0.0 0.0 0.2 0.8 0.8 0.2 0.0 0.0 0.2 0.8 0.0 0.2 0.8 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Water</FOR>
+      <TABLE>0.622 0.378 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

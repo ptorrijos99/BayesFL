@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ChiA</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ChiA_PS</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Colour</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Colour_PS</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Cyanobacteria</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RainSum</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TP</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TP_PS</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WindSpeed</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ChiA</FOR>
+      <GIVEN>ChiA_PS</GIVEN>
+      <GIVEN>TP</GIVEN>
+      <GIVEN>WindSpeed</GIVEN>
+      <TABLE>0.89 0.11 0.93 0.07 0.67 0.33 0.86 0.14 0.33 0.67 0.33 0.67 0.33 0.67 0.24 0.76 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ChiA_PS</FOR>
+      <GIVEN>TP_PS</GIVEN>
+      <TABLE>0.76 0.24 0.33 0.67 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Colour</FOR>
+      <GIVEN>Colour_PS</GIVEN>
+      <GIVEN>RainSum</GIVEN>
+      <TABLE>0.88 0.12 0.83 0.17 0.81 0.19 0.5 0.5 0.5 0.5 0.31 0.69 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Colour_PS</FOR>
+      <TABLE>0.34 0.33 0.33 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Cyanobacteria</FOR>
+      <GIVEN>ChiA</GIVEN>
+      <GIVEN>Colour</GIVEN>
+      <TABLE>0.63 0.37 0.7 0.3 0.19 0.81 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RainSum</FOR>
+      <TABLE>0.41 0.59 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TP</FOR>
+      <GIVEN>TP_PS</GIVEN>
+      <TABLE>0.64 0.36 0.33 0.67 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TP_PS</FOR>
+      <TABLE>0.61 0.39 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WindSpeed</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

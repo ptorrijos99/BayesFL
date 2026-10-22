@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Distance_Coast</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Elevation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Exchange_InSettlement</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Landscape</NAME>
+      <OUTCOME>Aquatic</OUTCOME>
+      <OUTCOME>Tundra</OUTCOME>
+      <OUTCOME>Desert</OUTCOME>
+      <OUTCOME>Forest</OUTCOME>
+      <OUTCOME>Grassland</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Slope</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Annual_Temperature</FOR>
+      <GIVEN>Elevation</GIVEN>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.05454545 0.07272727 0.87272727 0.0 0.1428571 0.8571429 0.0 0.24 0.76 0.0 0.2727273 0.7272727 0.07894737 0.76315789 0.15789474 0.0 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Precipitation</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.02857143 0.0 0.97142857 0.0 0.0 1.0 0.01298701 0.0 0.98701299 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Productivity</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.14705882 0.02941176 0.82352941 0.0 0.0 1.0 0.0 0.0 1.0 0.1666667 0.0 0.8333333 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Temperature</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.3636364 0.2657343 0.3706294 0.2666667 0.3 0.4333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Distance_Coast</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.14685315 0.06293706 0.79020979 0.1333333 0.1 0.7666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Elevation</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.3846154 0.3496503 0.2657343 0.4666667 0.3666667 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Exchange_InSettlement</FOR>
+      <TABLE>0.8265896 0.1734104 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Landscape</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.02097902 0.01398601 0.06293706 0.55244755 0.34965035 0.0 0.0 0.1 0.6 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Precipitation</FOR>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.13461538 0.05769231 0.80769231 0.0 0.125 0.875 0.1315789 0.2105263 0.6578947 0.1111111 0.5555556 0.3333333 0.4339623 0.3773585 0.1886792 0.53846154 0.38461538 0.07692308 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Productivity</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.7428571 0.2571429 0.0 0.1935484 0.5806452 0.2258065 0.02597403 0.62337662 0.35064935 0.75 0.25 0.0 0.0 0.5454545 0.4545455 0.0 0.7272727 0.2727273 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Slope</FOR>
+      <GIVEN>Exchange_InSettlement</GIVEN>
+      <TABLE>0.3636364 0.3426573 0.2937063 0.2333333 0.5 0.2666667 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,81 @@
+network unknown {
+}
+variable CmdSteeringOnTurn {
+  type discrete [ 3 ] { Left, Straight, Right };
+}
+variable CurrentPosition {
+  type discrete [ 3 ] { Near, On, Far };
+}
+variable CurrentSteering {
+  type discrete [ 3 ] { Straight, Left, Right };
+}
+variable CurrentVelocity {
+  type discrete [ 3 ] { Slow, Medium, Fast };
+}
+variable InTrack {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SafeTurnRegion {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( CmdSteeringOnTurn ) {
+  table 0.05, 0.15, 0.80;
+}
+probability ( CurrentPosition ) {
+  table 0.33, 0.33, 0.34;
+}
+probability ( CurrentSteering ) {
+  table 0.45, 0.10, 0.45;
+}
+probability ( CurrentVelocity ) {
+  table 0.3, 0.6, 0.1;
+}
+probability ( InTrack | CmdSteeringOnTurn, CurrentVelocity, SafeTurnRegion ) {
+  (Left, Slow, Yes) 0.6, 0.4;
+  (Straight, Slow, Yes) 0.7, 0.3;
+  (Right, Slow, Yes) 1.0, 0.0;
+  (Left, Medium, Yes) 0.2, 0.8;
+  (Straight, Medium, Yes) 0.5, 0.5;
+  (Right, Medium, Yes) 0.9, 0.1;
+  (Left, Fast, Yes) 0.0, 1.0;
+  (Straight, Fast, Yes) 0.0, 1.0;
+  (Right, Fast, Yes) 0.0, 1.0;
+  (Left, Slow, No) 0.2, 0.8;
+  (Straight, Slow, No) 0.3, 0.7;
+  (Right, Slow, No) 0.5, 0.5;
+  (Left, Medium, No) 0.1, 0.9;
+  (Straight, Medium, No) 0.2, 0.8;
+  (Right, Medium, No) 0.4, 0.6;
+  (Left, Fast, No) 0.0, 1.0;
+  (Straight, Fast, No) 0.0, 1.0;
+  (Right, Fast, No) 0.0, 1.0;
+}
+probability ( SafeTurnRegion | CurrentPosition, CurrentSteering, CurrentVelocity ) {
+  (Near, Straight, Slow) 1.0, 0.0;
+  (On, Straight, Slow) 1.0, 0.0;
+  (Far, Straight, Slow) 0.9, 0.1;
+  (Near, Left, Slow) 0.8, 0.2;
+  (On, Left, Slow) 1.0, 0.0;
+  (Far, Left, Slow) 0.9, 0.1;
+  (Near, Right, Slow) 0.8, 0.2;
+  (On, Right, Slow) 1.0, 0.0;
+  (Far, Right, Slow) 0.8, 0.2;
+  (Near, Straight, Medium) 0.9, 0.1;
+  (On, Straight, Medium) 1.0, 0.0;
+  (Far, Straight, Medium) 0.7, 0.3;
+  (Near, Left, Medium) 0.6, 0.4;
+  (On, Left, Medium) 1.0, 0.0;
+  (Far, Left, Medium) 0.7, 0.3;
+  (Near, Right, Medium) 0.6, 0.4;
+  (On, Right, Medium) 1.0, 0.0;
+  (Far, Right, Medium) 0.5, 0.5;
+  (Near, Straight, Fast) 0.2, 0.8;
+  (On, Straight, Fast) 1.0, 0.0;
+  (Far, Straight, Fast) 0.2, 0.8;
+  (Near, Left, Fast) 0.1, 0.9;
+  (On, Left, Fast) 1.0, 0.0;
+  (Far, Left, Fast) 0.2, 0.8;
+  (Near, Right, Fast) 0.1, 0.9;
+  (On, Right, Fast) 1.0, 0.0;
+  (Far, Right, Fast) 1.0, 0.0;
+}

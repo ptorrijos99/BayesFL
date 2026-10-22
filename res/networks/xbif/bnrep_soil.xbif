@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Depth</NAME>
+      <OUTCOME>0_20</OUTCOME>
+      <OUTCOME>20_40</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EC</NAME>
+      <OUTCOME>Less_than_1_4</OUTCOME>
+      <OUTCOME>More_than_1_4</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Intensity</NAME>
+      <OUTCOME>Less_than_0_3</OUTCOME>
+      <OUTCOME>More_than_0_3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Length</NAME>
+      <OUTCOME>Less_than_20</OUTCOME>
+      <OUTCOME>More_than_20</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>W</NAME>
+      <OUTCOME>Less_than_10</OUTCOME>
+      <OUTCOME>More_than_10</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>pH</NAME>
+      <OUTCOME>Less_than_7_7</OUTCOME>
+      <OUTCOME>More_than_7_7</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Depth</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EC</FOR>
+      <GIVEN>Depth</GIVEN>
+      <GIVEN>Intensity</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Intensity</FOR>
+      <GIVEN>pH</GIVEN>
+      <TABLE>0.647 0.353 0.307 0.693 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Length</FOR>
+      <GIVEN>EC</GIVEN>
+      <TABLE>0.5 0.5 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>W</FOR>
+      <GIVEN>EC</GIVEN>
+      <TABLE>0.05 0.95 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>pH</FOR>
+      <GIVEN>Depth</GIVEN>
+      <TABLE>0.133 0.867 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

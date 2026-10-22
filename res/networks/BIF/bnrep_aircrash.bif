@@ -1,0 +1,83 @@
+network unknown {
+}
+variable 5HTOL5HIAARatio {
+  type discrete [ 2 ] { Above_20, Below_20 };
+}
+variable BACAtTimeOfDeath {
+  type discrete [ 8 ] { a101plus, a80_100, a50_80, a40_49, a30_39, a20_29, a10_19, Negative };
+}
+variable EthanolConsumptionWithin8hrsOfDeath {
+  type discrete [ 2 ] { Yes, No };
+}
+variable MeasuredBAC {
+  type discrete [ 8 ] { a101plus, a80_100, a50_80, a40_49, a30_39, a20_29, a10_19, Negative };
+}
+variable PMAlcoholFormation {
+  type discrete [ 2 ] { PMF, No_PMF };
+}
+variable UACPositive {
+  type discrete [ 2 ] { UPositive, UNegative };
+}
+variable VACPositive {
+  type discrete [ 2 ] { Positive, Negative };
+}
+variable VOCDetected {
+  type discrete [ 2 ] { Detected, Not_Detected };
+}
+variable WitnessEvidenceOfETOHConsumption {
+  type discrete [ 2 ] { Positive, Negative };
+}
+probability ( 5HTOL5HIAARatio | EthanolConsumptionWithin8hrsOfDeath ) {
+  (Yes) 0.999, 0.001;
+  (No) 0.001, 0.999;
+}
+probability ( BACAtTimeOfDeath | EthanolConsumptionWithin8hrsOfDeath ) {
+  (Yes) 0.100, 0.200, 0.300, 0.200, 0.100, 0.045, 0.045, 0.010;
+  (No) 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.93;
+}
+probability ( EthanolConsumptionWithin8hrsOfDeath ) {
+  table 0.05, 0.95;
+}
+probability ( MeasuredBAC | BACAtTimeOfDeath, PMAlcoholFormation ) {
+  (a101plus, PMF) 0.993, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001;
+  (a80_100, PMF) 0.993, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001;
+  (a50_80, PMF) 0.993, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001;
+  (a40_49, PMF) 0.993, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001;
+  (a30_39, PMF) 0.0099108028, 0.9841427156, 0.0009910803, 0.0009910803, 0.0009910803, 0.0009910803, 0.0009910803, 0.0009910803;
+  (a20_29, PMF) 0.001, 0.001, 0.993, 0.001, 0.001, 0.001, 0.001, 0.001;
+  (a10_19, PMF) 0.001, 0.001, 0.001, 0.993, 0.001, 0.001, 0.001, 0.001;
+  (Negative, PMF) 0.202, 0.149, 0.053, 0.117, 0.329, 0.043, 0.106, 0.001;
+  (a101plus, No_PMF) 0.93, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01;
+  (a80_100, No_PMF) 0.01, 0.93, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01;
+  (a50_80, No_PMF) 0.01, 0.01, 0.93, 0.01, 0.01, 0.01, 0.01, 0.01;
+  (a40_49, No_PMF) 0.01, 0.01, 0.01, 0.93, 0.01, 0.01, 0.01, 0.01;
+  (a30_39, No_PMF) 0.01, 0.01, 0.01, 0.01, 0.93, 0.01, 0.01, 0.01;
+  (a20_29, No_PMF) 0.01, 0.01, 0.01, 0.01, 0.01, 0.93, 0.01, 0.01;
+  (a10_19, No_PMF) 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.93, 0.01;
+  (Negative, No_PMF) 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.93;
+}
+probability ( PMAlcoholFormation ) {
+  table 0.5, 0.5;
+}
+probability ( UACPositive | VACPositive ) {
+  (Positive) 0.93, 0.07;
+  (Negative) 0.15, 0.85;
+}
+probability ( VACPositive | BACAtTimeOfDeath ) {
+  (a101plus) 0.999, 0.001;
+  (a80_100) 0.999, 0.001;
+  (a50_80) 0.999, 0.001;
+  (a40_49) 0.891, 0.109;
+  (a30_39) 0.704, 0.296;
+  (a20_29) 0.591, 0.409;
+  (a10_19) 0.539, 0.461;
+  (Negative) 0.001, 0.999;
+}
+probability ( VOCDetected | PMAlcoholFormation ) {
+  (PMF) 0.5, 0.5;
+  (No_PMF) 0.41, 0.59;
+}
+probability ( WitnessEvidenceOfETOHConsumption | EthanolConsumptionWithin8hrsOfDeath ) {
+  (Yes) 0.5, 0.5;
+  (No) 0.001, 0.999;
+}

@@ -1,0 +1,24 @@
+network unknown {
+}
+variable Burglar {
+  type discrete [ 3 ] { Suspect_1, Suspect_2, Suspect_3 };
+}
+variable BurglaryTime {
+  type discrete [ 2 ] { Day, Night };
+}
+variable PrimaryItemStolen {
+  type discrete [ 3 ] { Jewellery, Electronics, Money };
+}
+probability ( Burglar ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( BurglaryTime | Burglar ) {
+  (Suspect_1) 0.1, 0.9;
+  (Suspect_2) 0.9, 0.1;
+  (Suspect_3) 0.25, 0.75;
+}
+probability ( PrimaryItemStolen | Burglar ) {
+  (Suspect_1) 0.8, 0.1, 0.1;
+  (Suspect_2) 0.1, 0.8, 0.1;
+  (Suspect_3) 0.1, 0.1, 0.8;
+}

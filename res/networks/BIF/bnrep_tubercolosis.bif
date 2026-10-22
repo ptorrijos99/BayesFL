@@ -1,0 +1,50 @@
+network unknown {
+}
+variable AgeGroup {
+  type discrete [ 3 ] { 0_to_35, 35_to_65, More_than_65 };
+}
+variable Gender {
+  type discrete [ 2 ] { Male, Femal };
+}
+variable Location {
+  type discrete [ 3 ] { Nkangala, Gert_Sibande, Ehlanzeni };
+}
+variable TreatmentOutcome {
+  type discrete [ 2 ] { Alive, Died };
+}
+variable Tubercolosis {
+  type discrete [ 2 ] { Pulmonary, ExtraPulmonary };
+}
+probability ( AgeGroup ) {
+  table 0.50279, 0.47097, 0.02624;
+}
+probability ( Gender ) {
+  table 0.53685, 0.46315;
+}
+probability ( Location ) {
+  table 0.28141, 0.25377, 0.46482;
+}
+probability ( TreatmentOutcome | Tubercolosis ) {
+  (Pulmonary) 0.86811, 0.13189;
+  (ExtraPulmonary) 0.86364, 0.13636;
+}
+probability ( Tubercolosis | AgeGroup, Gender, Location ) {
+  (0_to_35, Male, Nkangala) 0.87179, 0.12821;
+  (35_to_65, Male, Nkangala) 0.93226, 0.06774;
+  (More_than_65, Male, Nkangala) 0.90909, 0.09091;
+  (0_to_35, Femal, Nkangala) 0.88095, 0.11905;
+  (35_to_65, Femal, Nkangala) 0.92265, 0.07735;
+  (More_than_65, Femal, Nkangala) 0.9, 0.1;
+  (0_to_35, Male, Gert_Sibande) 0.90517, 0.09483;
+  (35_to_65, Male, Gert_Sibande) 0.96918, 0.03082;
+  (More_than_65, Male, Gert_Sibande) 1.0, 0.0;
+  (0_to_35, Femal, Gert_Sibande) 0.92213, 0.07787;
+  (35_to_65, Femal, Gert_Sibande) 0.90076, 0.09924;
+  (More_than_65, Femal, Gert_Sibande) 1.0, 0.0;
+  (0_to_35, Male, Ehlanzeni) 0.89205, 0.10795;
+  (35_to_65, Male, Ehlanzeni) 0.88987, 0.11013;
+  (More_than_65, Male, Ehlanzeni) 0.87097, 0.12903;
+  (0_to_35, Femal, Ehlanzeni) 0.8809, 0.1191;
+  (35_to_65, Femal, Ehlanzeni) 0.87774, 0.12226;
+  (More_than_65, Femal, Ehlanzeni) 0.90909, 0.09091;
+}

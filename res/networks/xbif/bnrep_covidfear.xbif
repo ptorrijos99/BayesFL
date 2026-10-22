@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Age</NAME>
+      <OUTCOME>Young</OUTCOME>
+      <OUTCOME>Adult</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fear</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Gender</NAME>
+      <OUTCOME>Female</OUTCOME>
+      <OUTCOME>Male</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Hands</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Heart</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Life</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>News</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sleep</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Think</NAME>
+      <OUTCOME>Disagree</OUTCOME>
+      <OUTCOME>Neither</OUTCOME>
+      <OUTCOME>Agree</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Age</FOR>
+      <TABLE>0.4738956 0.5261044 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fear</FOR>
+      <GIVEN>Life</GIVEN>
+      <TABLE>0.2624113 0.4539007 0.2836879 0.05263158 0.31578947 0.63157895 0.03921569 0.09803922 0.8627451 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Gender</FOR>
+      <TABLE>0.91967871 0.08032129 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Hands</FOR>
+      <GIVEN>Heart</GIVEN>
+      <TABLE>0.96932515 0.03067485 0.0 0.76595745 0.17021277 0.06382979 0.5128205 0.2051282 0.2820513 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Heart</FOR>
+      <GIVEN>News</GIVEN>
+      <TABLE>0.96039604 0.02970297 0.00990099 0.6065574 0.2622951 0.1311475 0.3333333 0.3218391 0.3448276 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Life</FOR>
+      <GIVEN>Heart</GIVEN>
+      <TABLE>0.73619632 0.19631902 0.06748466 0.3191489 0.3829787 0.2978723 0.1538462 0.1794872 0.6666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>News</FOR>
+      <GIVEN>Think</GIVEN>
+      <TABLE>0.6744186 0.1976744 0.127907 0.4166667 0.3888889 0.1944444 0.1428571 0.1758242 0.6813187 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sleep</FOR>
+      <GIVEN>Heart</GIVEN>
+      <TABLE>0.97546012 0.02453988 0.0 0.65957447 0.27659574 0.06382979 0.4615385 0.3333333 0.2051282 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Think</FOR>
+      <TABLE>0.3453815 0.2891566 0.3654618 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

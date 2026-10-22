@@ -1,0 +1,31 @@
+network unknown {
+}
+variable FTPBasedBufferOverflow {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable RemoteAdversary {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable RemoteBufferOverflowOnSSHDaemon {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable RootAccessFTPServer {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( FTPBasedBufferOverflow | RemoteAdversary ) {
+  (TRUE) 0.85, 0.15;
+  (FALSE) 0.0, 1.0;
+}
+probability ( RemoteAdversary ) {
+  table 0.7, 0.3;
+}
+probability ( RemoteBufferOverflowOnSSHDaemon | RemoteAdversary ) {
+  (TRUE) 0.7, 0.3;
+  (FALSE) 0.0, 1.0;
+}
+probability ( RootAccessFTPServer | FTPBasedBufferOverflow, RemoteBufferOverflowOnSSHDaemon ) {
+  (TRUE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE) 0.65, 0.35;
+  (TRUE, FALSE) 1.0, 0.0;
+  (FALSE, FALSE) 1.0, 0.0;
+}

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Android</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>C</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Database</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Java</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Math</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Web</NAME>
+      <OUTCOME>Pass</OUTCOME>
+      <OUTCOME>Fail</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Android</FOR>
+      <GIVEN>Database</GIVEN>
+      <TABLE>0.98 0.02 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>C</FOR>
+      <GIVEN>Math</GIVEN>
+      <TABLE>0.85 0.15 0.55 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Database</FOR>
+      <TABLE>0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Java</FOR>
+      <GIVEN>C</GIVEN>
+      <TABLE>0.9 0.1 0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Math</FOR>
+      <TABLE>0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Web</FOR>
+      <GIVEN>C</GIVEN>
+      <GIVEN>Database</GIVEN>
+      <TABLE>0.99 0.01 0.7 0.3 0.9 0.1 0.02 0.98 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

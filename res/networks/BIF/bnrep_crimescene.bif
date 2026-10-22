@@ -1,0 +1,76 @@
+network unknown {
+}
+variable DNAFoundOnFoil {
+  type discrete [ 4 ] { Suspect_DNA_On_Foil, Suspect_And_Unknown_DNA_On_Foil, Unknown_DNA_On_Foil, No_DNA_On_Foil };
+}
+variable Hypothesis {
+  type discrete [ 2 ] { Prosecutor, Defense };
+}
+variable SuspectCutTheFoil {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SuspectDNAOnFoilFromCutting {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SuspectDNAOnFoilFromPicking {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SuspectPickedLock {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UnknownCutTheFoil {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UnknownDNAOnFoil {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UnknownPickedLock {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( DNAFoundOnFoil | SuspectDNAOnFoilFromCutting, SuspectDNAOnFoilFromPicking, UnknownDNAOnFoil ) {
+  (Yes, Yes, Yes) 0.0, 1.0, 0.0, 0.0;
+  (No, Yes, Yes) 0.0, 1.0, 0.0, 0.0;
+  (Yes, No, Yes) 0.0, 1.0, 0.0, 0.0;
+  (No, No, Yes) 0.0, 0.0, 1.0, 0.0;
+  (Yes, Yes, No) 1.0, 0.0, 0.0, 0.0;
+  (No, Yes, No) 1.0, 0.0, 0.0, 0.0;
+  (Yes, No, No) 1.0, 0.0, 0.0, 0.0;
+  (No, No, No) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( Hypothesis ) {
+  table 0.5, 0.5;
+}
+probability ( SuspectCutTheFoil | Hypothesis ) {
+  (Prosecutor) 0.0, 1.0;
+  (Defense) 1.0, 0.0;
+}
+probability ( SuspectDNAOnFoilFromCutting | SuspectCutTheFoil, UnknownPickedLock ) {
+  (Yes, Yes) 0.07, 0.93;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.12, 0.88;
+  (No, No) 0.0, 1.0;
+}
+probability ( SuspectDNAOnFoilFromPicking | SuspectPickedLock, UnknownCutTheFoil ) {
+  (Yes, Yes) 0.36, 0.64;
+  (No, Yes) 0.0, 1.0;
+  (Yes, No) 0.19, 0.81;
+  (No, No) 0.0, 1.0;
+}
+probability ( SuspectPickedLock | Hypothesis ) {
+  (Prosecutor) 1.0, 0.0;
+  (Defense) 0.0, 1.0;
+}
+probability ( UnknownCutTheFoil | Hypothesis ) {
+  (Prosecutor) 1.0, 0.0;
+  (Defense) 0.0, 1.0;
+}
+probability ( UnknownDNAOnFoil | UnknownCutTheFoil, UnknownPickedLock ) {
+  (Yes, Yes) 0.31, 0.69;
+  (No, Yes) 0.36, 0.64;
+  (Yes, No) 0.07, 0.93;
+  (No, No) 0.0, 1.0;
+}
+probability ( UnknownPickedLock | Hypothesis ) {
+  (Prosecutor) 0.0, 1.0;
+  (Defense) 1.0, 0.0;
+}

@@ -1,0 +1,45 @@
+network unknown {
+}
+variable Combine {
+  type discrete [ 2 ] { _70, __70 };
+}
+variable Oral {
+  type discrete [ 2 ] { _70, __70 };
+}
+variable Position {
+  type discrete [ 2 ] { Captain, Lieutenant };
+}
+variable Promoted {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable Race {
+  type discrete [ 2 ] { Non_White, White };
+}
+variable Written {
+  type discrete [ 2 ] { _70, __70 };
+}
+probability ( Combine | Oral, Written ) {
+  (_70, _70) 1.0, 0.0;
+  (__70, _70) 0.5625, 0.4375;
+  (_70, __70) 0.53125, 0.46875;
+  (__70, __70) 0.0, 1.0;
+}
+probability ( Oral | Position ) {
+  (Captain) 0.4146341, 0.5853659;
+  (Lieutenant) 0.6623377, 0.3376623;
+}
+probability ( Position ) {
+  table 0.3474576, 0.6525424;
+}
+probability ( Promoted | Combine ) {
+  (_70) 1.0, 0.0;
+  (__70) 0.0, 1.0;
+}
+probability ( Race | Oral ) {
+  (_70) 0.5588235, 0.4411765;
+  (__70) 0.24, 0.76;
+}
+probability ( Written | Oral ) {
+  (_70) 0.5294118, 0.4705882;
+  (__70) 0.32, 0.68;
+}

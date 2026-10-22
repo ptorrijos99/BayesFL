@@ -1,0 +1,45 @@
+network unknown {
+}
+variable Depth {
+  type discrete [ 2 ] { 0_20, 20_40 };
+}
+variable EC {
+  type discrete [ 2 ] { Less_than_1_4, More_than_1_4 };
+}
+variable Intensity {
+  type discrete [ 2 ] { Less_than_0_3, More_than_0_3 };
+}
+variable Length {
+  type discrete [ 2 ] { Less_than_20, More_than_20 };
+}
+variable pH {
+  type discrete [ 2 ] { Less_than_7_7, More_than_7_7 };
+}
+variable W {
+  type discrete [ 2 ] { Less_than_10, More_than_10 };
+}
+probability ( Depth ) {
+  table 0.5, 0.5;
+}
+probability ( EC | Depth, Intensity ) {
+  (0_20, Less_than_0_3) 0.0, 1.0;
+  (20_40, Less_than_0_3) 1.0, 0.0;
+  (0_20, More_than_0_3) 1.0, 0.0;
+  (20_40, More_than_0_3) 1.0, 0.0;
+}
+probability ( Intensity | pH ) {
+  (Less_than_7_7) 0.647, 0.353;
+  (More_than_7_7) 0.307, 0.693;
+}
+probability ( Length | EC ) {
+  (Less_than_1_4) 0.5, 0.5;
+  (More_than_1_4) 1.0, 0.0;
+}
+probability ( pH | Depth ) {
+  (0_20) 0.133, 0.867;
+  (20_40) 1.0, 0.0;
+}
+probability ( W | EC ) {
+  (Less_than_1_4) 0.05, 0.95;
+  (More_than_1_4) 0.5, 0.5;
+}

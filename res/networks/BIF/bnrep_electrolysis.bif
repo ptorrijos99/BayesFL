@@ -1,0 +1,165 @@
+network unknown {
+}
+variable C {
+  type discrete [ 2 ] { High, Low };
+}
+variable F {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FPR {
+  type discrete [ 2 ] { Yes, No };
+}
+variable GP {
+  type discrete [ 2 ] { Yes, No };
+}
+variable GRE {
+  type discrete [ 2 ] { Yes, No };
+}
+variable H {
+  type discrete [ 2 ] { High, Low };
+}
+variable HCF {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HOR {
+  type discrete [ 2 ] { Yes, No };
+}
+variable IOA {
+  type discrete [ 2 ] { Yes, No };
+}
+variable IRF {
+  type discrete [ 2 ] { Yes, No };
+}
+variable P {
+  type discrete [ 2 ] { High, Low };
+}
+variable RGP {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SBT {
+  type discrete [ 2 ] { Yes, No };
+}
+variable SMT {
+  type discrete [ 2 ] { Yes, No };
+}
+variable T {
+  type discrete [ 2 ] { High, Low };
+}
+variable V {
+  type discrete [ 2 ] { High, Low };
+}
+probability ( C ) {
+  table 0.65, 0.35;
+}
+probability ( F | GRE, HCF, IOA, IRF ) {
+  (Yes, Yes, Yes, Yes) 0.0, 1.0;
+  (No, Yes, Yes, Yes) 0.1, 0.9;
+  (Yes, No, Yes, Yes) 0.0, 1.0;
+  (No, No, Yes, Yes) 0.0, 1.0;
+  (Yes, Yes, No, Yes) 0.1, 0.9;
+  (No, Yes, No, Yes) 0.5, 0.5;
+  (Yes, No, No, Yes) 0.0, 1.0;
+  (No, No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, Yes, No) 0.5, 0.5;
+  (No, Yes, Yes, No) 0.9, 0.1;
+  (Yes, No, Yes, No) 0.0, 1.0;
+  (No, No, Yes, No) 0.0, 1.0;
+  (Yes, Yes, No, No) 1.0, 0.0;
+  (No, Yes, No, No) 0.0, 1.0;
+  (Yes, No, No, No) 0.0, 1.0;
+  (No, No, No, No) 0.0, 1.0;
+}
+probability ( FPR | HCF, HOR, IOA ) {
+  (Yes, Yes, Yes) 0.1, 0.9;
+  (No, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes) 0.5, 0.5;
+  (No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, No) 0.5, 0.5;
+  (No, Yes, No) 0.0, 1.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( GP | C, H, P, T, V ) {
+  (High, High, High, High, High) 0.8705, 0.1295;
+  (Low, High, High, High, High) 0.8667, 0.1333;
+  (High, Low, High, High, High) 0.8667, 0.1333;
+  (Low, Low, High, High, High) 0.8667, 0.1333;
+  (High, High, Low, High, High) 0.097, 0.903;
+  (Low, High, Low, High, High) 0.097, 0.903;
+  (High, Low, Low, High, High) 0.0458, 0.9542;
+  (Low, Low, Low, High, High) 0.0458, 0.9542;
+  (High, High, High, Low, High) 0.8725, 0.1275;
+  (Low, High, High, Low, High) 0.8758, 0.1242;
+  (High, Low, High, Low, High) 0.8728, 0.1272;
+  (Low, Low, High, Low, High) 0.8667, 0.1333;
+  (High, High, Low, Low, High) 0.0612, 0.9388;
+  (Low, High, Low, Low, High) 0.0612, 0.9388;
+  (High, Low, Low, Low, High) 0.0612, 0.9388;
+  (Low, Low, Low, Low, High) 0.0612, 0.9388;
+  (High, High, High, High, Low) 0.0301, 0.9699;
+  (Low, High, High, High, Low) 0.8667, 0.1333;
+  (High, Low, High, High, Low) 0.8906, 0.1094;
+  (Low, Low, High, High, Low) 0.8757, 0.1243;
+  (High, High, Low, High, Low) 0.0301, 0.9699;
+  (Low, High, Low, High, Low) 0.7356, 0.2644;
+  (High, Low, Low, High, Low) 0.0301, 0.9699;
+  (Low, Low, Low, High, Low) 0.7356, 0.2644;
+  (High, High, High, Low, Low) 0.8947, 0.1053;
+  (Low, High, High, Low, Low) 0.8974, 0.1026;
+  (High, Low, High, Low, Low) 0.8946, 0.1054;
+  (Low, Low, High, Low, Low) 0.8973, 0.1027;
+  (High, High, Low, Low, Low) 0.0462, 0.9538;
+  (Low, High, Low, Low, Low) 0.7287, 0.2713;
+  (High, Low, Low, Low, Low) 0.0462, 0.9538;
+  (Low, Low, Low, Low, Low) 0.7288, 0.2712;
+}
+probability ( GRE ) {
+  table 0.5, 0.5;
+}
+probability ( H ) {
+  table 0.99999, 0.00001;
+}
+probability ( HCF | GP, SBT, SMT ) {
+  (Yes, Yes, Yes) 0.0, 1.0;
+  (No, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes) 0.1, 0.9;
+  (No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, No) 0.5, 0.5;
+  (No, Yes, No) 0.0, 1.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( HOR ) {
+  table 0.5, 0.5;
+}
+probability ( IOA ) {
+  table 0.5, 0.5;
+}
+probability ( IRF ) {
+  table 0.1, 0.9;
+}
+probability ( P ) {
+  table 0.04, 0.96;
+}
+probability ( RGP | HCF, HOR, IOA ) {
+  (Yes, Yes, Yes) 0.1, 0.9;
+  (No, Yes, Yes) 0.0, 1.0;
+  (Yes, No, Yes) 0.5, 0.5;
+  (No, No, Yes) 0.0, 1.0;
+  (Yes, Yes, No) 0.5, 0.5;
+  (No, Yes, No) 0.0, 1.0;
+  (Yes, No, No) 1.0, 0.0;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( SBT ) {
+  table 0.5, 0.5;
+}
+probability ( SMT ) {
+  table 0.5, 0.5;
+}
+probability ( T ) {
+  table 0.1, 0.9;
+}
+probability ( V ) {
+  table 0.21, 0.79;
+}

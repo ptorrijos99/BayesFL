@@ -1,0 +1,149 @@
+network unknown {
+}
+variable AccidentalViolations {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable CreateAFalseImpressionToDeceiveTheRegulators {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable DecisionErrors {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable DeparmentsAndInstitutionsAreNotComplete {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable HabitualViolations {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable IllegalCommand {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable InadequateEmergencyPlan {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable InsufficientCracdownOnIllegalActivities {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable InsufficientSupervisionOfWorkSafety {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable MentalStates {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable OrganizeProductionInViolationOfLawsAndRegulations {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable PerceptualErrors {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable PhysicalIntellectualDisability {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable SafetyEducationAndTraning {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable SafetySupervisionIsInadequate {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable SecurityManagementConfusion {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable SkillBasedErrors {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+variable TechnicalEnvironment {
+  type discrete [ 2 ] { Non_occurence, Occurence };
+}
+probability ( AccidentalViolations | IllegalCommand, OrganizeProductionInViolationOfLawsAndRegulations ) {
+  (Non_occurence, Non_occurence) 0.903, 0.097;
+  (Occurence, Non_occurence) 0.905, 0.095;
+  (Non_occurence, Occurence) 0.793, 0.207;
+  (Occurence, Occurence) 0.789, 0.211;
+}
+probability ( CreateAFalseImpressionToDeceiveTheRegulators | SecurityManagementConfusion ) {
+  (Non_occurence) 0.875, 0.125;
+  (Occurence) 0.706, 0.294;
+}
+probability ( DecisionErrors | IllegalCommand, OrganizeProductionInViolationOfLawsAndRegulations, TechnicalEnvironment ) {
+  (Non_occurence, Non_occurence, Non_occurence) 1.0, 0.0;
+  (Occurence, Non_occurence, Non_occurence) 0.846, 0.154;
+  (Non_occurence, Occurence, Non_occurence) 0.882, 0.118;
+  (Occurence, Occurence, Non_occurence) 1.0, 0.0;
+  (Non_occurence, Non_occurence, Occurence) 1.0, 0.0;
+  (Occurence, Non_occurence, Occurence) 0.75, 0.25;
+  (Non_occurence, Occurence, Occurence) 0.75, 0.25;
+  (Occurence, Occurence, Occurence) 1.0, 0.0;
+}
+probability ( DeparmentsAndInstitutionsAreNotComplete | SafetySupervisionIsInadequate ) {
+  (Non_occurence) 0.74, 0.26;
+  (Occurence) 0.68, 0.32;
+}
+probability ( HabitualViolations | MentalStates, PhysicalIntellectualDisability ) {
+  (Non_occurence, Non_occurence) 0.645, 0.355;
+  (Occurence, Non_occurence) 0.333, 0.667;
+  (Non_occurence, Occurence) 0.333, 0.667;
+  (Occurence, Occurence) 0.0, 1.0;
+}
+probability ( IllegalCommand ) {
+  table 0.6, 0.4;
+}
+probability ( InadequateEmergencyPlan ) {
+  table 0.79, 0.21;
+}
+probability ( InsufficientCracdownOnIllegalActivities ) {
+  table 0.78, 0.22;
+}
+probability ( InsufficientSupervisionOfWorkSafety ) {
+  table 0.56, 0.44;
+}
+probability ( MentalStates | SafetyEducationAndTraning ) {
+  (Non_occurence) 1.0, 0.0;
+  (Occurence) 0.857, 0.143;
+}
+probability ( OrganizeProductionInViolationOfLawsAndRegulations | DeparmentsAndInstitutionsAreNotComplete, SecurityManagementConfusion ) {
+  (Non_occurence, Non_occurence) 0.619, 0.381;
+  (Occurence, Non_occurence) 0.545, 0.455;
+  (Non_occurence, Occurence) 0.52, 0.48;
+  (Occurence, Occurence) 0.389, 0.611;
+}
+probability ( PerceptualErrors | IllegalCommand ) {
+  (Non_occurence) 0.917, 0.083;
+  (Occurence) 0.85, 0.15;
+}
+probability ( PhysicalIntellectualDisability | InadequateEmergencyPlan, SafetyEducationAndTraning, SecurityManagementConfusion ) {
+  (Non_occurence, Non_occurence, Non_occurence) 1.0, 0.0;
+  (Occurence, Non_occurence, Non_occurence) 1.0, 0.0;
+  (Non_occurence, Occurence, Non_occurence) 1.0, 0.0;
+  (Occurence, Occurence, Non_occurence) 0.667, 0.333;
+  (Non_occurence, Non_occurence, Occurence) 0.974, 0.026;
+  (Occurence, Non_occurence, Occurence) 1.0, 0.0;
+  (Non_occurence, Occurence, Occurence) 0.875, 0.125;
+  (Occurence, Occurence, Occurence) 1.0, 0.0;
+}
+probability ( SafetyEducationAndTraning | SafetySupervisionIsInadequate ) {
+  (Non_occurence) 0.78, 0.22;
+  (Occurence) 0.66, 0.34;
+}
+probability ( SafetySupervisionIsInadequate ) {
+  table 0.5, 0.5;
+}
+probability ( SecurityManagementConfusion | InsufficientCracdownOnIllegalActivities, SafetySupervisionIsInadequate ) {
+  (Non_occurence, Non_occurence) 0.417, 0.583;
+  (Occurence, Non_occurence) 0.0, 1.0;
+  (Non_occurence, Occurence) 0.233, 0.767;
+  (Occurence, Occurence) 0.25, 0.75;
+}
+probability ( SkillBasedErrors | CreateAFalseImpressionToDeceiveTheRegulators, IllegalCommand, TechnicalEnvironment ) {
+  (Non_occurence, Non_occurence, Non_occurence) 0.969, 0.031;
+  (Occurence, Non_occurence, Non_occurence) 1.0, 0.0;
+  (Non_occurence, Occurence, Non_occurence) 0.957, 0.043;
+  (Occurence, Occurence, Non_occurence) 0.75, 0.25;
+  (Non_occurence, Non_occurence, Occurence) 0.9, 0.1;
+  (Occurence, Non_occurence, Occurence) 0.833, 0.167;
+  (Non_occurence, Occurence, Occurence) 0.7274549, 0.2725451;
+  (Occurence, Occurence, Occurence) 0.5, 0.5;
+}
+probability ( TechnicalEnvironment | InsufficientSupervisionOfWorkSafety ) {
+  (Non_occurence) 0.75, 0.25;
+  (Occurence) 0.659, 0.341;
+}

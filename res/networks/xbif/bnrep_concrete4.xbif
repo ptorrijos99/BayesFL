@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AverageDistance</NAME>
+      <OUTCOME>0_300</OUTCOME>
+      <OUTCOME>300_600</OUTCOME>
+      <OUTCOME>_600</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Basement</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueConcrete</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConstructionYear</NAME>
+      <OUTCOME>1930_1955</OUTCOME>
+      <OUTCOME>1955_1960</OUTCOME>
+      <OUTCOME>1960_1968</OUTCOME>
+      <OUTCOME>1968_1975</OUTCOME>
+      <OUTCOME>1975_1980</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AverageDistance</FOR>
+      <TABLE>0.02 0.16 0.82 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Basement</FOR>
+      <GIVEN>AverageDistance</GIVEN>
+      <TABLE>0.26 0.74 0.21 0.79 0.38 0.62 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlueConcrete</FOR>
+      <GIVEN>AverageDistance</GIVEN>
+      <TABLE>0.58 0.42 0.21 0.79 0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConstructionYear</FOR>
+      <GIVEN>Basement</GIVEN>
+      <TABLE>0.07 0.18 0.11 0.28 0.36 0.23 0.16 0.25 0.28 0.08 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

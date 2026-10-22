@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AtCrimeScene</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EredHanded</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EseenCS</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ewallet</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Guilty</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AtCrimeScene</FOR>
+      <TABLE>0.57 0.43 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EredHanded</FOR>
+      <GIVEN>Guilty</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EseenCS</FOR>
+      <GIVEN>AtCrimeScene</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ewallet</FOR>
+      <GIVEN>Guilty</GIVEN>
+      <TABLE>0.993 0.007 0.549 0.451 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Guilty</FOR>
+      <GIVEN>AtCrimeScene</GIVEN>
+      <TABLE>1.0 0.0 0.67 0.33 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>A</NAME>
+      <OUTCOME>young</OUTCOME>
+      <OUTCOME>adult</OUTCOME>
+      <OUTCOME>old</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>E</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>uni</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>O</NAME>
+      <OUTCOME>emp</OUTCOME>
+      <OUTCOME>self</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>R</NAME>
+      <OUTCOME>small</OUTCOME>
+      <OUTCOME>big</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>S</NAME>
+      <OUTCOME>M</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T</NAME>
+      <OUTCOME>car</OUTCOME>
+      <OUTCOME>train</OUTCOME>
+      <OUTCOME>other</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>A</FOR>
+      <TABLE>0.3 0.5 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>E</FOR>
+      <GIVEN>A</GIVEN>
+      <GIVEN>S</GIVEN>
+      <TABLE>0.75 0.25 0.64 0.36 0.72 0.28 0.7 0.3 0.88 0.12 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>O</FOR>
+      <GIVEN>E</GIVEN>
+      <TABLE>0.96 0.04 0.92 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>R</FOR>
+      <GIVEN>E</GIVEN>
+      <TABLE>0.25 0.75 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>S</FOR>
+      <TABLE>0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T</FOR>
+      <GIVEN>O</GIVEN>
+      <GIVEN>R</GIVEN>
+      <TABLE>0.48 0.42 0.1 0.58 0.24 0.18 0.56 0.36 0.08 0.7 0.21 0.09 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

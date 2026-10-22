@@ -1,0 +1,121 @@
+network unknown {
+}
+variable AgriculturalDensity {
+  type discrete [ 3 ] { low, med, high };
+}
+variable AllRoadAccess {
+  type discrete [ 2 ] { no, yes };
+}
+variable BuiltUpDensity {
+  type discrete [ 3 ] { low, med, high };
+}
+variable CoUserInteractionConstraints {
+  type discrete [ 2 ] { low, high };
+}
+variable EnvironmentalConstraints {
+  type discrete [ 2 ] { yes, no };
+}
+variable Geology {
+  type discrete [ 3 ] { colluvial_clay, diabase_or_other, limestone_bare_rock };
+}
+variable GroundwaterDepth {
+  type discrete [ 3 ] { less_than_25m, between_25_and_60m, over_60m };
+}
+variable InfrastructureConstraints {
+  type discrete [ 2 ] { low, high };
+}
+variable ProductivityConstraints {
+  type discrete [ 2 ] { low, high };
+}
+variable SiteConstraints {
+  type discrete [ 2 ] { low, high };
+}
+variable Slope {
+  type discrete [ 3 ] { flat, moderate, steep };
+}
+variable SuitabilityConventionalAgriculture {
+  type discrete [ 2 ] { no, yes };
+}
+variable UtilitiesAccess {
+  type discrete [ 3 ] { no, planned, yes };
+}
+probability ( AgriculturalDensity ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( AllRoadAccess ) {
+  table 0.5, 0.5;
+}
+probability ( BuiltUpDensity ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( CoUserInteractionConstraints | AgriculturalDensity, BuiltUpDensity ) {
+  (low, low) 0.15, 0.85;
+  (med, low) 0.8, 0.2;
+  (high, low) 0.95, 0.05;
+  (low, med) 0.85, 0.15;
+  (med, med) 0.7, 0.3;
+  (high, med) 0.85, 0.15;
+  (low, high) 0.85, 0.15;
+  (med, high) 0.6, 0.4;
+  (high, high) 0.8, 0.2;
+}
+probability ( EnvironmentalConstraints ) {
+  table 0.5, 0.5;
+}
+probability ( Geology ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( GroundwaterDepth ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( InfrastructureConstraints | AllRoadAccess, UtilitiesAccess ) {
+  (no, no) 0.5, 0.5;
+  (yes, no) 0.6, 0.4;
+  (no, planned) 0.7, 0.3;
+  (yes, planned) 0.75, 0.25;
+  (no, yes) 0.9, 0.1;
+  (yes, yes) 1.0, 0.0;
+}
+probability ( ProductivityConstraints | Geology, GroundwaterDepth ) {
+  (colluvial_clay, less_than_25m) 0.9, 0.1;
+  (diabase_or_other, less_than_25m) 0.85, 0.15;
+  (limestone_bare_rock, less_than_25m) 0.5, 0.5;
+  (colluvial_clay, between_25_and_60m) 0.7, 0.3;
+  (diabase_or_other, between_25_and_60m) 0.65, 0.35;
+  (limestone_bare_rock, between_25_and_60m) 0.25, 0.75;
+  (colluvial_clay, over_60m) 0.65, 0.35;
+  (diabase_or_other, over_60m) 0.5, 0.5;
+  (limestone_bare_rock, over_60m) 0.0, 1.0;
+}
+probability ( SiteConstraints | EnvironmentalConstraints, Slope ) {
+  (yes, flat) 1.0, 0.0;
+  (no, flat) 0.4, 0.6;
+  (yes, moderate) 0.9, 0.1;
+  (no, moderate) 0.4, 0.6;
+  (yes, steep) 0.7, 0.3;
+  (no, steep) 0.4, 0.6;
+}
+probability ( Slope ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( SuitabilityConventionalAgriculture | CoUserInteractionConstraints, InfrastructureConstraints, ProductivityConstraints, SiteConstraints ) {
+  (low, low, low, low) 0.0, 1.0;
+  (high, low, low, low) 0.2, 0.8;
+  (low, high, low, low) 0.1, 0.9;
+  (high, high, low, low) 0.25, 0.75;
+  (low, low, high, low) 0.5, 0.5;
+  (high, low, high, low) 0.65, 0.35;
+  (low, high, high, low) 0.6, 0.4;
+  (high, high, high, low) 0.7, 0.3;
+  (low, low, low, high) 0.4, 0.6;
+  (high, low, low, high) 0.35, 0.65;
+  (low, high, low, high) 0.5, 0.5;
+  (high, high, low, high) 0.4, 0.6;
+  (low, low, high, high) 0.7, 0.3;
+  (high, low, high, high) 0.8, 0.2;
+  (low, high, high, high) 0.8, 0.2;
+  (high, high, high, high) 0.9, 0.1;
+}
+probability ( UtilitiesAccess ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}

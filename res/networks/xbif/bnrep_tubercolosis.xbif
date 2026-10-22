@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AgeGroup</NAME>
+      <OUTCOME>0_to_35</OUTCOME>
+      <OUTCOME>35_to_65</OUTCOME>
+      <OUTCOME>More_than_65</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Gender</NAME>
+      <OUTCOME>Male</OUTCOME>
+      <OUTCOME>Femal</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Location</NAME>
+      <OUTCOME>Nkangala</OUTCOME>
+      <OUTCOME>Gert_Sibande</OUTCOME>
+      <OUTCOME>Ehlanzeni</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TreatmentOutcome</NAME>
+      <OUTCOME>Alive</OUTCOME>
+      <OUTCOME>Died</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Tubercolosis</NAME>
+      <OUTCOME>Pulmonary</OUTCOME>
+      <OUTCOME>ExtraPulmonary</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AgeGroup</FOR>
+      <TABLE>0.50279 0.47097 0.02624 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Gender</FOR>
+      <TABLE>0.53685 0.46315 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Location</FOR>
+      <TABLE>0.28141 0.25377 0.46482 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TreatmentOutcome</FOR>
+      <GIVEN>Tubercolosis</GIVEN>
+      <TABLE>0.86811 0.13189 0.86364 0.13636 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Tubercolosis</FOR>
+      <GIVEN>AgeGroup</GIVEN>
+      <GIVEN>Gender</GIVEN>
+      <GIVEN>Location</GIVEN>
+      <TABLE>0.87179 0.12821 0.90517 0.09483 0.89205 0.10795 0.88095 0.11905 0.92213 0.07787 0.8809 0.1191 0.93226 0.06774 0.96918 0.03082 0.88987 0.11013 0.92265 0.07735 0.90076 0.09924 0.87774 0.12226 0.90909 0.09091 1.0 0.0 0.87097 0.12903 0.9 0.1 1.0 0.0 0.90909 0.09091 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

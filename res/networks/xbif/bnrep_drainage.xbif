@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AbnormalFlow</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AirLeakageOfShaftSeal</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GateValveFailure</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImpellerDamaged</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LowSpeed</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LowVoltage</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MotorFault</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PipelineFailure</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PipelineRupture</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Silting</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterPumpFailure</NAME>
+      <OUTCOME>T</OUTCOME>
+      <OUTCOME>F</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AbnormalFlow</FOR>
+      <GIVEN>MotorFault</GIVEN>
+      <GIVEN>PipelineFailure</GIVEN>
+      <GIVEN>WaterPumpFailure</GIVEN>
+      <TABLE>1.0 0.0 0.4542 0.5458 0.875 0.125 0.584 0.416 0.2356 0.7644 0.1375 0.8625 0.7644 0.2356 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AirLeakageOfShaftSeal</FOR>
+      <TABLE>0.91 0.09 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GateValveFailure</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImpellerDamaged</FOR>
+      <TABLE>0.86 0.14 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LowSpeed</FOR>
+      <TABLE>0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LowVoltage</FOR>
+      <TABLE>0.92 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MotorFault</FOR>
+      <GIVEN>LowSpeed</GIVEN>
+      <GIVEN>LowVoltage</GIVEN>
+      <TABLE>1.0 0.0 0.4542 0.5458 0.1375 0.8625 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PipelineFailure</FOR>
+      <GIVEN>GateValveFailure</GIVEN>
+      <GIVEN>PipelineRupture</GIVEN>
+      <TABLE>1.0 0.0 0.1247 0.8753 0.2707 0.7293 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PipelineRupture</FOR>
+      <TABLE>0.98 0.02 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Silting</FOR>
+      <TABLE>0.78 0.22 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterPumpFailure</FOR>
+      <GIVEN>AirLeakageOfShaftSeal</GIVEN>
+      <GIVEN>ImpellerDamaged</GIVEN>
+      <GIVEN>Silting</GIVEN>
+      <TABLE>1.0 0.0 0.1375 0.8625 0.8141 0.1859 0.1357 0.8643 0.5458 0.4542 0.2356 0.7644 0.4542 0.5458 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

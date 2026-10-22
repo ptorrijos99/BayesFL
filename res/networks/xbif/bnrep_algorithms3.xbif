@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>X1</NAME>
+      <OUTCOME>a</OUTCOME>
+      <OUTCOME>b</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X2</NAME>
+      <OUTCOME>c</OUTCOME>
+      <OUTCOME>d</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X3</NAME>
+      <OUTCOME>e</OUTCOME>
+      <OUTCOME>f</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X4</NAME>
+      <OUTCOME>g</OUTCOME>
+      <OUTCOME>h</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>X1</FOR>
+      <TABLE>0.53 0.47 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X2</FOR>
+      <TABLE>0.34 0.66 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X3</FOR>
+      <GIVEN>X1</GIVEN>
+      <GIVEN>X2</GIVEN>
+      <TABLE>0.15 0.85 0.75 0.25 0.4 0.6 0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X4</FOR>
+      <GIVEN>X3</GIVEN>
+      <TABLE>0.2 0.8 0.42 0.58 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

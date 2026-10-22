@@ -1,0 +1,50 @@
+network unknown {
+}
+variable Anxiety {
+  type discrete [ 2 ] { 0_2, 3_5 };
+}
+variable DepressiveState {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable EEG {
+  type discrete [ 2 ] { _0, _0_1 };
+}
+variable Energy {
+  type discrete [ 2 ] { 0_2, 3_5 };
+}
+variable Irritability {
+  type discrete [ 2 ] { 0_3, 4_5 };
+}
+variable MoodState {
+  type discrete [ 7 ] { _3, _2, _1, 0, _1_1, _2_1, _3_1 };
+}
+variable Sleep {
+  type discrete [ 2 ] { _6_Hours, _6_Hours_1 };
+}
+probability ( Anxiety | DepressiveState ) {
+  (TRUE) 0.25, 0.75;
+  (FALSE) 0.8, 0.2;
+}
+probability ( DepressiveState ) {
+  table 0.2, 0.8;
+}
+probability ( EEG | DepressiveState ) {
+  (TRUE) 0.67, 0.33;
+  (FALSE) 0.22, 0.78;
+}
+probability ( Energy | DepressiveState ) {
+  (TRUE) 0.8, 0.2;
+  (FALSE) 0.5, 0.5;
+}
+probability ( Irritability | DepressiveState ) {
+  (TRUE) 0.67, 0.33;
+  (FALSE) 0.9, 0.1;
+}
+probability ( MoodState | DepressiveState ) {
+  (TRUE) 0.00, 0.00, 0.00, 0.10, 0.35, 0.35, 0.20;
+  (FALSE) 0.00, 0.01, 0.09, 0.80, 0.04, 0.04, 0.02;
+}
+probability ( Sleep | DepressiveState ) {
+  (TRUE) 0.8, 0.2;
+  (FALSE) 0.2, 0.8;
+}

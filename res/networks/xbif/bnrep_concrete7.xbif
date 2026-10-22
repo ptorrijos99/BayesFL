@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AverageDistance</NAME>
+      <OUTCOME>0_300</OUTCOME>
+      <OUTCOME>300_600</OUTCOME>
+      <OUTCOME>_600</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueConcrete</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConstructionYear</NAME>
+      <OUTCOME>1930_1955</OUTCOME>
+      <OUTCOME>1955_1960</OUTCOME>
+      <OUTCOME>1960_1968</OUTCOME>
+      <OUTCOME>1968_1975</OUTCOME>
+      <OUTCOME>1975_1980</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloorArea</NAME>
+      <OUTCOME>0_150</OUTCOME>
+      <OUTCOME>150_220</OUTCOME>
+      <OUTCOME>220_360</OUTCOME>
+      <OUTCOME>360_1500</OUTCOME>
+      <OUTCOME>_1500</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NumberOfStairwells</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <OUTCOME>4</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AverageDistance</FOR>
+      <GIVEN>BlueConcrete</GIVEN>
+      <TABLE>0.5 0.25 0.25 0.72 0.23 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlueConcrete</FOR>
+      <TABLE>0.49 0.51 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConstructionYear</FOR>
+      <GIVEN>FloorArea</GIVEN>
+      <TABLE>0.03 0.42 0.03 0.26 0.26 0.36 0.2 0.12 0.12 0.2 0.12 0.36 0.2 0.2 0.12 0.08 0.18 0.28 0.28 0.18 0.28 0.15 0.21 0.15 0.21 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloorArea</FOR>
+      <GIVEN>NumberOfStairwells</GIVEN>
+      <TABLE>0.37 0.25 0.25 0.11 0.02 0.18 0.35 0.18 0.03 0.26 0.03 0.03 0.09 0.62 0.23 0.04 0.14 0.14 0.44 0.24 0.12 0.03 0.12 0.2 0.53 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NumberOfStairwells</FOR>
+      <GIVEN>AverageDistance</GIVEN>
+      <TABLE>0.26 0.11 0.28 0.15 0.2 0.55 0.21 0.04 0.1 0.1 0.06 0.46 0.16 0.16 0.16 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,23 @@
+network unknown {
+}
+variable Disease {
+  type discrete [ 2 ] { no, yes };
+}
+variable Test1 {
+  type discrete [ 2 ] { no, yes };
+}
+variable Test2 {
+  type discrete [ 2 ] { no, yes };
+}
+probability ( Disease | Test1, Test2 ) {
+  (no, no) 0.7, 0.3;
+  (yes, no) 0.6, 0.4;
+  (no, yes) 0.6, 0.4;
+  (yes, yes) 0.05, 0.95;
+}
+probability ( Test1 ) {
+  table 0.6, 0.4;
+}
+probability ( Test2 ) {
+  table 0.7, 0.3;
+}

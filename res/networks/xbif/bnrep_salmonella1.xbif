@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CHL</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CIP</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CTX</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FFC</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GEN</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NAL</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TET</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CHL</FOR>
+      <GIVEN>GEN</GIVEN>
+      <TABLE>0.635 0.365 0.212 0.788 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CIP</FOR>
+      <TABLE>0.114 0.886 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CTX</FOR>
+      <TABLE>0.018 0.982 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FFC</FOR>
+      <GIVEN>CHL</GIVEN>
+      <TABLE>0.221 0.779 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GEN</FOR>
+      <TABLE>0.064 0.936 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NAL</FOR>
+      <GIVEN>CIP</GIVEN>
+      <TABLE>0.779 0.221 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TET</FOR>
+      <GIVEN>CHL</GIVEN>
+      <GIVEN>GEN</GIVEN>
+      <TABLE>0.979 0.021 0.961 0.039 1.0 0.0 0.776 0.224 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

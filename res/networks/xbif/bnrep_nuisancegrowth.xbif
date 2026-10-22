@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Activity</NAME>
+      <OUTCOME>Swimming</OUTCOME>
+      <OUTCOME>Boating</OUTCOME>
+      <OUTCOME>Angling</OUTCOME>
+      <OUTCOME>Biodiversity</OUTCOME>
+      <OUTCOME>Aesthetics</OUTCOME>
+      <OUTCOME>Bird_watching</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BenthicFishForaging</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Disturbance</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ecosystem</NAME>
+      <OUTCOME>Standing_floating</OUTCOME>
+      <OUTCOME>Standing_submerged</OUTCOME>
+      <OUTCOME>Flowing_submerged</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EpiphyticInvertebrates</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Flow</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Light</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MacrophyteGrowth</NAME>
+      <OUTCOME>Very_low</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Very_high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MacrophyteRemoval</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Partial</OUTCOME>
+      <OUTCOME>Full</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MacrophyteSpecies</NAME>
+      <OUTCOME>Elodea_nuttallii</OUTCOME>
+      <OUTCOME>Pontederia_crassipes</OUTCOME>
+      <OUTCOME>Ludwigia</OUTCOME>
+      <OUTCOME>Juncus_bulbosus</OUTCOME>
+      <OUTCOME>Sagittaria_sagittifolia</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NutrientLoading</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Perception</NAME>
+      <OUTCOME>Nuisance</OUTCOME>
+      <OUTCOME>No_nuisance</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Phytoplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PiscivorousFish</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PiscivorousFishPredation</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlanktivorousFish</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Resources</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RespondentType</NAME>
+      <OUTCOME>Resident</OUTCOME>
+      <OUTCOME>Visitor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Zooplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Activity</FOR>
+      <TABLE>0.12780829 0.21168248 0.20768847 0.20668997 0.20768847 0.03844234 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BenthicFishForaging</FOR>
+      <GIVEN>EpiphyticInvertebrates</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Disturbance</FOR>
+      <GIVEN>Flow</GIVEN>
+      <GIVEN>Zooplankton</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.75 0.25 0.0 1.0 0.0 0.0 0.5 0.5 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ecosystem</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EpiphyticInvertebrates</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>MacrophyteRemoval</GIVEN>
+      <TABLE>0.75 0.25 0.0 0.5 0.5 0.0 0.25 0.5 0.25 0.0 0.25 0.75 0.25 0.75 0.0 1.0 0.0 0.0 0.0 0.25 0.75 0.25 0.75 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Flow</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>MacrophyteRemoval</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.75 0.25 0.0 0.0 0.5 0.5 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Light</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>MacrophyteRemoval</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 0.0 1.0 0.5 0.5 0.25 0.75 0.0 1.0 0.5 0.5 0.25 0.75 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MacrophyteGrowth</FOR>
+      <TABLE>0.183 0.19 0.197 0.209 0.221 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MacrophyteRemoval</FOR>
+      <GIVEN>Perception</GIVEN>
+      <TABLE>0.2 0.2 0.6 0.8 0.2 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MacrophyteSpecies</FOR>
+      <TABLE>0.165 0.222 0.192 0.217 0.204 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NutrientLoading</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Perception</FOR>
+      <GIVEN>Activity</GIVEN>
+      <GIVEN>MacrophyteGrowth</GIVEN>
+      <GIVEN>MacrophyteSpecies</GIVEN>
+      <GIVEN>RespondentType</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.184 0.816 0.233 0.767 0.5 0.5 0.5 0.5 0.29 0.71 0.122 0.878 0.021 0.979 0.051 0.949 0.5 0.5 0.5 0.5 0.311 0.689 0.311 0.689 0.5 0.5 0.5 0.5 0.433 0.567 0.208 0.792 0.073 0.927 0.107 0.893 0.5 0.5 0.5 0.5 0.475 0.525 0.1 0.9 0.5 0.5 0.5 0.5 0.591 0.409 0.333 0.667 0.226 0.774 0.211 0.789 0.5 0.5 0.5 0.5 0.644 0.356 0.497 0.503 0.5 0.5 0.5 0.5 0.732 0.268 0.485 0.515 0.52 0.48 0.373 0.627 0.5 0.5 0.5 0.5 0.784 0.216 0.594 0.406 0.5 0.5 0.5 0.5 0.838 0.162 0.641 0.359 0.8 0.2 0.569 0.431 0.111 0.889 0.062 0.938 0.191 0.809 0.383 0.617 0.178 0.822 0.156 0.844 0.278 0.722 0.117 0.883 0.021 0.979 0.054 0.946 0.265 0.735 0.159 0.841 0.322 0.678 0.479 0.521 0.162 0.838 0.16 0.84 0.421 0.579 0.201 0.799 0.078 0.922 0.112 0.888 0.509 0.491 0.353 0.647 0.488 0.512 0.576 0.424 0.152 0.848 0.164 0.836 0.579 0.421 0.322 0.678 0.236 0.764 0.219 0.781 0.749 0.251 0.611 0.389 0.655 0.345 0.668 0.332 0.139 0.861 0.168 0.832 0.722 0.278 0.474 0.526 0.534 0.466 0.385 0.615 0.896 0.104 0.819 0.181 0.792 0.208 0.748 0.252 0.128 0.872 0.171 0.829 0.831 0.169 0.629 0.371 0.801 0.199 0.583 0.417 0.029 0.971 0.015 0.985 0.179 0.821 0.361 0.639 0.176 0.824 0.155 0.845 0.258 0.742 0.107 0.893 0.026 0.974 0.063 0.937 0.079 0.921 0.043 0.957 0.304 0.696 0.456 0.544 0.163 0.837 0.159 0.841 0.3966034 0.6033966 0.185 0.815 0.089 0.911 0.13 0.87 0.198 0.802 0.114 0.886 0.467 0.533 0.553 0.447 0.15 0.85 0.162 0.838 0.554 0.446 0.3 0.7 0.267 0.733 0.249 0.751 0.415 0.585 0.271 0.729 0.637 0.363 0.647 0.353 0.138 0.862 0.166 0.834 0.702 0.298 0.448 0.552 0.574 0.426 0.425 0.575 0.672 0.328 0.518 0.482 0.778 0.222 0.73 0.27 0.127 0.873 0.17 0.83 0.817 0.183 0.606 0.394 0.833 0.167 0.622 0.378 0.035 0.965 0.019 0.981 0.178 0.822 0.358 0.642 0.193 0.807 0.169 0.831 0.227 0.773 0.092 0.908 0.015 0.985 0.026 0.974 0.095 0.905 0.052 0.948 0.302 0.698 0.452 0.548 0.178 0.822 0.174 0.826 0.357 0.643 0.161 0.839 0.038 0.962 0.563 0.437 0.232 0.768 0.137 0.863 0.466 0.534 0.549 0.451 0.165 0.835 0.178 0.822 0.512 0.488 0.266 0.734 0.127 0.873 0.117 0.883 0.465 0.535 0.313 0.687 0.634 0.366 0.643 0.357 0.152 0.848 0.182 0.818 0.665 0.335 0.407 0.593 0.35 0.65 0.228 0.772 0.715 0.285 0.568 0.432 0.777 0.223 0.728 0.272 0.139 0.861 0.186 0.814 0.79 0.21 0.565 0.435 0.666 0.334 0.397 0.603 0.045 0.955 0.024 0.976 0.199 0.801 0.281 0.719 0.172 0.828 0.151 0.849 0.257 0.743 0.106 0.894 0.019 0.981 0.048 0.952 0.119 0.881 0.066 0.934 0.333 0.667 0.366 0.634 0.159 0.841 0.155 0.845 0.395 0.605 0.184 0.816 0.069 0.931 0.102 0.898 0.281 0.719 0.17 0.83 0.5 0.5 0.461 0.539 0.146 0.854 0.158 0.842 0.553 0.447 0.299 0.701 0.216 0.784 0.201 0.799 0.53 0.47 0.372 0.628 0.667 0.333 0.559 0.441 0.135 0.865 0.162 0.838 0.7 0.3 0.447 0.553 0.505 0.495 0.359 0.641 0.765 0.235 0.63 0.37 0.8 0.2 0.652 0.348 0.124 0.876 0.166 0.834 0.816 0.184 0.604 0.396 0.791 0.209 0.555 0.445 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.184 0.816 0.162 0.838 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.169 0.831 0.1641642 0.8358358 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.157 0.843 0.169 0.831 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.144 0.856 0.173 0.827 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.133 0.867 0.177 0.823 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Phytoplankton</FOR>
+      <GIVEN>Disturbance</GIVEN>
+      <GIVEN>Resources</GIVEN>
+      <TABLE>0.5 0.5 0.0 0.0 0.5 0.5 0.0 0.0 1.0 0.75 0.25 0.0 0.0 1.0 0.0 0.0 0.5 0.5 1.0 0.0 0.0 0.5 0.5 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PiscivorousFish</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PiscivorousFishPredation</FOR>
+      <GIVEN>MacrophyteRemoval</GIVEN>
+      <GIVEN>PiscivorousFish</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlanktivorousFish</FOR>
+      <GIVEN>PiscivorousFishPredation</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Resources</FOR>
+      <GIVEN>BenthicFishForaging</GIVEN>
+      <GIVEN>Light</GIVEN>
+      <GIVEN>NutrientLoading</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.75 0.25 0.0 0.5 0.5 0.0 0.75 0.25 0.0 0.0 0.75 0.25 0.0 0.0 1.0 0.9 0.1 0.0 0.7 0.3 0.0 0.5 0.5 0.0 0.5 0.5 0.0 0.0 0.65 0.35 0.0 0.0 1.0 0.8 0.2 0.0 0.65 0.35 0.0 0.5 0.5 0.0 0.25 0.75 0.0 0.0 0.55 0.45 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RespondentType</FOR>
+      <TABLE>0.507 0.493 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Zooplankton</FOR>
+      <GIVEN>Flow</GIVEN>
+      <GIVEN>PlanktivorousFish</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.5 0.5 0.0 0.0 1.0 0.0 0.75 0.25 0.0 1.0 0.0 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Community_Organisation</NAME>
+      <OUTCOME>Clan_communities</OUTCOME>
+      <OUTCOME>Missing</OUTCOME>
+      <OUTCOME>No_exogamous_clans</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Community_Size</NAME>
+      <OUTCOME>_200</OUTCOME>
+      <OUTCOME>__200</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Gathering</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_25</OUTCOME>
+      <OUTCOME>__25</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Household_Organisation</NAME>
+      <OUTCOME>Small_extended</OUTCOME>
+      <OUTCOME>Large_extended</OUTCOME>
+      <OUTCOME>Nuclear</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Settlement_Types</NAME>
+      <OUTCOME>Camp</OUTCOME>
+      <OUTCOME>Hamlet</OUTCOME>
+      <OUTCOME>Homesteads</OUTCOME>
+      <OUTCOME>Village</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Community_Organisation</FOR>
+      <GIVEN>Gathering</GIVEN>
+      <TABLE>0.23958333 0.08333333 0.67708333 0.28947368 0.03947368 0.67105263 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Community_Size</FOR>
+      <GIVEN>Gathering</GIVEN>
+      <TABLE>0.4791667 0.5208333 0.6710526 0.3289474 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Gathering</FOR>
+      <TABLE>0.554913295 0.439306358 0.005780347 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Household_Organisation</FOR>
+      <GIVEN>Gathering</GIVEN>
+      <TABLE>0.6145833 0.1145833 0.2708333 0.5 0.2236842 0.2763158 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Settlement_Types</FOR>
+      <GIVEN>Gathering</GIVEN>
+      <TABLE>0.08333333 0.13541667 0.23958333 0.54166667 0.1052632 0.25 0.2105263 0.4342105 1.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

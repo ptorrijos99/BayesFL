@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AccidentalViolations</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CreateAFalseImpressionToDeceiveTheRegulators</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DecisionErrors</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DeparmentsAndInstitutionsAreNotComplete</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HabitualViolations</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IllegalCommand</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InadequateEmergencyPlan</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InsufficientCracdownOnIllegalActivities</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InsufficientSupervisionOfWorkSafety</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MentalStates</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OrganizeProductionInViolationOfLawsAndRegulations</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PerceptualErrors</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PhysicalIntellectualDisability</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafetyEducationAndTraning</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafetySupervisionIsInadequate</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SecurityManagementConfusion</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SkillBasedErrors</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TechnicalEnvironment</NAME>
+      <OUTCOME>Non_occurence</OUTCOME>
+      <OUTCOME>Occurence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AccidentalViolations</FOR>
+      <GIVEN>IllegalCommand</GIVEN>
+      <GIVEN>OrganizeProductionInViolationOfLawsAndRegulations</GIVEN>
+      <TABLE>0.903 0.097 0.793 0.207 0.905 0.095 0.789 0.211 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CreateAFalseImpressionToDeceiveTheRegulators</FOR>
+      <GIVEN>SecurityManagementConfusion</GIVEN>
+      <TABLE>0.875 0.125 0.706 0.294 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DecisionErrors</FOR>
+      <GIVEN>IllegalCommand</GIVEN>
+      <GIVEN>OrganizeProductionInViolationOfLawsAndRegulations</GIVEN>
+      <GIVEN>TechnicalEnvironment</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.882 0.118 0.75 0.25 0.846 0.154 0.75 0.25 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DeparmentsAndInstitutionsAreNotComplete</FOR>
+      <GIVEN>SafetySupervisionIsInadequate</GIVEN>
+      <TABLE>0.74 0.26 0.68 0.32 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HabitualViolations</FOR>
+      <GIVEN>MentalStates</GIVEN>
+      <GIVEN>PhysicalIntellectualDisability</GIVEN>
+      <TABLE>0.645 0.355 0.333 0.667 0.333 0.667 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IllegalCommand</FOR>
+      <TABLE>0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InadequateEmergencyPlan</FOR>
+      <TABLE>0.79 0.21 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InsufficientCracdownOnIllegalActivities</FOR>
+      <TABLE>0.78 0.22 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InsufficientSupervisionOfWorkSafety</FOR>
+      <TABLE>0.56 0.44 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MentalStates</FOR>
+      <GIVEN>SafetyEducationAndTraning</GIVEN>
+      <TABLE>1.0 0.0 0.857 0.143 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OrganizeProductionInViolationOfLawsAndRegulations</FOR>
+      <GIVEN>DeparmentsAndInstitutionsAreNotComplete</GIVEN>
+      <GIVEN>SecurityManagementConfusion</GIVEN>
+      <TABLE>0.619 0.381 0.52 0.48 0.545 0.455 0.389 0.611 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PerceptualErrors</FOR>
+      <GIVEN>IllegalCommand</GIVEN>
+      <TABLE>0.917 0.083 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PhysicalIntellectualDisability</FOR>
+      <GIVEN>InadequateEmergencyPlan</GIVEN>
+      <GIVEN>SafetyEducationAndTraning</GIVEN>
+      <GIVEN>SecurityManagementConfusion</GIVEN>
+      <TABLE>1.0 0.0 0.974 0.026 1.0 0.0 0.875 0.125 1.0 0.0 1.0 0.0 0.667 0.333 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafetyEducationAndTraning</FOR>
+      <GIVEN>SafetySupervisionIsInadequate</GIVEN>
+      <TABLE>0.78 0.22 0.66 0.34 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafetySupervisionIsInadequate</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SecurityManagementConfusion</FOR>
+      <GIVEN>InsufficientCracdownOnIllegalActivities</GIVEN>
+      <GIVEN>SafetySupervisionIsInadequate</GIVEN>
+      <TABLE>0.417 0.583 0.233 0.767 0.0 1.0 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SkillBasedErrors</FOR>
+      <GIVEN>CreateAFalseImpressionToDeceiveTheRegulators</GIVEN>
+      <GIVEN>IllegalCommand</GIVEN>
+      <GIVEN>TechnicalEnvironment</GIVEN>
+      <TABLE>0.969 0.031 0.9 0.1 0.957 0.043 0.7274549 0.2725451 1.0 0.0 0.833 0.167 0.75 0.25 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TechnicalEnvironment</FOR>
+      <GIVEN>InsufficientSupervisionOfWorkSafety</GIVEN>
+      <TABLE>0.75 0.25 0.659 0.341 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

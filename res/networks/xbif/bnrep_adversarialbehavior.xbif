@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>FTPBasedBufferOverflow</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RemoteAdversary</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RemoteBufferOverflowOnSSHDaemon</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RootAccessFTPServer</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>FTPBasedBufferOverflow</FOR>
+      <GIVEN>RemoteAdversary</GIVEN>
+      <TABLE>0.85 0.15 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RemoteAdversary</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RemoteBufferOverflowOnSSHDaemon</FOR>
+      <GIVEN>RemoteAdversary</GIVEN>
+      <TABLE>0.7 0.3 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RootAccessFTPServer</FOR>
+      <GIVEN>FTPBasedBufferOverflow</GIVEN>
+      <GIVEN>RemoteBufferOverflowOnSSHDaemon</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.65 0.35 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

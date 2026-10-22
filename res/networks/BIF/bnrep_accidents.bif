@@ -1,0 +1,232 @@
+network unknown {
+}
+variable AccidentType {
+  type discrete [ 9 ] { Collision, Grounding, Flooding, Fire_Explosion, Capsize, Contact_Crush, Sinking, Overboard, Others };
+}
+variable EquipmentDevice {
+  type discrete [ 2 ] { Devices_and_equipment_on_board_operate_correctly, Devices_and_equipment_not_fully_utilised_or_operated_correctly };
+}
+variable ErgonomicDesign {
+  type discrete [ 2 ] { Ergonomic_friendly, Ergonomic_impact_of_innovative_bridge_design };
+}
+variable FairwayTraffic {
+  type discrete [ 2 ] { Good, Poor };
+}
+variable GrossTonnage {
+  type discrete [ 4 ] { Less_than_300, 300_1000, More_than_1000, NA };
+}
+variable HullType {
+  type discrete [ 4 ] { Steel, Wood, Aluminium, Others };
+}
+variable Information {
+  type discrete [ 2 ] { Effective_and_updated_information_provided, Insufficient_or_lack_of_updated_information };
+}
+variable Length {
+  type discrete [ 3 ] { Less_than_100, More_than_100, NA };
+}
+variable SeaCondition {
+  type discrete [ 2 ] { Good, Poor };
+}
+variable ShipAge {
+  type discrete [ 6 ] { _0_5_, _6_10_, _11_15_, _16_20_, More_than_20, NA };
+}
+variable ShipOperation {
+  type discrete [ 8 ] { Towing, Loading_Unloading, Pilotage, Manoeuvring, Fishing, At_anchor, On_passage, Others };
+}
+variable ShipSpeed {
+  type discrete [ 2 ] { Normal, Fast };
+}
+variable ShipType {
+  type discrete [ 10 ] { Passenger_vessel, Tug, Barge, Fishing_vessel, Container_ship, Bulk_carrier, RORO, Tanker_or_chemical_ship, Cargo_ship, Others };
+}
+variable TimeOfDay {
+  type discrete [ 2 ] { 7am_to_7pm, Other };
+}
+variable VesselCondition {
+  type discrete [ 2 ] { Good, Poor };
+}
+variable VoyageSegment {
+  type discrete [ 6 ] { In_port, Departure, Arrival, Mid_water, Transit, Others };
+}
+variable WeatherCondition {
+  type discrete [ 2 ] { Good, Poor };
+}
+probability ( AccidentType ) {
+  table 0.203, 0.212, 0.037, 0.055, 0.111, 0.106, 0.041, 0.092, 0.143;
+}
+probability ( EquipmentDevice | AccidentType ) {
+  (Collision) 0.6444444, 0.3555556;
+  (Grounding) 0.489362, 0.510638;
+  (Flooding) 0.666667, 0.333333;
+  (Fire_Explosion) 0.692308, 0.307692;
+  (Capsize) 0.6, 0.4;
+  (Contact_Crush) 0.625, 0.375;
+  (Sinking) 0.3, 0.7;
+  (Overboard) 0.809524, 0.190476;
+  (Others) 0.65625, 0.34375;
+}
+probability ( ErgonomicDesign | AccidentType ) {
+  (Collision) 0.711111, 0.288889;
+  (Grounding) 0.851064, 0.148936;
+  (Flooding) 0.888889, 0.111111;
+  (Fire_Explosion) 0.923077, 0.076923;
+  (Capsize) 0.96, 0.04;
+  (Contact_Crush) 0.75, 0.25;
+  (Sinking) 0.9, 0.1;
+  (Overboard) 0.952381, 0.047619;
+  (Others) 0.96875, 0.03125;
+}
+probability ( FairwayTraffic | AccidentType ) {
+  (Collision) 0.666667, 0.333333;
+  (Grounding) 0.744681, 0.255319;
+  (Flooding) 0.666667, 0.333333;
+  (Fire_Explosion) 0.923077, 0.076923;
+  (Capsize) 0.92, 0.08;
+  (Contact_Crush) 0.791667, 0.208333;
+  (Sinking) 0.9, 0.1;
+  (Overboard) 0.952381, 0.047619;
+  (Others) 0.90625, 0.09375;
+}
+probability ( GrossTonnage | AccidentType ) {
+  (Collision) 0.361702, 0.234043, 0.297872, 0.106383;
+  (Grounding) 0.183674, 0.489796, 0.285714, 0.040816;
+  (Flooding) 0.36363636, 0.18181818, 0.36363636, 0.09090909;
+  (Fire_Explosion) 0.46666653, 0.26666673, 0.19999980, 0.06666693;
+  (Capsize) 0.629630, 0.185185, 0.074074, 0.111111;
+  (Contact_Crush) 0.192308, 0.384615, 0.384615, 0.038462;
+  (Sinking) 0.75000000, 0.08333333, 0.08333333, 0.08333333;
+  (Overboard) 0.52173848, 0.26086974, 0.13043487, 0.08695691;
+  (Others) 0.382353, 0.294118, 0.205882, 0.117647;
+}
+probability ( HullType | AccidentType ) {
+  (Collision) 0.72340472, 0.10638311, 0.08510609, 0.08510609;
+  (Grounding) 0.81632618, 0.06122494, 0.04081596, 0.08163292;
+  (Flooding) 0.45454545, 0.27272727, 0.09090909, 0.18181818;
+  (Fire_Explosion) 0.533333, 0.333333, 0.066667, 0.066667;
+  (Capsize) 0.592593, 0.074074, 0.111111, 0.222222;
+  (Contact_Crush) 0.769231, 0.076923, 0.076923, 0.076923;
+  (Sinking) 0.416667, 0.250000, 0.083333, 0.250000;
+  (Overboard) 0.52173952, 0.04347804, 0.04347804, 0.39130439;
+  (Others) 0.67647032, 0.02941197, 0.05882394, 0.23529376;
+}
+probability ( Information | AccidentType ) {
+  (Collision) 0.6444444, 0.3555556;
+  (Grounding) 0.319149, 0.680851;
+  (Flooding) 0.333333, 0.666667;
+  (Fire_Explosion) 0.692308, 0.307692;
+  (Capsize) 0.68, 0.32;
+  (Contact_Crush) 0.25, 0.75;
+  (Sinking) 0.6, 0.4;
+  (Overboard) 0.714286, 0.285714;
+  (Others) 0.6875, 0.3125;
+}
+probability ( Length | AccidentType ) {
+  (Collision) 0.586957, 0.347826, 0.065217;
+  (Grounding) 0.604167, 0.375000, 0.020833;
+  (Flooding) 0.5, 0.4, 0.1;
+  (Fire_Explosion) 0.71428529, 0.21428579, 0.07142893;
+  (Capsize) 0.846154, 0.076923, 0.076923;
+  (Contact_Crush) 0.52, 0.44, 0.04;
+  (Sinking) 0.818182, 0.090909, 0.090909;
+  (Overboard) 0.772727, 0.181818, 0.045455;
+  (Others) 0.636364, 0.303030, 0.060606;
+}
+probability ( SeaCondition | AccidentType ) {
+  (Collision) 0.555556, 0.444444;
+  (Grounding) 0.319149, 0.680851;
+  (Flooding) 0.666667, 0.333333;
+  (Fire_Explosion) 0.615385, 0.384615;
+  (Capsize) 0.24, 0.76;
+  (Contact_Crush) 0.541667, 0.458333;
+  (Sinking) 0.4, 0.6;
+  (Overboard) 0.4761905, 0.5238095;
+  (Others) 0.59375, 0.40625;
+}
+probability ( ShipAge | AccidentType ) {
+  (Collision) 0.18367382, 0.16326484, 0.08163292, 0.08163292, 0.26530573, 0.22448978;
+  (Grounding) 0.137255, 0.137255, 0.117647, 0.117647, 0.450980, 0.039216;
+  (Flooding) 0.15384615, 0.07692308, 0.23076923, 0.07692308, 0.38461538, 0.07692308;
+  (Fire_Explosion) 0.11764688, 0.11764688, 0.17647082, 0.05882394, 0.35294065, 0.17647082;
+  (Capsize) 0.172414, 0.103448, 0.103448, 0.137931, 0.344828, 0.137931;
+  (Contact_Crush) 0.2142858, 0.1071429, 0.1071429, 0.1428569, 0.2142858, 0.2142858;
+  (Sinking) 0.07142893, 0.14285686, 0.21428579, 0.07142893, 0.35714264, 0.14285686;
+  (Overboard) 0.12, 0.12, 0.12, 0.16, 0.24, 0.24;
+  (Others) 0.138889, 0.194444, 0.055556, 0.111111, 0.361111, 0.138889;
+}
+probability ( ShipOperation | AccidentType ) {
+  (Collision) 0.01960796, 0.01960796, 0.01960796, 0.05882388, 0.05882388, 0.01960796, 0.78431243, 0.01960796;
+  (Grounding) 0.18867919, 0.01886802, 0.18867919, 0.11320711, 0.01886802, 0.05660406, 0.39622640, 0.01886802;
+  (Flooding) 0.06666693, 0.06666693, 0.13333287, 0.06666693, 0.19999980, 0.06666693, 0.33333267, 0.06666693;
+  (Fire_Explosion) 0.05263189, 0.10526279, 0.05263189, 0.05263189, 0.05263189, 0.10526279, 0.52631495, 0.05263189;
+  (Capsize) 0.29032329, 0.03225803, 0.03225803, 0.16129016, 0.22580623, 0.03225803, 0.16129016, 0.06451606;
+  (Contact_Crush) 0.09999990, 0.06666693, 0.13333287, 0.16666683, 0.06666693, 0.06666693, 0.33333267, 0.06666693;
+  (Sinking) 0.1875, 0.0625, 0.0625, 0.0625, 0.0625, 0.1250, 0.3750, 0.0625;
+  (Overboard) 0.07407407, 0.07407407, 0.07407407, 0.11111111, 0.37037037, 0.03703704, 0.22222222, 0.03703704;
+  (Others) 0.18421037, 0.21052642, 0.07894716, 0.13157926, 0.10526321, 0.07894716, 0.18421037, 0.02631605;
+}
+probability ( ShipSpeed | AccidentType ) {
+  (Collision) 0.8, 0.2;
+  (Grounding) 0.893617, 0.106383;
+  (Flooding) 0.888889, 0.111111;
+  (Fire_Explosion) 0.923077, 0.076923;
+  (Capsize) 0.92, 0.08;
+  (Contact_Crush) 0.708333, 0.291667;
+  (Sinking) 0.9, 0.1;
+  (Overboard) 0.952381, 0.047619;
+  (Others) 0.9375, 0.0625;
+}
+probability ( ShipType | AccidentType ) {
+  (Collision) 0.07547192, 0.11320689, 0.03773596, 0.13207587, 0.05660394, 0.09433991, 0.05660394, 0.07547192, 0.15094285, 0.20754679;
+  (Grounding) 0.181818, 0.072727, 0.072727, 0.109091, 0.090909, 0.090909, 0.036364, 0.072727, 0.218182, 0.054546;
+  (Flooding) 0.05882388, 0.05882388, 0.05882388, 0.23529353, 0.05882388, 0.11764676, 0.11764676, 0.11764676, 0.11764676, 0.05882388;
+  (Fire_Explosion) 0.09523810, 0.09523810, 0.04761905, 0.23809524, 0.04761905, 0.04761905, 0.09523810, 0.04761905, 0.19047619, 0.09523810;
+  (Capsize) 0.06060606, 0.18181818, 0.09090909, 0.30303030, 0.06060606, 0.06060606, 0.03030303, 0.06060606, 0.03030303, 0.12121212;
+  (Contact_Crush) 0.12500, 0.06250, 0.03125, 0.12500, 0.03125, 0.12500, 0.12500, 0.12500, 0.12500, 0.12500;
+  (Sinking) 0.11111078, 0.11111078, 0.16666667, 0.22222156, 0.05555589, 0.05555589, 0.05555589, 0.05555589, 0.05555589, 0.11111078;
+  (Overboard) 0.10344790, 0.06896593, 0.03448297, 0.41379259, 0.06896593, 0.03448297, 0.03448297, 0.03448297, 0.10344790, 0.10344790;
+  (Others) 0.175, 0.125, 0.100, 0.125, 0.025, 0.125, 0.025, 0.025, 0.150, 0.125;
+}
+probability ( TimeOfDay | AccidentType ) {
+  (Collision) 0.422222, 0.577778;
+  (Grounding) 0.510638, 0.489362;
+  (Flooding) 0.555556, 0.444444;
+  (Fire_Explosion) 0.538462, 0.461538;
+  (Capsize) 0.6, 0.4;
+  (Contact_Crush) 0.583333, 0.416667;
+  (Sinking) 0.7, 0.3;
+  (Overboard) 0.5238095, 0.4761905;
+  (Others) 0.65625, 0.34375;
+}
+probability ( VesselCondition | AccidentType ) {
+  (Collision) 0.8444442, 0.1555558;
+  (Grounding) 0.680851, 0.319149;
+  (Flooding) 0.777778, 0.222222;
+  (Fire_Explosion) 0.538462, 0.461538;
+  (Capsize) 0.6, 0.4;
+  (Contact_Crush) 0.791667, 0.208333;
+  (Sinking) 0.2, 0.8;
+  (Overboard) 0.809524, 0.190476;
+  (Others) 0.625, 0.375;
+}
+probability ( VoyageSegment | AccidentType ) {
+  (Collision) 0.020408, 0.122449, 0.020408, 0.510204, 0.306123, 0.020408;
+  (Grounding) 0.01960798, 0.15686284, 0.29411771, 0.39215661, 0.11764688, 0.01960798;
+  (Flooding) 0.07692308, 0.07692308, 0.07692308, 0.46153846, 0.23076923, 0.07692308;
+  (Fire_Explosion) 0.05882388, 0.05882388, 0.17647065, 0.52941094, 0.11764676, 0.05882388;
+  (Capsize) 0.13793086, 0.17241383, 0.03448297, 0.44827555, 0.17241383, 0.03448297;
+  (Contact_Crush) 0.071429, 0.107143, 0.428571, 0.107143, 0.142857, 0.142857;
+  (Sinking) 0.07142893, 0.07142893, 0.21428579, 0.28571371, 0.28571371, 0.07142893;
+  (Overboard) 0.08, 0.04, 0.08, 0.60, 0.08, 0.12;
+  (Others) 0.194444, 0.055556, 0.222222, 0.361111, 0.138889, 0.027778;
+}
+probability ( WeatherCondition | AccidentType ) {
+  (Collision) 0.666667, 0.333333;
+  (Grounding) 0.468085, 0.531915;
+  (Flooding) 0.444444, 0.555556;
+  (Fire_Explosion) 0.615385, 0.384615;
+  (Capsize) 0.6, 0.4;
+  (Contact_Crush) 0.625, 0.375;
+  (Sinking) 0.6, 0.4;
+  (Overboard) 0.666667, 0.333333;
+  (Others) 0.65625, 0.34375;
+}

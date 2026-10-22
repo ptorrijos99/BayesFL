@@ -1,0 +1,67 @@
+network unknown {
+}
+variable FailureInvest {
+  type discrete [ 2 ] { Yes, No };
+}
+variable FinancialFraud {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LackAwareness {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LackKnowledge {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LackRegulation {
+  type discrete [ 2 ] { Yes, No };
+}
+variable OverTrust {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PatsyInvestment {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PromotionalMessages {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( FailureInvest | LackKnowledge, OverTrust ) {
+  (Yes, Yes) 0.29, 0.71;
+  (No, Yes) 0.18, 0.82;
+  (Yes, No) 0.4, 0.6;
+  (No, No) 0.0, 1.0;
+}
+probability ( FinancialFraud | LackAwareness, LackRegulation, PatsyInvestment ) {
+  (Yes, Yes, Yes) 0.141, 0.859;
+  (No, Yes, Yes) 0.112, 0.888;
+  (Yes, No, Yes) 0.18, 0.82;
+  (No, No, Yes) 0.16, 0.84;
+  (Yes, Yes, No) 0.132, 0.868;
+  (No, Yes, No) 0.064, 0.936;
+  (Yes, No, No) 0.2, 0.8;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( LackAwareness ) {
+  table 0.064, 0.936;
+}
+probability ( LackKnowledge ) {
+  table 0.4, 0.6;
+}
+probability ( LackRegulation ) {
+  table 0.2, 0.8;
+}
+probability ( OverTrust ) {
+  table 0.18, 0.82;
+}
+probability ( PatsyInvestment | FailureInvest, LackRegulation, PromotionalMessages ) {
+  (Yes, Yes, Yes) 0.183, 0.817;
+  (No, Yes, Yes) 0.165, 0.835;
+  (Yes, No, Yes) 0.173, 0.827;
+  (No, No, Yes) 0.13, 0.87;
+  (Yes, Yes, No) 0.209, 0.791;
+  (No, Yes, No) 0.2, 0.8;
+  (Yes, No, No) 0.217, 0.783;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( PromotionalMessages ) {
+  table 0.13, 0.87;
+}

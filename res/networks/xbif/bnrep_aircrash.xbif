@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>5HTOL5HIAARatio</NAME>
+      <OUTCOME>Above_20</OUTCOME>
+      <OUTCOME>Below_20</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BACAtTimeOfDeath</NAME>
+      <OUTCOME>a101plus</OUTCOME>
+      <OUTCOME>a80_100</OUTCOME>
+      <OUTCOME>a50_80</OUTCOME>
+      <OUTCOME>a40_49</OUTCOME>
+      <OUTCOME>a30_39</OUTCOME>
+      <OUTCOME>a20_29</OUTCOME>
+      <OUTCOME>a10_19</OUTCOME>
+      <OUTCOME>Negative</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EthanolConsumptionWithin8hrsOfDeath</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MeasuredBAC</NAME>
+      <OUTCOME>a101plus</OUTCOME>
+      <OUTCOME>a80_100</OUTCOME>
+      <OUTCOME>a50_80</OUTCOME>
+      <OUTCOME>a40_49</OUTCOME>
+      <OUTCOME>a30_39</OUTCOME>
+      <OUTCOME>a20_29</OUTCOME>
+      <OUTCOME>a10_19</OUTCOME>
+      <OUTCOME>Negative</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PMAlcoholFormation</NAME>
+      <OUTCOME>PMF</OUTCOME>
+      <OUTCOME>No_PMF</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UACPositive</NAME>
+      <OUTCOME>UPositive</OUTCOME>
+      <OUTCOME>UNegative</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VACPositive</NAME>
+      <OUTCOME>Positive</OUTCOME>
+      <OUTCOME>Negative</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VOCDetected</NAME>
+      <OUTCOME>Detected</OUTCOME>
+      <OUTCOME>Not_Detected</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WitnessEvidenceOfETOHConsumption</NAME>
+      <OUTCOME>Positive</OUTCOME>
+      <OUTCOME>Negative</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>5HTOL5HIAARatio</FOR>
+      <GIVEN>EthanolConsumptionWithin8hrsOfDeath</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BACAtTimeOfDeath</FOR>
+      <GIVEN>EthanolConsumptionWithin8hrsOfDeath</GIVEN>
+      <TABLE>0.1 0.2 0.3 0.2 0.1 0.045 0.045 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.93 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EthanolConsumptionWithin8hrsOfDeath</FOR>
+      <TABLE>0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MeasuredBAC</FOR>
+      <GIVEN>BACAtTimeOfDeath</GIVEN>
+      <GIVEN>PMAlcoholFormation</GIVEN>
+      <TABLE>0.993 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.93 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.993 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.01 0.93 0.01 0.01 0.01 0.01 0.01 0.01 0.993 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.01 0.01 0.93 0.01 0.01 0.01 0.01 0.01 0.993 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.01 0.01 0.01 0.93 0.01 0.01 0.01 0.01 0.0099108028 0.9841427156 0.0009910803 0.0009910803 0.0009910803 0.0009910803 0.0009910803 0.0009910803 0.01 0.01 0.01 0.01 0.93 0.01 0.01 0.01 0.001 0.001 0.993 0.001 0.001 0.001 0.001 0.001 0.01 0.01 0.01 0.01 0.01 0.93 0.01 0.01 0.001 0.001 0.001 0.993 0.001 0.001 0.001 0.001 0.01 0.01 0.01 0.01 0.01 0.01 0.93 0.01 0.202 0.149 0.053 0.117 0.329 0.043 0.106 0.001 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.93 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PMAlcoholFormation</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UACPositive</FOR>
+      <GIVEN>VACPositive</GIVEN>
+      <TABLE>0.93 0.07 0.15 0.85 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VACPositive</FOR>
+      <GIVEN>BACAtTimeOfDeath</GIVEN>
+      <TABLE>0.999 0.001 0.999 0.001 0.999 0.001 0.891 0.109 0.704 0.296 0.591 0.409 0.539 0.461 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VOCDetected</FOR>
+      <GIVEN>PMAlcoholFormation</GIVEN>
+      <TABLE>0.5 0.5 0.41 0.59 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WitnessEvidenceOfETOHConsumption</FOR>
+      <GIVEN>EthanolConsumptionWithin8hrsOfDeath</GIVEN>
+      <TABLE>0.5 0.5 0.001 0.999 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

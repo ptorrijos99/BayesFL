@@ -1,0 +1,43 @@
+network unknown {
+}
+variable Binance_Coin {
+  type discrete [ 2 ] { Down, Up };
+}
+variable Bitcoin {
+  type discrete [ 2 ] { Down, Up };
+}
+variable Ethereum {
+  type discrete [ 2 ] { Down, Up };
+}
+variable Litecoin {
+  type discrete [ 2 ] { Down, Up };
+}
+variable Ripple {
+  type discrete [ 2 ] { Down, Up };
+}
+variable Tether {
+  type discrete [ 2 ] { Down, Up };
+}
+probability ( Binance_Coin | Bitcoin ) {
+  (Down) 0.8507891, 0.1492109;
+  (Up) 0.02258727, 0.97741273;
+}
+probability ( Bitcoin ) {
+  table 0.7410952, 0.2589048;
+}
+probability ( Ethereum ) {
+  table 0.6932483, 0.3067517;
+}
+probability ( Litecoin | Bitcoin, Ethereum ) {
+  (Down, Down) 0.9995697074, 0.0004302926;
+  (Up, Down) 0.6503497, 0.3496503;
+  (Down, Up) 0.5021459, 0.4978541;
+  (Up, Up) 0.2005814, 0.7994186;
+}
+probability ( Ripple | Litecoin ) {
+  (Down) 0.8583333, 0.1416667;
+  (Up) 0.2630385, 0.7369615;
+}
+probability ( Tether ) {
+  table 0.90855928, 0.09144072;
+}

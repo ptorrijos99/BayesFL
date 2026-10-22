@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>class</NAME>
+      <OUTCOME>chessleague_db_AccountFacade</OUTCOME>
+      <OUTCOME>chessleague_ejb_AccountBean</OUTCOME>
+      <OUTCOME>chessleague_ejb_BidBean</OUTCOME>
+      <OUTCOME>chessleague_ejb_TeamBean</OUTCOME>
+      <OUTCOME>com_sun_ejb_containers_BaseContainer</OUTCOME>
+      <OUTCOME>com_sun_ejb_containers_EJBContainerTransactionManager</OUTCOME>
+      <OUTCOME>com_sun_gjc_common_DataSourceObjectBuilder</OUTCOME>
+      <OUTCOME>java_lang_NumberFormatException</OUTCOME>
+      <OUTCOME>java_net_URLClassLoader</OUTCOME>
+      <OUTCOME>org_apache_jsp_AdminLeagues_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_AdminSuggestions_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_AdminUsers_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_AllLeagues_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Bid_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Calendar_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Clasification_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_DirectorOfChess_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_ErrorPage_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Finance_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Help_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_index_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Invite_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_LastMovements_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_League_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Lineup_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Market_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_NewPassword_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_NewSuggestion_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_OfferPlayer_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_OldSeasons_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Player_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Privacy_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Results_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_SearchPlayer_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Start_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Team_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Trainer_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_Transactions_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_UserConfiguration_jsp</OUTCOME>
+      <OUTCOME>org_apache_jsp_ViewOffers_jsp</OUTCOME>
+      <OUTCOME>org_glassfish_hk2_external_org_objectweb_asm_ClassReader</OUTCOME>
+      <OUTCOME>org_jboss_weld_servlet_WeldTerminalListener</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>error</NAME>
+      <OUTCOME>com_mysql_jdbc_jdbc2_optional_MysqlDataSource</OUTCOME>
+      <OUTCOME>java_lang_IllegalArgumentException</OUTCOME>
+      <OUTCOME>java_lang_NullPointerException</OUTCOME>
+      <OUTCOME>java_lang_NumberFormatException</OUTCOME>
+      <OUTCOME>javax_ejb_EJBException</OUTCOME>
+      <OUTCOME>javax_ejb_EJBTransactionRolledbackException</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>method</NAME>
+      <OUTCOME>_jspService</OUTCOME>
+      <OUTCOME>_init_</OUTCOME>
+      <OUTCOME>deleteAccount</OUTCOME>
+      <OUTCOME>findClass</OUTCOME>
+      <OUTCOME>forInputString</OUTCOME>
+      <OUTCOME>getDataSourceObject</OUTCOME>
+      <OUTCOME>getInfo</OUTCOME>
+      <OUTCOME>getSessionContext</OUTCOME>
+      <OUTCOME>mapLocal3xException</OUTCOME>
+      <OUTCOME>processSystemException</OUTCOME>
+      <OUTCOME>publishMessage</OUTCOME>
+      <OUTCOME>sendHeadlines</OUTCOME>
+      <OUTCOME>undoBid</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>severity</NAME>
+      <OUTCOME>INFO</OUTCOME>
+      <OUTCOME>SEVERE</OUTCOME>
+      <OUTCOME>WARNING</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>thread_name</NAME>
+      <OUTCOME>AutoDeployer</OUTCOME>
+      <OUTCOME>ContainerBackgroundProcessor_StandardEngine_glassfish_web__StandardHost_server__StandardContext__ChessLeague_war__</OUTCOME>
+      <OUTCOME>ContainerBackgroundProcessor_StandardEngine_glassfish_web__StandardHost_server__StandardContext___</OUTCOME>
+      <OUTCOME>deployment_jar_scanner</OUTCOME>
+      <OUTCOME>http_listener</OUTCOME>
+      <OUTCOME>RunLevelControllerThread</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>class</FOR>
+      <TABLE>0.0009123047 0.0001140381 0.0001520508 7.602539e-05 0.001178394 0.0001900635 0.0001520508 0.00380127 0.0001520508 7.602539e-05 3.80127e-05 3.80127e-05 0.0001140381 0.0001900635 0.0004941651 0.001064355 0.001102368 0.5067853 0.0004561524 0.008590869 0.001140381 3.80127e-05 0.001178394 0.0004181397 0.0007222412 0.005207739 0.00832478 7.602539e-05 0.0001140381 0.0 0.001444482 0.007640552 0.001482495 0.0004561524 0.00338313 0.006500171 0.000380127 0.0001140381 0.0006842285 0.001748584 0.0006462158 0.4326225 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>error</FOR>
+      <GIVEN>method</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>method</FOR>
+      <GIVEN>class</GIVEN>
+      <TABLE>0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.3333333 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.6666667 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 0.07692308 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>severity</FOR>
+      <GIVEN>error</GIVEN>
+      <GIVEN>method</GIVEN>
+      <TABLE>0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 1.0 0.0 0.3333333 0.3333333 0.3333333 0.0 1.0 0.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 1.0 0.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 1.0 0.0 0.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>thread_name</FOR>
+      <GIVEN>method</GIVEN>
+      <TABLE>0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0726649679 0.0 0.9271593006 0.0 0.0 0.0001757315 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

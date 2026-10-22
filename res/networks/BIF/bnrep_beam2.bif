@@ -1,0 +1,48 @@
+network unknown {
+}
+variable BeamWidth {
+  type discrete [ 2 ] { Low, High };
+}
+variable ConcreteStrength {
+  type discrete [ 2 ] { Low, High };
+}
+variable ProbabilityOfFailure {
+  type discrete [ 2 ] { Fail, Pass };
+}
+variable Reinforcement {
+  type discrete [ 2 ] { Low, High };
+}
+variable TempAndHumidity {
+  type discrete [ 2 ] { Low, High };
+}
+variable WaterCementRatio {
+  type discrete [ 2 ] { Low, High };
+}
+probability ( BeamWidth ) {
+  table 0.65, 0.35;
+}
+probability ( ConcreteStrength | TempAndHumidity, WaterCementRatio ) {
+  (Low, Low) 0.3, 0.7;
+  (High, Low) 0.4, 0.6;
+  (Low, High) 0.35, 0.65;
+  (High, High) 0.45, 0.55;
+}
+probability ( ProbabilityOfFailure | BeamWidth, ConcreteStrength, Reinforcement ) {
+  (Low, Low, Low) 0.35, 0.65;
+  (High, Low, Low) 0.3, 0.7;
+  (Low, High, Low) 0.45, 0.55;
+  (High, High, Low) 0.4, 0.6;
+  (Low, Low, High) 0.4, 0.6;
+  (High, Low, High) 0.35, 0.65;
+  (Low, High, High) 0.5, 0.5;
+  (High, High, High) 0.45, 0.55;
+}
+probability ( Reinforcement ) {
+  table 0.65, 0.35;
+}
+probability ( TempAndHumidity ) {
+  table 0.7, 0.3;
+}
+probability ( WaterCementRatio ) {
+  table 0.55, 0.45;
+}

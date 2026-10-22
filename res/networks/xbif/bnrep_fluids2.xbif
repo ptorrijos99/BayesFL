@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Concentration</NAME>
+      <OUTCOME>0___0_0002</OUTCOME>
+      <OUTCOME>0_0002___0_0005</OUTCOME>
+      <OUTCOME>0_0005___0_001</OUTCOME>
+      <OUTCOME>0_001___0_002</OUTCOME>
+      <OUTCOME>0_002___0_004</OUTCOME>
+      <OUTCOME>0_004___0_01</OUTCOME>
+      <OUTCOME>0_01___0_02</OUTCOME>
+      <OUTCOME>0_02___inf</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Nature_of_stain</NAME>
+      <OUTCOME>Saliva</OUTCOME>
+      <OUTCOME>Fecal_matter__vaginal_secretion__sperm__breast_milk__urine</OUTCOME>
+      <OUTCOME>Other</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RSID</NAME>
+      <OUTCOME>Positive</OUTCOME>
+      <OUTCOME>Negative</OUTCOME>
+      <OUTCOME>Weak_positive</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Risk</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Saliva</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Concentration</FOR>
+      <TABLE>0.125 0.125 0.125 0.125 0.125 0.125 0.125 0.125 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Nature_of_stain</FOR>
+      <GIVEN>Risk</GIVEN>
+      <GIVEN>Saliva</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 0.99 0.01 1.0 0.0 0.0 0.0 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RSID</FOR>
+      <GIVEN>Concentration</GIVEN>
+      <GIVEN>Nature_of_stain</GIVEN>
+      <TABLE>0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.033 0.933 0.034 0.8 0.04 0.16 0.033 0.933 0.034 0.033 0.933 0.034 0.8 0.04 0.16 0.033 0.933 0.034 0.033 0.933 0.034 0.933 0.033 0.034 0.079 0.881 0.04 0.033 0.933 0.034 0.933 0.033 0.034 0.079 0.881 0.04 0.033 0.933 0.034 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Risk</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Saliva</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

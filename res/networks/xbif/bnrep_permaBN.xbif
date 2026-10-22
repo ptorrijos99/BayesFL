@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ActiveLayerIceContent</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AirTemperature</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Aspect</NAME>
+      <OUTCOME>North</OUTCOME>
+      <OUTCOME>East</OUTCOME>
+      <OUTCOME>South</OUTCOME>
+      <OUTCOME>West</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Insulation</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Rain</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Season</NAME>
+      <OUTCOME>Snow_free</OUTCOME>
+      <OUTCOME>Snow</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Snow</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SnowDepth</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoilDensity</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoilMoisture</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoilTemperature</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoilWaterInput</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ThawDepth</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VegetationHeight</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ActiveLayerIceContent</FOR>
+      <GIVEN>SoilMoisture</GIVEN>
+      <GIVEN>SoilTemperature</GIVEN>
+      <TABLE>0.05 0.1 0.85 0.25 0.55 0.2 0.9 0.07 0.03 0.04 0.08 0.88 0.35 0.5 0.15 0.88 0.08 0.04 0.03 0.07 0.9 0.45 0.45 0.1 0.85 0.1 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AirTemperature</FOR>
+      <TABLE>0.1 0.6 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Aspect</FOR>
+      <TABLE>0.25 0.25 0.25 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Insulation</FOR>
+      <GIVEN>SnowDepth</GIVEN>
+      <GIVEN>SoilDensity</GIVEN>
+      <GIVEN>VegetationHeight</GIVEN>
+      <TABLE>0.75 0.1 0.15 0.25 0.15 0.6 0.1 0.05 0.85 0.85 0.05 0.1 0.25 0.2 0.55 0.1 0.1 0.8 0.9 0.05 0.05 0.25 0.25 0.5 0.15 0.1 0.75 0.85 0.1 0.05 0.29 0.55 0.16 0.05 0.15 0.8 0.88 0.07 0.05 0.38 0.5 0.12 0.07 0.18 0.75 0.9 0.05 0.05 0.45 0.45 0.1 0.1 0.2 0.7 0.75 0.15 0.1 0.22 0.6 0.18 0.05 0.1 0.85 0.8 0.13 0.07 0.3 0.55 0.15 0.07 0.13 0.8 0.85 0.1 0.05 0.38 0.5 0.12 0.1 0.15 0.75 0.7 0.2 0.1 0.15 0.65 0.2 0.05 0.05 0.9 0.75 0.18 0.07 0.22 0.6 0.18 0.05 0.1 0.85 0.8 0.15 0.05 0.3 0.55 0.15 0.05 0.15 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Rain</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <TABLE>0.25 0.5 0.25 0.15 0.4 0.45 0.05 0.3 0.65 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Season</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Snow</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <TABLE>0.3 0.5 0.2 0.45 0.4 0.15 0.7 0.25 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SnowDepth</FOR>
+      <GIVEN>Aspect</GIVEN>
+      <GIVEN>Rain</GIVEN>
+      <GIVEN>Season</GIVEN>
+      <GIVEN>Snow</GIVEN>
+      <GIVEN>VegetationHeight</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.14 0.21 0.65 0.0 0.12 0.18 0.7 0.0 0.1 0.15 0.75 0.0 0.12 0.18 0.7 0.0 0.1 0.15 0.75 0.0 0.07 0.13 0.8 0.0 0.1 0.15 0.75 0.0 0.07 0.13 0.8 0.0 0.05 0.1 0.85 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.33 0.55 0.12 0.0 0.22 0.62 0.16 0.0 0.14 0.65 0.21 0.0 0.26 0.6 0.14 0.0 0.17 0.65 0.18 0.0 0.12 0.68 0.2 0.0 0.2 0.65 0.15 0.0 0.12 0.68 0.2 0.0 0.1 0.7 0.2 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.75 0.15 0.1 0.0 0.7 0.18 0.12 0.0 0.65 0.22 0.13 0.0 0.7 0.18 0.12 0.0 0.65 0.22 0.13 0.0 0.6 0.24 0.16 0.0 0.65 0.22 0.13 0.0 0.6 0.24 0.16 0.0 0.55 0.25 0.2 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.16 0.21 0.63 0.0 0.14 0.19 0.67 0.0 0.12 0.15 0.73 0.0 0.14 0.19 0.67 0.0 0.12 0.15 0.73 0.0 0.1 0.15 0.75 0.0 0.12 0.15 0.73 0.0 0.1 0.15 0.75 0.0 0.1 0.1 0.8 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.21 0.58 0.21 0.0 0.2 0.6 0.2 0.0 0.17 0.66 0.17 0.0 0.2 0.6 0.2 0.0 0.17 0.66 0.17 0.0 0.16 0.68 0.16 0.0 0.17 0.66 0.17 0.0 0.16 0.68 0.16 0.0 0.15 0.7 0.15 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.78 0.14 0.08 0.0 0.76 0.14 0.1 0.0 0.74 0.14 0.12 0.0 0.76 0.14 0.1 0.0 0.74 0.14 0.12 0.0 0.72 0.14 0.14 0.0 0.74 0.14 0.12 0.0 0.72 0.14 0.14 0.0 0.7 0.14 0.16 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.2 0.25 0.55 0.0 0.16 0.24 0.6 0.0 0.13 0.22 0.65 0.0 0.16 0.24 0.6 0.0 0.13 0.22 0.65 0.0 0.12 0.18 0.7 0.0 0.13 0.22 0.65 0.0 0.12 0.18 0.7 0.0 0.1 0.15 0.75 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.35 0.55 0.1 0.0 0.25 0.62 0.13 0.0 0.16 0.65 0.19 0.0 0.29 0.6 0.11 0.0 0.2 0.65 0.15 0.0 0.14 0.68 0.18 0.0 0.23 0.65 0.12 0.0 0.15 0.68 0.17 0.0 0.12 0.7 0.18 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.85 0.1 0.05 0.0 0.8 0.13 0.07 0.0 0.75 0.15 0.1 0.0 0.8 0.13 0.07 0.0 0.75 0.15 0.1 0.0 0.7 0.18 0.12 0.0 0.75 0.15 0.1 0.0 0.7 0.18 0.12 0.0 0.65 0.21 0.14 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.18 0.21 0.61 0.0 0.16 0.19 0.65 0.0 0.14 0.16 0.7 0.0 0.16 0.19 0.65 0.0 0.14 0.16 0.7 0.0 0.12 0.15 0.73 0.0 0.14 0.16 0.7 0.0 0.12 0.15 0.73 0.0 0.1 0.12 0.78 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.23 0.58 0.19 0.0 0.22 0.6 0.18 0.0 0.18 0.66 0.16 0.0 0.22 0.6 0.18 0.0 0.18 0.66 0.16 0.0 0.17 0.68 0.15 0.0 0.19 0.66 0.15 0.0 0.17 0.68 0.15 0.0 0.15 0.7 0.15 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.8 0.13 0.07 0.0 0.78 0.13 0.09 0.0 0.76 0.13 0.11 0.0 0.78 0.13 0.09 0.0 0.76 0.13 0.11 0.0 0.74 0.13 0.13 0.0 0.76 0.13 0.11 0.0 0.74 0.13 0.13 0.0 0.72 0.13 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoilDensity</FOR>
+      <TABLE>0.33 0.38 0.29 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoilMoisture</FOR>
+      <GIVEN>Aspect</GIVEN>
+      <GIVEN>SoilDensity</GIVEN>
+      <GIVEN>SoilWaterInput</GIVEN>
+      <TABLE>0.75 0.2 0.05 0.15 0.6 0.25 0.05 0.1 0.85 0.8 0.15 0.05 0.25 0.55 0.2 0.05 0.15 0.8 0.85 0.1 0.05 0.35 0.5 0.15 0.05 0.2 0.75 0.66 0.22 0.12 0.3 0.5 0.2 0.08 0.17 0.75 0.7 0.2 0.1 0.38 0.45 0.17 0.1 0.2 0.7 0.75 0.17 0.08 0.48 0.4 0.12 0.12 0.22 0.66 0.6 0.25 0.15 0.4 0.42 0.18 0.1 0.2 0.7 0.65 0.23 0.12 0.47 0.38 0.15 0.12 0.23 0.65 0.7 0.2 0.1 0.55 0.35 0.1 0.15 0.25 0.6 0.63 0.22 0.15 0.33 0.47 0.2 0.11 0.17 0.72 0.67 0.2 0.13 0.41 0.42 0.17 0.13 0.2 0.67 0.72 0.17 0.11 0.51 0.37 0.12 0.15 0.22 0.63 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoilTemperature</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <GIVEN>Insulation</GIVEN>
+      <GIVEN>Season</GIVEN>
+      <GIVEN>SoilMoisture</GIVEN>
+      <TABLE>0.7 0.2 0.1 0.75 0.15 0.1 0.8 0.12 0.08 0.9 0.07 0.03 0.85 0.1 0.05 0.8 0.12 0.08 0.75 0.15 0.1 0.8 0.12 0.08 0.85 0.1 0.05 0.85 0.1 0.05 0.8 0.12 0.08 0.75 0.15 0.1 0.8 0.12 0.08 0.85 0.1 0.05 0.9 0.07 0.03 0.8 0.12 0.08 0.75 0.15 0.1 0.7 0.15 0.15 0.4 0.55 0.05 0.45 0.5 0.05 0.5 0.45 0.05 0.6 0.37 0.03 0.55 0.4 0.05 0.5 0.42 0.08 0.45 0.5 0.05 0.5 0.45 0.05 0.55 0.4 0.05 0.55 0.4 0.05 0.5 0.42 0.08 0.45 0.45 0.1 0.5 0.45 0.05 0.55 0.4 0.05 0.6 0.35 0.05 0.5 0.42 0.08 0.45 0.45 0.1 0.4 0.45 0.15 0.6 0.2 0.2 0.65 0.17 0.18 0.7 0.15 0.15 0.85 0.1 0.05 0.8 0.15 0.05 0.75 0.15 0.1 0.65 0.17 0.18 0.7 0.15 0.15 0.75 0.1 0.15 0.8 0.15 0.05 0.75 0.15 0.1 0.7 0.15 0.15 0.7 0.15 0.15 0.75 0.1 0.15 0.8 0.1 0.1 0.75 0.15 0.1 0.7 0.15 0.15 0.65 0.18 0.17 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoilWaterInput</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <GIVEN>Rain</GIVEN>
+      <GIVEN>Snow</GIVEN>
+      <TABLE>0.75 0.15 0.1 0.7 0.18 0.12 0.65 0.2 0.15 0.45 0.35 0.2 0.3 0.45 0.25 0.1 0.3 0.6 0.08 0.17 0.75 0.05 0.15 0.8 0.05 0.1 0.85 0.8 0.12 0.08 0.75 0.16 0.09 0.7 0.18 0.12 0.5 0.32 0.18 0.35 0.45 0.2 0.15 0.3 0.55 0.12 0.18 0.7 0.09 0.16 0.75 0.08 0.12 0.8 0.85 0.1 0.05 0.8 0.15 0.05 0.75 0.17 0.08 0.55 0.3 0.15 0.4 0.42 0.18 0.2 0.3 0.5 0.15 0.2 0.65 0.12 0.18 0.7 0.1 0.15 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ThawDepth</FOR>
+      <GIVEN>ActiveLayerIceContent</GIVEN>
+      <GIVEN>SoilMoisture</GIVEN>
+      <GIVEN>SoilTemperature</GIVEN>
+      <TABLE>0.05 0.4 0.55 0.05 0.35 0.6 0.1 0.15 0.75 0.05 0.35 0.6 0.05 0.3 0.65 0.05 0.15 0.8 0.1 0.25 0.65 0.1 0.2 0.7 0.05 0.1 0.85 0.5 0.4 0.1 0.15 0.4 0.45 0.25 0.35 0.4 0.45 0.4 0.15 0.1 0.4 0.5 0.15 0.4 0.45 0.4 0.35 0.25 0.05 0.4 0.55 0.1 0.4 0.5 0.85 0.1 0.05 0.7 0.2 0.1 0.65 0.25 0.1 0.8 0.15 0.05 0.65 0.3 0.05 0.6 0.35 0.05 0.75 0.15 0.1 0.6 0.35 0.05 0.55 0.4 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VegetationHeight</FOR>
+      <GIVEN>AirTemperature</GIVEN>
+      <GIVEN>Aspect</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.86 0.1 0.04 0.83 0.17 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.86 0.1 0.04 0.83 0.17 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.86 0.1 0.04 0.83 0.17 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

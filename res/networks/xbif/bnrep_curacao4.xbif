@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AgriculturalDensity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AllRoadAccess</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BuiltUpDensity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CoUserInteractionConstraints</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EnvironmentalConstraints</NAME>
+      <OUTCOME>yes</OUTCOME>
+      <OUTCOME>no</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Geology</NAME>
+      <OUTCOME>colluvial_clay</OUTCOME>
+      <OUTCOME>diabase_or_other</OUTCOME>
+      <OUTCOME>limestone_bare_rock</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GroundwaterDepth</NAME>
+      <OUTCOME>less_than_25m</OUTCOME>
+      <OUTCOME>between_25_and_60m</OUTCOME>
+      <OUTCOME>over_60m</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InfrastructureConstraints</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProductivityConstraints</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SiteConstraints</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Slope</NAME>
+      <OUTCOME>flat</OUTCOME>
+      <OUTCOME>moderate</OUTCOME>
+      <OUTCOME>steep</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuitabilityConventionalAgriculture</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UtilitiesAccess</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>planned</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AgriculturalDensity</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AllRoadAccess</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BuiltUpDensity</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CoUserInteractionConstraints</FOR>
+      <GIVEN>AgriculturalDensity</GIVEN>
+      <GIVEN>BuiltUpDensity</GIVEN>
+      <TABLE>0.15 0.85 0.85 0.15 0.85 0.15 0.8 0.2 0.7 0.3 0.6 0.4 0.95 0.05 0.85 0.15 0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EnvironmentalConstraints</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Geology</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GroundwaterDepth</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InfrastructureConstraints</FOR>
+      <GIVEN>AllRoadAccess</GIVEN>
+      <GIVEN>UtilitiesAccess</GIVEN>
+      <TABLE>0.5 0.5 0.7 0.3 0.9 0.1 0.6 0.4 0.75 0.25 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProductivityConstraints</FOR>
+      <GIVEN>Geology</GIVEN>
+      <GIVEN>GroundwaterDepth</GIVEN>
+      <TABLE>0.9 0.1 0.7 0.3 0.65 0.35 0.85 0.15 0.65 0.35 0.5 0.5 0.5 0.5 0.25 0.75 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SiteConstraints</FOR>
+      <GIVEN>EnvironmentalConstraints</GIVEN>
+      <GIVEN>Slope</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 0.7 0.3 0.4 0.6 0.4 0.6 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Slope</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuitabilityConventionalAgriculture</FOR>
+      <GIVEN>CoUserInteractionConstraints</GIVEN>
+      <GIVEN>InfrastructureConstraints</GIVEN>
+      <GIVEN>ProductivityConstraints</GIVEN>
+      <GIVEN>SiteConstraints</GIVEN>
+      <TABLE>0.0 1.0 0.4 0.6 0.5 0.5 0.7 0.3 0.1 0.9 0.5 0.5 0.6 0.4 0.8 0.2 0.2 0.8 0.35 0.65 0.65 0.35 0.8 0.2 0.25 0.75 0.4 0.6 0.7 0.3 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UtilitiesAccess</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

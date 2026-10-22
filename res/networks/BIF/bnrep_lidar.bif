@@ -1,0 +1,65 @@
+network unknown {
+}
+variable ActivityIndustrialArea {
+  type discrete [ 2 ] { Routine, Unusual };
+}
+variable ActivitySiteA {
+  type discrete [ 2 ] { Routine, Unusual };
+}
+variable ActivitySiteB {
+  type discrete [ 2 ] { Routine, Unusual };
+}
+variable ThunderstormsA {
+  type discrete [ 2 ] { High, Low };
+}
+variable ThunderstormsB {
+  type discrete [ 2 ] { High, Low };
+}
+variable TrafficUnusualEvent {
+  type discrete [ 2 ] { True, False };
+}
+variable UsualRushHourTraffic {
+  type discrete [ 2 ] { True, False };
+}
+variable VehicleDensityA {
+  type discrete [ 2 ] { High, Low };
+}
+variable VehicleDensityB {
+  type discrete [ 2 ] { High, Low };
+}
+probability ( ActivityIndustrialArea | TrafficUnusualEvent, UsualRushHourTraffic ) {
+  (True, True) 0.01, 0.99;
+  (False, True) 0.99, 0.01;
+  (True, False) 0.01, 0.99;
+  (False, False) 0.7, 0.3;
+}
+probability ( ActivitySiteA | ActivityIndustrialArea ) {
+  (Routine) 0.8, 0.2;
+  (Unusual) 0.2, 0.8;
+}
+probability ( ActivitySiteB | ActivityIndustrialArea ) {
+  (Routine) 0.99, 0.01;
+  (Unusual) 0.01, 0.99;
+}
+probability ( ThunderstormsA | ActivitySiteA ) {
+  (Routine) 0.1, 0.9;
+  (Unusual) 0.95, 0.05;
+}
+probability ( ThunderstormsB | ActivitySiteB ) {
+  (Routine) 0.25, 0.75;
+  (Unusual) 0.99, 0.01;
+}
+probability ( TrafficUnusualEvent ) {
+  table 0.2, 0.8;
+}
+probability ( UsualRushHourTraffic ) {
+  table 0.8, 0.2;
+}
+probability ( VehicleDensityA | ActivitySiteA ) {
+  (Routine) 0.85, 0.15;
+  (Unusual) 0.2, 0.8;
+}
+probability ( VehicleDensityB | ActivitySiteB ) {
+  (Routine) 0.8, 0.2;
+  (Unusual) 0.01, 0.99;
+}

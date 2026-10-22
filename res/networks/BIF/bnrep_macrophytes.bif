@@ -1,0 +1,170 @@
+network unknown {
+}
+variable BenthicFishForaging {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Disturbance {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Ecosystem {
+  type discrete [ 3 ] { Standing_floating, Standing_submerged, Flowing_submerged };
+}
+variable EcosystemServices {
+  type discrete [ 9 ] { Flooding, Birds, Nutrient_retention, Angling, Swimming, Boating, Hydropower, Irrigation, Invasive_species };
+}
+variable EpiphyticInvertebrates {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Flow {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Light {
+  type discrete [ 2 ] { Low, High };
+}
+variable NutrientLoading {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Phytoplankton {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable PiscivorousFish {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable PiscivorousFishPredation {
+  type discrete [ 2 ] { Low, High };
+}
+variable PlanktivorousFish {
+  type discrete [ 2 ] { Low, High };
+}
+variable PlantRemoval {
+  type discrete [ 3 ] { None, Partial, Full };
+}
+variable Resources {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Zooplankton {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( BenthicFishForaging | EpiphyticInvertebrates ) {
+  (Low) 0.0, 0.0, 1.0;
+  (Medium) 0.0, 1.0, 0.0;
+  (High) 1.0, 0.0, 0.0;
+}
+probability ( Disturbance | Flow, Zooplankton ) {
+  (Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.0, 1.0, 0.0;
+  (High, Low) 0.0, 0.0, 1.0;
+  (Low, Medium) 0.0, 1.0, 0.0;
+  (Medium, Medium) 0.0, 0.5, 0.5;
+  (High, Medium) 0.3333333, 0.3333333, 0.3333333;
+  (Low, High) 0.00, 0.75, 0.25;
+  (Medium, High) 0.3333333, 0.3333333, 0.3333333;
+  (High, High) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( Ecosystem ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( EcosystemServices ) {
+  table 0.1, 0.0, 0.1, 0.4, 0.1, 0.0, 0.2, 0.1, 0.0;
+}
+probability ( EpiphyticInvertebrates | Ecosystem, PlantRemoval ) {
+  (Standing_floating, None) 0.75, 0.25, 0.00;
+  (Standing_submerged, None) 0.00, 0.25, 0.75;
+  (Flowing_submerged, None) 0.00, 0.25, 0.75;
+  (Standing_floating, Partial) 0.5, 0.5, 0.0;
+  (Standing_submerged, Partial) 0.00, 0.25, 0.75;
+  (Flowing_submerged, Partial) 0.00, 0.25, 0.75;
+  (Standing_floating, Full) 0.25, 0.50, 0.25;
+  (Standing_submerged, Full) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Full) 1.0, 0.0, 0.0;
+}
+probability ( Flow | Ecosystem, PlantRemoval ) {
+  (Standing_floating, None) 1.0, 0.0, 0.0;
+  (Standing_submerged, None) 1.0, 0.0, 0.0;
+  (Flowing_submerged, None) 0.75, 0.25, 0.00;
+  (Standing_floating, Partial) 1.0, 0.0, 0.0;
+  (Standing_submerged, Partial) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Partial) 0.0, 0.5, 0.5;
+  (Standing_floating, Full) 1.0, 0.0, 0.0;
+  (Standing_submerged, Full) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Full) 0.0, 0.0, 1.0;
+}
+probability ( Light | Ecosystem, PlantRemoval ) {
+  (Standing_floating, None) 1.0, 0.0;
+  (Standing_submerged, None) 0.5, 0.5;
+  (Flowing_submerged, None) 0.5, 0.5;
+  (Standing_floating, Partial) 0.5, 0.5;
+  (Standing_submerged, Partial) 0.25, 0.75;
+  (Flowing_submerged, Partial) 0.25, 0.75;
+  (Standing_floating, Full) 0.0, 1.0;
+  (Standing_submerged, Full) 0.0, 1.0;
+  (Flowing_submerged, Full) 0.0, 1.0;
+}
+probability ( NutrientLoading ) {
+  table 0.525, 0.275, 0.200;
+}
+probability ( Phytoplankton | Disturbance, Resources ) {
+  (Low, Low) 0.5, 0.5, 0.0;
+  (Medium, Low) 0.75, 0.25, 0.00;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Low, Medium) 0.0, 0.5, 0.5;
+  (Medium, Medium) 0.0, 1.0, 0.0;
+  (High, Medium) 0.5, 0.5, 0.0;
+  (Low, High) 0.0, 0.0, 1.0;
+  (Medium, High) 0.0, 0.5, 0.5;
+  (High, High) 0.0, 1.0, 0.0;
+}
+probability ( PiscivorousFish ) {
+  table 0.5, 0.5;
+}
+probability ( PiscivorousFishPredation | PiscivorousFish, PlantRemoval ) {
+  (Absent, None) 1.0, 0.0;
+  (Present, None) 1.0, 0.0;
+  (Absent, Partial) 1.0, 0.0;
+  (Present, Partial) 0.5, 0.5;
+  (Absent, Full) 1.0, 0.0;
+  (Present, Full) 0.0, 1.0;
+}
+probability ( PlanktivorousFish | PiscivorousFishPredation ) {
+  (Low) 0.0, 1.0;
+  (High) 1.0, 0.0;
+}
+probability ( PlantRemoval | EcosystemServices ) {
+  (Flooding) 0.00, 0.25, 0.75;
+  (Birds) 1.0, 0.0, 0.0;
+  (Nutrient_retention) 0.75, 0.25, 0.00;
+  (Angling) 0.0, 1.0, 0.0;
+  (Swimming) 0.00, 0.25, 0.75;
+  (Boating) 0.0, 0.0, 1.0;
+  (Hydropower) 0.00, 0.25, 0.75;
+  (Irrigation) 0.0, 0.5, 0.5;
+  (Invasive_species) 0.0, 0.0, 1.0;
+}
+probability ( Resources | BenthicFishForaging, Light, NutrientLoading ) {
+  (Low, Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low, Low) 0.9, 0.1, 0.0;
+  (High, Low, Low) 0.8, 0.2, 0.0;
+  (Low, High, Low) 0.75, 0.25, 0.00;
+  (Medium, High, Low) 0.5, 0.5, 0.0;
+  (High, High, Low) 0.25, 0.75, 0.00;
+  (Low, Low, Medium) 0.75, 0.25, 0.00;
+  (Medium, Low, Medium) 0.7, 0.3, 0.0;
+  (High, Low, Medium) 0.65, 0.35, 0.00;
+  (Low, High, Medium) 0.00, 0.75, 0.25;
+  (Medium, High, Medium) 0.00, 0.65, 0.35;
+  (High, High, Medium) 0.00, 0.55, 0.45;
+  (Low, Low, High) 0.5, 0.5, 0.0;
+  (Medium, Low, High) 0.5, 0.5, 0.0;
+  (High, Low, High) 0.5, 0.5, 0.0;
+  (Low, High, High) 0.0, 0.0, 1.0;
+  (Medium, High, High) 0.0, 0.0, 1.0;
+  (High, High, High) 0.0, 0.0, 1.0;
+}
+probability ( Zooplankton | Flow, PlanktivorousFish ) {
+  (Low, Low) 0.0, 0.0, 1.0;
+  (Medium, Low) 0.0, 1.0, 0.0;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Low, High) 0.5, 0.5, 0.0;
+  (Medium, High) 0.75, 0.25, 0.00;
+  (High, High) 1.0, 0.0, 0.0;
+}

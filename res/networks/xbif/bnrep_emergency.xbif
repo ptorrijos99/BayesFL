@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CAW</NAME>
+      <OUTCOME>yes</OUTCOME>
+      <OUTCOME>no</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CLPL</NAME>
+      <OUTCOME>illuminated</OUTCOME>
+      <OUTCOME>extinguished</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CP</NAME>
+      <OUTCOME>normal</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CPMS</NAME>
+      <OUTCOME>automatic</OUTCOME>
+      <OUTCOME>manual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CPMSI</NAME>
+      <OUTCOME>automatic</OUTCOME>
+      <OUTCOME>manual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECA</NAME>
+      <OUTCOME>normal</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECFCBI</NAME>
+      <OUTCOME>on</OUTCOME>
+      <OUTCOME>off</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECFOL</NAME>
+      <OUTCOME>illuminated</OUTCOME>
+      <OUTCOME>extinguished</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECFS</NAME>
+      <OUTCOME>normal</OUTCOME>
+      <OUTCOME>faulted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECOL</NAME>
+      <OUTCOME>illuminated</OUTCOME>
+      <OUTCOME>extinguished</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FP</NAME>
+      <OUTCOME>retracted</OUTCOME>
+      <OUTCOME>extended</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FPI</NAME>
+      <OUTCOME>retracted</OUTCOME>
+      <OUTCOME>extended</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OMD</NAME>
+      <OUTCOME>yes</OUTCOME>
+      <OUTCOME>no</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OMDL</NAME>
+      <OUTCOME>illuminated</OUTCOME>
+      <OUTCOME>extinguished</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TC</NAME>
+      <OUTCOME>correct</OUTCOME>
+      <OUTCOME>wrong</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TS</NAME>
+      <OUTCOME>normal</OUTCOME>
+      <OUTCOME>abnormal</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TSI</NAME>
+      <OUTCOME>normal</OUTCOME>
+      <OUTCOME>abnormal</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CAW</FOR>
+      <GIVEN>CP</GIVEN>
+      <GIVEN>TC</GIVEN>
+      <TABLE>0.001 0.999 0.999 0.001 0.999 0.001 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CLPL</FOR>
+      <GIVEN>CP</GIVEN>
+      <TABLE>0.001 0.999 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CP</FOR>
+      <GIVEN>CPMS</GIVEN>
+      <TABLE>0.998990918 0.001009082 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CPMS</FOR>
+      <TABLE>0.997 0.003 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CPMSI</FOR>
+      <GIVEN>CPMS</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECA</FOR>
+      <GIVEN>CPMS</GIVEN>
+      <GIVEN>ECFS</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 0.001 0.999 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECFCBI</FOR>
+      <GIVEN>ECFS</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECFOL</FOR>
+      <GIVEN>ECA</GIVEN>
+      <TABLE>0.001 0.999 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECFS</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECOL</FOR>
+      <GIVEN>ECA</GIVEN>
+      <TABLE>0.001 0.999 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FP</FOR>
+      <TABLE>0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FPI</FOR>
+      <GIVEN>FP</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OMD</FOR>
+      <GIVEN>CP</GIVEN>
+      <TABLE>0.001 0.999 0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OMDL</FOR>
+      <GIVEN>OMD</GIVEN>
+      <TABLE>0.999 0.001 0.001 0.999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TC</FOR>
+      <GIVEN>FP</GIVEN>
+      <GIVEN>TS</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TS</FOR>
+      <TABLE>0.999 0.001 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TSI</FOR>
+      <GIVEN>TS</GIVEN>
+      <TABLE>0.998990918 0.001009082 0.001 0.999 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

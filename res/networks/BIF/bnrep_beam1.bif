@@ -1,0 +1,61 @@
+network unknown {
+}
+variable BeamShearSpan {
+  type discrete [ 2 ] { Low, High };
+}
+variable FRPSheetsSpacing {
+  type discrete [ 2 ] { Low, High };
+}
+variable ModelOfFailure {
+  type discrete [ 3 ] { Rupture, Debonding, FRP_Pass };
+}
+variable ProbabilityOfFailure {
+  type discrete [ 2 ] { Fail, Pass };
+}
+variable ShearGain {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable WrappingScheme {
+  type discrete [ 5 ] { Grooving, Side_Bonding, Three_Side_Bonding, Three_Side_Bonding_With_Anchoring, Full_Wrapping };
+}
+probability ( BeamShearSpan ) {
+  table 0.65, 0.35;
+}
+probability ( FRPSheetsSpacing ) {
+  table 0.7, 0.3;
+}
+probability ( ModelOfFailure | ShearGain ) {
+  (Low) 0.3, 0.5, 0.2;
+  (Medium) 0.2, 0.4, 0.4;
+  (High) 0.15, 0.25, 0.60;
+}
+probability ( ProbabilityOfFailure | ModelOfFailure ) {
+  (Rupture) 1.0, 0.0;
+  (Debonding) 1.0, 0.0;
+  (FRP_Pass) 0.0, 1.0;
+}
+probability ( ShearGain | BeamShearSpan, FRPSheetsSpacing, WrappingScheme ) {
+  (Low, Low, Grooving) 0.075, 0.275, 0.650;
+  (High, Low, Grooving) 0.1, 0.3, 0.6;
+  (Low, High, Grooving) 0.125, 0.325, 0.550;
+  (High, High, Grooving) 0.15, 0.35, 0.50;
+  (Low, Low, Side_Bonding) 0.05, 0.25, 0.70;
+  (High, Low, Side_Bonding) 0.075, 0.275, 0.650;
+  (Low, High, Side_Bonding) 0.1, 0.3, 0.6;
+  (High, High, Side_Bonding) 0.125, 0.325, 0.550;
+  (Low, Low, Three_Side_Bonding) 0.1, 0.3, 0.6;
+  (High, Low, Three_Side_Bonding) 0.125, 0.325, 0.550;
+  (Low, High, Three_Side_Bonding) 0.15, 0.35, 0.50;
+  (High, High, Three_Side_Bonding) 0.175, 0.375, 0.450;
+  (Low, Low, Three_Side_Bonding_With_Anchoring) 0.15, 0.35, 0.50;
+  (High, Low, Three_Side_Bonding_With_Anchoring) 0.175, 0.375, 0.450;
+  (Low, High, Three_Side_Bonding_With_Anchoring) 0.2, 0.4, 0.4;
+  (High, High, Three_Side_Bonding_With_Anchoring) 0.225, 0.425, 0.350;
+  (Low, Low, Full_Wrapping) 0.2, 0.4, 0.4;
+  (High, Low, Full_Wrapping) 0.225, 0.425, 0.350;
+  (Low, High, Full_Wrapping) 0.25, 0.45, 0.30;
+  (High, High, Full_Wrapping) 0.275, 0.475, 0.250;
+}
+probability ( WrappingScheme ) {
+  table 0.15, 0.10, 0.20, 0.25, 0.30;
+}

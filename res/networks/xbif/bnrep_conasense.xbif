@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Communication</NAME>
+      <OUTCOME>Bandwidth</OUTCOME>
+      <OUTCOME>CoverageArea</OUTCOME>
+      <OUTCOME>Latency</OUTCOME>
+      <OUTCOME>PacketLoss</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Navigation</NAME>
+      <OUTCOME>Accuracy</OUTCOME>
+      <OUTCOME>Mobility</OUTCOME>
+      <OUTCOME>Speed</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sensing</NAME>
+      <OUTCOME>TransmissionRange</OUTCOME>
+      <OUTCOME>Angle</OUTCOME>
+      <OUTCOME>Uplink</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Services</NAME>
+      <OUTCOME>Good</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Poor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Communication</FOR>
+      <GIVEN>Navigation</GIVEN>
+      <GIVEN>Sensing</GIVEN>
+      <GIVEN>Services</GIVEN>
+      <TABLE>0.6 0.3 0.05 0.05 0.4 0.25 0.25 0.1 0.1 0.2 0.4 0.3 0.7 0.2 0.05 0.05 0.4 0.25 0.1 0.25 0.1 0.25 0.4 0.25 0.5 0.4 0.06 0.04 0.4 0.25 0.05 0.3 0.25 0.0 0.5 0.25 0.65 0.3 0.05 0.0 0.5 0.25 0.0 0.25 0.0 0.25 0.5 0.25 0.5 0.4 0.0 0.1 0.5 0.25 0.25 0.0 0.25 0.0 0.25 0.5 0.65 0.25 0.08 0.02 0.5 0.3 0.2 0.0 0.1 0.1 0.4 0.4 0.4 0.4 0.1 0.1 0.5 0.3 0.0 0.2 0.05 0.05 0.5 0.4 0.7 0.2 0.05 0.05 0.5 0.35 0.0 0.15 0.0 0.0 0.5 0.5 0.75 0.2 0.025 0.025 0.5 0.35 0.15 0.0 0.05 0.0 0.5 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Navigation</FOR>
+      <GIVEN>Sensing</GIVEN>
+      <GIVEN>Services</GIVEN>
+      <TABLE>0.6 0.2 0.2 0.333 0.333 0.334 0.2 0.5 0.3 0.4 0.4 0.2 0.333 0.333 0.334 0.333 0.333 0.334 0.5 0.1 0.4 0.333 0.333 0.334 0.3 0.2 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sensing</FOR>
+      <GIVEN>Services</GIVEN>
+      <TABLE>0.2 0.35 0.45 0.2 0.2 0.6 0.6 0.2 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Services</FOR>
+      <TABLE>0.7 0.2 0.1 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

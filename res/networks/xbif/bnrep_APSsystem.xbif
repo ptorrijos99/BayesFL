@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Completeness</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Consistency</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DataQuality</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NNMasterData</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NNTransactionData</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NNValues</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlanDeliveryTime</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>QPlanDeliveryTime</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>QSetupTime</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SetupTime</NAME>
+      <OUTCOME>Complete</OUTCOME>
+      <OUTCOME>Incomplete</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Completeness</FOR>
+      <GIVEN>NNValues</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Consistency</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DataQuality</FOR>
+      <GIVEN>Completeness</GIVEN>
+      <GIVEN>Consistency</GIVEN>
+      <TABLE>0.99 0.01 0.5 0.5 0.7 0.3 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NNMasterData</FOR>
+      <GIVEN>PlanDeliveryTime</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NNTransactionData</FOR>
+      <GIVEN>SetupTime</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NNValues</FOR>
+      <GIVEN>NNMasterData</GIVEN>
+      <GIVEN>NNTransactionData</GIVEN>
+      <TABLE>0.99 0.01 0.5 0.5 0.7 0.3 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlanDeliveryTime</FOR>
+      <GIVEN>QPlanDeliveryTime</GIVEN>
+      <TABLE>0.75 0.25 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>QPlanDeliveryTime</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>QSetupTime</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SetupTime</FOR>
+      <GIVEN>QSetupTime</GIVEN>
+      <TABLE>0.75 0.25 0.25 0.75 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

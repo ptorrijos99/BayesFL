@@ -1,0 +1,26 @@
+network unknown {
+}
+variable AverageDistance {
+  type discrete [ 3 ] { 0_300, 300_600, _600 };
+}
+variable BlueConcrete {
+  type discrete [ 2 ] { False, True };
+}
+variable FloorArea {
+  type discrete [ 5 ] { 0_150, 150_220, 220_360, 360_1500, _1500 };
+}
+probability ( AverageDistance | FloorArea ) {
+  (0_150) 0.05, 0.18, 0.77;
+  (150_220) 0.02, 0.17, 0.81;
+  (220_360) 0.60, 0.22, 0.18;
+  (360_1500) 0.08, 0.17, 0.75;
+  (_1500) 0.32, 0.17, 0.51;
+}
+probability ( BlueConcrete | AverageDistance ) {
+  (0_300) 0.38, 0.62;
+  (300_600) 0.17, 0.83;
+  (_600) 0.98, 0.02;
+}
+probability ( FloorArea ) {
+  table 0.2, 0.2, 0.2, 0.2, 0.2;
+}

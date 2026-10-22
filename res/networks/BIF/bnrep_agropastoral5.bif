@@ -1,0 +1,40 @@
+network unknown {
+}
+variable Community_Organisation {
+  type discrete [ 3 ] { Clan_communities, Missing, No_exogamous_clans };
+}
+variable Community_Size {
+  type discrete [ 2 ] { _200, __200 };
+}
+variable Gathering {
+  type discrete [ 3 ] { None, _25, __25 };
+}
+variable Household_Organisation {
+  type discrete [ 3 ] { Small_extended, Large_extended, Nuclear };
+}
+variable Settlement_Types {
+  type discrete [ 4 ] { Camp, Hamlet, Homesteads, Village };
+}
+probability ( Community_Organisation | Gathering ) {
+  (None) 0.23958333, 0.08333333, 0.67708333;
+  (_25) 0.28947368, 0.03947368, 0.67105263;
+  (__25) 0.0, 0.0, 1.0;
+}
+probability ( Community_Size | Gathering ) {
+  (None) 0.4791667, 0.5208333;
+  (_25) 0.6710526, 0.3289474;
+  (__25) 1.0, 0.0;
+}
+probability ( Gathering ) {
+  table 0.554913295, 0.439306358, 0.005780347;
+}
+probability ( Household_Organisation | Gathering ) {
+  (None) 0.6145833, 0.1145833, 0.2708333;
+  (_25) 0.5000000, 0.2236842, 0.2763158;
+  (__25) 0.0, 1.0, 0.0;
+}
+probability ( Settlement_Types | Gathering ) {
+  (None) 0.08333333, 0.13541667, 0.23958333, 0.54166667;
+  (_25) 0.1052632, 0.2500000, 0.2105263, 0.4342105;
+  (__25) 1.0, 0.0, 0.0, 0.0;
+}

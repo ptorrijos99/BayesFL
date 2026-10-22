@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ECamera</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECameraSeenStealing</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EObjectGone</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EPsychReport</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Motive</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ObjectDroppedAccidentally</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sneak</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Stealing</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ECamera</FOR>
+      <GIVEN>ECameraSeenStealing</GIVEN>
+      <TABLE>0.75 0.25 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECameraSeenStealing</FOR>
+      <GIVEN>Stealing</GIVEN>
+      <TABLE>1.0 0.0 0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EObjectGone</FOR>
+      <GIVEN>ObjectDroppedAccidentally</GIVEN>
+      <GIVEN>Stealing</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EPsychReport</FOR>
+      <GIVEN>Motive</GIVEN>
+      <TABLE>1.0 0.0 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Motive</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ObjectDroppedAccidentally</FOR>
+      <GIVEN>Sneak</GIVEN>
+      <GIVEN>Stealing</GIVEN>
+      <TABLE>0.75 0.25 1.0 0.0 0.5 0.5 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sneak</FOR>
+      <GIVEN>Motive</GIVEN>
+      <TABLE>1.0 0.0 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Stealing</FOR>
+      <GIVEN>Motive</GIVEN>
+      <TABLE>1.0 0.0 0.01 0.99 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

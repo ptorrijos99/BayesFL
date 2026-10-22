@@ -1,0 +1,177 @@
+network unknown {
+}
+variable CAF {
+  type discrete [ 2 ] { Okay, Faulty };
+}
+variable CF {
+  type discrete [ 2 ] { Okay, Faulty };
+}
+variable FlyOutAccident {
+  type discrete [ 3 ] { Fatal, Major, Minor };
+}
+variable IFR {
+  type discrete [ 2 ] { HR, HE };
+}
+variable OS {
+  type discrete [ 2 ] { Proper, Improper };
+}
+variable SGF {
+  type discrete [ 2 ] { Okay, Faulty };
+}
+variable TPF {
+  type discrete [ 2 ] { Okay, Faulty };
+}
+variable WHF {
+  type discrete [ 2 ] { N_Fail, FLRE };
+}
+probability ( CAF ) {
+  table 0.28, 0.72;
+}
+probability ( CF ) {
+  table 0.99, 0.01;
+}
+probability ( FlyOutAccident | CAF, CF, IFR, OS, SGF, TPF, WHF ) {
+  (Okay, Okay, HR, Proper, Okay, Okay, N_Fail) 0.01, 0.04, 0.95;
+  (Faulty, Okay, HR, Proper, Okay, Okay, N_Fail) 0.25, 0.65, 0.10;
+  (Okay, Faulty, HR, Proper, Okay, Okay, N_Fail) 0.01, 0.04, 0.95;
+  (Faulty, Faulty, HR, Proper, Okay, Okay, N_Fail) 0.4, 0.5, 0.1;
+  (Okay, Okay, HE, Proper, Okay, Okay, N_Fail) 0.05, 0.10, 0.85;
+  (Faulty, Okay, HE, Proper, Okay, Okay, N_Fail) 0.75, 0.15, 0.10;
+  (Okay, Faulty, HE, Proper, Okay, Okay, N_Fail) 0.1, 0.2, 0.7;
+  (Faulty, Faulty, HE, Proper, Okay, Okay, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Improper, Okay, Okay, N_Fail) 0.30, 0.45, 0.25;
+  (Faulty, Okay, HR, Improper, Okay, Okay, N_Fail) 0.25, 0.55, 0.20;
+  (Okay, Faulty, HR, Improper, Okay, Okay, N_Fail) 0.3, 0.4, 0.3;
+  (Faulty, Faulty, HR, Improper, Okay, Okay, N_Fail) 0.3, 0.6, 0.1;
+  (Okay, Okay, HE, Improper, Okay, Okay, N_Fail) 0.5, 0.3, 0.2;
+  (Faulty, Okay, HE, Improper, Okay, Okay, N_Fail) 0.75, 0.15, 0.10;
+  (Okay, Faulty, HE, Improper, Okay, Okay, N_Fail) 0.5, 0.3, 0.2;
+  (Faulty, Faulty, HE, Improper, Okay, Okay, N_Fail) 0.80, 0.15, 0.05;
+  (Okay, Okay, HR, Proper, Faulty, Okay, N_Fail) 0.05, 0.10, 0.85;
+  (Faulty, Okay, HR, Proper, Faulty, Okay, N_Fail) 0.2, 0.7, 0.1;
+  (Okay, Faulty, HR, Proper, Faulty, Okay, N_Fail) 0.1, 0.2, 0.7;
+  (Faulty, Faulty, HR, Proper, Faulty, Okay, N_Fail) 0.3, 0.5, 0.2;
+  (Okay, Okay, HE, Proper, Faulty, Okay, N_Fail) 0.15, 0.20, 0.65;
+  (Faulty, Okay, HE, Proper, Faulty, Okay, N_Fail) 0.75, 0.15, 0.10;
+  (Okay, Faulty, HE, Proper, Faulty, Okay, N_Fail) 0.15, 0.20, 0.65;
+  (Faulty, Faulty, HE, Proper, Faulty, Okay, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Improper, Faulty, Okay, N_Fail) 0.3, 0.5, 0.2;
+  (Faulty, Okay, HR, Improper, Faulty, Okay, N_Fail) 0.3, 0.5, 0.2;
+  (Okay, Faulty, HR, Improper, Faulty, Okay, N_Fail) 0.55, 0.30, 0.15;
+  (Faulty, Faulty, HR, Improper, Faulty, Okay, N_Fail) 0.4, 0.5, 0.1;
+  (Okay, Okay, HE, Improper, Faulty, Okay, N_Fail) 0.55, 0.30, 0.15;
+  (Faulty, Okay, HE, Improper, Faulty, Okay, N_Fail) 0.6, 0.3, 0.1;
+  (Okay, Faulty, HE, Improper, Faulty, Okay, N_Fail) 0.6, 0.3, 0.1;
+  (Faulty, Faulty, HE, Improper, Faulty, Okay, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Proper, Okay, Faulty, N_Fail) 0.334, 0.333, 0.333;
+  (Faulty, Okay, HR, Proper, Okay, Faulty, N_Fail) 0.3, 0.6, 0.1;
+  (Okay, Faulty, HR, Proper, Okay, Faulty, N_Fail) 0.334, 0.333, 0.333;
+  (Faulty, Faulty, HR, Proper, Okay, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Okay, Okay, HE, Proper, Okay, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Okay, HE, Proper, Okay, Faulty, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HE, Proper, Okay, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Faulty, HE, Proper, Okay, Faulty, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Improper, Okay, Faulty, N_Fail) 0.35, 0.40, 0.25;
+  (Faulty, Okay, HR, Improper, Okay, Faulty, N_Fail) 0.5, 0.4, 0.1;
+  (Okay, Faulty, HR, Improper, Okay, Faulty, N_Fail) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Improper, Okay, Faulty, N_Fail) 0.55, 0.35, 0.10;
+  (Okay, Okay, HE, Improper, Okay, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Faulty, Okay, HE, Improper, Okay, Faulty, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HE, Improper, Okay, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Faulty, Faulty, HE, Improper, Okay, Faulty, N_Fail) 0.80, 0.15, 0.05;
+  (Okay, Okay, HR, Proper, Faulty, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Okay, HR, Proper, Faulty, Faulty, N_Fail) 0.4, 0.3, 0.3;
+  (Okay, Faulty, HR, Proper, Faulty, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Faulty, HR, Proper, Faulty, Faulty, N_Fail) 0.3, 0.6, 0.1;
+  (Okay, Okay, HE, Proper, Faulty, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Okay, HE, Proper, Faulty, Faulty, N_Fail) 0.5, 0.4, 0.1;
+  (Okay, Faulty, HE, Proper, Faulty, Faulty, N_Fail) 0.35, 0.35, 0.30;
+  (Faulty, Faulty, HE, Proper, Faulty, Faulty, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Improper, Faulty, Faulty, N_Fail) 0.3, 0.5, 0.2;
+  (Faulty, Okay, HR, Improper, Faulty, Faulty, N_Fail) 0.3, 0.4, 0.3;
+  (Okay, Faulty, HR, Improper, Faulty, Faulty, N_Fail) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Improper, Faulty, Faulty, N_Fail) 0.4, 0.3, 0.3;
+  (Okay, Okay, HE, Improper, Faulty, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Faulty, Okay, HE, Improper, Faulty, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Okay, Faulty, HE, Improper, Faulty, Faulty, N_Fail) 0.6, 0.3, 0.1;
+  (Faulty, Faulty, HE, Improper, Faulty, Faulty, N_Fail) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Proper, Okay, Okay, FLRE) 0.25, 0.25, 0.50;
+  (Faulty, Okay, HR, Proper, Okay, Okay, FLRE) 0.45, 0.45, 0.10;
+  (Okay, Faulty, HR, Proper, Okay, Okay, FLRE) 0.30, 0.35, 0.35;
+  (Faulty, Faulty, HR, Proper, Okay, Okay, FLRE) 0.25, 0.65, 0.10;
+  (Okay, Okay, HE, Proper, Okay, Okay, FLRE) 0.3, 0.3, 0.4;
+  (Faulty, Okay, HE, Proper, Okay, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HE, Proper, Okay, Okay, FLRE) 0.47, 0.33, 0.20;
+  (Faulty, Faulty, HE, Proper, Okay, Okay, FLRE) 0.75, 0.15, 0.10;
+  (Okay, Okay, HR, Improper, Okay, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Okay, HR, Improper, Okay, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HR, Improper, Okay, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Improper, Okay, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Okay, Okay, HE, Improper, Okay, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Faulty, Okay, HE, Improper, Okay, Okay, FLRE) 0.80, 0.15, 0.05;
+  (Okay, Faulty, HE, Improper, Okay, Okay, FLRE) 0.65, 0.25, 0.10;
+  (Faulty, Faulty, HE, Improper, Okay, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Okay, Okay, HR, Proper, Faulty, Okay, FLRE) 0.30, 0.35, 0.35;
+  (Faulty, Okay, HR, Proper, Faulty, Okay, FLRE) 0.5, 0.4, 0.1;
+  (Okay, Faulty, HR, Proper, Faulty, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Proper, Faulty, Okay, FLRE) 0.25, 0.65, 0.10;
+  (Okay, Okay, HE, Proper, Faulty, Okay, FLRE) 0.45, 0.30, 0.25;
+  (Faulty, Okay, HE, Proper, Faulty, Okay, FLRE) 0.75, 0.15, 0.10;
+  (Okay, Faulty, HE, Proper, Faulty, Okay, FLRE) 0.65, 0.25, 0.10;
+  (Faulty, Faulty, HE, Proper, Faulty, Okay, FLRE) 0.85, 0.10, 0.05;
+  (Okay, Okay, HR, Improper, Faulty, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Okay, HR, Improper, Faulty, Okay, FLRE) 0.3, 0.6, 0.1;
+  (Okay, Faulty, HR, Improper, Faulty, Okay, FLRE) 0.3, 0.4, 0.3;
+  (Faulty, Faulty, HR, Improper, Faulty, Okay, FLRE) 0.25, 0.65, 0.10;
+  (Okay, Okay, HE, Improper, Faulty, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Faulty, Okay, HE, Improper, Faulty, Okay, FLRE) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HE, Improper, Faulty, Okay, FLRE) 0.45, 0.35, 0.20;
+  (Faulty, Faulty, HE, Improper, Faulty, Okay, FLRE) 0.75, 0.20, 0.05;
+  (Okay, Okay, HR, Proper, Okay, Faulty, FLRE) 0.3, 0.4, 0.3;
+  (Faulty, Okay, HR, Proper, Okay, Faulty, FLRE) 0.2, 0.7, 0.1;
+  (Okay, Faulty, HR, Proper, Okay, Faulty, FLRE) 0.3, 0.5, 0.2;
+  (Faulty, Faulty, HR, Proper, Okay, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Okay, Okay, HE, Proper, Okay, Faulty, FLRE) 0.45, 0.35, 0.20;
+  (Faulty, Okay, HE, Proper, Okay, Faulty, FLRE) 0.80, 0.15, 0.05;
+  (Okay, Faulty, HE, Proper, Okay, Faulty, FLRE) 0.75, 0.15, 0.10;
+  (Faulty, Faulty, HE, Proper, Okay, Faulty, FLRE) 0.75, 0.20, 0.05;
+  (Okay, Okay, HR, Improper, Okay, Faulty, FLRE) 0.25, 0.65, 0.10;
+  (Faulty, Okay, HR, Improper, Okay, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Okay, Faulty, HR, Improper, Okay, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Improper, Okay, Faulty, FLRE) 0.01, 0.04, 0.95;
+  (Okay, Okay, HE, Improper, Okay, Faulty, FLRE) 0.75, 0.15, 0.10;
+  (Faulty, Okay, HE, Improper, Okay, Faulty, FLRE) 0.7, 0.2, 0.1;
+  (Okay, Faulty, HE, Improper, Okay, Faulty, FLRE) 0.75, 0.15, 0.10;
+  (Faulty, Faulty, HE, Improper, Okay, Faulty, FLRE) 0.05, 0.10, 0.85;
+  (Okay, Okay, HR, Proper, Faulty, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Okay, HR, Proper, Faulty, Faulty, FLRE) 0.35, 0.55, 0.10;
+  (Okay, Faulty, HR, Proper, Faulty, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Proper, Faulty, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Okay, Okay, HE, Proper, Faulty, Faulty, FLRE) 0.7, 0.2, 0.1;
+  (Faulty, Okay, HE, Proper, Faulty, Faulty, FLRE) 0.85, 0.10, 0.05;
+  (Okay, Faulty, HE, Proper, Faulty, Faulty, FLRE) 0.75, 0.15, 0.10;
+  (Faulty, Faulty, HE, Proper, Faulty, Faulty, FLRE) 0.85, 0.10, 0.05;
+  (Okay, Okay, HR, Improper, Faulty, Faulty, FLRE) 0.3, 0.5, 0.2;
+  (Faulty, Okay, HR, Improper, Faulty, Faulty, FLRE) 0.4, 0.5, 0.1;
+  (Okay, Faulty, HR, Improper, Faulty, Faulty, FLRE) 0.3, 0.6, 0.1;
+  (Faulty, Faulty, HR, Improper, Faulty, Faulty, FLRE) 0.05, 0.10, 0.85;
+  (Okay, Okay, HE, Improper, Faulty, Faulty, FLRE) 0.6, 0.3, 0.1;
+  (Faulty, Okay, HE, Improper, Faulty, Faulty, FLRE) 0.80, 0.15, 0.05;
+  (Okay, Faulty, HE, Improper, Faulty, Faulty, FLRE) 0.75, 0.15, 0.10;
+  (Faulty, Faulty, HE, Improper, Faulty, Faulty, FLRE) 0.15, 0.20, 0.65;
+}
+probability ( IFR ) {
+  table 0.9, 0.1;
+}
+probability ( OS ) {
+  table 0.98, 0.02;
+}
+probability ( SGF ) {
+  table 0.85, 0.15;
+}
+probability ( TPF ) {
+  table 0.96, 0.04;
+}
+probability ( WHF ) {
+  table 0.95, 0.05;
+}

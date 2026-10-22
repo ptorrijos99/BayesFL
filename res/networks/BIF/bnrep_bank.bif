@@ -1,0 +1,39 @@
+network unknown {
+}
+variable marital {
+  type discrete [ 4 ] { divorced, married, single, unknown };
+}
+variable education {
+  type discrete [ 2 ] { no_uni, uni };
+}
+variable contact {
+  type discrete [ 2 ] { cellular, telephone };
+}
+variable subscription {
+  type discrete [ 2 ] { no, yes };
+}
+probability ( marital ) {
+  table 0.111928919, 0.612955252, 0.273561668, 0.001554161;
+}
+probability ( education | marital ) {
+  (divorced) 0.6971444, 0.3028556;
+  (married) 0.7371191, 0.2628809;
+  (single) 0.6013506, 0.3986494;
+  (unknown) 0.5660377, 0.4339623;
+}
+probability ( contact | marital, education ) {
+  (divorced, no_uni) 0.5640737, 0.4359263;
+  (married, no_uni) 0.5338136, 0.4661864;
+  (single, no_uni) 0.6069519, 0.3930481;
+  (unknown, no_uni) 0.5, 0.5;
+  (divorced, uni) 0.6418685, 0.3581315;
+  (married, uni) 0.6576888, 0.3423112;
+  (single, uni) 0.7090616, 0.2909384;
+  (unknown, uni) 0.6956522, 0.3043478;
+}
+probability ( subscription | education, contact ) {
+  (no_uni, cellular) 0.8914499, 0.1085501;
+  (uni, cellular) 0.8681695, 0.1318305;
+  (no_uni, telephone) 0.9563571, 0.0436429;
+  (uni, telephone) 0.94385343, 0.05614657;
+}

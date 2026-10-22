@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CarryingLoadAboveTransportLimits</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DesignDefect</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HuntingEquipmentOverload</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LossOfBuoyancy</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LossOfStability</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LossOfWaterTightness</NAME>
+      <OUTCOME>Present</OUTCOME>
+      <OUTCOME>Absent</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Overload</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlannedMaintenance</NAME>
+      <OUTCOME>Completed</OUTCOME>
+      <OUTCOME>Uncompleted</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sinking</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnstableLoading</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UsedHuntingEquipment</NAME>
+      <OUTCOME>Proper</OUTCOME>
+      <OUTCOME>Improper</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselAge</NAME>
+      <OUTCOME>Old</OUTCOME>
+      <OUTCOME>New</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselPipelines</NAME>
+      <OUTCOME>Corroded</OUTCOME>
+      <OUTCOME>Normal</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VesselStructure</NAME>
+      <OUTCOME>Worn</OUTCOME>
+      <OUTCOME>Normal</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterIntake</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WeatherAndSeaConditions</NAME>
+      <OUTCOME>Bad</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CarryingLoadAboveTransportLimits</FOR>
+      <GIVEN>Overload</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DesignDefect</FOR>
+      <TABLE>0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HuntingEquipmentOverload</FOR>
+      <GIVEN>UsedHuntingEquipment</GIVEN>
+      <TABLE>0.13 0.87 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LossOfBuoyancy</FOR>
+      <GIVEN>WaterIntake</GIVEN>
+      <TABLE>1.0 0.0 0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LossOfStability</FOR>
+      <GIVEN>DesignDefect</GIVEN>
+      <GIVEN>HuntingEquipmentOverload</GIVEN>
+      <GIVEN>UnstableLoading</GIVEN>
+      <TABLE>1.0 0.0 0.75 0.25 0.5 0.5 0.1 0.9 1.0 0.0 0.5 0.5 0.4 0.6 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LossOfWaterTightness</FOR>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>0.09 0.91 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Overload</FOR>
+      <TABLE>0.16 0.84 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlannedMaintenance</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sinking</FOR>
+      <GIVEN>CarryingLoadAboveTransportLimits</GIVEN>
+      <GIVEN>LossOfBuoyancy</GIVEN>
+      <GIVEN>LossOfStability</GIVEN>
+      <GIVEN>WeatherAndSeaConditions</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 1.0 0.0 0.38 0.62 1.0 0.0 0.1 0.9 1.0 0.0 0.63 0.37 1.0 0.0 0.35 0.65 1.0 0.0 0.23 0.77 0.33 0.67 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnstableLoading</FOR>
+      <TABLE>0.13 0.87 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UsedHuntingEquipment</FOR>
+      <TABLE>0.93 0.07 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselAge</FOR>
+      <TABLE>0.74 0.26 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselPipelines</FOR>
+      <GIVEN>PlannedMaintenance</GIVEN>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>0.9 0.1 0.0 1.0 0.96 0.04 0.08 0.92 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VesselStructure</FOR>
+      <GIVEN>VesselAge</GIVEN>
+      <TABLE>0.72 0.28 0.375 0.625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterIntake</FOR>
+      <GIVEN>LossOfWaterTightness</GIVEN>
+      <GIVEN>VesselPipelines</GIVEN>
+      <GIVEN>VesselStructure</GIVEN>
+      <TABLE>1.0 0.0 0.43 0.57 0.94 0.06 0.3 0.7 0.74 0.26 0.1 0.9 0.6 0.4 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WeatherAndSeaConditions</FOR>
+      <TABLE>0.33 0.67 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

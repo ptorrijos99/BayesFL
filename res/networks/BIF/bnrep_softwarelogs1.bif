@@ -1,0 +1,174 @@
+network unknown {
+}
+variable error {
+  type discrete [ 6 ] { com_mysql_jdbc_jdbc2_optional_MysqlDataSource, java_lang_IllegalArgumentException, java_lang_NullPointerException, java_lang_NumberFormatException, javax_ejb_EJBException, javax_ejb_EJBTransactionRolledbackException };
+}
+variable class {
+  type discrete [ 42 ] { chessleague_db_AccountFacade, chessleague_ejb_AccountBean, chessleague_ejb_BidBean, chessleague_ejb_TeamBean, com_sun_ejb_containers_BaseContainer, com_sun_ejb_containers_EJBContainerTransactionManager, com_sun_gjc_common_DataSourceObjectBuilder, java_lang_NumberFormatException, java_net_URLClassLoader, org_apache_jsp_AdminLeagues_jsp, org_apache_jsp_AdminSuggestions_jsp, org_apache_jsp_AdminUsers_jsp, org_apache_jsp_AllLeagues_jsp, org_apache_jsp_Bid_jsp, org_apache_jsp_Calendar_jsp, org_apache_jsp_Clasification_jsp, org_apache_jsp_DirectorOfChess_jsp, org_apache_jsp_ErrorPage_jsp, org_apache_jsp_Finance_jsp, org_apache_jsp_Help_jsp, org_apache_jsp_index_jsp, org_apache_jsp_Invite_jsp, org_apache_jsp_LastMovements_jsp, org_apache_jsp_League_jsp, org_apache_jsp_Lineup_jsp, org_apache_jsp_Market_jsp, org_apache_jsp_NewPassword_jsp, org_apache_jsp_NewSuggestion_jsp, org_apache_jsp_OfferPlayer_jsp, org_apache_jsp_OldSeasons_jsp, org_apache_jsp_Player_jsp, org_apache_jsp_Privacy_jsp, org_apache_jsp_Results_jsp, org_apache_jsp_SearchPlayer_jsp, org_apache_jsp_Start_jsp, org_apache_jsp_Team_jsp, org_apache_jsp_Trainer_jsp, org_apache_jsp_Transactions_jsp, org_apache_jsp_UserConfiguration_jsp, org_apache_jsp_ViewOffers_jsp, org_glassfish_hk2_external_org_objectweb_asm_ClassReader, org_jboss_weld_servlet_WeldTerminalListener };
+}
+variable method {
+  type discrete [ 13 ] { _jspService, _init_, deleteAccount, findClass, forInputString, getDataSourceObject, getInfo, getSessionContext, mapLocal3xException, processSystemException, publishMessage, sendHeadlines, undoBid };
+}
+variable severity {
+  type discrete [ 3 ] { INFO, SEVERE, WARNING };
+}
+variable thread_name {
+  type discrete [ 6 ] { AutoDeployer, ContainerBackgroundProcessor_StandardEngine_glassfish_web__StandardHost_server__StandardContext__ChessLeague_war__, ContainerBackgroundProcessor_StandardEngine_glassfish_web__StandardHost_server__StandardContext___, deployment_jar_scanner, http_listener, RunLevelControllerThread };
+}
+probability ( error | method ) {
+  (_jspService) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (_init_) 0.0, 1.0, 0.0, 0.0, 0.0, 0.0;
+  (deleteAccount) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (findClass) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (forInputString) 0.0, 0.0, 0.0, 1.0, 0.0, 0.0;
+  (getDataSourceObject) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (getInfo) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (getSessionContext) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (mapLocal3xException) 0.0, 0.0, 0.0, 0.0, 0.0, 1.0;
+  (processSystemException) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (publishMessage) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (sendHeadlines) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (undoBid) 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+}
+probability ( class ) {
+  table 9.123047e-04, 1.140381e-04, 1.520508e-04, 7.602539e-05, 1.178394e-03, 1.900635e-04, 1.520508e-04, 3.801270e-03, 1.520508e-04, 7.602539e-05, 3.801270e-05, 3.801270e-05, 1.140381e-04, 1.900635e-04, 4.941651e-04, 1.064355e-03, 1.102368e-03, 5.067853e-01, 4.561524e-04, 8.590869e-03, 1.140381e-03, 3.801270e-05, 1.178394e-03, 4.181397e-04, 7.222412e-04, 5.207739e-03, 8.324780e-03, 7.602539e-05, 1.140381e-04, 0.000000e+00, 1.444482e-03, 7.640552e-03, 1.482495e-03, 4.561524e-04, 3.383130e-03, 6.500171e-03, 3.801270e-04, 1.140381e-04, 6.842285e-04, 1.748584e-03, 6.462158e-04, 4.326225e-01;
+}
+probability ( method | class ) {
+  (chessleague_db_AccountFacade) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (chessleague_ejb_AccountBean) 0.0000000, 0.0000000, 0.3333333, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.0000000, 0.6666667, 0.0000000, 0.0000000;
+  (chessleague_ejb_BidBean) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0;
+  (chessleague_ejb_TeamBean) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (com_sun_ejb_containers_BaseContainer) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0;
+  (com_sun_ejb_containers_EJBContainerTransactionManager) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0;
+  (com_sun_gjc_common_DataSourceObjectBuilder) 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (java_lang_NumberFormatException) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (java_net_URLClassLoader) 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_AdminLeagues_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_AdminSuggestions_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_AdminUsers_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_AllLeagues_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Bid_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Calendar_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Clasification_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_DirectorOfChess_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_ErrorPage_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Finance_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Help_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_index_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Invite_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_LastMovements_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_League_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Lineup_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Market_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_NewPassword_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_NewSuggestion_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_OfferPlayer_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_OldSeasons_jsp) 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308, 0.07692308;
+  (org_apache_jsp_Player_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Privacy_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Results_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_SearchPlayer_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Start_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Team_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Trainer_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_Transactions_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_UserConfiguration_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_apache_jsp_ViewOffers_jsp) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_glassfish_hk2_external_org_objectweb_asm_ClassReader) 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (org_jboss_weld_servlet_WeldTerminalListener) 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+}
+probability ( severity | error, method ) {
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, _jspService) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, _jspService) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, _jspService) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, _jspService) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, _jspService) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, _jspService) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, _init_) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, _init_) 0.0, 1.0, 0.0;
+  (java_lang_NullPointerException, _init_) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, _init_) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, _init_) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, _init_) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, deleteAccount) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, deleteAccount) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, deleteAccount) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, deleteAccount) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, deleteAccount) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, deleteAccount) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, findClass) 0.0, 1.0, 0.0;
+  (java_lang_IllegalArgumentException, findClass) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, findClass) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, findClass) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, findClass) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, findClass) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, forInputString) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, forInputString) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, forInputString) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, forInputString) 0.0, 0.0, 1.0;
+  (javax_ejb_EJBException, forInputString) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, forInputString) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, getDataSourceObject) 0.0, 1.0, 0.0;
+  (java_lang_IllegalArgumentException, getDataSourceObject) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, getDataSourceObject) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, getDataSourceObject) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, getDataSourceObject) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, getDataSourceObject) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, getInfo) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, getInfo) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, getInfo) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, getInfo) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, getInfo) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, getInfo) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, getSessionContext) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, getSessionContext) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, getSessionContext) 1.0, 0.0, 0.0;
+  (java_lang_NumberFormatException, getSessionContext) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, getSessionContext) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, getSessionContext) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, mapLocal3xException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, mapLocal3xException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, mapLocal3xException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, mapLocal3xException) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, mapLocal3xException) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, mapLocal3xException) 0.0, 0.0, 1.0;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, processSystemException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, processSystemException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, processSystemException) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NumberFormatException, processSystemException) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, processSystemException) 0.0, 0.0, 1.0;
+  (javax_ejb_EJBTransactionRolledbackException, processSystemException) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, publishMessage) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, publishMessage) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, publishMessage) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, publishMessage) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, publishMessage) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, publishMessage) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, sendHeadlines) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, sendHeadlines) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, sendHeadlines) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, sendHeadlines) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, sendHeadlines) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, sendHeadlines) 0.3333333, 0.3333333, 0.3333333;
+  (com_mysql_jdbc_jdbc2_optional_MysqlDataSource, undoBid) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_IllegalArgumentException, undoBid) 0.3333333, 0.3333333, 0.3333333;
+  (java_lang_NullPointerException, undoBid) 0.0, 0.0, 1.0;
+  (java_lang_NumberFormatException, undoBid) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBException, undoBid) 0.3333333, 0.3333333, 0.3333333;
+  (javax_ejb_EJBTransactionRolledbackException, undoBid) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( thread_name | method ) {
+  (_jspService) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (_init_) 0.0, 0.0, 0.0, 1.0, 0.0, 0.0;
+  (deleteAccount) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (findClass) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (forInputString) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (getDataSourceObject) 1.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+  (getInfo) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (getSessionContext) 0.0726649679, 0.0000000000, 0.9271593006, 0.0000000000, 0.0000000000, 0.0001757315;
+  (mapLocal3xException) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (processSystemException) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (publishMessage) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (sendHeadlines) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+  (undoBid) 0.0, 0.0, 0.0, 0.0, 1.0, 0.0;
+}

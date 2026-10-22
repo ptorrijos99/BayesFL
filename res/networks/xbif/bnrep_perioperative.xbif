@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AbnormalAPTT</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BleedingRisk</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>null</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DrugSuspension</NAME>
+      <OUTCOME>0_days</OUTCOME>
+      <OUTCOME>5_days</OUTCOME>
+      <OUTCOME>7_days</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlateletCount</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ThromboticRisk</NAME>
+      <OUTCOME>high</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AbnormalAPTT</FOR>
+      <GIVEN>DrugSuspension</GIVEN>
+      <TABLE>0.3333333 0.3333333 0.3333333 0.0 0.3333333 0.6666667 0.39 0.33 0.28 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BleedingRisk</FOR>
+      <GIVEN>DrugSuspension</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DrugSuspension</FOR>
+      <TABLE>0.61 0.05 0.34 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlateletCount</FOR>
+      <GIVEN>DrugSuspension</GIVEN>
+      <TABLE>0.3333333 0.3333333 0.3333333 0.0 0.3333333 0.6666667 0.39 0.33 0.28 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ThromboticRisk</FOR>
+      <GIVEN>DrugSuspension</GIVEN>
+      <TABLE>0.54 0.46 0.0 1.0 0.0 0.0 0.33 0.67 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

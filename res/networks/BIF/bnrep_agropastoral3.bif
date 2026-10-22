@@ -1,0 +1,98 @@
+network unknown {
+}
+variable Annual_Temperature {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable CV_Annual_Precipitation {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable CV_Annual_Productivity {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable CV_Annual_Temperature {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Distance_Coast {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Elevation {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Exchange_InSettlement {
+  type discrete [ 2 ] { No, Yes };
+}
+variable Landscape {
+  type discrete [ 5 ] { Aquatic, Tundra, Desert, Forest, Grassland };
+}
+variable Monthly_Precipitation {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Monthly_Productivity {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable Slope {
+  type discrete [ 3 ] { low, medium, high };
+}
+probability ( Annual_Temperature | Elevation, Exchange_InSettlement ) {
+  (low, No) 0.05454545, 0.07272727, 0.87272727;
+  (medium, No) 0.00, 0.24, 0.76;
+  (high, No) 0.07894737, 0.76315789, 0.15789474;
+  (low, Yes) 0.0000000, 0.1428571, 0.8571429;
+  (medium, Yes) 0.0000000, 0.2727273, 0.7272727;
+  (high, Yes) 0.0, 0.4, 0.6;
+}
+probability ( CV_Annual_Precipitation | Exchange_InSettlement, Monthly_Precipitation ) {
+  (No, low) 0.02857143, 0.00000000, 0.97142857;
+  (Yes, low) 0.0, 0.0, 1.0;
+  (No, medium) 0.0, 0.0, 1.0;
+  (Yes, medium) 0.0, 0.0, 1.0;
+  (No, high) 0.01298701, 0.00000000, 0.98701299;
+  (Yes, high) 0.0, 0.0, 1.0;
+}
+probability ( CV_Annual_Productivity | Exchange_InSettlement, Monthly_Productivity ) {
+  (No, low) 0.14705882, 0.02941176, 0.82352941;
+  (Yes, low) 0.1666667, 0.0000000, 0.8333333;
+  (No, medium) 0.0, 0.0, 1.0;
+  (Yes, medium) 0.0, 0.0, 1.0;
+  (No, high) 0.0, 0.0, 1.0;
+  (Yes, high) 0.0, 0.0, 1.0;
+}
+probability ( CV_Annual_Temperature | Exchange_InSettlement ) {
+  (No) 0.3636364, 0.2657343, 0.3706294;
+  (Yes) 0.2666667, 0.3000000, 0.4333333;
+}
+probability ( Distance_Coast | Exchange_InSettlement ) {
+  (No) 0.14685315, 0.06293706, 0.79020979;
+  (Yes) 0.1333333, 0.1000000, 0.7666667;
+}
+probability ( Elevation | Exchange_InSettlement ) {
+  (No) 0.3846154, 0.3496503, 0.2657343;
+  (Yes) 0.4666667, 0.3666667, 0.1666667;
+}
+probability ( Exchange_InSettlement ) {
+  table 0.8265896, 0.1734104;
+}
+probability ( Landscape | Exchange_InSettlement ) {
+  (No) 0.02097902, 0.01398601, 0.06293706, 0.55244755, 0.34965035;
+  (Yes) 0.0, 0.0, 0.1, 0.6, 0.3;
+}
+probability ( Monthly_Precipitation | CV_Annual_Temperature, Exchange_InSettlement ) {
+  (low, No) 0.13461538, 0.05769231, 0.80769231;
+  (medium, No) 0.1315789, 0.2105263, 0.6578947;
+  (high, No) 0.4339623, 0.3773585, 0.1886792;
+  (low, Yes) 0.000, 0.125, 0.875;
+  (medium, Yes) 0.1111111, 0.5555556, 0.3333333;
+  (high, Yes) 0.53846154, 0.38461538, 0.07692308;
+}
+probability ( Monthly_Productivity | Exchange_InSettlement, Monthly_Precipitation ) {
+  (No, low) 0.7428571, 0.2571429, 0.0000000;
+  (Yes, low) 0.75, 0.25, 0.00;
+  (No, medium) 0.1935484, 0.5806452, 0.2258065;
+  (Yes, medium) 0.0000000, 0.5454545, 0.4545455;
+  (No, high) 0.02597403, 0.62337662, 0.35064935;
+  (Yes, high) 0.0000000, 0.7272727, 0.2727273;
+}
+probability ( Slope | Exchange_InSettlement ) {
+  (No) 0.3636364, 0.3426573, 0.2937063;
+  (Yes) 0.2333333, 0.5000000, 0.2666667;
+}

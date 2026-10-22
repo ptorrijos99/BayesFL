@@ -1,0 +1,73 @@
+network unknown {
+}
+variable ChiA {
+  type discrete [ 2 ] { Low, High };
+}
+variable ChiA_PS {
+  type discrete [ 2 ] { Low, High };
+}
+variable Colour {
+  type discrete [ 2 ] { Low, High };
+}
+variable Colour_PS {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Cyanobacteria {
+  type discrete [ 2 ] { Low, High };
+}
+variable RainSum {
+  type discrete [ 2 ] { Low, High };
+}
+variable TP {
+  type discrete [ 2 ] { Low, High };
+}
+variable TP_PS {
+  type discrete [ 2 ] { Low, High };
+}
+variable WindSpeed {
+  type discrete [ 2 ] { Low, High };
+}
+probability ( ChiA | ChiA_PS, TP, WindSpeed ) {
+  (Low, Low, Low) 0.89, 0.11;
+  (High, Low, Low) 0.33, 0.67;
+  (Low, High, Low) 0.67, 0.33;
+  (High, High, Low) 0.33, 0.67;
+  (Low, Low, High) 0.93, 0.07;
+  (High, Low, High) 0.33, 0.67;
+  (Low, High, High) 0.86, 0.14;
+  (High, High, High) 0.24, 0.76;
+}
+probability ( ChiA_PS | TP_PS ) {
+  (Low) 0.76, 0.24;
+  (High) 0.33, 0.67;
+}
+probability ( Colour | Colour_PS, RainSum ) {
+  (Low, Low) 0.88, 0.12;
+  (Medium, Low) 0.81, 0.19;
+  (High, Low) 0.5, 0.5;
+  (Low, High) 0.83, 0.17;
+  (Medium, High) 0.5, 0.5;
+  (High, High) 0.31, 0.69;
+}
+probability ( Colour_PS ) {
+  table 0.34, 0.33, 0.33;
+}
+probability ( Cyanobacteria | ChiA, Colour ) {
+  (Low, Low) 0.63, 0.37;
+  (High, Low) 0.19, 0.81;
+  (Low, High) 0.7, 0.3;
+  (High, High) 0.5, 0.5;
+}
+probability ( RainSum ) {
+  table 0.41, 0.59;
+}
+probability ( TP | TP_PS ) {
+  (Low) 0.64, 0.36;
+  (High) 0.33, 0.67;
+}
+probability ( TP_PS ) {
+  table 0.61, 0.39;
+}
+probability ( WindSpeed ) {
+  table 0.5, 0.5;
+}

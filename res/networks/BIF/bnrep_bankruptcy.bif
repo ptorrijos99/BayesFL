@@ -1,0 +1,64 @@
+network unknown {
+}
+variable AuditorsOpinion {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable BankruptcyStatus {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable CashAssets {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable FirmSize {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable IndustryFailureRate {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable MarketableSecurities {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable NetIncomeNegative {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable NetIncomeRate {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable StockReturn {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( AuditorsOpinion | BankruptcyStatus ) {
+  (FALSE) 0.44, 0.56;
+  (TRUE) 0.75, 0.25;
+}
+probability ( BankruptcyStatus ) {
+  table 0.5, 0.5;
+}
+probability ( CashAssets | BankruptcyStatus ) {
+  (FALSE) 0.29, 0.63, 0.08;
+  (TRUE) 0.19, 0.63, 0.18;
+}
+probability ( FirmSize | BankruptcyStatus ) {
+  (FALSE) 0.44, 0.54, 0.02;
+  (TRUE) 0.15, 0.65, 0.20;
+}
+probability ( IndustryFailureRate | BankruptcyStatus ) {
+  (FALSE) 0.09, 0.69, 0.22;
+  (TRUE) 0.19, 0.75, 0.06;
+}
+probability ( MarketableSecurities | BankruptcyStatus ) {
+  (FALSE) 0.31, 0.64, 0.05;
+  (TRUE) 0.15, 0.63, 0.22;
+}
+probability ( NetIncomeNegative | BankruptcyStatus ) {
+  (FALSE) 0.37, 0.63;
+  (TRUE) 0.76, 0.24;
+}
+probability ( NetIncomeRate | BankruptcyStatus ) {
+  (FALSE) 0.35, 0.53, 0.12;
+  (TRUE) 0.16, 0.64, 0.20;
+}
+probability ( StockReturn | BankruptcyStatus ) {
+  (FALSE) 0.67, 0.28, 0.05;
+  (TRUE) 0.12, 0.67, 0.21;
+}

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AuditorsOpinion</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BankruptcyStatus</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CashAssets</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FirmSize</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IndustryFailureRate</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MarketableSecurities</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NetIncomeNegative</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NetIncomeRate</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StockReturn</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AuditorsOpinion</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.44 0.56 0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BankruptcyStatus</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CashAssets</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.29 0.63 0.08 0.19 0.63 0.18 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FirmSize</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.44 0.54 0.02 0.15 0.65 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IndustryFailureRate</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.09 0.69 0.22 0.19 0.75 0.06 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MarketableSecurities</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.31 0.64 0.05 0.15 0.63 0.22 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NetIncomeNegative</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.37 0.63 0.76 0.24 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NetIncomeRate</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.35 0.53 0.12 0.16 0.64 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StockReturn</FOR>
+      <GIVEN>BankruptcyStatus</GIVEN>
+      <TABLE>0.67 0.28 0.05 0.12 0.67 0.21 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Basement</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueConcrete</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BuildingClass</NAME>
+      <OUTCOME>Single_Family_House</OUTCOME>
+      <OUTCOME>MultiFamily_House</OUTCOME>
+      <OUTCOME>School_Building</OUTCOME>
+      <OUTCOME>Other_Building</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ConstructionYear</NAME>
+      <OUTCOME>1930_1955</OUTCOME>
+      <OUTCOME>1955_1960</OUTCOME>
+      <OUTCOME>1960_1968</OUTCOME>
+      <OUTCOME>1968_1975</OUTCOME>
+      <OUTCOME>1975_1980</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Basement</FOR>
+      <GIVEN>ConstructionYear</GIVEN>
+      <TABLE>0.15 0.85 0.36 0.64 0.23 0.77 0.4 0.6 0.72 0.28 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlueConcrete</FOR>
+      <GIVEN>ConstructionYear</GIVEN>
+      <TABLE>0.77 0.23 0.6 0.4 0.4 0.6 0.7 0.3 0.88 0.12 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BuildingClass</FOR>
+      <GIVEN>Basement</GIVEN>
+      <GIVEN>BlueConcrete</GIVEN>
+      <TABLE>0.47 0.05 0.27 0.21 0.07 0.58 0.16 0.19 0.43 0.37 0.09 0.11 0.14 0.53 0.06 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ConstructionYear</FOR>
+      <TABLE>0.21 0.19 0.27 0.18 0.15 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

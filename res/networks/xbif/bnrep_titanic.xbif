@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Age</NAME>
+      <OUTCOME>Child</OUTCOME>
+      <OUTCOME>Adult</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Class</NAME>
+      <OUTCOME>1st</OUTCOME>
+      <OUTCOME>2nd</OUTCOME>
+      <OUTCOME>3rd</OUTCOME>
+      <OUTCOME>Crew</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sex</NAME>
+      <OUTCOME>Male</OUTCOME>
+      <OUTCOME>Female</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Survived</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Age</FOR>
+      <GIVEN>Class</GIVEN>
+      <GIVEN>Survived</GIVEN>
+      <TABLE>0.0 1.0 0.02955665 0.97044335 0.0 1.0 0.2033898 0.7966102 0.09848485 0.90151515 0.1516854 0.8483146 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Class</FOR>
+      <TABLE>0.1476602 0.1294866 0.3207633 0.40209 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sex</FOR>
+      <GIVEN>Class</GIVEN>
+      <TABLE>0.5538462 0.4461538 0.6280702 0.3719298 0.7223796 0.2776204 0.9740113 0.0259887 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Survived</FOR>
+      <GIVEN>Class</GIVEN>
+      <GIVEN>Sex</GIVEN>
+      <TABLE>0.6555556 0.3444444 0.02758621 0.97241379 0.8603352 0.1396648 0.1226415 0.8773585 0.827451 0.172549 0.5408163 0.4591837 0.7772622 0.2227378 0.1304348 0.8695652 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

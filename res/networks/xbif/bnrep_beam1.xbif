@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BeamShearSpan</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FRPSheetsSpacing</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ModelOfFailure</NAME>
+      <OUTCOME>Rupture</OUTCOME>
+      <OUTCOME>Debonding</OUTCOME>
+      <OUTCOME>FRP_Pass</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProbabilityOfFailure</NAME>
+      <OUTCOME>Fail</OUTCOME>
+      <OUTCOME>Pass</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ShearGain</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WrappingScheme</NAME>
+      <OUTCOME>Grooving</OUTCOME>
+      <OUTCOME>Side_Bonding</OUTCOME>
+      <OUTCOME>Three_Side_Bonding</OUTCOME>
+      <OUTCOME>Three_Side_Bonding_With_Anchoring</OUTCOME>
+      <OUTCOME>Full_Wrapping</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BeamShearSpan</FOR>
+      <TABLE>0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FRPSheetsSpacing</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ModelOfFailure</FOR>
+      <GIVEN>ShearGain</GIVEN>
+      <TABLE>0.3 0.5 0.2 0.2 0.4 0.4 0.15 0.25 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProbabilityOfFailure</FOR>
+      <GIVEN>ModelOfFailure</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ShearGain</FOR>
+      <GIVEN>BeamShearSpan</GIVEN>
+      <GIVEN>FRPSheetsSpacing</GIVEN>
+      <GIVEN>WrappingScheme</GIVEN>
+      <TABLE>0.075 0.275 0.65 0.05 0.25 0.7 0.1 0.3 0.6 0.15 0.35 0.5 0.2 0.4 0.4 0.125 0.325 0.55 0.1 0.3 0.6 0.15 0.35 0.5 0.2 0.4 0.4 0.25 0.45 0.3 0.1 0.3 0.6 0.075 0.275 0.65 0.125 0.325 0.55 0.175 0.375 0.45 0.225 0.425 0.35 0.15 0.35 0.5 0.125 0.325 0.55 0.175 0.375 0.45 0.225 0.425 0.35 0.275 0.475 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WrappingScheme</FOR>
+      <TABLE>0.15 0.1 0.2 0.25 0.3 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

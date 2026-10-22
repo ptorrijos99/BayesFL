@@ -1,0 +1,182 @@
+network unknown {
+}
+variable BQ {
+  type discrete [ 5 ] { Num1, Num2, Num3, Num4, Num5 };
+}
+variable Groundwater {
+  type discrete [ 4 ] { DryWet, MoistDripping, RainlikeDripping, TubularGushing };
+}
+variable InSituStress {
+  type discrete [ 4 ] { Low, Medium, High, ExtremelyHigh };
+}
+variable RockHardness {
+  type discrete [ 5 ] { Hard, SlightlyHard, SlightlySoft, Soft, ExtremelySoft };
+}
+variable RockMassIntegrity {
+  type discrete [ 5 ] { Complete, SlightlyComplete, SlightlyBroken, Broken, ExtremelyBroken };
+}
+variable RockMassStructure {
+  type discrete [ 5 ] { State1, State2, State3, State4, State5 };
+}
+variable RockQuality {
+  type discrete [ 5 ] { I, II, III, IV, V };
+}
+variable StructuralPlaneIntegrity {
+  type discrete [ 4 ] { Good, Ordinary, Bad, VeryBad };
+}
+variable WeatheringDegree {
+  type discrete [ 5 ] { Fresh, Slight, Medium, Severe, Extreme };
+}
+probability ( BQ | RockHardness, RockMassIntegrity ) {
+  (Hard, Complete) 0.93987976, 0.01503006, 0.01503006, 0.01503006, 0.01503006;
+  (SlightlyHard, Complete) 0.005005005, 0.979979980, 0.005005005, 0.005005005, 0.005005005;
+  (SlightlySoft, Complete) 0.05, 0.05, 0.80, 0.05, 0.05;
+  (Soft, Complete) 0.05, 0.05, 0.05, 0.70, 0.15;
+  (ExtremelySoft, Complete) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Hard, SlightlyComplete) 0.00998004, 0.96007984, 0.00998004, 0.00998004, 0.00998004;
+  (SlightlyHard, SlightlyComplete) 0.007014028, 0.007014028, 0.971943888, 0.007014028, 0.007014028;
+  (SlightlySoft, SlightlyComplete) 0.006, 0.006, 0.006, 0.976, 0.006;
+  (Soft, SlightlyComplete) 0.1, 0.1, 0.1, 0.6, 0.1;
+  (ExtremelySoft, SlightlyComplete) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Hard, SlightlyBroken) 0.01801802, 0.01801802, 0.92792793, 0.01801802, 0.01801802;
+  (SlightlyHard, SlightlyBroken) 0.007992008, 0.007992008, 0.007992008, 0.968031968, 0.007992008;
+  (SlightlySoft, SlightlyBroken) 0.006, 0.006, 0.006, 0.976, 0.006;
+  (Soft, SlightlyBroken) 0.01198801, 0.01198801, 0.01198801, 0.01198801, 0.95204795;
+  (ExtremelySoft, SlightlyBroken) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Hard, Broken) 0.04, 0.04, 0.04, 0.84, 0.04;
+  (SlightlyHard, Broken) 0.02202202, 0.02202202, 0.02202202, 0.91191191, 0.02202202;
+  (SlightlySoft, Broken) 0.011, 0.011, 0.011, 0.011, 0.956;
+  (Soft, Broken) 0.01, 0.01, 0.01, 0.01, 0.96;
+  (ExtremelySoft, Broken) 0.02, 0.02, 0.02, 0.02, 0.92;
+  (Hard, ExtremelyBroken) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (SlightlyHard, ExtremelyBroken) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (SlightlySoft, ExtremelyBroken) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Soft, ExtremelyBroken) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (ExtremelySoft, ExtremelyBroken) 0.01698302, 0.01698302, 0.01698302, 0.01698302, 0.93206793;
+}
+probability ( Groundwater ) {
+  table 0.26573427, 0.50249750, 0.15384615, 0.07792208;
+}
+probability ( InSituStress ) {
+  table 0.443, 0.294, 0.224, 0.039;
+}
+probability ( RockHardness | WeatheringDegree ) {
+  (Fresh) 0.202, 0.369, 0.158, 0.147, 0.124;
+  (Slight) 0.377, 0.353, 0.237, 0.028, 0.005;
+  (Medium) 0.096, 0.335, 0.309, 0.181, 0.079;
+  (Severe) 0.03203203, 0.27627628, 0.62762763, 0.03203203, 0.03203203;
+  (Extreme) 0.05, 0.05, 0.05, 0.30, 0.55;
+}
+probability ( RockMassIntegrity | RockMassStructure, StructuralPlaneIntegrity ) {
+  (State1, Good) 0.775, 0.150, 0.025, 0.025, 0.025;
+  (State2, Good) 0.511, 0.456, 0.011, 0.011, 0.011;
+  (State3, Good) 0.40040040, 0.32332332, 0.24624625, 0.01501502, 0.01501502;
+  (State4, Good) 0.00, 0.00, 0.05, 0.80, 0.15;
+  (State5, Good) 0.0, 0.0, 0.0, 0.1, 0.9;
+  (State1, Ordinary) 0.578, 0.356, 0.022, 0.022, 0.022;
+  (State2, Ordinary) 0.384, 0.564, 0.044, 0.004, 0.004;
+  (State3, Ordinary) 0.101, 0.376, 0.420, 0.090, 0.013;
+  (State4, Ordinary) 0.005994006, 0.005994006, 0.162837163, 0.662337662, 0.162837163;
+  (State5, Ordinary) 0.04, 0.04, 0.04, 0.64, 0.24;
+  (State1, Bad) 0.005, 0.005, 0.672, 0.313, 0.005;
+  (State2, Bad) 0.005, 0.005, 0.672, 0.313, 0.005;
+  (State3, Bad) 0.005, 0.005, 0.672, 0.313, 0.005;
+  (State4, Bad) 0.009, 0.009, 0.418, 0.464, 0.100;
+  (State5, Bad) 0.1, 0.1, 0.6, 0.1, 0.1;
+  (State1, VeryBad) 0.04, 0.04, 0.24, 0.64, 0.04;
+  (State2, VeryBad) 0.04, 0.04, 0.24, 0.64, 0.04;
+  (State3, VeryBad) 0.04, 0.04, 0.24, 0.64, 0.04;
+  (State4, VeryBad) 0.06693307, 0.06693307, 0.39960040, 0.06693307, 0.39960040;
+  (State5, VeryBad) 0.06693307, 0.06693307, 0.06693307, 0.06693307, 0.73226773;
+}
+probability ( RockMassStructure ) {
+  table 0.053, 0.231, 0.502, 0.189, 0.025;
+}
+probability ( RockQuality | BQ, Groundwater, InSituStress ) {
+  (Num1, DryWet, Low) 0.900, 0.025, 0.025, 0.025, 0.025;
+  (Num2, DryWet, Low) 0.01503006, 0.93987976, 0.01503006, 0.01503006, 0.01503006;
+  (Num3, DryWet, Low) 0.02894212, 0.02894212, 0.88423154, 0.02894212, 0.02894212;
+  (Num4, DryWet, Low) 0.02894212, 0.02894212, 0.02894212, 0.88423154, 0.02894212;
+  (Num5, DryWet, Low) 0.02894212, 0.02894212, 0.02894212, 0.02894212, 0.88423154;
+  (Num1, MoistDripping, Low) 0.6, 0.1, 0.1, 0.1, 0.1;
+  (Num2, MoistDripping, Low) 0.01298701, 0.88711289, 0.07492507, 0.01298701, 0.01198801;
+  (Num3, MoistDripping, Low) 0.01801802, 0.01801802, 0.92792793, 0.01801802, 0.01801802;
+  (Num4, MoistDripping, Low) 0.01098901, 0.01098901, 0.01098901, 0.74625375, 0.22077922;
+  (Num5, MoistDripping, Low) 0.01297405, 0.01297405, 0.01297405, 0.01297405, 0.94810379;
+  (Num1, RainlikeDripping, Low) 0.06693307, 0.73226773, 0.06693307, 0.06693307, 0.06693307;
+  (Num2, RainlikeDripping, Low) 0.02897103, 0.31368631, 0.59940060, 0.02897103, 0.02897103;
+  (Num3, RainlikeDripping, Low) 0.06693307, 0.06693307, 0.39960040, 0.39960040, 0.06693307;
+  (Num4, RainlikeDripping, Low) 0.01698302, 0.01698302, 0.01698302, 0.34965035, 0.59940060;
+  (Num5, RainlikeDripping, Low) 0.1, 0.1, 0.1, 0.1, 0.6;
+  (Num1, TubularGushing, Low) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num2, TubularGushing, Low) 0.05, 0.05, 0.80, 0.05, 0.05;
+  (Num3, TubularGushing, Low) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num4, TubularGushing, Low) 0.02897103, 0.02897103, 0.02897103, 0.17082917, 0.74225774;
+  (Num5, TubularGushing, Low) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, DryWet, Medium) 0.6, 0.1, 0.1, 0.1, 0.1;
+  (Num2, DryWet, Medium) 0.1, 0.6, 0.1, 0.1, 0.1;
+  (Num3, DryWet, Medium) 0.04, 0.04, 0.84, 0.04, 0.04;
+  (Num4, DryWet, Medium) 0.02894212, 0.02894212, 0.02894212, 0.88423154, 0.02894212;
+  (Num5, DryWet, Medium) 0.02, 0.02, 0.02, 0.02, 0.92;
+  (Num1, MoistDripping, Medium) 0.5, 0.2, 0.1, 0.1, 0.1;
+  (Num2, MoistDripping, Medium) 0.1, 0.2, 0.5, 0.1, 0.1;
+  (Num3, MoistDripping, Medium) 0.02, 0.02, 0.82, 0.12, 0.02;
+  (Num4, MoistDripping, Medium) 0.01401401, 0.01401401, 0.01401401, 0.94394394, 0.01401401;
+  (Num5, MoistDripping, Medium) 0.01198801, 0.01198801, 0.01198801, 0.01198801, 0.95204795;
+  (Num1, RainlikeDripping, Medium) 0.05, 0.80, 0.05, 0.05, 0.05;
+  (Num2, RainlikeDripping, Medium) 0.05, 0.05, 0.80, 0.05, 0.05;
+  (Num3, RainlikeDripping, Medium) 0.1, 0.1, 0.1, 0.6, 0.1;
+  (Num4, RainlikeDripping, Medium) 0.00, 0.00, 0.05, 0.05, 0.90;
+  (Num5, RainlikeDripping, Medium) 0.04, 0.04, 0.04, 0.04, 0.84;
+  (Num1, TubularGushing, Medium) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num2, TubularGushing, Medium) 0.05, 0.05, 0.80, 0.05, 0.05;
+  (Num3, TubularGushing, Medium) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num4, TubularGushing, Medium) 0.06693307, 0.06693307, 0.06693307, 0.06693307, 0.73226773;
+  (Num5, TubularGushing, Medium) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, DryWet, High) 0.2, 0.5, 0.1, 0.1, 0.1;
+  (Num2, DryWet, High) 0.05, 0.80, 0.05, 0.05, 0.05;
+  (Num3, DryWet, High) 0.1, 0.1, 0.1, 0.6, 0.1;
+  (Num4, DryWet, High) 0.02, 0.02, 0.02, 0.62, 0.32;
+  (Num5, DryWet, High) 0.025, 0.025, 0.025, 0.025, 0.900;
+  (Num1, MoistDripping, High) 0.2, 0.5, 0.1, 0.1, 0.1;
+  (Num2, MoistDripping, High) 0.1, 0.1, 0.6, 0.1, 0.1;
+  (Num3, MoistDripping, High) 0.04, 0.04, 0.84, 0.04, 0.04;
+  (Num4, MoistDripping, High) 0.00, 0.00, 0.05, 0.05, 0.90;
+  (Num5, MoistDripping, High) 0.01503006, 0.01503006, 0.01503006, 0.01503006, 0.93987976;
+  (Num1, RainlikeDripping, High) 0.1, 0.1, 0.6, 0.1, 0.1;
+  (Num2, RainlikeDripping, High) 0.06693307, 0.06693307, 0.73226773, 0.06693307, 0.06693307;
+  (Num3, RainlikeDripping, High) 0.05, 0.05, 0.05, 0.80, 0.05;
+  (Num4, RainlikeDripping, High) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num5, RainlikeDripping, High) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num1, TubularGushing, High) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num2, TubularGushing, High) 0.05, 0.05, 0.05, 0.80, 0.05;
+  (Num3, TubularGushing, High) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num4, TubularGushing, High) 0.02202202, 0.02202202, 0.02202202, 0.02202202, 0.91191191;
+  (Num5, TubularGushing, High) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, DryWet, ExtremelyHigh) 0.1, 0.2, 0.5, 0.1, 0.1;
+  (Num2, DryWet, ExtremelyHigh) 0.1, 0.1, 0.6, 0.1, 0.1;
+  (Num3, DryWet, ExtremelyHigh) 0.05, 0.05, 0.05, 0.80, 0.05;
+  (Num4, DryWet, ExtremelyHigh) 0.02, 0.02, 0.02, 0.32, 0.62;
+  (Num5, DryWet, ExtremelyHigh) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, MoistDripping, ExtremelyHigh) 0.1, 0.1, 0.6, 0.1, 0.1;
+  (Num2, MoistDripping, ExtremelyHigh) 0.02897103, 0.02897103, 0.74225774, 0.17082917, 0.02897103;
+  (Num3, MoistDripping, ExtremelyHigh) 0.05, 0.05, 0.05, 0.80, 0.05;
+  (Num4, MoistDripping, ExtremelyHigh) 0.1, 0.1, 0.1, 0.1, 0.6;
+  (Num5, MoistDripping, ExtremelyHigh) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, RainlikeDripping, ExtremelyHigh) 0.1, 0.1, 0.1, 0.6, 0.1;
+  (Num2, RainlikeDripping, ExtremelyHigh) 0.1, 0.1, 0.1, 0.6, 0.1;
+  (Num3, RainlikeDripping, ExtremelyHigh) 0.1, 0.1, 0.1, 0.1, 0.6;
+  (Num4, RainlikeDripping, ExtremelyHigh) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num5, RainlikeDripping, ExtremelyHigh) 0.0, 0.0, 0.0, 0.0, 1.0;
+  (Num1, TubularGushing, ExtremelyHigh) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num2, TubularGushing, ExtremelyHigh) 0.05, 0.05, 0.05, 0.80, 0.05;
+  (Num3, TubularGushing, ExtremelyHigh) 0.05, 0.05, 0.05, 0.05, 0.80;
+  (Num4, TubularGushing, ExtremelyHigh) 0.02202202, 0.02202202, 0.02202202, 0.02202202, 0.91191191;
+  (Num5, TubularGushing, ExtremelyHigh) 0.0, 0.0, 0.0, 0.0, 1.0;
+}
+probability ( StructuralPlaneIntegrity ) {
+  table 0.126, 0.635, 0.210, 0.029;
+}
+probability ( WeatheringDegree ) {
+  table 0.311, 0.147, 0.405, 0.126, 0.011;
+}

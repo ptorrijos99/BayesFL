@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>EredHanded</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EseenCS</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ewallet</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Guilty</NAME>
+      <OUTCOME>F</OUTCOME>
+      <OUTCOME>T</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>EredHanded</FOR>
+      <GIVEN>Guilty</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EseenCS</FOR>
+      <GIVEN>Guilty</GIVEN>
+      <TABLE>0.94 0.06 0.71 0.29 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ewallet</FOR>
+      <GIVEN>Guilty</GIVEN>
+      <TABLE>0.993 0.007 0.549 0.451 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Guilty</FOR>
+      <TABLE>0.995 0.005 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

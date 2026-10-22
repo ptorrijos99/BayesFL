@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Constraint</NAME>
+      <OUTCOME>Scenario1</OUTCOME>
+      <OUTCOME>Scenario2</OUTCOME>
+      <OUTCOME>Scenario3</OUTCOME>
+      <OUTCOME>NA</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECamera</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ECameraSeenStealing</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EObjectGone</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EPsychReport</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Motive</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ObjectDroppedAccidentally</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario1</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario2</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Scenario3</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sneak</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Stealing</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Constraint</FOR>
+      <GIVEN>Scenario1</GIVEN>
+      <GIVEN>Scenario2</GIVEN>
+      <GIVEN>Scenario3</GIVEN>
+      <TABLE>0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECamera</FOR>
+      <TABLE>0.8396 0.1604 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ECameraSeenStealing</FOR>
+      <GIVEN>ECamera</GIVEN>
+      <GIVEN>Stealing</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.538461 0.461539 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EObjectGone</FOR>
+      <GIVEN>ObjectDroppedAccidentally</GIVEN>
+      <GIVEN>Stealing</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EPsychReport</FOR>
+      <GIVEN>Motive</GIVEN>
+      <TABLE>1.0 0.0 0.09859164 0.90140836 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Motive</FOR>
+      <GIVEN>Scenario1</GIVEN>
+      <TABLE>0.994974348 0.005025652 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ObjectDroppedAccidentally</FOR>
+      <GIVEN>Scenario2</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario1</FOR>
+      <TABLE>0.9551 0.0449 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario2</FOR>
+      <TABLE>0.6752 0.3248 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Scenario3</FOR>
+      <TABLE>0.3697 0.6303 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sneak</FOR>
+      <GIVEN>Motive</GIVEN>
+      <GIVEN>Scenario1</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 0.08333328 0.91666672 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Stealing</FOR>
+      <GIVEN>Scenario1</GIVEN>
+      <GIVEN>Sneak</GIVEN>
+      <TABLE>0.9995792569 0.0004207431 1.0 0.0 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Burglar</NAME>
+      <OUTCOME>Suspect_1</OUTCOME>
+      <OUTCOME>Suspect_2</OUTCOME>
+      <OUTCOME>Suspect_3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BurglaryTime</NAME>
+      <OUTCOME>Day</OUTCOME>
+      <OUTCOME>Night</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PrimaryItemStolen</NAME>
+      <OUTCOME>Jewellery</OUTCOME>
+      <OUTCOME>Electronics</OUTCOME>
+      <OUTCOME>Money</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Burglar</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BurglaryTime</FOR>
+      <GIVEN>Burglar</GIVEN>
+      <TABLE>0.1 0.9 0.9 0.1 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PrimaryItemStolen</FOR>
+      <GIVEN>Burglar</GIVEN>
+      <TABLE>0.8 0.1 0.1 0.1 0.8 0.1 0.1 0.1 0.8 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,128 @@
+network unknown {
+}
+variable AcidificationThreat {
+  type discrete [ 2 ] { Low, High };
+}
+variable CoastalDevelopmentThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ManagementEffectiveness {
+  type discrete [ 3 ] { Ineffective, Partial, Effective };
+}
+variable MarineBasedPollutionThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Overfishing {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ReefHealthIndex {
+  type discrete [ 5 ] { Less_than_0, 0_0_118, 0_118_0_330, 0_330_0_683, More_than_0_683 };
+}
+variable ThermalStress {
+  type discrete [ 2 ] { None, Severe };
+}
+variable WatershedBasedPollutionThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( AcidificationThreat | ManagementEffectiveness, ReefHealthIndex ) {
+  (Ineffective, Less_than_0) 0.895468, 0.104532;
+  (Partial, Less_than_0) 0.892908, 0.107092;
+  (Effective, Less_than_0) 0.390422, 0.609578;
+  (Ineffective, 0_0_118) 0.884633, 0.115367;
+  (Partial, 0_0_118) 0.826217, 0.173783;
+  (Effective, 0_0_118) 0.239681, 0.760319;
+  (Ineffective, 0_118_0_330) 0.872252, 0.127748;
+  (Partial, 0_118_0_330) 0.896758, 0.103242;
+  (Effective, 0_118_0_330) 0.57109, 0.42891;
+  (Ineffective, 0_330_0_683) 0.911496, 0.088504;
+  (Partial, 0_330_0_683) 0.948505, 0.051495;
+  (Effective, 0_330_0_683) 0.796053, 0.203947;
+  (Ineffective, More_than_0_683) 0.884981, 0.115019;
+  (Partial, More_than_0_683) 0.991803, 0.008197;
+  (Effective, More_than_0_683) 0.96875, 0.03125;
+}
+probability ( CoastalDevelopmentThreat | Overfishing, ReefHealthIndex ) {
+  (Low, Less_than_0) 0.81929482, 0.15283315, 0.02787203;
+  (Medium, Less_than_0) 0.719208, 0.178983, 0.101809;
+  (High, Less_than_0) 0.27123, 0.26916, 0.45961;
+  (Low, 0_0_118) 0.86495186, 0.12099612, 0.01405201;
+  (Medium, 0_0_118) 0.6790187, 0.1828732, 0.1381081;
+  (High, 0_0_118) 0.227483, 0.287560, 0.484957;
+  (Low, 0_118_0_330) 0.779762, 0.170996, 0.049242;
+  (Medium, 0_118_0_330) 0.576767, 0.250053, 0.173180;
+  (High, 0_118_0_330) 0.236876, 0.336841, 0.426283;
+  (Low, 0_330_0_683) 0.892774, 0.053613, 0.053613;
+  (Medium, 0_330_0_683) 0.713381, 0.250198, 0.036421;
+  (High, 0_330_0_683) 0.225090, 0.362476, 0.412434;
+  (Low, More_than_0_683) 0.995098, 0.002451, 0.002451;
+  (Medium, More_than_0_683) 0.743169743, 0.251366251, 0.005464005;
+  (High, More_than_0_683) 0.296388, 0.370279, 0.333333;
+}
+probability ( ManagementEffectiveness | ReefHealthIndex ) {
+  (Less_than_0) 0.768204, 0.190070, 0.041726;
+  (0_0_118) 0.749122, 0.176008, 0.074870;
+  (0_118_0_330) 0.841488, 0.116547, 0.041965;
+  (0_330_0_683) 0.802411, 0.157757, 0.039832;
+  (More_than_0_683) 0.872305, 0.101161, 0.026534;
+}
+probability ( MarineBasedPollutionThreat | CoastalDevelopmentThreat, ReefHealthIndex ) {
+  (Low, Less_than_0) 0.869326, 0.126733, 0.003941;
+  (Medium, Less_than_0) 0.752206, 0.200976, 0.046818;
+  (High, Less_than_0) 0.591373, 0.175138, 0.233489;
+  (Low, 0_0_118) 0.867013133, 0.128720871, 0.004265996;
+  (Medium, 0_0_118) 0.837160, 0.119685, 0.043155;
+  (High, 0_0_118) 0.5751276, 0.2030402, 0.2218322;
+  (Low, 0_118_0_330) 0.9048319048, 0.0950060950, 0.0001620002;
+  (Medium, 0_118_0_330) 0.741987, 0.206273, 0.051740;
+  (High, 0_118_0_330) 0.603782, 0.128848, 0.267370;
+  (Low, 0_330_0_683) 0.76311576, 0.21832122, 0.01856302;
+  (Medium, 0_330_0_683) 0.755995, 0.162470, 0.081535;
+  (High, 0_330_0_683) 0.7135617, 0.1147021, 0.1717362;
+  (Low, More_than_0_683) 0.798450, 0.150609, 0.050941;
+  (Medium, More_than_0_683) 0.724900, 0.182731, 0.092369;
+  (High, More_than_0_683) 0.4436274, 0.2230392, 0.3333333;
+}
+probability ( Overfishing | ManagementEffectiveness, ReefHealthIndex ) {
+  (Ineffective, Less_than_0) 0.093936, 0.267202, 0.638862;
+  (Partial, Less_than_0) 0.556070, 0.443811, 0.000119;
+  (Effective, Less_than_0) 0.998918, 0.000541, 0.000541;
+  (Ineffective, 0_0_118) 0.083005, 0.261610, 0.655385;
+  (Partial, 0_0_118) 0.508912, 0.490955, 0.000133;
+  (Effective, 0_0_118) 0.9993740006, 0.0003129997, 0.0003129997;
+  (Ineffective, 0_118_0_330) 0.04971205, 0.27660928, 0.67367867;
+  (Partial, 0_118_0_330) 0.333333, 0.666098, 0.000569;
+  (Effective, 0_118_0_330) 0.99684, 0.00158, 0.00158;
+  (Ineffective, 0_330_0_683) 0.059003, 0.156978, 0.784019;
+  (Partial, 0_330_0_683) 0.399779, 0.599114, 0.001107;
+  (Effective, 0_330_0_683) 0.991228, 0.004386, 0.004386;
+  (Ineffective, More_than_0_683) 0.143219, 0.086185, 0.770596;
+  (Partial, More_than_0_683) 0.743169743, 0.251366251, 0.005464005;
+  (Effective, More_than_0_683) 0.95833396, 0.02083302, 0.02083302;
+}
+probability ( ReefHealthIndex ) {
+  table 0.404023, 0.389655, 0.137603, 0.052217, 0.016502;
+}
+probability ( ThermalStress | ReefHealthIndex ) {
+  (Less_than_0) 0.429892, 0.570108;
+  (0_0_118) 0.492099, 0.507901;
+  (0_118_0_330) 0.546241, 0.453759;
+  (0_330_0_683) 0.519654, 0.480346;
+  (More_than_0_683) 0.475124, 0.524876;
+}
+probability ( WatershedBasedPollutionThreat | CoastalDevelopmentThreat, ReefHealthIndex ) {
+  (Low, Less_than_0) 0.76212724, 0.16376484, 0.07410793;
+  (Medium, Less_than_0) 0.471919, 0.369148, 0.158933;
+  (High, Less_than_0) 0.3073997, 0.4046506, 0.2879497;
+  (Low, 0_0_118) 0.763653, 0.219425, 0.016922;
+  (Medium, 0_0_118) 0.449724, 0.377976, 0.172300;
+  (High, 0_0_118) 0.297002, 0.432306, 0.270692;
+  (Low, 0_118_0_330) 0.67136867, 0.25551226, 0.07311907;
+  (Medium, 0_118_0_330) 0.628663, 0.257784, 0.113553;
+  (High, 0_118_0_330) 0.336631, 0.297054, 0.366315;
+  (Low, 0_330_0_683) 0.76311576, 0.21832122, 0.01856302;
+  (Medium, 0_330_0_683) 0.5401675, 0.3243407, 0.1354919;
+  (High, 0_330_0_683) 0.285805, 0.456907, 0.257288;
+  (Low, More_than_0_683) 0.798450, 0.150609, 0.050941;
+  (Medium, More_than_0_683) 0.45381545, 0.45381545, 0.09236909;
+  (High, More_than_0_683) 0.112745, 0.112745, 0.774510;
+}

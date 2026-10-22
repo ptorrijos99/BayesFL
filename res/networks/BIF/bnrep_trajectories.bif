@@ -1,0 +1,81 @@
+network unknown {
+}
+variable AGE {
+  type discrete [ 3 ] { child, adult, elder };
+}
+variable ICU {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable OUT {
+  type discrete [ 2 ] { death, survived };
+}
+variable RSP {
+  type discrete [ 3 ] { intub, mask, no };
+}
+variable SEX {
+  type discrete [ 2 ] { male, female };
+}
+probability ( AGE | ICU, SEX ) {
+  (0, male) 0.0000000, 0.4061522, 0.5938478;
+  (1, male) 0.1982422, 0.5815430, 0.2202148;
+  (0, female) 0.0000000, 0.1150412, 0.8849588;
+  (1, female) 0.2005125, 0.4631646, 0.3363229;
+}
+probability ( ICU ) {
+  table 0.483, 0.517;
+}
+probability ( OUT | AGE, ICU, RSP, SEX ) {
+  (child, 0, intub, male) 0.5, 0.5;
+  (adult, 0, intub, male) 0.5, 0.5;
+  (elder, 0, intub, male) 0.5, 0.5;
+  (child, 1, intub, male) 0.0, 1.0;
+  (adult, 1, intub, male) 0.1548117, 0.8451883;
+  (elder, 1, intub, male) 0.2967033, 0.7032967;
+  (child, 0, mask, male) 0.5, 0.5;
+  (adult, 0, mask, male) 0.04520796, 0.95479204;
+  (elder, 0, mask, male) 0.2100122, 0.7899878;
+  (child, 1, mask, male) 0.02666667, 0.97333333;
+  (adult, 1, mask, male) 0.07155026, 0.92844974;
+  (elder, 1, mask, male) 0.2610619, 0.7389381;
+  (child, 0, no, male) 0.5, 0.5;
+  (adult, 0, no, male) 0.01327434, 0.98672566;
+  (elder, 0, no, male) 0.140625, 0.859375;
+  (child, 1, no, male) 0.01428571, 0.98571429;
+  (adult, 1, no, male) 0.04761905, 0.95238095;
+  (elder, 1, no, male) 0.3488372, 0.6511628;
+  (child, 0, intub, female) 0.5, 0.5;
+  (adult, 0, intub, female) 0.5, 0.5;
+  (elder, 0, intub, female) 0.5, 0.5;
+  (child, 1, intub, female) 0.03389831, 0.96610169;
+  (adult, 1, intub, female) 0.1085526, 0.8914474;
+  (elder, 1, intub, female) 0.1549296, 0.8450704;
+  (child, 0, mask, female) 0.5, 0.5;
+  (adult, 0, mask, female) 0.09433962, 0.90566038;
+  (elder, 0, mask, female) 0.05915721, 0.94084279;
+  (child, 1, mask, female) 0.02031603, 0.97968397;
+  (adult, 1, mask, female) 0.1096866, 0.8903134;
+  (elder, 1, mask, female) 0.0662768, 0.9337232;
+  (child, 0, no, female) 0.5, 0.5;
+  (adult, 0, no, female) 0.1022727, 0.8977273;
+  (elder, 0, no, female) 0.01042442, 0.98957558;
+  (child, 1, no, female) 0.008064516, 0.991935484;
+  (adult, 1, no, female) 0.2205882, 0.7794118;
+  (elder, 1, no, female) 0.01801802, 0.98198198;
+}
+probability ( RSP | AGE, ICU, SEX ) {
+  (child, 0, male) 0.3333333, 0.3333333, 0.3333333;
+  (adult, 0, male) 0.0000000, 0.7098845, 0.2901155;
+  (elder, 0, male) 0.0000000, 0.7190518, 0.2809482;
+  (child, 1, male) 0.08866995, 0.73891626, 0.17241379;
+  (adult, 1, male) 0.4013434, 0.4928631, 0.1057935;
+  (elder, 1, male) 0.40354767, 0.50110865, 0.09534368;
+  (child, 0, female) 0.3333333, 0.3333333, 0.3333333;
+  (adult, 0, female) 0.0000000, 0.4746269, 0.5253731;
+  (elder, 0, female) 0.0000000, 0.4788514, 0.5211486;
+  (child, 1, female) 0.0942492, 0.7076677, 0.1980831;
+  (adult, 1, female) 0.42047026, 0.48547718, 0.09405256;
+  (elder, 1, female) 0.4057143, 0.4885714, 0.1057143;
+}
+probability ( SEX ) {
+  table 0.3966, 0.6034;
+}

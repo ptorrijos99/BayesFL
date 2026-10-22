@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ADHD</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Few</OUTCOME>
+      <OUTCOME>Moderate</OUTCOME>
+      <OUTCOME>Risk</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AvoidsTasks</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlurtsOutAnswers</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CantOrganize</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CantPlayQuietly</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CantStaySeated</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CantWaitForTurn</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Carelessness</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DifficultySustainingAttention</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DoesntListen</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EasilyDistractible</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Forgetful</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IntrudesOthers</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LosesItems</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NoFollowThrough</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OnTheGo</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RunsExcessively</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SquirmsAndFidgets</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TalksExcessively</NAME>
+      <OUTCOME>Never</OUTCOME>
+      <OUTCOME>Sometimes</OUTCOME>
+      <OUTCOME>Often</OUTCOME>
+      <OUTCOME>Very_Often</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ADHD</FOR>
+      <TABLE>0.091 0.212 0.343 0.354 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AvoidsTasks</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.925 0.068 0.007 0.0 0.565 0.383 0.044 0.008 0.272 0.219 0.482 0.027 0.134 0.217 0.233 0.416 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlurtsOutAnswers</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.927 0.07 0.003 0.0 0.649 0.347 0.004 0.0 0.27172827 0.42057942 0.27172827 0.03596404 0.15 0.217 0.366 0.267 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CantOrganize</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.867867868 0.125125125 0.007007007 0.0 0.398 0.463 0.102 0.037 0.062 0.307 0.482 0.149 0.051 0.15 0.034 0.765 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CantPlayQuietly</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.985 0.015 0.0 0.0 0.828 0.164 0.008 0.0 0.438 0.359 0.202 0.001 0.3833834 0.3163163 0.1501502 0.1501502 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CantStaySeated</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.499 0.347 0.118 0.036 0.08 0.387 0.372 0.161 0.044 0.106 0.447 0.403 0.018 0.067 0.267 0.648 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CantWaitForTurn</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.967032967 0.026973027 0.002997003 0.002997003 0.635 0.317 0.048 0.0 0.298 0.412 0.237 0.053 0.1501502 0.2832833 0.3163163 0.2502503 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Carelessness</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.553446553 0.416583417 0.026973027 0.002997003 0.160839161 0.721278721 0.10989011 0.007992008 0.036 0.307 0.473 0.184 0.018 0.283 0.333 0.366 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DifficultySustainingAttention</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.66023166 0.22586873 0.08108108 0.03281853 0.204 0.405 0.285 0.106 0.1841842 0.3333333 0.2892893 0.1931932 0.117 0.217 0.233 0.433 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DoesntListen</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.77877878 0.17817818 0.04304304 0.0 0.35364635 0.47052947 0.13886114 0.03696304 0.12312312 0.36836837 0.46446446 0.04404404 0.034 0.15 0.267 0.549 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EasilyDistractible</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.93 0.065 0.005 0.0 0.536 0.398 0.066 0.0 0.1408591 0.4025974 0.3506494 0.1058941 0.034 0.25 0.217 0.499 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Forgetful</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.795 0.183 0.017 0.005 0.24475524 0.58341658 0.13486513 0.03696304 0.027 0.377 0.447 0.149 0.01798202 0.05094905 0.26673327 0.66433566 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IntrudesOthers</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.918 0.075 0.007 0.0 0.489 0.427 0.08 0.004 0.263 0.342 0.342 0.053 0.0339898 0.2169349 0.23323 0.5158452 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LosesItems</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.619 0.325 0.053 0.003 0.029 0.551 0.332 0.088 0.009009009 0.062062062 0.534534535 0.394394394 0.001 0.001 0.117 0.881 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NoFollowThrough</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.694 0.231 0.058 0.017 0.277 0.423 0.223 0.077 0.123 0.377 0.316 0.184 0.084 0.101 0.233 0.582 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OnTheGo</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.874 0.121 0.005 0.0 0.558 0.416 0.026 0.0 0.24575425 0.38561439 0.30669331 0.06193806 0.101 0.25 0.366 0.283 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RunsExcessively</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.816183816 0.177822178 0.002997003 0.002997003 0.296 0.58 0.124 0.0 0.044 0.246 0.526 0.184 0.084 0.117 0.333 0.466 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SquirmsAndFidgets</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.881118881 0.112887113 0.002997003 0.002997003 0.474 0.467 0.051 0.008 0.237 0.386 0.333 0.044 0.034 0.233 0.383 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TalksExcessively</FOR>
+      <GIVEN>ADHD</GIVEN>
+      <TABLE>0.529470529 0.40959041 0.055944056 0.004995005 0.124 0.54 0.303 0.033 0.03596404 0.28071928 0.4025974 0.28071928 0.01798202 0.1008991 0.51548452 0.36563437 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

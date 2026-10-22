@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BGFibers</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BGU</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CaseFind</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAU</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAfind</NAME>
+      <OUTCOME>DNA_X</OUTCOME>
+      <OUTCOME>DNA_U</OUTCOME>
+      <OUTCOME>DNA_X___U</OUTCOME>
+      <OUTCOME>No_DNA</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FiberFind</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FibersSweater</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ItemProposition</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prop</NAME>
+      <OUTCOME>H1</OUTCOME>
+      <OUTCOME>H2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRUstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRXstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRYtoSweater</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRaltactX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Xaltact</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>XstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BGFibers</FOR>
+      <TABLE>0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BGU</FOR>
+      <TABLE>0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CaseFind</FOR>
+      <GIVEN>DNAfind</GIVEN>
+      <GIVEN>FiberFind</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAU</FOR>
+      <GIVEN>BGU</GIVEN>
+      <GIVEN>TPRUstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAX</FOR>
+      <GIVEN>TPRaltactX</GIVEN>
+      <GIVEN>TPRXstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAfind</FOR>
+      <GIVEN>DNAU</GIVEN>
+      <GIVEN>DNAX</GIVEN>
+      <TABLE>0.0 0.0 0.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FiberFind</FOR>
+      <GIVEN>FibersSweater</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FibersSweater</FOR>
+      <GIVEN>BGFibers</GIVEN>
+      <GIVEN>TPRYtoSweater</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ItemProposition</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prop</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRUstrangledY</FOR>
+      <GIVEN>ItemProposition</GIVEN>
+      <GIVEN>UstrangledY</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRXstrangledY</FOR>
+      <GIVEN>ItemProposition</GIVEN>
+      <GIVEN>XstrangledY</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRYtoSweater</FOR>
+      <GIVEN>ItemProposition</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRaltactX</FOR>
+      <GIVEN>Xaltact</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UstrangledY</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Xaltact</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>XstrangledY</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

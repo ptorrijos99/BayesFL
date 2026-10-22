@@ -1,0 +1,58 @@
+network unknown {
+}
+variable ClayContent {
+  type discrete [ 5 ] { Very_Low, Low, Medium, High, Very_High };
+}
+variable CompactionRisk {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable CompactionVulnerability {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable InherentSusceptibility {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SoilWetness {
+  type discrete [ 3 ] { Dry, Moist, Wet };
+}
+variable TotalExposure {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( ClayContent ) {
+  table 0.2, 0.2, 0.2, 0.2, 0.2;
+}
+probability ( CompactionRisk | CompactionVulnerability, TotalExposure ) {
+  (Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.9, 0.1, 0.0;
+  (High, Low) 0.00, 0.75, 0.25;
+  (Low, Medium) 0.8, 0.2, 0.0;
+  (Medium, Medium) 0.0, 1.0, 0.0;
+  (High, Medium) 0.00, 0.25, 0.75;
+  (Low, High) 0.0, 1.0, 0.0;
+  (Medium, High) 0.00, 0.25, 0.75;
+  (High, High) 0.0, 0.0, 1.0;
+}
+probability ( CompactionVulnerability | InherentSusceptibility, SoilWetness ) {
+  (Low, Dry) 1.0, 0.0, 0.0;
+  (Medium, Dry) 0.75, 0.25, 0.00;
+  (High, Dry) 0.5, 0.5, 0.0;
+  (Low, Moist) 0.75, 0.25, 0.00;
+  (Medium, Moist) 0.1, 0.8, 0.1;
+  (High, Moist) 0.0, 0.5, 0.5;
+  (Low, Wet) 0.2, 0.6, 0.2;
+  (Medium, Wet) 0.1, 0.6, 0.3;
+  (High, Wet) 0.0, 0.0, 1.0;
+}
+probability ( InherentSusceptibility | ClayContent ) {
+  (Very_Low) 0.556, 0.222, 0.222;
+  (Low) 0.06672002, 0.26708012, 0.66619986;
+  (Medium) 0.05, 0.15, 0.80;
+  (High) 0.05, 0.15, 0.80;
+  (Very_High) 0.091, 0.182, 0.727;
+}
+probability ( SoilWetness ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( TotalExposure ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}

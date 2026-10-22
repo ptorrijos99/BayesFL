@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ASPT</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Arable</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Enhanced</OUTCOME>
+      <OUTCOME>Intermediate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BOD5</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Enhanced</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BufForest</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EPT</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fines</NAME>
+      <OUTCOME>Normal</OUTCOME>
+      <OUTCOME>Enhanced</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FlowQ</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Grazer</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HabitatQ</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Fair</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>N</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Intermediate</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Nitrate</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Enhanced</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OrgMatter</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SI</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Shredder</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Stagnant</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Straight</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Urban</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Enhanced</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WaterQ</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Fair</OUTCOME>
+      <OUTCOME>Good</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>oPO4</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ASPT</FOR>
+      <GIVEN>WaterQ</GIVEN>
+      <TABLE>0.8 0.19 0.01 0.6 0.3 0.1 0.2 0.3 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Arable</FOR>
+      <TABLE>0.1886 0.38068207 0.33350551 0.09721242 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BOD5</FOR>
+      <GIVEN>Urban</GIVEN>
+      <GIVEN>BufForest</GIVEN>
+      <TABLE>0.7 0.2 0.1 0.8 0.15 0.05 0.5 0.3 0.2 0.6 0.3 0.1 0.4 0.4 0.2 0.5 0.4 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BufForest</FOR>
+      <TABLE>0.3206724 0.6793276 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EPT</FOR>
+      <GIVEN>WaterQ</GIVEN>
+      <GIVEN>HabitatQ</GIVEN>
+      <GIVEN>FlowQ</GIVEN>
+      <TABLE>0.9 0.05 0.05 0.85 0.1 0.05 0.8 0.15 0.05 0.75 0.15 0.1 0.75 0.15 0.1 0.7 0.2 0.1 0.7 0.2 0.1 0.5 0.3 0.2 0.6 0.2 0.2 0.3 0.4 0.3 0.3 0.4 0.3 0.2 0.4 0.4 0.4 0.3 0.3 0.3 0.4 0.3 0.3 0.5 0.2 0.2 0.4 0.4 0.2 0.3 0.5 0.05 0.15 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fines</FOR>
+      <GIVEN>Arable</GIVEN>
+      <GIVEN>Urban</GIVEN>
+      <TABLE>0.95 0.05 0.9 0.1 0.7 0.3 0.75 0.25 0.6 0.4 0.6 0.4 0.65 0.35 0.5 0.5 0.4 0.6 0.5 0.5 0.3 0.7 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FlowQ</FOR>
+      <GIVEN>Stagnant</GIVEN>
+      <GIVEN>Straight</GIVEN>
+      <TABLE>0.15 0.85 0.3 0.7 0.9 0.1 0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Grazer</FOR>
+      <GIVEN>N</GIVEN>
+      <GIVEN>Fines</GIVEN>
+      <TABLE>0.08599192 0.53256454 0.38144354 0.2 0.4 0.4 0.03387978 0.47156797 0.49455225 0.1 0.6 0.3 0.01 0.33 0.66 0.1 0.4 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HabitatQ</FOR>
+      <GIVEN>Fines</GIVEN>
+      <GIVEN>OrgMatter</GIVEN>
+      <GIVEN>Stagnant</GIVEN>
+      <TABLE>0.1 0.2 0.7 0.6 0.25 0.15 0.05 0.05 0.9 0.5 0.3 0.2 0.2 0.3 0.5 0.75 0.2 0.05 0.15 0.5 0.35 0.6 0.3 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>N</FOR>
+      <GIVEN>Arable</GIVEN>
+      <TABLE>0.75 0.2 0.05 0.5 0.3 0.2 0.4 0.3 0.3 0.25 0.45 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Nitrate</FOR>
+      <GIVEN>Arable</GIVEN>
+      <TABLE>0.7464245 0.2535755 0.799152 0.200848 0.5221933 0.4778067 0.279423 0.720577 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OrgMatter</FOR>
+      <GIVEN>N</GIVEN>
+      <GIVEN>Nitrate</GIVEN>
+      <GIVEN>oPO4</GIVEN>
+      <TABLE>0.8061343 0.1938657 0.6239492 0.3760508 0.6189462 0.3810538 0.98366013 0.01633987 0.8050769 0.1949231 0.6292173 0.3707827 0.97759689 0.02240311 0.98990978 0.01009022 0.99671053 0.00328947 0.98291139 0.01708861 0.98411416 0.01588584 0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SI</FOR>
+      <GIVEN>WaterQ</GIVEN>
+      <TABLE>0.9 0.099 0.001 0.3 0.65 0.05 0.05 0.25 0.7 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Shredder</FOR>
+      <GIVEN>OrgMatter</GIVEN>
+      <TABLE>0.5322769 0.308637 0.1590861 0.4 0.4 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Stagnant</FOR>
+      <TABLE>0.8472552 0.1527448 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Straight</FOR>
+      <TABLE>0.6736338 0.3263662 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Urban</FOR>
+      <TABLE>0.55 0.35 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WaterQ</FOR>
+      <GIVEN>N</GIVEN>
+      <GIVEN>oPO4</GIVEN>
+      <GIVEN>BOD5</GIVEN>
+      <TABLE>0.05 0.05 0.9 0.1 0.3 0.6 0.6 0.3 0.1 0.05 0.6 0.35 0.35 0.5 0.15 0.4 0.5 0.1 0.15 0.25 0.6 0.2 0.5 0.3 0.7 0.15 0.15 0.4 0.4 0.2 0.4 0.55 0.05 0.6 0.35 0.05 0.05 0.05 0.9 0.25 0.6 0.15 0.75 0.2 0.05 0.5 0.4 0.1 0.6 0.3 0.1 0.8 0.19 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>oPO4</FOR>
+      <GIVEN>Urban</GIVEN>
+      <TABLE>0.7079216 0.2920784 0.6063048 0.3936952 0.505603 0.494397 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

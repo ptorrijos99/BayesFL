@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AccessToPublicTransportation</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AirNuisance</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CoastalView</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LuxuryAmenities</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NearbySupportingFunctions</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NeighborhoodFactors</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NeighborhoodSafetyScore</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NoiseNuisance</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PollutedSoils</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PrimaryRoads</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProximityToBeach</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProximityToCoast</NAME>
+      <OUTCOME>far</OUTCOME>
+      <OUTCOME>near</OUTCOME>
+      <OUTCOME>immediate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SiteFavorability</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SlopeLimited</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SmallRoads</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuitabilityForUrbanFabric</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TransportationAccess</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ViewExtent</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ViewQuality</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AccessToPublicTransportation</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AirNuisance</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CoastalView</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LuxuryAmenities</FOR>
+      <GIVEN>ProximityToBeach</GIVEN>
+      <GIVEN>ProximityToCoast</GIVEN>
+      <GIVEN>ViewQuality</GIVEN>
+      <TABLE>1.0 0.0 0.3 0.7 0.9 0.1 0.1 0.9 0.2 0.8 0.1 0.9 0.3 0.7 0.1 0.9 0.25 0.75 0.05 0.95 0.1 0.9 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NearbySupportingFunctions</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NeighborhoodFactors</FOR>
+      <GIVEN>NearbySupportingFunctions</GIVEN>
+      <GIVEN>NeighborhoodSafetyScore</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 0.3 0.7 0.8 0.2 0.5 0.5 0.2 0.8 0.6 0.4 0.4 0.6 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NeighborhoodSafetyScore</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NoiseNuisance</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PollutedSoils</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PrimaryRoads</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProximityToBeach</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProximityToCoast</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SiteFavorability</FOR>
+      <GIVEN>AirNuisance</GIVEN>
+      <GIVEN>NoiseNuisance</GIVEN>
+      <GIVEN>PollutedSoils</GIVEN>
+      <GIVEN>SlopeLimited</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 1.0 0.0 1.0 0.0 0.3 0.7 1.0 0.0 1.0 0.0 1.0 0.0 0.4 0.6 1.0 0.0 1.0 0.0 1.0 0.0 0.7 0.3 1.0 0.0 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SlopeLimited</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SmallRoads</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuitabilityForUrbanFabric</FOR>
+      <GIVEN>LuxuryAmenities</GIVEN>
+      <GIVEN>NeighborhoodFactors</GIVEN>
+      <GIVEN>SiteFavorability</GIVEN>
+      <GIVEN>TransportationAccess</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 0.9 0.1 0.4 0.6 1.0 0.0 0.55 0.45 0.6 0.4 0.05 0.95 0.95 0.05 0.35 0.65 0.15 0.85 0.1 0.9 0.9 0.1 0.25 0.75 0.05 0.95 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TransportationAccess</FOR>
+      <GIVEN>AccessToPublicTransportation</GIVEN>
+      <GIVEN>PrimaryRoads</GIVEN>
+      <GIVEN>SmallRoads</GIVEN>
+      <TABLE>1.0 0.0 0.1 0.9 0.05 0.95 0.05 0.95 1.0 0.0 0.03 0.97 0.05 0.95 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ViewExtent</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ViewQuality</FOR>
+      <GIVEN>CoastalView</GIVEN>
+      <GIVEN>ViewExtent</GIVEN>
+      <TABLE>1.0 0.0 0.6 0.4 0.4 0.6 0.3 0.7 0.2 0.8 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

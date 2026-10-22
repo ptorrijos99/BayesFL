@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ECS</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EI</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EPI</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GCI</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GDP</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IS</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OU</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PEC</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TP</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UR</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ECS</FOR>
+      <GIVEN>GCI</GIVEN>
+      <GIVEN>TP</GIVEN>
+      <TABLE>0.363 0.455 0.182 0.013 0.964 0.023 0.789 0.203 0.008 0.022 0.486 0.492 0.036 0.92 0.044 0.268 0.723 0.009 0.008 0.007 0.985 0.028 0.937 0.035 0.473 0.316 0.211 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EI</FOR>
+      <GIVEN>GDP</GIVEN>
+      <TABLE>0.014 0.015 0.971 0.019 0.968 0.013 0.966 0.018 0.016 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EPI</FOR>
+      <GIVEN>ECS</GIVEN>
+      <GIVEN>GDP</GIVEN>
+      <TABLE>0.249 0.388 0.363 0.013 0.976 0.011 0.957 0.025 0.018 0.334 0.353 0.313 0.734 0.26 0.006 0.007 0.798 0.195 0.28 0.004 0.716 0.303 0.374 0.323 0.391 0.345 0.264 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GCI</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GDP</FOR>
+      <GIVEN>TP</GIVEN>
+      <TABLE>0.845 0.141 0.014 0.014 0.842 0.144 0.017 0.02 0.963 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IS</FOR>
+      <GIVEN>ECS</GIVEN>
+      <TABLE>0.025 0.223 0.752 0.013 0.655 0.332 0.971 0.014 0.015 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OU</FOR>
+      <GIVEN>GCI</GIVEN>
+      <GIVEN>IS</GIVEN>
+      <TABLE>0.56 0.302 0.138 0.793 0.197 0.01 0.789 0.203 0.008 0.058 0.901 0.041 0.069 0.725 0.206 0.299 0.539 0.162 0.009 0.012 0.979 0.034 0.793 0.173 0.091 0.651 0.258 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PEC</FOR>
+      <GIVEN>GDP</GIVEN>
+      <TABLE>0.972 0.013 0.015 0.015 0.967 0.018 0.012 0.015 0.973 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TP</FOR>
+      <GIVEN>GCI</GIVEN>
+      <TABLE>0.294 0.146 0.56 0.014 0.698 0.288 0.832 0.153 0.015 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UR</FOR>
+      <GIVEN>GDP</GIVEN>
+      <TABLE>0.966 0.019 0.015 0.016 0.971 0.013 0.015 0.013 0.972 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

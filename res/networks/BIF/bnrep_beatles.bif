@@ -1,0 +1,47 @@
+network unknown {
+}
+variable ExactlyOneBeatlesIsDead {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable GeorgeIsAlive {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable JohnIsAlive {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable PaulIsAlive {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable RingoIsAlive {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( ExactlyOneBeatlesIsDead | GeorgeIsAlive, JohnIsAlive, PaulIsAlive, RingoIsAlive ) {
+  (TRUE, TRUE, TRUE, TRUE) 0.0, 1.0;
+  (FALSE, TRUE, TRUE, TRUE) 1.0, 0.0;
+  (TRUE, FALSE, TRUE, TRUE) 0.0, 1.0;
+  (FALSE, FALSE, TRUE, TRUE) 0.0, 1.0;
+  (TRUE, TRUE, FALSE, TRUE) 1.0, 0.0;
+  (FALSE, TRUE, FALSE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE, FALSE, TRUE) 0.0, 1.0;
+  (FALSE, FALSE, FALSE, TRUE) 0.0, 1.0;
+  (TRUE, TRUE, TRUE, FALSE) 1.0, 0.0;
+  (FALSE, TRUE, TRUE, FALSE) 0.0, 1.0;
+  (TRUE, FALSE, TRUE, FALSE) 1.0, 0.0;
+  (FALSE, FALSE, TRUE, FALSE) 0.0, 1.0;
+  (TRUE, TRUE, FALSE, FALSE) 0.0, 1.0;
+  (FALSE, TRUE, FALSE, FALSE) 0.0, 1.0;
+  (TRUE, FALSE, FALSE, FALSE) 0.0, 1.0;
+  (FALSE, FALSE, FALSE, FALSE) 0.0, 1.0;
+}
+probability ( GeorgeIsAlive ) {
+  table 0.5, 0.5;
+}
+probability ( JohnIsAlive ) {
+  table 0.5, 0.5;
+}
+probability ( PaulIsAlive ) {
+  table 0.5, 0.5;
+}
+probability ( RingoIsAlive ) {
+  table 0.5, 0.5;
+}

@@ -1,0 +1,44 @@
+network unknown {
+}
+variable Android {
+  type discrete [ 2 ] { Pass, Fail };
+}
+variable C {
+  type discrete [ 2 ] { Pass, Fail };
+}
+variable Database {
+  type discrete [ 2 ] { Pass, Fail };
+}
+variable Java {
+  type discrete [ 2 ] { Pass, Fail };
+}
+variable Math {
+  type discrete [ 2 ] { Pass, Fail };
+}
+variable Web {
+  type discrete [ 2 ] { Pass, Fail };
+}
+probability ( Android | Database ) {
+  (Pass) 0.98, 0.02;
+  (Fail) 0.01, 0.99;
+}
+probability ( C | Math ) {
+  (Pass) 0.85, 0.15;
+  (Fail) 0.55, 0.45;
+}
+probability ( Database ) {
+  table 0.75, 0.25;
+}
+probability ( Java | C ) {
+  (Pass) 0.9, 0.1;
+  (Fail) 0.6, 0.4;
+}
+probability ( Math ) {
+  table 0.8, 0.2;
+}
+probability ( Web | C, Database ) {
+  (Pass, Pass) 0.99, 0.01;
+  (Fail, Pass) 0.9, 0.1;
+  (Pass, Fail) 0.7, 0.3;
+  (Fail, Fail) 0.02, 0.98;
+}

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ASTTest</NAME>
+      <OUTCOME>Initiated</OUTCOME>
+      <OUTCOME>Not_initiated</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ClinicianExperience</NAME>
+      <OUTCOME>Experienced</OUTCOME>
+      <OUTCOME>Unexperienced</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EpidemiologicalFactors</NAME>
+      <OUTCOME>High_Risk_Group</OUTCOME>
+      <OUTCOME>Low_Risk_Group</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InitialTreatmentFailure</NAME>
+      <OUTCOME>Treatment_success</OUTCOME>
+      <OUTCOME>Treatment_failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MedicationAdherence</NAME>
+      <OUTCOME>Proper_Adherence</OUTCOME>
+      <OUTCOME>Improper_Adherence</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NumberPartners</NAME>
+      <OUTCOME>One</OUTCOME>
+      <OUTCOME>Two_to_five</OUTCOME>
+      <OUTCOME>More_than_six</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PastDiagnoses</NAME>
+      <OUTCOME>One</OUTCOME>
+      <OUTCOME>Two_to_four</OUTCOME>
+      <OUTCOME>Five_to_nine</OUTCOME>
+      <OUTCOME>More_than_ten</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PersistingSymptoms</NAME>
+      <OUTCOME>Symptoms_persist</OUTCOME>
+      <OUTCOME>Symptoms_resolve</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SexualOrientation</NAME>
+      <OUTCOME>Heterosexual</OUTCOME>
+      <OUTCOME>Homosexual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnpromptedTest</NAME>
+      <OUTCOME>Initiated</OUTCOME>
+      <OUTCOME>Not_initiated</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ASTTest</FOR>
+      <GIVEN>InitialTreatmentFailure</GIVEN>
+      <GIVEN>UnpromptedTest</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 0.99 0.01 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ClinicianExperience</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EpidemiologicalFactors</FOR>
+      <GIVEN>NumberPartners</GIVEN>
+      <GIVEN>PastDiagnoses</GIVEN>
+      <GIVEN>SexualOrientation</GIVEN>
+      <TABLE>0.05 0.95 0.1 0.9 0.3 0.7 0.4 0.6 0.65 0.35 0.75 0.25 0.75 0.25 0.8 0.2 0.2 0.8 0.25 0.75 0.45 0.55 0.55 0.45 0.8 0.2 0.85 0.15 0.9 0.1 0.9 0.1 0.35 0.65 0.4 0.6 0.6 0.4 0.7 0.3 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InitialTreatmentFailure</FOR>
+      <GIVEN>ClinicianExperience</GIVEN>
+      <GIVEN>EpidemiologicalFactors</GIVEN>
+      <GIVEN>PersistingSymptoms</GIVEN>
+      <TABLE>0.15 0.85 0.9 0.1 0.3 0.7 0.95 0.05 0.05 0.95 0.9 0.1 0.15 0.85 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MedicationAdherence</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NumberPartners</FOR>
+      <TABLE>0.366 0.495 0.139 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PastDiagnoses</FOR>
+      <TABLE>0.72781655 0.245264207 0.023529412 0.003389831 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PersistingSymptoms</FOR>
+      <GIVEN>MedicationAdherence</GIVEN>
+      <TABLE>0.16 0.84 0.84 0.16 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SexualOrientation</FOR>
+      <TABLE>0.292 0.708 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnpromptedTest</FOR>
+      <TABLE>0.01 0.99 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

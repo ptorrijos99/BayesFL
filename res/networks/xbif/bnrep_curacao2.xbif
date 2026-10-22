@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CoastalView</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DistanceToTourismCore</NAME>
+      <OUTCOME>distant</OUTCOME>
+      <OUTCOME>nearby</OUTCOME>
+      <OUTCOME>inside</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ImmediateBeachAccess</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NaturalAmenities</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NeighborhoodSafetyScore</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProximityToPOIs</NAME>
+      <OUTCOME>far</OUTCOME>
+      <OUTCOME>near</OUTCOME>
+      <OUTCOME>immediate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ProximityToSouthernCoast</NAME>
+      <OUTCOME>far</OUTCOME>
+      <OUTCOME>near</OUTCOME>
+      <OUTCOME>immediate</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RoadsWithin1KM</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SiteInfrastructure</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuitabilityForTourism</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UtilityAccess</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ViewExtent</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ViewQuality</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CoastalView</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DistanceToTourismCore</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ImmediateBeachAccess</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NaturalAmenities</FOR>
+      <GIVEN>ImmediateBeachAccess</GIVEN>
+      <GIVEN>ProximityToPOIs</GIVEN>
+      <GIVEN>ProximityToSouthernCoast</GIVEN>
+      <TABLE>1.0 0.0 0.7 0.3 0.5 0.5 0.8 0.2 0.6 0.4 0.3 0.7 0.5 0.5 0.3 0.7 0.2 0.8 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NeighborhoodSafetyScore</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProximityToPOIs</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ProximityToSouthernCoast</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RoadsWithin1KM</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SiteInfrastructure</FOR>
+      <GIVEN>RoadsWithin1KM</GIVEN>
+      <GIVEN>UtilityAccess</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuitabilityForTourism</FOR>
+      <GIVEN>DistanceToTourismCore</GIVEN>
+      <GIVEN>NaturalAmenities</GIVEN>
+      <GIVEN>NeighborhoodSafetyScore</GIVEN>
+      <GIVEN>SiteInfrastructure</GIVEN>
+      <GIVEN>ViewQuality</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.45 0.55 1.0 0.0 0.9 0.1 0.9 0.1 0.4 0.6 1.0 0.0 0.85 0.15 0.85 0.15 0.35 0.65 0.7 0.3 0.45 0.55 0.4 0.6 0.225 0.775 0.65 0.35 0.4 0.6 0.35 0.65 0.175 0.825 0.625 0.375 0.375 0.625 0.325 0.675 0.15 0.85 1.0 0.0 0.8 0.2 0.9 0.1 0.45 0.55 1.0 0.0 0.7 0.3 0.8 0.2 0.35 0.65 1.0 0.0 0.65 0.35 0.75 0.25 0.3 0.7 0.5 0.5 0.4 0.6 0.35 0.65 0.25 0.75 0.4 0.6 0.3 0.7 0.25 0.75 0.2 0.8 0.35 0.65 0.25 0.75 0.2 0.8 0.25 0.75 0.15 0.85 1.0 0.0 0.6 0.4 0.35 0.65 0.1 0.9 1.0 0.0 0.5 0.5 0.25 0.75 1.0 0.0 0.7 0.3 0.45 0.55 0.4 0.6 0.3 0.7 0.25 0.75 0.15 0.85 0.2 0.8 0.2 0.8 0.15 0.85 0.05 0.95 0.1 0.9 0.35 0.65 0.25 0.75 0.3 0.7 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UtilityAccess</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ViewExtent</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ViewQuality</FOR>
+      <GIVEN>CoastalView</GIVEN>
+      <GIVEN>ViewExtent</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 0.4 0.6 0.6 0.4 0.2 0.8 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

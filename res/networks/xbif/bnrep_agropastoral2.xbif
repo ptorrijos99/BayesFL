@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Community_Size</NAME>
+      <OUTCOME>_200</OUTCOME>
+      <OUTCOME>__200</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Distance_Coast</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Elevation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Landscape</NAME>
+      <OUTCOME>Aquatic</OUTCOME>
+      <OUTCOME>Tundra</OUTCOME>
+      <OUTCOME>Desert</OUTCOME>
+      <OUTCOME>Forest</OUTCOME>
+      <OUTCOME>Grassland</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Slope</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Annual_Temperature</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>Elevation</GIVEN>
+      <TABLE>0.075 0.05 0.875 0.0 0.2162162 0.7837838 0.0952381 0.6190476 0.2857143 0.0 0.137931 0.862069 0.0 0.2916667 0.7083333 0.04545455 0.81818182 0.13636364 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Precipitation</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.04166667 0.0 0.95833333 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.02564103 0.0 0.97435897 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Productivity</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.19230769 0.03846154 0.76923077 0.0 0.0 1.0 0.0 0.0 1.0 0.07142857 0.0 0.92857143 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Temperature</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <TABLE>0.3979592 0.2346939 0.3673469 0.28 0.32 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Community_Size</FOR>
+      <TABLE>0.566474 0.433526 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Distance_Coast</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>CV_Annual_Productivity</GIVEN>
+      <TABLE>0.0 0.0 1.0 1.0 0.0 0.0 0.13043478 0.06521739 0.80434783 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.16216216 0.08108108 0.75675676 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Elevation</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <TABLE>0.4081633 0.377551 0.2142857 0.3866667 0.32 0.2933333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Landscape</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.04166667 0.08333333 0.375 0.04166667 0.45833333 0.0 0.0 0.0 0.72 0.28 0.0 0.0 0.0 0.7755102 0.2244898 0.0 0.0 0.1052632 0.2631579 0.6315789 0.05882353 0.0 0.0 0.29411765 0.64705882 0.02564103 0.0 0.02564103 0.76923077 0.17948718 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Precipitation</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <TABLE>0.12820513 0.05128205 0.82051282 0.1304348 0.3043478 0.5652174 0.4444444 0.4444444 0.1111111 0.0952381 0.0952381 0.8095238 0.125 0.25 0.625 0.4666667 0.3 0.2333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Productivity</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.8333333 0.1666667 0.0 0.16 0.48 0.36 0.04081633 0.6122449 0.34693878 0.6315789 0.3684211 0.0 0.1176471 0.7058824 0.1764706 0.0 0.6666667 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Slope</FOR>
+      <GIVEN>Community_Size</GIVEN>
+      <TABLE>0.3163265 0.4387755 0.244898 0.36 0.28 0.36 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

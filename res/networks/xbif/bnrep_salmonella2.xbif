@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AMP</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CAZ</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CHL</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CIP</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CTX</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GEN</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NAL</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SMX</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TET</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TMP</NAME>
+      <OUTCOME>r</OUTCOME>
+      <OUTCOME>s</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AMP</FOR>
+      <GIVEN>SMX</GIVEN>
+      <TABLE>0.805 0.195 0.087 0.913 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CAZ</FOR>
+      <GIVEN>CTX</GIVEN>
+      <TABLE>0.273 0.727 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CHL</FOR>
+      <GIVEN>SMX</GIVEN>
+      <TABLE>0.31 0.69 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CIP</FOR>
+      <GIVEN>GEN</GIVEN>
+      <TABLE>0.452 0.548 0.129 0.871 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CTX</FOR>
+      <GIVEN>AMP</GIVEN>
+      <TABLE>0.03 0.97 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GEN</FOR>
+      <GIVEN>TMP</GIVEN>
+      <TABLE>0.148 0.852 0.03 0.97 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NAL</FOR>
+      <GIVEN>CIP</GIVEN>
+      <TABLE>0.693 0.307 0.002 0.998 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SMX</FOR>
+      <TABLE>0.628 0.372 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TET</FOR>
+      <GIVEN>AMP</GIVEN>
+      <GIVEN>SMX</GIVEN>
+      <TABLE>0.95 0.05 0.864 0.136 0.892 0.108 0.487 0.513 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TMP</FOR>
+      <GIVEN>SMX</GIVEN>
+      <TABLE>0.413 0.587 0.028 0.972 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

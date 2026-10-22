@@ -1,0 +1,177 @@
+network unknown {
+}
+variable AccessToPublicTransportation {
+  type discrete [ 2 ] { no, yes };
+}
+variable AirNuisance {
+  type discrete [ 2 ] { no, yes };
+}
+variable CoastalView {
+  type discrete [ 2 ] { no, yes };
+}
+variable LuxuryAmenities {
+  type discrete [ 2 ] { low, high };
+}
+variable NearbySupportingFunctions {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable NeighborhoodFactors {
+  type discrete [ 2 ] { low, high };
+}
+variable NeighborhoodSafetyScore {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable NoiseNuisance {
+  type discrete [ 2 ] { no, yes };
+}
+variable PollutedSoils {
+  type discrete [ 2 ] { no, yes };
+}
+variable PrimaryRoads {
+  type discrete [ 2 ] { no, yes };
+}
+variable ProximityToBeach {
+  type discrete [ 2 ] { no, yes };
+}
+variable ProximityToCoast {
+  type discrete [ 3 ] { far, near, immediate };
+}
+variable SiteFavorability {
+  type discrete [ 2 ] { low, high };
+}
+variable SlopeLimited {
+  type discrete [ 2 ] { no, yes };
+}
+variable SmallRoads {
+  type discrete [ 2 ] { no, yes };
+}
+variable SuitabilityForUrbanFabric {
+  type discrete [ 2 ] { no, yes };
+}
+variable TransportationAccess {
+  type discrete [ 2 ] { low, high };
+}
+variable ViewExtent {
+  type discrete [ 3 ] { low, medium, high };
+}
+variable ViewQuality {
+  type discrete [ 2 ] { low, high };
+}
+probability ( AccessToPublicTransportation ) {
+  table 0.5, 0.5;
+}
+probability ( AirNuisance ) {
+  table 0.5, 0.5;
+}
+probability ( CoastalView ) {
+  table 0.5, 0.5;
+}
+probability ( LuxuryAmenities | ProximityToBeach, ProximityToCoast, ViewQuality ) {
+  (no, far, low) 1.0, 0.0;
+  (yes, far, low) 0.3, 0.7;
+  (no, near, low) 0.9, 0.1;
+  (yes, near, low) 0.25, 0.75;
+  (no, immediate, low) 0.2, 0.8;
+  (yes, immediate, low) 0.1, 0.9;
+  (no, far, high) 0.3, 0.7;
+  (yes, far, high) 0.1, 0.9;
+  (no, near, high) 0.1, 0.9;
+  (yes, near, high) 0.05, 0.95;
+  (no, immediate, high) 0.1, 0.9;
+  (yes, immediate, high) 0.0, 1.0;
+}
+probability ( NearbySupportingFunctions ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( NeighborhoodFactors | NearbySupportingFunctions, NeighborhoodSafetyScore ) {
+  (low, low) 1.0, 0.0;
+  (medium, low) 0.8, 0.2;
+  (high, low) 0.6, 0.4;
+  (low, medium) 0.9, 0.1;
+  (medium, medium) 0.5, 0.5;
+  (high, medium) 0.4, 0.6;
+  (low, high) 0.3, 0.7;
+  (medium, high) 0.2, 0.8;
+  (high, high) 0.0, 1.0;
+}
+probability ( NeighborhoodSafetyScore ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( NoiseNuisance ) {
+  table 0.5, 0.5;
+}
+probability ( PollutedSoils ) {
+  table 0.5, 0.5;
+}
+probability ( PrimaryRoads ) {
+  table 0.5, 0.5;
+}
+probability ( ProximityToBeach ) {
+  table 0.5, 0.5;
+}
+probability ( ProximityToCoast ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( SiteFavorability | AirNuisance, NoiseNuisance, PollutedSoils, SlopeLimited ) {
+  (no, no, no, no) 0.0, 1.0;
+  (yes, no, no, no) 0.4, 0.6;
+  (no, yes, no, no) 0.3, 0.7;
+  (yes, yes, no, no) 0.7, 0.3;
+  (no, no, yes, no) 1.0, 0.0;
+  (yes, no, yes, no) 1.0, 0.0;
+  (no, yes, yes, no) 1.0, 0.0;
+  (yes, yes, yes, no) 1.0, 0.0;
+  (no, no, no, yes) 1.0, 0.0;
+  (yes, no, no, yes) 1.0, 0.0;
+  (no, yes, no, yes) 1.0, 0.0;
+  (yes, yes, no, yes) 1.0, 0.0;
+  (no, no, yes, yes) 1.0, 0.0;
+  (yes, no, yes, yes) 1.0, 0.0;
+  (no, yes, yes, yes) 1.0, 0.0;
+  (yes, yes, yes, yes) 1.0, 0.0;
+}
+probability ( SlopeLimited ) {
+  table 0.5, 0.5;
+}
+probability ( SmallRoads ) {
+  table 0.5, 0.5;
+}
+probability ( SuitabilityForUrbanFabric | LuxuryAmenities, NeighborhoodFactors, SiteFavorability, TransportationAccess ) {
+  (low, low, low, low) 1.0, 0.0;
+  (high, low, low, low) 0.95, 0.05;
+  (low, high, low, low) 1.0, 0.0;
+  (high, high, low, low) 0.9, 0.1;
+  (low, low, high, low) 0.9, 0.1;
+  (high, low, high, low) 0.15, 0.85;
+  (low, high, high, low) 0.6, 0.4;
+  (high, high, high, low) 0.05, 0.95;
+  (low, low, low, high) 0.9, 0.1;
+  (high, low, low, high) 0.35, 0.65;
+  (low, high, low, high) 0.55, 0.45;
+  (high, high, low, high) 0.25, 0.75;
+  (low, low, high, high) 0.4, 0.6;
+  (high, low, high, high) 0.1, 0.9;
+  (low, high, high, high) 0.05, 0.95;
+  (high, high, high, high) 0.0, 1.0;
+}
+probability ( TransportationAccess | AccessToPublicTransportation, PrimaryRoads, SmallRoads ) {
+  (no, no, no) 1.0, 0.0;
+  (yes, no, no) 1.0, 0.0;
+  (no, yes, no) 0.05, 0.95;
+  (yes, yes, no) 0.05, 0.95;
+  (no, no, yes) 0.1, 0.9;
+  (yes, no, yes) 0.03, 0.97;
+  (no, yes, yes) 0.05, 0.95;
+  (yes, yes, yes) 0.0, 1.0;
+}
+probability ( ViewExtent ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( ViewQuality | CoastalView, ViewExtent ) {
+  (no, low) 1.0, 0.0;
+  (yes, low) 0.3, 0.7;
+  (no, medium) 0.6, 0.4;
+  (yes, medium) 0.2, 0.8;
+  (no, high) 0.4, 0.6;
+  (yes, high) 0.0, 1.0;
+}

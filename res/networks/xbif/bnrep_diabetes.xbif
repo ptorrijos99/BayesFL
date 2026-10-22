@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AGE</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DIAB</NAME>
+      <OUTCOME>neg</OUTCOME>
+      <OUTCOME>pos</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GLUC</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>INS</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MASS</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PED</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PREG</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PRES</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TRIC</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AGE</FOR>
+      <TABLE>0.4821429 0.5178571 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DIAB</FOR>
+      <GIVEN>AGE</GIVEN>
+      <GIVEN>GLUC</GIVEN>
+      <TABLE>0.91803279 0.08196721 0.7014925 0.2985075 0.7826087 0.2173913 0.3656716 0.6343284 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GLUC</FOR>
+      <GIVEN>MASS</GIVEN>
+      <TABLE>0.5463918 0.4536082 0.4292929 0.5707071 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>INS</FOR>
+      <GIVEN>TRIC</GIVEN>
+      <TABLE>0.6117021 0.3882979 0.3970588 0.6029412 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MASS</FOR>
+      <TABLE>0.494898 0.505102 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PED</FOR>
+      <GIVEN>INS</GIVEN>
+      <TABLE>0.5510204 0.4489796 0.4489796 0.5510204 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PREG</FOR>
+      <GIVEN>AGE</GIVEN>
+      <TABLE>0.5714286 0.4285714 0.2019704 0.7980296 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PRES</FOR>
+      <GIVEN>AGE</GIVEN>
+      <TABLE>0.6084656 0.3915344 0.270936 0.729064 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TRIC</FOR>
+      <GIVEN>MASS</GIVEN>
+      <TABLE>0.7164948 0.2835052 0.2474747 0.7525253 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

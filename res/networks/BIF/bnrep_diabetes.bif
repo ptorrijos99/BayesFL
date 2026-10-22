@@ -1,0 +1,65 @@
+network unknown {
+}
+variable AGE {
+  type discrete [ 2 ] { low, high };
+}
+variable DIAB {
+  type discrete [ 2 ] { neg, pos };
+}
+variable GLUC {
+  type discrete [ 2 ] { low, high };
+}
+variable INS {
+  type discrete [ 2 ] { low, high };
+}
+variable MASS {
+  type discrete [ 2 ] { low, high };
+}
+variable PED {
+  type discrete [ 2 ] { low, high };
+}
+variable PREG {
+  type discrete [ 2 ] { low, high };
+}
+variable PRES {
+  type discrete [ 2 ] { low, high };
+}
+variable TRIC {
+  type discrete [ 2 ] { low, high };
+}
+probability ( AGE ) {
+  table 0.4821429, 0.5178571;
+}
+probability ( DIAB | AGE, GLUC ) {
+  (low, low) 0.91803279, 0.08196721;
+  (high, low) 0.7826087, 0.2173913;
+  (low, high) 0.7014925, 0.2985075;
+  (high, high) 0.3656716, 0.6343284;
+}
+probability ( GLUC | MASS ) {
+  (low) 0.5463918, 0.4536082;
+  (high) 0.4292929, 0.5707071;
+}
+probability ( INS | TRIC ) {
+  (low) 0.6117021, 0.3882979;
+  (high) 0.3970588, 0.6029412;
+}
+probability ( MASS ) {
+  table 0.494898, 0.505102;
+}
+probability ( PED | INS ) {
+  (low) 0.5510204, 0.4489796;
+  (high) 0.4489796, 0.5510204;
+}
+probability ( PREG | AGE ) {
+  (low) 0.5714286, 0.4285714;
+  (high) 0.2019704, 0.7980296;
+}
+probability ( PRES | AGE ) {
+  (low) 0.6084656, 0.3915344;
+  (high) 0.270936, 0.729064;
+}
+probability ( TRIC | MASS ) {
+  (low) 0.7164948, 0.2835052;
+  (high) 0.2474747, 0.7525253;
+}

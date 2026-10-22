@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AverageDistance</NAME>
+      <OUTCOME>0_300</OUTCOME>
+      <OUTCOME>300_600</OUTCOME>
+      <OUTCOME>_600</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueConcrete</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloorArea</NAME>
+      <OUTCOME>0_150</OUTCOME>
+      <OUTCOME>150_220</OUTCOME>
+      <OUTCOME>220_360</OUTCOME>
+      <OUTCOME>360_1500</OUTCOME>
+      <OUTCOME>_1500</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AverageDistance</FOR>
+      <GIVEN>BlueConcrete</GIVEN>
+      <TABLE>0.1 0.04 0.86 0.39 0.53 0.08 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlueConcrete</FOR>
+      <TABLE>0.46 0.54 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloorArea</FOR>
+      <GIVEN>AverageDistance</GIVEN>
+      <TABLE>0.05 0.04 0.19 0.31 0.41 0.25 0.06 0.19 0.26 0.24 0.26 0.39 0.21 0.09 0.05 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

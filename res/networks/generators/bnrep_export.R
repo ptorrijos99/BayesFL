@@ -17,6 +17,8 @@
 #
 # Usage (from the repository root):
 #   Rscript res/networks/generators/bnrep_export.R [minNodes] [nClients] [nRows] [onlyNet]
+# The environment variable BNREP_MAX_NODES caps the size of the selected
+# networks (e.g. minNodes 0 and BNREP_MAX_NODES=20 for the small ones).
 
 args <- commandArgs(trailingOnly = TRUE)
 minNodes <- if (length(args) > 0) as.integer(args[1]) else 20
@@ -29,7 +31,8 @@ suppressMessages(library(bnlearn))
 data(bnRep_summary)
 
 s <- bnRep_summary
-sel <- s[s$Type == "Discrete" & s$Nodes > minNodes, ]
+maxNodes <- as.integer(Sys.getenv("BNREP_MAX_NODES", "1000000"))
+sel <- s[s$Type == "Discrete" & s$Nodes > minNodes & s$Nodes <= maxNodes, ]
 if (!is.na(onlyNet)) sel <- sel[sel$Name == onlyNet, ]
 cat("exporting", nrow(sel), "networks\n")
 
@@ -42,10 +45,53 @@ dir.create(bifDir, recursive = TRUE, showWarnings = FALSE)
 # are therefore sanitised BEFORE anything is written, by rebuilding the bn.fit
 # from its own CPTs -- that way the .bif and the sampled CSVs carry identical
 # category names, which the Java gold-standard loader requires.
+# volleyball names a parent "NEUROTICISM" in its children's CPTs while the node
+# is "neuroticism", and leaves its root CPTs without dimension names. When the
+# CPT dimension names do not match the nodes, they are matched to the nodes
+# ignoring case and the DAG is rebuilt from the CPTs. The same path renames
+# nodes whose names hold spaces or symbols ("sampling place" in dioxins), which
+# BIF parsers reject, replacing them by "_".
+cptsOf <- function(bn) {
+  nds <- nodes(bn)
+  clean <- gsub("[^A-Za-z0-9_.-]", "_", nds)
+  probs <- lapply(nds, function(nd) bn[[nd]]$prob)
+  names(probs) <- nds
+  ok <- identical(clean, nds) && all(vapply(nds, function(nd) {
+    nm <- names(dimnames(probs[[nd]]))
+    !is.null(nm) && nm[1] == nd && all(nm[-1] %in% nds)
+  }, logical(1)))
+  if (ok) return(list(dag = bn.net(bn), probs = probs))
+  stopifnot(!anyDuplicated(tolower(clean)))
+  cat("   CPT dimension or node names repaired\n")
+  d <- empty.graph(clean)
+  out <- list()
+  for (k in seq_along(nds)) {
+    p <- probs[[nds[k]]]
+    nm <- names(dimnames(p))
+    pa <- if (length(dim(p)) > 1) clean[match(tolower(nm[-1]), tolower(nds))] else character(0)
+    if (anyNA(pa)) stop("unmatched parent of ", nds[k])
+    names(dimnames(p)) <- c(clean[k], pa)
+    for (q in pa) d <- set.arc(d, q, clean[k])
+    out[[clean[k]]] <- p
+  }
+  list(dag = d, probs = out)
+}
+
 sanitiseLevels <- function(bn) {
-  d <- bn.net(bn)
-  cpts <- lapply(nodes(bn), function(nd) {
-    p <- bn[[nd]]$prob
+  cp <- cptsOf(bn)
+  d <- cp$dag
+  cpts <- lapply(nodes(d), function(nd) {
+    p <- cp$probs[[nd]]
+    # A few networks were fitted by maximum likelihood and leave NA in the
+    # columns of parent configurations absent from their data (poultry,
+    # student1). Those columns become uniform, as in bn.fit's own default.
+    if (anyNA(p)) {
+      k <- dim(p)[1]
+      cols <- matrix(p, nrow = k)
+      cols[, colSums(is.na(cols)) > 0] <- 1 / k
+      p[] <- cols
+      cat("  ", nd, ": NA columns set to uniform\n")
+    }
     dn <- dimnames(p)
     nm <- names(dn)
     # Replacing punctuation can collapse two distinct levels onto the same name
@@ -57,7 +103,7 @@ sanitiseLevels <- function(bn) {
     names(dimnames(p)) <- nm
     p
   })
-  names(cpts) <- nodes(bn)
+  names(cpts) <- nodes(d)
   custom.fit(d, cpts)
 }
 
@@ -102,7 +148,7 @@ for (k in seq_len(nrow(sel))) {
   if (ok) {
     manifest <- rbind(manifest, data.frame(
       name = out, nodes = sel$Nodes[k], arcs = sel$Arcs[k],
-      area = sel$Area[k], structure = sel$Structure[k]))
+      area = as.character(sel$Area[k]), structure = as.character(sel$Structure[k])))
     cat(sprintf("%3d/%3d %-28s %4d nodes %4d arcs\n", k, nrow(sel), out,
                 sel$Nodes[k], sel$Arcs[k]))
   }

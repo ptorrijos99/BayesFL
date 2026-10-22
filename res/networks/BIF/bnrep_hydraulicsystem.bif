@@ -1,0 +1,33 @@
+network unknown {
+}
+variable BlueHydraulicSystem {
+  type discrete [ 2 ] { True, False };
+}
+variable GreenHydraulicSystem {
+  type discrete [ 2 ] { True, False };
+}
+variable HydraulicSystem {
+  type discrete [ 2 ] { True, False };
+}
+variable YellowHydraulicSystem {
+  type discrete [ 2 ] { True, False };
+}
+probability ( BlueHydraulicSystem ) {
+  table 0.9829, 0.0171;
+}
+probability ( GreenHydraulicSystem ) {
+  table 0.9764, 0.0236;
+}
+probability ( HydraulicSystem | BlueHydraulicSystem, GreenHydraulicSystem, YellowHydraulicSystem ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 0.7575758, 0.2424242;
+  (True, False, True) 1.0, 0.0;
+  (False, False, True) 0.7575758, 0.2424242;
+  (True, True, False) 1.0, 0.0;
+  (False, True, False) 0.7575758, 0.2424242;
+  (True, False, False) 0.2424242, 0.7575758;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( YellowHydraulicSystem ) {
+  table 0.9759, 0.0241;
+}

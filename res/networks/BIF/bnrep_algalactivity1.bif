@@ -1,0 +1,64 @@
+network unknown {
+}
+variable C {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Chl_a {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DO {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable N {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable P {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable pH {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Te {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Tu {
+  type discrete [ 2 ] { 0, 1 };
+}
+probability ( C | pH ) {
+  (0) 0.61, 0.39;
+  (1) 0.39, 0.61;
+}
+probability ( Chl_a ) {
+  table 0.5, 0.5;
+}
+probability ( DO | Chl_a, Te ) {
+  (0, 0) 0.5, 0.5;
+  (1, 0) 0.05, 0.95;
+  (0, 1) 0.57, 0.43;
+  (1, 1) 0.63, 0.37;
+}
+probability ( N | pH ) {
+  (0) 0.35, 0.65;
+  (1) 0.73, 0.27;
+}
+probability ( P | N, Tu ) {
+  (0, 0) 0.83, 0.17;
+  (1, 0) 0.47, 0.53;
+  (0, 1) 0.7, 0.3;
+  (1, 1) 0.18, 0.82;
+}
+probability ( pH | DO, Te ) {
+  (0, 0) 0.97, 0.03;
+  (1, 0) 0.55, 0.45;
+  (0, 1) 0.46, 0.54;
+  (1, 1) 0.0, 1.0;
+}
+probability ( Te ) {
+  table 0.5, 0.5;
+}
+probability ( Tu | C, Te ) {
+  (0, 0) 0.22, 0.78;
+  (1, 0) 0.61, 0.39;
+  (0, 1) 0.44, 0.56;
+  (1, 1) 0.74, 0.26;
+}

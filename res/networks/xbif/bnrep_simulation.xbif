@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>JointFailure</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PressureRegulatorLeakage</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SealFailure</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ValveActivation</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>JointFailure</FOR>
+      <TABLE>0.00019 0.99981 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PressureRegulatorLeakage</FOR>
+      <GIVEN>JointFailure</GIVEN>
+      <GIVEN>SealFailure</GIVEN>
+      <GIVEN>ValveActivation</GIVEN>
+      <TABLE>0.186 0.814 0.186 0.814 0.183 0.817 0.183 0.817 0.00434 0.99566 0.00433 0.99567 1.47e-05 0.9999853 1e-06 0.999999 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SealFailure</FOR>
+      <TABLE>0.00422 0.99578 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ValveActivation</FOR>
+      <TABLE>0.00442 0.99558 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

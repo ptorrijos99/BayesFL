@@ -1,0 +1,43 @@
+network unknown {
+}
+variable AverageDistance {
+  type discrete [ 3 ] { 0_300, 300_600, _600 };
+}
+variable BlueConcrete {
+  type discrete [ 2 ] { False, True };
+}
+variable ConstructionYear {
+  type discrete [ 5 ] { 1930_1955, 1955_1960, 1960_1968, 1968_1975, 1975_1980 };
+}
+variable FloorArea {
+  type discrete [ 5 ] { 0_150, 150_220, 220_360, 360_1500, _1500 };
+}
+variable NumberOfStairwells {
+  type discrete [ 5 ] { 0, 1, 2, 3, 4 };
+}
+probability ( AverageDistance | BlueConcrete ) {
+  (False) 0.50, 0.25, 0.25;
+  (True) 0.72, 0.23, 0.05;
+}
+probability ( BlueConcrete ) {
+  table 0.49, 0.51;
+}
+probability ( ConstructionYear | FloorArea ) {
+  (0_150) 0.03, 0.42, 0.03, 0.26, 0.26;
+  (150_220) 0.36, 0.20, 0.12, 0.12, 0.20;
+  (220_360) 0.12, 0.36, 0.20, 0.20, 0.12;
+  (360_1500) 0.08, 0.18, 0.28, 0.28, 0.18;
+  (_1500) 0.28, 0.15, 0.21, 0.15, 0.21;
+}
+probability ( FloorArea | NumberOfStairwells ) {
+  (0) 0.37, 0.25, 0.25, 0.11, 0.02;
+  (1) 0.18, 0.35, 0.18, 0.03, 0.26;
+  (2) 0.03, 0.03, 0.09, 0.62, 0.23;
+  (3) 0.04, 0.14, 0.14, 0.44, 0.24;
+  (4) 0.12, 0.03, 0.12, 0.20, 0.53;
+}
+probability ( NumberOfStairwells | AverageDistance ) {
+  (0_300) 0.26, 0.11, 0.28, 0.15, 0.20;
+  (300_600) 0.55, 0.21, 0.04, 0.10, 0.10;
+  (_600) 0.06, 0.46, 0.16, 0.16, 0.16;
+}

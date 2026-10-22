@@ -1,0 +1,58 @@
+network unknown {
+}
+variable Risk {
+  type discrete [ 2 ] { High, Low };
+}
+variable Saliva {
+  type discrete [ 2 ] { Yes, No };
+}
+variable RSID {
+  type discrete [ 3 ] { Positive, Negative, Weak_positive };
+}
+variable Concentration {
+  type discrete [ 8 ] { 0___0_0002, 0_0002___0_0005, 0_0005___0_001, 0_001___0_002, 0_002___0_004, 0_004___0_01, 0_01___0_02, 0_02___inf };
+}
+variable Nature_of_stain {
+  type discrete [ 3 ] { Saliva, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine, Other };
+}
+probability ( Risk ) {
+  table 0.5, 0.5;
+}
+probability ( Saliva ) {
+  table 0.5, 0.5;
+}
+probability ( RSID | Concentration, Nature_of_stain ) {
+  (0___0_0002, Saliva) 0.033, 0.933, 0.034;
+  (0_0002___0_0005, Saliva) 0.033, 0.933, 0.034;
+  (0_0005___0_001, Saliva) 0.033, 0.933, 0.034;
+  (0_001___0_002, Saliva) 0.033, 0.933, 0.034;
+  (0_002___0_004, Saliva) 0.80, 0.04, 0.16;
+  (0_004___0_01, Saliva) 0.80, 0.04, 0.16;
+  (0_01___0_02, Saliva) 0.933, 0.033, 0.034;
+  (0_02___inf, Saliva) 0.933, 0.033, 0.034;
+  (0___0_0002, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_0002___0_0005, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_0005___0_001, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_001___0_002, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_002___0_004, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_004___0_01, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.033, 0.933, 0.034;
+  (0_01___0_02, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.079, 0.881, 0.040;
+  (0_02___inf, Fecal_matter__vaginal_secretion__sperm__breast_milk__urine) 0.079, 0.881, 0.040;
+  (0___0_0002, Other) 0.033, 0.933, 0.034;
+  (0_0002___0_0005, Other) 0.033, 0.933, 0.034;
+  (0_0005___0_001, Other) 0.033, 0.933, 0.034;
+  (0_001___0_002, Other) 0.033, 0.933, 0.034;
+  (0_002___0_004, Other) 0.033, 0.933, 0.034;
+  (0_004___0_01, Other) 0.033, 0.933, 0.034;
+  (0_01___0_02, Other) 0.033, 0.933, 0.034;
+  (0_02___inf, Other) 0.033, 0.933, 0.034;
+}
+probability ( Concentration ) {
+  table 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125;
+}
+probability ( Nature_of_stain | Risk, Saliva ) {
+  (High, Yes) 1.0, 0.0, 0.0;
+  (Low, Yes) 1.0, 0.0, 0.0;
+  (High, No) 0.00, 0.99, 0.01;
+  (Low, No) 0.00, 0.01, 0.99;
+}

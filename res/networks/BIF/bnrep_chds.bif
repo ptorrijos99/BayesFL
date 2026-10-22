@@ -1,0 +1,30 @@
+network unknown {
+}
+variable Social {
+  type discrete [ 2 ] { High, Low };
+}
+variable Economic {
+  type discrete [ 2 ] { High, Low };
+}
+variable Events {
+  type discrete [ 3 ] { High, Average, Low };
+}
+variable Admission {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( Social ) {
+  table 0.569, 0.431;
+}
+probability ( Economic | Social ) {
+  (High) 0.468, 0.532;
+  (Low) 0.122, 0.878;
+}
+probability ( Events | Social ) {
+  (High) 0.192, 0.347, 0.461;
+  (Low) 0.441, 0.311, 0.248;
+}
+probability ( Admission | Events ) {
+  (High) 0.256, 0.744;
+  (Average) 0.211, 0.789;
+  (Low) 0.119, 0.881;
+}

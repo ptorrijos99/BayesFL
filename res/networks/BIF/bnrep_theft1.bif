@@ -1,0 +1,29 @@
+network unknown {
+}
+variable EredHanded {
+  type discrete [ 2 ] { F, T };
+}
+variable EseenCS {
+  type discrete [ 2 ] { F, T };
+}
+variable Ewallet {
+  type discrete [ 2 ] { F, T };
+}
+variable Guilty {
+  type discrete [ 2 ] { F, T };
+}
+probability ( EredHanded | Guilty ) {
+  (F) 1.0, 0.0;
+  (T) 0.9, 0.1;
+}
+probability ( EseenCS | Guilty ) {
+  (F) 0.94, 0.06;
+  (T) 0.71, 0.29;
+}
+probability ( Ewallet | Guilty ) {
+  (F) 0.993, 0.007;
+  (T) 0.549, 0.451;
+}
+probability ( Guilty ) {
+  table 0.995, 0.005;
+}

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Anxiety</NAME>
+      <OUTCOME>0_2</OUTCOME>
+      <OUTCOME>3_5</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DepressiveState</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EEG</NAME>
+      <OUTCOME>_0</OUTCOME>
+      <OUTCOME>_0_1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Energy</NAME>
+      <OUTCOME>0_2</OUTCOME>
+      <OUTCOME>3_5</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Irritability</NAME>
+      <OUTCOME>0_3</OUTCOME>
+      <OUTCOME>4_5</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MoodState</NAME>
+      <OUTCOME>_3</OUTCOME>
+      <OUTCOME>_2</OUTCOME>
+      <OUTCOME>_1</OUTCOME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>_1_1</OUTCOME>
+      <OUTCOME>_2_1</OUTCOME>
+      <OUTCOME>_3_1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sleep</NAME>
+      <OUTCOME>_6_Hours</OUTCOME>
+      <OUTCOME>_6_Hours_1</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Anxiety</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.25 0.75 0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DepressiveState</FOR>
+      <TABLE>0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EEG</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.67 0.33 0.22 0.78 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Energy</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.8 0.2 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Irritability</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.67 0.33 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MoodState</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.0 0.0 0.0 0.1 0.35 0.35 0.2 0.0 0.01 0.09 0.8 0.04 0.04 0.02 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sleep</FOR>
+      <GIVEN>DepressiveState</GIVEN>
+      <TABLE>0.8 0.2 0.2 0.8 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

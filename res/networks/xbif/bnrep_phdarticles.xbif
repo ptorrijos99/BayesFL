@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Articles</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1_2</OUTCOME>
+      <OUTCOME>_2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Gender</NAME>
+      <OUTCOME>male</OUTCOME>
+      <OUTCOME>female</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Kids</NAME>
+      <OUTCOME>yes</OUTCOME>
+      <OUTCOME>no</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Married</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Mentor</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prestige</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Articles</FOR>
+      <TABLE>0.3005464 0.463388 0.2360656 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Gender</FOR>
+      <TABLE>0.5398907 0.4601093 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Kids</FOR>
+      <GIVEN>Gender</GIVEN>
+      <TABLE>0.4777328 0.5222672 0.1900238 0.8099762 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Married</FOR>
+      <GIVEN>Kids</GIVEN>
+      <TABLE>0.0 1.0 0.5158598 0.4841402 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Mentor</FOR>
+      <GIVEN>Articles</GIVEN>
+      <TABLE>0.4763636 0.36 0.1636364 0.2900943 0.4245283 0.2853774 0.1712963 0.3564815 0.4722222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prestige</FOR>
+      <GIVEN>Mentor</GIVEN>
+      <TABLE>0.6185567 0.3814433 0.5280899 0.4719101 0.3395522 0.6604478 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

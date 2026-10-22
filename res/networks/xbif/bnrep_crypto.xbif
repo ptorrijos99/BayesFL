@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Binance_Coin</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Bitcoin</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ethereum</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Litecoin</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ripple</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Tether</NAME>
+      <OUTCOME>Down</OUTCOME>
+      <OUTCOME>Up</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Binance_Coin</FOR>
+      <GIVEN>Bitcoin</GIVEN>
+      <TABLE>0.8507891 0.1492109 0.02258727 0.97741273 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Bitcoin</FOR>
+      <TABLE>0.7410952 0.2589048 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ethereum</FOR>
+      <TABLE>0.6932483 0.3067517 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Litecoin</FOR>
+      <GIVEN>Bitcoin</GIVEN>
+      <GIVEN>Ethereum</GIVEN>
+      <TABLE>0.9995697074 0.0004302926 0.5021459 0.4978541 0.6503497 0.3496503 0.2005814 0.7994186 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ripple</FOR>
+      <GIVEN>Litecoin</GIVEN>
+      <TABLE>0.8583333 0.1416667 0.2630385 0.7369615 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Tether</FOR>
+      <TABLE>0.90855928 0.09144072 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

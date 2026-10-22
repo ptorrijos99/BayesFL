@@ -1,0 +1,88 @@
+network unknown {
+}
+variable AbnormalFlow {
+  type discrete [ 2 ] { T, F };
+}
+variable AirLeakageOfShaftSeal {
+  type discrete [ 2 ] { T, F };
+}
+variable GateValveFailure {
+  type discrete [ 2 ] { T, F };
+}
+variable ImpellerDamaged {
+  type discrete [ 2 ] { T, F };
+}
+variable LowSpeed {
+  type discrete [ 2 ] { T, F };
+}
+variable LowVoltage {
+  type discrete [ 2 ] { T, F };
+}
+variable MotorFault {
+  type discrete [ 2 ] { T, F };
+}
+variable PipelineFailure {
+  type discrete [ 2 ] { T, F };
+}
+variable PipelineRupture {
+  type discrete [ 2 ] { T, F };
+}
+variable Silting {
+  type discrete [ 2 ] { T, F };
+}
+variable WaterPumpFailure {
+  type discrete [ 2 ] { T, F };
+}
+probability ( AbnormalFlow | MotorFault, PipelineFailure, WaterPumpFailure ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 0.2356, 0.7644;
+  (T, F, T) 0.875, 0.125;
+  (F, F, T) 0.7644, 0.2356;
+  (T, T, F) 0.4542, 0.5458;
+  (F, T, F) 0.1375, 0.8625;
+  (T, F, F) 0.584, 0.416;
+  (F, F, F) 0.0, 1.0;
+}
+probability ( AirLeakageOfShaftSeal ) {
+  table 0.91, 0.09;
+}
+probability ( GateValveFailure ) {
+  table 0.9, 0.1;
+}
+probability ( ImpellerDamaged ) {
+  table 0.86, 0.14;
+}
+probability ( LowSpeed ) {
+  table 0.8, 0.2;
+}
+probability ( LowVoltage ) {
+  table 0.92, 0.08;
+}
+probability ( MotorFault | LowSpeed, LowVoltage ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 0.1375, 0.8625;
+  (T, F) 0.4542, 0.5458;
+  (F, F) 0.0, 1.0;
+}
+probability ( PipelineFailure | GateValveFailure, PipelineRupture ) {
+  (T, T) 1.0, 0.0;
+  (F, T) 0.2707, 0.7293;
+  (T, F) 0.1247, 0.8753;
+  (F, F) 0.0, 1.0;
+}
+probability ( PipelineRupture ) {
+  table 0.98, 0.02;
+}
+probability ( Silting ) {
+  table 0.78, 0.22;
+}
+probability ( WaterPumpFailure | AirLeakageOfShaftSeal, ImpellerDamaged, Silting ) {
+  (T, T, T) 1.0, 0.0;
+  (F, T, T) 0.5458, 0.4542;
+  (T, F, T) 0.8141, 0.1859;
+  (F, F, T) 0.4542, 0.5458;
+  (T, T, F) 0.1375, 0.8625;
+  (F, T, F) 0.2356, 0.7644;
+  (T, F, F) 0.1357, 0.8643;
+  (F, F, F) 0.0, 1.0;
+}

@@ -1,0 +1,142 @@
+network unknown {
+}
+variable H {
+  type discrete [ 2 ] { yes, no };
+}
+variable H1 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H10 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H11 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H2 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H3 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H4 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H5 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H6 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H7 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H8 {
+  type discrete [ 2 ] { yes, no };
+}
+variable H9 {
+  type discrete [ 2 ] { yes, no };
+}
+probability ( H | H10, H11, H2, H6, H9 ) {
+  (yes, yes, yes, yes, yes) 0.08048425, 0.91951575;
+  (no, yes, yes, yes, yes) 0.079818, 0.920182;
+  (yes, no, yes, yes, yes) 0.055315, 0.944685;
+  (no, no, yes, yes, yes) 0.066519, 0.933481;
+  (yes, yes, no, yes, yes) 0.03964, 0.96036;
+  (no, yes, no, yes, yes) 0.046983, 0.953017;
+  (yes, no, no, yes, yes) 0.028699, 0.971301;
+  (no, no, no, yes, yes) 0.029295, 0.970705;
+  (yes, yes, yes, no, yes) 0.05569426, 0.94430574;
+  (no, yes, yes, no, yes) 0.055694, 0.944306;
+  (yes, no, yes, no, yes) 0.06651877, 0.93348123;
+  (no, no, yes, no, yes) 0.046141, 0.953859;
+  (yes, yes, no, no, yes) 0.028898, 0.971102;
+  (no, yes, no, no, yes) 0.033212, 0.966788;
+  (yes, no, no, no, yes) 0.034319, 0.965681;
+  (no, no, no, no, yes) 0.028898, 0.971102;
+  (yes, yes, yes, yes, no) 0.066024, 0.933976;
+  (no, yes, yes, yes, no) 0.055694, 0.944306;
+  (yes, no, yes, yes, no) 0.046983, 0.953017;
+  (no, no, yes, yes, no) 0.034319, 0.965681;
+  (yes, yes, no, yes, no) 0.039934, 0.960066;
+  (no, yes, no, yes, no) 0.04698294, 0.95301706;
+  (yes, no, no, yes, no) 0.028898, 0.971102;
+  (no, no, no, yes, no) 0.03431924, 0.96568076;
+  (yes, yes, yes, no, no) 0.03993418, 0.96006582;
+  (no, yes, yes, no, no) 0.03988, 0.96012;
+  (yes, no, yes, no, no) 0.055315, 0.944685;
+  (no, no, yes, no, no) 0.02096809, 0.97903191;
+  (yes, yes, no, no, no) 0.032978, 0.967022;
+  (no, yes, no, no, no) 0.000101, 0.999899;
+  (yes, no, no, no, no) 0.010585, 0.989415;
+  (no, no, no, no, no) 0.000063, 0.999937;
+}
+probability ( H1 ) {
+  table 0.0009103, 0.9990897;
+}
+probability ( H10 | H3, H4, H5, H8 ) {
+  (yes, yes, yes, yes) 0.02873802, 0.97126198;
+  (no, yes, yes, yes) 0.021425, 0.978575;
+  (yes, no, yes, yes) 0.007041, 0.992959;
+  (no, no, yes, yes) 0.002877, 0.997123;
+  (yes, yes, no, yes) 0.009684, 0.990316;
+  (no, yes, no, yes) 0.003524, 0.996476;
+  (yes, no, no, yes) 0.000468, 0.999532;
+  (no, no, no, yes) 0.000158, 0.999842;
+  (yes, yes, yes, no) 0.02142507, 0.97857493;
+  (no, yes, yes, no) 0.01221214, 0.98778786;
+  (yes, no, yes, no) 0.004193, 0.995807;
+  (no, no, yes, no) 0.001502, 0.998498;
+  (yes, yes, no, no) 0.005937568, 0.994062432;
+  (no, yes, no, no) 0.002329, 0.997671;
+  (yes, no, no, no) 0.000656, 0.999344;
+  (no, no, no, no) 0.000105078, 0.999894922;
+}
+probability ( H11 | H8 ) {
+  (yes) 0.024441, 0.975559;
+  (no) 0.000063, 0.999937;
+}
+probability ( H2 | H1, H10 ) {
+  (yes, yes) 0.003524, 0.996476;
+  (no, yes) 0.000889, 0.999111;
+  (yes, no) 0.000856, 0.999144;
+  (no, no) 0.000357, 0.999643;
+}
+probability ( H3 ) {
+  table 0.004129327, 0.995870673;
+}
+probability ( H4 ) {
+  table 0.001881711, 0.998118289;
+}
+probability ( H5 ) {
+  table 0.001826461, 0.998173539;
+}
+probability ( H6 | H3, H4, H5, H7 ) {
+  (yes, yes, yes, yes) 0.06602412, 0.93397588;
+  (no, yes, yes, yes) 0.01473854, 0.98526146;
+  (yes, no, yes, yes) 0.05494, 0.94506;
+  (no, no, yes, yes) 0.018268, 0.981732;
+  (yes, yes, no, yes) 0.034123, 0.965877;
+  (no, yes, no, yes) 0.00756198, 0.99243802;
+  (yes, no, no, yes) 0.008362, 0.991638;
+  (no, no, no, yes) 0.003441, 0.996559;
+  (yes, yes, yes, no) 0.079818, 0.920182;
+  (no, yes, yes, no) 0.01122635, 0.98877365;
+  (yes, no, yes, no) 0.030171, 0.969829;
+  (no, no, yes, no) 0.021425, 0.978575;
+  (yes, yes, no, no) 0.021569, 0.978431;
+  (no, yes, no, no) 0.012456, 0.987544;
+  (yes, no, no, no) 0.003496, 0.996504;
+  (no, no, no, no) 0.001472058, 0.998527942;
+}
+probability ( H7 ) {
+  table 0.006014822, 0.993985178;
+}
+probability ( H8 ) {
+  table 0.003468451, 0.996531549;
+}
+probability ( H9 | H4, H5 ) {
+  (yes, yes) 0.04668667, 0.95331333;
+  (no, yes) 0.008305, 0.991695;
+  (yes, no) 0.007041, 0.992959;
+  (no, no) 0.000103, 0.999897;
+}

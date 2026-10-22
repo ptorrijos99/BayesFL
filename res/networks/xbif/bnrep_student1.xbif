@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Fedu</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Primary_Education</OUTCOME>
+      <OUTCOME>5th_to_9th_Grade</OUTCOME>
+      <OUTCOME>Secondary_Education</OUTCOME>
+      <OUTCOME>Higher_Education</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fjob</NAME>
+      <OUTCOME>At_Home</OUTCOME>
+      <OUTCOME>Healtcare_Related</OUTCOME>
+      <OUTCOME>Other</OUTCOME>
+      <OUTCOME>Civil_Services</OUTCOME>
+      <OUTCOME>Teacher</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G1</NAME>
+      <OUTCOME>__10</OUTCOME>
+      <OUTCOME>___10</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>G2</NAME>
+      <OUTCOME>__10</OUTCOME>
+      <OUTCOME>___10</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Medu</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Primary_Education</OUTCOME>
+      <OUTCOME>5th_to_9th_Grade</OUTCOME>
+      <OUTCOME>Secondary_Education</OUTCOME>
+      <OUTCOME>Higher_Education</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Mjob</NAME>
+      <OUTCOME>At_Home</OUTCOME>
+      <OUTCOME>Healtcare_Related</OUTCOME>
+      <OUTCOME>Other</OUTCOME>
+      <OUTCOME>Civil_Services</OUTCOME>
+      <OUTCOME>Teacher</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Pstatus</NAME>
+      <OUTCOME>Living_together</OUTCOME>
+      <OUTCOME>Apart</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>activities</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>address</NAME>
+      <OUTCOME>Rural</OUTCOME>
+      <OUTCOME>Urban</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>age</NAME>
+      <OUTCOME>15</OUTCOME>
+      <OUTCOME>16</OUTCOME>
+      <OUTCOME>17</OUTCOME>
+      <OUTCOME>18</OUTCOME>
+      <OUTCOME>19</OUTCOME>
+      <OUTCOME>20</OUTCOME>
+      <OUTCOME>21</OUTCOME>
+      <OUTCOME>22</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>class</NAME>
+      <OUTCOME>__10</OUTCOME>
+      <OUTCOME>___10</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>failures</NAME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>famsize</NAME>
+      <OUTCOME>Less_or_equal_to_3</OUTCOME>
+      <OUTCOME>Greater_than_3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>famsup</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>goout</NAME>
+      <OUTCOME>Very_Low</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Very_High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>guardian</NAME>
+      <OUTCOME>Mother</OUTCOME>
+      <OUTCOME>Father</OUTCOME>
+      <OUTCOME>Other</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>higher</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>internet</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>nursery</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>paid</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>reason</NAME>
+      <OUTCOME>Close_to_Home</OUTCOME>
+      <OUTCOME>School_Reputation</OUTCOME>
+      <OUTCOME>Course_Preference</OUTCOME>
+      <OUTCOME>Other</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>romantic</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>school</NAME>
+      <OUTCOME>Gabriel_Pereira</OUTCOME>
+      <OUTCOME>Mousinho_da_Silveira</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>schoolsup</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>sex</NAME>
+      <OUTCOME>Female</OUTCOME>
+      <OUTCOME>Male</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>traveltime</NAME>
+      <OUTCOME>Less_than_15min</OUTCOME>
+      <OUTCOME>15_to_30_mins</OUTCOME>
+      <OUTCOME>30_mins_to_1_hour</OUTCOME>
+      <OUTCOME>More_than_1_hour</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Fedu</FOR>
+      <GIVEN>Medu</GIVEN>
+      <TABLE>0.1666667 0.3333333 0.5 0.0 0.0 0.03496503 0.64335664 0.25174825 0.05594406 0.01398601 0.0 0.27956989 0.54301075 0.1344086 0.04301075 0.0 0.1438849 0.3021583 0.3884892 0.1654676 0.005714286 0.045714286 0.154285714 0.251428571 0.542857143 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fjob</FOR>
+      <GIVEN>Fedu</GIVEN>
+      <TABLE>0.1428571 0.0 0.8571429 0.0 0.0 0.091954023 0.0 0.649425287 0.252873563 0.005747126 0.07655502 0.01435407 0.62679426 0.28229665 0.0 0.045801527 0.022900763 0.557251908 0.366412214 0.007633588 0.0234375 0.1328125 0.34375 0.234375 0.265625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G1</FOR>
+      <GIVEN>school</GIVEN>
+      <GIVEN>sex</GIVEN>
+      <TABLE>0.08860759 0.91139241 0.2204301 0.7795699 0.4109589 0.5890411 0.4375 0.5625 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>G2</FOR>
+      <GIVEN>G1</GIVEN>
+      <TABLE>0.6815287 0.3184713 0.07723577 0.92276423 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Medu</FOR>
+      <GIVEN>Mjob</GIVEN>
+      <TABLE>0.02222222 0.4962963 0.2962963 0.14814815 0.03703704 0.0 0.04166667 0.10416667 0.10416667 0.75 0.01162791 0.26356589 0.36821705 0.2248062 0.13178295 0.0 0.04411765 0.33823529 0.38970588 0.22794118 0.0 0.0 0.0 0.04166667 0.95833333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Mjob</FOR>
+      <GIVEN>internet</GIVEN>
+      <TABLE>0.38410596 0.03311258 0.45695364 0.09933775 0.02649007 0.15461847 0.08634538 0.37951807 0.24297189 0.13654618 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Pstatus</FOR>
+      <GIVEN>guardian</GIVEN>
+      <TABLE>0.8615385 0.1384615 0.96078431 0.03921569 0.7317073 0.2682927 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>activities</FOR>
+      <TABLE>0.5146379 0.4853621 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>address</FOR>
+      <GIVEN>school</GIVEN>
+      <TABLE>0.1843972 0.8156028 0.5265487 0.4734513 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>age</FOR>
+      <GIVEN>failures</GIVEN>
+      <TABLE>0.196721311 0.293260474 0.278688525 0.204007286 0.023679417 0.003642987 0.0 0.0 0.05714286 0.17142857 0.27142857 0.27142857 0.18571429 0.04285714 0.0 0.0 0.0 0.1875 0.0625 0.375 0.1875 0.0625 0.125 0.0 0.0 0.07142857 0.42857143 0.21428571 0.21428571 0.0 0.0 0.07142857 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>class</FOR>
+      <GIVEN>G1</GIVEN>
+      <GIVEN>G2</GIVEN>
+      <TABLE>0.7476636 0.2523364 0.16 0.84 0.2368421 0.7631579 0.00660793 0.99339207 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>failures</FOR>
+      <GIVEN>G1</GIVEN>
+      <TABLE>0.55414013 0.29299363 0.08280255 0.07006369 0.93902439 0.048780488 0.006097561 0.006097561 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>famsize</FOR>
+      <GIVEN>Pstatus</GIVEN>
+      <TABLE>0.254833 0.745167 0.5875 0.4125 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>famsup</FOR>
+      <TABLE>0.3867488 0.6132512 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>goout</FOR>
+      <TABLE>0.07395994 0.22342065 0.31587057 0.21725732 0.16949153 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>guardian</FOR>
+      <GIVEN>age</GIVEN>
+      <TABLE>0.66071429 0.3125 0.02678571 0.72316384 0.25988701 0.01694915 0.73743017 0.24581006 0.01675978 0.75 0.17857143 0.07142857 0.40625 0.09375 0.5 0.3333333 0.0 0.6666667 0.0 0.0 1.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>higher</FOR>
+      <GIVEN>age</GIVEN>
+      <GIVEN>G1</GIVEN>
+      <TABLE>0.1428571 0.8571429 0.01020408 0.98979592 0.1578947 0.8421053 0.02877698 0.97122302 0.3095238 0.6904762 0.02189781 0.97810219 0.45 0.55 0.06 0.94 0.5 0.5 0.2142857 0.7857143 0.5 0.5 0.25 0.75 0.5 0.5 0.5 0.5 1.0 0.0 0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>internet</FOR>
+      <GIVEN>address</GIVEN>
+      <GIVEN>school</GIVEN>
+      <TABLE>0.3076923 0.6923077 0.3697479 0.6302521 0.1246377 0.8753623 0.3738318 0.6261682 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>nursery</FOR>
+      <GIVEN>famsize</GIVEN>
+      <TABLE>0.1354167 0.8645833 0.2231947 0.7768053 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>paid</FOR>
+      <TABLE>0.93990755 0.06009245 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>reason</FOR>
+      <GIVEN>school</GIVEN>
+      <TABLE>0.27186761 0.26950355 0.39479905 0.06382979 0.1504425 0.1283186 0.5221239 0.199115 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>romantic</FOR>
+      <GIVEN>age</GIVEN>
+      <TABLE>0.75 0.25 0.6892655 0.3107345 0.6089385 0.3910615 0.5428571 0.4571429 0.53125 0.46875 0.1666667 0.8333333 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>school</FOR>
+      <GIVEN>schoolsup</GIVEN>
+      <TABLE>0.6316695 0.3683305 0.8235294 0.1764706 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>schoolsup</FOR>
+      <GIVEN>sex</GIVEN>
+      <TABLE>0.8668407 0.1331593 0.93609023 0.06390977 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>sex</FOR>
+      <GIVEN>activities</GIVEN>
+      <GIVEN>famsup</GIVEN>
+      <TABLE>0.5078125 0.4921875 0.7378641 0.2621359 0.5121951 0.4878049 0.5364583 0.4635417 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>traveltime</FOR>
+      <GIVEN>address</GIVEN>
+      <TABLE>0.31979695 0.45177665 0.17766497 0.05076142 0.67035398 0.27433628 0.0420354 0.01327434 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

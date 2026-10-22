@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>C</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>F</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FPR</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GP</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GRE</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>H</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HCF</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HOR</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IOA</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IRF</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>P</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RGP</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SBT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SMT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>T</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>V</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>C</FOR>
+      <TABLE>0.65 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>F</FOR>
+      <GIVEN>GRE</GIVEN>
+      <GIVEN>HCF</GIVEN>
+      <GIVEN>IOA</GIVEN>
+      <GIVEN>IRF</GIVEN>
+      <TABLE>0.0 1.0 0.5 0.5 0.1 0.9 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.1 0.9 0.9 0.1 0.5 0.5 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FPR</FOR>
+      <GIVEN>HCF</GIVEN>
+      <GIVEN>HOR</GIVEN>
+      <GIVEN>IOA</GIVEN>
+      <TABLE>0.1 0.9 0.5 0.5 0.5 0.5 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GP</FOR>
+      <GIVEN>C</GIVEN>
+      <GIVEN>H</GIVEN>
+      <GIVEN>P</GIVEN>
+      <GIVEN>T</GIVEN>
+      <GIVEN>V</GIVEN>
+      <TABLE>0.8705 0.1295 0.0301 0.9699 0.8725 0.1275 0.8947 0.1053 0.097 0.903 0.0301 0.9699 0.0612 0.9388 0.0462 0.9538 0.8667 0.1333 0.8906 0.1094 0.8728 0.1272 0.8946 0.1054 0.0458 0.9542 0.0301 0.9699 0.0612 0.9388 0.0462 0.9538 0.8667 0.1333 0.8667 0.1333 0.8758 0.1242 0.8974 0.1026 0.097 0.903 0.7356 0.2644 0.0612 0.9388 0.7287 0.2713 0.8667 0.1333 0.8757 0.1243 0.8667 0.1333 0.8973 0.1027 0.0458 0.9542 0.7356 0.2644 0.0612 0.9388 0.7288 0.2712 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GRE</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>H</FOR>
+      <TABLE>0.99999 1e-05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HCF</FOR>
+      <GIVEN>GP</GIVEN>
+      <GIVEN>SBT</GIVEN>
+      <GIVEN>SMT</GIVEN>
+      <TABLE>0.0 1.0 0.5 0.5 0.1 0.9 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HOR</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IOA</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IRF</FOR>
+      <TABLE>0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>P</FOR>
+      <TABLE>0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RGP</FOR>
+      <GIVEN>HCF</GIVEN>
+      <GIVEN>HOR</GIVEN>
+      <GIVEN>IOA</GIVEN>
+      <TABLE>0.1 0.9 0.5 0.5 0.5 0.5 1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SBT</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SMT</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>T</FOR>
+      <TABLE>0.1 0.9 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>V</FOR>
+      <TABLE>0.21 0.79 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

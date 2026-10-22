@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>contact</NAME>
+      <OUTCOME>cellular</OUTCOME>
+      <OUTCOME>telephone</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>education</NAME>
+      <OUTCOME>no_uni</OUTCOME>
+      <OUTCOME>uni</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>marital</NAME>
+      <OUTCOME>divorced</OUTCOME>
+      <OUTCOME>married</OUTCOME>
+      <OUTCOME>single</OUTCOME>
+      <OUTCOME>unknown</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>subscription</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>contact</FOR>
+      <GIVEN>marital</GIVEN>
+      <GIVEN>education</GIVEN>
+      <TABLE>0.5640737 0.4359263 0.6418685 0.3581315 0.5338136 0.4661864 0.6576888 0.3423112 0.6069519 0.3930481 0.7090616 0.2909384 0.5 0.5 0.6956522 0.3043478 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>education</FOR>
+      <GIVEN>marital</GIVEN>
+      <TABLE>0.6971444 0.3028556 0.7371191 0.2628809 0.6013506 0.3986494 0.5660377 0.4339623 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>marital</FOR>
+      <TABLE>0.111928919 0.612955252 0.273561668 0.001554161 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>subscription</FOR>
+      <GIVEN>education</GIVEN>
+      <GIVEN>contact</GIVEN>
+      <TABLE>0.8914499 0.1085501 0.9563571 0.0436429 0.8681695 0.1318305 0.94385343 0.05614657 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

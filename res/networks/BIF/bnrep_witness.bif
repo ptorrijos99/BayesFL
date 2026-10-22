@@ -1,0 +1,63 @@
+network unknown {
+}
+variable W1SteveDidIt {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable W2SteveDidIt {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable W3SteveMartinOrDavidDidIt {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable W4SteveJohnOrJamesDidIt {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable W5SteveJohnOrPeterDidIt {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable WhoCommittedTheDeed {
+  type discrete [ 6 ] { Steve, Martin, David, John, James, Peter };
+}
+probability ( W1SteveDidIt | WhoCommittedTheDeed ) {
+  (Steve) 0.8, 0.2;
+  (Martin) 0.05, 0.95;
+  (David) 0.05, 0.95;
+  (John) 0.05, 0.95;
+  (James) 0.05, 0.95;
+  (Peter) 0.05, 0.95;
+}
+probability ( W2SteveDidIt | WhoCommittedTheDeed ) {
+  (Steve) 0.8, 0.2;
+  (Martin) 0.05, 0.95;
+  (David) 0.05, 0.95;
+  (John) 0.05, 0.95;
+  (James) 0.05, 0.95;
+  (Peter) 0.05, 0.95;
+}
+probability ( W3SteveMartinOrDavidDidIt | WhoCommittedTheDeed ) {
+  (Steve) 0.8, 0.2;
+  (Martin) 0.8, 0.2;
+  (David) 0.8, 0.2;
+  (John) 0.05, 0.95;
+  (James) 0.05, 0.95;
+  (Peter) 0.05, 0.95;
+}
+probability ( W4SteveJohnOrJamesDidIt | WhoCommittedTheDeed ) {
+  (Steve) 0.8, 0.2;
+  (Martin) 0.05, 0.95;
+  (David) 0.05, 0.95;
+  (John) 0.8, 0.2;
+  (James) 0.8, 0.2;
+  (Peter) 0.05, 0.95;
+}
+probability ( W5SteveJohnOrPeterDidIt | WhoCommittedTheDeed ) {
+  (Steve) 0.8, 0.2;
+  (Martin) 0.05, 0.95;
+  (David) 0.05, 0.95;
+  (John) 0.8, 0.2;
+  (James) 0.05, 0.95;
+  (Peter) 0.8, 0.2;
+}
+probability ( WhoCommittedTheDeed ) {
+  table 0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667, 0.1666667;
+}

@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Agriculture</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_55</OUTCOME>
+      <OUTCOME>__55</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Animal_Husbandry</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_25</OUTCOME>
+      <OUTCOME>__25</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CV_Annual_Temperature</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Distance_Coast</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Elevation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fishing</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_25</OUTCOME>
+      <OUTCOME>__25</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Gathering</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_25</OUTCOME>
+      <OUTCOME>__25</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Hunting</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>_25</OUTCOME>
+      <OUTCOME>__25</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Landscape</NAME>
+      <OUTCOME>Aquatic</OUTCOME>
+      <OUTCOME>Tundra</OUTCOME>
+      <OUTCOME>Desert</OUTCOME>
+      <OUTCOME>Forest</OUTCOME>
+      <OUTCOME>Grassland</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Precipitation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Monthly_Productivity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Slope</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>medium</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Agriculture</FOR>
+      <GIVEN>Fishing</GIVEN>
+      <TABLE>0.06557377 0.26229508 0.67213115 0.01136364 0.39772727 0.59090909 0.04166667 0.875 0.08333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Animal_Husbandry</FOR>
+      <GIVEN>Hunting</GIVEN>
+      <TABLE>0.06122449 0.59183673 0.34693878 0.226087 0.6086957 0.1652174 0.7777778 0.0 0.2222222 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Annual_Temperature</FOR>
+      <GIVEN>Elevation</GIVEN>
+      <TABLE>0.04347826 0.08695652 0.86956522 0.0 0.2459016 0.7540984 0.06976744 0.72093023 0.20930233 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Precipitation</FOR>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <TABLE>0.01666667 0.0 0.98333333 0.0212766 0.0 0.9787234 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Productivity</FOR>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.15 0.025 0.825 0.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CV_Annual_Temperature</FOR>
+      <GIVEN>Annual_Temperature</GIVEN>
+      <TABLE>0.6666667 0.0 0.3333333 0.19230769 0.09615385 0.71153846 0.4 0.3652174 0.2347826 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Distance_Coast</FOR>
+      <GIVEN>CV_Annual_Productivity</GIVEN>
+      <TABLE>0.0 0.0 1.0 1.0 0.0 0.0 0.14457831 0.07228916 0.78313253 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Elevation</FOR>
+      <TABLE>0.3988439 0.3526012 0.2485549 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fishing</FOR>
+      <GIVEN>Animal_Husbandry</GIVEN>
+      <TABLE>0.08333333 0.69444444 0.22222222 0.2828283 0.5656566 0.1515152 0.78947368 0.18421053 0.02631579 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Gathering</FOR>
+      <TABLE>0.554913295 0.439306358 0.005780347 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Hunting</FOR>
+      <TABLE>0.28323699 0.66473988 0.05202312 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Landscape</FOR>
+      <GIVEN>Monthly_Productivity</GIVEN>
+      <TABLE>0.0 0.05 0.275 0.125 0.55 0.03296703 0.0 0.01098901 0.56043956 0.3956044 0.0 0.0 0.0 0.97619048 0.02380952 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Precipitation</FOR>
+      <GIVEN>CV_Annual_Temperature</GIVEN>
+      <TABLE>0.11666667 0.06666667 0.81666667 0.1276596 0.2765957 0.5957447 0.4545455 0.3787879 0.1666667 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Monthly_Productivity</FOR>
+      <GIVEN>Monthly_Precipitation</GIVEN>
+      <TABLE>0.744186 0.255814 0.0 0.1428571 0.5714286 0.2857143 0.02272727 0.63636364 0.34090909 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Slope</FOR>
+      <GIVEN>Elevation</GIVEN>
+      <TABLE>0.56521739 0.36231884 0.07246377 0.2622951 0.3606557 0.3770492 0.09302326 0.37209302 0.53488372 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>X1</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X10</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X2</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X3</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X4</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X5</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X6</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X7</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X8</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X9</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>X1</FOR>
+      <GIVEN>X9</GIVEN>
+      <TABLE>0.448 0.552 0.067 0.933 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X10</FOR>
+      <GIVEN>X1</GIVEN>
+      <GIVEN>X2</GIVEN>
+      <GIVEN>X4</GIVEN>
+      <TABLE>0.684 0.316 0.0 1.0 0.0 1.0 0.474 0.526 1.0 0.0 0.0 1.0 0.481 0.519 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X2</FOR>
+      <GIVEN>X4</GIVEN>
+      <TABLE>0.76 0.24 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X3</FOR>
+      <GIVEN>X5</GIVEN>
+      <TABLE>1.0 0.0 0.949 0.051 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X4</FOR>
+      <GIVEN>X1</GIVEN>
+      <GIVEN>X9</GIVEN>
+      <TABLE>0.151 0.849 0.874 0.126 1.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X5</FOR>
+      <GIVEN>X4</GIVEN>
+      <GIVEN>X8</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.723 0.277 0.311 0.689 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X6</FOR>
+      <TABLE>0.98 0.02 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X7</FOR>
+      <GIVEN>X6</GIVEN>
+      <TABLE>0.988 0.012 0.429 0.571 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X8</FOR>
+      <GIVEN>X7</GIVEN>
+      <TABLE>0.006 0.994 0.875 0.125 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X9</FOR>
+      <GIVEN>X8</GIVEN>
+      <TABLE>0.0 1.0 0.982 0.018 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

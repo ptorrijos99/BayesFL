@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CCRAchieved</NAME>
+      <OUTCOME>Achieved</OUTCOME>
+      <OUTCOME>Not_Achieved_</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FinalCSDCAchieved</NAME>
+      <OUTCOME>Achieved</OUTCOME>
+      <OUTCOME>Not_Achieved_</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RemissionAchieved</NAME>
+      <OUTCOME>Achieved</OUTCOME>
+      <OUTCOME>Not_Achieved_</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CCRAchieved</FOR>
+      <GIVEN>FinalCSDCAchieved</GIVEN>
+      <TABLE>0.474 0.526 0.184 0.816 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FinalCSDCAchieved</FOR>
+      <TABLE>0.522 0.478 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RemissionAchieved</FOR>
+      <GIVEN>CCRAchieved</GIVEN>
+      <GIVEN>FinalCSDCAchieved</GIVEN>
+      <TABLE>0.658 0.342 0.259 0.741 0.271 0.729 0.035 0.965 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

@@ -1,0 +1,60 @@
+network unknown {
+}
+variable Bronchitis {
+  type discrete [ 2 ] { True, False };
+}
+variable Dyspnea {
+  type discrete [ 2 ] { True, False };
+}
+variable Lung_Cancer {
+  type discrete [ 2 ] { True, False };
+}
+variable Smoker {
+  type discrete [ 2 ] { True, False };
+}
+variable Tubercolosis {
+  type discrete [ 2 ] { True, False };
+}
+variable TubercolosisOrCancer {
+  type discrete [ 2 ] { True, False };
+}
+variable Visit_To_Asia {
+  type discrete [ 2 ] { True, False };
+}
+variable XRay_Result {
+  type discrete [ 2 ] { Abnormal, Normal };
+}
+probability ( Bronchitis | Smoker ) {
+  (True) 0.6, 0.4;
+  (False) 0.3, 0.7;
+}
+probability ( Dyspnea | Bronchitis, TubercolosisOrCancer ) {
+  (True, True) 0.9, 0.1;
+  (False, True) 0.7, 0.3;
+  (True, False) 0.8, 0.2;
+  (False, False) 0.1, 0.9;
+}
+probability ( Lung_Cancer | Smoker ) {
+  (True) 0.1, 0.9;
+  (False) 0.01, 0.99;
+}
+probability ( Smoker ) {
+  table 0.5, 0.5;
+}
+probability ( Tubercolosis | Visit_To_Asia ) {
+  (True) 0.05, 0.95;
+  (False) 0.01, 0.99;
+}
+probability ( TubercolosisOrCancer | Lung_Cancer, Tubercolosis ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( Visit_To_Asia ) {
+  table 0.01, 0.99;
+}
+probability ( XRay_Result | TubercolosisOrCancer ) {
+  (True) 0.98, 0.02;
+  (False) 0.05, 0.95;
+}

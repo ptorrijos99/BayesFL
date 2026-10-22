@@ -1,0 +1,31 @@
+network unknown {
+}
+variable AverageDistance {
+  type discrete [ 3 ] { 0_300, 300_600, _600 };
+}
+variable Basement {
+  type discrete [ 2 ] { False, True };
+}
+variable BlueConcrete {
+  type discrete [ 2 ] { False, True };
+}
+variable ConstructionYear {
+  type discrete [ 5 ] { 1930_1955, 1955_1960, 1960_1968, 1968_1975, 1975_1980 };
+}
+probability ( AverageDistance ) {
+  table 0.02, 0.16, 0.82;
+}
+probability ( Basement | AverageDistance ) {
+  (0_300) 0.26, 0.74;
+  (300_600) 0.21, 0.79;
+  (_600) 0.38, 0.62;
+}
+probability ( BlueConcrete | AverageDistance ) {
+  (0_300) 0.58, 0.42;
+  (300_600) 0.21, 0.79;
+  (_600) 0.99, 0.01;
+}
+probability ( ConstructionYear | Basement ) {
+  (False) 0.07, 0.18, 0.11, 0.28, 0.36;
+  (True) 0.23, 0.16, 0.25, 0.28, 0.08;
+}

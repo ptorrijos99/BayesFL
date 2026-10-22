@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ClayContent</NAME>
+      <OUTCOME>Very_Low</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Very_High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CompactionRisk</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CompactionVulnerability</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InherentSusceptibility</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SoilWetness</NAME>
+      <OUTCOME>Dry</OUTCOME>
+      <OUTCOME>Moist</OUTCOME>
+      <OUTCOME>Wet</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TotalExposure</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ClayContent</FOR>
+      <TABLE>0.2 0.2 0.2 0.2 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CompactionRisk</FOR>
+      <GIVEN>CompactionVulnerability</GIVEN>
+      <GIVEN>TotalExposure</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.8 0.2 0.0 0.0 1.0 0.0 0.9 0.1 0.0 0.0 1.0 0.0 0.0 0.25 0.75 0.0 0.75 0.25 0.0 0.25 0.75 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CompactionVulnerability</FOR>
+      <GIVEN>InherentSusceptibility</GIVEN>
+      <GIVEN>SoilWetness</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.75 0.25 0.0 0.2 0.6 0.2 0.75 0.25 0.0 0.1 0.8 0.1 0.1 0.6 0.3 0.5 0.5 0.0 0.0 0.5 0.5 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InherentSusceptibility</FOR>
+      <GIVEN>ClayContent</GIVEN>
+      <TABLE>0.556 0.222 0.222 0.06672002 0.26708012 0.66619986 0.05 0.15 0.8 0.05 0.15 0.8 0.091 0.182 0.727 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SoilWetness</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TotalExposure</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

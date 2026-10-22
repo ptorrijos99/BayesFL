@@ -1,0 +1,40 @@
+network unknown {
+}
+variable AbnormalAPTT {
+  type discrete [ 3 ] { high, medium, low };
+}
+variable BleedingRisk {
+  type discrete [ 2 ] { high, null };
+}
+variable DrugSuspension {
+  type discrete [ 3 ] { 0_days, 5_days, 7_days };
+}
+variable PlateletCount {
+  type discrete [ 3 ] { high, medium, low };
+}
+variable ThromboticRisk {
+  type discrete [ 3 ] { high, medium, low };
+}
+probability ( AbnormalAPTT | DrugSuspension ) {
+  (0_days) 0.3333333, 0.3333333, 0.3333333;
+  (5_days) 0.0000000, 0.3333333, 0.6666667;
+  (7_days) 0.39, 0.33, 0.28;
+}
+probability ( BleedingRisk | DrugSuspension ) {
+  (0_days) 1.0, 0.0;
+  (5_days) 1.0, 0.0;
+  (7_days) 1.0, 0.0;
+}
+probability ( DrugSuspension ) {
+  table 0.61, 0.05, 0.34;
+}
+probability ( PlateletCount | DrugSuspension ) {
+  (0_days) 0.3333333, 0.3333333, 0.3333333;
+  (5_days) 0.0000000, 0.3333333, 0.6666667;
+  (7_days) 0.39, 0.33, 0.28;
+}
+probability ( ThromboticRisk | DrugSuspension ) {
+  (0_days) 0.54, 0.46, 0.00;
+  (5_days) 1.0, 0.0, 0.0;
+  (7_days) 0.33, 0.67, 0.00;
+}

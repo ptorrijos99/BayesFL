@@ -1,0 +1,139 @@
+network unknown {
+}
+variable CulturalSiteProximity {
+  type discrete [ 3 ] { low, med, high };
+}
+variable FloraRichness {
+  type discrete [ 3 ] { low, med, high };
+}
+variable KeySpeciesPresence {
+  type discrete [ 2 ] { no, yes };
+}
+variable NeighborhoodConservationValue {
+  type discrete [ 2 ] { low, high };
+}
+variable NeighborhoodNaturalLandCover {
+  type discrete [ 3 ] { low, med, high };
+}
+variable SpeciesRelatedConservationValue {
+  type discrete [ 2 ] { low, high };
+}
+variable SuitabilityForConservation {
+  type discrete [ 2 ] { low, high };
+}
+variable VisitorDemand {
+  type discrete [ 3 ] { low, med, high };
+}
+variable WatershedConservationValue {
+  type discrete [ 2 ] { low, high };
+}
+variable WSAboveMarineProtectedArea {
+  type discrete [ 2 ] { no, yes };
+}
+variable WSIncludesOtherKeyDesignations {
+  type discrete [ 2 ] { no, yes };
+}
+variable WSIncludesRAMSARArea {
+  type discrete [ 2 ] { no, yes };
+}
+variable WSLandscapeVariability {
+  type discrete [ 3 ] { low, med, high };
+}
+probability ( CulturalSiteProximity ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( FloraRichness ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( KeySpeciesPresence ) {
+  table 0.5, 0.5;
+}
+probability ( NeighborhoodConservationValue | CulturalSiteProximity, NeighborhoodNaturalLandCover ) {
+  (low, low) 0.85, 0.15;
+  (med, low) 0.35, 0.65;
+  (high, low) 0.0, 1.0;
+  (low, med) 0.7, 0.3;
+  (med, med) 0.15, 0.85;
+  (high, med) 0.0, 1.0;
+  (low, high) 0.0, 1.0;
+  (med, high) 0.0, 1.0;
+  (high, high) 0.0, 1.0;
+}
+probability ( NeighborhoodNaturalLandCover ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( SpeciesRelatedConservationValue | FloraRichness, KeySpeciesPresence ) {
+  (low, no) 0.65, 0.35;
+  (med, no) 0.25, 0.75;
+  (high, no) 0.1, 0.9;
+  (low, yes) 0.0, 1.0;
+  (med, yes) 0.0, 1.0;
+  (high, yes) 0.0, 1.0;
+}
+probability ( SuitabilityForConservation | NeighborhoodConservationValue, SpeciesRelatedConservationValue, VisitorDemand, WatershedConservationValue ) {
+  (low, low, low, low) 1.0, 0.0;
+  (high, low, low, low) 0.2, 0.8;
+  (low, high, low, low) 0.5, 0.5;
+  (high, high, low, low) 0.0, 1.0;
+  (low, low, med, low) 0.98, 0.02;
+  (high, low, med, low) 0.15, 0.85;
+  (low, high, med, low) 0.48, 0.52;
+  (high, high, med, low) 0.0, 1.0;
+  (low, low, high, low) 0.95, 0.05;
+  (high, low, high, low) 0.1, 0.9;
+  (low, high, high, low) 0.45, 0.55;
+  (high, high, high, low) 0.0, 1.0;
+  (low, low, low, high) 0.45, 0.55;
+  (high, low, low, high) 0.0, 1.0;
+  (low, high, low, high) 0.35, 0.65;
+  (high, high, low, high) 0.0, 1.0;
+  (low, low, med, high) 0.43, 0.57;
+  (high, low, med, high) 0.0, 1.0;
+  (low, high, med, high) 0.33, 0.67;
+  (high, high, med, high) 0.0, 1.0;
+  (low, low, high, high) 0.4, 0.6;
+  (high, low, high, high) 0.0, 1.0;
+  (low, high, high, high) 0.3, 0.7;
+  (high, high, high, high) 0.0, 1.0;
+}
+probability ( VisitorDemand ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( WatershedConservationValue | WSAboveMarineProtectedArea, WSIncludesOtherKeyDesignations, WSIncludesRAMSARArea, WSLandscapeVariability ) {
+  (no, no, no, low) 1.0, 0.0;
+  (yes, no, no, low) 0.0, 1.0;
+  (no, yes, no, low) 0.3, 0.7;
+  (yes, yes, no, low) 0.0, 1.0;
+  (no, no, yes, low) 0.0, 1.0;
+  (yes, no, yes, low) 0.0, 1.0;
+  (no, yes, yes, low) 0.0, 1.0;
+  (yes, yes, yes, low) 0.0, 1.0;
+  (no, no, no, med) 0.4, 0.6;
+  (yes, no, no, med) 0.0, 1.0;
+  (no, yes, no, med) 0.15, 0.85;
+  (yes, yes, no, med) 0.0, 1.0;
+  (no, no, yes, med) 0.0, 1.0;
+  (yes, no, yes, med) 0.0, 1.0;
+  (no, yes, yes, med) 0.0, 1.0;
+  (yes, yes, yes, med) 0.0, 1.0;
+  (no, no, no, high) 0.0, 1.0;
+  (yes, no, no, high) 0.0, 1.0;
+  (no, yes, no, high) 0.0, 1.0;
+  (yes, yes, no, high) 0.0, 1.0;
+  (no, no, yes, high) 0.0, 1.0;
+  (yes, no, yes, high) 0.0, 1.0;
+  (no, yes, yes, high) 0.0, 1.0;
+  (yes, yes, yes, high) 0.0, 1.0;
+}
+probability ( WSAboveMarineProtectedArea ) {
+  table 0.5, 0.5;
+}
+probability ( WSIncludesOtherKeyDesignations ) {
+  table 0.5, 0.5;
+}
+probability ( WSIncludesRAMSARArea ) {
+  table 0.5, 0.5;
+}
+probability ( WSLandscapeVariability ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}

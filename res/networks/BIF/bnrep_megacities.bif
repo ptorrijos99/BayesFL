@@ -1,0 +1,147 @@
+network unknown {
+}
+variable ExcessVehicleEmission {
+  type discrete [ 2 ] { True, False };
+}
+variable M1 {
+  type discrete [ 2 ] { True, False };
+}
+variable M2 {
+  type discrete [ 2 ] { True, False };
+}
+variable M3 {
+  type discrete [ 2 ] { True, False };
+}
+variable M4 {
+  type discrete [ 2 ] { True, False };
+}
+variable M5 {
+  type discrete [ 2 ] { True, False };
+}
+variable M6 {
+  type discrete [ 2 ] { True, False };
+}
+variable X1 {
+  type discrete [ 2 ] { True, False };
+}
+variable X10 {
+  type discrete [ 2 ] { True, False };
+}
+variable X11 {
+  type discrete [ 2 ] { True, False };
+}
+variable X2 {
+  type discrete [ 2 ] { True, False };
+}
+variable X3 {
+  type discrete [ 2 ] { True, False };
+}
+variable X4 {
+  type discrete [ 2 ] { True, False };
+}
+variable X5 {
+  type discrete [ 2 ] { True, False };
+}
+variable X6 {
+  type discrete [ 2 ] { True, False };
+}
+variable X7 {
+  type discrete [ 2 ] { True, False };
+}
+variable X8 {
+  type discrete [ 2 ] { True, False };
+}
+variable X9 {
+  type discrete [ 2 ] { True, False };
+}
+probability ( ExcessVehicleEmission | M1, M2, M3, M4 ) {
+  (True, True, True, True) 1.0, 0.0;
+  (False, True, True, True) 1.0, 0.0;
+  (True, False, True, True) 1.0, 0.0;
+  (False, False, True, True) 1.0, 0.0;
+  (True, True, False, True) 1.0, 0.0;
+  (False, True, False, True) 1.0, 0.0;
+  (True, False, False, True) 1.0, 0.0;
+  (False, False, False, True) 1.0, 0.0;
+  (True, True, True, False) 1.0, 0.0;
+  (False, True, True, False) 1.0, 0.0;
+  (True, False, True, False) 1.0, 0.0;
+  (False, False, True, False) 1.0, 0.0;
+  (True, True, False, False) 1.0, 0.0;
+  (False, True, False, False) 1.0, 0.0;
+  (True, False, False, False) 1.0, 0.0;
+  (False, False, False, False) 0.0, 1.0;
+}
+probability ( M1 | M5, X1 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( M2 | X2, X3 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( M3 | X4, X5, X6 ) {
+  (True, True, True) 1.0, 0.0;
+  (False, True, True) 0.0, 1.0;
+  (True, False, True) 0.0, 1.0;
+  (False, False, True) 0.0, 1.0;
+  (True, True, False) 0.0, 1.0;
+  (False, True, False) 0.0, 1.0;
+  (True, False, False) 0.0, 1.0;
+  (False, False, False) 0.0, 1.0;
+}
+probability ( M4 | M6, X7 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( M5 | X8, X9 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 0.0, 1.0;
+  (True, False) 0.0, 1.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( M6 | X10, X11 ) {
+  (True, True) 1.0, 0.0;
+  (False, True) 1.0, 0.0;
+  (True, False) 1.0, 0.0;
+  (False, False) 0.0, 1.0;
+}
+probability ( X1 ) {
+  table 0.15, 0.85;
+}
+probability ( X10 ) {
+  table 0.7044, 0.2956;
+}
+probability ( X11 ) {
+  table 0.8003, 0.1997;
+}
+probability ( X2 ) {
+  table 0.7071, 0.2929;
+}
+probability ( X3 ) {
+  table 0.4583, 0.5417;
+}
+probability ( X4 ) {
+  table 0.444, 0.556;
+}
+probability ( X5 ) {
+  table 0.2286, 0.7714;
+}
+probability ( X6 ) {
+  table 0.2, 0.8;
+}
+probability ( X7 ) {
+  table 0.25, 0.75;
+}
+probability ( X8 ) {
+  table 0.2, 0.8;
+}
+probability ( X9 ) {
+  table 0.6078, 0.3922;
+}

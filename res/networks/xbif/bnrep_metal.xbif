@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CAF</NAME>
+      <OUTCOME>Okay</OUTCOME>
+      <OUTCOME>Faulty</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CF</NAME>
+      <OUTCOME>Okay</OUTCOME>
+      <OUTCOME>Faulty</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FlyOutAccident</NAME>
+      <OUTCOME>Fatal</OUTCOME>
+      <OUTCOME>Major</OUTCOME>
+      <OUTCOME>Minor</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IFR</NAME>
+      <OUTCOME>HR</OUTCOME>
+      <OUTCOME>HE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OS</NAME>
+      <OUTCOME>Proper</OUTCOME>
+      <OUTCOME>Improper</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SGF</NAME>
+      <OUTCOME>Okay</OUTCOME>
+      <OUTCOME>Faulty</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPF</NAME>
+      <OUTCOME>Okay</OUTCOME>
+      <OUTCOME>Faulty</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WHF</NAME>
+      <OUTCOME>N_Fail</OUTCOME>
+      <OUTCOME>FLRE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CAF</FOR>
+      <TABLE>0.28 0.72 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CF</FOR>
+      <TABLE>0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FlyOutAccident</FOR>
+      <GIVEN>CAF</GIVEN>
+      <GIVEN>CF</GIVEN>
+      <GIVEN>IFR</GIVEN>
+      <GIVEN>OS</GIVEN>
+      <GIVEN>SGF</GIVEN>
+      <GIVEN>TPF</GIVEN>
+      <GIVEN>WHF</GIVEN>
+      <TABLE>0.01 0.04 0.95 0.25 0.25 0.5 0.334 0.333 0.333 0.3 0.4 0.3 0.05 0.1 0.85 0.3 0.35 0.35 0.35 0.35 0.3 0.3 0.6 0.1 0.3 0.45 0.25 0.3 0.6 0.1 0.35 0.4 0.25 0.25 0.65 0.1 0.3 0.5 0.2 0.3 0.6 0.1 0.3 0.5 0.2 0.3 0.5 0.2 0.05 0.1 0.85 0.3 0.3 0.4 0.35 0.35 0.3 0.45 0.35 0.2 0.15 0.2 0.65 0.45 0.3 0.25 0.35 0.35 0.3 0.7 0.2 0.1 0.5 0.3 0.2 0.7 0.2 0.1 0.6 0.3 0.1 0.75 0.15 0.1 0.55 0.3 0.15 0.7 0.2 0.1 0.6 0.3 0.1 0.6 0.3 0.1 0.01 0.04 0.95 0.3 0.35 0.35 0.334 0.333 0.333 0.3 0.5 0.2 0.1 0.2 0.7 0.3 0.6 0.1 0.35 0.35 0.3 0.3 0.6 0.1 0.3 0.4 0.3 0.3 0.6 0.1 0.3 0.6 0.1 0.3 0.6 0.1 0.55 0.3 0.15 0.3 0.4 0.3 0.3 0.6 0.1 0.3 0.6 0.1 0.1 0.2 0.7 0.47 0.33 0.2 0.35 0.35 0.3 0.75 0.15 0.1 0.15 0.2 0.65 0.65 0.25 0.1 0.35 0.35 0.3 0.75 0.15 0.1 0.5 0.3 0.2 0.65 0.25 0.1 0.6 0.3 0.1 0.75 0.15 0.1 0.6 0.3 0.1 0.45 0.35 0.2 0.6 0.3 0.1 0.75 0.15 0.1 0.25 0.65 0.1 0.45 0.45 0.1 0.3 0.6 0.1 0.2 0.7 0.1 0.2 0.7 0.1 0.5 0.4 0.1 0.4 0.3 0.3 0.35 0.55 0.1 0.25 0.55 0.2 0.7 0.2 0.1 0.5 0.4 0.1 0.3 0.6 0.1 0.3 0.5 0.2 0.3 0.6 0.1 0.3 0.4 0.3 0.4 0.5 0.1 0.75 0.15 0.1 0.7 0.2 0.1 0.7 0.2 0.1 0.8 0.15 0.05 0.75 0.15 0.1 0.75 0.15 0.1 0.5 0.4 0.1 0.85 0.1 0.05 0.75 0.15 0.1 0.8 0.15 0.05 0.7 0.2 0.1 0.7 0.2 0.1 0.6 0.3 0.1 0.7 0.2 0.1 0.6 0.3 0.1 0.8 0.15 0.05 0.4 0.5 0.1 0.25 0.65 0.1 0.6 0.3 0.1 0.3 0.6 0.1 0.3 0.5 0.2 0.25 0.65 0.1 0.3 0.6 0.1 0.3 0.6 0.1 0.3 0.6 0.1 0.3 0.6 0.1 0.55 0.35 0.1 0.01 0.04 0.95 0.4 0.5 0.1 0.25 0.65 0.1 0.4 0.3 0.3 0.05 0.1 0.85 0.7 0.2 0.1 0.75 0.15 0.1 0.7 0.2 0.1 0.75 0.2 0.05 0.7 0.2 0.1 0.85 0.1 0.05 0.7 0.2 0.1 0.85 0.1 0.05 0.8 0.15 0.05 0.7 0.2 0.1 0.8 0.15 0.05 0.05 0.1 0.85 0.7 0.2 0.1 0.75 0.2 0.05 0.7 0.2 0.1 0.15 0.2 0.65 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IFR</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OS</FOR>
+      <TABLE>0.98 0.02 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SGF</FOR>
+      <TABLE>0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPF</FOR>
+      <TABLE>0.96 0.04 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WHF</FOR>
+      <TABLE>0.95 0.05 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

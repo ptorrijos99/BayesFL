@@ -1,0 +1,50 @@
+network unknown {
+}
+variable CHL {
+  type discrete [ 2 ] { r, s };
+}
+variable CIP {
+  type discrete [ 2 ] { r, s };
+}
+variable CTX {
+  type discrete [ 2 ] { r, s };
+}
+variable FFC {
+  type discrete [ 2 ] { r, s };
+}
+variable GEN {
+  type discrete [ 2 ] { r, s };
+}
+variable NAL {
+  type discrete [ 2 ] { r, s };
+}
+variable TET {
+  type discrete [ 2 ] { r, s };
+}
+probability ( CHL | GEN ) {
+  (r) 0.635, 0.365;
+  (s) 0.212, 0.788;
+}
+probability ( CIP ) {
+  table 0.114, 0.886;
+}
+probability ( CTX ) {
+  table 0.018, 0.982;
+}
+probability ( FFC | CHL ) {
+  (r) 0.221, 0.779;
+  (s) 0.0, 1.0;
+}
+probability ( GEN ) {
+  table 0.064, 0.936;
+}
+probability ( NAL | CIP ) {
+  (r) 0.779, 0.221;
+  (s) 0.001, 0.999;
+}
+probability ( TET | CHL, GEN ) {
+  (r, r) 0.979, 0.021;
+  (s, r) 1.0, 0.0;
+  (r, s) 0.961, 0.039;
+  (s, s) 0.776, 0.224;
+}

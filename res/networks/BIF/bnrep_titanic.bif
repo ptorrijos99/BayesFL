@@ -1,0 +1,43 @@
+network unknown {
+}
+variable Class {
+  type discrete [ 4 ] { 1st, 2nd, 3rd, Crew };
+}
+variable Sex {
+  type discrete [ 2 ] { Male, Female };
+}
+variable Age {
+  type discrete [ 2 ] { Child, Adult };
+}
+variable Survived {
+  type discrete [ 2 ] { No, Yes };
+}
+probability ( Class ) {
+  table 0.1476602, 0.1294866, 0.3207633, 0.4020900;
+}
+probability ( Sex | Class ) {
+  (1st) 0.5538462, 0.4461538;
+  (2nd) 0.6280702, 0.3719298;
+  (3rd) 0.7223796, 0.2776204;
+  (Crew) 0.9740113, 0.0259887;
+}
+probability ( Age | Class, Survived ) {
+  (1st, No) 0.0, 1.0;
+  (2nd, No) 0.0, 1.0;
+  (3rd, No) 0.09848485, 0.90151515;
+  (Crew, No) 0.0, 1.0;
+  (1st, Yes) 0.02955665, 0.97044335;
+  (2nd, Yes) 0.2033898, 0.7966102;
+  (3rd, Yes) 0.1516854, 0.8483146;
+  (Crew, Yes) 0.0, 1.0;
+}
+probability ( Survived | Class, Sex ) {
+  (1st, Male) 0.6555556, 0.3444444;
+  (2nd, Male) 0.8603352, 0.1396648;
+  (3rd, Male) 0.827451, 0.172549;
+  (Crew, Male) 0.7772622, 0.2227378;
+  (1st, Female) 0.02758621, 0.97241379;
+  (2nd, Female) 0.1226415, 0.8773585;
+  (3rd, Female) 0.5408163, 0.4591837;
+  (Crew, Female) 0.1304348, 0.8695652;
+}

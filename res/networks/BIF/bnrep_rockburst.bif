@@ -1,0 +1,59 @@
+network unknown {
+}
+variable ASAV {
+  type discrete [ 3 ] { Small, Medium, Big };
+}
+variable DSDAV {
+  type discrete [ 3 ] { Small, Medium, Big };
+}
+variable MMAV {
+  type discrete [ 3 ] { Slight, Medium, Strong };
+}
+variable Rockburst {
+  type discrete [ 2 ] { No, Yes };
+}
+variable SEAV {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SRAV {
+  type discrete [ 3 ] { Small, Medium, Big };
+}
+probability ( ASAV | Rockburst, SRAV ) {
+  (No, Small) 0.45333, 0.25333, 0.29334;
+  (Yes, Small) 0.03030, 0.12121, 0.84849;
+  (No, Medium) 0.66666, 0.16667, 0.16667;
+  (Yes, Medium) 0.07752, 0.49612, 0.42636;
+  (No, Big) 0.3333333, 0.3333333, 0.3333333;
+  (Yes, Big) 0.41667, 0.47916, 0.10417;
+}
+probability ( DSDAV | ASAV, Rockburst ) {
+  (Small, No) 0.96078, 0.01961, 0.01961;
+  (Medium, No) 0.54167, 0.29167, 0.16666;
+  (Big, No) 0.14815, 0.59259, 0.25926;
+  (Small, Yes) 0.37255, 0.49020, 0.13725;
+  (Medium, Yes) 0.11404, 0.56140, 0.32456;
+  (Big, Yes) 0.01738267, 0.20293022, 0.77968711;
+}
+probability ( MMAV | Rockburst ) {
+  (No) 0.91666083, 0.07291927, 0.01041990;
+  (Yes) 0.06349063, 0.44444444, 0.49206492;
+}
+probability ( Rockburst ) {
+  table 0.72609, 0.27391;
+}
+probability ( SEAV | DSDAV, Rockburst ) {
+  (Small, No) 0.96970, 0.01515, 0.01515;
+  (Medium, No) 0.79167, 0.16666, 0.04167;
+  (Big, No) 0.33333, 0.58334, 0.08333;
+  (Small, Yes) 0.21212, 0.66667, 0.12121;
+  (Medium, Yes) 0.06481, 0.64815, 0.28704;
+  (Big, Yes) 0.00854, 0.21368, 0.77778;
+}
+probability ( SRAV | MMAV, Rockburst ) {
+  (Slight, No) 0.77778, 0.21111, 0.01111;
+  (Medium, No) 0.44444, 0.44444, 0.11112;
+  (Strong, No) 0.3333333, 0.3333333, 0.3333333;
+  (Slight, Yes) 0.72222, 0.22222, 0.05556;
+  (Medium, Yes) 0.16667, 0.74561, 0.08772;
+  (Strong, Yes) 0.007925734, 0.316889599, 0.675184668;
+}

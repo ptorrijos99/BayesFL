@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BenthicFishForaging</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Disturbance</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Ecosystem</NAME>
+      <OUTCOME>Standing_floating</OUTCOME>
+      <OUTCOME>Standing_submerged</OUTCOME>
+      <OUTCOME>Flowing_submerged</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EcosystemServices</NAME>
+      <OUTCOME>Flooding</OUTCOME>
+      <OUTCOME>Birds</OUTCOME>
+      <OUTCOME>Nutrient_retention</OUTCOME>
+      <OUTCOME>Angling</OUTCOME>
+      <OUTCOME>Swimming</OUTCOME>
+      <OUTCOME>Boating</OUTCOME>
+      <OUTCOME>Hydropower</OUTCOME>
+      <OUTCOME>Irrigation</OUTCOME>
+      <OUTCOME>Invasive_species</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EpiphyticInvertebrates</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Flow</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Light</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NutrientLoading</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Phytoplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PiscivorousFish</NAME>
+      <OUTCOME>Absent</OUTCOME>
+      <OUTCOME>Present</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PiscivorousFishPredation</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlanktivorousFish</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlantRemoval</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>Partial</OUTCOME>
+      <OUTCOME>Full</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Resources</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Zooplankton</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BenthicFishForaging</FOR>
+      <GIVEN>EpiphyticInvertebrates</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Disturbance</FOR>
+      <GIVEN>Flow</GIVEN>
+      <GIVEN>Zooplankton</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.75 0.25 0.0 1.0 0.0 0.0 0.5 0.5 0.3333333 0.3333333 0.3333333 0.0 0.0 1.0 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Ecosystem</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EcosystemServices</FOR>
+      <TABLE>0.1 0.0 0.1 0.4 0.1 0.0 0.2 0.1 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EpiphyticInvertebrates</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>PlantRemoval</GIVEN>
+      <TABLE>0.75 0.25 0.0 0.5 0.5 0.0 0.25 0.5 0.25 0.0 0.25 0.75 0.0 0.25 0.75 1.0 0.0 0.0 0.0 0.25 0.75 0.0 0.25 0.75 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Flow</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>PlantRemoval</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.75 0.25 0.0 0.0 0.5 0.5 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Light</FOR>
+      <GIVEN>Ecosystem</GIVEN>
+      <GIVEN>PlantRemoval</GIVEN>
+      <TABLE>1.0 0.0 0.5 0.5 0.0 1.0 0.5 0.5 0.25 0.75 0.0 1.0 0.5 0.5 0.25 0.75 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NutrientLoading</FOR>
+      <TABLE>0.525 0.275 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Phytoplankton</FOR>
+      <GIVEN>Disturbance</GIVEN>
+      <GIVEN>Resources</GIVEN>
+      <TABLE>0.5 0.5 0.0 0.0 0.5 0.5 0.0 0.0 1.0 0.75 0.25 0.0 0.0 1.0 0.0 0.0 0.5 0.5 1.0 0.0 0.0 0.5 0.5 0.0 0.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PiscivorousFish</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PiscivorousFishPredation</FOR>
+      <GIVEN>PiscivorousFish</GIVEN>
+      <GIVEN>PlantRemoval</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.5 0.5 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlanktivorousFish</FOR>
+      <GIVEN>PiscivorousFishPredation</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlantRemoval</FOR>
+      <GIVEN>EcosystemServices</GIVEN>
+      <TABLE>0.0 0.25 0.75 1.0 0.0 0.0 0.75 0.25 0.0 0.0 1.0 0.0 0.0 0.25 0.75 0.0 0.0 1.0 0.0 0.25 0.75 0.0 0.5 0.5 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Resources</FOR>
+      <GIVEN>BenthicFishForaging</GIVEN>
+      <GIVEN>Light</GIVEN>
+      <GIVEN>NutrientLoading</GIVEN>
+      <TABLE>1.0 0.0 0.0 0.75 0.25 0.0 0.5 0.5 0.0 0.75 0.25 0.0 0.0 0.75 0.25 0.0 0.0 1.0 0.9 0.1 0.0 0.7 0.3 0.0 0.5 0.5 0.0 0.5 0.5 0.0 0.0 0.65 0.35 0.0 0.0 1.0 0.8 0.2 0.0 0.65 0.35 0.0 0.5 0.5 0.0 0.25 0.75 0.0 0.0 0.55 0.45 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Zooplankton</FOR>
+      <GIVEN>Flow</GIVEN>
+      <GIVEN>PlanktivorousFish</GIVEN>
+      <TABLE>0.0 0.0 1.0 0.5 0.5 0.0 0.0 1.0 0.0 0.75 0.25 0.0 1.0 0.0 0.0 1.0 0.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

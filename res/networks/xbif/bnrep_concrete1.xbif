@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Basement</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueConcrete</NAME>
+      <OUTCOME>False</OUTCOME>
+      <OUTCOME>True</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BuildingClass</NAME>
+      <OUTCOME>Single_Family_House</OUTCOME>
+      <OUTCOME>MultiFamily_House</OUTCOME>
+      <OUTCOME>School_Building</OUTCOME>
+      <OUTCOME>Other_Building</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloorArea</NAME>
+      <OUTCOME>0_150</OUTCOME>
+      <OUTCOME>150_220</OUTCOME>
+      <OUTCOME>220_360</OUTCOME>
+      <OUTCOME>360_1500</OUTCOME>
+      <OUTCOME>_1500</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Basement</FOR>
+      <TABLE>0.34 0.66 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BlueConcrete</FOR>
+      <TABLE>0.64 0.36 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BuildingClass</FOR>
+      <GIVEN>Basement</GIVEN>
+      <GIVEN>BlueConcrete</GIVEN>
+      <TABLE>0.47 0.05 0.27 0.21 0.07 0.58 0.16 0.19 0.44 0.37 0.08 0.11 0.14 0.54 0.05 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloorArea</FOR>
+      <GIVEN>Basement</GIVEN>
+      <GIVEN>BuildingClass</GIVEN>
+      <TABLE>0.76 0.2 0.04 0.0 0.0 0.0 0.0 0.35 0.2 0.45 0.05 0.02 0.09 0.66 0.18 0.02 0.0 0.12 0.54 0.32 0.18 0.45 0.36 0.01 0.0 0.0 0.0 0.09 0.5 0.41 0.03 0.01 0.11 0.29 0.56 0.02 0.0 0.04 0.26 0.68 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

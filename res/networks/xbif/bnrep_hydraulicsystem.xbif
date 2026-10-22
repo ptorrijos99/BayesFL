@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BlueHydraulicSystem</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GreenHydraulicSystem</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HydraulicSystem</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>YellowHydraulicSystem</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BlueHydraulicSystem</FOR>
+      <TABLE>0.9829 0.0171 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GreenHydraulicSystem</FOR>
+      <TABLE>0.9764 0.0236 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HydraulicSystem</FOR>
+      <GIVEN>BlueHydraulicSystem</GIVEN>
+      <GIVEN>GreenHydraulicSystem</GIVEN>
+      <GIVEN>YellowHydraulicSystem</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.2424242 0.7575758 0.7575758 0.2424242 0.7575758 0.2424242 0.7575758 0.2424242 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>YellowHydraulicSystem</FOR>
+      <TABLE>0.9759 0.0241 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

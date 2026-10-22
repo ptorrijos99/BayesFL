@@ -1,0 +1,82 @@
+network unknown {
+}
+variable BGU {
+  type discrete [ 2 ] { false, true };
+}
+variable DNAFind {
+  type discrete [ 2 ] { false, true };
+}
+variable DNAU {
+  type discrete [ 2 ] { false, true };
+}
+variable DNAX {
+  type discrete [ 2 ] { false, true };
+}
+variable Prop {
+  type discrete [ 2 ] { H1, H2 };
+}
+variable TPRaltactX {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRUstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+variable TPRXstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+variable UstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+variable Xaltact {
+  type discrete [ 2 ] { false, true };
+}
+variable XstrangledY {
+  type discrete [ 2 ] { false, true };
+}
+probability ( BGU ) {
+  table 0.4, 0.6;
+}
+probability ( DNAFind | DNAU, DNAX ) {
+  (false, false) 0.0, 1.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 1.0, 0.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( DNAU | BGU, TPRUstrangledY ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 0.0, 1.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( DNAX | TPRaltactX, TPRXstrangledY ) {
+  (false, false) 1.0, 0.0;
+  (true, false) 0.0, 1.0;
+  (false, true) 0.0, 1.0;
+  (true, true) 0.0, 1.0;
+}
+probability ( Prop ) {
+  table 0.5, 0.5;
+}
+probability ( TPRaltactX | Xaltact ) {
+  (false) 1.0, 0.0;
+  (true) 0.4, 0.6;
+}
+probability ( TPRUstrangledY | UstrangledY ) {
+  (false) 1.0, 0.0;
+  (true) 0.05, 0.95;
+}
+probability ( TPRXstrangledY | XstrangledY ) {
+  (false) 1.0, 0.0;
+  (true) 0.05, 0.95;
+}
+probability ( UstrangledY | Prop ) {
+  (H1) 1.0, 0.0;
+  (H2) 0.0, 1.0;
+}
+probability ( Xaltact ) {
+  table 0.0, 1.0;
+}
+probability ( XstrangledY | Prop ) {
+  (H1) 0.0, 1.0;
+  (H2) 1.0, 0.0;
+}

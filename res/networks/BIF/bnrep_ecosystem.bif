@@ -1,0 +1,118 @@
+network unknown {
+}
+variable Budget {
+  type discrete [ 3 ] { Deficit, Balance, Surplus };
+}
+variable Bus {
+  type discrete [ 2 ] { Low, High };
+}
+variable Demand {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Green {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Lot {
+  type discrete [ 2 ] { Low, High };
+}
+variable Opportunity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Park {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable People {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Potential {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Road {
+  type discrete [ 2 ] { Low, High };
+}
+variable Supply {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Traffic {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Water {
+  type discrete [ 2 ] { No, Yes };
+}
+probability ( Budget | Demand, Supply ) {
+  (Low, Low) 0.0, 1.0, 0.0;
+  (Medium, Low) 1.0, 0.0, 0.0;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Low, Medium) 0.0, 0.0, 1.0;
+  (Medium, Medium) 0.0, 1.0, 0.0;
+  (High, Medium) 1.0, 0.0, 0.0;
+  (Low, High) 0.0, 0.0, 1.0;
+  (Medium, High) 0.0, 0.0, 1.0;
+  (High, High) 0.0, 1.0, 0.0;
+}
+probability ( Bus ) {
+  table 0.211, 0.789;
+}
+probability ( Demand | People ) {
+  (Low) 1.0, 0.0, 0.0;
+  (Medium) 0.0, 1.0, 0.0;
+  (High) 0.0, 0.0, 1.0;
+}
+probability ( Green ) {
+  table 0.62237762, 0.08991009, 0.28771229;
+}
+probability ( Lot ) {
+  table 0.317, 0.683;
+}
+probability ( Opportunity | Park, Traffic ) {
+  (Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.8, 0.2, 0.0;
+  (High, Low) 0.2, 0.8, 0.0;
+  (Low, Medium) 0.8, 0.2, 0.0;
+  (Medium, Medium) 0.0, 1.0, 0.0;
+  (High, Medium) 0.0, 0.8, 0.2;
+  (Low, High) 0.2, 0.8, 0.0;
+  (Medium, High) 0.0, 0.8, 0.2;
+  (High, High) 0.0, 0.0, 1.0;
+}
+probability ( Park ) {
+  table 0.3363363, 0.2922923, 0.3713714;
+}
+probability ( People ) {
+  table 0.482, 0.327, 0.191;
+}
+probability ( Potential | Green, Water ) {
+  (Low, No) 1.0, 0.0, 0.0;
+  (Medium, No) 0.0, 1.0, 0.0;
+  (High, No) 0.0, 0.0, 1.0;
+  (Low, Yes) 0.2, 0.8, 0.0;
+  (Medium, Yes) 0.0, 0.2, 0.8;
+  (High, Yes) 0.0, 0.0, 1.0;
+}
+probability ( Road ) {
+  table 0.2, 0.8;
+}
+probability ( Supply | Opportunity, Potential ) {
+  (Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.8, 0.2, 0.0;
+  (High, Low) 0.2, 0.8, 0.0;
+  (Low, Medium) 1.0, 0.0, 0.0;
+  (Medium, Medium) 0.0, 1.0, 0.0;
+  (High, Medium) 0.0, 0.2, 0.8;
+  (Low, High) 1.0, 0.0, 0.0;
+  (Medium, High) 0.0, 0.8, 0.2;
+  (High, High) 0.0, 0.0, 1.0;
+}
+probability ( Traffic | Bus, Lot, Road ) {
+  (Low, Low, Low) 1.0, 0.0, 0.0;
+  (High, Low, Low) 0.8, 0.2, 0.0;
+  (Low, High, Low) 0.8, 0.2, 0.0;
+  (High, High, Low) 0.0, 0.2, 0.8;
+  (Low, Low, High) 0.8, 0.2, 0.0;
+  (High, Low, High) 0.0, 0.2, 0.8;
+  (Low, High, High) 0.0, 0.2, 0.8;
+  (High, High, High) 0.0, 0.0, 1.0;
+}
+probability ( Water ) {
+  table 0.622, 0.378;
+}

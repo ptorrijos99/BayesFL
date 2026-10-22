@@ -1,0 +1,328 @@
+network unknown {
+}
+variable AI_Risk_Jobs {
+  type discrete [ 2 ] { Not_mentioned, Mentioned };
+}
+variable AI_Risk_LossOfControl {
+  type discrete [ 2 ] { Not_mentioned, Mentioned };
+}
+variable AI_Risk_Misuse_Regulation {
+  type discrete [ 2 ] { Not_mentioned, Mentioned };
+}
+variable AI_Risk_Data {
+  type discrete [ 2 ] { Not_mentioned, Mentioned };
+}
+variable AI_Risk_Society {
+  type discrete [ 2 ] { Not_mentioned, Mentioned };
+}
+variable VoteIntent {
+  type discrete [ 3 ] { Left, Right, Other };
+}
+variable AIRegulations {
+  type discrete [ 2 ] { No, Yes };
+}
+variable HeardEURegulation {
+  type discrete [ 2 ] { No, Yes };
+}
+variable EUAppropriateRegulation {
+  type discrete [ 4 ] { Appropriate, Too_strict, Not_strict_enough, Don_t_know };
+}
+variable Sex {
+  type discrete [ 2 ] { Female, Male };
+}
+variable Age {
+  type discrete [ 4 ] { 14_29, 30_44, 45_59, 60_ };
+}
+variable Education {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Income {
+  type discrete [ 4 ] { Low, Medium, High, Not_reported };
+}
+variable Municipality {
+  type discrete [ 5 ] { _5k, 5k_19k, 20k_99k, 100k_499k, 500k_ };
+}
+variable InterestAI {
+  type discrete [ 4 ] { Not_at_all, Less_strongly, Strongly, Very_strongly };
+}
+variable InformedAI {
+  type discrete [ 4 ] { Very_poor, Rather_poor, Rather_good, Very_good };
+}
+variable MediaAI {
+  type discrete [ 2 ] { No, Yes };
+}
+variable FriendsAI {
+  type discrete [ 2 ] { No, Yes };
+}
+variable SearchAI {
+  type discrete [ 2 ] { No, Yes };
+}
+probability ( AI_Risk_Jobs | Age ) {
+  (14_29) 0.7081448, 0.2918552;
+  (30_44) 0.7428256, 0.2571744;
+  (45_59) 0.8442786, 0.1557214;
+  (60_) 0.8824027, 0.1175973;
+}
+probability ( AI_Risk_LossOfControl | AI_Risk_Jobs, AI_Risk_Misuse_Regulation, AI_Risk_Data ) {
+  (Not_mentioned, Not_mentioned, Not_mentioned) 0.475377, 0.524623;
+  (Mentioned, Not_mentioned, Not_mentioned) 0.8978836, 0.1021164;
+  (Not_mentioned, Mentioned, Not_mentioned) 0.94340176, 0.05659824;
+  (Mentioned, Mentioned, Not_mentioned) 0.994382022, 0.005617978;
+  (Not_mentioned, Not_mentioned, Mentioned) 0.92075736, 0.07924264;
+  (Mentioned, Not_mentioned, Mentioned) 0.6632653, 0.3367347;
+  (Not_mentioned, Mentioned, Mentioned) 0.94137931, 0.05862069;
+  (Mentioned, Mentioned, Mentioned) 0.94444444, 0.05555556;
+}
+probability ( AI_Risk_Misuse_Regulation | AI_Risk_Jobs, AI_Risk_Data ) {
+  (Not_mentioned, Not_mentioned) 0.6558337, 0.3441663;
+  (Mentioned, Not_mentioned) 0.9139265, 0.0860735;
+  (Not_mentioned, Mentioned) 0.8310023, 0.1689977;
+  (Mentioned, Mentioned) 0.8448276, 0.1551724;
+}
+probability ( AI_Risk_Data | AI_Risk_Jobs, FriendsAI ) {
+  (Not_mentioned, No) 0.8969171, 0.1030829;
+  (Mentioned, No) 0.94518272, 0.05481728;
+  (Not_mentioned, Yes) 0.8009637, 0.1990363;
+  (Mentioned, Yes) 0.94897959, 0.05102041;
+}
+probability ( AI_Risk_Society | AI_Risk_Jobs, AI_Risk_LossOfControl, AI_Risk_Misuse_Regulation, AI_Risk_Data ) {
+  (Not_mentioned, Not_mentioned, Not_mentioned, Not_mentioned) 0.4922305, 0.5077695;
+  (Mentioned, Not_mentioned, Not_mentioned, Not_mentioned) 0.98084856, 0.01915144;
+  (Not_mentioned, Mentioned, Not_mentioned, Not_mentioned) 0.97169258, 0.02830742;
+  (Mentioned, Mentioned, Not_mentioned, Not_mentioned) 0.997409326, 0.002590674;
+  (Not_mentioned, Not_mentioned, Mentioned, Not_mentioned) 0.97000311, 0.02999689;
+  (Mentioned, Not_mentioned, Mentioned, Not_mentioned) 0.90677966, 0.09322034;
+  (Not_mentioned, Mentioned, Mentioned, Not_mentioned) 0.997409326, 0.002590674;
+  (Mentioned, Mentioned, Mentioned, Not_mentioned) 0.5, 0.5;
+  (Not_mentioned, Not_mentioned, Not_mentioned, Mentioned) 0.98743336, 0.01256664;
+  (Mentioned, Not_mentioned, Not_mentioned, Mentioned) 0.992307692, 0.007692308;
+  (Not_mentioned, Mentioned, Not_mentioned, Mentioned) 0.995575221, 0.004424779;
+  (Mentioned, Mentioned, Not_mentioned, Mentioned) 0.98484848, 0.01515152;
+  (Not_mentioned, Not_mentioned, Mentioned, Mentioned) 0.998168498, 0.001831502;
+  (Mentioned, Not_mentioned, Mentioned, Mentioned) 0.97058824, 0.02941176;
+  (Not_mentioned, Mentioned, Mentioned, Mentioned) 0.97058824, 0.02941176;
+  (Mentioned, Mentioned, Mentioned, Mentioned) 0.5, 0.5;
+}
+probability ( VoteIntent | Sex, Income, Municipality ) {
+  (Female, Low, _5k) 0.3000831, 0.3998337, 0.3000831;
+  (Male, Low, _5k) 0.07189542, 0.78490791, 0.14319667;
+  (Female, Medium, _5k) 0.3333333, 0.5553500, 0.1113167;
+  (Male, Medium, _5k) 0.3181990, 0.5452138, 0.1365872;
+  (Female, High, _5k) 0.5330006, 0.3333333, 0.1336661;
+  (Male, High, _5k) 0.20022185, 0.73266778, 0.06711037;
+  (Female, Not_reported, _5k) 0.1541907, 0.3845170, 0.4612924;
+  (Male, Not_reported, _5k) 0.3333333, 0.4164934, 0.2501733;
+  (Female, Low, 5k_19k) 0.07716939, 0.53826449, 0.38456612;
+  (Male, Low, 5k_19k) 0.3181990, 0.4544079, 0.2273931;
+  (Female, Medium, 5k_19k) 0.3243304, 0.5674094, 0.1082602;
+  (Male, Medium, 5k_19k) 0.3214392, 0.2857568, 0.3928040;
+  (Female, High, 5k_19k) 0.4053567, 0.4053567, 0.1892865;
+  (Male, High, 5k_19k) 0.48927875, 0.44674818, 0.06397306;
+  (Female, Not_reported, 5k_19k) 0.3998891, 0.3998891, 0.2002219;
+  (Male, Not_reported, 5k_19k) 0.2857709, 0.4760206, 0.2382085;
+  (Female, Low, 20k_99k) 0.3928040, 0.4641689, 0.1430271;
+  (Male, Low, 20k_99k) 0.6465981400, 0.3529123837, 0.0004894763;
+  (Female, Medium, 20k_99k) 0.4544766, 0.4090479, 0.1364755;
+  (Male, Medium, 20k_99k) 0.3823169, 0.4410972, 0.1765858;
+  (Female, High, 20k_99k) 0.6330835, 0.3000278, 0.0668887;
+  (Male, High, 20k_99k) 0.3829523, 0.5956052, 0.0214425;
+  (Female, Not_reported, 20k_99k) 0.1668401, 0.4582033, 0.3749566;
+  (Male, Not_reported, 20k_99k) 0.1668978, 0.5552474, 0.2778548;
+  (Female, Low, 100k_499k) 0.68694747, 0.06292252, 0.25013001;
+  (Male, Low, 100k_499k) 0.4994808, 0.1256490, 0.3748702;
+  (Female, Medium, 100k_499k) 0.5330005, 0.2002219, 0.2667776;
+  (Male, Medium, 100k_499k) 0.3333333, 0.5552474, 0.1114193;
+  (Female, High, 100k_499k) 0.64659814, 0.29417523, 0.05922663;
+  (Male, High, 100k_499k) 0.5923527, 0.2593278, 0.1483195;
+  (Female, Not_reported, 100k_499k) 0.2309661, 0.3845170, 0.3845170;
+  (Male, Not_reported, 100k_499k) 0.4282325, 0.4282325, 0.1435350;
+  (Female, Low, 500k_) 0.4164934, 0.4164934, 0.1670132;
+  (Male, Low, 500k_) 0.6659736, 0.1670132, 0.1670132;
+  (Female, Medium, 500k_) 0.5291238, 0.2354381, 0.2354381;
+  (Male, Medium, 500k_) 0.624545, 0.250130, 0.125325;
+  (Female, High, 500k_) 0.58044588, 0.38705345, 0.03250067;
+  (Male, High, 500k_) 0.4073388837, 0.5923527598, 0.0003083565;
+  (Female, Not_reported, 500k_) 0.4284017, 0.3571004, 0.2144979;
+  (Male, Not_reported, 500k_) 0.4441367, 0.2225300, 0.3333333;
+}
+probability ( AIRegulations | VoteIntent, EUAppropriateRegulation ) {
+  (Left, Appropriate) 0.02692948, 0.97307052;
+  (Right, Appropriate) 0.113548, 0.886452;
+  (Other, Appropriate) 0.09497645, 0.90502355;
+  (Left, Too_strict) 0.08477509, 0.91522491;
+  (Right, Too_strict) 0.4083192, 0.5916808;
+  (Other, Too_strict) 0.3853503, 0.6146497;
+  (Left, Not_strict_enough) 0.02824694, 0.97175306;
+  (Right, Not_strict_enough) 0.05997514, 0.94002486;
+  (Other, Not_strict_enough) 0.09890859, 0.90109141;
+  (Left, Don_t_know) 0.1571429, 0.8428571;
+  (Right, Don_t_know) 0.172209, 0.827791;
+  (Other, Don_t_know) 0.1682028, 0.8317972;
+}
+probability ( HeardEURegulation | VoteIntent, InterestAI ) {
+  (Left, Not_at_all) 0.93100189, 0.06899811;
+  (Right, Not_at_all) 0.91625372, 0.08374628;
+  (Other, Not_at_all) 0.97191011, 0.02808989;
+  (Left, Less_strongly) 0.7696225, 0.2303775;
+  (Right, Less_strongly) 0.90126183, 0.09873817;
+  (Other, Less_strongly) 0.8787661, 0.1212339;
+  (Left, Strongly) 0.6520637, 0.3479363;
+  (Right, Strongly) 0.8067933, 0.1932067;
+  (Other, Strongly) 0.90806045, 0.09193955;
+  (Left, Very_strongly) 0.5097879, 0.4902121;
+  (Right, Very_strongly) 0.631291, 0.368709;
+  (Other, Very_strongly) 0.704878, 0.295122;
+}
+probability ( EUAppropriateRegulation | Age ) {
+  (14_29) 0.70701358, 0.05542986, 0.14592760, 0.09162896;
+  (30_44) 0.48620309, 0.10651214, 0.37141280, 0.03587196;
+  (45_59) 0.37039801, 0.10771144, 0.45398010, 0.06791045;
+  (60_) 0.37464749, 0.09940778, 0.39269600, 0.13324873;
+}
+probability ( Sex | Income ) {
+  (Low) 0.5574887, 0.4425113;
+  (Medium) 0.5425944, 0.4574056;
+  (High) 0.443734, 0.556266;
+  (Not_reported) 0.5410256, 0.4589744;
+}
+probability ( Age | Sex, Education, Municipality ) {
+  (Female, Low, _5k) 0.000755287, 0.091389728, 0.272658610, 0.635196375;
+  (Male, Low, _5k) 0.1116236, 0.1116236, 0.2223247, 0.5544281;
+  (Female, Medium, _5k) 0.0002774695, 0.0668701443, 0.4331298557, 0.4997225305;
+  (Male, Medium, _5k) 0.1179061, 0.1179061, 0.2940313, 0.4701566;
+  (Female, High, _5k) 0.20839112, 0.08356449, 0.25000000, 0.45804438;
+  (Male, High, _5k) 0.1352385, 0.1352385, 0.2432493, 0.4862736;
+  (Female, Low, 5k_19k) 0.0006925208, 0.0837950139, 0.2500000000, 0.6655124653;
+  (Male, Low, 5k_19k) 0.05591497, 0.22227357, 0.16682070, 0.55499076;
+  (Female, Medium, 5k_19k) 0.02239082, 0.04459660, 0.26665433, 0.66635825;
+  (Male, Medium, 5k_19k) 0.03147763, 0.15634755, 0.31243496, 0.49973985;
+  (Female, High, 5k_19k) 0.01737507, 0.10353245, 0.39646755, 0.48262493;
+  (Male, High, 5k_19k) 0.07361587, 0.11771191, 0.22060265, 0.58806957;
+  (Female, Low, 20k_99k) 0.0005543237, 0.0005543237, 0.2001108647, 0.7987804879;
+  (Male, Low, 20k_99k) 0.0005543237, 0.0005543237, 0.4661862528, 0.5327050998;
+  (Female, Medium, 20k_99k) 0.03596908, 0.07164090, 0.32134364, 0.57104638;
+  (Male, Medium, 20k_99k) 0.0003201024, 0.0771446863, 0.4228553137, 0.4996798976;
+  (Female, High, 20k_99k) 0.0723605, 0.1927941, 0.1807507, 0.5540947;
+  (Male, High, 20k_99k) 0.09340293, 0.12005775, 0.35995113, 0.42658818;
+  (Female, Low, 100k_499k) 0.250000000, 0.002066116, 0.250000000, 0.497933884;
+  (Male, Low, 100k_499k) 0.001381215, 0.167127072, 0.001381215, 0.830110498;
+  (Female, Medium, 100k_499k) 0.0005543237, 0.0005543237, 0.2666297118, 0.7322616408;
+  (Male, Medium, 100k_499k) 0.0005197505, 0.3123700624, 0.3123700624, 0.3747401247;
+  (Female, High, 100k_499k) 0.09536082, 0.21431404, 0.21431404, 0.47601110;
+  (Male, High, 100k_499k) 0.1579755, 0.2631464, 0.1579755, 0.4209027;
+  (Female, Low, 500k_) 0.004098361, 0.004098361, 0.987704917, 0.004098361;
+  (Male, Low, 500k_) 0.001381215, 0.167127072, 0.332872928, 0.498618785;
+  (Female, Medium, 500k_) 0.0004621072, 0.0004621072, 0.4440850277, 0.5549907579;
+  (Male, Medium, 500k_) 0.0005197505, 0.0628898129, 0.3123700624, 0.6242203742;
+  (Female, High, 500k_) 0.05567551, 0.18522517, 0.38880321, 0.37029611;
+  (Male, High, 500k_) 0.1191515, 0.1905234, 0.2856860, 0.4046392;
+}
+probability ( Education | Sex ) {
+  (Female) 0.1000378, 0.3084183, 0.5915439;
+  (Male) 0.1285093, 0.2542507, 0.6172400;
+}
+probability ( Income ) {
+  table 0.1914832, 0.2992468, 0.3398030, 0.1694670;
+}
+probability ( Municipality | Education ) {
+  (Low) 0.2040678, 0.3057627, 0.3057627, 0.1023729, 0.0820339;
+  (Medium) 0.1934247, 0.3167123, 0.2221918, 0.1276712, 0.1400000;
+  (High) 0.1171355, 0.2418159, 0.3031969, 0.1535806, 0.1842711;
+}
+probability ( InterestAI | Education ) {
+  (Low) 0.35677966, 0.42796610, 0.15338983, 0.06186441;
+  (Medium) 0.27157534, 0.44006849, 0.21404110, 0.07431507;
+  (High) 0.1229220, 0.3454284, 0.3742008, 0.1574488;
+}
+probability ( InformedAI | Age, InterestAI ) {
+  (14_29, Not_at_all) 0.498062016, 0.498062016, 0.001937984, 0.001937984;
+  (30_44, Not_at_all) 0.49929178, 0.31798867, 0.13668555, 0.04603399;
+  (45_59, Not_at_all) 0.18526012, 0.40722543, 0.35173410, 0.05578035;
+  (60_, Not_at_all) 0.24691596, 0.56765613, 0.16056284, 0.02486507;
+  (14_29, Less_strongly) 0.0009157509, 0.1767399267, 0.6456043957, 0.1767399267;
+  (30_44, Less_strongly) 0.11788991, 0.52889908, 0.32339450, 0.02981651;
+  (45_59, Less_strongly) 0.09792940, 0.41293279, 0.44551935, 0.04361847;
+  (60_, Less_strongly) 0.08070205, 0.46229426, 0.44617064, 0.01083305;
+  (14_29, Strongly) 0.0007418398, 0.3805637982, 0.4755192878, 0.1431750742;
+  (30_44, Strongly) 0.0003805175, 0.3656773212, 0.4387366819, 0.1952054795;
+  (45_59, Strongly) 0.02918552, 0.47805430, 0.43461538, 0.05814480;
+  (60_, Strongly) 0.03063901, 0.40450644, 0.51895565, 0.04589890;
+  (14_29, Very_strongly) 0.001724138, 0.222413793, 0.663793103, 0.112068966;
+  (30_44, Very_strongly) 0.0009727626, 0.0632295720, 0.1254863813, 0.8103112841;
+  (45_59, Very_strongly) 0.08362218, 0.30545927, 0.33318891, 0.27772964;
+  (60_, Very_strongly) 0.06692094, 0.22226075, 0.48855756, 0.22226075;
+}
+probability ( MediaAI | VoteIntent, InterestAI ) {
+  (Left, Not_at_all) 0.4546314, 0.5453686;
+  (Right, Not_at_all) 0.4643211, 0.5356789;
+  (Other, Not_at_all) 0.4865169, 0.5134831;
+  (Left, Less_strongly) 0.07938886, 0.92061114;
+  (Right, Less_strongly) 0.2804416, 0.7195584;
+  (Other, Less_strongly) 0.3106169, 0.6893831;
+  (Left, Strongly) 0.08725561, 0.91274439;
+  (Right, Strongly) 0.1581446, 0.8418554;
+  (Other, Strongly) 0.1523929, 0.8476071;
+  (Left, Very_strongly) 0.1182708, 0.8817292;
+  (Right, Very_strongly) 0.1849015, 0.8150985;
+  (Other, Very_strongly) 0.3536585, 0.6463415;
+}
+probability ( FriendsAI | Age, Education, InterestAI ) {
+  (14_29, Low, Not_at_all) 0.98979592, 0.01020408;
+  (30_44, Low, Not_at_all) 0.997925311, 0.002074689;
+  (45_59, Low, Not_at_all) 0.7493506, 0.2506494;
+  (60_, Low, Not_at_all) 0.9995044599, 0.0004955401;
+  (14_29, Medium, Not_at_all) 0.994845361, 0.005154639;
+  (30_44, Medium, Not_at_all) 0.8321799, 0.1678201;
+  (45_59, Medium, Not_at_all) 0.9351914, 0.0648086;
+  (60_, Medium, Not_at_all) 0.96260601, 0.03739399;
+  (14_29, High, Not_at_all) 0.7987552, 0.2012448;
+  (30_44, High, Not_at_all) 0.8175803, 0.1824197;
+  (45_59, High, Not_at_all) 0.7995839, 0.2004161;
+  (60_, High, Not_at_all) 0.7574132, 0.2425868;
+  (14_29, Low, Less_strongly) 0.5, 0.5;
+  (30_44, Low, Less_strongly) 0.98979592, 0.01020408;
+  (45_59, Low, Less_strongly) 0.8456, 0.1544;
+  (60_, Low, Less_strongly) 0.8211896, 0.1788104;
+  (14_29, Medium, Less_strongly) 0.005154639, 0.994845361;
+  (30_44, Medium, Less_strongly) 0.6246753, 0.3753247;
+  (45_59, Medium, Less_strongly) 0.593689, 0.406311;
+  (60_, Medium, Less_strongly) 0.7076258, 0.2923742;
+  (14_29, High, Less_strongly) 0.2669903, 0.7330097;
+  (30_44, High, Less_strongly) 0.5999167, 0.4000833;
+  (45_59, High, Less_strongly) 0.4255649, 0.5744351;
+  (60_, High, Less_strongly) 0.6021277, 0.3978723;
+  (14_29, Low, Strongly) 0.5, 0.5;
+  (30_44, Low, Strongly) 0.005154639, 0.994845361;
+  (45_59, Low, Strongly) 0.6655172, 0.3344828;
+  (60_, Low, Strongly) 0.3753247, 0.6246753;
+  (14_29, Medium, Strongly) 0.01020408, 0.98979592;
+  (30_44, Medium, Strongly) 0.5, 0.5;
+  (45_59, Medium, Strongly) 0.4667129, 0.5332871;
+  (60_, Medium, Strongly) 0.5624593, 0.4375407;
+  (14_29, High, Strongly) 0.1115607, 0.8884393;
+  (30_44, High, Strongly) 0.2001785, 0.7998215;
+  (45_59, High, Strongly) 0.1766027, 0.8233973;
+  (60_, High, Strongly) 0.4615473, 0.5384527;
+  (14_29, Low, Very_strongly) 0.5, 0.5;
+  (30_44, Low, Very_strongly) 0.01020408, 0.98979592;
+  (45_59, Low, Very_strongly) 0.5, 0.5;
+  (60_, Low, Very_strongly) 0.996551724, 0.003448276;
+  (14_29, Medium, Very_strongly) 0.5, 0.5;
+  (30_44, Medium, Very_strongly) 0.3344828, 0.6655172;
+  (45_59, Medium, Very_strongly) 0.2512953, 0.7487047;
+  (60_, Medium, Very_strongly) 0.2731569, 0.7268431;
+  (14_29, High, Very_strongly) 0.1120092, 0.8879908;
+  (30_44, High, Very_strongly) 0.2504333, 0.7495667;
+  (45_59, High, Very_strongly) 0.06696738, 0.93303262;
+  (60_, High, Very_strongly) 0.3549362, 0.6450638;
+}
+probability ( SearchAI | InterestAI, FriendsAI ) {
+  (Not_at_all, No) 0.98578811, 0.01421189;
+  (Less_strongly, No) 0.9547158, 0.0452842;
+  (Strongly, No) 0.7416107, 0.2583893;
+  (Very_strongly, No) 0.6913876, 0.3086124;
+  (Not_at_all, Yes) 0.99689441, 0.00310559;
+  (Less_strongly, Yes) 0.8601162, 0.1398838;
+  (Strongly, Yes) 0.5620843, 0.4379157;
+  (Very_strongly, Yes) 0.275351, 0.724649;
+}

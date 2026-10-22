@@ -1,0 +1,134 @@
+network unknown {
+}
+variable ConstructionQuality {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Distance {
+  type discrete [ 3 ] { Short, Medium, Long };
+}
+variable Fragility {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable LiveLoad {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Magnitude {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SeismicHazard {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SeismicRisk {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ShakingIntensity {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable StrengthDegradation {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Vulnerability {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( ConstructionQuality ) {
+  table 0.1, 0.2, 0.7;
+}
+probability ( Distance ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( Fragility | LiveLoad, SeismicHazard, StrengthDegradation ) {
+  (Low, Low, Low) 0.9, 0.1, 0.0;
+  (Medium, Low, Low) 0.8, 0.2, 0.0;
+  (High, Low, Low) 0.7, 0.3, 0.0;
+  (Low, Medium, Low) 0.60, 0.23, 0.17;
+  (Medium, Medium, Low) 0.48, 0.30, 0.22;
+  (High, Medium, Low) 0.35, 0.35, 0.30;
+  (Low, High, Low) 0.30, 0.38, 0.32;
+  (Medium, High, Low) 0.18, 0.42, 0.40;
+  (High, High, Low) 0.07, 0.48, 0.45;
+  (Low, Low, Medium) 0.7, 0.2, 0.1;
+  (Medium, Low, Medium) 0.60, 0.25, 0.15;
+  (High, Low, Medium) 0.5, 0.3, 0.2;
+  (Low, Medium, Medium) 0.48, 0.30, 0.22;
+  (Medium, Medium, Medium) 0.43, 0.32, 0.25;
+  (High, Medium, Medium) 0.32, 0.35, 0.33;
+  (Low, High, Medium) 0.16, 0.44, 0.40;
+  (Medium, High, Medium) 0.02, 0.46, 0.52;
+  (High, High, Medium) 0.02, 0.38, 0.60;
+  (Low, Low, High) 0.5, 0.3, 0.2;
+  (Medium, Low, High) 0.36, 0.38, 0.26;
+  (High, Low, High) 0.30, 0.35, 0.35;
+  (Low, Medium, High) 0.32, 0.33, 0.35;
+  (Medium, Medium, High) 0.14, 0.40, 0.46;
+  (High, Medium, High) 0.03, 0.42, 0.55;
+  (Low, High, High) 0.0, 0.2, 0.8;
+  (Medium, High, High) 0.00, 0.15, 0.85;
+  (High, High, High) 0.0, 0.1, 0.9;
+}
+probability ( LiveLoad ) {
+  table 0.1, 0.1, 0.8;
+}
+probability ( Magnitude ) {
+  table 0.48, 0.40, 0.12;
+}
+probability ( SeismicHazard | Distance, Magnitude, ShakingIntensity ) {
+  (Short, Low, Low) 0.80, 0.15, 0.05;
+  (Medium, Low, Low) 0.85, 0.10, 0.05;
+  (Long, Low, Low) 0.9, 0.1, 0.0;
+  (Short, Medium, Low) 0.25, 0.50, 0.25;
+  (Medium, Medium, Low) 0.35, 0.45, 0.20;
+  (Long, Medium, Low) 0.6, 0.2, 0.2;
+  (Short, High, Low) 0.2, 0.4, 0.4;
+  (Medium, High, Low) 0.2, 0.4, 0.4;
+  (Long, High, Low) 0.35, 0.35, 0.30;
+  (Short, Low, Medium) 0.75, 0.15, 0.10;
+  (Medium, Low, Medium) 0.80, 0.12, 0.08;
+  (Long, Low, Medium) 0.85, 0.10, 0.05;
+  (Short, Medium, Medium) 0.15, 0.25, 0.60;
+  (Medium, Medium, Medium) 0.3, 0.4, 0.3;
+  (Long, Medium, Medium) 0.30, 0.55, 0.15;
+  (Short, High, Medium) 0.2, 0.3, 0.5;
+  (Medium, High, Medium) 0.2, 0.3, 0.5;
+  (Long, High, Medium) 0.3, 0.3, 0.4;
+  (Short, Low, High) 0.7, 0.2, 0.1;
+  (Medium, Low, High) 0.78, 0.12, 0.10;
+  (Long, Low, High) 0.84, 0.10, 0.06;
+  (Short, Medium, High) 0.02, 0.08, 0.90;
+  (Medium, Medium, High) 0.2, 0.3, 0.5;
+  (Long, Medium, High) 0.25, 0.60, 0.15;
+  (Short, High, High) 0.00, 0.05, 0.95;
+  (Medium, High, High) 0.1, 0.2, 0.7;
+  (Long, High, High) 0.2, 0.3, 0.5;
+}
+probability ( SeismicRisk | SeismicHazard, Vulnerability ) {
+  (Low, Low) 0.75, 0.15, 0.10;
+  (Medium, Low) 0.25, 0.45, 0.30;
+  (High, Low) 0.8, 0.1, 0.1;
+  (Low, Medium) 0.55, 0.25, 0.20;
+  (Medium, Medium) 0.08, 0.60, 0.32;
+  (High, Medium) 0.15, 0.60, 0.25;
+  (Low, High) 0.3, 0.3, 0.4;
+  (Medium, High) 0.02, 0.65, 0.33;
+  (High, High) 0.02, 0.02, 0.96;
+}
+probability ( ShakingIntensity | Distance, Magnitude ) {
+  (Short, Low) 0.5, 0.3, 0.2;
+  (Medium, Low) 0.7, 0.2, 0.1;
+  (Long, Low) 1.0, 0.0, 0.0;
+  (Short, Medium) 0.2, 0.5, 0.3;
+  (Medium, Medium) 0.45, 0.40, 0.15;
+  (Long, Medium) 0.6, 0.3, 0.1;
+  (Short, High) 0.0, 0.0, 1.0;
+  (Medium, High) 0.0, 0.2, 0.8;
+  (Long, High) 0.2, 0.5, 0.3;
+}
+probability ( StrengthDegradation | ConstructionQuality ) {
+  (Low) 0.0, 0.1, 0.9;
+  (Medium) 0.2, 0.7, 0.1;
+  (High) 0.90, 0.05, 0.05;
+}
+probability ( Vulnerability | Fragility ) {
+  (Low) 1.0, 0.0, 0.0;
+  (Medium) 0.0, 1.0, 0.0;
+  (High) 0.0, 0.0, 1.0;
+}

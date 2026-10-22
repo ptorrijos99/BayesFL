@@ -1,0 +1,61 @@
+network unknown {
+}
+variable ECamera {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ECameraSeenStealing {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EObjectGone {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EPsychReport {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Motive {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ObjectDroppedAccidentally {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Sneak {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Stealing {
+  type discrete [ 2 ] { 0, 1 };
+}
+probability ( ECamera | ECameraSeenStealing ) {
+  (0) 0.75, 0.25;
+  (1) 0.0, 1.0;
+}
+probability ( ECameraSeenStealing | Stealing ) {
+  (0) 1.0, 0.0;
+  (1) 0.99, 0.01;
+}
+probability ( EObjectGone | ObjectDroppedAccidentally, Stealing ) {
+  (0, 0) 1.0, 0.0;
+  (1, 0) 0.0, 1.0;
+  (0, 1) 0.0, 1.0;
+  (1, 1) 0.5, 0.5;
+}
+probability ( EPsychReport | Motive ) {
+  (0) 1.0, 0.0;
+  (1) 0.01, 0.99;
+}
+probability ( Motive ) {
+  table 0.99, 0.01;
+}
+probability ( ObjectDroppedAccidentally | Sneak, Stealing ) {
+  (0, 0) 0.75, 0.25;
+  (1, 0) 0.5, 0.5;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 1.0, 0.0;
+}
+probability ( Sneak | Motive ) {
+  (0) 1.0, 0.0;
+  (1) 0.01, 0.99;
+}
+probability ( Stealing | Motive ) {
+  (0) 1.0, 0.0;
+  (1) 0.01, 0.99;
+}

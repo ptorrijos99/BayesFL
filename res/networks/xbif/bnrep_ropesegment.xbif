@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>DragChainLinkBroken</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DragHitchShacklePinOut</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DragRopeFault</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DragSubsystem</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DumpRopeFault</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DumpSocketPinOut</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DumpSubsystem</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HoistChainPinOut</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HoistRopeSystem</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HoistSubsystem</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RopeSegment</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>DragChainLinkBroken</FOR>
+      <TABLE>0.008 0.992 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DragHitchShacklePinOut</FOR>
+      <TABLE>0.003 0.997 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DragRopeFault</FOR>
+      <TABLE>0.025 0.975 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DragSubsystem</FOR>
+      <GIVEN>DragChainLinkBroken</GIVEN>
+      <GIVEN>DragHitchShacklePinOut</GIVEN>
+      <GIVEN>DragRopeFault</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DumpRopeFault</FOR>
+      <TABLE>0.006 0.994 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DumpSocketPinOut</FOR>
+      <TABLE>0.004 0.996 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DumpSubsystem</FOR>
+      <GIVEN>DumpRopeFault</GIVEN>
+      <GIVEN>DumpSocketPinOut</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HoistChainPinOut</FOR>
+      <TABLE>0.004 0.996 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HoistRopeSystem</FOR>
+      <TABLE>0.003 0.997 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HoistSubsystem</FOR>
+      <GIVEN>HoistChainPinOut</GIVEN>
+      <GIVEN>HoistRopeSystem</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RopeSegment</FOR>
+      <GIVEN>DragSubsystem</GIVEN>
+      <GIVEN>DumpSubsystem</GIVEN>
+      <GIVEN>HoistSubsystem</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

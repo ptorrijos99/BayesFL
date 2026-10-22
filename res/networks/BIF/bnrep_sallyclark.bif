@@ -1,0 +1,43 @@
+network unknown {
+}
+variable ABruising {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable ADisease {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable AMurder {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BBruising {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BDisease {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable BMurder {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+probability ( ABruising | AMurder ) {
+  (TRUE) 0.05, 0.95;
+  (FALSE) 0.01, 0.99;
+}
+probability ( ADisease | AMurder ) {
+  (TRUE) 0.001, 0.999;
+  (FALSE) 0.05, 0.95;
+}
+probability ( AMurder ) {
+  table 0.078, 0.922;
+}
+probability ( BBruising | BMurder ) {
+  (TRUE) 0.05, 0.95;
+  (FALSE) 0.01, 0.99;
+}
+probability ( BDisease | BMurder ) {
+  (TRUE) 0.001, 0.999;
+  (FALSE) 0.05, 0.95;
+}
+probability ( BMurder | AMurder ) {
+  (TRUE) 1.0, 0.0;
+  (FALSE) 0.001, 0.999;
+}

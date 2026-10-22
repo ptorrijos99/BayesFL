@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Disease</NAME>
+      <OUTCOME>Healthy</OUTCOME>
+      <OUTCOME>Mildly</OUTCOME>
+      <OUTCOME>Severly</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Screening_Test</NAME>
+      <OUTCOME>Negative</OUTCOME>
+      <OUTCOME>Positive</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Vaccine</NAME>
+      <OUTCOME>No</OUTCOME>
+      <OUTCOME>Yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Disease</FOR>
+      <GIVEN>Screening_Test</GIVEN>
+      <TABLE>0.5 0.4 0.1 0.24 0.35 0.41 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Screening_Test</FOR>
+      <TABLE>0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Vaccine</FOR>
+      <GIVEN>Disease</GIVEN>
+      <GIVEN>Screening_Test</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 0.5 0.5 0.5 0.5 0.2 0.8 0.2 0.8 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

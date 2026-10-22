@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Cereals</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Eggs</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Fruits</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Milk</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Nuts</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Peanuts</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Seafood</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Veg_Leg</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Cereals</FOR>
+      <GIVEN>Fruits</GIVEN>
+      <TABLE>0.003 0.997 0.09 0.91 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Eggs</FOR>
+      <GIVEN>Fruits</GIVEN>
+      <TABLE>0.003 0.997 0.226 0.774 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Fruits</FOR>
+      <GIVEN>Veg_Leg</GIVEN>
+      <TABLE>0.166 0.834 0.56 0.44 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Milk</FOR>
+      <GIVEN>Fruits</GIVEN>
+      <TABLE>0.018 0.982 0.33 0.67 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Nuts</FOR>
+      <TABLE>0.083 0.917 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Peanuts</FOR>
+      <GIVEN>Nuts</GIVEN>
+      <TABLE>0.404 0.596 0.071 0.929 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Seafood</FOR>
+      <GIVEN>Fruits</GIVEN>
+      <GIVEN>Nuts</GIVEN>
+      <TABLE>0.735 0.265 0.05 0.95 0.34 0.66 0.27 0.73 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Veg_Leg</FOR>
+      <GIVEN>Peanuts</GIVEN>
+      <TABLE>0.26 0.74 0.037 0.963 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

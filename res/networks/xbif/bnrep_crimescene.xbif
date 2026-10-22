@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAFoundOnFoil</NAME>
+      <OUTCOME>Suspect_DNA_On_Foil</OUTCOME>
+      <OUTCOME>Suspect_And_Unknown_DNA_On_Foil</OUTCOME>
+      <OUTCOME>Unknown_DNA_On_Foil</OUTCOME>
+      <OUTCOME>No_DNA_On_Foil</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Hypothesis</NAME>
+      <OUTCOME>Prosecutor</OUTCOME>
+      <OUTCOME>Defense</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspectCutTheFoil</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspectDNAOnFoilFromCutting</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspectDNAOnFoilFromPicking</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuspectPickedLock</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnknownCutTheFoil</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnknownDNAOnFoil</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UnknownPickedLock</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>DNAFoundOnFoil</FOR>
+      <GIVEN>SuspectDNAOnFoilFromCutting</GIVEN>
+      <GIVEN>SuspectDNAOnFoilFromPicking</GIVEN>
+      <GIVEN>UnknownDNAOnFoil</GIVEN>
+      <TABLE>0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Hypothesis</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspectCutTheFoil</FOR>
+      <GIVEN>Hypothesis</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspectDNAOnFoilFromCutting</FOR>
+      <GIVEN>SuspectCutTheFoil</GIVEN>
+      <GIVEN>UnknownPickedLock</GIVEN>
+      <TABLE>0.07 0.93 0.12 0.88 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspectDNAOnFoilFromPicking</FOR>
+      <GIVEN>SuspectPickedLock</GIVEN>
+      <GIVEN>UnknownCutTheFoil</GIVEN>
+      <TABLE>0.36 0.64 0.19 0.81 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuspectPickedLock</FOR>
+      <GIVEN>Hypothesis</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnknownCutTheFoil</FOR>
+      <GIVEN>Hypothesis</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnknownDNAOnFoil</FOR>
+      <GIVEN>UnknownCutTheFoil</GIVEN>
+      <GIVEN>UnknownPickedLock</GIVEN>
+      <TABLE>0.31 0.69 0.07 0.93 0.36 0.64 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UnknownPickedLock</FOR>
+      <GIVEN>Hypothesis</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

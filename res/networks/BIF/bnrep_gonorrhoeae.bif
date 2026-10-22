@@ -1,0 +1,96 @@
+network unknown {
+}
+variable ASTTest {
+  type discrete [ 2 ] { Initiated, Not_initiated };
+}
+variable ClinicianExperience {
+  type discrete [ 2 ] { Experienced, Unexperienced };
+}
+variable EpidemiologicalFactors {
+  type discrete [ 2 ] { High_Risk_Group, Low_Risk_Group };
+}
+variable InitialTreatmentFailure {
+  type discrete [ 2 ] { Treatment_success, Treatment_failure };
+}
+variable MedicationAdherence {
+  type discrete [ 2 ] { Proper_Adherence, Improper_Adherence };
+}
+variable NumberPartners {
+  type discrete [ 3 ] { One, Two_to_five, More_than_six };
+}
+variable PastDiagnoses {
+  type discrete [ 4 ] { One, Two_to_four, Five_to_nine, More_than_ten };
+}
+variable PersistingSymptoms {
+  type discrete [ 2 ] { Symptoms_persist, Symptoms_resolve };
+}
+variable SexualOrientation {
+  type discrete [ 2 ] { Heterosexual, Homosexual };
+}
+variable UnpromptedTest {
+  type discrete [ 2 ] { Initiated, Not_initiated };
+}
+probability ( ASTTest | InitialTreatmentFailure, UnpromptedTest ) {
+  (Treatment_success, Initiated) 0.99, 0.01;
+  (Treatment_failure, Initiated) 0.99, 0.01;
+  (Treatment_success, Not_initiated) 0.01, 0.99;
+  (Treatment_failure, Not_initiated) 0.9, 0.1;
+}
+probability ( ClinicianExperience ) {
+  table 0.7, 0.3;
+}
+probability ( EpidemiologicalFactors | NumberPartners, PastDiagnoses, SexualOrientation ) {
+  (One, One, Heterosexual) 0.05, 0.95;
+  (Two_to_five, One, Heterosexual) 0.2, 0.8;
+  (More_than_six, One, Heterosexual) 0.35, 0.65;
+  (One, Two_to_four, Heterosexual) 0.3, 0.7;
+  (Two_to_five, Two_to_four, Heterosexual) 0.45, 0.55;
+  (More_than_six, Two_to_four, Heterosexual) 0.6, 0.4;
+  (One, Five_to_nine, Heterosexual) 0.65, 0.35;
+  (Two_to_five, Five_to_nine, Heterosexual) 0.8, 0.2;
+  (More_than_six, Five_to_nine, Heterosexual) 0.95, 0.05;
+  (One, More_than_ten, Heterosexual) 0.75, 0.25;
+  (Two_to_five, More_than_ten, Heterosexual) 0.9, 0.1;
+  (More_than_six, More_than_ten, Heterosexual) 0.95, 0.05;
+  (One, One, Homosexual) 0.1, 0.9;
+  (Two_to_five, One, Homosexual) 0.25, 0.75;
+  (More_than_six, One, Homosexual) 0.4, 0.6;
+  (One, Two_to_four, Homosexual) 0.4, 0.6;
+  (Two_to_five, Two_to_four, Homosexual) 0.55, 0.45;
+  (More_than_six, Two_to_four, Homosexual) 0.7, 0.3;
+  (One, Five_to_nine, Homosexual) 0.75, 0.25;
+  (Two_to_five, Five_to_nine, Homosexual) 0.85, 0.15;
+  (More_than_six, Five_to_nine, Homosexual) 0.95, 0.05;
+  (One, More_than_ten, Homosexual) 0.8, 0.2;
+  (Two_to_five, More_than_ten, Homosexual) 0.9, 0.1;
+  (More_than_six, More_than_ten, Homosexual) 0.95, 0.05;
+}
+probability ( InitialTreatmentFailure | ClinicianExperience, EpidemiologicalFactors, PersistingSymptoms ) {
+  (Experienced, High_Risk_Group, Symptoms_persist) 0.15, 0.85;
+  (Unexperienced, High_Risk_Group, Symptoms_persist) 0.05, 0.95;
+  (Experienced, Low_Risk_Group, Symptoms_persist) 0.3, 0.7;
+  (Unexperienced, Low_Risk_Group, Symptoms_persist) 0.15, 0.85;
+  (Experienced, High_Risk_Group, Symptoms_resolve) 0.9, 0.1;
+  (Unexperienced, High_Risk_Group, Symptoms_resolve) 0.9, 0.1;
+  (Experienced, Low_Risk_Group, Symptoms_resolve) 0.95, 0.05;
+  (Unexperienced, Low_Risk_Group, Symptoms_resolve) 0.95, 0.05;
+}
+probability ( MedicationAdherence ) {
+  table 0.7, 0.3;
+}
+probability ( NumberPartners ) {
+  table 0.366, 0.495, 0.139;
+}
+probability ( PastDiagnoses ) {
+  table 0.727816550, 0.245264207, 0.023529412, 0.003389831;
+}
+probability ( PersistingSymptoms | MedicationAdherence ) {
+  (Proper_Adherence) 0.16, 0.84;
+  (Improper_Adherence) 0.84, 0.16;
+}
+probability ( SexualOrientation ) {
+  table 0.292, 0.708;
+}
+probability ( UnpromptedTest ) {
+  table 0.01, 0.99;
+}

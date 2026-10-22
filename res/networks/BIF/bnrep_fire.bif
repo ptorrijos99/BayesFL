@@ -1,0 +1,100 @@
+network unknown {
+}
+variable AudioFireCues {
+  type discrete [ 2 ] { Yes, No };
+}
+variable EmotionalStability {
+  type discrete [ 2 ] { Stable, Unstable };
+}
+variable Escape {
+  type discrete [ 2 ] { True, False };
+}
+variable FireCues {
+  type discrete [ 2 ] { Consistent, Not_consistent };
+}
+variable FireKnowledge {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LayoutFamiliarity {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PerceivedHazard {
+  type discrete [ 2 ] { Risky, Not_risky };
+}
+variable PsychologicalIncapacitation {
+  type discrete [ 2 ] { Mild, Severe };
+}
+variable Stress {
+  type discrete [ 2 ] { Low, High };
+}
+variable TimePressure {
+  type discrete [ 2 ] { Low, High };
+}
+variable VisualFireCues {
+  type discrete [ 2 ] { Yes, No };
+}
+probability ( AudioFireCues ) {
+  table 0.5, 0.5;
+}
+probability ( EmotionalStability | FireCues, FireKnowledge, LayoutFamiliarity, TimePressure ) {
+  (Consistent, Yes, Yes, Low) 0.86, 0.14;
+  (Not_consistent, Yes, Yes, Low) 0.75, 0.25;
+  (Consistent, No, Yes, Low) 0.75, 0.25;
+  (Not_consistent, No, Yes, Low) 0.59, 0.41;
+  (Consistent, Yes, No, Low) 0.75, 0.25;
+  (Not_consistent, Yes, No, Low) 0.59, 0.41;
+  (Consistent, No, No, Low) 0.63, 0.37;
+  (Not_consistent, No, No, Low) 0.41, 0.59;
+  (Consistent, Yes, Yes, High) 0.63, 0.37;
+  (Not_consistent, Yes, Yes, High) 0.59, 0.41;
+  (Consistent, No, Yes, High) 0.59, 0.41;
+  (Not_consistent, No, Yes, High) 0.37, 0.63;
+  (Consistent, Yes, No, High) 0.59, 0.41;
+  (Not_consistent, Yes, No, High) 0.41, 0.59;
+  (Consistent, No, No, High) 0.41, 0.59;
+  (Not_consistent, No, No, High) 0.25, 0.75;
+}
+probability ( Escape | PerceivedHazard, PsychologicalIncapacitation ) {
+  (Risky, Mild) 0.63, 0.37;
+  (Not_risky, Mild) 0.63, 0.37;
+  (Risky, Severe) 0.29, 0.71;
+  (Not_risky, Severe) 0.41, 0.59;
+}
+probability ( FireCues | AudioFireCues, FireKnowledge, VisualFireCues ) {
+  (Yes, Yes, Yes) 0.86, 0.14;
+  (No, Yes, Yes) 0.59, 0.41;
+  (Yes, No, Yes) 0.41, 0.59;
+  (No, No, Yes) 0.25, 0.75;
+  (Yes, Yes, No) 0.71, 0.29;
+  (No, Yes, No) 0.41, 0.59;
+  (Yes, No, No) 0.25, 0.75;
+  (No, No, No) 0.04, 0.96;
+}
+probability ( FireKnowledge ) {
+  table 0.37, 0.63;
+}
+probability ( LayoutFamiliarity ) {
+  table 0.59, 0.41;
+}
+probability ( PerceivedHazard | FireKnowledge, Stress ) {
+  (Yes, Low) 0.25, 0.75;
+  (No, Low) 0.14, 0.86;
+  (Yes, High) 0.59, 0.41;
+  (No, High) 0.63, 0.37;
+}
+probability ( PsychologicalIncapacitation | Stress ) {
+  (Low) 0.86, 0.14;
+  (High) 0.37, 0.63;
+}
+probability ( Stress | EmotionalStability, TimePressure ) {
+  (Stable, Low) 0.86, 0.14;
+  (Unstable, Low) 0.86, 0.14;
+  (Stable, High) 0.25, 0.75;
+  (Unstable, High) 0.25, 0.75;
+}
+probability ( TimePressure ) {
+  table 0.63, 0.37;
+}
+probability ( VisualFireCues ) {
+  table 0.5, 0.5;
+}

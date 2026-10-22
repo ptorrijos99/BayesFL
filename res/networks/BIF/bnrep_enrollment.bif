@@ -1,0 +1,57 @@
+network unknown {
+}
+variable AdvancedEducationRate {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable AverageAdmissionScore {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+variable CoursePassRate {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+variable EmploymentRate {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+variable EnrollmentQuota {
+  type discrete [ 5 ] { _2, _1, 0, 1, 2 };
+}
+variable FirstTimeGraduationRate {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+variable StudentTeacherRatio {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+variable TransferRate {
+  type discrete [ 3 ] { 1, 2, 3 };
+}
+probability ( AdvancedEducationRate ) {
+  table 0.409, 0.591;
+}
+probability ( AverageAdmissionScore | AdvancedEducationRate ) {
+  (1) 0.27778, 0.38889, 0.33333;
+  (2) 0.00000, 0.42308, 0.57692;
+}
+probability ( CoursePassRate | AdvancedEducationRate ) {
+  (1) 0.50000, 0.38889, 0.11111;
+  (2) 0.2307677, 0.3846162, 0.3846162;
+}
+probability ( EmploymentRate | AdvancedEducationRate ) {
+  (1) 0.16667, 0.44444, 0.38889;
+  (2) 0.4230758, 0.3846162, 0.1923081;
+}
+probability ( EnrollmentQuota | AdvancedEducationRate ) {
+  (1) 0.05555944, 0.16666833, 0.11110889, 0.49999500, 0.16666833;
+  (2) 0.0000000, 0.3461535, 0.3076931, 0.2307723, 0.1153812;
+}
+probability ( FirstTimeGraduationRate | AdvancedEducationRate ) {
+  (1) 0.16667, 0.44444, 0.38889;
+  (2) 0.3486955, 0.3864410, 0.2648635;
+}
+probability ( StudentTeacherRatio | AdvancedEducationRate ) {
+  (1) 0.44444, 0.44444, 0.11112;
+  (2) 0.42308, 0.50000, 0.07692;
+}
+probability ( TransferRate | AdvancedEducationRate ) {
+  (1) 0.72222, 0.00000, 0.27778;
+  (2) 0.57692, 0.23077, 0.19231;
+}

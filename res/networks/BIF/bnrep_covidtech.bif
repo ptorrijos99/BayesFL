@@ -1,0 +1,147 @@
+network unknown {
+}
+variable AGE {
+  type discrete [ 2 ] { lessThan25, moreOrEqualTo25 };
+}
+variable GENDER {
+  type discrete [ 2 ] { Male, Female };
+}
+variable BELONGINGNESS {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ANG_IRR {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SOCIAL {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ANXIETY {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable BOREDOM {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable LONELINESS {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TECH_FUN_Q {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TECH_FUN_PQ {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable TECH_WORK_Q {
+  type discrete [ 2 ] { Low, High };
+}
+variable TECH_WORK_PQ {
+  type discrete [ 2 ] { Low, High };
+}
+variable OUTSIDE {
+  type discrete [ 3 ] { 0to1, 2, moreThan2 };
+}
+variable SQUARE_METERS {
+  type discrete [ 2 ] { lessThan80, moreOrEqualTo };
+}
+variable FAMILY_SIZE {
+  type discrete [ 3 ] { 1, 2, moreThan2 };
+}
+variable DAYS_ISOLATION {
+  type discrete [ 3 ] { 0to10, 11to20, moreThan20 };
+}
+variable REGION {
+  type discrete [ 2 ] { Other, Lombardy };
+}
+variable OCCUPATION {
+  type discrete [ 4 ] { Other, Smartworking, Student, OfficeWork };
+}
+probability ( AGE ) {
+  table 0.4547414, 0.5452586;
+}
+probability ( GENDER ) {
+  table 0.25, 0.75;
+}
+probability ( BELONGINGNESS | SOCIAL ) {
+  (Low) 0.4768212, 0.3509934, 0.1721854;
+  (Medium) 0.3096774, 0.3483871, 0.3419355;
+  (High) 0.1708861, 0.3227848, 0.5063291;
+}
+probability ( ANG_IRR | AGE, GENDER ) {
+  (lessThan25, Male) 0.3658537, 0.3658537, 0.2682927;
+  (moreOrEqualTo25, Male) 0.6133333, 0.2266667, 0.1600000;
+  (lessThan25, Female) 0.1882353, 0.3176471, 0.4941176;
+  (moreOrEqualTo25, Female) 0.3033708, 0.4213483, 0.2752809;
+}
+probability ( SOCIAL | LONELINESS ) {
+  (Low) 0.1310345, 0.2965517, 0.5724138;
+  (Medium) 0.24375, 0.37500, 0.38125;
+  (High) 0.58490566, 0.32704403, 0.08805031;
+}
+probability ( ANXIETY | ANG_IRR ) {
+  (Low) 0.6598640, 0.2312925, 0.1088435;
+  (Medium) 0.2360248, 0.4285714, 0.3354037;
+  (High) 0.06410256, 0.29487179, 0.64102565;
+}
+probability ( BOREDOM | ANG_IRR ) {
+  (Low) 0.68707483, 0.25850340, 0.05442177;
+  (Medium) 0.2360248, 0.5031056, 0.2608696;
+  (High) 0.07692308, 0.23717949, 0.68589743;
+}
+probability ( LONELINESS | BOREDOM ) {
+  (Low) 0.5430464, 0.3311258, 0.1258278;
+  (Medium) 0.3205128, 0.4679487, 0.2115385;
+  (High) 0.08280255, 0.23566879, 0.68152866;
+}
+probability ( TECH_FUN_Q | TECH_FUN_PQ ) {
+  (Low) 0.4726027, 0.3356164, 0.1917808;
+  (Medium) 0.2743363, 0.4070796, 0.3185841;
+  (High) 0.1219512, 0.3268293, 0.5512195;
+}
+probability ( TECH_FUN_PQ | AGE ) {
+  (lessThan25) 0.4170616, 0.2227488, 0.3601896;
+  (moreOrEqualTo25) 0.2292490, 0.2608696, 0.5098814;
+}
+probability ( TECH_WORK_Q | TECH_WORK_PQ, OCCUPATION ) {
+  (Low, Other) 0.8333333, 0.1666667;
+  (High, Other) 0.5633803, 0.4366197;
+  (Low, Smartworking) 0.2173913, 0.7826087;
+  (High, Smartworking) 0.04301075, 0.95698925;
+  (Low, Student) 0.593985, 0.406015;
+  (High, Student) 0.2542373, 0.7457627;
+  (Low, OfficeWork) 0.7777778, 0.2222222;
+  (High, OfficeWork) 0.1785714, 0.8214286;
+}
+probability ( TECH_WORK_PQ | OCCUPATION ) {
+  (Other) 0.4033613, 0.5966387;
+  (Smartworking) 0.1982759, 0.8017241;
+  (Student) 0.6927083, 0.3072917;
+  (OfficeWork) 0.2432432, 0.7567568;
+}
+probability ( OUTSIDE | OCCUPATION ) {
+  (Other) 0.2184874, 0.4957983, 0.2857143;
+  (Smartworking) 0.1982759, 0.5517241, 0.2500000;
+  (Student) 0.4479167, 0.4218750, 0.1302083;
+  (OfficeWork) 0.0, 0.0, 1.0;
+}
+probability ( SQUARE_METERS | FAMILY_SIZE ) {
+  (1) 0.5890411, 0.4109589;
+  (2) 0.44, 0.56;
+  (moreThan2) 0.1924399, 0.8075601;
+}
+probability ( FAMILY_SIZE | AGE ) {
+  (lessThan25) 0.0521327, 0.1611374, 0.7867299;
+  (moreOrEqualTo25) 0.2450593, 0.2608696, 0.4940711;
+}
+probability ( DAYS_ISOLATION | OCCUPATION ) {
+  (Other) 0.1512605, 0.6386555, 0.2100840;
+  (Smartworking) 0.1293103, 0.5862069, 0.2844828;
+  (Student) 0.02604167, 0.76562500, 0.20833333;
+  (OfficeWork) 1.0, 0.0, 0.0;
+}
+probability ( REGION | AGE ) {
+  (lessThan25) 0.1800948, 0.8199052;
+  (moreOrEqualTo25) 0.3557312, 0.6442688;
+}
+probability ( OCCUPATION | AGE ) {
+  (lessThan25) 0.12322275, 0.07109005, 0.78672985, 0.01895735;
+  (moreOrEqualTo25) 0.3675889, 0.3992095, 0.1027668, 0.1304348;
+}

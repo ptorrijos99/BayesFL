@@ -1,0 +1,170 @@
+network unknown {
+}
+variable ADHD {
+  type discrete [ 4 ] { No, Few, Moderate, Risk };
+}
+variable AvoidsTasks {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable BlurtsOutAnswers {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable CantOrganize {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable CantPlayQuietly {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable CantStaySeated {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable CantWaitForTurn {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable Carelessness {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable DifficultySustainingAttention {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable DoesntListen {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable EasilyDistractible {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable Forgetful {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable IntrudesOthers {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable LosesItems {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable NoFollowThrough {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable OnTheGo {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable RunsExcessively {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable SquirmsAndFidgets {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+variable TalksExcessively {
+  type discrete [ 4 ] { Never, Sometimes, Often, Very_Often };
+}
+probability ( ADHD ) {
+  table 0.091, 0.212, 0.343, 0.354;
+}
+probability ( AvoidsTasks | ADHD ) {
+  (No) 0.925, 0.068, 0.007, 0.000;
+  (Few) 0.565, 0.383, 0.044, 0.008;
+  (Moderate) 0.272, 0.219, 0.482, 0.027;
+  (Risk) 0.134, 0.217, 0.233, 0.416;
+}
+probability ( BlurtsOutAnswers | ADHD ) {
+  (No) 0.927, 0.070, 0.003, 0.000;
+  (Few) 0.649, 0.347, 0.004, 0.000;
+  (Moderate) 0.27172827, 0.42057942, 0.27172827, 0.03596404;
+  (Risk) 0.150, 0.217, 0.366, 0.267;
+}
+probability ( CantOrganize | ADHD ) {
+  (No) 0.867867868, 0.125125125, 0.007007007, 0.000000000;
+  (Few) 0.398, 0.463, 0.102, 0.037;
+  (Moderate) 0.062, 0.307, 0.482, 0.149;
+  (Risk) 0.051, 0.150, 0.034, 0.765;
+}
+probability ( CantPlayQuietly | ADHD ) {
+  (No) 0.985, 0.015, 0.000, 0.000;
+  (Few) 0.828, 0.164, 0.008, 0.000;
+  (Moderate) 0.438, 0.359, 0.202, 0.001;
+  (Risk) 0.3833834, 0.3163163, 0.1501502, 0.1501502;
+}
+probability ( CantStaySeated | ADHD ) {
+  (No) 0.499, 0.347, 0.118, 0.036;
+  (Few) 0.080, 0.387, 0.372, 0.161;
+  (Moderate) 0.044, 0.106, 0.447, 0.403;
+  (Risk) 0.018, 0.067, 0.267, 0.648;
+}
+probability ( CantWaitForTurn | ADHD ) {
+  (No) 0.967032967, 0.026973027, 0.002997003, 0.002997003;
+  (Few) 0.635, 0.317, 0.048, 0.000;
+  (Moderate) 0.298, 0.412, 0.237, 0.053;
+  (Risk) 0.1501502, 0.2832833, 0.3163163, 0.2502503;
+}
+probability ( Carelessness | ADHD ) {
+  (No) 0.553446553, 0.416583417, 0.026973027, 0.002997003;
+  (Few) 0.160839161, 0.721278721, 0.109890110, 0.007992008;
+  (Moderate) 0.036, 0.307, 0.473, 0.184;
+  (Risk) 0.018, 0.283, 0.333, 0.366;
+}
+probability ( DifficultySustainingAttention | ADHD ) {
+  (No) 0.66023166, 0.22586873, 0.08108108, 0.03281853;
+  (Few) 0.204, 0.405, 0.285, 0.106;
+  (Moderate) 0.1841842, 0.3333333, 0.2892893, 0.1931932;
+  (Risk) 0.117, 0.217, 0.233, 0.433;
+}
+probability ( DoesntListen | ADHD ) {
+  (No) 0.77877878, 0.17817818, 0.04304304, 0.00000000;
+  (Few) 0.35364635, 0.47052947, 0.13886114, 0.03696304;
+  (Moderate) 0.12312312, 0.36836837, 0.46446446, 0.04404404;
+  (Risk) 0.034, 0.150, 0.267, 0.549;
+}
+probability ( EasilyDistractible | ADHD ) {
+  (No) 0.930, 0.065, 0.005, 0.000;
+  (Few) 0.536, 0.398, 0.066, 0.000;
+  (Moderate) 0.1408591, 0.4025974, 0.3506494, 0.1058941;
+  (Risk) 0.034, 0.250, 0.217, 0.499;
+}
+probability ( Forgetful | ADHD ) {
+  (No) 0.795, 0.183, 0.017, 0.005;
+  (Few) 0.24475524, 0.58341658, 0.13486513, 0.03696304;
+  (Moderate) 0.027, 0.377, 0.447, 0.149;
+  (Risk) 0.01798202, 0.05094905, 0.26673327, 0.66433566;
+}
+probability ( IntrudesOthers | ADHD ) {
+  (No) 0.918, 0.075, 0.007, 0.000;
+  (Few) 0.489, 0.427, 0.080, 0.004;
+  (Moderate) 0.263, 0.342, 0.342, 0.053;
+  (Risk) 0.0339898, 0.2169349, 0.2332300, 0.5158452;
+}
+probability ( LosesItems | ADHD ) {
+  (No) 0.619, 0.325, 0.053, 0.003;
+  (Few) 0.029, 0.551, 0.332, 0.088;
+  (Moderate) 0.009009009, 0.062062062, 0.534534535, 0.394394394;
+  (Risk) 0.001, 0.001, 0.117, 0.881;
+}
+probability ( NoFollowThrough | ADHD ) {
+  (No) 0.694, 0.231, 0.058, 0.017;
+  (Few) 0.277, 0.423, 0.223, 0.077;
+  (Moderate) 0.123, 0.377, 0.316, 0.184;
+  (Risk) 0.084, 0.101, 0.233, 0.582;
+}
+probability ( OnTheGo | ADHD ) {
+  (No) 0.874, 0.121, 0.005, 0.000;
+  (Few) 0.558, 0.416, 0.026, 0.000;
+  (Moderate) 0.24575425, 0.38561439, 0.30669331, 0.06193806;
+  (Risk) 0.101, 0.250, 0.366, 0.283;
+}
+probability ( RunsExcessively | ADHD ) {
+  (No) 0.816183816, 0.177822178, 0.002997003, 0.002997003;
+  (Few) 0.296, 0.580, 0.124, 0.000;
+  (Moderate) 0.044, 0.246, 0.526, 0.184;
+  (Risk) 0.084, 0.117, 0.333, 0.466;
+}
+probability ( SquirmsAndFidgets | ADHD ) {
+  (No) 0.881118881, 0.112887113, 0.002997003, 0.002997003;
+  (Few) 0.474, 0.467, 0.051, 0.008;
+  (Moderate) 0.237, 0.386, 0.333, 0.044;
+  (Risk) 0.034, 0.233, 0.383, 0.350;
+}
+probability ( TalksExcessively | ADHD ) {
+  (No) 0.529470529, 0.409590410, 0.055944056, 0.004995005;
+  (Few) 0.124, 0.540, 0.303, 0.033;
+  (Moderate) 0.03596404, 0.28071928, 0.40259740, 0.28071928;
+  (Risk) 0.01798202, 0.10089910, 0.51548452, 0.36563437;
+}

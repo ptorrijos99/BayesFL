@@ -1,0 +1,205 @@
+network unknown {
+}
+variable Arable {
+  type discrete [ 4 ] { Low, Enhanced, Intermediate, High };
+}
+variable N {
+  type discrete [ 3 ] { Low, Intermediate, High };
+}
+variable Urban {
+  type discrete [ 3 ] { None, Enhanced, High };
+}
+variable Fines {
+  type discrete [ 2 ] { Normal, Enhanced };
+}
+variable Nitrate {
+  type discrete [ 2 ] { Low, Enhanced };
+}
+variable Grazer {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable oPO4 {
+  type discrete [ 2 ] { Low, High };
+}
+variable BufForest {
+  type discrete [ 2 ] { Low, High };
+}
+variable BOD5 {
+  type discrete [ 3 ] { Low, Enhanced, High };
+}
+variable WaterQ {
+  type discrete [ 3 ] { Low, Fair, Good };
+}
+variable OrgMatter {
+  type discrete [ 2 ] { Low, High };
+}
+variable Stagnant {
+  type discrete [ 2 ] { No, Yes };
+}
+variable HabitatQ {
+  type discrete [ 3 ] { Low, Fair, Good };
+}
+variable Straight {
+  type discrete [ 2 ] { No, Yes };
+}
+variable FlowQ {
+  type discrete [ 2 ] { Low, High };
+}
+variable EPT {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ASPT {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable SI {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Shredder {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( Arable ) {
+  table 0.18860000, 0.38068207, 0.33350551, 0.09721242;
+}
+probability ( N | Arable ) {
+  (Low) 0.75, 0.20, 0.05;
+  (Enhanced) 0.5, 0.3, 0.2;
+  (Intermediate) 0.4, 0.3, 0.3;
+  (High) 0.25, 0.45, 0.30;
+}
+probability ( Urban ) {
+  table 0.55, 0.35, 0.10;
+}
+probability ( Fines | Arable, Urban ) {
+  (Low, None) 0.95, 0.05;
+  (Enhanced, None) 0.75, 0.25;
+  (Intermediate, None) 0.65, 0.35;
+  (High, None) 0.5, 0.5;
+  (Low, Enhanced) 0.9, 0.1;
+  (Enhanced, Enhanced) 0.6, 0.4;
+  (Intermediate, Enhanced) 0.5, 0.5;
+  (High, Enhanced) 0.3, 0.7;
+  (Low, High) 0.7, 0.3;
+  (Enhanced, High) 0.6, 0.4;
+  (Intermediate, High) 0.4, 0.6;
+  (High, High) 0.25, 0.75;
+}
+probability ( Nitrate | Arable ) {
+  (Low) 0.7464245, 0.2535755;
+  (Enhanced) 0.799152, 0.200848;
+  (Intermediate) 0.5221933, 0.4778067;
+  (High) 0.279423, 0.720577;
+}
+probability ( Grazer | N, Fines ) {
+  (Low, Normal) 0.08599192, 0.53256454, 0.38144354;
+  (Intermediate, Normal) 0.03387978, 0.47156797, 0.49455225;
+  (High, Normal) 0.01, 0.33, 0.66;
+  (Low, Enhanced) 0.2, 0.4, 0.4;
+  (Intermediate, Enhanced) 0.1, 0.6, 0.3;
+  (High, Enhanced) 0.1, 0.4, 0.5;
+}
+probability ( oPO4 | Urban ) {
+  (None) 0.7079216, 0.2920784;
+  (Enhanced) 0.6063048, 0.3936952;
+  (High) 0.505603, 0.494397;
+}
+probability ( BufForest ) {
+  table 0.3206724, 0.6793276;
+}
+probability ( BOD5 | Urban, BufForest ) {
+  (None, Low) 0.7, 0.2, 0.1;
+  (Enhanced, Low) 0.5, 0.3, 0.2;
+  (High, Low) 0.4, 0.4, 0.2;
+  (None, High) 0.80, 0.15, 0.05;
+  (Enhanced, High) 0.6, 0.3, 0.1;
+  (High, High) 0.5, 0.4, 0.1;
+}
+probability ( WaterQ | N, oPO4, BOD5 ) {
+  (Low, Low, Low) 0.05, 0.05, 0.90;
+  (Intermediate, Low, Low) 0.15, 0.25, 0.60;
+  (High, Low, Low) 0.05, 0.05, 0.90;
+  (Low, High, Low) 0.05, 0.60, 0.35;
+  (Intermediate, High, Low) 0.4, 0.4, 0.2;
+  (High, High, Low) 0.5, 0.4, 0.1;
+  (Low, Low, Enhanced) 0.1, 0.3, 0.6;
+  (Intermediate, Low, Enhanced) 0.2, 0.5, 0.3;
+  (High, Low, Enhanced) 0.25, 0.60, 0.15;
+  (Low, High, Enhanced) 0.35, 0.50, 0.15;
+  (Intermediate, High, Enhanced) 0.40, 0.55, 0.05;
+  (High, High, Enhanced) 0.6, 0.3, 0.1;
+  (Low, Low, High) 0.6, 0.3, 0.1;
+  (Intermediate, Low, High) 0.70, 0.15, 0.15;
+  (High, Low, High) 0.75, 0.20, 0.05;
+  (Low, High, High) 0.4, 0.5, 0.1;
+  (Intermediate, High, High) 0.60, 0.35, 0.05;
+  (High, High, High) 0.80, 0.19, 0.01;
+}
+probability ( OrgMatter | N, Nitrate, oPO4 ) {
+  (Low, Low, Low) 0.8061343, 0.1938657;
+  (Intermediate, Low, Low) 0.8050769, 0.1949231;
+  (High, Low, Low) 0.99671053, 0.00328947;
+  (Low, Enhanced, Low) 0.6189462, 0.3810538;
+  (Intermediate, Enhanced, Low) 0.97759689, 0.02240311;
+  (High, Enhanced, Low) 0.98411416, 0.01588584;
+  (Low, Low, High) 0.6239492, 0.3760508;
+  (Intermediate, Low, High) 0.6292173, 0.3707827;
+  (High, Low, High) 0.98291139, 0.01708861;
+  (Low, Enhanced, High) 0.98366013, 0.01633987;
+  (Intermediate, Enhanced, High) 0.98990978, 0.01009022;
+  (High, Enhanced, High) 0.99, 0.01;
+}
+probability ( Stagnant ) {
+  table 0.8472552, 0.1527448;
+}
+probability ( HabitatQ | Fines, OrgMatter, Stagnant ) {
+  (Normal, Low, No) 0.1, 0.2, 0.7;
+  (Enhanced, Low, No) 0.2, 0.3, 0.5;
+  (Normal, High, No) 0.05, 0.05, 0.90;
+  (Enhanced, High, No) 0.15, 0.50, 0.35;
+  (Normal, Low, Yes) 0.60, 0.25, 0.15;
+  (Enhanced, Low, Yes) 0.75, 0.20, 0.05;
+  (Normal, High, Yes) 0.5, 0.3, 0.2;
+  (Enhanced, High, Yes) 0.6, 0.3, 0.1;
+}
+probability ( Straight ) {
+  table 0.6736338, 0.3263662;
+}
+probability ( FlowQ | Stagnant, Straight ) {
+  (No, No) 0.15, 0.85;
+  (Yes, No) 0.9, 0.1;
+  (No, Yes) 0.3, 0.7;
+  (Yes, Yes) 0.99, 0.01;
+}
+probability ( EPT | WaterQ, HabitatQ, FlowQ ) {
+  (Low, Low, Low) 0.90, 0.05, 0.05;
+  (Fair, Low, Low) 0.7, 0.2, 0.1;
+  (Good, Low, Low) 0.4, 0.3, 0.3;
+  (Low, Fair, Low) 0.80, 0.15, 0.05;
+  (Fair, Fair, Low) 0.6, 0.2, 0.2;
+  (Good, Fair, Low) 0.3, 0.5, 0.2;
+  (Low, Good, Low) 0.75, 0.15, 0.10;
+  (Fair, Good, Low) 0.3, 0.4, 0.3;
+  (Good, Good, Low) 0.2, 0.3, 0.5;
+  (Low, Low, High) 0.85, 0.10, 0.05;
+  (Fair, Low, High) 0.5, 0.3, 0.2;
+  (Good, Low, High) 0.3, 0.4, 0.3;
+  (Low, Fair, High) 0.75, 0.15, 0.10;
+  (Fair, Fair, High) 0.3, 0.4, 0.3;
+  (Good, Fair, High) 0.2, 0.4, 0.4;
+  (Low, Good, High) 0.7, 0.2, 0.1;
+  (Fair, Good, High) 0.2, 0.4, 0.4;
+  (Good, Good, High) 0.05, 0.15, 0.80;
+}
+probability ( ASPT | WaterQ ) {
+  (Low) 0.80, 0.19, 0.01;
+  (Fair) 0.6, 0.3, 0.1;
+  (Good) 0.2, 0.3, 0.5;
+}
+probability ( SI | WaterQ ) {
+  (Low) 0.900, 0.099, 0.001;
+  (Fair) 0.30, 0.65, 0.05;
+  (Good) 0.05, 0.25, 0.70;
+}
+probability ( Shredder | OrgMatter ) {
+  (Low) 0.5322769, 0.3086370, 0.1590861;
+  (High) 0.4, 0.4, 0.2;
+}

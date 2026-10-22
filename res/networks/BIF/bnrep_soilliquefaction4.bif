@@ -1,0 +1,80 @@
+network unknown {
+}
+variable ConePenetrationResistance {
+  type discrete [ 4 ] { small, medium, big, super };
+}
+variable EartquakeMagnitude {
+  type discrete [ 4 ] { medium, strong, big, super };
+}
+variable LiquefactionPotential {
+  type discrete [ 2 ] { no, yes };
+}
+variable MeanGrainSize {
+  type discrete [ 4 ] { medium, strong, big, super };
+}
+variable PeakGroundAcceleration {
+  type discrete [ 4 ] { low, medium, high, super };
+}
+variable TotalVerticalStress {
+  type discrete [ 4 ] { small, medium, big, super };
+}
+variable VerticalEffectiveStress {
+  type discrete [ 4 ] { small, medium, big, super };
+}
+probability ( ConePenetrationResistance ) {
+  table 0.3604167, 0.2937500, 0.1604167, 0.1854167;
+}
+probability ( EartquakeMagnitude | MeanGrainSize ) {
+  (medium) 0.0586956522, 0.0934782609, 0.8471014493, 0.0007246377;
+  (strong) 0.25, 0.25, 0.25, 0.25;
+  (big) 0.01923077, 0.01923077, 0.94230769, 0.01923077;
+  (super) 0.25, 0.25, 0.25, 0.25;
+}
+probability ( LiquefactionPotential | ConePenetrationResistance, VerticalEffectiveStress ) {
+  (small, small) 0.001945525, 0.998054475;
+  (medium, small) 0.09322034, 0.90677966;
+  (big, small) 0.6632653, 0.3367347;
+  (super, small) 0.99382716, 0.00617284;
+  (small, medium) 0.001945525, 0.998054475;
+  (medium, medium) 0.1190476, 0.8809524;
+  (big, medium) 0.3344828, 0.6655172;
+  (super, medium) 0.996551724, 0.003448276;
+  (small, big) 0.1836158, 0.8163842;
+  (medium, big) 0.98979592, 0.01020408;
+  (big, big) 0.3367347, 0.6632653;
+  (super, big) 0.8298969, 0.1701031;
+  (small, super) 0.5, 0.5;
+  (medium, super) 0.5, 0.5;
+  (big, super) 0.992307692, 0.007692308;
+  (super, super) 0.98484848, 0.01515152;
+}
+probability ( MeanGrainSize ) {
+  table 0.958333333, 0.002777778, 0.036111111, 0.002777778;
+}
+probability ( PeakGroundAcceleration | EartquakeMagnitude ) {
+  (medium) 0.01190476, 0.96428571, 0.01190476, 0.01190476;
+  (strong) 0.002688172, 0.088709677, 0.002688172, 0.905913978;
+  (big) 0.04452055, 0.74589041, 0.02260274, 0.18698630;
+  (super) 0.25, 0.25, 0.25, 0.25;
+}
+probability ( TotalVerticalStress ) {
+  table 0.1604167, 0.4020833, 0.2354167, 0.2020833;
+}
+probability ( VerticalEffectiveStress | PeakGroundAcceleration, TotalVerticalStress ) {
+  (low, small) 0.25, 0.25, 0.25, 0.25;
+  (medium, small) 0.995341615, 0.001552795, 0.001552795, 0.001552795;
+  (high, small) 0.25, 0.25, 0.25, 0.25;
+  (super, small) 0.994827586, 0.001724138, 0.001724138, 0.001724138;
+  (low, medium) 0.01470588, 0.95588235, 0.01470588, 0.01470588;
+  (medium, medium) 0.3241989882, 0.6749578415, 0.0004215852, 0.0004215852;
+  (high, medium) 0.007575758, 0.977272727, 0.007575758, 0.007575758;
+  (super, medium) 0.498062016, 0.498062016, 0.001937984, 0.001937984;
+  (low, big) 0.01470588, 0.01470588, 0.95588235, 0.01470588;
+  (medium, big) 0.0008196721, 0.8926229508, 0.1057377049, 0.0008196721;
+  (high, big) 0.25, 0.25, 0.25, 0.25;
+  (super, big) 0.001937984, 0.250000000, 0.746124031, 0.001937984;
+  (low, super) 0.007575758, 0.007575758, 0.977272727, 0.007575758;
+  (medium, super) 0.001724138, 0.001724138, 0.994827586, 0.001724138;
+  (high, super) 0.25, 0.25, 0.25, 0.25;
+  (super, super) 0.001196172, 0.001196172, 0.230861244, 0.766746411;
+}

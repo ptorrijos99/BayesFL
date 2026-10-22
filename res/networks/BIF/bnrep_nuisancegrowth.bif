@@ -1,0 +1,486 @@
+network unknown {
+}
+variable Activity {
+  type discrete [ 6 ] { Swimming, Boating, Angling, Biodiversity, Aesthetics, Bird_watching };
+}
+variable BenthicFishForaging {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable Disturbance {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable Ecosystem {
+  type discrete [ 3 ] { Standing_floating, Standing_submerged, Flowing_submerged };
+}
+variable EpiphyticInvertebrates {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable Flow {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Light {
+  type discrete [ 2 ] { Low, High };
+}
+variable MacrophyteGrowth {
+  type discrete [ 5 ] { Very_low, Low, Medium, High, Very_high };
+}
+variable MacrophyteRemoval {
+  type discrete [ 3 ] { None, Partial, Full };
+}
+variable MacrophyteSpecies {
+  type discrete [ 5 ] { Elodea_nuttallii, Pontederia_crassipes, Ludwigia, Juncus_bulbosus, Sagittaria_sagittifolia };
+}
+variable NutrientLoading {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable Perception {
+  type discrete [ 2 ] { Nuisance, No_nuisance };
+}
+variable Phytoplankton {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable PiscivorousFish {
+  type discrete [ 2 ] { Absent, Present };
+}
+variable PiscivorousFishPredation {
+  type discrete [ 2 ] { Low, High };
+}
+variable PlanktivorousFish {
+  type discrete [ 2 ] { Low, High };
+}
+variable Resources {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+variable RespondentType {
+  type discrete [ 2 ] { Resident, Visitor };
+}
+variable Zooplankton {
+  type discrete [ 3 ] { Low, Moderate, High };
+}
+probability ( Activity ) {
+  table 0.12780829, 0.21168248, 0.20768847, 0.20668997, 0.20768847, 0.03844234;
+}
+probability ( BenthicFishForaging | EpiphyticInvertebrates ) {
+  (Low) 0.0, 0.0, 1.0;
+  (Moderate) 0.0, 1.0, 0.0;
+  (High) 1.0, 0.0, 0.0;
+}
+probability ( Disturbance | Flow, Zooplankton ) {
+  (Low, Low) 1.0, 0.0, 0.0;
+  (Medium, Low) 0.0, 1.0, 0.0;
+  (High, Low) 0.0, 0.0, 1.0;
+  (Low, Moderate) 0.0, 1.0, 0.0;
+  (Medium, Moderate) 0.0, 0.5, 0.5;
+  (High, Moderate) 0.3333333, 0.3333333, 0.3333333;
+  (Low, High) 0.00, 0.75, 0.25;
+  (Medium, High) 0.3333333, 0.3333333, 0.3333333;
+  (High, High) 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( Ecosystem ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( EpiphyticInvertebrates | Ecosystem, MacrophyteRemoval ) {
+  (Standing_floating, None) 0.75, 0.25, 0.00;
+  (Standing_submerged, None) 0.00, 0.25, 0.75;
+  (Flowing_submerged, None) 0.00, 0.25, 0.75;
+  (Standing_floating, Partial) 0.5, 0.5, 0.0;
+  (Standing_submerged, Partial) 0.25, 0.75, 0.00;
+  (Flowing_submerged, Partial) 0.25, 0.75, 0.00;
+  (Standing_floating, Full) 0.25, 0.50, 0.25;
+  (Standing_submerged, Full) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Full) 1.0, 0.0, 0.0;
+}
+probability ( Flow | Ecosystem, MacrophyteRemoval ) {
+  (Standing_floating, None) 1.0, 0.0, 0.0;
+  (Standing_submerged, None) 1.0, 0.0, 0.0;
+  (Flowing_submerged, None) 0.75, 0.25, 0.00;
+  (Standing_floating, Partial) 1.0, 0.0, 0.0;
+  (Standing_submerged, Partial) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Partial) 0.0, 0.5, 0.5;
+  (Standing_floating, Full) 1.0, 0.0, 0.0;
+  (Standing_submerged, Full) 1.0, 0.0, 0.0;
+  (Flowing_submerged, Full) 0.0, 0.0, 1.0;
+}
+probability ( Light | Ecosystem, MacrophyteRemoval ) {
+  (Standing_floating, None) 1.0, 0.0;
+  (Standing_submerged, None) 0.5, 0.5;
+  (Flowing_submerged, None) 0.5, 0.5;
+  (Standing_floating, Partial) 0.5, 0.5;
+  (Standing_submerged, Partial) 0.25, 0.75;
+  (Flowing_submerged, Partial) 0.25, 0.75;
+  (Standing_floating, Full) 0.0, 1.0;
+  (Standing_submerged, Full) 0.0, 1.0;
+  (Flowing_submerged, Full) 0.0, 1.0;
+}
+probability ( MacrophyteGrowth ) {
+  table 0.183, 0.190, 0.197, 0.209, 0.221;
+}
+probability ( MacrophyteRemoval | Perception ) {
+  (Nuisance) 0.2, 0.2, 0.6;
+  (No_nuisance) 0.8, 0.2, 0.0;
+}
+probability ( MacrophyteSpecies ) {
+  table 0.165, 0.222, 0.192, 0.217, 0.204;
+}
+probability ( NutrientLoading ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( Perception | Activity, MacrophyteGrowth, MacrophyteSpecies, RespondentType ) {
+  (Swimming, Very_low, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Boating, Very_low, Elodea_nuttallii, Resident) 0.111, 0.889;
+  (Angling, Very_low, Elodea_nuttallii, Resident) 0.029, 0.971;
+  (Biodiversity, Very_low, Elodea_nuttallii, Resident) 0.035, 0.965;
+  (Aesthetics, Very_low, Elodea_nuttallii, Resident) 0.045, 0.955;
+  (Bird_watching, Very_low, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Swimming, Low, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Boating, Low, Elodea_nuttallii, Resident) 0.265, 0.735;
+  (Angling, Low, Elodea_nuttallii, Resident) 0.079, 0.921;
+  (Biodiversity, Low, Elodea_nuttallii, Resident) 0.095, 0.905;
+  (Aesthetics, Low, Elodea_nuttallii, Resident) 0.119, 0.881;
+  (Bird_watching, Low, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Swimming, Medium, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Boating, Medium, Elodea_nuttallii, Resident) 0.509, 0.491;
+  (Angling, Medium, Elodea_nuttallii, Resident) 0.198, 0.802;
+  (Biodiversity, Medium, Elodea_nuttallii, Resident) 0.232, 0.768;
+  (Aesthetics, Medium, Elodea_nuttallii, Resident) 0.281, 0.719;
+  (Bird_watching, Medium, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Swimming, High, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Boating, High, Elodea_nuttallii, Resident) 0.749, 0.251;
+  (Angling, High, Elodea_nuttallii, Resident) 0.415, 0.585;
+  (Biodiversity, High, Elodea_nuttallii, Resident) 0.465, 0.535;
+  (Aesthetics, High, Elodea_nuttallii, Resident) 0.53, 0.47;
+  (Bird_watching, High, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Swimming, Very_high, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Boating, Very_high, Elodea_nuttallii, Resident) 0.896, 0.104;
+  (Angling, Very_high, Elodea_nuttallii, Resident) 0.672, 0.328;
+  (Biodiversity, Very_high, Elodea_nuttallii, Resident) 0.715, 0.285;
+  (Aesthetics, Very_high, Elodea_nuttallii, Resident) 0.765, 0.235;
+  (Bird_watching, Very_high, Elodea_nuttallii, Resident) 0.5, 0.5;
+  (Swimming, Very_low, Pontederia_crassipes, Resident) 0.184, 0.816;
+  (Boating, Very_low, Pontederia_crassipes, Resident) 0.191, 0.809;
+  (Angling, Very_low, Pontederia_crassipes, Resident) 0.179, 0.821;
+  (Biodiversity, Very_low, Pontederia_crassipes, Resident) 0.178, 0.822;
+  (Aesthetics, Very_low, Pontederia_crassipes, Resident) 0.199, 0.801;
+  (Bird_watching, Very_low, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Swimming, Low, Pontederia_crassipes, Resident) 0.311, 0.689;
+  (Boating, Low, Pontederia_crassipes, Resident) 0.322, 0.678;
+  (Angling, Low, Pontederia_crassipes, Resident) 0.304, 0.696;
+  (Biodiversity, Low, Pontederia_crassipes, Resident) 0.302, 0.698;
+  (Aesthetics, Low, Pontederia_crassipes, Resident) 0.333, 0.667;
+  (Bird_watching, Low, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Swimming, Medium, Pontederia_crassipes, Resident) 0.475, 0.525;
+  (Boating, Medium, Pontederia_crassipes, Resident) 0.488, 0.512;
+  (Angling, Medium, Pontederia_crassipes, Resident) 0.467, 0.533;
+  (Biodiversity, Medium, Pontederia_crassipes, Resident) 0.466, 0.534;
+  (Aesthetics, Medium, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Bird_watching, Medium, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Swimming, High, Pontederia_crassipes, Resident) 0.644, 0.356;
+  (Boating, High, Pontederia_crassipes, Resident) 0.655, 0.345;
+  (Angling, High, Pontederia_crassipes, Resident) 0.637, 0.363;
+  (Biodiversity, High, Pontederia_crassipes, Resident) 0.634, 0.366;
+  (Aesthetics, High, Pontederia_crassipes, Resident) 0.667, 0.333;
+  (Bird_watching, High, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Swimming, Very_high, Pontederia_crassipes, Resident) 0.784, 0.216;
+  (Boating, Very_high, Pontederia_crassipes, Resident) 0.792, 0.208;
+  (Angling, Very_high, Pontederia_crassipes, Resident) 0.778, 0.222;
+  (Biodiversity, Very_high, Pontederia_crassipes, Resident) 0.777, 0.223;
+  (Aesthetics, Very_high, Pontederia_crassipes, Resident) 0.8, 0.2;
+  (Bird_watching, Very_high, Pontederia_crassipes, Resident) 0.5, 0.5;
+  (Swimming, Very_low, Ludwigia, Resident) 0.5, 0.5;
+  (Boating, Very_low, Ludwigia, Resident) 0.178, 0.822;
+  (Angling, Very_low, Ludwigia, Resident) 0.176, 0.824;
+  (Biodiversity, Very_low, Ludwigia, Resident) 0.193, 0.807;
+  (Aesthetics, Very_low, Ludwigia, Resident) 0.172, 0.828;
+  (Bird_watching, Very_low, Ludwigia, Resident) 0.184, 0.816;
+  (Swimming, Low, Ludwigia, Resident) 0.5, 0.5;
+  (Boating, Low, Ludwigia, Resident) 0.162, 0.838;
+  (Angling, Low, Ludwigia, Resident) 0.163, 0.837;
+  (Biodiversity, Low, Ludwigia, Resident) 0.178, 0.822;
+  (Aesthetics, Low, Ludwigia, Resident) 0.159, 0.841;
+  (Bird_watching, Low, Ludwigia, Resident) 0.169, 0.831;
+  (Swimming, Medium, Ludwigia, Resident) 0.5, 0.5;
+  (Boating, Medium, Ludwigia, Resident) 0.152, 0.848;
+  (Angling, Medium, Ludwigia, Resident) 0.15, 0.85;
+  (Biodiversity, Medium, Ludwigia, Resident) 0.165, 0.835;
+  (Aesthetics, Medium, Ludwigia, Resident) 0.146, 0.854;
+  (Bird_watching, Medium, Ludwigia, Resident) 0.157, 0.843;
+  (Swimming, High, Ludwigia, Resident) 0.5, 0.5;
+  (Boating, High, Ludwigia, Resident) 0.139, 0.861;
+  (Angling, High, Ludwigia, Resident) 0.138, 0.862;
+  (Biodiversity, High, Ludwigia, Resident) 0.152, 0.848;
+  (Aesthetics, High, Ludwigia, Resident) 0.135, 0.865;
+  (Bird_watching, High, Ludwigia, Resident) 0.144, 0.856;
+  (Swimming, Very_high, Ludwigia, Resident) 0.5, 0.5;
+  (Boating, Very_high, Ludwigia, Resident) 0.128, 0.872;
+  (Angling, Very_high, Ludwigia, Resident) 0.127, 0.873;
+  (Biodiversity, Very_high, Ludwigia, Resident) 0.139, 0.861;
+  (Aesthetics, Very_high, Ludwigia, Resident) 0.124, 0.876;
+  (Bird_watching, Very_high, Ludwigia, Resident) 0.133, 0.867;
+  (Swimming, Very_low, Juncus_bulbosus, Resident) 0.29, 0.71;
+  (Boating, Very_low, Juncus_bulbosus, Resident) 0.278, 0.722;
+  (Angling, Very_low, Juncus_bulbosus, Resident) 0.258, 0.742;
+  (Biodiversity, Very_low, Juncus_bulbosus, Resident) 0.227, 0.773;
+  (Aesthetics, Very_low, Juncus_bulbosus, Resident) 0.257, 0.743;
+  (Bird_watching, Very_low, Juncus_bulbosus, Resident) 0.5, 0.5;
+  (Swimming, Low, Juncus_bulbosus, Resident) 0.433, 0.567;
+  (Boating, Low, Juncus_bulbosus, Resident) 0.421, 0.579;
+  (Angling, Low, Juncus_bulbosus, Resident) 0.3966034, 0.6033966;
+  (Biodiversity, Low, Juncus_bulbosus, Resident) 0.357, 0.643;
+  (Aesthetics, Low, Juncus_bulbosus, Resident) 0.395, 0.605;
+  (Bird_watching, Low, Juncus_bulbosus, Resident) 0.5, 0.5;
+  (Swimming, Medium, Juncus_bulbosus, Resident) 0.591, 0.409;
+  (Boating, Medium, Juncus_bulbosus, Resident) 0.579, 0.421;
+  (Angling, Medium, Juncus_bulbosus, Resident) 0.554, 0.446;
+  (Biodiversity, Medium, Juncus_bulbosus, Resident) 0.512, 0.488;
+  (Aesthetics, Medium, Juncus_bulbosus, Resident) 0.553, 0.447;
+  (Bird_watching, Medium, Juncus_bulbosus, Resident) 0.5, 0.5;
+  (Swimming, High, Juncus_bulbosus, Resident) 0.732, 0.268;
+  (Boating, High, Juncus_bulbosus, Resident) 0.722, 0.278;
+  (Angling, High, Juncus_bulbosus, Resident) 0.702, 0.298;
+  (Biodiversity, High, Juncus_bulbosus, Resident) 0.665, 0.335;
+  (Aesthetics, High, Juncus_bulbosus, Resident) 0.7, 0.3;
+  (Bird_watching, High, Juncus_bulbosus, Resident) 0.5, 0.5;
+  (Swimming, Very_high, Juncus_bulbosus, Resident) 0.838, 0.162;
+  (Boating, Very_high, Juncus_bulbosus, Resident) 0.831, 0.169;
+  (Angling, Very_high, Juncus_bulbosus, Resident) 0.817, 0.183;
+  (Biodiversity, Very_high, Juncus_bulbosus, Resident) 0.79, 0.21;
+  (Aesthetics, Very_high, Juncus_bulbosus, Resident) 0.816, 0.184;
+  (Bird_watching, Very_high, Juncus_bulbosus, Resident) 0.5, 0.5;
+  (Swimming, Very_low, Sagittaria_sagittifolia, Resident) 0.021, 0.979;
+  (Boating, Very_low, Sagittaria_sagittifolia, Resident) 0.021, 0.979;
+  (Angling, Very_low, Sagittaria_sagittifolia, Resident) 0.026, 0.974;
+  (Biodiversity, Very_low, Sagittaria_sagittifolia, Resident) 0.015, 0.985;
+  (Aesthetics, Very_low, Sagittaria_sagittifolia, Resident) 0.019, 0.981;
+  (Bird_watching, Very_low, Sagittaria_sagittifolia, Resident) 0.5, 0.5;
+  (Swimming, Low, Sagittaria_sagittifolia, Resident) 0.073, 0.927;
+  (Boating, Low, Sagittaria_sagittifolia, Resident) 0.078, 0.922;
+  (Angling, Low, Sagittaria_sagittifolia, Resident) 0.089, 0.911;
+  (Biodiversity, Low, Sagittaria_sagittifolia, Resident) 0.038, 0.962;
+  (Aesthetics, Low, Sagittaria_sagittifolia, Resident) 0.069, 0.931;
+  (Bird_watching, Low, Sagittaria_sagittifolia, Resident) 0.5, 0.5;
+  (Swimming, Medium, Sagittaria_sagittifolia, Resident) 0.226, 0.774;
+  (Boating, Medium, Sagittaria_sagittifolia, Resident) 0.236, 0.764;
+  (Angling, Medium, Sagittaria_sagittifolia, Resident) 0.267, 0.733;
+  (Biodiversity, Medium, Sagittaria_sagittifolia, Resident) 0.127, 0.873;
+  (Aesthetics, Medium, Sagittaria_sagittifolia, Resident) 0.216, 0.784;
+  (Bird_watching, Medium, Sagittaria_sagittifolia, Resident) 0.5, 0.5;
+  (Swimming, High, Sagittaria_sagittifolia, Resident) 0.52, 0.48;
+  (Boating, High, Sagittaria_sagittifolia, Resident) 0.534, 0.466;
+  (Angling, High, Sagittaria_sagittifolia, Resident) 0.574, 0.426;
+  (Biodiversity, High, Sagittaria_sagittifolia, Resident) 0.35, 0.65;
+  (Aesthetics, High, Sagittaria_sagittifolia, Resident) 0.505, 0.495;
+  (Bird_watching, High, Sagittaria_sagittifolia, Resident) 0.5, 0.5;
+  (Swimming, Very_high, Sagittaria_sagittifolia, Resident) 0.8, 0.2;
+  (Boating, Very_high, Sagittaria_sagittifolia, Resident) 0.801, 0.199;
+  (Angling, Very_high, Sagittaria_sagittifolia, Resident) 0.833, 0.167;
+  (Biodiversity, Very_high, Sagittaria_sagittifolia, Resident) 0.666, 0.334;
+  (Aesthetics, Very_high, Sagittaria_sagittifolia, Resident) 0.791, 0.209;
+  (Bird_watching, Very_high, Sagittaria_sagittifolia, Resident) 0.5, 0.5;
+  (Swimming, Very_low, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Boating, Very_low, Elodea_nuttallii, Visitor) 0.062, 0.938;
+  (Angling, Very_low, Elodea_nuttallii, Visitor) 0.015, 0.985;
+  (Biodiversity, Very_low, Elodea_nuttallii, Visitor) 0.019, 0.981;
+  (Aesthetics, Very_low, Elodea_nuttallii, Visitor) 0.024, 0.976;
+  (Bird_watching, Very_low, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Swimming, Low, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Boating, Low, Elodea_nuttallii, Visitor) 0.159, 0.841;
+  (Angling, Low, Elodea_nuttallii, Visitor) 0.043, 0.957;
+  (Biodiversity, Low, Elodea_nuttallii, Visitor) 0.052, 0.948;
+  (Aesthetics, Low, Elodea_nuttallii, Visitor) 0.066, 0.934;
+  (Bird_watching, Low, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Swimming, Medium, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Boating, Medium, Elodea_nuttallii, Visitor) 0.353, 0.647;
+  (Angling, Medium, Elodea_nuttallii, Visitor) 0.114, 0.886;
+  (Biodiversity, Medium, Elodea_nuttallii, Visitor) 0.137, 0.863;
+  (Aesthetics, Medium, Elodea_nuttallii, Visitor) 0.17, 0.83;
+  (Bird_watching, Medium, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Swimming, High, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Boating, High, Elodea_nuttallii, Visitor) 0.611, 0.389;
+  (Angling, High, Elodea_nuttallii, Visitor) 0.271, 0.729;
+  (Biodiversity, High, Elodea_nuttallii, Visitor) 0.313, 0.687;
+  (Aesthetics, High, Elodea_nuttallii, Visitor) 0.372, 0.628;
+  (Bird_watching, High, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Swimming, Very_high, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Boating, Very_high, Elodea_nuttallii, Visitor) 0.819, 0.181;
+  (Angling, Very_high, Elodea_nuttallii, Visitor) 0.518, 0.482;
+  (Biodiversity, Very_high, Elodea_nuttallii, Visitor) 0.568, 0.432;
+  (Aesthetics, Very_high, Elodea_nuttallii, Visitor) 0.63, 0.37;
+  (Bird_watching, Very_high, Elodea_nuttallii, Visitor) 0.5, 0.5;
+  (Swimming, Very_low, Pontederia_crassipes, Visitor) 0.233, 0.767;
+  (Boating, Very_low, Pontederia_crassipes, Visitor) 0.383, 0.617;
+  (Angling, Very_low, Pontederia_crassipes, Visitor) 0.361, 0.639;
+  (Biodiversity, Very_low, Pontederia_crassipes, Visitor) 0.358, 0.642;
+  (Aesthetics, Very_low, Pontederia_crassipes, Visitor) 0.281, 0.719;
+  (Bird_watching, Very_low, Pontederia_crassipes, Visitor) 0.5, 0.5;
+  (Swimming, Low, Pontederia_crassipes, Visitor) 0.311, 0.689;
+  (Boating, Low, Pontederia_crassipes, Visitor) 0.479, 0.521;
+  (Angling, Low, Pontederia_crassipes, Visitor) 0.456, 0.544;
+  (Biodiversity, Low, Pontederia_crassipes, Visitor) 0.452, 0.548;
+  (Aesthetics, Low, Pontederia_crassipes, Visitor) 0.366, 0.634;
+  (Bird_watching, Low, Pontederia_crassipes, Visitor) 0.5, 0.5;
+  (Swimming, Medium, Pontederia_crassipes, Visitor) 0.1, 0.9;
+  (Boating, Medium, Pontederia_crassipes, Visitor) 0.576, 0.424;
+  (Angling, Medium, Pontederia_crassipes, Visitor) 0.553, 0.447;
+  (Biodiversity, Medium, Pontederia_crassipes, Visitor) 0.549, 0.451;
+  (Aesthetics, Medium, Pontederia_crassipes, Visitor) 0.461, 0.539;
+  (Bird_watching, Medium, Pontederia_crassipes, Visitor) 0.5, 0.5;
+  (Swimming, High, Pontederia_crassipes, Visitor) 0.497, 0.503;
+  (Boating, High, Pontederia_crassipes, Visitor) 0.668, 0.332;
+  (Angling, High, Pontederia_crassipes, Visitor) 0.647, 0.353;
+  (Biodiversity, High, Pontederia_crassipes, Visitor) 0.643, 0.357;
+  (Aesthetics, High, Pontederia_crassipes, Visitor) 0.559, 0.441;
+  (Bird_watching, High, Pontederia_crassipes, Visitor) 0.5, 0.5;
+  (Swimming, Very_high, Pontederia_crassipes, Visitor) 0.594, 0.406;
+  (Boating, Very_high, Pontederia_crassipes, Visitor) 0.748, 0.252;
+  (Angling, Very_high, Pontederia_crassipes, Visitor) 0.73, 0.27;
+  (Biodiversity, Very_high, Pontederia_crassipes, Visitor) 0.728, 0.272;
+  (Aesthetics, Very_high, Pontederia_crassipes, Visitor) 0.652, 0.348;
+  (Bird_watching, Very_high, Pontederia_crassipes, Visitor) 0.5, 0.5;
+  (Swimming, Very_low, Ludwigia, Visitor) 0.5, 0.5;
+  (Boating, Very_low, Ludwigia, Visitor) 0.156, 0.844;
+  (Angling, Very_low, Ludwigia, Visitor) 0.155, 0.845;
+  (Biodiversity, Very_low, Ludwigia, Visitor) 0.169, 0.831;
+  (Aesthetics, Very_low, Ludwigia, Visitor) 0.151, 0.849;
+  (Bird_watching, Very_low, Ludwigia, Visitor) 0.162, 0.838;
+  (Swimming, Low, Ludwigia, Visitor) 0.5, 0.5;
+  (Boating, Low, Ludwigia, Visitor) 0.16, 0.84;
+  (Angling, Low, Ludwigia, Visitor) 0.159, 0.841;
+  (Biodiversity, Low, Ludwigia, Visitor) 0.174, 0.826;
+  (Aesthetics, Low, Ludwigia, Visitor) 0.155, 0.845;
+  (Bird_watching, Low, Ludwigia, Visitor) 0.1641642, 0.8358358;
+  (Swimming, Medium, Ludwigia, Visitor) 0.5, 0.5;
+  (Boating, Medium, Ludwigia, Visitor) 0.164, 0.836;
+  (Angling, Medium, Ludwigia, Visitor) 0.162, 0.838;
+  (Biodiversity, Medium, Ludwigia, Visitor) 0.178, 0.822;
+  (Aesthetics, Medium, Ludwigia, Visitor) 0.158, 0.842;
+  (Bird_watching, Medium, Ludwigia, Visitor) 0.169, 0.831;
+  (Swimming, High, Ludwigia, Visitor) 0.5, 0.5;
+  (Boating, High, Ludwigia, Visitor) 0.168, 0.832;
+  (Angling, High, Ludwigia, Visitor) 0.166, 0.834;
+  (Biodiversity, High, Ludwigia, Visitor) 0.182, 0.818;
+  (Aesthetics, High, Ludwigia, Visitor) 0.162, 0.838;
+  (Bird_watching, High, Ludwigia, Visitor) 0.173, 0.827;
+  (Swimming, Very_high, Ludwigia, Visitor) 0.5, 0.5;
+  (Boating, Very_high, Ludwigia, Visitor) 0.171, 0.829;
+  (Angling, Very_high, Ludwigia, Visitor) 0.17, 0.83;
+  (Biodiversity, Very_high, Ludwigia, Visitor) 0.186, 0.814;
+  (Aesthetics, Very_high, Ludwigia, Visitor) 0.166, 0.834;
+  (Bird_watching, Very_high, Ludwigia, Visitor) 0.177, 0.823;
+  (Swimming, Very_low, Juncus_bulbosus, Visitor) 0.122, 0.878;
+  (Boating, Very_low, Juncus_bulbosus, Visitor) 0.117, 0.883;
+  (Angling, Very_low, Juncus_bulbosus, Visitor) 0.107, 0.893;
+  (Biodiversity, Very_low, Juncus_bulbosus, Visitor) 0.092, 0.908;
+  (Aesthetics, Very_low, Juncus_bulbosus, Visitor) 0.106, 0.894;
+  (Bird_watching, Very_low, Juncus_bulbosus, Visitor) 0.5, 0.5;
+  (Swimming, Low, Juncus_bulbosus, Visitor) 0.208, 0.792;
+  (Boating, Low, Juncus_bulbosus, Visitor) 0.201, 0.799;
+  (Angling, Low, Juncus_bulbosus, Visitor) 0.185, 0.815;
+  (Biodiversity, Low, Juncus_bulbosus, Visitor) 0.161, 0.839;
+  (Aesthetics, Low, Juncus_bulbosus, Visitor) 0.184, 0.816;
+  (Bird_watching, Low, Juncus_bulbosus, Visitor) 0.5, 0.5;
+  (Swimming, Medium, Juncus_bulbosus, Visitor) 0.333, 0.667;
+  (Boating, Medium, Juncus_bulbosus, Visitor) 0.322, 0.678;
+  (Angling, Medium, Juncus_bulbosus, Visitor) 0.3, 0.7;
+  (Biodiversity, Medium, Juncus_bulbosus, Visitor) 0.266, 0.734;
+  (Aesthetics, Medium, Juncus_bulbosus, Visitor) 0.299, 0.701;
+  (Bird_watching, Medium, Juncus_bulbosus, Visitor) 0.5, 0.5;
+  (Swimming, High, Juncus_bulbosus, Visitor) 0.485, 0.515;
+  (Boating, High, Juncus_bulbosus, Visitor) 0.474, 0.526;
+  (Angling, High, Juncus_bulbosus, Visitor) 0.448, 0.552;
+  (Biodiversity, High, Juncus_bulbosus, Visitor) 0.407, 0.593;
+  (Aesthetics, High, Juncus_bulbosus, Visitor) 0.447, 0.553;
+  (Bird_watching, High, Juncus_bulbosus, Visitor) 0.5, 0.5;
+  (Swimming, Very_high, Juncus_bulbosus, Visitor) 0.641, 0.359;
+  (Boating, Very_high, Juncus_bulbosus, Visitor) 0.629, 0.371;
+  (Angling, Very_high, Juncus_bulbosus, Visitor) 0.606, 0.394;
+  (Biodiversity, Very_high, Juncus_bulbosus, Visitor) 0.565, 0.435;
+  (Aesthetics, Very_high, Juncus_bulbosus, Visitor) 0.604, 0.396;
+  (Bird_watching, Very_high, Juncus_bulbosus, Visitor) 0.5, 0.5;
+  (Swimming, Very_low, Sagittaria_sagittifolia, Visitor) 0.051, 0.949;
+  (Boating, Very_low, Sagittaria_sagittifolia, Visitor) 0.054, 0.946;
+  (Angling, Very_low, Sagittaria_sagittifolia, Visitor) 0.063, 0.937;
+  (Biodiversity, Very_low, Sagittaria_sagittifolia, Visitor) 0.026, 0.974;
+  (Aesthetics, Very_low, Sagittaria_sagittifolia, Visitor) 0.048, 0.952;
+  (Bird_watching, Very_low, Sagittaria_sagittifolia, Visitor) 0.5, 0.5;
+  (Swimming, Low, Sagittaria_sagittifolia, Visitor) 0.107, 0.893;
+  (Boating, Low, Sagittaria_sagittifolia, Visitor) 0.112, 0.888;
+  (Angling, Low, Sagittaria_sagittifolia, Visitor) 0.13, 0.87;
+  (Biodiversity, Low, Sagittaria_sagittifolia, Visitor) 0.563, 0.437;
+  (Aesthetics, Low, Sagittaria_sagittifolia, Visitor) 0.102, 0.898;
+  (Bird_watching, Low, Sagittaria_sagittifolia, Visitor) 0.5, 0.5;
+  (Swimming, Medium, Sagittaria_sagittifolia, Visitor) 0.211, 0.789;
+  (Boating, Medium, Sagittaria_sagittifolia, Visitor) 0.219, 0.781;
+  (Angling, Medium, Sagittaria_sagittifolia, Visitor) 0.249, 0.751;
+  (Biodiversity, Medium, Sagittaria_sagittifolia, Visitor) 0.117, 0.883;
+  (Aesthetics, Medium, Sagittaria_sagittifolia, Visitor) 0.201, 0.799;
+  (Bird_watching, Medium, Sagittaria_sagittifolia, Visitor) 0.5, 0.5;
+  (Swimming, High, Sagittaria_sagittifolia, Visitor) 0.373, 0.627;
+  (Boating, High, Sagittaria_sagittifolia, Visitor) 0.385, 0.615;
+  (Angling, High, Sagittaria_sagittifolia, Visitor) 0.425, 0.575;
+  (Biodiversity, High, Sagittaria_sagittifolia, Visitor) 0.228, 0.772;
+  (Aesthetics, High, Sagittaria_sagittifolia, Visitor) 0.359, 0.641;
+  (Bird_watching, High, Sagittaria_sagittifolia, Visitor) 0.5, 0.5;
+  (Swimming, Very_high, Sagittaria_sagittifolia, Visitor) 0.569, 0.431;
+  (Boating, Very_high, Sagittaria_sagittifolia, Visitor) 0.583, 0.417;
+  (Angling, Very_high, Sagittaria_sagittifolia, Visitor) 0.622, 0.378;
+  (Biodiversity, Very_high, Sagittaria_sagittifolia, Visitor) 0.397, 0.603;
+  (Aesthetics, Very_high, Sagittaria_sagittifolia, Visitor) 0.555, 0.445;
+  (Bird_watching, Very_high, Sagittaria_sagittifolia, Visitor) 0.5, 0.5;
+}
+probability ( Phytoplankton | Disturbance, Resources ) {
+  (Low, Low) 0.5, 0.5, 0.0;
+  (Moderate, Low) 0.75, 0.25, 0.00;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Low, Moderate) 0.0, 0.5, 0.5;
+  (Moderate, Moderate) 0.0, 1.0, 0.0;
+  (High, Moderate) 0.5, 0.5, 0.0;
+  (Low, High) 0.0, 0.0, 1.0;
+  (Moderate, High) 0.0, 0.5, 0.5;
+  (High, High) 0.0, 1.0, 0.0;
+}
+probability ( PiscivorousFish ) {
+  table 0.5, 0.5;
+}
+probability ( PiscivorousFishPredation | MacrophyteRemoval, PiscivorousFish ) {
+  (None, Absent) 1.0, 0.0;
+  (Partial, Absent) 1.0, 0.0;
+  (Full, Absent) 1.0, 0.0;
+  (None, Present) 1.0, 0.0;
+  (Partial, Present) 0.5, 0.5;
+  (Full, Present) 0.0, 1.0;
+}
+probability ( PlanktivorousFish | PiscivorousFishPredation ) {
+  (Low) 0.0, 1.0;
+  (High) 1.0, 0.0;
+}
+probability ( Resources | BenthicFishForaging, Light, NutrientLoading ) {
+  (Low, Low, Low) 1.0, 0.0, 0.0;
+  (Moderate, Low, Low) 0.9, 0.1, 0.0;
+  (High, Low, Low) 0.8, 0.2, 0.0;
+  (Low, High, Low) 0.75, 0.25, 0.00;
+  (Moderate, High, Low) 0.5, 0.5, 0.0;
+  (High, High, Low) 0.25, 0.75, 0.00;
+  (Low, Low, Moderate) 0.75, 0.25, 0.00;
+  (Moderate, Low, Moderate) 0.7, 0.3, 0.0;
+  (High, Low, Moderate) 0.65, 0.35, 0.00;
+  (Low, High, Moderate) 0.00, 0.75, 0.25;
+  (Moderate, High, Moderate) 0.00, 0.65, 0.35;
+  (High, High, Moderate) 0.00, 0.55, 0.45;
+  (Low, Low, High) 0.5, 0.5, 0.0;
+  (Moderate, Low, High) 0.5, 0.5, 0.0;
+  (High, Low, High) 0.5, 0.5, 0.0;
+  (Low, High, High) 0.0, 0.0, 1.0;
+  (Moderate, High, High) 0.0, 0.0, 1.0;
+  (High, High, High) 0.0, 0.0, 1.0;
+}
+probability ( RespondentType ) {
+  table 0.507, 0.493;
+}
+probability ( Zooplankton | Flow, PlanktivorousFish ) {
+  (Low, Low) 0.0, 0.0, 1.0;
+  (Medium, Low) 0.0, 1.0, 0.0;
+  (High, Low) 1.0, 0.0, 0.0;
+  (Low, High) 0.5, 0.5, 0.0;
+  (Medium, High) 0.75, 0.25, 0.00;
+  (High, High) 1.0, 0.0, 0.0;
+}

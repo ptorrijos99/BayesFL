@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AZVaccineDoses</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>One</OUTCOME>
+      <OUTCOME>Two</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Age</NAME>
+      <OUTCOME>0_9</OUTCOME>
+      <OUTCOME>10_19</OUTCOME>
+      <OUTCOME>20_29</OUTCOME>
+      <OUTCOME>30_39</OUTCOME>
+      <OUTCOME>40_49</OUTCOME>
+      <OUTCOME>50_59</OUTCOME>
+      <OUTCOME>60_69</OUTCOME>
+      <OUTCOME>70_</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BackgroundCSVTOver6Weeks</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>BackgroundPVTOver6Weeks</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Covid19AssociatedCSVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Covid19AssociatedPVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromBackgroundCSVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromBackgroundPVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromCovid19</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromCovid19AssociatedCSVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromCovid19AssociatedPVT</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DieFromVaccineAssociatedTTS</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>IntensityOfCommunityTransmission</NAME>
+      <OUTCOME>None</OUTCOME>
+      <OUTCOME>ATAGI_Low</OUTCOME>
+      <OUTCOME>ATAGI_Med</OUTCOME>
+      <OUTCOME>ATAGI_High</OUTCOME>
+      <OUTCOME>One_Percent</OUTCOME>
+      <OUTCOME>Two_Percent</OUTCOME>
+      <OUTCOME>NSW_200_Daily</OUTCOME>
+      <OUTCOME>NSW_1000_Daily</OUTCOME>
+      <OUTCOME>VIC_1000_Daily</OUTCOME>
+      <OUTCOME>QLD_1000_Daily</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiskOfSymptomaticInfection</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RiskOfSymptomaticInfectionUnderCurrentTransmissionAndVaccinationStatus</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SARSCoV2Variant</NAME>
+      <OUTCOME>Alpha_Wild</OUTCOME>
+      <OUTCOME>Delta</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sex</NAME>
+      <OUTCOME>Male</OUTCOME>
+      <OUTCOME>Female</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VaccineAssociatedTTS</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VaccineEffectivenessAgainstDeathIfInfected</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Not_Effective</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VaccineEffectivenessAgainstSymptomaticInfection</NAME>
+      <OUTCOME>Effective</OUTCOME>
+      <OUTCOME>Not_Effective</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AZVaccineDoses</FOR>
+      <TABLE>0.3 0.35 0.35 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Age</FOR>
+      <TABLE>0.1233831 0.1233831 0.1402985 0.1452736 0.1273632 0.121393 0.1044776 0.1144279 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BackgroundCSVTOver6Weeks</FOR>
+      <GIVEN>Age</GIVEN>
+      <TABLE>3.8e-07 0.99999962 3.8e-07 0.99999962 6.4e-07 0.99999936 6.4e-07 0.99999936 6.4e-07 0.99999936 7.5e-07 0.99999925 7.5e-07 0.99999925 7.3e-07 0.99999927 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>BackgroundPVTOver6Weeks</FOR>
+      <GIVEN>Age</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 2e-07 0.9999998 2.6e-07 0.99999974 5.6e-07 0.99999944 9.1e-07 0.99999909 1.76e-06 0.99999824 1.96e-06 0.99999804 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Covid19AssociatedCSVT</FOR>
+      <GIVEN>RiskOfSymptomaticInfectionUnderCurrentTransmissionAndVaccinationStatus</GIVEN>
+      <GIVEN>Sex</GIVEN>
+      <TABLE>2.88732e-05 0.9999711268 5.41969e-05 0.9999458031 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Covid19AssociatedPVT</FOR>
+      <GIVEN>RiskOfSymptomaticInfectionUnderCurrentTransmissionAndVaccinationStatus</GIVEN>
+      <GIVEN>Sex</GIVEN>
+      <TABLE>0.000482596 0.999517404 0.000318407 0.999681593 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromBackgroundCSVT</FOR>
+      <GIVEN>BackgroundCSVTOver6Weeks</GIVEN>
+      <TABLE>0.07 0.93 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromBackgroundPVT</FOR>
+      <GIVEN>BackgroundPVTOver6Weeks</GIVEN>
+      <TABLE>0.27 0.73 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromCovid19</FOR>
+      <GIVEN>Age</GIVEN>
+      <GIVEN>RiskOfSymptomaticInfectionUnderCurrentTransmissionAndVaccinationStatus</GIVEN>
+      <GIVEN>Sex</GIVEN>
+      <GIVEN>VaccineEffectivenessAgainstDeathIfInfected</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00030321 0.99969679 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00032457 0.99967543 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00080402 0.99919598 0.0 1.0 0.00044336 0.99955664 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00086505 0.99913495 0.0 1.0 0.00062933 0.99937067 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00374787 0.99625213 0.0 1.0 0.00285919 0.99714081 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.01879699 0.98120301 0.0 1.0 0.00806916 0.99193084 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.2174339 0.7825661 0.0 1.0 0.1910828 0.8089172 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromCovid19AssociatedCSVT</FOR>
+      <GIVEN>Covid19AssociatedCSVT</GIVEN>
+      <TABLE>0.174 0.826 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromCovid19AssociatedPVT</FOR>
+      <GIVEN>Covid19AssociatedPVT</GIVEN>
+      <TABLE>0.1981982 0.8018018 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DieFromVaccineAssociatedTTS</FOR>
+      <GIVEN>VaccineAssociatedTTS</GIVEN>
+      <TABLE>0.05 0.95 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>IntensityOfCommunityTransmission</FOR>
+      <TABLE>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiskOfSymptomaticInfection</FOR>
+      <GIVEN>Age</GIVEN>
+      <GIVEN>SARSCoV2Variant</GIVEN>
+      <TABLE>0.0416611 0.9583389 0.09182884 0.90817116 0.0702759 0.9297241 0.1423347 0.8576653 0.1589055 0.8410945 0.1540069 0.8459931 0.1212599 0.8787401 0.1131176 0.8868824 0.1005435 0.8994565 0.09119044 0.90880956 0.0977633 0.9022367 0.09033166 0.90966834 0.0812794 0.9187206 0.05484361 0.94515639 0.1126984 0.8873016 0.04305606 0.95694394 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RiskOfSymptomaticInfectionUnderCurrentTransmissionAndVaccinationStatus</FOR>
+      <GIVEN>IntensityOfCommunityTransmission</GIVEN>
+      <GIVEN>RiskOfSymptomaticInfection</GIVEN>
+      <GIVEN>VaccineEffectivenessAgainstSymptomaticInfection</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.00471 0.99529 0.0 1.0 0.0 1.0 0.0 1.0 0.04469 0.95531 0.0 1.0 0.0 1.0 0.0 1.0 0.5759 0.4241 0.0 1.0 0.0 1.0 0.0 1.0 0.1 0.9 0.0 1.0 0.0 1.0 0.0 1.0 0.2 0.8 0.0 1.0 0.0 1.0 0.0 1.0 0.04455 0.95545 0.0 1.0 0.0 1.0 0.0 1.0 0.22276 0.77724 0.0 1.0 0.0 1.0 0.0 1.0 0.27289 0.72711 0.0 1.0 0.0 1.0 0.0 1.0 0.35067 0.64933 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SARSCoV2Variant</FOR>
+      <TABLE>0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sex</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VaccineAssociatedTTS</FOR>
+      <GIVEN>Age</GIVEN>
+      <GIVEN>AZVaccineDoses</GIVEN>
+      <TABLE>0.0 1.0 2.5e-05 0.999975 1.8e-06 0.9999982 0.0 1.0 2.5e-05 0.999975 1.8e-06 0.9999982 0.0 1.0 2.5e-05 0.999975 1.8e-06 0.9999982 0.0 1.0 2.5e-05 0.999975 1.8e-06 0.9999982 0.0 1.0 2.5e-05 0.999975 1.8e-06 0.9999982 0.0 1.0 2.7e-05 0.999973 1.8e-06 0.9999982 0.0 1.0 1.6e-05 0.999984 1.8e-06 0.9999982 0.0 1.0 1.85e-05 0.9999815 1.8e-06 0.9999982 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VaccineEffectivenessAgainstDeathIfInfected</FOR>
+      <GIVEN>AZVaccineDoses</GIVEN>
+      <GIVEN>SARSCoV2Variant</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.8 0.2 0.69 0.31 0.95 0.05 0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VaccineEffectivenessAgainstSymptomaticInfection</FOR>
+      <GIVEN>AZVaccineDoses</GIVEN>
+      <GIVEN>SARSCoV2Variant</GIVEN>
+      <TABLE>0.0 1.0 0.0 1.0 0.6 0.4 0.3333333 0.6666667 0.8 0.2 0.61 0.39 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

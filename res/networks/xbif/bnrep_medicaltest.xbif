@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Disease</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Test1</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Test2</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Disease</FOR>
+      <GIVEN>Test1</GIVEN>
+      <GIVEN>Test2</GIVEN>
+      <TABLE>0.7 0.3 0.6 0.4 0.6 0.4 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Test1</FOR>
+      <TABLE>0.6 0.4 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Test2</FOR>
+      <TABLE>0.7 0.3 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

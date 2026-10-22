@@ -1,0 +1,96 @@
+network unknown {
+}
+variable Constraint {
+  type discrete [ 4 ] { Scenario1, Scenario2, Scenario3, NA };
+}
+variable ECamera {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ECameraSeenStealing {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EObjectGone {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EPsychReport {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Motive {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ObjectDroppedAccidentally {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Scenario1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Scenario2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Scenario3 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Sneak {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Stealing {
+  type discrete [ 2 ] { 0, 1 };
+}
+probability ( Constraint | Scenario1, Scenario2, Scenario3 ) {
+  (0, 0, 0) 0.0, 0.0, 0.0, 1.0;
+  (1, 0, 0) 1.0, 0.0, 0.0, 0.0;
+  (0, 1, 0) 0.0, 1.0, 0.0, 0.0;
+  (1, 1, 0) 0.0, 0.0, 0.0, 1.0;
+  (0, 0, 1) 0.0, 0.0, 1.0, 0.0;
+  (1, 0, 1) 0.0, 0.0, 0.0, 1.0;
+  (0, 1, 1) 0.0, 0.0, 0.0, 1.0;
+  (1, 1, 1) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( ECamera ) {
+  table 0.8396, 0.1604;
+}
+probability ( ECameraSeenStealing | ECamera, Stealing ) {
+  (0, 0) 1.0, 0.0;
+  (1, 0) 1.0, 0.0;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 0.538461, 0.461539;
+}
+probability ( EObjectGone | ObjectDroppedAccidentally, Stealing ) {
+  (0, 0) 1.0, 0.0;
+  (1, 0) 0.0, 1.0;
+  (0, 1) 0.0, 1.0;
+  (1, 1) 0.5, 0.5;
+}
+probability ( EPsychReport | Motive ) {
+  (0) 1.0, 0.0;
+  (1) 0.09859164, 0.90140836;
+}
+probability ( Motive | Scenario1 ) {
+  (0) 0.994974348, 0.005025652;
+  (1) 0.0, 1.0;
+}
+probability ( ObjectDroppedAccidentally | Scenario2 ) {
+  (0) 1.0, 0.0;
+  (1) 0.0, 1.0;
+}
+probability ( Scenario1 ) {
+  table 0.9551, 0.0449;
+}
+probability ( Scenario2 ) {
+  table 0.6752, 0.3248;
+}
+probability ( Scenario3 ) {
+  table 0.3697, 0.6303;
+}
+probability ( Sneak | Motive, Scenario1 ) {
+  (0, 0) 1.0, 0.0;
+  (1, 0) 0.08333328, 0.91666672;
+  (0, 1) 0.5, 0.5;
+  (1, 1) 0.0, 1.0;
+}
+probability ( Stealing | Scenario1, Sneak ) {
+  (0, 0) 0.9995792569, 0.0004207431;
+  (1, 0) 0.5, 0.5;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 0.0, 1.0;
+}

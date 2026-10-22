@@ -1,0 +1,88 @@
+network unknown {
+}
+variable DecisionProcess {
+  type discrete [ 3 ] { Not_based_on_evidence, Integrative_complexity, Absence_of_integrative_complexity };
+}
+variable DeliberativePractice {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable ExpertAssertsHypothesis {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable Feedback {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable GenuineExpertise {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable Hypothesis {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable ObjectiveEvidence {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable RegularPractice {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable Validity {
+  type discrete [ 3 ] { High, Medium, Zero };
+}
+variable WellInformedPractice {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+probability ( DecisionProcess ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( DeliberativePractice | Feedback, WellInformedPractice ) {
+  (FALSE, FALSE) 1.0, 0.0;
+  (TRUE, FALSE) 0.4, 0.6;
+  (FALSE, TRUE) 0.4, 0.6;
+  (TRUE, TRUE) 0.0, 1.0;
+}
+probability ( ExpertAssertsHypothesis | DecisionProcess, GenuineExpertise, ObjectiveEvidence ) {
+  (Not_based_on_evidence, FALSE, FALSE) 0.5, 0.5;
+  (Integrative_complexity, FALSE, FALSE) 0.55, 0.45;
+  (Absence_of_integrative_complexity, FALSE, FALSE) 0.2, 0.8;
+  (Not_based_on_evidence, TRUE, FALSE) 0.5, 0.5;
+  (Integrative_complexity, TRUE, FALSE) 0.65, 0.35;
+  (Absence_of_integrative_complexity, TRUE, FALSE) 0.2, 0.8;
+  (Not_based_on_evidence, FALSE, TRUE) 0.5, 0.5;
+  (Integrative_complexity, FALSE, TRUE) 0.45, 0.55;
+  (Absence_of_integrative_complexity, FALSE, TRUE) 0.8, 0.2;
+  (Not_based_on_evidence, TRUE, TRUE) 0.5, 0.5;
+  (Integrative_complexity, TRUE, TRUE) 0.35, 0.65;
+  (Absence_of_integrative_complexity, TRUE, TRUE) 0.8, 0.2;
+}
+probability ( Feedback | Validity ) {
+  (High) 0.0, 1.0;
+  (Medium) 0.3, 0.7;
+  (Zero) 1.0, 0.0;
+}
+probability ( GenuineExpertise | DeliberativePractice, RegularPractice ) {
+  (FALSE, FALSE) 1.0, 0.0;
+  (TRUE, FALSE) 1.0, 0.0;
+  (FALSE, TRUE) 1.0, 0.0;
+  (TRUE, TRUE) 0.0, 1.0;
+}
+probability ( Hypothesis ) {
+  table 0.5, 0.5;
+}
+probability ( ObjectiveEvidence | Hypothesis, Validity ) {
+  (FALSE, High) 1.0, 0.0;
+  (TRUE, High) 0.0, 1.0;
+  (FALSE, Medium) 0.7, 0.3;
+  (TRUE, Medium) 0.3, 0.7;
+  (FALSE, Zero) 1.0, 0.0;
+  (TRUE, Zero) 1.0, 0.0;
+}
+probability ( RegularPractice ) {
+  table 0.5, 0.5;
+}
+probability ( Validity ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( WellInformedPractice | Validity ) {
+  (High) 0.0, 1.0;
+  (Medium) 0.3, 0.7;
+  (Zero) 1.0, 0.0;
+}

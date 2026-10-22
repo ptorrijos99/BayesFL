@@ -1,0 +1,61 @@
+network unknown {
+}
+variable Cereals {
+  type discrete [ 2 ] { True, False };
+}
+variable Eggs {
+  type discrete [ 2 ] { True, False };
+}
+variable Fruits {
+  type discrete [ 2 ] { True, False };
+}
+variable Milk {
+  type discrete [ 2 ] { True, False };
+}
+variable Nuts {
+  type discrete [ 2 ] { True, False };
+}
+variable Peanuts {
+  type discrete [ 2 ] { True, False };
+}
+variable Seafood {
+  type discrete [ 2 ] { True, False };
+}
+variable Veg_Leg {
+  type discrete [ 2 ] { True, False };
+}
+probability ( Cereals | Fruits, Seafood ) {
+  (True, True) 0.136, 0.864;
+  (False, True) 0.012, 0.988;
+  (True, False) 0.017, 0.983;
+  (False, False) 0.322, 0.678;
+}
+probability ( Eggs ) {
+  table 0.066, 0.934;
+}
+probability ( Fruits ) {
+  table 0.431, 0.569;
+}
+probability ( Milk | Fruits, Veg_Leg ) {
+  (True, True) 0.337, 0.663;
+  (False, True) 0.007, 0.993;
+  (True, False) 0.017, 0.983;
+  (False, False) 0.171, 0.829;
+}
+probability ( Nuts | Cereals ) {
+  (True) 0.007, 0.993;
+  (False) 0.103, 0.897;
+}
+probability ( Peanuts | Milk ) {
+  (True) 0.161, 0.839;
+  (False) 0.3, 0.7;
+}
+probability ( Seafood | Fruits, Veg_Leg ) {
+  (True, True) 0.337, 0.663;
+  (False, True) 0.069, 0.931;
+  (True, False) 0.041, 0.959;
+  (False, False) 0.544, 0.456;
+}
+probability ( Veg_Leg ) {
+  table 0.083, 0.917;
+}

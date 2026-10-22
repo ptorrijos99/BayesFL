@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CulturalSiteProximity</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FloraRichness</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>KeySpeciesPresence</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NeighborhoodConservationValue</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>NeighborhoodNaturalLandCover</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SpeciesRelatedConservationValue</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SuitabilityForConservation</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VisitorDemand</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WSAboveMarineProtectedArea</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WSIncludesOtherKeyDesignations</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WSIncludesRAMSARArea</NAME>
+      <OUTCOME>no</OUTCOME>
+      <OUTCOME>yes</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WSLandscapeVariability</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>med</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WatershedConservationValue</NAME>
+      <OUTCOME>low</OUTCOME>
+      <OUTCOME>high</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CulturalSiteProximity</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FloraRichness</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>KeySpeciesPresence</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NeighborhoodConservationValue</FOR>
+      <GIVEN>CulturalSiteProximity</GIVEN>
+      <GIVEN>NeighborhoodNaturalLandCover</GIVEN>
+      <TABLE>0.85 0.15 0.7 0.3 0.0 1.0 0.35 0.65 0.15 0.85 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>NeighborhoodNaturalLandCover</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SpeciesRelatedConservationValue</FOR>
+      <GIVEN>FloraRichness</GIVEN>
+      <GIVEN>KeySpeciesPresence</GIVEN>
+      <TABLE>0.65 0.35 0.0 1.0 0.25 0.75 0.0 1.0 0.1 0.9 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SuitabilityForConservation</FOR>
+      <GIVEN>NeighborhoodConservationValue</GIVEN>
+      <GIVEN>SpeciesRelatedConservationValue</GIVEN>
+      <GIVEN>VisitorDemand</GIVEN>
+      <GIVEN>WatershedConservationValue</GIVEN>
+      <TABLE>1.0 0.0 0.45 0.55 0.98 0.02 0.43 0.57 0.95 0.05 0.4 0.6 0.5 0.5 0.35 0.65 0.48 0.52 0.33 0.67 0.45 0.55 0.3 0.7 0.2 0.8 0.0 1.0 0.15 0.85 0.0 1.0 0.1 0.9 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VisitorDemand</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WSAboveMarineProtectedArea</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WSIncludesOtherKeyDesignations</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WSIncludesRAMSARArea</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WSLandscapeVariability</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WatershedConservationValue</FOR>
+      <GIVEN>WSAboveMarineProtectedArea</GIVEN>
+      <GIVEN>WSIncludesOtherKeyDesignations</GIVEN>
+      <GIVEN>WSIncludesRAMSARArea</GIVEN>
+      <GIVEN>WSLandscapeVariability</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.3 0.7 0.15 0.85 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

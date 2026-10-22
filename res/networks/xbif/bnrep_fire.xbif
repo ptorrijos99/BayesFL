@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AudioFireCues</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmotionalStability</NAME>
+      <OUTCOME>Stable</OUTCOME>
+      <OUTCOME>Unstable</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Escape</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FireCues</NAME>
+      <OUTCOME>Consistent</OUTCOME>
+      <OUTCOME>Not_consistent</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FireKnowledge</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LayoutFamiliarity</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PerceivedHazard</NAME>
+      <OUTCOME>Risky</OUTCOME>
+      <OUTCOME>Not_risky</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PsychologicalIncapacitation</NAME>
+      <OUTCOME>Mild</OUTCOME>
+      <OUTCOME>Severe</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Stress</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TimePressure</NAME>
+      <OUTCOME>Low</OUTCOME>
+      <OUTCOME>High</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VisualFireCues</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AudioFireCues</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmotionalStability</FOR>
+      <GIVEN>FireCues</GIVEN>
+      <GIVEN>FireKnowledge</GIVEN>
+      <GIVEN>LayoutFamiliarity</GIVEN>
+      <GIVEN>TimePressure</GIVEN>
+      <TABLE>0.86 0.14 0.63 0.37 0.75 0.25 0.59 0.41 0.75 0.25 0.59 0.41 0.63 0.37 0.41 0.59 0.75 0.25 0.59 0.41 0.59 0.41 0.41 0.59 0.59 0.41 0.37 0.63 0.41 0.59 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Escape</FOR>
+      <GIVEN>PerceivedHazard</GIVEN>
+      <GIVEN>PsychologicalIncapacitation</GIVEN>
+      <TABLE>0.63 0.37 0.29 0.71 0.63 0.37 0.41 0.59 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FireCues</FOR>
+      <GIVEN>AudioFireCues</GIVEN>
+      <GIVEN>FireKnowledge</GIVEN>
+      <GIVEN>VisualFireCues</GIVEN>
+      <TABLE>0.86 0.14 0.71 0.29 0.41 0.59 0.25 0.75 0.59 0.41 0.41 0.59 0.25 0.75 0.04 0.96 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FireKnowledge</FOR>
+      <TABLE>0.37 0.63 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LayoutFamiliarity</FOR>
+      <TABLE>0.59 0.41 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PerceivedHazard</FOR>
+      <GIVEN>FireKnowledge</GIVEN>
+      <GIVEN>Stress</GIVEN>
+      <TABLE>0.25 0.75 0.59 0.41 0.14 0.86 0.63 0.37 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PsychologicalIncapacitation</FOR>
+      <GIVEN>Stress</GIVEN>
+      <TABLE>0.86 0.14 0.37 0.63 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Stress</FOR>
+      <GIVEN>EmotionalStability</GIVEN>
+      <GIVEN>TimePressure</GIVEN>
+      <TABLE>0.86 0.14 0.25 0.75 0.86 0.14 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TimePressure</FOR>
+      <TABLE>0.63 0.37 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VisualFireCues</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

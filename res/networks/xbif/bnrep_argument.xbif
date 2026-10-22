@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>DecisionProcess</NAME>
+      <OUTCOME>Not_based_on_evidence</OUTCOME>
+      <OUTCOME>Integrative_complexity</OUTCOME>
+      <OUTCOME>Absence_of_integrative_complexity</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DeliberativePractice</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ExpertAssertsHypothesis</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Feedback</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>GenuineExpertise</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Hypothesis</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ObjectiveEvidence</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>RegularPractice</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Validity</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Zero</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WellInformedPractice</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>DecisionProcess</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DeliberativePractice</FOR>
+      <GIVEN>Feedback</GIVEN>
+      <GIVEN>WellInformedPractice</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 0.4 0.6 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ExpertAssertsHypothesis</FOR>
+      <GIVEN>DecisionProcess</GIVEN>
+      <GIVEN>GenuineExpertise</GIVEN>
+      <GIVEN>ObjectiveEvidence</GIVEN>
+      <TABLE>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.55 0.45 0.45 0.55 0.65 0.35 0.35 0.65 0.2 0.8 0.8 0.2 0.2 0.8 0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Feedback</FOR>
+      <GIVEN>Validity</GIVEN>
+      <TABLE>0.0 1.0 0.3 0.7 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>GenuineExpertise</FOR>
+      <GIVEN>DeliberativePractice</GIVEN>
+      <GIVEN>RegularPractice</GIVEN>
+      <TABLE>1.0 0.0 1.0 0.0 1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Hypothesis</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ObjectiveEvidence</FOR>
+      <GIVEN>Hypothesis</GIVEN>
+      <GIVEN>Validity</GIVEN>
+      <TABLE>1.0 0.0 0.7 0.3 1.0 0.0 0.0 1.0 0.3 0.7 1.0 0.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>RegularPractice</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Validity</FOR>
+      <TABLE>0.3333333 0.3333333 0.3333333 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WellInformedPractice</FOR>
+      <GIVEN>Validity</GIVEN>
+      <TABLE>0.0 1.0 0.3 0.7 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

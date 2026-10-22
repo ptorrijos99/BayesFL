@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Combine</NAME>
+      <OUTCOME>_70</OUTCOME>
+      <OUTCOME>__70</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Oral</NAME>
+      <OUTCOME>_70</OUTCOME>
+      <OUTCOME>__70</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Position</NAME>
+      <OUTCOME>Captain</OUTCOME>
+      <OUTCOME>Lieutenant</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Promoted</NAME>
+      <OUTCOME>FALSE</OUTCOME>
+      <OUTCOME>TRUE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Race</NAME>
+      <OUTCOME>Non_White</OUTCOME>
+      <OUTCOME>White</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Written</NAME>
+      <OUTCOME>_70</OUTCOME>
+      <OUTCOME>__70</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Combine</FOR>
+      <GIVEN>Oral</GIVEN>
+      <GIVEN>Written</GIVEN>
+      <TABLE>1.0 0.0 0.53125 0.46875 0.5625 0.4375 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Oral</FOR>
+      <GIVEN>Position</GIVEN>
+      <TABLE>0.4146341 0.5853659 0.6623377 0.3376623 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Position</FOR>
+      <TABLE>0.3474576 0.6525424 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Promoted</FOR>
+      <GIVEN>Combine</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Race</FOR>
+      <GIVEN>Oral</GIVEN>
+      <TABLE>0.5588235 0.4411765 0.24 0.76 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Written</FOR>
+      <GIVEN>Oral</GIVEN>
+      <TABLE>0.5294118 0.4705882 0.32 0.68 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

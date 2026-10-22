@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>ActivityIndustrialArea</NAME>
+      <OUTCOME>Routine</OUTCOME>
+      <OUTCOME>Unusual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ActivitySiteA</NAME>
+      <OUTCOME>Routine</OUTCOME>
+      <OUTCOME>Unusual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ActivitySiteB</NAME>
+      <OUTCOME>Routine</OUTCOME>
+      <OUTCOME>Unusual</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ThunderstormsA</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>ThunderstormsB</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TrafficUnusualEvent</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UsualRushHourTraffic</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VehicleDensityA</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>VehicleDensityB</NAME>
+      <OUTCOME>High</OUTCOME>
+      <OUTCOME>Low</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>ActivityIndustrialArea</FOR>
+      <GIVEN>TrafficUnusualEvent</GIVEN>
+      <GIVEN>UsualRushHourTraffic</GIVEN>
+      <TABLE>0.01 0.99 0.01 0.99 0.99 0.01 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ActivitySiteA</FOR>
+      <GIVEN>ActivityIndustrialArea</GIVEN>
+      <TABLE>0.8 0.2 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ActivitySiteB</FOR>
+      <GIVEN>ActivityIndustrialArea</GIVEN>
+      <TABLE>0.99 0.01 0.01 0.99 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ThunderstormsA</FOR>
+      <GIVEN>ActivitySiteA</GIVEN>
+      <TABLE>0.1 0.9 0.95 0.05 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>ThunderstormsB</FOR>
+      <GIVEN>ActivitySiteB</GIVEN>
+      <TABLE>0.25 0.75 0.99 0.01 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TrafficUnusualEvent</FOR>
+      <TABLE>0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UsualRushHourTraffic</FOR>
+      <TABLE>0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VehicleDensityA</FOR>
+      <GIVEN>ActivitySiteA</GIVEN>
+      <TABLE>0.85 0.15 0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>VehicleDensityB</FOR>
+      <GIVEN>ActivitySiteB</GIVEN>
+      <TABLE>0.8 0.2 0.01 0.99 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

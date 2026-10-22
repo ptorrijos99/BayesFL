@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>FailureInvest</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FinancialFraud</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackAwareness</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackKnowledge</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>LackRegulation</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OverTrust</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PatsyInvestment</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PromotionalMessages</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>FailureInvest</FOR>
+      <GIVEN>LackKnowledge</GIVEN>
+      <GIVEN>OverTrust</GIVEN>
+      <TABLE>0.29 0.71 0.4 0.6 0.18 0.82 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FinancialFraud</FOR>
+      <GIVEN>LackAwareness</GIVEN>
+      <GIVEN>LackRegulation</GIVEN>
+      <GIVEN>PatsyInvestment</GIVEN>
+      <TABLE>0.141 0.859 0.132 0.868 0.18 0.82 0.2 0.8 0.112 0.888 0.064 0.936 0.16 0.84 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackAwareness</FOR>
+      <TABLE>0.064 0.936 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackKnowledge</FOR>
+      <TABLE>0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>LackRegulation</FOR>
+      <TABLE>0.2 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OverTrust</FOR>
+      <TABLE>0.18 0.82 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PatsyInvestment</FOR>
+      <GIVEN>FailureInvest</GIVEN>
+      <GIVEN>LackRegulation</GIVEN>
+      <GIVEN>PromotionalMessages</GIVEN>
+      <TABLE>0.183 0.817 0.209 0.791 0.173 0.827 0.217 0.783 0.165 0.835 0.2 0.8 0.13 0.87 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PromotionalMessages</FOR>
+      <TABLE>0.13 0.87 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

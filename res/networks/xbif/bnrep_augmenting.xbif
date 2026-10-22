@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>CmdSteeringOnTurn</NAME>
+      <OUTCOME>Left</OUTCOME>
+      <OUTCOME>Straight</OUTCOME>
+      <OUTCOME>Right</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CurrentPosition</NAME>
+      <OUTCOME>Near</OUTCOME>
+      <OUTCOME>On</OUTCOME>
+      <OUTCOME>Far</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CurrentSteering</NAME>
+      <OUTCOME>Straight</OUTCOME>
+      <OUTCOME>Left</OUTCOME>
+      <OUTCOME>Right</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CurrentVelocity</NAME>
+      <OUTCOME>Slow</OUTCOME>
+      <OUTCOME>Medium</OUTCOME>
+      <OUTCOME>Fast</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>InTrack</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SafeTurnRegion</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>CmdSteeringOnTurn</FOR>
+      <TABLE>0.05 0.15 0.8 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CurrentPosition</FOR>
+      <TABLE>0.33 0.33 0.34 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CurrentSteering</FOR>
+      <TABLE>0.45 0.1 0.45 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CurrentVelocity</FOR>
+      <TABLE>0.3 0.6 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>InTrack</FOR>
+      <GIVEN>CmdSteeringOnTurn</GIVEN>
+      <GIVEN>CurrentVelocity</GIVEN>
+      <GIVEN>SafeTurnRegion</GIVEN>
+      <TABLE>0.6 0.4 0.2 0.8 0.2 0.8 0.1 0.9 0.0 1.0 0.0 1.0 0.7 0.3 0.3 0.7 0.5 0.5 0.2 0.8 0.0 1.0 0.0 1.0 1.0 0.0 0.5 0.5 0.9 0.1 0.4 0.6 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SafeTurnRegion</FOR>
+      <GIVEN>CurrentPosition</GIVEN>
+      <GIVEN>CurrentSteering</GIVEN>
+      <GIVEN>CurrentVelocity</GIVEN>
+      <TABLE>1.0 0.0 0.9 0.1 0.2 0.8 0.8 0.2 0.6 0.4 0.1 0.9 0.8 0.2 0.6 0.4 0.1 0.9 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 1.0 0.0 0.9 0.1 0.7 0.3 0.2 0.8 0.9 0.1 0.7 0.3 0.2 0.8 0.8 0.2 0.5 0.5 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

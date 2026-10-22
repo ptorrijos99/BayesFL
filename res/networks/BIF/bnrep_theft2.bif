@@ -1,0 +1,36 @@
+network unknown {
+}
+variable AtCrimeScene {
+  type discrete [ 2 ] { F, T };
+}
+variable EredHanded {
+  type discrete [ 2 ] { F, T };
+}
+variable EseenCS {
+  type discrete [ 2 ] { F, T };
+}
+variable Ewallet {
+  type discrete [ 2 ] { F, T };
+}
+variable Guilty {
+  type discrete [ 2 ] { F, T };
+}
+probability ( AtCrimeScene ) {
+  table 0.57, 0.43;
+}
+probability ( EredHanded | Guilty ) {
+  (F) 1.0, 0.0;
+  (T) 0.9, 0.1;
+}
+probability ( EseenCS | AtCrimeScene ) {
+  (F) 1.0, 0.0;
+  (T) 0.0, 1.0;
+}
+probability ( Ewallet | Guilty ) {
+  (F) 0.993, 0.007;
+  (T) 0.549, 0.451;
+}
+probability ( Guilty | AtCrimeScene ) {
+  (F) 1.0, 0.0;
+  (T) 0.67, 0.33;
+}

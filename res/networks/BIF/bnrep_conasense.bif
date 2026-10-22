@@ -1,0 +1,62 @@
+network unknown {
+}
+variable Communication {
+  type discrete [ 4 ] { Bandwidth, CoverageArea, Latency, PacketLoss };
+}
+variable Navigation {
+  type discrete [ 3 ] { Accuracy, Mobility, Speed };
+}
+variable Sensing {
+  type discrete [ 3 ] { TransmissionRange, Angle, Uplink };
+}
+variable Services {
+  type discrete [ 3 ] { Good, Moderate, Poor };
+}
+probability ( Communication | Navigation, Sensing, Services ) {
+  (Accuracy, TransmissionRange, Good) 0.60, 0.30, 0.05, 0.05;
+  (Mobility, TransmissionRange, Good) 0.65, 0.30, 0.05, 0.00;
+  (Speed, TransmissionRange, Good) 0.4, 0.4, 0.1, 0.1;
+  (Accuracy, Angle, Good) 0.70, 0.20, 0.05, 0.05;
+  (Mobility, Angle, Good) 0.5, 0.4, 0.0, 0.1;
+  (Speed, Angle, Good) 0.70, 0.20, 0.05, 0.05;
+  (Accuracy, Uplink, Good) 0.50, 0.40, 0.06, 0.04;
+  (Mobility, Uplink, Good) 0.65, 0.25, 0.08, 0.02;
+  (Speed, Uplink, Good) 0.750, 0.200, 0.025, 0.025;
+  (Accuracy, TransmissionRange, Moderate) 0.40, 0.25, 0.25, 0.10;
+  (Mobility, TransmissionRange, Moderate) 0.50, 0.25, 0.00, 0.25;
+  (Speed, TransmissionRange, Moderate) 0.5, 0.3, 0.0, 0.2;
+  (Accuracy, Angle, Moderate) 0.40, 0.25, 0.10, 0.25;
+  (Mobility, Angle, Moderate) 0.50, 0.25, 0.25, 0.00;
+  (Speed, Angle, Moderate) 0.50, 0.35, 0.00, 0.15;
+  (Accuracy, Uplink, Moderate) 0.40, 0.25, 0.05, 0.30;
+  (Mobility, Uplink, Moderate) 0.5, 0.3, 0.2, 0.0;
+  (Speed, Uplink, Moderate) 0.50, 0.35, 0.15, 0.00;
+  (Accuracy, TransmissionRange, Poor) 0.1, 0.2, 0.4, 0.3;
+  (Mobility, TransmissionRange, Poor) 0.00, 0.25, 0.50, 0.25;
+  (Speed, TransmissionRange, Poor) 0.05, 0.05, 0.50, 0.40;
+  (Accuracy, Angle, Poor) 0.10, 0.25, 0.40, 0.25;
+  (Mobility, Angle, Poor) 0.25, 0.00, 0.25, 0.50;
+  (Speed, Angle, Poor) 0.0, 0.0, 0.5, 0.5;
+  (Accuracy, Uplink, Poor) 0.25, 0.00, 0.50, 0.25;
+  (Mobility, Uplink, Poor) 0.1, 0.1, 0.4, 0.4;
+  (Speed, Uplink, Poor) 0.05, 0.00, 0.50, 0.45;
+}
+probability ( Navigation | Sensing, Services ) {
+  (TransmissionRange, Good) 0.6, 0.2, 0.2;
+  (Angle, Good) 0.4, 0.4, 0.2;
+  (Uplink, Good) 0.5, 0.1, 0.4;
+  (TransmissionRange, Moderate) 0.333, 0.333, 0.334;
+  (Angle, Moderate) 0.333, 0.333, 0.334;
+  (Uplink, Moderate) 0.333, 0.333, 0.334;
+  (TransmissionRange, Poor) 0.2, 0.5, 0.3;
+  (Angle, Poor) 0.333, 0.333, 0.334;
+  (Uplink, Poor) 0.3, 0.2, 0.5;
+}
+probability ( Sensing | Services ) {
+  (Good) 0.20, 0.35, 0.45;
+  (Moderate) 0.2, 0.2, 0.6;
+  (Poor) 0.6, 0.2, 0.2;
+}
+probability ( Services ) {
+  table 0.7, 0.2, 0.1;
+}

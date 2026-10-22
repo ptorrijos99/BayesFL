@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>AdvancedEducationRate</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AverageAdmissionScore</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>CoursePassRate</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EmploymentRate</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EnrollmentQuota</NAME>
+      <OUTCOME>_2</OUTCOME>
+      <OUTCOME>_1</OUTCOME>
+      <OUTCOME>0</OUTCOME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>FirstTimeGraduationRate</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>StudentTeacherRatio</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TransferRate</NAME>
+      <OUTCOME>1</OUTCOME>
+      <OUTCOME>2</OUTCOME>
+      <OUTCOME>3</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>AdvancedEducationRate</FOR>
+      <TABLE>0.409 0.591 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AverageAdmissionScore</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.27778 0.38889 0.33333 0.0 0.42308 0.57692 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>CoursePassRate</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.5 0.38889 0.11111 0.2307677 0.3846162 0.3846162 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EmploymentRate</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.16667 0.44444 0.38889 0.4230758 0.3846162 0.1923081 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EnrollmentQuota</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.05555944 0.16666833 0.11110889 0.499995 0.16666833 0.0 0.3461535 0.3076931 0.2307723 0.1153812 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>FirstTimeGraduationRate</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.16667 0.44444 0.38889 0.3486955 0.386441 0.2648635 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>StudentTeacherRatio</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.44444 0.44444 0.11112 0.42308 0.5 0.07692 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TransferRate</FOR>
+      <GIVEN>AdvancedEducationRate</GIVEN>
+      <TABLE>0.72222 0.0 0.27778 0.57692 0.23077 0.19231 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

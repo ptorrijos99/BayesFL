@@ -1,0 +1,73 @@
+network unknown {
+}
+variable Completeness {
+  type discrete [ 2 ] { High, Low };
+}
+variable Consistency {
+  type discrete [ 2 ] { High, Low };
+}
+variable DataQuality {
+  type discrete [ 2 ] { High, Low };
+}
+variable NNMasterData {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+variable NNTransactionData {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+variable NNValues {
+  type discrete [ 2 ] { High, Low };
+}
+variable PlanDeliveryTime {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+variable QPlanDeliveryTime {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+variable QSetupTime {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+variable SetupTime {
+  type discrete [ 2 ] { Complete, Incomplete };
+}
+probability ( Completeness | NNValues ) {
+  (High) 0.99, 0.01;
+  (Low) 0.01, 0.99;
+}
+probability ( Consistency ) {
+  table 0.5, 0.5;
+}
+probability ( DataQuality | Completeness, Consistency ) {
+  (High, High) 0.99, 0.01;
+  (Low, High) 0.7, 0.3;
+  (High, Low) 0.5, 0.5;
+  (Low, Low) 0.01, 0.99;
+}
+probability ( NNMasterData | PlanDeliveryTime ) {
+  (Complete) 0.99, 0.01;
+  (Incomplete) 0.01, 0.99;
+}
+probability ( NNTransactionData | SetupTime ) {
+  (Complete) 0.99, 0.01;
+  (Incomplete) 0.01, 0.99;
+}
+probability ( NNValues | NNMasterData, NNTransactionData ) {
+  (Complete, Complete) 0.99, 0.01;
+  (Incomplete, Complete) 0.7, 0.3;
+  (Complete, Incomplete) 0.5, 0.5;
+  (Incomplete, Incomplete) 0.01, 0.99;
+}
+probability ( PlanDeliveryTime | QPlanDeliveryTime ) {
+  (Complete) 0.75, 0.25;
+  (Incomplete) 0.25, 0.75;
+}
+probability ( QPlanDeliveryTime ) {
+  table 0.5, 0.5;
+}
+probability ( QSetupTime ) {
+  table 0.5, 0.5;
+}
+probability ( SetupTime | QSetupTime ) {
+  (Complete) 0.75, 0.25;
+  (Incomplete) 0.25, 0.75;
+}

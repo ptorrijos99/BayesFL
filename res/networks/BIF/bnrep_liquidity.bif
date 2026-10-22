@@ -1,0 +1,81 @@
+network unknown {
+}
+variable X1 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X10 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X2 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X3 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X4 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X5 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X6 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X7 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X8 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+variable X9 {
+  type discrete [ 2 ] { FALSE, TRUE };
+}
+probability ( X1 | X9 ) {
+  (FALSE) 0.448, 0.552;
+  (TRUE) 0.067, 0.933;
+}
+probability ( X10 | X1, X2, X4 ) {
+  (FALSE, FALSE, FALSE) 0.684, 0.316;
+  (TRUE, FALSE, FALSE) 1.0, 0.0;
+  (FALSE, TRUE, FALSE) 0.0, 1.0;
+  (TRUE, TRUE, FALSE) 0.481, 0.519;
+  (FALSE, FALSE, TRUE) 0.0, 1.0;
+  (TRUE, FALSE, TRUE) 0.0, 1.0;
+  (FALSE, TRUE, TRUE) 0.474, 0.526;
+  (TRUE, TRUE, TRUE) 1.0, 0.0;
+}
+probability ( X2 | X4 ) {
+  (FALSE) 0.76, 0.24;
+  (TRUE) 1.0, 0.0;
+}
+probability ( X3 | X5 ) {
+  (FALSE) 1.0, 0.0;
+  (TRUE) 0.949, 0.051;
+}
+probability ( X4 | X1, X9 ) {
+  (FALSE, FALSE) 0.151, 0.849;
+  (TRUE, FALSE) 1.0, 0.0;
+  (FALSE, TRUE) 0.874, 0.126;
+  (TRUE, TRUE) 1.0, 0.0;
+}
+probability ( X5 | X4, X8 ) {
+  (FALSE, FALSE) 0.0, 1.0;
+  (TRUE, FALSE) 0.723, 0.277;
+  (FALSE, TRUE) 0.0, 1.0;
+  (TRUE, TRUE) 0.311, 0.689;
+}
+probability ( X6 ) {
+  table 0.98, 0.02;
+}
+probability ( X7 | X6 ) {
+  (FALSE) 0.988, 0.012;
+  (TRUE) 0.429, 0.571;
+}
+probability ( X8 | X7 ) {
+  (FALSE) 0.006, 0.994;
+  (TRUE) 0.875, 0.125;
+}
+probability ( X9 | X8 ) {
+  (FALSE) 0.0, 1.0;
+  (TRUE) 0.982, 0.018;
+}

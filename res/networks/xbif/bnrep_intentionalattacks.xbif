@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>U1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>U2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>X2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Y</NAME>
+      <OUTCOME>Intentional_Attack</OUTCOME>
+      <OUTCOME>Accidental_Technical_Failure</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Z1</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Z2</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Z3</NAME>
+      <OUTCOME>True</OUTCOME>
+      <OUTCOME>False</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>U1</FOR>
+      <TABLE>0.75 0.25 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>U2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X1</FOR>
+      <TABLE>0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>X2</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Y</FOR>
+      <GIVEN>U1</GIVEN>
+      <GIVEN>U2</GIVEN>
+      <GIVEN>X1</GIVEN>
+      <GIVEN>X2</GIVEN>
+      <TABLE>0.09 0.91 0.1 0.9 0.15 0.85 0.15 0.85 0.04 0.96 0.05 0.95 0.01 0.99 0.5 0.5 0.5 0.5 0.68 0.32 0.15 0.85 0.05 0.95 0.29 0.71 0.34 0.66 0.01 0.99 0.03 0.97 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Z1</FOR>
+      <GIVEN>Y</GIVEN>
+      <TABLE>0.85 0.15 0.25 0.75 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Z2</FOR>
+      <GIVEN>Y</GIVEN>
+      <TABLE>0.15 0.85 0.85 0.15 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Z3</FOR>
+      <GIVEN>Y</GIVEN>
+      <TABLE>0.25 0.75 0.85 0.15 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

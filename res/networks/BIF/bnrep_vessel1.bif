@@ -1,0 +1,135 @@
+network unknown {
+}
+variable CarryingLoadAboveTransportLimits {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DesignDefect {
+  type discrete [ 2 ] { Yes, No };
+}
+variable HuntingEquipmentOverload {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LossOfBuoyancy {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LossOfStability {
+  type discrete [ 2 ] { Yes, No };
+}
+variable LossOfWaterTightness {
+  type discrete [ 2 ] { Present, Absent };
+}
+variable Overload {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PlannedMaintenance {
+  type discrete [ 2 ] { Completed, Uncompleted };
+}
+variable Sinking {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UnstableLoading {
+  type discrete [ 2 ] { Yes, No };
+}
+variable UsedHuntingEquipment {
+  type discrete [ 2 ] { Proper, Improper };
+}
+variable VesselAge {
+  type discrete [ 2 ] { Old, New };
+}
+variable VesselPipelines {
+  type discrete [ 2 ] { Corroded, Normal };
+}
+variable VesselStructure {
+  type discrete [ 2 ] { Worn, Normal };
+}
+variable WaterIntake {
+  type discrete [ 2 ] { Yes, No };
+}
+variable WeatherAndSeaConditions {
+  type discrete [ 2 ] { Bad, Good };
+}
+probability ( CarryingLoadAboveTransportLimits | Overload ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.0, 1.0;
+}
+probability ( DesignDefect ) {
+  table 0.04, 0.96;
+}
+probability ( HuntingEquipmentOverload | UsedHuntingEquipment ) {
+  (Proper) 0.13, 0.87;
+  (Improper) 1.0, 0.0;
+}
+probability ( LossOfBuoyancy | WaterIntake ) {
+  (Yes) 1.0, 0.0;
+  (No) 0.04, 0.96;
+}
+probability ( LossOfStability | DesignDefect, HuntingEquipmentOverload, UnstableLoading ) {
+  (Yes, Yes, Yes) 1.0, 0.0;
+  (No, Yes, Yes) 1.0, 0.0;
+  (Yes, No, Yes) 0.5, 0.5;
+  (No, No, Yes) 0.4, 0.6;
+  (Yes, Yes, No) 0.75, 0.25;
+  (No, Yes, No) 0.5, 0.5;
+  (Yes, No, No) 0.1, 0.9;
+  (No, No, No) 0.0, 1.0;
+}
+probability ( LossOfWaterTightness | VesselAge ) {
+  (Old) 0.09, 0.91;
+  (New) 0.0, 1.0;
+}
+probability ( Overload ) {
+  table 0.16, 0.84;
+}
+probability ( PlannedMaintenance ) {
+  table 0.9, 0.1;
+}
+probability ( Sinking | CarryingLoadAboveTransportLimits, LossOfBuoyancy, LossOfStability, WeatherAndSeaConditions ) {
+  (Yes, Yes, Yes, Bad) 1.0, 0.0;
+  (No, Yes, Yes, Bad) 1.0, 0.0;
+  (Yes, No, Yes, Bad) 1.0, 0.0;
+  (No, No, Yes, Bad) 1.0, 0.0;
+  (Yes, Yes, No, Bad) 1.0, 0.0;
+  (No, Yes, No, Bad) 1.0, 0.0;
+  (Yes, No, No, Bad) 1.0, 0.0;
+  (No, No, No, Bad) 0.33, 0.67;
+  (Yes, Yes, Yes, Good) 1.0, 0.0;
+  (No, Yes, Yes, Good) 0.63, 0.37;
+  (Yes, No, Yes, Good) 0.38, 0.62;
+  (No, No, Yes, Good) 0.23, 0.77;
+  (Yes, Yes, No, Good) 0.5, 0.5;
+  (No, Yes, No, Good) 0.35, 0.65;
+  (Yes, No, No, Good) 0.1, 0.9;
+  (No, No, No, Good) 0.0, 1.0;
+}
+probability ( UnstableLoading ) {
+  table 0.13, 0.87;
+}
+probability ( UsedHuntingEquipment ) {
+  table 0.93, 0.07;
+}
+probability ( VesselAge ) {
+  table 0.74, 0.26;
+}
+probability ( VesselPipelines | PlannedMaintenance, VesselAge ) {
+  (Completed, Old) 0.9, 0.1;
+  (Uncompleted, Old) 0.96, 0.04;
+  (Completed, New) 0.0, 1.0;
+  (Uncompleted, New) 0.08, 0.92;
+}
+probability ( VesselStructure | VesselAge ) {
+  (Old) 0.72, 0.28;
+  (New) 0.375, 0.625;
+}
+probability ( WaterIntake | LossOfWaterTightness, VesselPipelines, VesselStructure ) {
+  (Present, Corroded, Worn) 1.0, 0.0;
+  (Absent, Corroded, Worn) 0.74, 0.26;
+  (Present, Normal, Worn) 0.94, 0.06;
+  (Absent, Normal, Worn) 0.6, 0.4;
+  (Present, Corroded, Normal) 0.43, 0.57;
+  (Absent, Corroded, Normal) 0.1, 0.9;
+  (Present, Normal, Normal) 0.3, 0.7;
+  (Absent, Normal, Normal) 0.0, 1.0;
+}
+probability ( WeatherAndSeaConditions ) {
+  table 0.33, 0.67;
+}

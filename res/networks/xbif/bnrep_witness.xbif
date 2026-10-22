@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>W1SteveDidIt</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>W2SteveDidIt</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>W3SteveMartinOrDavidDidIt</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>W4SteveJohnOrJamesDidIt</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>W5SteveJohnOrPeterDidIt</NAME>
+      <OUTCOME>TRUE</OUTCOME>
+      <OUTCOME>FALSE</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WhoCommittedTheDeed</NAME>
+      <OUTCOME>Steve</OUTCOME>
+      <OUTCOME>Martin</OUTCOME>
+      <OUTCOME>David</OUTCOME>
+      <OUTCOME>John</OUTCOME>
+      <OUTCOME>James</OUTCOME>
+      <OUTCOME>Peter</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>W1SteveDidIt</FOR>
+      <GIVEN>WhoCommittedTheDeed</GIVEN>
+      <TABLE>0.8 0.2 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>W2SteveDidIt</FOR>
+      <GIVEN>WhoCommittedTheDeed</GIVEN>
+      <TABLE>0.8 0.2 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>W3SteveMartinOrDavidDidIt</FOR>
+      <GIVEN>WhoCommittedTheDeed</GIVEN>
+      <TABLE>0.8 0.2 0.8 0.2 0.8 0.2 0.05 0.95 0.05 0.95 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>W4SteveJohnOrJamesDidIt</FOR>
+      <GIVEN>WhoCommittedTheDeed</GIVEN>
+      <TABLE>0.8 0.2 0.05 0.95 0.05 0.95 0.8 0.2 0.8 0.2 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>W5SteveJohnOrPeterDidIt</FOR>
+      <GIVEN>WhoCommittedTheDeed</GIVEN>
+      <TABLE>0.8 0.2 0.05 0.95 0.05 0.95 0.8 0.2 0.05 0.95 0.8 0.2 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WhoCommittedTheDeed</FOR>
+      <TABLE>0.1666667 0.1666667 0.1666667 0.1666667 0.1666667 0.1666667 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

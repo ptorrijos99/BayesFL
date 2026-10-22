@@ -1,0 +1,123 @@
+network unknown {
+}
+variable AcidificationThreat {
+  type discrete [ 2 ] { Low, High };
+}
+variable CoastalDevelopmentThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable CoralPopulationBleached {
+  type discrete [ 5 ] { Less_than_0, 0_0_086, 0_086_0_265, 0_265_0_507, More_than_0_507 };
+}
+variable ManagementEffectiveness {
+  type discrete [ 3 ] { Ineffective, Partial, Effective };
+}
+variable MarineBasedPollutionThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable Overfishing {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+variable ThermalStress {
+  type discrete [ 2 ] { None, Severe };
+}
+variable WatershedBasedPollutionThreat {
+  type discrete [ 3 ] { Low, Medium, High };
+}
+probability ( AcidificationThreat | CoralPopulationBleached ) {
+  (Less_than_0) 0.905562, 0.094438;
+  (0_0_086) 0.753267, 0.246733;
+  (0_086_0_265) 0.796253, 0.203747;
+  (0_265_0_507) 0.686673, 0.313327;
+  (More_than_0_507) 0.864659, 0.135341;
+}
+probability ( CoastalDevelopmentThreat | CoralPopulationBleached, Overfishing ) {
+  (Less_than_0, Low) 0.833920, 0.146094, 0.019986;
+  (0_0_086, Low) 0.841847, 0.127656, 0.030497;
+  (0_086_0_265, Low) 0.9615680384, 0.0008179992, 0.0376139624;
+  (0_265_0_507, Low) 0.794142, 0.201478, 0.004380;
+  (More_than_0_507, Low) 0.496869, 0.492426, 0.010705;
+  (Less_than_0, Medium) 0.6824407, 0.1758652, 0.1416941;
+  (0_0_086, Medium) 0.669702, 0.239806, 0.090492;
+  (0_086_0_265, Medium) 0.644799, 0.296010, 0.059191;
+  (0_265_0_507, Medium) 0.747904, 0.188659, 0.063437;
+  (More_than_0_507, Medium) 0.79820, 0.13405, 0.06775;
+  (Less_than_0, High) 0.2616607, 0.2832137, 0.4551255;
+  (0_0_086, High) 0.205708, 0.328910, 0.465382;
+  (0_086_0_265, High) 0.250429, 0.295356, 0.454215;
+  (0_265_0_507, High) 0.369378, 0.331604, 0.299018;
+  (More_than_0_507, High) 0.001678, 0.152834, 0.845488;
+}
+probability ( CoralPopulationBleached ) {
+  table 0.65706934, 0.24730675, 0.06311494, 0.01996498, 0.01254399;
+}
+probability ( ManagementEffectiveness | AcidificationThreat, CoralPopulationBleached ) {
+  (Low, Less_than_0) 0.792111, 0.189554, 0.018335;
+  (High, Less_than_0) 0.675396, 0.106070, 0.218534;
+  (Low, 0_0_086) 0.80678719, 0.15707484, 0.03613796;
+  (High, 0_0_086) 0.5084365, 0.2020522, 0.2895113;
+  (Low, 0_086_0_265) 0.892364, 0.082118, 0.025518;
+  (High, 0_086_0_265) 0.5828776, 0.1606772, 0.2564453;
+  (Low, 0_265_0_507) 0.878023, 0.120963, 0.001014;
+  (High, 0_265_0_507) 0.79875820, 0.06780993, 0.13343187;
+  (Low, More_than_0_507) 0.883580116, 0.115152885, 0.001266999;
+  (High, More_than_0_507) 0.500262500, 0.491677492, 0.008060008;
+}
+probability ( MarineBasedPollutionThreat | CoastalDevelopmentThreat, CoralPopulationBleached ) {
+  (Low, Less_than_0) 0.870134, 0.124049, 0.005817;
+  (Medium, Less_than_0) 0.826491, 0.138771, 0.034738;
+  (High, Less_than_0) 0.609436, 0.185362, 0.205202;
+  (Low, 0_0_086) 0.858304, 0.137050, 0.004646;
+  (Medium, 0_0_086) 0.741669, 0.203847, 0.054484;
+  (High, 0_0_086) 0.582364, 0.167088, 0.250548;
+  (Low, 0_086_0_265) 0.928303, 0.071288, 0.000409;
+  (Medium, 0_086_0_265) 0.566815, 0.294491, 0.138694;
+  (High, 0_086_0_265) 0.4970245, 0.1380391, 0.3649364;
+  (Low, 0_265_0_507) 0.803464, 0.194564, 0.001972;
+  (Medium, 0_265_0_507) 0.536138, 0.305546, 0.158316;
+  (High, 0_265_0_507) 0.3307703, 0.2304682, 0.4387614;
+  (Low, More_than_0_507) 0.612528, 0.384167, 0.003305;
+  (Medium, More_than_0_507) 0.991239, 0.004365, 0.004396;
+  (High, More_than_0_507) 0.579835, 0.085852, 0.334313;
+}
+probability ( Overfishing | CoralPopulationBleached, ManagementEffectiveness ) {
+  (Less_than_0, Ineffective) 0.084802, 0.259968, 0.655230;
+  (0_0_086, Ineffective) 0.092875, 0.241932, 0.665193;
+  (0_086_0_265, Ineffective) 0.05507406, 0.22054122, 0.72438472;
+  (0_265_0_507, Ineffective) 0.024635, 0.314966, 0.660399;
+  (More_than_0_507, Ineffective) 0.0008740009, 0.4739024739, 0.5252235252;
+  (Less_than_0, Partial) 0.466807, 0.533117, 0.000076;
+  (0_0_086, Partial) 0.634358, 0.365423, 0.000219;
+  (0_086_0_265, Partial) 0.599343, 0.399184, 0.001473;
+  (0_265_0_507, Partial) 0.399883, 0.595737, 0.004380;
+  (More_than_0_507, Partial) 0.400199, 0.595423, 0.004378;
+  (Less_than_0, Effective) 0.999254, 0.000373, 0.000373;
+  (0_0_086, Effective) 0.999252, 0.000374, 0.000374;
+  (0_086_0_265, Effective) 0.996016004, 0.001991998, 0.001991998;
+  (0_265_0_507, Effective) 0.97850, 0.01075, 0.01075;
+  (More_than_0_507, Effective) 0.3346973, 0.3326513, 0.3326513;
+}
+probability ( ThermalStress | CoralPopulationBleached ) {
+  (Less_than_0) 0.601506, 0.398494;
+  (0_0_086) 0.546087, 0.453913;
+  (0_086_0_265) 0.533976, 0.466024;
+  (0_265_0_507) 0.439516, 0.560484;
+  (More_than_0_507) 0.433893, 0.566107;
+}
+probability ( WatershedBasedPollutionThreat | CoastalDevelopmentThreat, CoralPopulationBleached ) {
+  (Low, Less_than_0) 0.766302, 0.175681, 0.058017;
+  (Medium, Less_than_0) 0.498027, 0.370403, 0.131570;
+  (High, Less_than_0) 0.327901, 0.401097, 0.271002;
+  (Low, 0_0_086) 0.737793, 0.231670, 0.030537;
+  (Medium, 0_0_086) 0.501313, 0.291641, 0.207046;
+  (High, 0_0_086) 0.299706, 0.365406, 0.334888;
+  (Low, 0_086_0_265) 0.759288, 0.212351, 0.028361;
+  (Medium, 0_086_0_265) 0.432591, 0.377364, 0.190045;
+  (High, 0_086_0_265) 0.134586, 0.470642, 0.394772;
+  (Low, 0_265_0_507) 0.498052, 0.462961, 0.038987;
+  (Medium, 0_265_0_507) 0.614103, 0.306890, 0.079007;
+  (High, 0_265_0_507) 0.334521, 0.439156, 0.226323;
+  (Low, More_than_0_507) 0.767531, 0.230772, 0.001697;
+  (Medium, More_than_0_507) 0.200799, 0.794771, 0.004430;
+  (High, More_than_0_507) 0.08286308, 0.40812941, 0.50900751;
+}

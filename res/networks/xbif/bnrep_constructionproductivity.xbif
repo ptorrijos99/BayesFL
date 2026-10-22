@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>Accidents</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>AdverseWeather</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Age</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Attitude</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>EngineerQualification</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Experience</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>HealthStatus</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>MaterialPresence</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>OwnerFinance</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>PlanningAndMethod</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Productivity</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Sex</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>SkilledWorkers</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TaskComplexity</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TechnologyLevel</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WorkingFrequency</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>WorkingTools</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Workmanship</NAME>
+      <OUTCOME>Yes</OUTCOME>
+      <OUTCOME>No</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>Accidents</FOR>
+      <GIVEN>HealthStatus</GIVEN>
+      <TABLE>0.617 0.383 0.587 0.413 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>AdverseWeather</FOR>
+      <TABLE>0.47 0.53 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Age</FOR>
+      <TABLE>0.73 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Attitude</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>EngineerQualification</FOR>
+      <TABLE>0.67 0.33 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Experience</FOR>
+      <GIVEN>Age</GIVEN>
+      <TABLE>0.703 0.297 0.463 0.537 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>HealthStatus</FOR>
+      <GIVEN>AdverseWeather</GIVEN>
+      <TABLE>0.44 0.56 0.647 0.353 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>MaterialPresence</FOR>
+      <GIVEN>OwnerFinance</GIVEN>
+      <TABLE>0.887 0.113 0.627 0.373 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>OwnerFinance</FOR>
+      <TABLE>0.9 0.1 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>PlanningAndMethod</FOR>
+      <GIVEN>EngineerQualification</GIVEN>
+      <TABLE>0.627 0.373 0.73 0.27 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Productivity</FOR>
+      <GIVEN>Accidents</GIVEN>
+      <GIVEN>TaskComplexity</GIVEN>
+      <GIVEN>TechnologyLevel</GIVEN>
+      <GIVEN>WorkingFrequency</GIVEN>
+      <TABLE>0.627 0.373 0.327 0.673 0.627 0.373 0.327 0.673 0.527 0.473 0.827 0.173 0.327 0.673 0.727 0.273 0.527 0.473 0.427 0.573 0.127 0.873 0.727 0.273 0.227 0.773 0.427 0.573 0.727 0.273 0.327 0.673 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Sex</FOR>
+      <TABLE>0.53 0.47 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>SkilledWorkers</FOR>
+      <GIVEN>OwnerFinance</GIVEN>
+      <TABLE>0.76 0.24 0.83 0.17 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TaskComplexity</FOR>
+      <GIVEN>Workmanship</GIVEN>
+      <TABLE>0.703 0.297 0.403 0.597 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TechnologyLevel</FOR>
+      <GIVEN>PlanningAndMethod</GIVEN>
+      <TABLE>0.73 0.27 0.7 0.3 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WorkingFrequency</FOR>
+      <GIVEN>Attitude</GIVEN>
+      <GIVEN>MaterialPresence</GIVEN>
+      <GIVEN>Sex</GIVEN>
+      <GIVEN>SkilledWorkers</GIVEN>
+      <GIVEN>WorkingTools</GIVEN>
+      <TABLE>0.827 0.173 0.627 0.373 0.527 0.473 0.427 0.573 0.727 0.273 0.727 0.273 0.327 0.673 0.227 0.773 0.4264264 0.5735736 0.727 0.273 0.127 0.873 0.827 0.173 0.627 0.373 0.327 0.673 0.627 0.373 0.627 0.373 0.627 0.373 0.527 0.473 0.427 0.573 0.727 0.273 0.727 0.273 0.13 0.87 0.127 0.873 0.527 0.473 0.13 0.87 0.527 0.473 0.327 0.673 0.227 0.773 0.527 0.473 0.627 0.373 0.727 0.273 0.527 0.473 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>WorkingTools</FOR>
+      <GIVEN>OwnerFinance</GIVEN>
+      <TABLE>0.787 0.213 0.66 0.34 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Workmanship</FOR>
+      <GIVEN>Experience</GIVEN>
+      <TABLE>0.8 0.2 0.6 0.4 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

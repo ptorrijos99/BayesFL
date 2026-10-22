@@ -1,0 +1,107 @@
+network unknown {
+}
+variable C11 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C12 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C9 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C7 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C8 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C6 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C5 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C10 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C4 {
+  type discrete [ 2 ] { FM_S_present, FM_S_absent };
+}
+variable C1 {
+  type discrete [ 2 ] { Hp, Hd };
+}
+variable C3 {
+  type discrete [ 2 ] { True, False };
+}
+variable C2 {
+  type discrete [ 2 ] { True, False };
+}
+probability ( C11 | C9, C6 ) {
+  (FM_S_present, FM_S_present) 1.0, 0.0;
+  (FM_S_absent, FM_S_present) 1.0, 0.0;
+  (FM_S_present, FM_S_absent) 1.0, 0.0;
+  (FM_S_absent, FM_S_absent) 0.0, 1.0;
+}
+probability ( C12 | C8, C5 ) {
+  (FM_S_present, FM_S_present) 1.0, 0.0;
+  (FM_S_absent, FM_S_present) 1.0, 0.0;
+  (FM_S_present, FM_S_absent) 1.0, 0.0;
+  (FM_S_absent, FM_S_absent) 0.0, 1.0;
+}
+probability ( C9 | C7, C8, C3 ) {
+  (FM_S_present, FM_S_present, True) 0.52, 0.48;
+  (FM_S_absent, FM_S_present, True) 0.5, 0.5;
+  (FM_S_present, FM_S_absent, True) 0.666667, 0.333333;
+  (FM_S_absent, FM_S_absent, True) 0.5, 0.5;
+  (FM_S_present, FM_S_present, False) 0.0, 1.0;
+  (FM_S_absent, FM_S_present, False) 0.0, 1.0;
+  (FM_S_present, FM_S_absent, False) 0.0, 1.0;
+  (FM_S_absent, FM_S_absent, False) 0.0, 1.0;
+}
+probability ( C7 | C3 ) {
+  (True) 0.96153848, 0.03846152;
+  (False) 0.0, 1.0;
+}
+probability ( C8 | C7, C3 ) {
+  (FM_S_present, True) 0.92307691, 0.07692309;
+  (FM_S_absent, True) 0.5, 0.5;
+  (FM_S_present, False) 0.0, 1.0;
+  (FM_S_absent, False) 0.0, 1.0;
+}
+probability ( C6 | C5, C4, C2 ) {
+  (FM_S_present, FM_S_present, True) 0.117647, 0.882353;
+  (FM_S_absent, FM_S_present, True) 0.09090909, 0.90909091;
+  (FM_S_present, FM_S_absent, True) 0.5, 0.5;
+  (FM_S_absent, FM_S_absent, True) 0.5, 0.5;
+  (FM_S_present, FM_S_present, False) 0.0, 1.0;
+  (FM_S_absent, FM_S_present, False) 0.0, 1.0;
+  (FM_S_present, FM_S_absent, False) 0.0, 1.0;
+  (FM_S_absent, FM_S_absent, False) 0.0, 1.0;
+}
+probability ( C5 | C4, C2 ) {
+  (FM_S_present, True) 0.615385, 0.384615;
+  (FM_S_absent, True) 0.5, 0.5;
+  (FM_S_present, False) 0.0, 1.0;
+  (FM_S_absent, False) 0.0, 1.0;
+}
+probability ( C10 | C7, C4 ) {
+  (FM_S_present, FM_S_present) 1.0, 0.0;
+  (FM_S_absent, FM_S_present) 1.0, 0.0;
+  (FM_S_present, FM_S_absent) 1.0, 0.0;
+  (FM_S_absent, FM_S_absent) 0.0, 1.0;
+}
+probability ( C4 | C2 ) {
+  (True) 0.96153848, 0.03846152;
+  (False) 0.0, 1.0;
+}
+probability ( C1 ) {
+  table 0.5, 0.5;
+}
+probability ( C3 | C1 ) {
+  (Hp) 0.0, 1.0;
+  (Hd) 1.0, 0.0;
+}
+probability ( C2 | C1 ) {
+  (Hp) 1.0, 0.0;
+  (Hd) 0.0, 1.0;
+}

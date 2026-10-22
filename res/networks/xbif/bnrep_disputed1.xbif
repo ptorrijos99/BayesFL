@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BIF VERSION="0.3">
+  <NETWORK>
+    <NAME>unknown</NAME>
+    <VARIABLE TYPE="nature">
+      <NAME>BGU</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAFind</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAU</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>DNAX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Prop</NAME>
+      <OUTCOME>H1</OUTCOME>
+      <OUTCOME>H2</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRUstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRXstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>TPRaltactX</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>UstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>Xaltact</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <VARIABLE TYPE="nature">
+      <NAME>XstrangledY</NAME>
+      <OUTCOME>false</OUTCOME>
+      <OUTCOME>true</OUTCOME>
+      <PROPERTY>weight = None</PROPERTY>
+    </VARIABLE>
+    <DEFINITION>
+      <FOR>BGU</FOR>
+      <TABLE>0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAFind</FOR>
+      <GIVEN>DNAU</GIVEN>
+      <GIVEN>DNAX</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAU</FOR>
+      <GIVEN>BGU</GIVEN>
+      <GIVEN>TPRUstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>DNAX</FOR>
+      <GIVEN>TPRaltactX</GIVEN>
+      <GIVEN>TPRXstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 0.0 1.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Prop</FOR>
+      <TABLE>0.5 0.5 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRUstrangledY</FOR>
+      <GIVEN>UstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRXstrangledY</FOR>
+      <GIVEN>XstrangledY</GIVEN>
+      <TABLE>1.0 0.0 0.05 0.95 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>TPRaltactX</FOR>
+      <GIVEN>Xaltact</GIVEN>
+      <TABLE>1.0 0.0 0.4 0.6 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>UstrangledY</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>1.0 0.0 0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>Xaltact</FOR>
+      <TABLE>0.0 1.0 </TABLE>
+    </DEFINITION>
+    <DEFINITION>
+      <FOR>XstrangledY</FOR>
+      <GIVEN>Prop</GIVEN>
+      <TABLE>0.0 1.0 1.0 0.0 </TABLE>
+    </DEFINITION>
+  </NETWORK>
+</BIF>

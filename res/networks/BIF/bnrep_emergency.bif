@@ -1,0 +1,123 @@
+network unknown {
+}
+variable CAW {
+  type discrete [ 2 ] { yes, no };
+}
+variable CLPL {
+  type discrete [ 2 ] { illuminated, extinguished };
+}
+variable CP {
+  type discrete [ 2 ] { normal, low };
+}
+variable CPMS {
+  type discrete [ 2 ] { automatic, manual };
+}
+variable CPMSI {
+  type discrete [ 2 ] { automatic, manual };
+}
+variable ECA {
+  type discrete [ 2 ] { normal, low };
+}
+variable ECFCBI {
+  type discrete [ 2 ] { on, off };
+}
+variable ECFOL {
+  type discrete [ 2 ] { illuminated, extinguished };
+}
+variable ECFS {
+  type discrete [ 2 ] { normal, faulted };
+}
+variable ECOL {
+  type discrete [ 2 ] { illuminated, extinguished };
+}
+variable FP {
+  type discrete [ 2 ] { retracted, extended };
+}
+variable FPI {
+  type discrete [ 2 ] { retracted, extended };
+}
+variable OMD {
+  type discrete [ 2 ] { yes, no };
+}
+variable OMDL {
+  type discrete [ 2 ] { illuminated, extinguished };
+}
+variable TC {
+  type discrete [ 2 ] { correct, wrong };
+}
+variable TS {
+  type discrete [ 2 ] { normal, abnormal };
+}
+variable TSI {
+  type discrete [ 2 ] { normal, abnormal };
+}
+probability ( CAW | CP, TC ) {
+  (normal, correct) 0.001, 0.999;
+  (low, correct) 0.999, 0.001;
+  (normal, wrong) 0.999, 0.001;
+  (low, wrong) 0.999, 0.001;
+}
+probability ( CLPL | CP ) {
+  (normal) 0.001, 0.999;
+  (low) 0.999, 0.001;
+}
+probability ( CP | CPMS ) {
+  (automatic) 0.998990918, 0.001009082;
+  (manual) 0.001, 0.999;
+}
+probability ( CPMS ) {
+  table 0.997, 0.003;
+}
+probability ( CPMSI | CPMS ) {
+  (automatic) 0.999, 0.001;
+  (manual) 0.001, 0.999;
+}
+probability ( ECA | CPMS, ECFS ) {
+  (automatic, normal) 0.999, 0.001;
+  (manual, normal) 0.001, 0.999;
+  (automatic, faulted) 0.001, 0.999;
+  (manual, faulted) 0.999, 0.001;
+}
+probability ( ECFCBI | ECFS ) {
+  (normal) 0.999, 0.001;
+  (faulted) 0.001, 0.999;
+}
+probability ( ECFOL | ECA ) {
+  (normal) 0.001, 0.999;
+  (low) 0.999, 0.001;
+}
+probability ( ECFS ) {
+  table 0.999, 0.001;
+}
+probability ( ECOL | ECA ) {
+  (normal) 0.001, 0.999;
+  (low) 0.999, 0.001;
+}
+probability ( FP ) {
+  table 0.001, 0.999;
+}
+probability ( FPI | FP ) {
+  (retracted) 0.999, 0.001;
+  (extended) 0.001, 0.999;
+}
+probability ( OMD | CP ) {
+  (normal) 0.001, 0.999;
+  (low) 0.999, 0.001;
+}
+probability ( OMDL | OMD ) {
+  (yes) 0.999, 0.001;
+  (no) 0.001, 0.999;
+}
+probability ( TC | FP, TS ) {
+  (retracted, normal) 0.0, 1.0;
+  (extended, normal) 1.0, 0.0;
+  (retracted, abnormal) 0.0, 1.0;
+  (extended, abnormal) 0.0, 1.0;
+}
+probability ( TS ) {
+  table 0.999, 0.001;
+}
+probability ( TSI | TS ) {
+  (normal) 0.998990918, 0.001009082;
+  (abnormal) 0.001, 0.999;
+}

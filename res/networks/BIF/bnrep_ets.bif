@@ -1,0 +1,238 @@
+network unknown {
+}
+variable CAC {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable CO1 {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable DAX {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable ECO {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable EURCHF {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable EURCNY {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable EURGBP {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable EURRUB {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable EURUSD {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable LBEATREU {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable LP01TREU {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable MO1 {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable MXEU0EN {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable NG1COMB {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable SPGTCED {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable SPX {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable SXXP {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable VIX {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable XA1 {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+variable XAU {
+  type discrete [ 3 ] { High, Low, Neutral };
+}
+probability ( CAC | SPGTCED, SPX ) {
+  (High, High) 0.62487636, 0.08908259, 0.28604105;
+  (Low, High) 0.2762991, 0.4268695, 0.2968314;
+  (Neutral, High) 0.4031270, 0.2005003, 0.3963727;
+  (High, Low) 0.4711588, 0.2368555, 0.2919857;
+  (Low, Low) 0.09151549, 0.68399726, 0.22448725;
+  (Neutral, Low) 0.2071341, 0.3931119, 0.3997540;
+  (High, Neutral) 0.5061082, 0.1257791, 0.3681127;
+  (Low, Neutral) 0.1778354, 0.4743922, 0.3477724;
+  (Neutral, Neutral) 0.2671347, 0.2851889, 0.4476764;
+}
+probability ( CO1 | EURRUB, MXEU0EN ) {
+  (High, High) 0.4405279, 0.2449702, 0.3145019;
+  (Low, High) 0.1254811, 0.6243264, 0.2501925;
+  (Neutral, High) 0.2616403, 0.3434309, 0.3949288;
+  (High, Low) 0.6475478, 0.0925716, 0.2598806;
+  (Low, Low) 0.1873874, 0.4837019, 0.3289107;
+  (Neutral, Low) 0.3559593, 0.2263741, 0.4176666;
+  (High, Neutral) 0.5056517, 0.1693195, 0.3250288;
+  (Low, Neutral) 0.1392039, 0.4874361, 0.3733600;
+  (Neutral, Neutral) 0.2832614, 0.3247002, 0.3920384;
+}
+probability ( DAX | CAC, SXXP ) {
+  (High, High) 0.870175439, 0.001564151, 0.128260410;
+  (Low, High) 0.09009009, 0.33333333, 0.57657658;
+  (Neutral, High) 0.39333333, 0.03954023, 0.56712644;
+  (High, Low) 0.57657658, 0.09009009, 0.33333333;
+  (Low, Low) 0.001536098, 0.880350396, 0.118113505;
+  (Neutral, Low) 0.04420457, 0.45361090, 0.50218453;
+  (High, Neutral) 0.49885057, 0.01471264, 0.48643678;
+  (Low, Neutral) 0.0233873, 0.5230018, 0.4536109;
+  (Neutral, Neutral) 0.1651048, 0.1392584, 0.6956368;
+}
+probability ( ECO | SPGTCED ) {
+  (High) 0.67328212, 0.07597098, 0.25074691;
+  (Low) 0.05970309, 0.69315390, 0.24714301;
+  (Neutral) 0.2673288, 0.2308021, 0.5018691;
+}
+probability ( EURCHF | EURUSD, XAU ) {
+  (High, High) 0.3946590, 0.2868745, 0.3184665;
+  (Low, High) 0.5585699, 0.1667718, 0.2746583;
+  (Neutral, High) 0.4505208, 0.2120697, 0.3374094;
+  (High, Low) 0.1508171, 0.5920457, 0.2571372;
+  (Low, Low) 0.2445463, 0.3964846, 0.3589690;
+  (Neutral, Low) 0.2236537, 0.4994197, 0.2769266;
+  (High, Neutral) 0.2972527, 0.3736588, 0.3290886;
+  (Low, Neutral) 0.3937360, 0.2336689, 0.3725951;
+  (Neutral, Neutral) 0.3274278, 0.2793401, 0.3932321;
+}
+probability ( EURCNY ) {
+  table 0.3335469, 0.3332266, 0.3332266;
+}
+probability ( EURGBP | EURUSD, LP01TREU ) {
+  (High, High) 0.2734984, 0.3880101, 0.3384915;
+  (Low, High) 0.65115172, 0.08833048, 0.26051780;
+  (Neutral, High) 0.4204366, 0.2107810, 0.3687824;
+  (High, Low) 0.08629542, 0.67012243, 0.24358215;
+  (Low, Low) 0.3623991, 0.2658593, 0.3717416;
+  (Neutral, Low) 0.1841567, 0.4863847, 0.3294586;
+  (High, Neutral) 0.1613774, 0.4761442, 0.3624784;
+  (Low, Neutral) 0.5356823, 0.1491051, 0.3152125;
+  (Neutral, Neutral) 0.3178553, 0.2577643, 0.4243804;
+}
+probability ( EURRUB | EURUSD, MXEU0EN ) {
+  (High, High) 0.3189350, 0.3158496, 0.3652154;
+  (Low, High) 0.6307094, 0.1295432, 0.2397473;
+  (Neutral, High) 0.4295317, 0.1944904, 0.3759780;
+  (High, Low) 0.1266566, 0.6019221, 0.2714213;
+  (Low, Low) 0.3091163, 0.3468948, 0.3439888;
+  (Neutral, Low) 0.1980254, 0.4312802, 0.3706945;
+  (High, Neutral) 0.2289030, 0.4766878, 0.2944093;
+  (Low, Neutral) 0.4264222, 0.1820639, 0.3915139;
+  (Neutral, Neutral) 0.3217503, 0.3110583, 0.3671914;
+}
+probability ( EURUSD | EURCNY ) {
+  (High) 0.5945369, 0.1259070, 0.2795561;
+  (Low) 0.1279504, 0.5951084, 0.2769412;
+  (Neutral) 0.2779024, 0.2788636, 0.4432340;
+}
+probability ( LBEATREU | LP01TREU, MXEU0EN ) {
+  (High, High) 0.3628190, 0.3196190, 0.3175619;
+  (Low, High) 0.5163648, 0.1688910, 0.3147442;
+  (Neutral, High) 0.4264689, 0.2712430, 0.3022881;
+  (High, Low) 0.1611230, 0.4749642, 0.3639127;
+  (Low, Low) 0.3380177, 0.3500632, 0.3119191;
+  (Neutral, Low) 0.2093664, 0.4652342, 0.3253994;
+  (High, Neutral) 0.2739653, 0.4061070, 0.3199277;
+  (Low, Neutral) 0.4282291, 0.2535346, 0.3182363;
+  (Neutral, Neutral) 0.2809925, 0.2862266, 0.4327808;
+}
+probability ( LP01TREU | SXXP ) {
+  (High) 0.5714895, 0.1220657, 0.3064447;
+  (Low) 0.1260280, 0.5931859, 0.2807861;
+  (Neutral) 0.3028944, 0.2855922, 0.4115134;
+}
+probability ( MO1 | MXEU0EN, XA1 ) {
+  (High, High) 0.4621232, 0.2085681, 0.3293086;
+  (Low, High) 0.3051907, 0.3828643, 0.3119450;
+  (Neutral, High) 0.4329978, 0.2517897, 0.3152125;
+  (High, Low) 0.3416638, 0.3010529, 0.3572834;
+  (Low, Low) 0.2103325, 0.4903557, 0.2993118;
+  (Neutral, Low) 0.2761529, 0.4062877, 0.3175594;
+  (High, Neutral) 0.4635794, 0.2486734, 0.2877472;
+  (Low, Neutral) 0.2164263, 0.4373530, 0.3462207;
+  (Neutral, Neutral) 0.3000998, 0.2731537, 0.4267465;
+}
+probability ( MXEU0EN | CAC, SXXP ) {
+  (High, High) 0.64303530, 0.08488692, 0.27207778;
+  (Low, High) 0.33333333, 0.57657658, 0.09009009;
+  (Neutral, High) 0.3871264, 0.2381609, 0.3747126;
+  (High, Low) 0.33333333, 0.09009009, 0.57657658;
+  (Low, Low) 0.09121103, 0.64495371, 0.26383526;
+  (Neutral, Low) 0.2384991, 0.3772809, 0.3842200;
+  (High, Neutral) 0.4119540, 0.2381609, 0.3498851;
+  (Low, Neutral) 0.1760473, 0.5160627, 0.3078900;
+  (Neutral, Neutral) 0.2793732, 0.2480854, 0.4725413;
+}
+probability ( NG1COMB | CO1 ) {
+  (High) 0.3669441, 0.2978020, 0.3352539;
+  (Low) 0.2750187, 0.3951725, 0.3298088;
+  (Neutral) 0.3586457, 0.3067393, 0.3346150;
+}
+probability ( SPGTCED | EURUSD ) {
+  (High) 0.4188007, 0.2718737, 0.3093257;
+  (Low) 0.2663676, 0.3999786, 0.3336537;
+  (Neutral) 0.3153904, 0.3278864, 0.3567233;
+}
+probability ( SPX | ECO, SPGTCED ) {
+  (High, High) 0.68230322, 0.06899102, 0.24870576;
+  (Low, High) 0.4084675, 0.1830650, 0.4084675;
+  (Neutral, High) 0.5047277, 0.1451591, 0.3501132;
+  (High, Low) 0.2195693, 0.5229401, 0.2574906;
+  (Low, Low) 0.0767848, 0.6980483, 0.2251669;
+  (Neutral, Low) 0.08067253, 0.57627642, 0.34305106;
+  (High, Neutral) 0.3958865, 0.2158865, 0.3882270;
+  (Low, Neutral) 0.2503601, 0.3087007, 0.4409392;
+  (Neutral, Neutral) 0.2631056, 0.2324608, 0.5044336;
+}
+probability ( SXXP | CAC, SPX ) {
+  (High, High) 0.8959035844, 0.0006244536, 0.1034719620;
+  (Low, High) 0.7181795, 0.0160040, 0.2658165;
+  (Neutral, High) 0.79427373, 0.00456621, 0.20116006;
+  (High, Low) 0.002960332, 0.730313795, 0.266725873;
+  (Low, Low) 0.003878788, 0.920242424, 0.075878788;
+  (Neutral, Low) 0.00450615, 0.78382657, 0.21166728;
+  (High, Neutral) 0.21779000, 0.09089867, 0.69131133;
+  (Low, Neutral) 0.1187088, 0.1969697, 0.6843215;
+  (Neutral, Neutral) 0.1315499, 0.1361359, 0.7323142;
+}
+probability ( VIX | ECO, SPX ) {
+  (High, High) 0.03938819, 0.73492036, 0.22569145;
+  (Low, High) 0.5431003, 0.1035886, 0.3533111;
+  (Neutral, High) 0.1661680, 0.3108950, 0.5229369;
+  (High, Low) 0.1125854, 0.6011259, 0.2862887;
+  (Low, Low) 0.82032097, 0.01225331, 0.16742572;
+  (Neutral, Low) 0.2277172, 0.2201732, 0.5521095;
+  (High, Neutral) 0.0536538, 0.6567128, 0.2896334;
+  (Low, Neutral) 0.66263325, 0.05589167, 0.28147508;
+  (Neutral, Neutral) 0.1973817, 0.2664033, 0.5362150;
+}
+probability ( XA1 | MXEU0EN ) {
+  (High) 0.3976739, 0.2843577, 0.3179684;
+  (Low) 0.3077005, 0.3672968, 0.3250027;
+  (Neutral) 0.2952045, 0.3480722, 0.3567233;
+}
+probability ( XAU | EURUSD, LBEATREU ) {
+  (High, High) 0.6077487, 0.1063732, 0.2858780;
+  (Low, High) 0.4235451, 0.2440421, 0.3324128;
+  (Neutral, High) 0.5289652, 0.1498700, 0.3211648;
+  (High, Low) 0.2355845, 0.4488547, 0.3155608;
+  (Low, Low) 0.1380613, 0.5898100, 0.2721287;
+  (Neutral, Low) 0.1625848, 0.5040819, 0.3333333;
+  (High, Neutral) 0.4091105, 0.2371546, 0.3537349;
+  (Low, Neutral) 0.2159593, 0.4397657, 0.3442750;
+  (Neutral, Neutral) 0.2799427, 0.2827043, 0.4373530;
+}

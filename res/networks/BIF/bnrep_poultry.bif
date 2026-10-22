@@ -1,0 +1,337 @@
+network unknown {
+}
+variable ARHGAP26 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable BOP1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable CANX {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable CWC25 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DGKD {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DMR1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DMR2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DMR5 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DMR6 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DMR7 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable DOCK5 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EEPD1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable EFR3B {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS10218 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS27231 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS46425 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS47746 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS50012 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS50641 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS51236 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ENS53725 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable FBN1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable GNAO1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable GRP141 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable LOC101750642 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable LOC770074 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable LRP5 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable MFSD4A {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable MIP {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable OCLN {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable PAPK2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable PLXNA2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable POP5 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable RP1_27O5_3 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable SCHIP1 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable SELENOI {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable SHISA2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable SKOR2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable STAT3 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable Stress {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable TPST2 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable TRMT10A {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable TTLL9 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable VGLL4 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable XRCC4 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ZBTB48 {
+  type discrete [ 2 ] { 0, 1 };
+}
+variable ZDHHC18 {
+  type discrete [ 2 ] { 0, 1 };
+}
+probability ( ARHGAP26 ) {
+  table 0.8043478, 0.1956522;
+}
+probability ( BOP1 | VGLL4 ) {
+  (0) 0.7777778, 0.2222222;
+  (1) 0.1, 0.9;
+}
+probability ( CANX ) {
+  table 0.8043478, 0.1956522;
+}
+probability ( CWC25 | ENS50641 ) {
+  (0) 0.97142857, 0.02857143;
+  (1) 0.4545455, 0.5454545;
+}
+probability ( DGKD | TRMT10A ) {
+  (0) 0.94594595, 0.05405405;
+  (1) 0.4444444, 0.5555556;
+}
+probability ( DMR1 | LOC101750642, PAPK2 ) {
+  (0, 0) 0.96875, 0.03125;
+  (1, 0) 0.5714286, 0.4285714;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 0.0, 1.0;
+}
+probability ( DMR2 ) {
+  table 0.8695652, 0.1304348;
+}
+probability ( DMR5 ) {
+  table 0.826087, 0.173913;
+}
+probability ( DMR6 | ARHGAP26, LOC770074 ) {
+  (0, 0) 0.93103448, 0.06896552;
+  (1, 0) 0.0, 1.0;
+  (0, 1) 0.25, 0.75;
+  (1, 1) 0.3333333, 0.6666667;
+}
+probability ( DMR7 | OCLN ) {
+  (0) 1.0, 0.0;
+  (1) 0.75, 0.25;
+}
+probability ( DOCK5 | SHISA2 ) {
+  (0) 0.8684211, 0.1315789;
+  (1) 0.25, 0.75;
+}
+probability ( EEPD1 | BOP1, ENS50012 ) {
+  (0, 0) 1.0, 0.0;
+  (1, 0) 1.0, 0.0;
+  (0, 1) 0.8947368, 0.1052632;
+  (1, 1) 0.3076923, 0.6923077;
+}
+probability ( EFR3B ) {
+  table 0.8043478, 0.1956522;
+}
+probability ( ENS10218 ) {
+  table 0.7391304, 0.2608696;
+}
+probability ( ENS27231 | CANX, FBN1 ) {
+  (0, 0) 0.92592593, 0.07407407;
+  (1, 0) 1.0, 0.0;
+  (0, 1) 0.0, 1.0;
+  (1, 1) 1.0, 0.0;
+}
+probability ( ENS46425 | DMR6, GRP141 ) {
+  (0, 0) 0.92592593, 0.07407407;
+  (1, 0) 1.0, 0.0;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 0.25, 0.75;
+}
+probability ( ENS47746 | EFR3B ) {
+  (0) 0.8918919, 0.1081081;
+  (1) 0.1111111, 0.8888889;
+}
+probability ( ENS50012 ) {
+  table 0.3043478, 0.6956522;
+}
+probability ( ENS50641 ) {
+  table 0.7608696, 0.2391304;
+}
+probability ( ENS51236 | Stress ) {
+  (0) 0.6818182, 0.3181818;
+  (1) 1.0, 0.0;
+}
+probability ( ENS53725 | TRMT10A ) {
+  (0) 0.94594595, 0.05405405;
+  (1) 0.4444444, 0.5555556;
+}
+probability ( FBN1 | ENS50641 ) {
+  (0) 0.91428571, 0.08571429;
+  (1) 0.1818182, 0.8181818;
+}
+probability ( GNAO1 | ZDHHC18 ) {
+  (0) 0.8857143, 0.1142857;
+  (1) 0.1818182, 0.8181818;
+}
+probability ( GRP141 ) {
+  table 0.7391304, 0.2608696;
+}
+probability ( LOC101750642 ) {
+  table 0.7608696, 0.2391304;
+}
+probability ( LOC770074 ) {
+  table 0.6956522, 0.3043478;
+}
+probability ( LRP5 | ENS10218, MFSD4A ) {
+  (0, 0) 0.95652174, 0.04347826;
+  (1, 0) 0.25, 0.75;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 1.0, 0.0;
+}
+probability ( MFSD4A ) {
+  table 0.673913, 0.326087;
+}
+probability ( MIP | ZDHHC18 ) {
+  (0) 0.8571429, 0.1428571;
+  (1) 0.09090909, 0.90909091;
+}
+probability ( OCLN | Stress ) {
+  (0) 0.6363636, 0.3636364;
+  (1) 1.0, 0.0;
+}
+probability ( PAPK2 | SHISA2 ) {
+  (0) 0.94736842, 0.05263158;
+  (1) 0.375, 0.625;
+}
+probability ( PLXNA2 | DMR2 ) {
+  (0) 0.75, 0.25;
+  (1) 0.0, 1.0;
+}
+probability ( POP5 | DMR2 ) {
+  (0) 0.75, 0.25;
+  (1) 0.0, 1.0;
+}
+probability ( RP1_27O5_3 | ENS27231, PLXNA2 ) {
+  (0, 0) 0.9047619, 0.0952381;
+  (1, 0) 1.0, 0.0;
+  (0, 1) 0.4615385, 0.5384615;
+  (1, 1) 1.0, 0.0;
+}
+probability ( SCHIP1 ) {
+  table 0.6521739, 0.3478261;
+}
+probability ( SELENOI | DMR5, PAPK2, SHISA2 ) {
+  (0, 0, 0) 1.0, 0.0;
+  (1, 0, 0) 0.0, 1.0;
+  (0, 1, 0) 0.5, 0.5;
+  (1, 1, 0) 0.5, 0.5;
+  (0, 0, 1) 0.0, 1.0;
+  (1, 0, 1) 1.0, 0.0;
+  (0, 1, 1) 0.6666667, 0.3333333;
+  (1, 1, 1) 0.0, 1.0;
+}
+probability ( SHISA2 | FBN1 ) {
+  (0) 0.97058824, 0.02941176;
+  (1) 0.4166667, 0.5833333;
+}
+probability ( SKOR2 | ZDHHC18 ) {
+  (0) 0.97142857, 0.02857143;
+  (1) 0.3636364, 0.6363636;
+}
+probability ( STAT3 | DMR5 ) {
+  (0) 0.94736842, 0.05263158;
+  (1) 0.375, 0.625;
+}
+probability ( Stress ) {
+  table 0.4782609, 0.5217391;
+}
+probability ( TPST2 | CANX, MFSD4A ) {
+  (0, 0) 0.8461538, 0.1538462;
+  (1, 0) 0.0, 1.0;
+  (0, 1) 1.0, 0.0;
+  (1, 1) 0.75, 0.25;
+}
+probability ( TRMT10A | ENS50641 ) {
+  (0) 0.94285714, 0.05714286;
+  (1) 0.3636364, 0.6363636;
+}
+probability ( TTLL9 | SCHIP1 ) {
+  (0) 0.93333333, 0.06666667;
+  (1) 0.375, 0.625;
+}
+probability ( VGLL4 ) {
+  table 0.7826087, 0.2173913;
+}
+probability ( XRCC4 | LOC101750642 ) {
+  (0) 0.97142857, 0.02857143;
+  (1) 0.2727273, 0.7272727;
+}
+probability ( ZBTB48 | ENS50641 ) {
+  (0) 0.8857143, 0.1142857;
+  (1) 0.3636364, 0.6363636;
+}
+probability ( ZDHHC18 ) {
+  table 0.7608696, 0.2391304;
+}

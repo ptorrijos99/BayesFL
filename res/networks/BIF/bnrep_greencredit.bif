@@ -1,0 +1,98 @@
+network unknown {
+}
+variable ECS {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable EI {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable EPI {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable GCI {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable GDP {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable IS {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable OU {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable PEC {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable TP {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+variable UR {
+  type discrete [ 3 ] { High, Medium, Low };
+}
+probability ( ECS | GCI, TP ) {
+  (High, High) 0.363, 0.455, 0.182;
+  (Medium, High) 0.022, 0.486, 0.492;
+  (Low, High) 0.008, 0.007, 0.985;
+  (High, Medium) 0.013, 0.964, 0.023;
+  (Medium, Medium) 0.036, 0.920, 0.044;
+  (Low, Medium) 0.028, 0.937, 0.035;
+  (High, Low) 0.789, 0.203, 0.008;
+  (Medium, Low) 0.268, 0.723, 0.009;
+  (Low, Low) 0.473, 0.316, 0.211;
+}
+probability ( EI | GDP ) {
+  (High) 0.014, 0.015, 0.971;
+  (Medium) 0.019, 0.968, 0.013;
+  (Low) 0.966, 0.018, 0.016;
+}
+probability ( EPI | ECS, GDP ) {
+  (High, High) 0.249, 0.388, 0.363;
+  (Medium, High) 0.334, 0.353, 0.313;
+  (Low, High) 0.280, 0.004, 0.716;
+  (High, Medium) 0.013, 0.976, 0.011;
+  (Medium, Medium) 0.734, 0.260, 0.006;
+  (Low, Medium) 0.303, 0.374, 0.323;
+  (High, Low) 0.957, 0.025, 0.018;
+  (Medium, Low) 0.007, 0.798, 0.195;
+  (Low, Low) 0.391, 0.345, 0.264;
+}
+probability ( GCI ) {
+  table 0.3333333, 0.3333333, 0.3333333;
+}
+probability ( GDP | TP ) {
+  (High) 0.845, 0.141, 0.014;
+  (Medium) 0.014, 0.842, 0.144;
+  (Low) 0.017, 0.020, 0.963;
+}
+probability ( IS | ECS ) {
+  (High) 0.025, 0.223, 0.752;
+  (Medium) 0.013, 0.655, 0.332;
+  (Low) 0.971, 0.014, 0.015;
+}
+probability ( OU | GCI, IS ) {
+  (High, High) 0.560, 0.302, 0.138;
+  (Medium, High) 0.058, 0.901, 0.041;
+  (Low, High) 0.009, 0.012, 0.979;
+  (High, Medium) 0.793, 0.197, 0.010;
+  (Medium, Medium) 0.069, 0.725, 0.206;
+  (Low, Medium) 0.034, 0.793, 0.173;
+  (High, Low) 0.789, 0.203, 0.008;
+  (Medium, Low) 0.299, 0.539, 0.162;
+  (Low, Low) 0.091, 0.651, 0.258;
+}
+probability ( PEC | GDP ) {
+  (High) 0.972, 0.013, 0.015;
+  (Medium) 0.015, 0.967, 0.018;
+  (Low) 0.012, 0.015, 0.973;
+}
+probability ( TP | GCI ) {
+  (High) 0.294, 0.146, 0.560;
+  (Medium) 0.014, 0.698, 0.288;
+  (Low) 0.832, 0.153, 0.015;
+}
+probability ( UR | GDP ) {
+  (High) 0.966, 0.019, 0.015;
+  (Medium) 0.016, 0.971, 0.013;
+  (Low) 0.015, 0.013, 0.972;
+}
