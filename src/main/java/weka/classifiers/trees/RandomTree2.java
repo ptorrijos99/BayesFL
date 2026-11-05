@@ -69,6 +69,27 @@ public class RandomTree2 extends RandomTree {
         return m_BagSizePercentDouble;
     }
 
+    /**
+     * Rewrites the split attributes of the tree through {@code map} (index in the data the
+     * tree was learnt on -> index in the full data), for trees learnt on a column subset.
+     */
+    public void remapAttributes(int[] map) {
+        LinkedList<Tree> tbExplored = new LinkedList<>();
+        tbExplored.add(m_Tree);
+        while (!tbExplored.isEmpty()) {
+            Tree node = tbExplored.poll();
+            if (node.m_Attribute == -1) {
+                continue;
+            }
+            node.m_Attribute = map[node.m_Attribute];
+            if (node.m_Successors != null) {
+                for (Tree successor : node.m_Successors) {
+                    tbExplored.add(successor);
+                }
+            }
+        }
+    }
+
     public void toSP1DE(ConcurrentHashMap<Object, mSPnDE> mSPnDEs) {
         // If the tree is empty, return
         if (m_Tree.m_Attribute == -1) {

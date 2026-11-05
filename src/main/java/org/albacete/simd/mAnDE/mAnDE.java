@@ -235,6 +235,13 @@ public class mAnDE extends AbstractClassifier implements
     private boolean pruning = true;
 
     /**
+     * Learn the bagged trees without the attributes that the discretisation leaves with a
+     * single value. Their gain is zero, so they are never split on and the trees (and the
+     * ensemble) are the same; only the cost of evaluating them at every node is saved.
+     */
+    private boolean dropConstantAttributes = true;
+
+    /**
      * Percentage of instances to be used to make each tree in the assembly.
      */
     private double bagSize = 100;
@@ -385,6 +392,32 @@ public class mAnDE extends AbstractClassifier implements
     }
 
     /**
+     * Indices (in order, class included) of the attributes with more than one value, or null if
+     * no attribute has a single value.
+     */
+    private static int[] nonConstantAttributes(Instances data) {
+        int[] keep = new int[data.numAttributes()];
+        int k = 0;
+        for (int i = 0; i < data.numAttributes(); i++) {
+            if (i == data.classIndex() || !data.attribute(i).isNominal() || data.attribute(i).numValues() > 1) {
+                keep[k++] = i;
+            }
+        }
+        return k == data.numAttributes() ? null : Arrays.copyOf(keep, k);
+    }
+
+    /** The columns {@code keep} of {@code data}, in the same order, with the class set. */
+    private static Instances selectAttributes(Instances data, int[] keep) throws Exception {
+        weka.filters.unsupervised.attribute.Remove remove = new weka.filters.unsupervised.attribute.Remove();
+        remove.setAttributeIndicesArray(keep);
+        remove.setInvertSelection(true);
+        remove.setInputFormat(data);
+        Instances out = weka.filters.Filter.useFilter(data, remove);
+        out.setClassIndex(Arrays.binarySearch(keep, data.classIndex()));
+        return out;
+    }
+
+    /**
      * Create the necessary mSPnDE's, by running the trees set in the options...
      */
     private void build_mSPnDEs() throws Exception {
@@ -420,11 +453,18 @@ public class mAnDE extends AbstractClassifier implements
                     bagging.setNumExecutionSlots(0);
                     RandomTree2 rtBase = new RandomTree2();
                     rtBase.setDoNotCheckCapabilities(true);
-                    rtBase.setKValue(data.numAttributes() - 1);  // all features, no random subsets
+                    int[] keep = dropConstantAttributes ? nonConstantAttributes(data) : null;
+                    Instances treeData = keep == null ? data : selectAttributes(data, keep);
+                    rtBase.setKValue(treeData.numAttributes() - 1);  // all features, no random subsets
                     bagging.setClassifier(rtBase);
                     bagging.setNumIterations(nTrees);
                     bagging.setBagSizePercentDouble(bagSize);
-                    bagging.buildClassifier(data);
+                    bagging.buildClassifier(treeData);
+                    if (keep != null) {
+                        for (Classifier c : bagging.getClassifiers()) {
+                            ((RandomTree2) c).remapAttributes(keep);
+                        }
+                    }
                     if (n == 1) {
                         for (Classifier c : bagging.getClassifiers()) {
                             ((RandomTree2) c).toSP1DE(mSPnDEs);
@@ -762,6 +802,10 @@ public class mAnDE extends AbstractClassifier implements
      */
     public void setBagSize(double bagSize) {
         this.bagSize = bagSize;
+    }
+
+    public void setDropConstantAttributes(boolean dropConstantAttributes) {
+        this.dropConstantAttributes = dropConstantAttributes;
     }
 
     /**
