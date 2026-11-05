@@ -36,17 +36,24 @@ public class ClassificationExperiment {
         int nBins        = Integer.parseInt(parameters[5]);
         String algorithm = parameters[6];
         int nTrees       = Integer.parseInt(parameters[7]);
+        // Optional: run only the first maxFolds folds (timing runs), written to results/timing/
+        int maxFolds     = parameters.length > 8 ? Integer.parseInt(parameters[8]) : Integer.MAX_VALUE;
 
         try {
-            experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees);
+            experimentBaseline(folder, bbdd, nClients, seed, folds, nBins, algorithm, nTrees, maxFolds);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, int nBins, String algorithm, int nTrees) throws Exception {
+        experimentBaseline(folder, bbdd, nClients, seed, nFolds, nBins, algorithm, nTrees, Integer.MAX_VALUE);
+    }
+
+    public static void experimentBaseline(String folder, String bbdd, int nClients, int seed, int nFolds, int nBins, String algorithm, int nTrees, int maxFolds) throws Exception {
         String bbddPath = PATH + "res/classification/" + folder + "/" + bbdd + ".arff";
-        String completePath = PATH + "results/baseline/" + bbdd + "_" + algorithm + "_" + nBins + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
+        String resultsDir = maxFolds == Integer.MAX_VALUE ? "results/baseline/" : "results/timing/";
+        String completePath = PATH + resultsDir + bbdd + "_" + algorithm + "_" + nBins + "_" + nTrees + "_" + nFolds + "_" + nClients + "_" + seed + ".csv";
         String header = "bbdd,id,cv,algorithm,bins,seed,nTrees,nClients,iteration,instances,threads,trAcc,trPr,trRc,trF1,trTime,teAcc,tePr,teRc,teF1,teTime,time\n";
 
         int threads = Runtime.getRuntime().availableProcessors();
@@ -61,7 +68,7 @@ public class ClassificationExperiment {
         // Read the data and stratify it to the number of clients.
         // divide() expands nFolds=-1 into numInstances (LOO).
         Instances[][][] splits = divide(bbdd, bbddPath, nFolds, nClients, seed);
-        int actualFolds = splits.length;
+        int actualFolds = Math.min(splits.length, maxFolds);
 
         // Initialize the filter
         Filter filter = null;
