@@ -110,9 +110,11 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
 
         // ---- Joint P(y, Xi_disc) with Laplace smoothing (alpha = 1) ----
         globalProb = new double[nClass][nXi];
-        for (int i = 0; i < model.numInstances; i++) {
-            Instance inst = model.data.get(i);
-            globalProb[(int) inst.value(model.y)][(int) inst.value(xi)] += 1;
+        int m = model.numInstances;
+        int[] yc = model.column(model.y);
+        int[] xc = model.column(xi);
+        for (int i = 0; i < m; i++) {
+            globalProb[yc[i]][xc[i]] += 1;
         }
         double globalDenom = model.numInstances + (double) nClass * nXi;
         for (int y = 0; y < nClass; y++) {
@@ -150,25 +152,30 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
             if (doHybrid) numDisc.put(xj, new double[nClass][nXi][model.varNumValues[xj]]);
         }
 
-        // Single pass over the data accumulating everything.
-        for (int i = 0; i < model.numInstances; i++) {
-            Instance instD = model.data.get(i);          // discretized
-            Instance instO = model.dataOriginal.get(i);  // original numeric
-            int y = (int) instD.value(model.y);
-            int xiVal = (int) instD.value(xi);
-
-            for (int xj : listChildren) {
-                if (numericCandidates.contains(xj)) {
-                    double v = instO.value(xj);
+        // One pass per child over its column. Every cell still receives the instances in
+        // their order, so the sums are the same as in a single pass over the instances.
+        for (int xj : listChildren) {
+            if (numericCandidates.contains(xj)) {
+                double[] values = model.numericColumn(xj);
+                double[][] c = cnt.get(xj), sx = sum.get(xj), sxx = sumSq.get(xj);
+                double[][][] nd = doHybrid ? numDisc.get(xj) : null;
+                int[] dc = doHybrid ? model.column(xj) : null;
+                for (int i = 0; i < m; i++) {
+                    double v = values[i];
                     // A missing value (NaN in Weka) carries no information about this
                     // child: leaving it in would turn the cell's mean and variance into NaN.
                     if (Double.isNaN(v)) continue;
-                    cnt.get(xj)[y][xiVal] += 1.0;
-                    sum.get(xj)[y][xiVal] += v;
-                    sumSq.get(xj)[y][xiVal] += v * v;
-                    if (doHybrid) numDisc.get(xj)[y][xiVal][(int) instD.value(xj)] += 1.0;
-                } else {
-                    nominalTables.get(xj)[y][xiVal][(int) instD.value(xj)] += 1.0;
+                    int y = yc[i], xiVal = xc[i];
+                    c[y][xiVal] += 1.0;
+                    sx[y][xiVal] += v;
+                    sxx[y][xiVal] += v * v;
+                    if (doHybrid) nd[y][xiVal][dc[i]] += 1.0;
+                }
+            } else {
+                double[][][] t = nominalTables.get(xj);
+                int[] jc = model.column(xj);
+                for (int i = 0; i < m; i++) {
+                    t[yc[i]][xc[i]][jc[i]] += 1.0;
                 }
             }
         }
@@ -217,7 +224,39 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
                 laplaceNormalize(nominalTables.get(xj));
             }
         }
+        childIndex = new ChildIndex();
     }
+
+    /**
+     * The children in the iteration order of {@link #listChildren} (the order in which
+     * probsForInstance adds their log-densities), with their parameters, so that prediction
+     * does not look them up in the maps for every instance.
+     */
+    private final class ChildIndex {
+        final int[] ids = new int[listChildren.size()];
+        final boolean[] numeric = new boolean[ids.length];
+        final double[][][] means = new double[ids.length][][];
+        final double[][][] vars = new double[ids.length][][];
+        final double[][][][] tables = new double[ids.length][][][];
+
+        ChildIndex() {
+            int k = 0;
+            for (int xj : listChildren) {
+                ids[k] = xj;
+                numeric[k] = numericChildren.contains(xj);
+                if (numeric[k]) {
+                    means[k] = mean.get(xj);
+                    vars[k] = var.get(xj);
+                } else {
+                    tables[k] = nominalTables.get(xj);
+                }
+                k++;
+            }
+        }
+    }
+
+    /** Built at the end of buildTables; null before (or if the children change afterwards). */
+    private transient volatile ChildIndex childIndex;
 
     /**
      * Finalises the per-cell Gaussian parameters of a numeric child with
@@ -393,23 +432,47 @@ public class mSP1DE_CG implements mSPnDE, Serializable {
 
         // Summed child log-densities (the likelihood term).
         double[] lik = new double[nClass];
-        for (int xj : listChildren) {
-            if (numericChildren.contains(xj)) {
-                double v = instO.value(xj);
-                // Missing child: marginalised out (same factor for every class).
-                if (Double.isNaN(v)) continue;
-                double[][] m = mean.get(xj);
-                double[][] s2 = var.get(xj);
-                for (int y = 0; y < nClass; y++) {
-                    lik[y] += studentT
-                            ? logStudentT(v, m[y][xiVal], s2[y][xiVal], nu)
-                            : logGaussian(v, m[y][xiVal], s2[y][xiVal]);
+        ChildIndex index = childIndex;
+        if (index != null && index.ids.length == listChildren.size()) {
+            for (int k = 0; k < index.ids.length; k++) {
+                if (index.numeric[k]) {
+                    double v = instO.value(index.ids[k]);
+                    // Missing child: marginalised out (same factor for every class).
+                    if (Double.isNaN(v)) continue;
+                    double[][] m = index.means[k];
+                    double[][] s2 = index.vars[k];
+                    for (int y = 0; y < nClass; y++) {
+                        lik[y] += studentT
+                                ? logStudentT(v, m[y][xiVal], s2[y][xiVal], nu)
+                                : logGaussian(v, m[y][xiVal], s2[y][xiVal]);
+                    }
+                } else {
+                    double[][][] table = index.tables[k];
+                    int xjVal = (int) inst.value(index.ids[k]);
+                    for (int y = 0; y < nClass; y++) {
+                        lik[y] += Math.log(table[y][xiVal][xjVal]);
+                    }
                 }
-            } else {
-                double[][][] table = nominalTables.get(xj);
-                int xjVal = (int) inst.value(xj);
-                for (int y = 0; y < nClass; y++) {
-                    lik[y] += Math.log(table[y][xiVal][xjVal]);
+            }
+        } else {
+            for (int xj : listChildren) {
+                if (numericChildren.contains(xj)) {
+                    double v = instO.value(xj);
+                    // Missing child: marginalised out (same factor for every class).
+                    if (Double.isNaN(v)) continue;
+                    double[][] m = mean.get(xj);
+                    double[][] s2 = var.get(xj);
+                    for (int y = 0; y < nClass; y++) {
+                        lik[y] += studentT
+                                ? logStudentT(v, m[y][xiVal], s2[y][xiVal], nu)
+                                : logGaussian(v, m[y][xiVal], s2[y][xiVal]);
+                    }
+                } else {
+                    double[][][] table = nominalTables.get(xj);
+                    int xjVal = (int) inst.value(xj);
+                    for (int y = 0; y < nClass; y++) {
+                        lik[y] += Math.log(table[y][xiVal][xjVal]);
+                    }
                 }
             }
         }

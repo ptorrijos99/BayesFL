@@ -61,6 +61,25 @@ public class mSP1DE implements mSPnDE, Serializable {
      */
     private double[][] globalProb;
 
+    /** The keys and tables of {@link #children}, in the iteration order of the map. */
+    private static final class ChildIndex {
+        final int[] ids;
+        final double[][][][] tables;
+
+        ChildIndex(HashMap<Integer, double[][][]> children) {
+            ids = new int[children.size()];
+            tables = new double[children.size()][][][];
+            int k = 0;
+            for (Map.Entry<Integer, double[][][]> e : children.entrySet()) {
+                ids[k] = e.getKey();
+                tables[k++] = e.getValue();
+            }
+        }
+    }
+
+    /** {@link #children} as arrays; null until the tables are built (or after they change). */
+    private transient volatile ChildIndex childIndex;
+
     /**
      * Raw count table P(y, Xi): used for federated parameter aggregation.
      */
@@ -100,17 +119,25 @@ public class mSP1DE implements mSPnDE, Serializable {
             [model.varNumValues[child]]); // Xj
         });
 
-        // Creation of the contingency tables
-        for (int i = 0; i < model.numInstances; i++) {
-            Instance inst = model.data.get(i);
+        // The children in the order of the map, which is the order of the product in
+        // probsForInstance.
+        ChildIndex index = new ChildIndex(children);
+        childIndex = index;
 
-            // Creation of the probability table P(y,Xi)
-            globalProb[(int) inst.value(model.y)][(int) inst.value(xi)] += 1;
-
-            // Creation of the probability table P(y,Xi)
-            children.forEach((Integer xj, double[][][] tablaXj) -> {
-                tablaXj[(int) inst.value(model.y)][(int) inst.value(xi)][(int) inst.value(xj)] += 1;
-            });
+        // Creation of the contingency tables, column by column (the counts are integers, so
+        // the order in which they are added does not matter).
+        int m = model.numInstances;
+        int[] yc = model.column(model.y);
+        int[] xc = model.column(xi);
+        for (int i = 0; i < m; i++) {
+            globalProb[yc[i]][xc[i]] += 1;
+        }
+        for (int k = 0; k < index.ids.length; k++) {
+            int[] jc = model.column(index.ids[k]);
+            double[][][] tableXj = index.tables[k];
+            for (int i = 0; i < m; i++) {
+                tableXj[yc[i]][xc[i]][jc[i]] += 1;
+            }
         }
 
         // Joint P(y, Xi) with Laplace smoothing (alpha = 1)
@@ -251,6 +278,7 @@ public class mSP1DE implements mSPnDE, Serializable {
             }
             this.children.put(xj, condTable);
         });
+        childIndex = null;
     }
 
     /**
@@ -276,11 +304,19 @@ public class mSP1DE implements mSPnDE, Serializable {
          * For each child Xj, we multiply P(Xj|y,Xi) by the result
          * accumulated for each of the values of the class
          */
-        children.forEach((Integer xj, double[][][] tablaXj) -> {
+        ChildIndex index = childIndex;
+        if (index == null) {
+            index = new ChildIndex(children);
+            childIndex = index;
+        }
+        int xiv = (int) xi;
+        for (int k = 0; k < index.ids.length; k++) {
+            double[][][] tablaXj = index.tables[k];
+            int xjv = (int) inst.value(index.ids[k]);
             for (int i = 0; i < res.length; i++) {
-                res[i] *= tablaXj[i][(int) xi][(int) inst.value(xj)];
+                res[i] *= tablaXj[i][xiv][xjv];
             }
-        });
+        }
 
         // We normalise the values by dividing them by the sum of all the values.
         double sum = Utils.sum(res);

@@ -242,6 +242,13 @@ public class mAnDE extends AbstractClassifier implements
     private boolean dropConstantAttributes = true;
 
     /**
+     * Build the bagged trees with {@link RandomTree2#baggedStructures} (when the discretised data
+     * is all nominal) instead of WEKA's Bagging and RandomTree. The trees are the same; only
+     * their structure is built, on the data stored once by columns.
+     */
+    private boolean fastTrees = true;
+
+    /**
      * Percentage of instances to be used to make each tree in the assembly.
      */
     private double bagSize = 100;
@@ -309,7 +316,8 @@ public class mAnDE extends AbstractClassifier implements
         if (stackModel != null) {
             double[] estimates = new double[stackModel.getNrClass()];
             de.bwaldvogel.liblinear.Linear.predictProbability(stackModel,
-                    stackFeatures(stackOrder, nb, instance_d, gaussNB ? instance : instance_d), estimates);
+                    de.bwaldvogel.liblinear.DenseL2LR.toFeatures(stackFeatures(stackOrder, nb, instance_d, gaussNB ? instance : instance_d)),
+                    estimates);
             int[] labels = stackModel.getLabels();
             for (int k = 0; k < labels.length; k++) {
                 res[labels[k]] = estimates[k];
@@ -348,6 +356,59 @@ public class mAnDE extends AbstractClassifier implements
         return res;
     }
 
+    /** Columns of {@link #data} read so far (see {@link #column}) and the data they belong to. */
+    private transient int[][] dataColumns;
+    private transient Instances dataColumnsOf;
+
+    /**
+     * Column {@code j} of the discretised training data, as the integers {@code (int) value}
+     * (so a missing value reads 0, as {@code (int) inst.value(j)} does). Built on first use and
+     * kept while {@link #data} is the same object, so the count tables of all the components read
+     * contiguous arrays instead of every instance.
+     */
+    public synchronized int[] column(int j) {
+        if (dataColumnsOf != data || dataColumns == null || dataColumns.length != data.numAttributes()) {
+            dataColumns = new int[data.numAttributes()][];
+            dataColumnsOf = data;
+        }
+        int[] c = dataColumns[j];
+        if (c == null) {
+            int m = data.numInstances();
+            c = new int[m];
+            for (int i = 0; i < m; i++) {
+                c[i] = (int) data.get(i).value(j);
+            }
+            dataColumns[j] = c;
+        }
+        return c;
+    }
+
+    /** Numeric columns of {@link #dataOriginal} read so far and the data they belong to. */
+    private transient double[][] originalColumns;
+    private transient Instances originalColumnsOf;
+
+    /**
+     * Column {@code j} of the original (not discretised) training data, kept like
+     * {@link #column} while {@link #dataOriginal} is the same object.
+     */
+    public synchronized double[] numericColumn(int j) {
+        if (originalColumnsOf != dataOriginal || originalColumns == null
+                || originalColumns.length != dataOriginal.numAttributes()) {
+            originalColumns = new double[dataOriginal.numAttributes()][];
+            originalColumnsOf = dataOriginal;
+        }
+        double[] c = originalColumns[j];
+        if (c == null) {
+            int m = dataOriginal.numInstances();
+            c = new double[m];
+            for (int i = 0; i < m; i++) {
+                c[i] = dataOriginal.get(i).value(j);
+            }
+            originalColumns[j] = c;
+        }
+        return c;
+    }
+
     public void initMetadata() {
         y = data.classIndex();
         classNumValues = data.classAttribute().numValues();
@@ -372,7 +433,8 @@ public class mAnDE extends AbstractClassifier implements
         }
 
         // Discretize instances
-        discretizer = new weka.filters.supervised.attribute.Discretize();
+        // FastDiscretize: WEKA's MDL discretisation, same cut points, computed on arrays.
+        discretizer = new FastDiscretize();
         discretizer.setInputFormat(instances);
         data = weka.filters.Filter.useFilter(instances, discretizer);
         numInstances = data.numInstances();
@@ -404,6 +466,28 @@ public class mAnDE extends AbstractClassifier implements
             }
         }
         return k == data.numAttributes() ? null : Arrays.copyOf(keep, k);
+    }
+
+    /** Whether every attribute, the class included, is nominal. */
+    private static boolean allNominal(Instances data) {
+        for (int i = 0; i < data.numAttributes(); i++) {
+            if (!data.attribute(i).isNominal()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** The attributes the trees may split on: all but the class, without the single-valued ones if asked. */
+    private static int[] splitCandidates(Instances data, boolean dropConstant) {
+        int[] atts = new int[data.numAttributes() - 1];
+        int k = 0;
+        for (int i = 0; i < data.numAttributes(); i++) {
+            if (i != data.classIndex() && !(dropConstant && data.attribute(i).numValues() <= 1)) {
+                atts[k++] = i;
+            }
+        }
+        return Arrays.copyOf(atts, k);
     }
 
     /** The columns {@code keep} of {@code data}, in the same order, with the class set. */
@@ -450,28 +534,37 @@ public class mAnDE extends AbstractClassifier implements
             switch (getEnsemble()) {
                 case "Bagging":
                     Bagging2 bagging = new Bagging2();
-                    bagging.setNumExecutionSlots(0);
-                    RandomTree2 rtBase = new RandomTree2();
-                    rtBase.setDoNotCheckCapabilities(true);
-                    int[] keep = dropConstantAttributes ? nonConstantAttributes(data) : null;
-                    Instances treeData = keep == null ? data : selectAttributes(data, keep);
-                    rtBase.setKValue(treeData.numAttributes() - 1);  // all features, no random subsets
-                    bagging.setClassifier(rtBase);
-                    bagging.setNumIterations(nTrees);
-                    bagging.setBagSizePercentDouble(bagSize);
-                    bagging.buildClassifier(treeData);
-                    if (keep != null) {
-                        for (Classifier c : bagging.getClassifiers()) {
-                            ((RandomTree2) c).remapAttributes(keep);
+                    Classifier[] baggedTrees;
+                    if (fastTrees && allNominal(data)) {
+                        // Same trees as the Bagging2 + RandomTree2 branch below, built directly
+                        // (see RandomTree2.baggedStructures).
+                        int[] atts = splitCandidates(data, dropConstantAttributes);
+                        baggedTrees = RandomTree2.baggedStructures(data, atts, nTrees, bagSize, bagging.getSeed());
+                    } else {
+                        bagging.setNumExecutionSlots(0);
+                        RandomTree2 rtBase = new RandomTree2();
+                        rtBase.setDoNotCheckCapabilities(true);
+                        int[] keep = dropConstantAttributes ? nonConstantAttributes(data) : null;
+                        Instances treeData = keep == null ? data : selectAttributes(data, keep);
+                        rtBase.setKValue(treeData.numAttributes() - 1);  // all features, no random subsets
+                        bagging.setClassifier(rtBase);
+                        bagging.setNumIterations(nTrees);
+                        bagging.setBagSizePercentDouble(bagSize);
+                        bagging.buildClassifier(treeData);
+                        if (keep != null) {
+                            for (Classifier c : bagging.getClassifiers()) {
+                                ((RandomTree2) c).remapAttributes(keep);
+                            }
                         }
+                        baggedTrees = bagging.getClassifiers();
                     }
                     if (n == 1) {
-                        for (Classifier c : bagging.getClassifiers()) {
+                        for (Classifier c : baggedTrees) {
                             ((RandomTree2) c).toSP1DE(mSPnDEs);
                         }
                         return;
                     } else {
-                        for (Classifier c : bagging.getClassifiers()) {
+                        for (Classifier c : baggedTrees) {
                             graphToSP2DE(((RandomTree2) c).toSP2DE());
                         }
                     }
@@ -591,6 +684,10 @@ public class mAnDE extends AbstractClassifier implements
         }
 
         // We free up the discretized data space
+        dataColumns = null;
+        dataColumnsOf = null;
+        originalColumns = null;
+        originalColumnsOf = null;
         data.delete();
         if (dataOriginal != null) {
             dataOriginal.delete();
@@ -637,7 +734,7 @@ public class mAnDE extends AbstractClassifier implements
             fold[i] = dealt[c]++ % STACK_FOLDS;
         }
 
-        de.bwaldvogel.liblinear.Feature[][] x = new de.bwaldvogel.liblinear.Feature[m][];
+        double[][] x = new double[m][];
         double[] labels = new double[m];
         try {
             for (int f = 0; f < STACK_FOLDS; f++) {
@@ -672,16 +769,23 @@ public class mAnDE extends AbstractClassifier implements
             numInstances = m;
         }
 
-        de.bwaldvogel.liblinear.Problem problem = new de.bwaldvogel.liblinear.Problem();
-        problem.l = m;
-        problem.n = (stackOrder.size() + 1) * classNumValues + 1;
-        problem.bias = 1;
-        problem.x = x;
-        problem.y = labels;
         de.bwaldvogel.liblinear.Linear.disableDebugOutput();
-        de.bwaldvogel.liblinear.SolverType solver = stack.startsWith("l1")
+        boolean l1 = stack.startsWith("l1");
+        de.bwaldvogel.liblinear.SolverType solver = l1
                 ? de.bwaldvogel.liblinear.SolverType.L1R_LR : de.bwaldvogel.liblinear.SolverType.L2R_LR;
         de.bwaldvogel.liblinear.Parameter parameter = new de.bwaldvogel.liblinear.Parameter(solver, stackC, 0.01);
+        // The L2 model is learnt on the dense rows (DenseL2LR: same solver and arithmetic as
+        // liblinear, bitwise-identical weights, a fraction of the memory); L1 goes through liblinear.
+        de.bwaldvogel.liblinear.Problem problem = null;
+        if (l1) {
+            problem = new de.bwaldvogel.liblinear.Problem();
+            problem.l = m;
+            problem.n = (stackOrder.size() + 1) * classNumValues + 1;
+            problem.bias = 1;
+            problem.x = new de.bwaldvogel.liblinear.Feature[m][];
+            for (int i = 0; i < m; i++) problem.x[i] = de.bwaldvogel.liblinear.DenseL2LR.toFeatures(x[i]);
+            problem.y = labels;
+        }
 
         // "auto": keep the plain average unless the logistic regression, cross-validated on
         // the held-out posteriors, classifies more training instances than the average does.
@@ -693,14 +797,17 @@ public class mAnDE extends AbstractClassifier implements
                 for (int e = 0; e <= nExperts; e++) {
                     double weight = e < nExperts ? 1.0 : getAddNB() * nExperts;
                     for (int c = 0; c < classNumValues; c++) {
-                        average[c] += weight * Math.exp(x[i][e * classNumValues + c].getValue());
+                        average[c] += weight * Math.exp(x[i][e * classNumValues + c]);
                     }
                 }
                 if (Utils.maxIndex(average) == (int) labels[i]) averageHits++;
             }
             double[] predicted = new double[m];
-            de.bwaldvogel.liblinear.Linear.resetRandom();
-            de.bwaldvogel.liblinear.Linear.crossValidation(problem, parameter, STACK_FOLDS, predicted);
+            if (l1) {
+                de.bwaldvogel.liblinear.Linear.crossValidation(problem, parameter, STACK_FOLDS, predicted);
+            } else {
+                de.bwaldvogel.liblinear.DenseL2LR.crossValidation(x, labels, 1, parameter, STACK_FOLDS, predicted);
+            }
             int stackHits = 0;
             for (int i = 0; i < m; i++) {
                 if (predicted[i] == labels[i]) stackHits++;
@@ -710,28 +817,29 @@ public class mAnDE extends AbstractClassifier implements
                 return;
             }
         }
-        stackModel = de.bwaldvogel.liblinear.Linear.train(problem, parameter);
+        stackModel = l1 ? de.bwaldvogel.liblinear.Linear.train(problem, parameter)
+                : de.bwaldvogel.liblinear.DenseL2LR.train(x, labels, 1, parameter);
     }
 
     /**
      * Log-posteriors of every component and of the Naive Bayes for an instance,
      * followed by the bias feature.
      */
-    private de.bwaldvogel.liblinear.Feature[] stackFeatures(List<mSPnDE> experts, NaiveBayes naive,
+    private double[] stackFeatures(List<mSPnDE> experts, NaiveBayes naive,
             Instance discretized, Instance forNB) throws Exception {
         int nFeatures = (experts.size() + 1) * classNumValues;
-        de.bwaldvogel.liblinear.Feature[] features = new de.bwaldvogel.liblinear.Feature[nFeatures + 1];
+        double[] features = new double[nFeatures + 1];
         int index = 0;
         for (int e = 0; e <= experts.size(); e++) {
             double[] p = e < experts.size() ? experts.get(e).probsForInstance(discretized, this)
                     : naive.distributionForInstance(forNB);
             for (int c = 0; c < classNumValues; c++) {
                 double v = Double.isNaN(p[c]) ? STACK_FLOOR : Math.max(p[c], STACK_FLOOR);
-                features[index] = new de.bwaldvogel.liblinear.FeatureNode(index + 1, Math.log(v));
+                features[index] = Math.log(v);
                 index++;
             }
         }
-        features[nFeatures] = new de.bwaldvogel.liblinear.FeatureNode(nFeatures + 1, 1);
+        features[nFeatures] = 1;
         return features;
     }
 
@@ -802,6 +910,10 @@ public class mAnDE extends AbstractClassifier implements
      */
     public void setBagSize(double bagSize) {
         this.bagSize = bagSize;
+    }
+
+    public void setFastTrees(boolean fastTrees) {
+        this.fastTrees = fastTrees;
     }
 
     public void setDropConstantAttributes(boolean dropConstantAttributes) {
