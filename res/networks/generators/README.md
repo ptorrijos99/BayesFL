@@ -29,6 +29,13 @@ No sampler fixed a seed, so the datasets cannot be redrawn identically. Both
 sets are on Zenodo: [bnlearn](https://doi.org/10.5281/zenodo.14917796) and
 [bnRep](https://doi.org/10.5281/zenodo.23561525).
 
+Rows of 34 client files (andes.46 and 33 files of 17 bnRep networks) were split
+or merged by concurrent writers when they were saved, and andes.46 was cut at
+2819 rows. `repair_clients.R` dropped the damaged rows and topped each file up
+to 5000 rows with seeded draws from the network; valid rows were kept as they
+were. The repaired files replace the originals in later versions of both
+Zenodo records.
+
 ## Scripts
 
 Run from the repository root.
@@ -39,4 +46,5 @@ Run from the repository root.
 | `bnrep_export.R [minNodes] [nClients] [nRows] [onlyNet]` | BIF and datasets of the bnRep networks |
 | `bif_to_xbif.py <bifDir> <outDir> [--only NAME]` | BIF to XMLBIF (pgmpy) |
 | `networks_manifest.py` | Rebuilds `networks.csv` from the files |
+| `repair_clients.R <net> <client> [...]` | Repairs client datasets with damaged rows |
 | `sachs_discretize.R` | Discretisation of the Sachs et al. (2005) data |
