@@ -115,6 +115,26 @@ public class ClassificationExperiment {
                 ((FilteredClassifier) classifier).setFilter(filter);
                 ((FilteredClassifier) classifier).setClassifier(new A2DE());
             }
+            // A1DE/A2DE after the discretisation, without the attributes it leaves constant
+            // (single interval), which carry no information but take memory in WEKA's AnDE.
+            case "A1DE-NC-Dis", "A2DE-NC-Dis" -> {
+                weka.filters.MultiFilter pipeline = new weka.filters.MultiFilter();
+                pipeline.setFilters(new Filter[] {filter, new weka.filters.unsupervised.attribute.RemoveUseless()});
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(pipeline);
+                ((FilteredClassifier) classifier).setClassifier(algorithm.startsWith("A1") ? new A1DE() : new A2DE());
+            }
+            // The same A1DE evaluated in log space (SelectiveAnDE with every attribute as a super-parent):
+            // WEKA's A1DE multiplies the probabilities directly and underflows with thousands of attributes.
+            case "A1DE-NC-Log-Dis" -> {
+                weka.filters.MultiFilter pipeline = new weka.filters.MultiFilter();
+                pipeline.setFilters(new Filter[] {filter, new weka.filters.unsupervised.attribute.RemoveUseless()});
+                bayesfl.experiments.utils.SelectiveAnDE all = new bayesfl.experiments.utils.SelectiveAnDE();
+                all.setMode("SA"); all.setN(1); all.setSRule("fixed"); all.setSFixed(Integer.MAX_VALUE);
+                classifier = new FilteredClassifier();
+                ((FilteredClassifier) classifier).setFilter(pipeline);
+                ((FilteredClassifier) classifier).setClassifier(all);
+            }
             case "TAN" -> {
                 classifier = new BayesNet();
                 TAN alg = new TAN();
@@ -204,13 +224,14 @@ public class ClassificationExperiment {
         // (gamma = 0.2), Gaussian children with "-G", and the components combined by an
         // L1 ("-S1") or L2 ("-S2") logistic regression instead of averaged ("-A1", "-A2": only when that
         // regression beats the average in an internal cross-validation).
-        java.util.regex.Matcher mini = java.util.regex.Pattern.compile("Mini([12])(-G)?(-[SA][12])?(-C[0-9.]+)?").matcher(algorithm);
+        // An optional "-B<b>" sets the bag size of the trees to b% of the training data (default 100).
+        java.util.regex.Matcher mini = java.util.regex.Pattern.compile("Mini([12])(-G)?(-[SA][12])?(-C[0-9.]+)?(-B[0-9.]+)?").matcher(algorithm);
         if (mini.matches()) {
             org.albacete.simd.mAnDE.mAnDE m = new org.albacete.simd.mAnDE.mAnDE();
             m.setN(Integer.parseInt(mini.group(1)));
             m.setnTrees(nTrees);
             m.setEnsemble("Bagging");
-            m.setBagSize(100);
+            m.setBagSize(mini.group(5) != null ? Double.parseDouble(mini.group(5).substring(2)) : 100);
             m.setAddNB(0.2);
             if (mini.group(2) != null) {
                 m.setContinuous(true);
@@ -246,6 +267,20 @@ public class ClassificationExperiment {
                     yield tan;
                 }
             });
+        }
+
+        // Selective AnDE of Chen et al. on the discretized data: "SASA<n>DE-Dis" (TKDE 2017),
+        // "SA<n>DE-Dis" (KAIS 2017, memory rule) and "SA<n>DE-M-Dis" (KAIS 2017 ranking with as many
+        // components as MiniAnDE).
+        java.util.regex.Matcher sel = java.util.regex.Pattern.compile("(SASA|SA)([12])DE(-M)?-Dis").matcher(algorithm);
+        if (sel.matches()) {
+            bayesfl.experiments.utils.SelectiveAnDE s = new bayesfl.experiments.utils.SelectiveAnDE();
+            s.setMode(sel.group(1));
+            s.setN(Integer.parseInt(sel.group(2)));
+            s.setSRule(sel.group(3) != null ? "mini" : "mem");
+            classifier = new FilteredClassifier();
+            ((FilteredClassifier) classifier).setFilter(filter);
+            ((FilteredClassifier) classifier).setClassifier(s);
         }
 
         // Resume: skip (fold, client) pairs already written by a previous run
