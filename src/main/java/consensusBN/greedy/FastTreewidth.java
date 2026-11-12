@@ -30,6 +30,25 @@ public final class FastTreewidth {
         return run(dag, Integer.MAX_VALUE, null, false);
     }
 
+    /** Largest clique of the triangulation given by a min-fill elimination order. */
+    public static int minFillWidth(Graph dag) {
+        List<Node> nodes = dag.getNodes();
+        int n = nodes.size();
+        if (n == 0) return 0;
+        Map<Node, Integer> id = new HashMap<>(2 * n);
+        for (int i = 0; i < n; i++) id.put(nodes.get(i), i);
+        long[][] adj = new long[n][(n + 63) >>> 6];
+        for (int v = 0; v < n; v++) {
+            List<Node> pa = dag.getParents(nodes.get(v));
+            int[] p = new int[pa.size()];
+            for (int i = 0; i < p.length; i++) p[i] = id.get(pa.get(i));
+            for (int a : p) link(adj, a, v);
+            for (int i = 0; i < p.length; i++)
+                for (int j = i + 1; j < p.length; j++) link(adj, p[i], p[j]);
+        }
+        return eliminate(adj, minFillOrder(adj), nodes, Integer.MAX_VALUE, null);
+    }
+
     /** Whether some elimination order tried here has no clique larger than k. */
     public static boolean fits(Graph dag, int k) {
         return run(dag, k, null, true) <= k;

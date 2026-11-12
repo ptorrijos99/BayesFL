@@ -2,6 +2,7 @@ package org.albacete.simd.utils;
 
 import consensusBN.BetaToAlpha;
 import consensusBN.ConsensusUnion;
+import consensusBN.greedy.FastTreewidth;
 import edu.cmu.tetrad.bayes.BayesIm;
 import edu.cmu.tetrad.bayes.BayesPm;
 import edu.cmu.tetrad.bayes.MlBayesIm;
@@ -1110,9 +1111,18 @@ public class Utils {
         return getCliques(maximumCardinalityOrdering, undirectedGraph);
     }
 
+    /**
+     * With -DtwMinFill=true, getTreeWidth returns the smaller of the MCS and the
+     * min-fill triangulations. Both are upper bounds, so the minimum is a valid,
+     * tighter one. Off by default, so earlier results keep their convention.
+     */
+    public static final boolean TW_MIN_FILL = Boolean.getBoolean("twMinFill");
+
     public static int getTreeWidth(Graph dag) {
         Map<Node, Set<Node>> cliques = getMoralTriangulatedCliques(dag);
-        return cliques.values().stream().mapToInt(Set::size).max().orElse(0);
+        int mcs = cliques.values().stream().mapToInt(Set::size).max().orElse(0);
+        if (!TW_MIN_FILL || mcs <= 2) return mcs;
+        return Math.min(mcs, FastTreewidth.minFillWidth(dag));
     }
 
     /**
