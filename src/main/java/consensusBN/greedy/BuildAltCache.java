@@ -38,13 +38,23 @@ public class BuildAltCache {
             parts.put("pc", ExperimentMinCutGES.readCache(cacheFile("pc", sampleSize, net)));
             parts.put("hc", ExperimentMinCutGES.readCache(cacheFile("hc", sampleSize, net)));
         }
+        // "het": GES clients with unequal amounts of data, client i from the 500, 1000
+        // and 5000-row caches in turn (written as Cache-het-n0, sampleSize 0)
+        String[] sizes = {"500", "1000", "5000"};
+        if (alg.equals("het"))
+            for (String s : sizes)
+                parts.put(s, ExperimentMinCutGES.readCache(new File("./results/Cache-n" + s + "/cachedDAGs-" + net + ".ser")));
         String[] turn = {"ges", "pc", "hc"};
 
         for (int i = 0; i < nClients; i++) {
             if (cached.containsKey(i)) continue;
             long t = System.currentTimeMillis();
             Dag dag;
-            if (alg.equals("mix")) {
+            if (alg.equals("het")) {
+                Dag d = parts.get(sizes[i % 3]).get(i);
+                if (d == null) throw new IllegalStateException("missing " + sizes[i % 3] + "-row client " + i + " of " + net);
+                dag = d;
+            } else if (alg.equals("mix")) {
                 Dag d = parts.get(turn[i % 3]).get(i);
                 if (d == null) throw new IllegalStateException("missing " + turn[i % 3] + " client " + i + " of " + net);
                 dag = d;
