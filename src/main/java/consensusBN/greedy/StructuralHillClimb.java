@@ -193,8 +193,11 @@ public class StructuralHillClimb {
                     }
                     case REMOVE -> {
                         t.removeArc(m.x, m.y);
+                        // Removing an arc cannot raise the treewidth, but it can raise the
+                        // MCS estimate that the budget bounds, so removals are tested too.
+                        if (!budget.fits(r)) { t.addArc(m.x, m.y); continue; }
                         removesApplied++;
-                        applied = true;   // removal can never break the budget
+                        applied = true;
                     }
                     case REVERSE -> {
                         t.removeArc(m.x, m.y);
