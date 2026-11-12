@@ -28,6 +28,56 @@ public class AveragedNetwork {
     public double threshold;
 
     public Dag build(PairWeights w) {
+        return build(w, estimateCut(w), TreewidthBudget.unbounded());
+    }
+
+    /**
+     * The averaged network under a treewidth bound: the same pairs, in the same
+     * order of decreasing strength and in their majority direction, but a pair is
+     * skipped when neither of its orientations keeps the graph acyclic and within
+     * the bound.
+     */
+    public Dag buildBounded(PairWeights w, TreewidthBudget tb) {
+        return build(w, estimateCut(w), tb);
+    }
+
+    /** Pairs with more than kStar adjacent inputs, i.e. threshold kStar / r. */
+    public Dag build(PairWeights w, int kStar, TreewidthBudget tb) {
+        int n = w.n(), r = w.r();
+        threshold = kStar / (double) r;
+        List<int[]> keep = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                if (w.countSkel(i, j) > kStar) keep.add(new int[]{i, j});
+        keep.sort((p, q) -> Integer.compare(w.countSkel(q[0], q[1]), w.countSkel(p[0], p[1])));
+
+        List<Node> v = w.nodes();
+        Dag out = new Dag(v);
+        boolean bounded = tb.maxCliqueSize() != Integer.MAX_VALUE;
+        for (int[] p : keep) {
+            int a = p[0], b = p[1];
+            if (w.countDir(b, a) > w.countDir(a, b)) { int t = a; a = b; b = t; }
+            Node x = v.get(a), y = v.get(b);
+            if (!bounded) {
+                if (out.paths().existsDirectedPath(y, x)) { Node t = x; x = y; y = t; }
+                out.addEdge(Edges.directedEdge(x, y));
+                continue;
+            }
+            // the two orientations marry different pairs, so both are tried
+            for (int k = 0; k < 2; k++) {
+                Node s = k == 0 ? x : y, t = k == 0 ? y : x;
+                if (out.paths().existsDirectedPath(t, s)) continue;
+                Edge e = Edges.directedEdge(s, t);
+                out.addEdge(e);
+                if (tb.fits(out)) break;
+                out.removeEdge(e);
+            }
+        }
+        return out;
+    }
+
+    /** The cut kStar of the L1 fit of Scutari and Nagarajan, as described above. */
+    public static int estimateCut(PairWeights w) {
         int n = w.n(), r = w.r();
         long total = (long) n * (n - 1) / 2;
         long[] atMost = new long[r + 1];            // pairs with c_skel = k
@@ -42,23 +92,6 @@ public class AveragedNetwork {
         double c = r % 2 == 1 ? s[r / 2] : 0.5 * (s[r / 2 - 1] + s[r / 2]);
         int kStar = 0;
         while (kStar < r && f[kStar] < c - 1e-12) kStar++;
-        threshold = kStar / (double) r;
-
-        List<int[]> keep = new ArrayList<>();
-        for (int i = 0; i < n; i++)
-            for (int j = i + 1; j < n; j++)
-                if (w.countSkel(i, j) > kStar) keep.add(new int[]{i, j});
-        keep.sort((p, q) -> Integer.compare(w.countSkel(q[0], q[1]), w.countSkel(p[0], p[1])));
-
-        List<Node> v = w.nodes();
-        Dag out = new Dag(v);
-        for (int[] p : keep) {
-            int a = p[0], b = p[1];
-            if (w.countDir(b, a) > w.countDir(a, b)) { int t = a; a = b; b = t; }
-            Node x = v.get(a), y = v.get(b);
-            if (out.paths().existsDirectedPath(y, x)) { Node t = x; x = y; y = t; }
-            out.addEdge(Edges.directedEdge(x, y));
-        }
-        return out;
+        return kStar;
     }
 }

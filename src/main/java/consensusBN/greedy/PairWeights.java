@@ -56,6 +56,26 @@ public class PairWeights {
         this.constSkel = ss;
     }
 
+    /**
+     * Recounts the arc directions from the compelled arcs of each input only. A
+     * learner such as GES returns an equivalence class, and the direction of a
+     * reversible edge in the DAG it hands over is an arbitrary choice of the
+     * extension, so it carries no information. After this call countDir(a,b)
+     * counts the inputs whose CPDAG has the directed edge a->b; the pair counts,
+     * and therefore every weight and gain, are unchanged.
+     */
+    public void useCompelledDirections(List<Dag> inputs) {
+        for (int[] row : cDir) Arrays.fill(row, 0);
+        for (Dag g : inputs) {
+            Graph c = GraphTransforms.dagToCpdag(new EdgeListGraph(g));
+            for (Edge e : c.getEdges()) {
+                if (!Edges.isDirectedEdge(e)) continue;
+                Node a = Edges.getDirectedEdgeTail(e), b = Edges.getDirectedEdgeHead(e);
+                cDir[idx(a)][idx(b)]++;
+            }
+        }
+    }
+
     private void bump(int[][] c, Edge e) {
         int a = idx(e.getNode1()), b = idx(e.getNode2());
         c[a][b]++;

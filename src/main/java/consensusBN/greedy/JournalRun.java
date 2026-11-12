@@ -57,7 +57,7 @@ public class JournalRun {
         outFile.getParentFile().mkdirs();
         boolean fresh = !outFile.exists();
         PrintWriter out = new PrintWriter(new FileWriter(outFile, true));
-        if (fresh) out.println(HEADER);
+        if (fresh) out.println(group.equals("ll") ? LikelihoodEval.HEADER : HEADER);
 
         for (int rep = 0; rep < reps; rep++) {
             List<Dag> dags = new ArrayList<>();
@@ -74,15 +74,7 @@ public class JournalRun {
             Dag gold = GoldStandard.loadAlignedTo(net, w.nodes());
             Graph goldCpdag = GraphTransforms.dagToCpdag(new EdgeListGraph(gold));
 
-            int supported = w.supportedPairs().size(), maj = 0;
-            for (int i = 0; i < w.n(); i++)
-                for (int j = i + 1; j < w.n(); j++)
-                    if (2 * w.countSkel(i, j) > r) maj++;
-            double noise = supported == 0 ? 0 : 1.0 - maj / (double) supported;
-
-            String prefix = String.format(Locale.US, "%s,%s,%s,%d,%d,%d,%.4f,%.4f,%.4f",
-                    tag, net, net.startsWith("bnrep_") ? "bnRep" : "bnlearn", w.n(), r, rep,
-                    noise, w.smhdLowerBound(), w.skeletonOptimum());
+            String prefix = prefix(tag, net, w, r, rep);
             Row row = (method, param, g, time) -> {
                 out.println(prefix + "," + method + "," + param + "," + metrics(w, g, gold, goldCpdag, time));
                 out.flush();
@@ -119,6 +111,12 @@ public class JournalRun {
                 case "budget2" -> runBudgetSel(dags, w, row, wTime, false);
                 case "budget2p" -> runBudgetSel(dags, w, row, wTime, true);
                 case "central" -> runCentral(w, row, net, r, rep, Integer.parseInt(tag));
+                case "budgetavg" -> runBudgetAvg(dags, w, row, wTime);
+                case "avgtraj" -> runAvgTraj(dags, w, row, wTime);
+                case "compelled" -> runCompelled(dags, w, row, wTime);
+                case "corrupt", "corruptmc" -> runCorrupt(dags, gold, goldCpdag, out, tag, net, r, rep,
+                        group.equals("corruptmc"));
+                case "ll" -> LikelihoodEval.run(dags, w, out, prefix, net, r, rep, Integer.parseInt(tag), wTime);
                 default -> throw new IllegalArgumentException("unknown group " + group);
             }
             System.out.printf("%s %s r=%d rep %d/%d %s done%n", tag, net, r, rep + 1, reps, group);
@@ -127,6 +125,18 @@ public class JournalRun {
     }
 
     interface Row { void emit(String method, String param, Dag g, double time); }
+
+    /** The cell columns of a row: sample size, network, size, r, replicate, noise index and bounds. */
+    static String prefix(String tag, String net, PairWeights w, int r, int rep) {
+        int supported = w.supportedPairs().size(), maj = 0;
+        for (int i = 0; i < w.n(); i++)
+            for (int j = i + 1; j < w.n(); j++)
+                if (2 * w.countSkel(i, j) > r) maj++;
+        double noise = supported == 0 ? 0 : 1.0 - maj / (double) supported;
+        return String.format(Locale.US, "%s,%s,%s,%d,%d,%d,%.4f,%.4f,%.4f",
+                tag, net, net.startsWith("bnrep_") ? "bnRep" : "bnlearn", w.n(), r, rep,
+                noise, w.smhdLowerBound(), w.skeletonOptimum());
+    }
 
     static String metrics(PairWeights w, Dag g, Dag gold, Graph goldCpdag, double time) {
         double smhdIn = w.smhdOf(w.objectiveOfMoral(Utils.moralize(g)));
@@ -909,8 +919,7 @@ public class JournalRun {
         for (Dag d : dags) in.add(GraphTransforms.dagToCpdag(new EdgeListGraph(d)));
         CpdagShdCounts counts = new CpdagShdCounts(in);
         java.util.function.ToDoubleFunction<Dag> shdIn = g -> counts.mean(GraphTransforms.dagToCpdag(new EdgeListGraph(g)));
-        Dag medS = null; double bm = Double.POSITIVE_INFINITY;
-        for (Dag d : dags) { double v = shdIn.applyAsDouble(d); if (v < bm) { bm = v; medS = d; } }
+        Dag medS = medoidBy(dags, shdIn);
         double tPre = (System.currentTimeMillis() - t0) / 1000.0;
         double lex = 1.0 / (2 * w.r());
         Dag avg = new AveragedNetwork().build(w);
@@ -1033,6 +1042,226 @@ public class JournalRun {
         double time = (System.currentTimeMillis() - t) / 1000.0;
         tmp.delete();
         row.emit("GES-central", String.valueOf(data.getNumRows()), onNodes(w, new Dag(g)), time);
+    }
+
+    // -----------------------------------------------------------------------
+    // Second revision (2026-11-06): the averaged network under treewidth bounds
+    // and along its threshold trajectory, direction counts from compelled arcs
+    // only, corrupted clients, and the test log-likelihood (LikelihoodEval).
+    // -----------------------------------------------------------------------
+
+    /** Mean CPDAG-SHD to the inputs, through the per-pair state counts. */
+    static java.util.function.ToDoubleFunction<Dag> shdToInputs(List<Dag> dags) {
+        List<Graph> in = new ArrayList<>();
+        for (Dag d : dags) in.add(GraphTransforms.dagToCpdag(new EdgeListGraph(d)));
+        CpdagShdCounts counts = new CpdagShdCounts(in);
+        return g -> counts.mean(GraphTransforms.dagToCpdag(new EdgeListGraph(g)));
+    }
+
+    /** The input with the lowest crit, the first one on ties. */
+    static Dag medoidBy(List<Dag> dags, java.util.function.ToDoubleFunction<Dag> crit) {
+        Dag best = null;
+        double bv = Double.POSITIVE_INFINITY;
+        for (Dag d : dags) { double v = crit.applyAsDouble(d); if (v < bv) { bv = v; best = d; } }
+        return best;
+    }
+
+    /**
+     * The structural protocol of PHC-Sel: climbs from the empty graph, the majority
+     * skeleton and the given medoid, every point scored by crit, best point kept.
+     * Returns {start, graph, search seconds}.
+     */
+    static Object[] traj3(PairWeights w, Dag medoid, boolean pool, java.util.function.ToDoubleFunction<Dag> crit) {
+        Map<String, Dag> starts = new LinkedHashMap<>();
+        starts.put("empty", new Dag(w.nodes()));
+        starts.put("maj", OrientationChooser.majoritySkeletonOriented(w));
+        starts.put("medoid", onNodes(w, medoid));
+        String bestK = null; Dag bestG = null; double bestV = Double.POSITIVE_INFINITY, total = 0;
+        for (Map.Entry<String, Dag> e : starts.entrySet()) {
+            final Dag[] best = {new Dag(e.getValue())};
+            final double[] bv = {crit.applyAsDouble(e.getValue())};
+            StructuralHillClimb s = new StructuralHillClimb(w);
+            s.skelWeight = 1.0 / (2 * w.r());
+            s.poolMoral = pool;
+            s.onStep = g -> {
+                double v = crit.applyAsDouble(g);
+                if (v < bv[0]) { bv[0] = v; best[0] = new Dag(g); }
+            };
+            long t = System.currentTimeMillis();
+            s.search(new Dag(e.getValue()), TreewidthBudget.unbounded());
+            total += (System.currentTimeMillis() - t) / 1000.0;
+            if (bv[0] < bestV) { bestV = bv[0]; bestK = e.getKey(); bestG = best[0]; }
+        }
+        return new Object[]{bestK, bestG, total};
+    }
+
+    /** The moral protocol of PHC-Sel (pool P^M): three starts, the output with the lowest D_M. */
+    static void phcSelMoral(PairWeights w, List<Dag> dags, Row row, String name, double wTime) {
+        double lex = 1.0 / (2 * w.r());
+        long t = System.currentTimeMillis();
+        Dag med = medoidMoral(w, dags);
+        double tMed = (System.currentTimeMillis() - t) / 1000.0;
+        Map<String, Dag> hc = new LinkedHashMap<>();
+        Map<String, Double> times = new LinkedHashMap<>();
+        times.put("HC-empty", climbCfg(w, new Dag(w.nodes()), lex, true, TreewidthBudget.unbounded(), null, "HC-empty", "-", wTime, hc));
+        times.put("HC-maj", climbCfg(w, OrientationChooser.majoritySkeletonOriented(w), lex, true, TreewidthBudget.unbounded(), null, "HC-maj", "-", wTime, hc));
+        times.put("HC-medoid", climbCfg(w, onNodes(w, med), lex, true, TreewidthBudget.unbounded(), null, "HC-medoid", "-", wTime + tMed, hc));
+        emitBest(w, row, name, hc, times, wTime);
+    }
+
+    /** The averaged network on the budget grid of runBudget, as "avgNet" with param b/tw(G+). */
+    static void runBudgetAvg(List<Dag> dags, PairWeights w, Row row, double wTime) {
+        int twMax = Utils.getTreeWidth(new Dag(ConsensusUnion.fusionUnion(dags)));
+        List<Integer> grid = new ArrayList<>();
+        for (int b : new int[]{2, 3, 4, 5, 6, 7, 8, 10, 12, 15, 20}) if (b < twMax) grid.add(b);
+        grid.add(twMax);
+        for (int b : grid) {
+            long t = System.currentTimeMillis();
+            Dag g = new AveragedNetwork().buildBounded(w, new TreewidthBudget(b));
+            row.emit("avgNet", "b" + b + "/" + twMax, g, wTime + (System.currentTimeMillis() - t) / 1000.0);
+        }
+    }
+
+    /**
+     * The averaged network along its threshold trajectory: every cut k = 0..r-1
+     * (pairs with more than k adjacent inputs), the graph closest to the inputs
+     * returned, by D_M (avgNet-sel) and by the mean CPDAG-SHD (avgNet@traj). This
+     * gives the averaged network the selection that PHC-Sel and MCBNC have.
+     */
+    static void runAvgTraj(List<Dag> dags, PairWeights w, Row row, double wTime) {
+        long t0 = System.currentTimeMillis();
+        java.util.function.ToDoubleFunction<Dag> shdIn = shdToInputs(dags);
+        double inTime = (System.currentTimeMillis() - t0) / 1000.0;
+        Dag bestM = null, bestS = null;
+        double vm = Double.POSITIVE_INFINITY, vs = Double.POSITIVE_INFINITY, tm = 0, ts = 0;
+        int km = -1, ks = -1;
+        AveragedNetwork an = new AveragedNetwork();
+        for (int k = 0; k < w.r(); k++) {
+            long t = System.currentTimeMillis();
+            Dag g = an.build(w, k, TreewidthBudget.unbounded());
+            double tb = (System.currentTimeMillis() - t) / 1000.0;
+            t = System.currentTimeMillis();
+            double m = w.smhdOf(w.objectiveOfMoral(Utils.moralize(g))) + w.skelOf(w.objectiveOfSkeleton(g)) * 1e-6;
+            tm += tb + (System.currentTimeMillis() - t) / 1000.0;
+            if (m < vm) { vm = m; bestM = g; km = k; }
+            t = System.currentTimeMillis();
+            double s = shdIn.applyAsDouble(g);
+            ts += tb + (System.currentTimeMillis() - t) / 1000.0;
+            if (s < vs) { vs = s; bestS = g; ks = k; }
+        }
+        row.emit("avgNet-sel", km + "/" + w.r(), bestM, wTime + tm);
+        row.emit("avgNet@traj", ks + "/" + w.r(), bestS, wTime + inTime + ts);
+    }
+
+    /**
+     * Ablation of the arc directions: the counts that order the equal-gain moves of
+     * PHC and orient the averaged network are taken from the compelled arcs of the
+     * inputs' CPDAGs only. Rows: avgNet-cmp, HC-best-free3-pool-cmp (moral protocol)
+     * and HC-best-free3-pool@traj-cmp (structural protocol).
+     */
+    static void runCompelled(List<Dag> dags, PairWeights w, Row row, double wTime) {
+        long t = System.currentTimeMillis();
+        w.useCompelledDirections(dags);
+        double tc = (System.currentTimeMillis() - t) / 1000.0;
+        t = System.currentTimeMillis();
+        AveragedNetwork an = new AveragedNetwork();
+        Dag avg = an.build(w);
+        row.emit("avgNet-cmp", String.format(Locale.US, "%.2f", an.threshold), avg, wTime + tc + (System.currentTimeMillis() - t) / 1000.0);
+        phcSelMoral(w, dags, row, "HC-best-free3-pool-cmp", wTime + tc);
+        t = System.currentTimeMillis();
+        java.util.function.ToDoubleFunction<Dag> shdIn = shdToInputs(dags);
+        Dag medS = medoidBy(dags, shdIn);
+        double tPre = (System.currentTimeMillis() - t) / 1000.0;
+        Object[] res = traj3(w, medS, true, shdIn);
+        row.emit("HC-best-free3-pool@traj-cmp", (String) res[0], (Dag) res[1], wTime + tc + tPre + (Double) res[2]);
+    }
+
+    /**
+     * Corrupted clients. The last m inputs of the federation are replaced by random
+     * DAGs with the same number of arcs as the inputs they replace: independent
+     * draws ("rand") or one draw shared by all m ("coll", colluding clients), for
+     * m = 0 and m = 10, 20 and 30 percent of r. The methods see the corrupted set;
+     * clientMean is the mean over the honest inputs only, the reference a consensus
+     * should still beat. param = "<kind>:<m>". Group corruptmc runs MCBNC instead,
+     * under both protocols, on the same sets.
+     */
+    static void runCorrupt(List<Dag> honest, Dag gold, Graph goldCpdag, PrintWriter out, String tag,
+                           String net, int r, int rep, boolean mcbnc) {
+        List<Node> nodes = honest.get(0).getNodes();
+        List<String[]> cfg = new ArrayList<>();
+        cfg.add(new String[]{"none", "0"});
+        for (String kind : new String[]{"rand", "coll"})
+            for (double f : new double[]{0.1, 0.2, 0.3})
+                cfg.add(new String[]{kind, String.valueOf((int) Math.round(f * r))});
+        for (String[] c : cfg) {
+            String kind = c[0];
+            int m = Integer.parseInt(c[1]);
+            Random rnd = new Random(((long) net.hashCode() * 1_000_003L + r) * 1_000_003L + rep * 7919L + kind.hashCode());
+            List<Dag> dags = new ArrayList<>(honest.subList(0, r - m));
+            Dag shared = null;
+            for (int i = r - m; i < r; i++) {
+                int e = honest.get(i).getNumEdges();
+                if (kind.equals("coll")) {
+                    if (shared == null) shared = randomDag(nodes, e, rnd);
+                    dags.add(shared);
+                } else dags.add(randomDag(nodes, e, rnd));
+            }
+            long t0 = System.currentTimeMillis();
+            PairWeights w = new PairWeights(dags);
+            double wTime = (System.currentTimeMillis() - t0) / 1000.0;
+            String pre = prefix(tag, net, w, r, rep);
+            String param = kind + ":" + m;
+            Row row = (method, p, g, time) -> {
+                out.println(pre + "," + method + "," + param + "," + metrics(w, g, gold, goldCpdag, time));
+                out.flush();
+            };
+            if (mcbnc) {
+                runMcbncBoth(dags, w, row);
+                continue;
+            }
+            double[] acc = new double[8];
+            for (Dag d : honest.subList(0, r - m)) {
+                String[] x = metrics(w, d, gold, goldCpdag, 0).split(",");
+                for (int k = 0; k < 8; k++) acc[k] += Double.parseDouble(x[k]);
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int k = 0; k < 8; k++) sb.append(k == 0 ? "" : ",").append(String.format(Locale.US, "%.4f", acc[k] / (r - m)));
+            out.println(pre + ",clientMean," + param + "," + sb);
+            long t = System.currentTimeMillis();
+            row.emit("medoid", param, medoidMoral(w, dags), wTime + (System.currentTimeMillis() - t) / 1000.0);
+            t = System.currentTimeMillis();
+            row.emit("avgNet", param, new AveragedNetwork().build(w), wTime + (System.currentTimeMillis() - t) / 1000.0);
+            phcSelMoral(w, dags, row, "HC-best-free3-pool", wTime);
+            t = System.currentTimeMillis();
+            java.util.function.ToDoubleFunction<Dag> shdIn = shdToInputs(dags);
+            Dag medS = medoidBy(dags, shdIn);
+            double tPre = (System.currentTimeMillis() - t) / 1000.0;
+            row.emit("medoid@shd", param, medS, wTime + tPre);
+            Object[] res = traj3(w, medS, true, shdIn);
+            row.emit("HC-best-free3-pool@traj", param, (Dag) res[1], wTime + tPre + (Double) res[2]);
+        }
+    }
+
+    /** A DAG with e arcs drawn uniformly among the pairs, oriented along a random order. */
+    static Dag randomDag(List<Node> nodes, int e, Random rnd) {
+        int n = nodes.size();
+        List<Integer> order = new ArrayList<>();
+        for (int i = 0; i < n; i++) order.add(i);
+        Collections.shuffle(order, rnd);
+        int[] pos = new int[n];
+        for (int i = 0; i < n; i++) pos[order.get(i)] = i;
+        long max = (long) n * (n - 1) / 2;
+        e = (int) Math.min(e, max);
+        Set<Long> chosen = new HashSet<>();
+        Dag g = new Dag(nodes);
+        while (chosen.size() < e) {
+            int a = rnd.nextInt(n), b = rnd.nextInt(n);
+            if (a == b) continue;
+            if (pos[a] > pos[b]) { int s = a; a = b; b = s; }
+            if (!chosen.add((long) a * n + b)) continue;
+            g.addEdge(Edges.directedEdge(nodes.get(a), nodes.get(b)));
+        }
+        return g;
     }
 
     /** Every budget up to 12, then a coarser grid up to tw(G+). */
